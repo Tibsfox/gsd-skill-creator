@@ -1,0 +1,82 @@
+{
+  "name": "digital-literacy-analysis-team",
+  "description": "Full Digital Literacy Department investigation team for complex, multi-perspective questions that span information evaluation, youth practice, institutional framing, algorithmic systems, participatory culture, and connected learning. Rheingold classifies the query and activates the relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Kafai. Use for educator questions, systemic analysis, research-driven inquiries, or any situation where different literacy perspectives may yield different insights.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "rheingold",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "boyd",
+      "role": "worker",
+      "description": "Networked publics, contextual integrity, youth practice",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "palfrey",
+      "role": "worker",
+      "description": "Law, policy, source credibility, institutional analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "noble",
+      "role": "worker",
+      "description": "Algorithmic systems, power asymmetry, documented cases",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "jenkins",
+      "role": "worker",
+      "description": "Participation, remix, collective intelligence",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "ito",
+      "role": "worker",
+      "description": "HOMAGO, interest-driven practice, learning pathways",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "kafai",
+      "role": "worker",
+      "description": "Constructionist learning design, level-appropriate output",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "source-workshop-team",
+  "description": "Focused source analysis and document interpretation team. Herodotus leads with source classification and provenance assessment, Arendt provides close political reading and ideological critique, Zinn recovers marginalized voices and silences in the source, and Montessori translates findings into level-appropriate pedagogy. Use for primary source analysis, document interpretation, evidence evaluation, source comparison, and historiographical method instruction. Not for broad comparative studies, narrative construction, or longue duree structural analysis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "herodotus",
+      "role": "leader",
+      "description": "Source classification, provenance, context, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "arendt",
+      "role": "worker",
+      "description": "Close political reading, ideological critique, power analysis",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "zinn",
+      "role": "worker",
+      "description": "Marginalized voices, absences, subaltern reading, counter-narrative",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "montessori",
+      "role": "worker",
+      "description": "Level-appropriate explanation, method instruction, learning pathway",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

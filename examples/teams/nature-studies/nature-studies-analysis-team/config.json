@@ -1,0 +1,83 @@
+{
+  "name": "nature-studies-analysis-team",
+  "description": "Full Nature Studies Department analysis team for multi-wing naturalist investigations spanning identification, behavior, biogeography, and teaching. Linnaeus classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Louv. Use for research-level questions, advanced multi-wing work, or any naturalist problem where the wing is not obvious and different perspectives may yield different insights. Not for routine one-shot identification, pure habitat questions, or pure pedagogy.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "linnaeus",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "goodall-nat",
+      "role": "worker",
+      "description": "Longitudinal behavior, Tinbergen framework, individual recognition",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "merian",
+      "role": "worker",
+      "description": "Insect life cycles, host-plant relationships, sketch-first journaling",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "audubon",
+      "role": "worker",
+      "description": "Bird ID, voice, field-guide description",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "von-humboldt-nat",
+      "role": "worker",
+      "description": "Habitat assemblages, elevational gradients, range",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "peterson",
+      "role": "worker",
+      "description": "Diagnostic features, confusion species, confidence rating",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "louv",
+      "role": "worker",
+      "description": "Level adaptation, nature-based learning, entry-point design",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

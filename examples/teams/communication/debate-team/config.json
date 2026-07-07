@@ -1,0 +1,49 @@
+{
+  "name": "debate-team",
+  "description": "Focused argumentation and debate team for constructing, evaluating, and stress-testing persuasive arguments. Douglass coaches delivery, Wollstonecraft maps argument structure and detects fallacies, King optimizes audience connection and rhetorical power, and Freire ensures the argument respects all participants and surfaces power dynamics. Use for debate preparation, argument construction, rhetorical analysis of persuasive texts, or any task where the primary goal is building or evaluating the strength of an argument.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "douglass",
+      "role": "leader",
+      "description": "Speech delivery, advocacy, oral persuasion",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "wollstonecraft",
+      "role": "worker",
+      "description": "Argument mapping, fallacy detection, persuasive writing",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "king",
+      "role": "worker",
+      "description": "Audience connection, rhetorical structure, emotional architecture",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "freire",
+      "role": "worker",
+      "description": "Power dynamics, ethical persuasion, dialogical engagement",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

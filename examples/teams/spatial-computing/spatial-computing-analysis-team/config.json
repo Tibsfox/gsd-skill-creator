@@ -1,0 +1,83 @@
+{
+  "name": "spatial-computing-analysis-team",
+  "description": "Full Spatial Computing Department analysis team for multi-wing problems spanning spatial reasoning, world-building, interaction design, immersive environments, and embodied learning. Sutherland classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Papert-sp. Use for research-level questions, professional VR/AR deployment decisions, or any problem where the wing is not obvious and different perspectives may yield different insights. Not for routine design, pure review, or single-concept explanation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "sutherland",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "engelbart",
+      "role": "worker",
+      "description": "Coordinate frames, augmentation value analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "bret-victor",
+      "role": "worker",
+      "description": "Interaction design and directness review",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "krueger",
+      "role": "worker",
+      "description": "Body-as-input, multi-user environments",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "furness",
+      "role": "worker",
+      "description": "HMD design, comfort discipline, professional VR",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "azuma",
+      "role": "worker",
+      "description": "AR tracking, registration budgets, diagnosis",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "papert-sp",
+      "role": "worker",
+      "description": "Level-appropriate explanation, exercise design",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

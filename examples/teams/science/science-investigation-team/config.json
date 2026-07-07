@@ -1,0 +1,82 @@
+{
+  "name": "science-investigation-team",
+  "description": "Full Science Department investigation team for multi-domain problems spanning methodology, experimental design, data analysis, communication, and the nature of science. Darwin classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Pestalozzi. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any problem where the domain is not obvious and different scientific perspectives may yield different insights. Not for routine experimental design, pure communication tasks, or pure methodological evaluation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "darwin",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "mcclintock",
+      "role": "worker",
+      "description": "Controlled experiments, pattern recognition in data",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "sagan",
+      "role": "worker",
+      "description": "Science communication, narrative, public understanding",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "goodall",
+      "role": "worker",
+      "description": "Field observation, longitudinal studies, ecological systems",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "feynman-s",
+      "role": "worker",
+      "description": "Epistemology, methodological evaluation, demarcation",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "wu",
+      "role": "worker",
+      "description": "Measurement protocols, error analysis, quantitative rigor",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "pestalozzi",
+      "role": "worker",
+      "description": "Level-appropriate learning activities, head-heart-hand",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "nature-studies-practice-team",
+  "description": "Four-agent field-practice pipeline team for sustained naturalist work. Merian models the sketch-first journal loop, Goodall models longitudinal ethology, von Humboldt supplies habitat and biogeographic context, and Louv scaffolds the session as a learning experience rather than a one-shot answer. Use for ongoing sit-spot, nature-journaling, phenology monitoring, and multi-week behavioral tracking. Not for single-shot identification, pure taxonomy, or research-level analysis that does not require sustained observation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "merian",
+      "role": "leader",
+      "description": "Sketch-first journaling, paired observation, life-cycle tracking",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "goodall-nat",
+      "role": "worker",
+      "description": "Longitudinal observation, individual recognition, Tinbergen framework",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "von-humboldt-nat",
+      "role": "worker",
+      "description": "Habitat assemblages, regional expectations, phenology baselines",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "louv",
+      "role": "worker",
+      "description": "Practice scaffolding, sustained-attention training, session structure",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

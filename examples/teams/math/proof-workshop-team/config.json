@@ -1,0 +1,48 @@
+{
+  "name": "proof-workshop-team",
+  "description": "Focused proof construction and verification team. Euclid leads with strategy selection and step-by-step proof construction, Noether provides structural insight that may simplify or reframe the problem, Gauss verifies computational steps and searches for counterexamples, and Polya translates the finished proof into a level-appropriate explanation. Use for proof construction from scratch, proof verification and critique, proof strategy exploration, formal verification preparation, and proof pedagogy. Not for pure computation, pattern finding, or multi-domain investigation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "euclid",
+      "role": "leader",
+      "description": "Strategy selection, proof construction, verification",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "noether",
+      "role": "worker",
+      "description": "Algebraic structure detection, symmetry analysis, reframing",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "gauss",
+      "role": "worker",
+      "description": "Verify arithmetic steps, search for counterexamples, test boundary cases",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "polya",
+      "role": "worker",
+      "description": "Level-appropriate explanation, mugga-mugga readability, learning pathway",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

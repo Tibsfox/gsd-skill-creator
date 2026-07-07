@@ -1,0 +1,53 @@
+{
+  "name": "trades-workshop-team",
+  "description": "Focused trades workshop team for a single shop design, layout, or improvement question. Pairs Vitruvius with Edison and Nasmyth to cover the workshop-environment and machine-shop foundations, with Crawford available for the philosophical framing of a redesign's educational implications. Smaller and faster than the full trades-analysis-team. Use for single-shop questions, layout proposals, tool-room reorganization, and invention-environment design. Not for multi-trade curriculum design, materials-and-fit diagnosis, or pure pedagogy questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "vitruvius",
+      "role": "leader",
+      "description": "Triad framing, classification, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "edison",
+      "role": "worker",
+      "description": "Shop layout, flow, tool-room, invention environments",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "nasmyth",
+      "role": "worker",
+      "description": "Precision power, machine tool selection, tooling investment",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "crawford",
+      "role": "worker",
+      "description": "Educational and human-development implications of shop design",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

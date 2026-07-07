@@ -1,0 +1,49 @@
+{
+  "name": "composition-workshop-team",
+  "description": "Focused composition and arrangement team. Messiaen leads with creative framework and compositional technique, Rameau ensures harmonic viability and voice-leading quality, Coltrane adds improvisatory elements and cross-genre pattern vocabulary when jazz or hybrid idioms are involved, and Kodaly translates the compositional choices into a level-appropriate explanation with exercises. Use for original composition, arrangement, creative problem-solving, style exercises, and compositional pedagogy. Not for pure analysis, performance preparation, or ear training.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "messiaen",
+      "role": "leader",
+      "description": "Creative framework, compositional technique, rhythm, mode, structural design",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "rameau",
+      "role": "worker",
+      "description": "Voice leading, harmonic function, tonal viability, counterpoint",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "coltrane",
+      "role": "worker",
+      "description": "Jazz harmony, substitution chains, improvisatory pattern vocabulary, cross-genre idiom",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "kodaly",
+      "role": "worker",
+      "description": "Level-appropriate explanation, compositional exercises, learning pathway",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

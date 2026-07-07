@@ -1,0 +1,87 @@
+{
+  "name": "rca-deep-team",
+  "description": "Multi-method parallel root cause investigation for high-severity or high-uncertainty incidents. Runs classical, systems-theoretic, causal-inference, and human-factors analyses in parallel, then synthesizes findings into a single coherent report. Use when an incident is SEV1/SEV2, when initial analysis produced conflicting hypotheses, when the incident is likely to recur, or when regulatory or legal review will scrutinize the investigation. Not for routine incidents — the token and time cost is substantial.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "rca-investigator",
+      "role": "leader",
+      "description": "Method selection, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write",
+        "WebFetch"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "five-whys-facilitator",
+      "role": "worker",
+      "description": "5 Whys + Fishbone + Cause Map",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "stamp-stpa-analyst",
+      "role": "worker",
+      "description": "CAST on the incident",
+      "tools": [
+        "Read",
+        "Write",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "causal-graph-builder",
+      "role": "worker",
+      "description": "Bayesian network, counterfactuals",
+      "tools": [
+        "Read",
+        "Write",
+        "Bash",
+        "Grep",
+        "Glob"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "rca-investigator",
+      "role": "worker",
+      "description": "HFACS taxonomy, Just Culture triage",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write",
+        "WebFetch"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "rca-investigator",
+      "role": "worker",
+      "description": "Trace analysis, service-graph diff",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write",
+        "WebFetch"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

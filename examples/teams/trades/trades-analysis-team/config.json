@@ -1,0 +1,83 @@
+{
+  "name": "trades-analysis-team",
+  "description": "Full Trades Department investigation team for multi-domain craft problems spanning methodology, workshop practice, tools and machines, materials, pedagogy, and measurement. Vitruvius classifies the query along five dimensions (domain, complexity, type, user level, firmitas/utilitas/venustas emphasis) and activates the relevant specialists in parallel, then synthesizes their independent findings into a coherent level-appropriate response. Use for complex craft problems where multiple specialist perspectives are required, including problems that cross methodology, materials, and pedagogy in a single question. Not for routine tool selection, pure shop layout, or single-specialist questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "vitruvius",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, triad framing",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "edison",
+      "role": "worker",
+      "description": "Shop layout, invention environments, tool-room organization",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "nasmyth",
+      "role": "worker",
+      "description": "Machine tools, tolerances, metallurgy, machine-shop design",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "brunel-tr",
+      "role": "worker",
+      "description": "Dedicated tooling, mass-production origin, interchangeable parts",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "taylor",
+      "role": "worker",
+      "description": "Time study, task decomposition, with labor-relations framing",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "rose",
+      "role": "worker",
+      "description": "Cognitive content of manual work, apprenticeship, teaching",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "crawford",
+      "role": "worker",
+      "description": "Philosophical argument, craft-education defense, soulcraft framing",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

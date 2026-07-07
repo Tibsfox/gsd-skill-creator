@@ -1,0 +1,61 @@
+{
+  "name": "logic-workshop-team",
+  "description": "Focused five-agent team for evaluating a single argument, proof, or claim in depth. Frege dispatches boole, russell, godel, and quine (or a subset appropriate to the argument type), each working on the same artifact from a different angle. Produces a LogicReview record with a clear verdict and decision guidance.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "frege",
+      "role": "leader",
+      "description": "Chair, classifier, synthesizer",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "russell",
+      "role": "worker",
+      "description": "Informal argument and fallacy",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "godel",
+      "role": "worker",
+      "description": "Proof verification",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "tarski",
+      "role": "worker",
+      "description": "Semantic countermodel",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "quine",
+      "role": "worker",
+      "description": "Skeptical critique",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

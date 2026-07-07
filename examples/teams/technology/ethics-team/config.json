@@ -1,0 +1,48 @@
+{
+  "name": "ethics-team",
+  "description": "Focused ethics and social impact team combining technology risk assessment (Joy), social construction analysis (Hicks), digital equity evaluation (Gates-M), and creative learning perspective (Resnick). Use for ethical evaluation of technology proposals, social impact assessment, labor analysis, equity audits, and any question where the primary concern is whether a technology should be deployed rather than whether it can be. Not for pure technical evaluation or design review.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "joy",
+      "role": "leader",
+      "description": "Emerging tech risk, failure modes, precautionary principle, controllability",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hicks",
+      "role": "worker",
+      "description": "Social construction, labor, gender, power dynamics, historical patterns",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "gates-m",
+      "role": "worker",
+      "description": "Digital equity, social impact, global development, inclusion",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "resnick",
+      "role": "worker",
+      "description": "Level-appropriate framing, creative agency, equitable access to learning",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

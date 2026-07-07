@@ -1,0 +1,47 @@
+{
+  "name": "critical-thinking-practice-team",
+  "description": "Sequential practice pipeline for developing critical thinking skills through structured drills. Dewey-ct frames the practice question and selects the target skill, de-bono generates varied example problems to work on, elder walks the learner through the structural analysis, and lipman produces the final explanation and learning-pathway update. Use for skill-building, drill-and-practice sessions, classroom preparation, and systematic development from novice to proficient. Not for evaluating live arguments, deep multi-lens audits, or ill-structured open problems.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "dewey-ct",
+      "role": "leader",
+      "description": "Frame the practice question, select target skill, set the level",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "de-bono",
+      "role": "worker",
+      "description": "Generate varied practice problems at the chosen level",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "elder",
+      "role": "worker",
+      "description": "Walk the learner through the structural analysis step by step",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "lipman",
+      "role": "worker",
+      "description": "Produce final explanation, pathway update, and next-steps",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

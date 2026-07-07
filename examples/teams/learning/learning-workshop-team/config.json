@@ -1,0 +1,51 @@
+{
+  "name": "learning-workshop-team",
+  "description": "Focused design workshop team for a single learning-design question — a new unit, a stuck learner, or a curriculum section needing rework. Bloom pairs with developmental, scaffolding, and motivation specialists to produce a deep, actionable response without pulling in the full department. Use for unit design, single-learner intervention plans, or focused-lesson redesigns where the bottleneck is clear but multi-dimensional. Not for multi-domain curriculum reviews, pure drill pipelines, or routine objective writing.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "bloom",
+      "role": "leader",
+      "description": "Classification, objective design, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "piaget-learn",
+      "role": "worker",
+      "description": "Developmental readiness, schema diagnosis",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "vygotsky-learn",
+      "role": "worker",
+      "description": "ZPD calibration, scaffold plan, fading schedule",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "dweck",
+      "role": "worker",
+      "description": "Attribution audit, intervention script, framing",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    }
+  ]
+}

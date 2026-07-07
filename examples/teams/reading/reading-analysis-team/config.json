@@ -1,0 +1,82 @@
+{
+  "name": "reading-analysis-team",
+  "description": "Full Reading Department analysis team for multi-domain problems spanning decoding, comprehension, literary analysis, critical reading, and information literacy. Austen classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with scaffolding from Clay. Use for advanced literary analysis requiring multiple perspectives, multi-domain reading questions, research-level interpretation, or problems where the reading domain is not obvious. Not for routine comprehension, pure decoding, or single-domain questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "austen",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "morrison",
+      "role": "worker",
+      "description": "Narrative voice, race, representation, craft",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "borges",
+      "role": "worker",
+      "description": "Allusion, influence, metafiction, genre",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "achebe",
+      "role": "worker",
+      "description": "Postcolonial analysis, bias, source evaluation, world literature",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "rosenblatt",
+      "role": "worker",
+      "description": "Transactional theory, comprehension, reader experience",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "chomsky-r",
+      "role": "worker",
+      "description": "Language structure, morphology, syntax, decoding",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "clay",
+      "role": "worker",
+      "description": "Assessment, scaffolding, instructional design",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

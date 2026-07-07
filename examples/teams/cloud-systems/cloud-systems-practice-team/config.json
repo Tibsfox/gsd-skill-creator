@@ -1,0 +1,62 @@
+{
+  "name": "cloud-systems-practice-team",
+  "description": "Sequential pipeline team for cloud operations practice — incident response, postmortems, and runbook construction. Runs Lamport, DeCandia, Hamilton-cloud, Vogels, and Gray in a triage/analyze/document pipeline analogous to the RCA postmortem pattern. Use for operational incidents, runbook writing, and post-incident learning. Not for greenfield design or theoretical consensus questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lamport",
+      "role": "leader",
+      "description": "Classification, triage, pipeline orchestration",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "decandia",
+      "role": "worker",
+      "description": "Ring-based store operations, quorum mechanics",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "hamilton-cloud",
+      "role": "worker",
+      "description": "Cost of operations, SLO trade-offs, hardware fit",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "vogels",
+      "role": "worker",
+      "description": "Service boundary, API behavior, ownership",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "gray",
+      "role": "worker",
+      "description": "Runbook prose, level-appropriate explanation, postmortem writing",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

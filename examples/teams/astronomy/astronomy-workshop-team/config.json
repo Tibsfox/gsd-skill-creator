@@ -1,0 +1,49 @@
+{
+  "name": "astronomy-workshop-team",
+  "description": "Focused four-agent workshop team for stellar astrophysics problems that need spectroscopic classification, structural/evolutionary modeling, and nucleosynthetic interpretation in one pass. Payne-Gaposchkin leads classification and composition, Chandrasekhar-astro handles structure and evolution, Burbidge interprets nucleosynthesis, and Tyson delivers the result at the user's level. Use for stellar classification deep-dives, abundance analyses, evolutionary assessments, and any stellar-physics problem where the answer is in the star itself rather than its environment. Not for observational planning, galactic dynamics, or cosmological questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "payne-gaposchkin",
+      "role": "leader",
+      "description": "Classification, composition analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "chandrasekhar-astro",
+      "role": "worker",
+      "description": "Interior models, evolutionary tracks",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "burbidge",
+      "role": "worker",
+      "description": "B^2FH processes, chemical history",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "tyson",
+      "role": "worker",
+      "description": "Level-appropriate synthesis",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

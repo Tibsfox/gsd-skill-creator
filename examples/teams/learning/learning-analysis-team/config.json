@@ -1,0 +1,82 @@
+{
+  "name": "learning-analysis-team",
+  "description": "Full Learning Department investigation team for multi-lens learning-design problems spanning developmental readiness, scaffolding, deliberate practice, mindset, experiential design, and prepared environment. Bloom classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified response calibrated to the user's role (teacher, parent, curriculum designer, self-learner). Use for curriculum reviews, one-learner diagnoses that resist a single-lens reading, or any learning-design question where the right intervention is not obvious and different traditions may yield different recommendations. Not for routine objective writing, pure drill design, or pure motivation framing.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "bloom",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, objective design",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ericsson",
+      "role": "worker",
+      "description": "Deliberate-practice diagnosis, drill design, plateau escape",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "dweck",
+      "role": "worker",
+      "description": "Mindset diagnosis, attribution audit, intervention scripts",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "piaget-learn",
+      "role": "worker",
+      "description": "Developmental readiness, schema diagnosis, disequilibrium design",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "vygotsky-learn",
+      "role": "worker",
+      "description": "ZPD diagnosis, scaffold design, fading schedules",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "dewey-learn",
+      "role": "worker",
+      "description": "Continuity-interaction evaluation, PBL audit, reflective-cycle design",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "montessori-learn",
+      "role": "worker",
+      "description": "Prepared-environment design, materials recommendation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

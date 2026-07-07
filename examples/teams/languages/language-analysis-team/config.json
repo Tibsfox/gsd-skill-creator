@@ -1,0 +1,83 @@
+{
+  "name": "language-analysis-team",
+  "description": "Full Languages Department investigation team for multi-domain problems spanning phonetics, grammar, acquisition, sociolinguistics, translation, and pedagogy. Saussure classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Bruner-L. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any problem where the domain is not obvious and different linguistic perspectives may yield different insights. Not for routine vocabulary questions, pure phonetic description, or simple translation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "saussure",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "chomsky-l",
+      "role": "worker",
+      "description": "Universal Grammar, generative syntax, typological comparison",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "krashen",
+      "role": "worker",
+      "description": "Input hypothesis, acquisition conditions, learner profiling",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "baker",
+      "role": "worker",
+      "description": "Bilingualism, code-switching, language policy, identity",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "crystal",
+      "role": "worker",
+      "description": "Sound systems, language families, historical change, endangerment",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "lado",
+      "role": "worker",
+      "description": "L1-L2 comparison, error diagnosis, proficiency testing",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "bruner-l",
+      "role": "worker",
+      "description": "Scaffolding, narrative teaching, learning pathways",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

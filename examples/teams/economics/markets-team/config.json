@@ -1,0 +1,52 @@
+{
+  "name": "markets-team",
+  "description": "Focused market analysis team for understanding how specific markets work, why they succeed or fail, and who benefits or is harmed. Pairs Robinson (imperfect competition, monopsony, market power) with Smith (comparative advantage, price coordination, gains from trade), adds Sen (distributional and welfare analysis, capability effects) and Varian (applied micro pedagogy, technology markets, mechanism design). Use for industry analysis, competition assessment, market design, trade analysis, or any question centered on how a specific market functions. Not for macro policy, institutional governance, or behavioral analysis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "robinson",
+      "role": "worker",
+      "description": "Market structures, monopsony, imperfect competition",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "smith",
+      "role": "leader",
+      "description": "Price mechanism, comparative advantage, gains from trade",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "sen",
+      "role": "worker",
+      "description": "Distributional effects, capability assessment",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "varian",
+      "role": "worker",
+      "description": "Technology markets, mechanism design, pedagogy",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

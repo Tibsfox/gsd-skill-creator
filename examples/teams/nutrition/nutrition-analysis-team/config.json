@@ -1,0 +1,83 @@
+{
+  "name": "nutrition-analysis-team",
+  "description": "Full Nutrition Department analysis team for multi-domain questions spanning biochemistry, policy, evidence critique, food systems, and pedagogy. Lind classifies the query, activates relevant specialists in parallel, then synthesizes their findings into a tier-labeled response that distinguishes settled from contested claims and surfaces industry funding and historical-transparency context where appropriate. Use for complex nutrition questions, contested claims requiring multiple perspectives, and queries where the domain is not obvious. Not for routine calorie counts, single-specialist questions, or clinical emergencies.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lind",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, tier labeling",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ancel-keys",
+      "role": "worker",
+      "description": "Lipid metabolism, dietary-pattern epidemiology, cohort methodology",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "marion-nestle",
+      "role": "worker",
+      "description": "DGA process, industry influence, funding disclosure, federal programs",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "atwater",
+      "role": "worker",
+      "description": "Energy balance, Atwater factors, reference intakes, food composition",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "adelle-davis",
+      "role": "worker",
+      "description": "Popular-nutrition writing history, replication failures, transparency treatment",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "pollan",
+      "role": "worker",
+      "description": "Supply chain, food culture, ingredient-label reading, real-world translation",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "satter",
+      "role": "worker",
+      "description": "Feeding relationships, Division of Responsibility, nutrition communication",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

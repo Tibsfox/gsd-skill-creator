@@ -1,0 +1,53 @@
+{
+  "name": "learning-lab-team",
+  "description": "Programming pedagogy team for curriculum design, exercise generation, interactive lessons, and level-appropriate explanations. Papert leads with constructionist pedagogy, Hopper provides practical implementation expertise, Lovelace contributes computational vision and cross-domain connections, and Kay provides the perspective of computing as a creative medium. Use for learning pathway design, exercise creation, concept explanation at any level, onboarding materials, and coding workshop facilitation. Not for production code review, architecture decisions, or research-level analysis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "papert",
+      "role": "leader",
+      "description": "Constructionist learning, exercise design, level adaptation, debugging mindset",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "hopper",
+      "role": "worker",
+      "description": "Working code examples, language-specific idioms, practical debugging",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "lovelace",
+      "role": "worker",
+      "description": "Cross-domain connections, the bigger picture, what computing can be",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kay",
+      "role": "worker",
+      "description": "Computing as a medium for thought, OOP pedagogy, Dynabook vision",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

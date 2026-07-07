@@ -1,0 +1,50 @@
+{
+  "name": "modeling-team",
+  "description": "Focused modeling team for statistical and machine learning model construction, comparison, and validation. Breiman handles algorithm selection and ML pipelines, Tukey provides EDA and feature engineering, Fisher provides experimental design and statistical inference, and Cairo ensures findings are communicated clearly. Use for model building, model comparison, feature engineering, and statistical inference tasks that do not require full-department orchestration.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "breiman",
+      "role": "leader",
+      "description": "Algorithm selection, ensemble methods, cross-validation",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tukey",
+      "role": "worker",
+      "description": "Profiling, distributions, feature engineering",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "fisher",
+      "role": "worker",
+      "description": "ANOVA, experimental design, causal inference",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "cairo",
+      "role": "worker",
+      "description": "Level-appropriate explanation, model interpretation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

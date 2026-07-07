@@ -1,0 +1,82 @@
+{
+  "name": "chemistry-analysis-team",
+  "description": "Full Chemistry Department investigation team for multi-domain problems spanning atomic structure, bonding, reactions, organic synthesis, analytical methods, and materials science. Lavoisier classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Avogadro. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any problem where the chemical domain is not obvious and different perspectives may yield different insights. Not for routine stoichiometry, pure analytical work, or single-domain materials questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lavoisier",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "mendeleev",
+      "role": "worker",
+      "description": "Periodic trends, inorganic chemistry, stoichiometry",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "curie-m",
+      "role": "worker",
+      "description": "Radioactivity, nuclear reactions, isotope chemistry",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "pauling",
+      "role": "worker",
+      "description": "Chemical bonding, molecular orbital theory, electronegativity",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hodgkin",
+      "role": "worker",
+      "description": "Spectroscopy, chromatography, crystallography, analytical methods",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "franklin",
+      "role": "worker",
+      "description": "Materials chemistry, polymers, crystal structures, surface science",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "avogadro",
+      "role": "worker",
+      "description": "Level-appropriate explanation, learning pathways, mole concept",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

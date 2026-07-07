@@ -1,0 +1,48 @@
+{
+  "name": "dialectic-team",
+  "description": "Dialectic team for thesis-antithesis-synthesis on contested philosophical claims. Aristotle formalizes the thesis with rigorous logical structure, Nagarjuna deconstructs it via the tetralemma (catuskoti) and dependent origination, Beauvoir synthesizes from lived experience and situated freedom, and Dewey documents the dialectical process and produces an accessible account. Use for contested metaphysical claims, free will debates, consciousness puzzles, realism vs. anti-realism disputes, or any philosophical proposition where structured adversarial analysis will reveal hidden assumptions and productive tensions. Not for applied ethics, multi-tradition surveys, or pedagogical explanation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "aristotle",
+      "role": "leader",
+      "description": "Construct the strongest version of the claim with formal logical structure",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "nagarjuna",
+      "role": "worker",
+      "description": "Deconstruct via tetralemma (catuskoti), dependent origination, and emptiness analysis",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "beauvoir",
+      "role": "worker",
+      "description": "Ground surviving elements in concrete existence, situated freedom, and phenomenological reality",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "dewey",
+      "role": "worker",
+      "description": "Record the dialectical arc, produce accessible account, identify what was learned",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

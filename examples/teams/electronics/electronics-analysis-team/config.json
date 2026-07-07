@@ -1,0 +1,84 @@
+{
+  "name": "electronics-analysis-team",
+  "description": "Full Electronics Department investigation team for multi-wing problems spanning device physics, integrated logic, layout, firmware, and practical bench debugging. Shockley classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with Horowitz pedagogy. Use for research-level design questions, graduate-level failure analysis, new-project architecture reviews, or any problem where the wing is not obvious and different electronics perspectives may yield different insights. Not for routine bias calculations, single-wing logic reviews, or pure bench measurement tasks.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "shockley",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, safety filtering",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "bardeen",
+      "role": "worker",
+      "description": "Solid-state physics, carrier-level analysis, small-signal models",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kilby",
+      "role": "worker",
+      "description": "Integrated circuit topology, logic families, FSM review",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "brattain",
+      "role": "worker",
+      "description": "Measurement protocols, device characterization, artifact diagnosis",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "noyce",
+      "role": "worker",
+      "description": "PCB layout, manufacturability, EMI, thermal, regulatory",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "shima",
+      "role": "worker",
+      "description": "Microcontroller architecture, firmware review, real-time analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "horowitz",
+      "role": "worker",
+      "description": "Level-appropriate explanation, bench workflows, debug intuition",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

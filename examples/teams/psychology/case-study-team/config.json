@@ -1,0 +1,47 @@
+{
+  "name": "case-study-team",
+  "description": "Focused case formulation and intervention team. Rogers leads with person-centered case formulation centering the client's subjective experience, Hooks provides structural and intersectional analysis of the systemic context shaping the client's situation, Vygotsky analyzes social and cultural factors including relationships and institutional contexts, and Skinner-P designs behavioral interventions and operationalizes treatment goals. Use for clinical case conceptualization, treatment planning, intervention design, case presentations, and understanding individual experiences within their systemic context. Not for research design, pure theoretical analysis, or multi-domain seminar discussions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "rogers",
+      "role": "leader",
+      "description": "Person-centered case formulation, subjective experience, therapeutic relationship",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "hooks",
+      "role": "worker",
+      "description": "Intersectionality, systemic factors, power dynamics, cultural context",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "vygotsky",
+      "role": "worker",
+      "description": "Social relationships, cultural tools, institutional factors, ZPD in recovery",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "skinner-p",
+      "role": "worker",
+      "description": "Behavioral analysis, operationalized goals, reinforcement-based interventions",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

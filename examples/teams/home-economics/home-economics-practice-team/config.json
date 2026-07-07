@@ -1,0 +1,41 @@
+{
+  "name": "home-economics-practice-team",
+  "description": "Pipeline-oriented operational practice team — diagnose, design, embed. Pairs Gilbreth (motion diagnosis) with Waters (plan design) and Liebhardt (habit embedding) for ongoing household improvement. Lower token cost than the analysis team and sequential rather than parallel, appropriate for ongoing practice rather than one-off design. Use for recurring improvement cycles, iterative routine refinement, or continuous-improvement-style household work. Not for first-time setup (use workshop team) or overhauls (use analysis team).",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "gilbreth",
+      "role": "leader",
+      "description": "Task decomposition, motion study, waste-therblig identification",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "waters",
+      "role": "worker",
+      "description": "Seasonal plan, ingredient-first design, weekly rotation",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "liebhardt",
+      "role": "worker",
+      "description": "Habit formation, retro design, documentation",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

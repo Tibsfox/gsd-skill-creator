@@ -1,0 +1,82 @@
+{
+  "name": "logic-analysis-team",
+  "description": "Full-department deployment for multi-domain or systemic logic questions. All seven agents engage in parallel under Frege's direction to produce a comprehensive analysis covering formal validity, semantic interpretation, informal argumentation, proof structure, skeptical critique, and pedagogical framing.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "frege",
+      "role": "leader",
+      "description": "Chair, classifier, synthesizer",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "boole",
+      "role": "worker",
+      "description": "Propositional analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "russell",
+      "role": "worker",
+      "description": "Translation and informal argument",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "godel",
+      "role": "worker",
+      "description": "Proof and metamathematics",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "tarski",
+      "role": "worker",
+      "description": "Semantics and model theory",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "quine",
+      "role": "worker",
+      "description": "Skeptical critique",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "langer",
+      "role": "worker",
+      "description": "Pedagogy and explanation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "name": "home-economics-analysis-team",
+  "description": "Full Home Economics Department team for multi-subsystem household problems spanning habitability, nutrition, technique, economics, motion study, and pedagogy. Richards classifies the query, audits habitability first, and activates the relevant specialists in parallel; the team returns a unified response with a pedagogical wrap from Liebhardt. Use for household overhauls, new-household setup, post-move rebuilds, or any problem where the subsystem is not obvious and multiple specialist lenses are needed. Not for single-task questions that map cleanly to one specialist.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "richards",
+      "role": "leader",
+      "description": "Classification, habitability audit, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "gilbreth",
+      "role": "worker",
+      "description": "Task decomposition, routine chart, ergonomics",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "fisher-he",
+      "role": "worker",
+      "description": "Experiential framing, sensory description, narrative critique",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "beecher",
+      "role": "worker",
+      "description": "Lineage grounding, curriculum sequence",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "child",
+      "role": "worker",
+      "description": "Technique guide, verification, diagnosis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "waters",
+      "role": "worker",
+      "description": "Weekly meal plan, ingredient-first design",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "liebhardt",
+      "role": "worker",
+      "description": "Teaching sequence, habit formation, retros",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "spatial-computing-practice-team",
+  "description": "Pipeline four-agent team for prototyping AR/VR experiences end-to-end — Azuma designs registration and tracking, Furness designs comfort and HMD budget, Bret Victor designs direct-manipulation interaction, and Papert-sp produces the learning pathway and onboarding tutorial. Runs sequentially as a design pipeline for professional AR/VR prototypes. Use for building AR/VR prototypes from scratch, producing reference implementations, or translating a concept into an executable spec. Not for pure review, directness-only critique, or multi-wing analysis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "azuma",
+      "role": "leader",
+      "description": "Registration budget, tracking stack, calibration",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "furness",
+      "role": "worker",
+      "description": "Comfort, frame rate budget, hardware, session length",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "bret-victor",
+      "role": "worker",
+      "description": "Direct manipulation, feedback loops, discoverability",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "papert-sp",
+      "role": "worker",
+      "description": "Tutorial design, learning pathway, constructionist exercises",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "project-assessment-team",
+  "description": "Full Project Management Department assessment team for comprehensive project evaluation. Brooks classifies the query and activates specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Sinek. Use for new project kickoffs, project health assessments, troubled project diagnosis, and portfolio reviews where multiple PM disciplines must converge on a single recommendation. Not for routine sprint work, single-domain questions, or lightweight status checks.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "brooks",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hamilton",
+      "role": "worker",
+      "description": "Risk identification, failure mode analysis, integration review",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "goldratt",
+      "role": "worker",
+      "description": "Bottleneck analysis, critical chain, buffer management",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "deming",
+      "role": "worker",
+      "description": "PDCA, statistical process control, continuous improvement",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "lei",
+      "role": "worker",
+      "description": "Scrum, Kanban, value stream mapping, flow metrics",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "gantt",
+      "role": "worker",
+      "description": "WBS, PERT estimation, critical path, earned value",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "sinek",
+      "role": "worker",
+      "description": "Purpose alignment, leadership coaching, level-appropriate explanation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

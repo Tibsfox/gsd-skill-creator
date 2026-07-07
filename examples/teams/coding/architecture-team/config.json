@@ -1,0 +1,51 @@
+{
+  "name": "architecture-team",
+  "description": "Focused architecture and design team for system structure decisions, pattern selection, and design-level code review. Dijkstra leads with structured programming and SOLID principles, Kay provides OOP and component architecture, Knuth contributes algorithm-aware design, and Papert assesses learnability and onboarding impact. Use for architecture decisions, design pattern selection, refactoring strategy, system decomposition, and API design. Not for implementation-level debugging, pure algorithm analysis, or beginner-level teaching.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "dijkstra",
+      "role": "leader",
+      "description": "SOLID, structured programming, coupling/cohesion, correctness",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "kay",
+      "role": "worker",
+      "description": "Component boundaries, message passing, encapsulation, API design",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "knuth",
+      "role": "worker",
+      "description": "Algorithm-aware design, data structure selection, efficiency implications",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "papert",
+      "role": "worker",
+      "description": "Onboarding impact, documentation needs, team comprehension",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

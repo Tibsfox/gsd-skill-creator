@@ -1,0 +1,34 @@
+{
+  "name": "rca-triage-team",
+  "description": "Fast triage team for routine incidents. Classifies the incident, runs a single-method shallow analysis, and produces a short postmortem suitable for low-severity events. Optimized for throughput rather than depth — gets the common case off the floor quickly so the deep team can focus on high-impact incidents. Escalates to rca-deep-team if classification reveals the incident is deeper than it looked.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "rca-investigator",
+      "role": "leader",
+      "description": "Classify incident, select single method",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write",
+        "WebFetch"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "postmortem-writer",
+      "role": "worker",
+      "description": "Produce the short postmortem",
+      "tools": [
+        "Read",
+        "Write",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

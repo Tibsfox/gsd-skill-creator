@@ -1,0 +1,49 @@
+{
+  "name": "systems-team",
+  "description": "Systems engineering and integration team for complex engineered systems. Four agents -- Johnson-K (lead), Tesla, Watt, Polya-E -- handle requirements management, V-model lifecycle, integration planning, verification and validation, interface control, and technical performance tracking. Use for systems-level problems, NASA-style SE processes, complex integration challenges, and verification/validation planning.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "johnson-k",
+      "role": "leader",
+      "description": "Requirements management, V-model, verification planning, mission analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tesla",
+      "role": "worker",
+      "description": "Electrical subsystem integration, control systems, EMC, avionics",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "watt",
+      "role": "worker",
+      "description": "Thermal subsystem integration, mechanical interfaces, fluid systems",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "polya-e",
+      "role": "worker",
+      "description": "Requirements writing guidance, SE process explanation, documentation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

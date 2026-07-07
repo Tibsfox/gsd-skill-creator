@@ -1,0 +1,53 @@
+{
+  "name": "physical-education-practice-team",
+  "description": "Operational practice team for ongoing coaching, conditioning, and practice delivery. Pairs the coaching specialist (Wooden), the cardiovascular specialist (Kenneth Cooper), and the lifetime fitness specialist (Sørensen) under the chair (Naismith) to produce integrated practice plans, conditioning schedules, and session-by-session coaching feedback. Use for in-season coaching support, periodized training delivery, and the practice-level questions that come up week by week during a season.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "naismith",
+      "role": "leader",
+      "description": "Classification, integration, coaching context",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kenneth-cooper",
+      "role": "worker",
+      "description": "Aerobic physiology, FITT, progression audit",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "wooden",
+      "role": "worker",
+      "description": "Practice design, strength and conditioning, coach mentoring",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "sorensen",
+      "role": "worker",
+      "description": "Aerobic dance, group fitness class design",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

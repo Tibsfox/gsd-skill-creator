@@ -1,0 +1,53 @@
+{
+  "name": "visualization-team",
+  "description": "Focused visualization and communication team for data display, dashboard design, visual critique, and data storytelling. Tufte handles chart design and visual honesty, Nightingale provides data context and narrative structure, Benjamin reviews visualizations for bias and equity, and Cairo ensures the output builds data literacy in the audience. Use for dashboard projects, publication-quality graphics, visualization audits, and data storytelling tasks.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "tufte",
+      "role": "worker",
+      "description": "Chart design, data-ink ratio, small multiples, critique",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "nightingale",
+      "role": "leader",
+      "description": "Data understanding, narrative structure, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "benjamin",
+      "role": "worker",
+      "description": "Bias in visual framing, equity of representation, accessibility",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "cairo",
+      "role": "worker",
+      "description": "Data literacy, audience adaptation, critical reading",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

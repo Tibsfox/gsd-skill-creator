@@ -1,0 +1,83 @@
+{
+  "name": "stats-analysis-team",
+  "description": "Full Statistics Department investigation team for multi-domain problems spanning descriptive analysis, inference, modeling, Bayesian reasoning, and computational methods. Pearson classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with pedagogical framing from George. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any statistical problem where the domain is not obvious and different perspectives may yield different insights. Not for routine tests, pure computation, or single-method queries.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "pearson",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "bayes",
+      "role": "worker",
+      "description": "Bayesian inference, prior-to-posterior updating",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "gosset",
+      "role": "worker",
+      "description": "t-tests, small-sample inference, experimental design",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "box",
+      "role": "worker",
+      "description": "Regression, model building, diagnostics, time series",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "efron",
+      "role": "worker",
+      "description": "Bootstrap, permutation, simulation, cross-validation",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "wasserstein",
+      "role": "worker",
+      "description": "Result interpretation, audience adaptation, p-value reform",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "george",
+      "role": "worker",
+      "description": "Level-appropriate explanation, active learning",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

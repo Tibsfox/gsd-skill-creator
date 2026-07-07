@@ -1,0 +1,50 @@
+{
+  "name": "nature-studies-workshop-team",
+  "description": "Four-agent identification-and-teaching workshop team for naturalist problems centered on \"what is this and how do I know?\" Linnaeus classifies and synthesizes, Peterson applies the field-guide methodology, Audubon handles bird-specific identification and voice, and Louv adapts the output for the learner's level. Use for identification-heavy workshops, field-guide-style artifact building, and beginner-to-intermediate teaching sessions where diagnosis and pedagogy are the focus. Not for behavioral interpretation, longitudinal studies, or research-level biogeography.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "linnaeus",
+      "role": "leader",
+      "description": "Classification, synthesis, taxonomic anchoring",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "peterson",
+      "role": "worker",
+      "description": "Diagnostic features, confusion species, confidence rating",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "audubon",
+      "role": "worker",
+      "description": "Bird-specific ID, voice, plumage variation",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "louv",
+      "role": "worker",
+      "description": "Level adaptation, beginner scaffolding, accessibility",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

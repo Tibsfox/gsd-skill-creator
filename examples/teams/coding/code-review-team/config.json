@@ -1,0 +1,86 @@
+{
+  "name": "code-review-team",
+  "description": "Full Coding Department review team for comprehensive code analysis spanning algorithms, design, implementation, systems, testing, and pedagogy. Lovelace classifies the code under review and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, prioritized review with actionable recommendations. Use for production code reviews, architecture assessments, pre-merge quality gates, or any code where multiple perspectives are needed to assess quality. Not for trivial fixes, single-function debugging, or pure pedagogy.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lovelace",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "turing",
+      "role": "worker",
+      "description": "Computability, correctness proofs, complexity class",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hopper",
+      "role": "worker",
+      "description": "Language idioms, bugs, error handling, systems issues",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "knuth",
+      "role": "worker",
+      "description": "Efficiency, data structure selection, complexity",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "dijkstra",
+      "role": "worker",
+      "description": "SOLID, coupling/cohesion, architecture, structure",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "kay",
+      "role": "worker",
+      "description": "Component boundaries, interfaces, encapsulation",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "papert",
+      "role": "worker",
+      "description": "Readability, learnability, onboarding impact",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "consulting-team",
+  "description": "Four-agent statistical consulting team for applied problems where a client needs help with study design, analysis, and interpretation. Box leads with model building and diagnostics, Pearson classifies and synthesizes, Gosset handles experimental design and testing, and George translates results into client-accessible language. Use for applied data analysis, study design consultation, result interpretation for non-statisticians, and iterative model building with client feedback. Not for purely theoretical questions, large-scale computation, or Bayesian-specific analysis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "box",
+      "role": "leader",
+      "description": "Model building, diagnostics, response surface, time series",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "pearson",
+      "role": "worker",
+      "description": "Classification, synthesis, client communication",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "gosset",
+      "role": "worker",
+      "description": "t-tests, ANOVA, sample size, experimental design",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "george",
+      "role": "worker",
+      "description": "Client-level explanations, misconception prevention",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "performance-prep-team",
+  "description": "Sequential performance preparation pipeline for interpretation, practice planning, and repertoire decisions. Clara Schumann leads with interpretation and phrasing, Rameau provides the harmonic context that informs expressive choices, Bartok maps the formal structure to guide large-scale pacing, and Kodaly designs the practice strategy and learning pathway. Use for preparing a piece for performance, making interpretation decisions, planning efficient practice, and selecting repertoire. Not for original composition, improvisation, or multi-domain analytical research.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "clara-schumann",
+      "role": "leader",
+      "description": "Interpretation, phrasing, articulation, pedaling, historical performance practice",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "rameau",
+      "role": "worker",
+      "description": "Harmonic analysis informing expressive choices, tension/release mapping, cadential weight",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "bartok",
+      "role": "worker",
+      "description": "Formal analysis, proportional structure, large-scale pacing, golden-section pivots",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "kodaly",
+      "role": "worker",
+      "description": "Practice strategy, learning pathway, technical exercises, memorization plan",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

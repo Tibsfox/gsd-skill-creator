@@ -1,0 +1,50 @@
+{
+  "name": "policy-team",
+  "description": "Focused policy analysis team for evaluating government interventions, regulatory proposals, tax design, and public goods provision. Pairs Keynes (fiscal policy, demand management) with Hayek (knowledge problem, unintended consequences) for balanced debate, adds Ostrom (institutional design, polycentric alternatives) for governance options beyond state-vs-market, and Varian (mechanism design, clear exposition) for pedagogical synthesis. Use for policy evaluation, regulatory design, tax analysis, commons governance, or any question where \"should the government intervene?\" is the central issue. Not for pure market analysis, development economics, or macro forecasting.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "keynes",
+      "role": "leader",
+      "description": "Government intervention as demand management and welfare improvement",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hayek",
+      "role": "worker",
+      "description": "Knowledge problem, unintended consequences, limits of planning",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "ostrom",
+      "role": "worker",
+      "description": "Polycentric governance, community-based alternatives, design principles",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "varian",
+      "role": "worker",
+      "description": "Mechanism design, clear exposition, applied micro",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

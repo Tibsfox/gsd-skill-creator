@@ -1,0 +1,51 @@
+{
+  "name": "design-team",
+  "description": "Focused design evaluation and creation team combining human-centered design (Norman), systems architecture (Berners-Lee), infrastructure feasibility (Borg), and creative learning (Resnick). Use for design reviews, prototype evaluation, accessibility audits, and creating technology solutions where usability, technical feasibility, and learnability must all be addressed. Not for pure risk assessment, ethics analysis, or social impact evaluation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "norman",
+      "role": "leader",
+      "description": "Usability, affordances, heuristic evaluation, accessibility",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "berners-lee",
+      "role": "worker",
+      "description": "Information architecture, standards, web architecture",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "borg",
+      "role": "worker",
+      "description": "Technical feasibility, system constraints, infrastructure access",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "resnick",
+      "role": "worker",
+      "description": "Learnability, creative learning, low floors/high ceilings/wide walls",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

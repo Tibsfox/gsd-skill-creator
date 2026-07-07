@@ -1,0 +1,53 @@
+{
+  "name": "mind-body-practice-team",
+  "description": "Body-centered practice team for queries about yoga, Pilates, somatic retraining, tai chi, qigong, and martial arts where several body-method voices contribute to the answer. Runs Iyengar (chair, yoga alignment), Feldenkrais (somatic learning), Pilates (classical Contrology), and Yang (internal arts, tai chi, qigong, martial arts) in a pipeline optimized for program design, form diagnosis, rehab-adjacent questions, and cross-method body training. The complement to the workshop team — the workshop team covers contemplative-side questions; the practice team covers body-side questions. Not for single-method questions with a clean specialist match.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "iyengar",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, Iyengar yoga voice",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "feldenkrais",
+      "role": "worker",
+      "description": "ATM lessons, nervous-system-first learning, rehab-adjacent somatic retraining",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "pilates",
+      "role": "worker",
+      "description": "Mat and apparatus, six principles, core-and-whole-body training",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "yang",
+      "role": "worker",
+      "description": "Tai chi, qigong, Chinese martial arts, rooted-stance and internal alignment",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

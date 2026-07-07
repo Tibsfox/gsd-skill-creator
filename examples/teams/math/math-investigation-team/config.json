@@ -1,0 +1,81 @@
+{
+  "name": "math-investigation-team",
+  "description": "Full Mathematics Department investigation team for multi-domain problems spanning proof, computation, pattern-finding, and structural analysis. Hypatia classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Polya. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any problem where the domain is not obvious and different mathematical perspectives may yield different insights. Not for routine computation, pure proof, or pure pattern exploration.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "hypatia",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "euclid",
+      "role": "worker",
+      "description": "Formal proof construction and verification",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "gauss",
+      "role": "worker",
+      "description": "Algebraic computation, number theory, modular arithmetic",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "euler",
+      "role": "worker",
+      "description": "Calculus, series, limits, numerical methods",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "noether",
+      "role": "worker",
+      "description": "Abstract algebra, symmetry, category theory",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ramanujan",
+      "role": "worker",
+      "description": "Pattern detection, conjecture generation",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "polya",
+      "role": "worker",
+      "description": "Level-appropriate explanation, learning pathways",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "astronomy-analysis-team",
+  "description": "Full Astronomy Department investigation team for multi-wing problems spanning observing, stellar physics, solar-system dynamics, and cosmology. Hubble classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with pedagogical framing from Tyson. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any problem where the wing is not obvious and different astronomical perspectives may yield different insights. Not for routine observing, pure classification, or pure orbital calculation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "hubble",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "payne-gaposchkin",
+      "role": "worker",
+      "description": "Spectral classification, composition analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "chandrasekhar-astro",
+      "role": "worker",
+      "description": "Stellar structure, evolution, orbital mechanics",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "caroline-herschel",
+      "role": "worker",
+      "description": "Observing plans, field identification, target visibility",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "rubin",
+      "role": "worker",
+      "description": "Rotation curves, mass profiles, dark-matter evidence",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "burbidge",
+      "role": "worker",
+      "description": "Element origins, B^2FH processes, chemical evolution",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "tyson",
+      "role": "worker",
+      "description": "Level-appropriate explanation, misconception correction",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "electronics-practice-team",
+  "description": "Sequential four-agent pipeline for the prototype-to-production path — Kilby for logic correctness, Noyce for layout and manufacturability, Shima for firmware architecture, and Horowitz for documentation and pedagogy. Use when advancing a project from working prototype toward a shipping product: design-for-manufacturing review, firmware bring-up, board-level integration, or first-article qualification. Mirrors the math discovery-team pipeline (explore -> compute -> verify -> document) but runs in the applied-systems direction. Not for theoretical device analysis, pure circuit debugging, or multi-wing research questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "kilby",
+      "role": "leader",
+      "description": "Logic correctness, FSM review, timing budget",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "noyce",
+      "role": "worker",
+      "description": "Layout, manufacturability, EMI, thermal, BOM cost",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "shima",
+      "role": "worker",
+      "description": "Firmware architecture, peripheral binding, real-time analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "horowitz",
+      "role": "worker",
+      "description": "Bring-up guide, documentation, learning pathway",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

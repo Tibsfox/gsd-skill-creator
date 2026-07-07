@@ -1,0 +1,51 @@
+{
+  "name": "electronics-workshop-team",
+  "description": "Focused four-agent subset of the Electronics Department for bench design reviews, circuit debugging, and practical schematic analysis. Pairs Shockley (chair and safety), Bardeen (device physics), Brattain (measurement discipline), and Horowitz (pedagogy and intuition) for problems where the engineering work is concentrated in the circuits and devices wings. Use when you have a specific schematic or working prototype that needs review, a device-level bug to diagnose, or a circuit to characterize at the bench. Not for multi-wing investigations, firmware-heavy problems, or pure layout questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "shockley",
+      "role": "leader",
+      "description": "Classification, orchestration, safety filtering",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "bardeen",
+      "role": "worker",
+      "description": "Carrier-level physics, small-signal models, nonideal effects",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "brattain",
+      "role": "worker",
+      "description": "Measurement protocols, artifact diagnosis, characterization",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "horowitz",
+      "role": "worker",
+      "description": "Bench workflows, debug intuition, level-appropriate explanation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

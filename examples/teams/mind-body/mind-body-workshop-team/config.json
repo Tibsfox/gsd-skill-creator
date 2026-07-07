@@ -1,0 +1,52 @@
+{
+  "name": "mind-body-workshop-team",
+  "description": "Focused contemplative workshop team for deep-dive questions on a single contemplative theme — meditation, breath, presence, attention — that benefits from multiple tradition voices without requiring the full department. Runs Iyengar (chair), Dōgen (classical Zen), Kabat-Zinn (clinical translation), and Thich Nhat Hanh (engaged pedagogy) in parallel on one focused question. Designed for users who want depth on a specific contemplative theme and who can hold multiple tradition voices without being overwhelmed. Smaller, cheaper, and faster than the full analysis team; richer than a single-specialist response.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "iyengar",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, lineage-aware framing",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kabat-zinn",
+      "role": "worker",
+      "description": "MBSR secular translation, research-honest framing",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "dogen",
+      "role": "worker",
+      "description": "Sōtō zazen, shikantaza, lineage voice",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "thich-nhat-hanh",
+      "role": "worker",
+      "description": "Plum Village voice, accessibility, gatha and daily-life practice",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

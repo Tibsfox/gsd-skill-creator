@@ -1,0 +1,46 @@
+{
+  "name": "postmortem-team",
+  "description": "End-to-end blameless postmortem authoring and review pipeline. Takes incident evidence and RCA findings, produces a draft postmortem, runs a blameless-language audit, runs an action-item quality gate, generates the review-meeting agenda, and tracks action items to closure. Use whenever a postmortem needs to be written and you want the process enforced rather than relying on individual discipline. Focuses on the delivery side of RCA; upstream investigation is handled by rca-deep-team or rca-triage-team.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "postmortem-writer",
+      "role": "leader",
+      "description": "Draft the postmortem from evidence and findings",
+      "tools": [
+        "Read",
+        "Write",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "postmortem-writer",
+      "role": "worker",
+      "description": "Scan draft for blame-charged language, rewrite",
+      "tools": [
+        "Read",
+        "Write",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "postmortem-writer",
+      "role": "worker",
+      "description": "Produce the review meeting agenda with discussion points",
+      "tools": [
+        "Read",
+        "Write",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

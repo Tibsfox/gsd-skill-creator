@@ -1,0 +1,83 @@
+{
+  "name": "communication-workshop-team",
+  "description": "Full Communication Department workshop team for multi-domain problems spanning speaking, listening, persuasion, interpersonal dynamics, conflict, and media analysis. Aristotle-C classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with pedagogical scaffolding from Freire. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any communication problem where the domain is not obvious and different perspectives may yield different insights. Not for routine coaching, pure speech preparation, or pure media analysis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "aristotle-c",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "douglass",
+      "role": "worker",
+      "description": "Speech delivery, oral advocacy, presentation coaching",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "wollstonecraft",
+      "role": "worker",
+      "description": "Persuasive writing, argument mapping, fallacy detection",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "king",
+      "role": "worker",
+      "description": "Audience connection, rhetorical structure, leadership communication",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tannen",
+      "role": "worker",
+      "description": "Conversational dynamics, cross-cultural communication, style analysis",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "mcluhan",
+      "role": "worker",
+      "description": "Media ecology, platform analysis, medium/message relationship",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "freire",
+      "role": "worker",
+      "description": "Dialogical education, power analysis, facilitation design",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

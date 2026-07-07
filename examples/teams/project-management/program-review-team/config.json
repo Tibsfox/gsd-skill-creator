@@ -1,0 +1,52 @@
+{
+  "name": "program-review-team",
+  "description": "Quality and retrospective team for milestone reviews, quality audits, process improvement, and lessons learned sessions. Deming drives PDCA analysis with statistical rigor, Hamilton reviews risk outcomes and integration failures, Brooks provides strategic big-picture perspective, and Sinek documents lessons and coaches teams on improvement adoption. Use for milestone retrospectives, quality audits, postmortem reviews, and process improvement initiatives. Not for sprint-level work, new project planning, or real-time constraint analysis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "deming",
+      "role": "leader",
+      "description": "PDCA, statistical process control, variation analysis, metrics design",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hamilton",
+      "role": "worker",
+      "description": "Risk outcome analysis, failure mode review, integration audit",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "brooks",
+      "role": "worker",
+      "description": "Strategic perspective, cross-domain synthesis, tar pit detection",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "sinek",
+      "role": "worker",
+      "description": "Knowledge transfer, coaching, purpose alignment, level-appropriate documentation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

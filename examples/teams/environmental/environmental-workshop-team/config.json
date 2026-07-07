@@ -1,0 +1,50 @@
+{
+  "name": "environmental-workshop-team",
+  "description": "Focused ecosystem analysis and impact assessment team. Leopold leads with ecological community diagnosis, Muir provides reference-state grounding, Commoner cross-checks biogeochemical mass balance, and Orr translates findings into level-appropriate explanations. Use for ecosystem diagnosis, impact assessment against reference conditions, ecological community analysis, and the scientific basis for conservation decisions. Not for pure community implementation, pure pedagogy, or multi-wing problems that need the full analysis team.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "leopold",
+      "role": "leader",
+      "description": "Community diagnosis, trophic structure, succession, land-ethic framing",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "muir",
+      "role": "worker",
+      "description": "Reference-state characterization, protected-area data, restoration targets",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "commoner",
+      "role": "worker",
+      "description": "Biogeochemical mass balance, systems coupling, unintended consequences",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "orr",
+      "role": "worker",
+      "description": "Level-appropriate explanation, place-based framing",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "fieldwork-team",
+  "description": "Focused fieldwork design and execution team for geographic field research. Carson leads with observation protocol and environmental communication, Humboldt provides integrated field strategy in the Humboldtian tradition, Sauer contributes cultural landscape reading methods, and Tobler handles GPS, spatial data collection, and field-to-GIS pipeline design. Use for planning field studies, designing sampling strategies, interpreting field observations, or connecting field data to broader geographic analysis. Not for desk-based analysis, pure cartographic tasks, or geopolitical questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "carson",
+      "role": "leader",
+      "description": "Environmental observation, sense of wonder, field communication",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "humboldt",
+      "role": "worker",
+      "description": "Multi-system field observation, cross-domain synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "sauer",
+      "role": "worker",
+      "description": "Landscape reading, material evidence interpretation",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tobler",
+      "role": "worker",
+      "description": "GPS, field mapping, sampling design, GIS integration",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

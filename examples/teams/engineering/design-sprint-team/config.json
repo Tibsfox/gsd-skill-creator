@@ -1,0 +1,51 @@
+{
+  "name": "design-sprint-team",
+  "description": "Rapid concept development team for engineering design problems. Four agents -- Brunel (lead), Tesla, Roebling, Polya-E -- run a condensed design cycle from problem definition through concept selection. Optimized for speed and breadth of concept generation rather than deep analysis. Use for early-stage design exploration, concept generation, trade studies, and design problems where multiple alternatives must be evaluated quickly.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "brunel",
+      "role": "leader",
+      "description": "Problem definition, concept integration, trade study leadership",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tesla",
+      "role": "worker",
+      "description": "Electrical feasibility, systems-level thinking, control architecture",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "roebling",
+      "role": "worker",
+      "description": "Structural feasibility, load path identification, material implications",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "polya-e",
+      "role": "worker",
+      "description": "Problem-solving framework, communication of results, learning context",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

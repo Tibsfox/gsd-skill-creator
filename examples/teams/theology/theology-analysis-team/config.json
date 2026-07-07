@@ -1,0 +1,87 @@
+{
+  "name": "theology-analysis-team",
+  "description": "Full Theology Department comparative team for multi-tradition questions spanning scripture, doctrine, philosophical theology, mysticism, and comparative framing. Augustine classifies the query along five dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a coherent response that preserves each tradition's distinctness. Use for research-level questions, cross-tradition comparison, or any problem where the domain is not obvious and different traditions may have substantially different things to say. Not for routine single-tradition queries or devotional requests.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "augustine",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, patristic Christian voice",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "aquinas",
+      "role": "worker",
+      "description": "Systematic and philosophical theology, Western Christian scholastic tradition",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "maimonides",
+      "role": "worker",
+      "description": "Jewish scripture and medieval philosophy",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "rumi",
+      "role": "worker",
+      "description": "Qur'an, Sufi tradition, classical *kalam*",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "zhuangzi",
+      "role": "worker",
+      "description": "*Zhuangzi*, *Daodejing*, classical Chinese traditions",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "hildegard",
+      "role": "worker",
+      "description": "Western Christian contemplative tradition, visionary literature",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "huston-smith",
+      "role": "worker",
+      "description": "Cross-tradition framing, introductory presentations, audience adaptation",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

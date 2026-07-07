@@ -1,0 +1,52 @@
+{
+  "name": "materials-workshop-team",
+  "description": "Focused materials workshop team for a single design or selection question that needs deep treatment from the selection lens, the fracture lens, and the pedagogy lens. Pairs the chair (Bessemer) with Ashby (selection), Gordon (failure and toughness), and Cottrell (pedagogy) to produce a defensible selection report backed by failure-mode screening and level-appropriate explanation. Use for design reviews, grade decisions for a new project, or when a single selection question deserves a full workshop rather than a quick ranking.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "bessemer",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ashby",
+      "role": "worker",
+      "description": "Ashby method, performance indices, Pareto trade-offs",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "gordon",
+      "role": "worker",
+      "description": "Fracture mechanics, fatigue, failure-mode screening",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "cottrell",
+      "role": "worker",
+      "description": "Level adaptation, scaffolding, textbook-quality explanation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

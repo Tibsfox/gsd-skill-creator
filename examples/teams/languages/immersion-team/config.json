@@ -1,0 +1,49 @@
+{
+  "name": "immersion-team",
+  "description": "Focused immersion and acquisition team for designing optimal language learning environments, input programs, and scaffolded practice sequences. Krashen provides acquisition theory and input recommendations, Baker provides sociolinguistic and multilingual context, Crystal provides target language phonetic and structural description, and Bruner-L designs scaffolded learning activities and pathways. Use for learning plan design, immersion program creation, extensive reading/listening program setup, heritage language maintenance, or diagnosing why a learner has plateaued.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "krashen",
+      "role": "leader",
+      "description": "Input hypothesis, i+1 calibration, affective filter assessment, method evaluation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "baker",
+      "role": "worker",
+      "description": "Community language dynamics, multilingual identity, heritage speaker support, bilingual education models",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "crystal",
+      "role": "worker",
+      "description": "Target language phonetic inventory, writing system, language family context, typological features",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "bruner-l",
+      "role": "worker",
+      "description": "Scaffolded activity sequences, Try Sessions, learning pathways, narrative-based teaching",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

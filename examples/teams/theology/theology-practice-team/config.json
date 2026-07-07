@@ -1,0 +1,65 @@
+{
+  "name": "theology-practice-team",
+  "description": "Pipeline-oriented contemplative-reading team for iterative work with contemplative primary sources across traditions. Pairs the chair with the three contemplative specialists — Rumi for Sufi tradition, Hildegard for Western Christian mysticism, Zhuangzi for Daoist material — plus Huston Smith for comparative framing. Designed for reading one or more contemplative texts closely, noting tradition-specific features, and producing a sober descriptive account of what the text is doing. Not for devotional practice, not for philosophical-theology argument.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "augustine",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "rumi",
+      "role": "worker",
+      "description": "Qur'anic ta'wil, Sufi poetic and prose sources, stages and states",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "hildegard",
+      "role": "worker",
+      "description": "Visionary literature, classical three-stage map, Western contemplative primary sources",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "zhuangzi",
+      "role": "worker",
+      "description": "*Zhuangzi*, *Daodejing*, classical Chinese contemplative register",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "huston-smith",
+      "role": "worker",
+      "description": "Cross-tradition framing, audience adaptation",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

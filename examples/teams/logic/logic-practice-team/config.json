@@ -1,0 +1,62 @@
+{
+  "name": "logic-practice-team",
+  "description": "Sequential pedagogy pipeline that turns a logic concept into a repeatable practice routine. Frege classifies the concept, a domain specialist prepares the technical content, langer adapts it to the learner's level, and the loop produces an explanation, worked examples, and scaffolded practice problems. The cheapest team, purpose-built for learning.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "frege",
+      "role": "leader",
+      "description": "Chair, classifier, supervision",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "boole",
+      "role": "worker",
+      "description": "Propositional content (if concept is in scope)",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "russell",
+      "role": "worker",
+      "description": "Informal content (if concept is in scope)",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "godel",
+      "role": "worker",
+      "description": "Proof content (if concept is in scope)",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "langer",
+      "role": "worker",
+      "description": "Pedagogical adaptation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

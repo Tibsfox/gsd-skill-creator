@@ -1,0 +1,49 @@
+{
+  "name": "book-club-team",
+  "description": "Interpretive discussion team for deep reading of literary and complex texts. Morrison leads literary analysis (voice, craft, representation), Borges traces intertextual connections and genre relationships, Achebe provides critical and postcolonial perspective, and Clay ensures accessibility across reader levels. Use for book discussions, close reading sessions, cross-text comparison, critical interpretation of literature from diverse traditions, and guided reading experiences for groups or individuals. Not for foundational skill instruction, pure decoding, or information literacy.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "morrison",
+      "role": "leader",
+      "description": "Narrative voice, craft, race, representation",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "borges",
+      "role": "worker",
+      "description": "Allusion, influence, metafiction, genre",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "achebe",
+      "role": "worker",
+      "description": "Postcolonial, bias, world literature, whose story",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "clay",
+      "role": "worker",
+      "description": "Reader level adaptation, guided reading, scaffolding",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

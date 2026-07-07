@@ -1,0 +1,81 @@
+{
+  "name": "physics-analysis-team",
+  "description": "Full Physics Department analysis team for multi-domain problems spanning classical mechanics, electromagnetism, thermodynamics, quantum mechanics, and astrophysics. Curie classifies the query across physics domains and activates relevant specialists in parallel, then synthesizes their independent analyses into a unified response before Faraday wraps the result in pedagogically sound explanation. Use for research-level questions, cross-domain physics (E&M coupled to quantum, thermo coupled to mechanics), comprehensive analysis requiring multiple theoretical frameworks, or any problem where the relevant physics domain is ambiguous. Not for single-domain computation, simple kinematics, or problems outside physics.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "curie",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "newton",
+      "role": "worker",
+      "description": "Newtonian mechanics, Lagrangian/Hamiltonian formalism, gravitation",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "maxwell",
+      "role": "worker",
+      "description": "E&M, optics, Maxwell's equations, wave theory",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "boltzmann",
+      "role": "worker",
+      "description": "Statistical mechanics, thermodynamics, entropy, kinetic theory",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "feynman",
+      "role": "worker",
+      "description": "Quantum mechanics, QFT, path integrals, particle physics",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "chandrasekhar",
+      "role": "worker",
+      "description": "Stellar structure, general relativity, cosmology, compact objects",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "faraday",
+      "role": "worker",
+      "description": "Level-appropriate explanation, experimental intuition, learning pathways",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

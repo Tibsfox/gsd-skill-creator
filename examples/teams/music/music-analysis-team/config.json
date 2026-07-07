@@ -1,0 +1,82 @@
+{
+  "name": "music-analysis-team",
+  "description": "Full Music Department analysis team for multi-domain problems spanning harmony, form, rhythm, composition, and performance practice. Bach classifies the query along musical dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Kodaly. Use for research-level questions, comprehensive piece analysis requiring coordinated specialist input, or any problem where the musical domain is not obvious and different perspectives may yield different insights. Not for simple chord identification, ear training exercises, or straightforward composition tasks.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "bach",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "rameau",
+      "role": "worker",
+      "description": "Harmonic analysis, voice leading, tonal function",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "clara-schumann",
+      "role": "worker",
+      "description": "Interpretation, phrasing, articulation, historical performance practice",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "messiaen",
+      "role": "worker",
+      "description": "Compositional technique, rhythm, mode, color, structural innovation",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "coltrane",
+      "role": "worker",
+      "description": "Improvisatory structure, jazz harmony, cross-genre pattern analysis",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "bartok",
+      "role": "worker",
+      "description": "Formal analysis, proportional structure, ethnomusicological context",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "kodaly",
+      "role": "worker",
+      "description": "Level-appropriate explanation, listening pathways, ear training",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

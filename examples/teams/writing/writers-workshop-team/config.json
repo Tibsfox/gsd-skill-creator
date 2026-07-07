@@ -1,0 +1,82 @@
+{
+  "name": "writers-workshop-team",
+  "description": "Full Writing Department workshop team for multi-form problems spanning fiction, poetry, essay, research, and revision. Woolf classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent perspectives into a unified, level-appropriate response with pedagogical framing from Calkins. Use for research-level writing questions, advanced creative projects requiring coordinated specialist input, or any writing task where the form is not obvious and different craft perspectives may yield different insights. Not for routine editing, single-form composition, or pure mechanics.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "woolf",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "baldwin",
+      "role": "worker",
+      "description": "Nonfiction craft, moral clarity, voice development",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "angelou",
+      "role": "worker",
+      "description": "Poetic form, sound, rhythm, embodied voice",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "orwell",
+      "role": "worker",
+      "description": "Argument structure, jargon elimination, expository clarity",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "le-guin",
+      "role": "worker",
+      "description": "Narrative structure, speculative construction, form-content relationship",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "strunk",
+      "role": "worker",
+      "description": "Sentence editing, economy, grammar, parallel construction",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "calkins",
+      "role": "worker",
+      "description": "Scaffolding, workshop structure, conferencing, assessment",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

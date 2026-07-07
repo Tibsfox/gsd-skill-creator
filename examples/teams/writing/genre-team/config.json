@@ -1,0 +1,50 @@
+{
+  "name": "genre-team",
+  "description": "Creative genre team for fiction, poetry, and creative nonfiction composition. Le Guin leads fiction and worldbuilding, Angelou leads poetry and memoir, Woolf provides literary analysis and synthesis, and Calkins provides pedagogical scaffolding. Use for creative writing projects, genre-specific composition, form exploration, creative workshops, and genre analysis. Not for argument construction, expository editing, or pure mechanics.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "le-guin",
+      "role": "leader",
+      "description": "Narrative structure, speculative construction, form-content relationship",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "angelou",
+      "role": "worker",
+      "description": "Poetic form, sound, rhythm, embodied voice, memoir craft",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "woolf",
+      "role": "worker",
+      "description": "Cross-genre analysis, synthesis, literary-critical perspective",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "calkins",
+      "role": "worker",
+      "description": "Creative workshop structure, scaffolding, process support",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

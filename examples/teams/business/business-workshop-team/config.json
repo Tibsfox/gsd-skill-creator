@@ -1,0 +1,51 @@
+{
+  "name": "business-workshop-team",
+  "description": "Focused Business Department team for deep-dive on a single strategic question. Pairs Drucker (chair and purpose framing) with Christensen (disruption and market entry), Follett (stakeholder integration), and Mintzberg (pedagogy and strategy-as-practice critique) to produce a thorough analysis of a specific strategic decision rather than a multi-domain scan. Use when the question is clearly strategic (pivot, entry, response to a threat, organizational redesign) and needs depth rather than breadth. Not for routine operational fixes, financial computations, or teaching a single concept.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "drucker",
+      "role": "leader",
+      "description": "Classification, purpose framing, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "christensen",
+      "role": "worker",
+      "description": "Jobs-to-be-done, disruption diagnosis, incumbent/entrant advice",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "follett",
+      "role": "worker",
+      "description": "Stakeholder analysis, conflict integration",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "mintzberg",
+      "role": "worker",
+      "description": "Strategy-as-practice critique, level-appropriate explanation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

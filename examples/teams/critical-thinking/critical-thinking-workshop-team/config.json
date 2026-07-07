@@ -1,0 +1,47 @@
+{
+  "name": "critical-thinking-workshop-team",
+  "description": "Focused argument reconstruction and evaluation team. Elder leads with structural analysis and elements of reasoning, Tversky checks the inferences for bias-driven distortion, Kahneman-ct diagnoses whether the reasoning is System 1 or System 2 and whether that fits the task, and Lipman translates the result into a level-appropriate explanation. Use for deep focused analysis of a single argument, editorial, study claim, or policy position. Not for ill-structured problems, creative generation, or routine drills.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "elder",
+      "role": "leader",
+      "description": "Argument reconstruction, elements of reasoning, validity and soundness",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tversky",
+      "role": "worker",
+      "description": "Heuristics and biases detection, probability correction",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kahneman-ct",
+      "role": "worker",
+      "description": "System 1 / System 2 diagnosis, mode-task match",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "lipman",
+      "role": "worker",
+      "description": "Level-appropriate explanation, Socratic framing",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

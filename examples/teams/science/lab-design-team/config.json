@@ -1,0 +1,51 @@
+{
+  "name": "lab-design-team",
+  "description": "Focused experimental design and laboratory science team combining McClintock (experimental design), Wu (measurement precision), Darwin (synthesis), and Pestalozzi (pedagogical adaptation). Use for designing controlled experiments, reviewing experimental protocols, specifying measurement procedures, or teaching experimental design through hands-on activities. Not for field observation, science communication, or methodological philosophy.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "darwin",
+      "role": "leader",
+      "description": "Classifies query, orchestrates workflow, synthesizes outputs",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "mcclintock",
+      "role": "worker",
+      "description": "Variable identification, control design, confound analysis, protocol construction",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "wu",
+      "role": "worker",
+      "description": "Measurement protocol, error analysis, significant figures, precision sufficiency",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "pestalozzi",
+      "role": "worker",
+      "description": "Level-appropriate activity design, hands-on experiments for learners",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

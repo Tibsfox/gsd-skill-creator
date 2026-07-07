@@ -1,0 +1,53 @@
+{
+  "name": "physical-education-workshop-team",
+  "description": "Focused pedagogy and curriculum workshop team for designing a single unit, season, or assessment rubric. Pairs the chair (Naismith) with the two pedagogy specialists (Siedentop, Jesse Feiring Williams) and the inclusion specialist (Berenson) for thorough treatment of one curriculum question. Use when producing a Sport Education unit, transforming a single unit from traditional to educationally coherent form, or aligning an assessment rubric with whole-child educational intent.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "naismith",
+      "role": "leader",
+      "description": "Classification, facilitation, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "jesse-feiring-williams",
+      "role": "worker",
+      "description": "Whole-child framing, purpose articulation, principle-based critique",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "siedentop",
+      "role": "worker",
+      "description": "Sport Education model, unit structure, assessment rubric design",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "berenson",
+      "role": "worker",
+      "description": "Equity audit, adaptation, UDL principles",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "problem-solving-analysis-team",
+  "description": "Full Problem Solving Department investigation team for multi-method problem attacks spanning state-space search, means-ends analysis, mathematical problem solving, ill-structured framing, and anchored case reasoning. Polya-PS classifies along four dimensions and activates the relevant specialists in parallel, then synthesizes their outputs against Polya's four-phase scaffold with a pedagogy wrap from Brown-PS. Use for complex problems where the right approach is not yet clear, for multi-step problems spanning comprehension and execution, and for high-stakes solving that benefits from multiple independent methods. Not for trivial lookups, routine computation, or single-specialist queries.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "polya-ps",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, four-phase scaffold",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "simon",
+      "role": "worker",
+      "description": "State-space formalization, bounded rationality",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "newell",
+      "role": "worker",
+      "description": "Difference reduction, GPS, subgoaling",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "schoenfeld",
+      "role": "worker",
+      "description": "Polya + control layer, math problem solving",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "jonassen",
+      "role": "worker",
+      "description": "Problem typology, stakeholder elicitation, framing",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "bransford",
+      "role": "worker",
+      "description": "Anchored instruction, IDEAL five-step, case grounding",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "brown-ps",
+      "role": "worker",
+      "description": "Reciprocal teaching, level-appropriate explanation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

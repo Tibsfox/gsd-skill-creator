@@ -1,0 +1,84 @@
+{
+  "name": "cloud-systems-analysis-team",
+  "description": "Full Cloud Systems Department investigation team for cross-domain problems spanning consensus, storage, networking, identity, service architecture, and reliability. Lamport classifies the query along four dimensions and activates relevant specialists (Dean, Ghemawat, Hamilton-cloud, Vogels, DeCandia) in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a pedagogical pass from Gray. Use for design-level reviews, multi-domain incidents, or questions whose domain is unclear from the outset. Not for routine operational questions or single-specialty design work.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lamport",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, consensus theory",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "dean",
+      "role": "worker",
+      "description": "Tail latency, capacity, production Paxos",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ghemawat",
+      "role": "worker",
+      "description": "Storage architecture, replication, durability",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hamilton-cloud",
+      "role": "worker",
+      "description": "Cost modeling, hardware selection, IAM economics",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "vogels",
+      "role": "worker",
+      "description": "SOA, API contracts, eventual consistency",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "decandia",
+      "role": "worker",
+      "description": "Dynamo-style KV, quorum tuning, conflict resolution",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "gray",
+      "role": "worker",
+      "description": "Level-appropriate explanation, runbook discipline",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

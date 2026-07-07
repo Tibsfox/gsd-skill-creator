@@ -1,0 +1,47 @@
+{
+  "name": "sprint-team",
+  "description": "Agile execution team for sprint-level project management. Lei facilitates ceremonies and coaches agile practices, Gantt produces schedules and tracks progress, Goldratt identifies bottlenecks and manages buffers, and Sinek synthesizes findings for stakeholders and provides level-appropriate coaching. Use for sprint planning, backlog grooming, velocity analysis, Kanban optimization, and daily standup facilitation. Not for multi-domain project assessment, risk-heavy analysis, or comprehensive retrospectives.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lei",
+      "role": "leader",
+      "description": "Agile coaching, flow metrics, waste identification, ceremony facilitation",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "gantt",
+      "role": "worker",
+      "description": "WBS, estimation, schedule, progress tracking",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "goldratt",
+      "role": "worker",
+      "description": "Bottleneck identification, buffer management, WIP analysis",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "sinek",
+      "role": "worker",
+      "description": "Stakeholder communication, purpose alignment, level-appropriate synthesis",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

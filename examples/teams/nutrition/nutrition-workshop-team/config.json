@@ -1,0 +1,52 @@
+{
+  "name": "nutrition-workshop-team",
+  "description": "Focused workshop team for deep-dive critique of a single nutrition claim or study. Pairs Lind (methodology and synthesis) with Ancel Keys (cardiovascular and cohort methodology), Marion Nestle (policy and funding context), and Adelle Davis (historical-transparency treatment) to produce a tier-labeled evidence review. Smaller than the full analysis team and cheaper. Use for study-critique, contested-claim deep-dives, and popular-nutrition reviews that need scientific and historical context together.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lind",
+      "role": "leader",
+      "description": "Methodology, classification, tier-label enforcement, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ancel-keys",
+      "role": "worker",
+      "description": "Cohort and trial methodology, lipid and cardiovascular evidence",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "marion-nestle",
+      "role": "worker",
+      "description": "Industry-influence pattern, funding disclosure, guideline-process context",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "adelle-davis",
+      "role": "worker",
+      "description": "Replication status of popular-nutrition claims, historical-transparency treatment",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

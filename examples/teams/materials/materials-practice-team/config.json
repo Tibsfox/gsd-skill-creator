@@ -1,0 +1,50 @@
+{
+  "name": "materials-practice-team",
+  "description": "Pipeline-oriented practice team for ongoing characterization, process qualification, and continuous materials improvement. Pairs Cort (process history) with Merica (nonferrous metallurgy) and Cottrell (characterization and pedagogy) to handle recurring questions that show up in a production environment — grade qualification, incoming inspection, characterization planning, and closing the loop between specification and delivery. Use for ongoing operational improvement, not for one-shot design decisions or failure diagnosis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "cort",
+      "role": "worker",
+      "description": "Process-route recognition, grade history, era-appropriate specification",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "merica",
+      "role": "worker",
+      "description": "Aluminum, nickel, and age-hardenable alloys at grade level",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "cottrell",
+      "role": "worker",
+      "description": "Technique selection, microstructure interpretation, level adaptation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "bessemer",
+      "role": "leader",
+      "description": "Classification, escalation to full department",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    }
+  ]
+}

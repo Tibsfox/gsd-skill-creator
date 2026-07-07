@@ -1,0 +1,49 @@
+{
+  "name": "narrative-team",
+  "description": "Historical narrative construction team optimized for longue duree analysis, multi-temporal storytelling, and the synthesis of structural forces with human agency. Tuchman leads with narrative architecture and scene-level writing, Braudel provides the deep structural substrate across geographic, economic, and social time, Ibn-Khaldun contributes cyclical social-economic analysis, and Montessori translates the narrative into level-appropriate pedagogy. Use for narrative history writing, longue duree analysis, campaign and conflict narratives, civilizational rise-and-fall analysis, and teaching through story. Not for source critique, political theory analysis, or people's history without narrative framing.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "tuchman",
+      "role": "leader",
+      "description": "Narrative structure, scene construction, pacing, human agency",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "braudel",
+      "role": "worker",
+      "description": "Longue duree, geographic determinism, economic cycles, multi-temporal",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ibn-khaldun",
+      "role": "worker",
+      "description": "Asabiyyah, social cohesion, dynastic cycles, trade networks",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "montessori",
+      "role": "worker",
+      "description": "Level-appropriate framing, concept scaffolding, learning pathways",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

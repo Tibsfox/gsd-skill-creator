@@ -1,0 +1,49 @@
+{
+  "name": "digital-literacy-workshop-team",
+  "description": "Focused workshop team for in-depth information evaluation and source analysis. Combines Palfrey (institutional credibility), Noble (algorithmic amplification), boyd (contextual framing), and Kafai (pedagogy) to take a specific source, claim, or artifact and analyze it in depth with a teaching wrap-up. Use when a learner brings a concrete case and wants to understand it thoroughly rather than get a general-purpose literacy overview.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "palfrey",
+      "role": "leader",
+      "description": "Source credibility, editorial oversight, legal accountability, track record",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "noble",
+      "role": "worker",
+      "description": "Amplification effects, bias in ranking, documented case comparisons",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "boyd",
+      "role": "worker",
+      "description": "Contextual framing, audience, networked publics effects",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kafai",
+      "role": "worker",
+      "description": "Teaching wrap-up, activity generation, level-appropriate presentation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

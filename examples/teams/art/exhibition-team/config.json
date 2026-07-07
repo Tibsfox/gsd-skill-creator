@@ -1,0 +1,50 @@
+{
+  "name": "exhibition-team",
+  "description": "Exhibition planning and curatorial team for designing art exhibitions, installations, and presentations. Ai Weiwei leads with conceptual framing and site-responsiveness, Leonardo provides integrative vision and project coordination, Albers handles visual design and color strategy for exhibition spaces, and Lowenfeld ensures the exhibition serves its audience through interpretive materials and educational programming. Use for exhibition design, installation planning, curatorial statements, gallery layout, educational programming for exhibitions, and portfolio presentation design. Not for studio art-making, single-artwork analysis, or routine technique instruction.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "ai-weiwei",
+      "role": "leader",
+      "description": "Curatorial concept, site-responsiveness, conceptual framing",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "leonardo",
+      "role": "worker",
+      "description": "Cross-domain coordination, synthesis, project coherence",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "albers",
+      "role": "worker",
+      "description": "Color strategy, spatial design, visual hierarchy in the exhibition environment",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "lowenfeld",
+      "role": "worker",
+      "description": "Interpretive materials, educational programming, accessibility",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

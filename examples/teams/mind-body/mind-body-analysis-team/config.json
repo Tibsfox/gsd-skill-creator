@@ -1,0 +1,85 @@
+{
+  "name": "mind-body-analysis-team",
+  "description": "Full Mind-Body Department analysis team for multi-tradition or multi-wing queries that need several specialists working in parallel under Iyengar's synthesis. Runs all seven agents (iyengar, feldenkrais, kabat-zinn, pilates, dogen, yang, thich-nhat-hanh) for problems that span meditation, yoga, somatics, internal arts, and martial arts and cannot be answered in a single lineage voice. Iyengar classifies the query, activates the relevant subset of specialists in parallel, collects their tradition-specific outputs, enforces the department's safety posture, and synthesizes a lineage-respectful, user-level-appropriate response. Use for comparative questions, scholarly queries, multi-wing program design, and full-department analysis requests. Not for routine single-tradition practice questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "iyengar",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, safety enforcement, Iyengar-lineage yoga voice",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "feldenkrais",
+      "role": "worker",
+      "description": "ATM lessons, Functional Integration frame, nervous-system-first learning, rehab-adjacent",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kabat-zinn",
+      "role": "worker",
+      "description": "MBSR, secular translation, research-honest voice, clinical-population framing",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "pilates",
+      "role": "worker",
+      "description": "Classical Pilates mat and apparatus, six principles, Elders lineage",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "dogen",
+      "role": "worker",
+      "description": "Sōtō zazen, shikantaza, Dōgen's texts, classical lineage voice",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "yang",
+      "role": "worker",
+      "description": "Tai chi, qigong, Chinese martial arts, three harmonies, YMAA-lineage voice",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "thich-nhat-hanh",
+      "role": "worker",
+      "description": "Plum Village engaged mindfulness, gathas, daily-life practice, cross-tradition accessibility",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "name": "environmental-analysis-team",
+  "description": "Full Environmental Department investigation team for multi-wing problems spanning ecosystems, Earth systems, human impacts, climate, sustainability, and environmental justice. Carson classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with pedagogical framing from Orr. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any problem where the wing is not obvious and different environmental perspectives may yield different insights. Not for routine reference lookups, pure pedagogy, or single-wing problems.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "carson",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "leopold",
+      "role": "worker",
+      "description": "Community ecology, land ethic, biodiversity",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "commoner",
+      "role": "worker",
+      "description": "Biogeochemical cycles, systems diagnosis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "shiva",
+      "role": "worker",
+      "description": "Agricultural systems, justice, biodiversity",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "muir",
+      "role": "worker",
+      "description": "Reference conditions, protected areas",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "wangari",
+      "role": "worker",
+      "description": "Community-led intervention, grassroots",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "orr",
+      "role": "worker",
+      "description": "Level-appropriate explanation, learning pathways",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

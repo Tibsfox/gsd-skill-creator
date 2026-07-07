@@ -1,0 +1,52 @@
+{
+  "name": "translation-team",
+  "description": "Focused translation and cross-linguistic transfer team for translation tasks, interpreting preparation, contrastive analysis, and cross-cultural communication. Lado provides systematic L1-L2 comparison and error prediction, Saussure provides structural equivalence analysis (signifier-signified mapping), Baker provides cultural context and community interpreting expertise, and Bruner-L scaffolds translation skill development and designs practice activities. Use for translation evaluation, interpreter training, contrastive analysis projects, and cross-cultural communication design.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lado",
+      "role": "leader",
+      "description": "Systematic L1-L2 comparison, difficulty prediction, error diagnosis, assessment design",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "saussure",
+      "role": "worker",
+      "description": "Signifier-signified mapping, translation strategy selection, equivalence judgment",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "baker",
+      "role": "worker",
+      "description": "Community interpreting context, cultural mediation, language attitudes, pragmatic norms",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "bruner-l",
+      "role": "worker",
+      "description": "Scaffolded translation exercises, interpreter training sequences, practice activities",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

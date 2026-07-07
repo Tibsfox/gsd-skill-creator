@@ -1,0 +1,82 @@
+{
+  "name": "history-seminar-team",
+  "description": "Full History Department seminar team for comprehensive historical analysis, comparative studies, and multi-perspective interpretation. Herodotus classifies the query by period, geography, and analytical framework, then dispatches to relevant specialists in parallel. Specialists produce independent analyses which Herodotus synthesizes into a unified, multiperspective response with pedagogical scaffolding from Montessori. Use for research-grade historiographical questions, comparative civilizational analysis, or any inquiry where multiple historical perspectives are needed. Not for single-source document analysis or narrow narrative construction.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "herodotus",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ibn-khaldun",
+      "role": "worker",
+      "description": "Asabiyyah cycles, trade networks, material conditions",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "arendt",
+      "role": "worker",
+      "description": "Political theory, totalitarianism, modernity, power structures",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "braudel",
+      "role": "worker",
+      "description": "Multi-temporal analysis, geographic determinism, structural history",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tuchman",
+      "role": "worker",
+      "description": "Narrative construction, military history, human decision-making",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "zinn",
+      "role": "worker",
+      "description": "Bottom-up history, labor, marginalized voices, resistance movements",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "montessori",
+      "role": "worker",
+      "description": "Level-appropriate explanation, learning pathways, concept scaffolding",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "name": "materials-analysis-team",
+  "description": "Full Materials Department investigation team for multi-subdomain problems spanning selection, process history, failure analysis, nonferrous alloys, nanomaterials, and characterization. Bessemer classifies the query along four dimensions and activates the relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with pedagogy wrap from Cottrell. Use for research-level questions, executive-level materials reviews, or any problem where the subdomain is not obvious and different specialist perspectives may yield different insights. Not for routine selection, pure failure analysis, or pure process questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "bessemer",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ashby",
+      "role": "worker",
+      "description": "Ashby method, performance indices, Pareto trade-offs",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "smalley",
+      "role": "worker",
+      "description": "Fullerenes, nanotubes, graphene, 2D materials",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "cort",
+      "role": "worker",
+      "description": "Puddling, Bessemer, open-hearth, BOF, EAF history",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "merica",
+      "role": "worker",
+      "description": "Aluminum, nickel superalloys, age hardening",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "gordon",
+      "role": "worker",
+      "description": "Fracture mechanics, fatigue, SCC, diagnosis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "cottrell",
+      "role": "worker",
+      "description": "Dislocation theory, level adaptation, textbook explanations",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

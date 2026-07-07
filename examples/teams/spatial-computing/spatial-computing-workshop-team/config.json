@@ -1,0 +1,50 @@
+{
+  "name": "spatial-computing-workshop-team",
+  "description": "Focused four-agent workshop team for interaction design review, directness critique, and iterative refinement of spatial computing interfaces. Bret Victor leads with direct-manipulation critique, Engelbart adds augmentation assessment, Krueger contributes responsive environment perspective, and Papert-sp translates the finished review into level-appropriate guidance. Use for interaction design review, directness critique, small VR/AR prototype review, and teaching interaction design through worked examples. Not for novel multi-wing problems or pipeline-style prototype building.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "bret-victor",
+      "role": "leader",
+      "description": "Directness critique, design recommendations",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "engelbart",
+      "role": "worker",
+      "description": "Augmentation value assessment, navigation coherence",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "krueger",
+      "role": "worker",
+      "description": "Body-scale, responsive environment perspective",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "papert-sp",
+      "role": "worker",
+      "description": "Level-appropriate explanation, exercise generation",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

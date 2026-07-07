@@ -1,0 +1,82 @@
+{
+  "name": "engineering-review-team",
+  "description": "Full Engineering Department review team for multi-domain design reviews, safety analyses, and complex problems spanning structural, electrical, aerospace, mechanical, materials, and pedagogical domains. Brunel classifies the query and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response. Use for design reviews (SRR, PDR, CDR), safety-critical analysis, professional-level multi-disciplinary problems, or any engineering question where the domain is not obvious and different engineering perspectives may yield different insights.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "brunel",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, design review leadership",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tesla",
+      "role": "worker",
+      "description": "Circuit analysis, power systems, control systems, EMC",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "roebling",
+      "role": "worker",
+      "description": "Statics, stress analysis, structural design, failure modes",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "johnson-k",
+      "role": "worker",
+      "description": "Orbital mechanics, trajectory, systems engineering, verification",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "watt",
+      "role": "worker",
+      "description": "Thermodynamics, heat transfer, mechanisms, fluid systems",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "lovelace-e",
+      "role": "worker",
+      "description": "Material selection, fabrication, quality control",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "polya-e",
+      "role": "worker",
+      "description": "Level-appropriate explanation, learning pathways",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

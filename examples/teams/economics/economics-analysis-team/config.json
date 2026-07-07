@@ -1,0 +1,85 @@
+{
+  "name": "economics-analysis-team",
+  "description": "Full Economics Department investigation team for multi-domain problems spanning microeconomics, macroeconomics, trade, policy, behavioral economics, and development. Smith classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with balanced presentation of competing schools of thought. Use for research-level questions, graduate-level work requiring coordinated specialist input, policy evaluation requiring multiple perspectives, or any problem where the domain is not obvious and different economic frameworks may yield different insights. Not for routine computation, single-domain analysis, or introductory-level explanation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "smith",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "keynes",
+      "role": "worker",
+      "description": "Aggregate demand, fiscal policy, business cycle",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ostrom",
+      "role": "worker",
+      "description": "Commons governance, polycentric systems, collective action",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "sen",
+      "role": "worker",
+      "description": "Capability approach, poverty, inequality, welfare",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "robinson",
+      "role": "worker",
+      "description": "Market structures, monopsony, imperfect competition",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "hayek",
+      "role": "worker",
+      "description": "Knowledge problem, spontaneous order, limits of intervention",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "varian",
+      "role": "worker",
+      "description": "Level-appropriate explanation, applied micro, technology markets",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

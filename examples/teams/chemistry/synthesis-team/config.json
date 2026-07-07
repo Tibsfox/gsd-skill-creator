@@ -1,0 +1,49 @@
+{
+  "name": "synthesis-team",
+  "description": "Focused chemistry team for reaction design, synthesis planning, mechanism analysis, and retrosynthetic reasoning. Pauling leads bonding and mechanism analysis, Mendeleev provides periodic trend context and reagent selection, Franklin evaluates materials properties and product characterization, and Avogadro frames results pedagogically. Use for organic and inorganic synthesis, reaction pathway design, mechanism elucidation, and yield optimization. Not for analytical method development, nuclear chemistry, or broad multi-domain investigations.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "pauling",
+      "role": "leader",
+      "description": "Bonding theory, orbital analysis, mechanism prediction, selectivity",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "mendeleev",
+      "role": "worker",
+      "description": "Periodic trends, inorganic reagents, stoichiometry, oxidation states",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "franklin",
+      "role": "worker",
+      "description": "Product properties, crystal structure prediction, polymer considerations",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "avogadro",
+      "role": "worker",
+      "description": "Level-appropriate explanation, learning pathways, worked examples",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

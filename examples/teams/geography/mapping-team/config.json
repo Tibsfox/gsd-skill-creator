@@ -1,0 +1,50 @@
+{
+  "name": "mapping-team",
+  "description": "Focused mapping and spatial analysis team for cartographic design, GIS analysis, and spatial data visualization. Tobler leads with projection selection, spatial analysis, and cartographic design, Reclus provides physical geography content for environmental and physical maps, Massey provides social data analysis and critical cartography perspectives, and Carson ensures map communication is accessible and honest. Use for thematic map design, spatial analysis workflows, remote sensing interpretation, or cartographic critique. Not for pure text-based analysis, fieldwork planning, or geopolitical narrative.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "tobler",
+      "role": "leader",
+      "description": "Projection, GIS, spatial analysis, spatial statistics",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "reclus",
+      "role": "worker",
+      "description": "Physical geography data, environmental mapping, Earth observation",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "massey",
+      "role": "worker",
+      "description": "Social data analysis, power-geometry of representation, critical cartography",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "carson",
+      "role": "worker",
+      "description": "Map accessibility, audience adaptation, environmental visualization",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

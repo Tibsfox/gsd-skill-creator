@@ -1,0 +1,51 @@
+{
+  "name": "experimental-design-team",
+  "description": "Physics laboratory and experiment design team for designing measurements, analyzing experimental data, uncertainty propagation, and Fermi estimation. Faraday leads the experimental design process, Curie reviews methodology and safety, the appropriate domain specialist (Newton or Maxwell) provides theoretical predictions, and Boltzmann handles statistical analysis and error propagation. Use for lab design, data analysis, uncertainty budgets, systematic error identification, and Fermi problems. Not for pure theoretical derivation, multi-domain research synthesis, or problems with no experimental component.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "faraday",
+      "role": "leader",
+      "description": "Experimental design, procedure, intuition, safety awareness",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "curie",
+      "role": "worker",
+      "description": "Methodology review, safety flags, cross-domain awareness",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "newton",
+      "role": "worker",
+      "description": "Theoretical predictions for the measurement (selected by domain)",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "boltzmann",
+      "role": "worker",
+      "description": "Uncertainty propagation, statistical analysis, error budgets",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

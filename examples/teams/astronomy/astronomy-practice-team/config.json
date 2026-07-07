@@ -1,0 +1,49 @@
+{
+  "name": "astronomy-practice-team",
+  "description": "Four-agent practice pipeline for the observation-to-analysis workflow. Caroline Herschel plans the observation and identifies the field, Chandrasekhar-astro handles any orbital or dynamical computation, Payne-Gaposchkin reduces any spectroscopic data to physical parameters, and Tyson turns the whole thing into a learning session for the user. Use for teaching observational astronomy, running guided sky sessions, first-light reductions, and practice-based learning that starts with looking up and ends with understanding. Not for pure theory, dark-matter dynamics, or cosmological scale problems.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "caroline-herschel",
+      "role": "leader",
+      "description": "Plan, identify, catalog",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "chandrasekhar-astro",
+      "role": "worker",
+      "description": "Orbital mechanics, ephemeris",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "payne-gaposchkin",
+      "role": "worker",
+      "description": "Classification if spectra are collected",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tyson",
+      "role": "worker",
+      "description": "Learning synthesis",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "business-analysis-team",
+  "description": "Full Business Department investigation team for multi-domain business questions spanning strategy, operations, entrepreneurship, finance, law, and ethics. Drucker classifies the query along domain, decision-type, stakeholder-scope, and user-level dimensions and activates the relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Mintzberg. Use for research-level questions, executive-level decisions requiring coordinated specialist input, or any business problem where the domain is not obvious and different lenses may yield different insights. Not for routine computation, single-domain operational fixes, or pure teaching of a single concept.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "drucker",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, purpose framing",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "follett",
+      "role": "worker",
+      "description": "Stakeholder conflict integration, cross-functional coordination",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ohno",
+      "role": "worker",
+      "description": "Waste diagnosis, pull-based flow design, root-cause analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ford",
+      "role": "worker",
+      "description": "High-volume production, economies of scale, vertical integration",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "ma",
+      "role": "worker",
+      "description": "Two-sided platforms, cold starts, network effects",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "christensen",
+      "role": "worker",
+      "description": "Disruption theory, jobs-to-be-done, incumbent/entrant strategy",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "mintzberg",
+      "role": "worker",
+      "description": "Level-appropriate explanation, strategy-as-practice, critique",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

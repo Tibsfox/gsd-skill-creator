@@ -1,0 +1,85 @@
+{
+  "name": "geography-analysis-team",
+  "description": "Full Geography Department analysis team for multi-domain problems spanning physical, human, environmental, geopolitical, and cartographic geography. Humboldt classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Carson. Use for research-level questions, graduate-level work requiring coordinated specialist input, or any problem where the domain is not obvious and different geographic perspectives may yield different insights. Not for routine single-domain questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "humboldt",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "reclus",
+      "role": "worker",
+      "description": "Earth systems, landforms, climate, hydrology",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "massey",
+      "role": "worker",
+      "description": "Social construction of space, power-geometry, inequality",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "sauer",
+      "role": "worker",
+      "description": "Landscape morphology, human-environment interaction",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "said-g",
+      "role": "worker",
+      "description": "Critical geopolitics, postcolonial analysis, territorial conflict",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "tobler",
+      "role": "worker",
+      "description": "Spatial analysis, mapping, projection, visualization",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "carson",
+      "role": "worker",
+      "description": "Level-appropriate explanation, environmental communication",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

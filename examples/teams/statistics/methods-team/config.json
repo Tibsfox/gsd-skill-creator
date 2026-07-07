@@ -1,0 +1,50 @@
+{
+  "name": "methods-team",
+  "description": "Four-agent methodological comparison team for exploring how different statistical methods handle the same problem. Bayes provides the Bayesian perspective, Efron provides computational approaches, Box provides modeling and diagnostics, and George explains the tradeoffs. Use for frequentist-vs-Bayesian comparisons, parametric-vs-computational method evaluation, methodological exploration for research, and teaching statistical methodology. Not for routine applied analysis, study design, or communication-only tasks.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "bayes",
+      "role": "leader",
+      "description": "Prior-to-posterior updating, Bayes factors, hierarchical models",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "efron",
+      "role": "worker",
+      "description": "Bootstrap, permutation tests, simulation, cross-validation",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "box",
+      "role": "worker",
+      "description": "Regression, diagnostics, model comparison (AIC/BIC)",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "george",
+      "role": "worker",
+      "description": "Explain the tradeoffs, build understanding",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

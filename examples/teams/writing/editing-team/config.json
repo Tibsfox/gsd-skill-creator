@@ -1,0 +1,49 @@
+{
+  "name": "editing-team",
+  "description": "Focused editing and revision team. Orwell leads with argument and structural analysis, Strunk handles sentence-level economy and mechanics, Baldwin evaluates voice and authenticity, and Calkins provides pedagogical framing when the writer is developing. Use for draft revision, argument strengthening, prose tightening, editorial feedback, and style audits. Not for creative composition, poetry analysis, or worldbuilding.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "orwell",
+      "role": "leader",
+      "description": "Argument structure, clarity, jargon detection",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "strunk",
+      "role": "worker",
+      "description": "Economy, grammar, parallel construction, punctuation",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "baldwin",
+      "role": "worker",
+      "description": "Voice authenticity, tonal consistency, depth",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "calkins",
+      "role": "worker",
+      "description": "Level-appropriate feedback, conferencing, next steps",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

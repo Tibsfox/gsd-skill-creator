@@ -1,0 +1,82 @@
+{
+  "name": "tech-assessment-team",
+  "description": "Full Technology Department assessment team for multi-domain technology questions spanning systems, design, emerging technologies, security, HCI, ethics, and social impact. Berners-Lee classifies the query and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with pedagogical scaffolding from Resnick. Use for technology policy assessment, cross-cutting evaluation of technology proposals, or any question where technical, social, and ethical dimensions must be considered together. Not for single-domain questions where one specialist suffices.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "berners-lee",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "borg",
+      "role": "worker",
+      "description": "Infrastructure, architecture, networking, system security",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "gates-m",
+      "role": "worker",
+      "description": "Digital equity, social impact, global development",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "joy",
+      "role": "worker",
+      "description": "Emerging tech risk, failure modes, precautionary analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hicks",
+      "role": "worker",
+      "description": "Social construction, labor, gender, power dynamics",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "norman",
+      "role": "worker",
+      "description": "HCI, usability, accessibility, interaction design",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "resnick",
+      "role": "worker",
+      "description": "Level-appropriate framing, creative learning, scaffolding",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

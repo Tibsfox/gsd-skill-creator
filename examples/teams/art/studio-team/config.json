@@ -1,0 +1,49 @@
+{
+  "name": "studio-team",
+  "description": "Focused studio practice team for hands-on art-making guidance. O'Keeffe leads observational work and the observation-to-abstraction continuum, Hokusai provides compositional structure and design principles, Kahlo brings expression and personal meaning, and Lowenfeld calibrates instruction to the learner's developmental stage and facilitates process. Use for guided studio projects, observational drawing sessions, painting exercises, creative problem-solving in any medium, and teaching art-making skills at any level. Not for art-historical analysis, conceptual art evaluation, or pure color theory.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "okeefe",
+      "role": "leader",
+      "description": "Sustained looking, observation-to-abstraction, perceptual methods",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hokusai",
+      "role": "worker",
+      "description": "Spatial organization, design principles, arrangement of elements",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "kahlo",
+      "role": "worker",
+      "description": "Personal meaning, symbolism, authenticity, emotional honesty",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "lowenfeld",
+      "role": "worker",
+      "description": "Developmental calibration, process facilitation, critique method",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

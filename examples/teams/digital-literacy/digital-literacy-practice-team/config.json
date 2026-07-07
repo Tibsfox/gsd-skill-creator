@@ -1,0 +1,50 @@
+{
+  "name": "digital-literacy-practice-team",
+  "description": "Pipeline-shaped team that turns digital-literacy concepts into repeatable practice. Ito diagnoses where the learner is on the HOMAGO progression, Jenkins identifies the participatory community where the skill will actually get used, Kafai designs the constructionist activity that builds the skill, and Rheingold wraps the sequence with an explanation of what the learner should notice. Use when a learner wants to develop a literacy skill rather than just understand it.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "ito",
+      "role": "leader",
+      "description": "HOMAGO assessment, connected-learning framing",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "jenkins",
+      "role": "worker",
+      "description": "Participatory community that will hold the practice",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "kafai",
+      "role": "worker",
+      "description": "Constructionist activity, level-appropriate",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "rheingold",
+      "role": "worker",
+      "description": "User-facing explanation, next-step guidance",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    }
+  ]
+}

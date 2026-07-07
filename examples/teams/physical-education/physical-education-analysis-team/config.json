@@ -1,0 +1,86 @@
+{
+  "name": "physical-education-analysis-team",
+  "description": "Full Physical Education Department analysis team for multi-domain problems spanning movement, fitness, coaching, pedagogy, inclusion, lifetime activities, and curriculum philosophy. Naismith classifies the query and activates the relevant specialists in parallel, then synthesizes their independent findings into a unified, context-appropriate response. Use for complex PE program questions, multi-stakeholder analyses, program transformations, and any question where the domain is not obvious and different PE perspectives may yield different insights.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "naismith",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kenneth-cooper",
+      "role": "worker",
+      "description": "Aerobic science, FITT, assessment",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "jesse-feiring-williams",
+      "role": "worker",
+      "description": "Whole-child framing, program purpose",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "berenson",
+      "role": "worker",
+      "description": "Gender equity, adapted PE, UDL",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "sorensen",
+      "role": "worker",
+      "description": "Aerobic dance, group fitness, lifetime activities",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "wooden",
+      "role": "worker",
+      "description": "Practice design, strength and conditioning",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "siedentop",
+      "role": "worker",
+      "description": "Sport Education model, unit design, assessment",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

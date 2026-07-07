@@ -1,0 +1,48 @@
+{
+  "name": "business-practice-team",
+  "description": "Pipeline-oriented Business Department team for ongoing operational work — waste diagnosis, scale decisions, platform operations, and the pedagogy needed to embed the improvements in the organization. Pairs Ohno (operations and waste), Ford (scale and vertical integration), Ma (platform operations), and Mintzberg (pedagogy) in a sequential pipeline rather than a parallel analysis. Use for repeated operational improvement work, process redesign programs, or any ongoing practice where the question is \"how do we actually run this day-to-day.\" Not for one-off strategic decisions or multi-domain strategy investigations.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "ohno",
+      "role": "leader",
+      "description": "Waste diagnosis, pull flow, root-cause investigation",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ford",
+      "role": "worker",
+      "description": "High-volume production, economies of scale, vertical integration",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "ma",
+      "role": "worker",
+      "description": "Two-sided platforms, operations at platform scale",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "mintzberg",
+      "role": "worker",
+      "description": "Management development, embedding change in practice",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

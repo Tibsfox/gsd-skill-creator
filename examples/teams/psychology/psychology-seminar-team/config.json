@@ -1,0 +1,82 @@
+{
+  "name": "psychology-seminar-team",
+  "description": "Full Psychology Department seminar team for multi-domain problems spanning cognitive, developmental, social, clinical, and neuroscience perspectives. James classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response. Use for graduate-level seminars, complex case studies requiring multiple perspectives, research-level questions spanning sub-disciplines, or any problem where the domain is ambiguous and different psychological perspectives may yield different insights. Not for routine explanations, single-domain questions, or introductory-level teaching.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "james",
+      "role": "leader",
+      "description": "Pragmatic integration, classification, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "piaget",
+      "role": "worker",
+      "description": "Cognitive development, lifespan stages, constructivism",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kahneman",
+      "role": "worker",
+      "description": "Decision-making, biases, System 1/2, research methods",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "vygotsky",
+      "role": "worker",
+      "description": "ZPD, scaffolding, cultural mediation, social context",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "rogers",
+      "role": "worker",
+      "description": "Person-centered formulation, subjective experience, growth",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "hooks",
+      "role": "worker",
+      "description": "Intersectionality, power structures, systemic analysis",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "skinner-p",
+      "role": "worker",
+      "description": "Learning design, reinforcement, behavioral analysis",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

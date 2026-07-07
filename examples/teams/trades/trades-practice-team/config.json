@@ -1,0 +1,51 @@
+{
+  "name": "trades-practice-team",
+  "description": "Pedagogy and practice pipeline team for trades learning, apprenticeship, and skill development. Runs Vitruvius as router, Rose for cognitive-content and apprenticeship ethnography, Crawford for philosophical framing and educational defense, and Nasmyth for the technical grounding of the skill being taught. Use for designing apprenticeship programs, diagnosing stuck learners, defending trades education in institutional contexts, and producing teaching artifacts that respect the cognitive content of craft. Not for shop layout, machine selection, or pure technical reference.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "vitruvius",
+      "role": "leader",
+      "description": "Classification, triad framing, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "rose",
+      "role": "worker",
+      "description": "Cognitive-content descriptions, apprenticeship ethnography",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "crawford",
+      "role": "worker",
+      "description": "Philosophical argument, educational defense, soulcraft framing",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "nasmyth",
+      "role": "worker",
+      "description": "Technical content that anchors pedagogy in real craft",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "home-economics-workshop-team",
+  "description": "Focused strategic workshop team for a single deep question about the household — a meal plan overhaul, a kitchen redesign, a new budget, a teaching program for one skill. Pairs Richards with three specialists (Waters, Child, Liebhardt) rather than the full department. Lower token cost than the analysis team while still covering the planning-technique-pedagogy triangle. Use for a one-question deep dive; not for multi-subsystem overhauls (use the analysis team) or for single-task questions (route directly to a specialist).",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "richards",
+      "role": "leader",
+      "description": "Classification, habitability audit, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "waters",
+      "role": "worker",
+      "description": "Weekly plan, ingredient-first design",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "child",
+      "role": "worker",
+      "description": "Technique guide, feasibility verification",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "liebhardt",
+      "role": "worker",
+      "description": "Teaching sequence, habit formation",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

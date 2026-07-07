@@ -1,0 +1,48 @@
+{
+  "name": "communication-team",
+  "description": "Science communication and public understanding team combining Sagan (science communication), Goodall (field narrative), Feynman-S (methodological accuracy), and Pestalozzi (pedagogical design). Use for communicating scientific findings to non-specialist audiences, defending science against misinformation, creating educational narratives, or producing level-appropriate explanations that combine accuracy with accessibility. Not for experimental design, measurement, or full multi-domain investigation.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "sagan",
+      "role": "leader",
+      "description": "Narrative structure, wonder, audience adaptation, baloney detection",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "goodall",
+      "role": "worker",
+      "description": "First-person observation stories, ecological context, patience narratives",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "feynman-s",
+      "role": "worker",
+      "description": "Accuracy verification, cargo cult detection, honest uncertainty",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "pestalozzi",
+      "role": "worker",
+      "description": "Hands-on activities, head-heart-hand framework, learning pathway",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

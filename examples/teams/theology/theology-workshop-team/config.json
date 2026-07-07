@@ -1,0 +1,54 @@
+{
+  "name": "theology-workshop-team",
+  "description": "Focused doctrinal and philosophical-theology workshop team. Pairs the chair with the scholastic and Jewish philosophical specialists for intensive work on a single doctrinal question, a philosophical argument about God or the divine attributes, or a contested scholarly debate. Smaller and faster than theology-analysis-team but deeper than single-agent invocation. Use for systematic-theology work, philosophical-theology argument analysis, or careful reading of medieval and scholastic primary sources. Not for broad cross-tradition survey or contemplative practice.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "augustine",
+      "role": "leader",
+      "description": "Classification, orchestration, patristic Christian voice, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "aquinas",
+      "role": "worker",
+      "description": "Systematic and philosophical theology, Western Christian scholastic tradition",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "maimonides",
+      "role": "worker",
+      "description": "Jewish scripture and medieval philosophy, the Jewish-Islamic-Christian philosophical conversation",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "huston-smith",
+      "role": "worker",
+      "description": "Cross-tradition framing, audience adaptation",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

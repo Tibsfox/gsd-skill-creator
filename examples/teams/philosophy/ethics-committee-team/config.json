@@ -1,0 +1,47 @@
+{
+  "name": "ethics-committee-team",
+  "description": "Ethics committee team for multi-framework moral analysis. Four ethicists apply their tradition independently -- Kant (deontological duty), Beauvoir (existentialist and feminist ethics of situated freedom), Confucius (relational and social harmony), Dewey (pragmatist synthesis and accessible explanation). Use for moral dilemmas, applied ethics, AI ethics, policy ethics, bioethics, or any ethical question where competing frameworks yield different verdicts and the user needs to see the full moral landscape. Not for abstract metaphysical questions, pure logic exercises, or questions where a single ethical framework is explicitly requested.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "kant",
+      "role": "leader",
+      "description": "Duty, categorical imperative, universalizability, moral law",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "beauvoir",
+      "role": "worker",
+      "description": "Situated freedom, ambiguity, oppression, embodied experience",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "confucius",
+      "role": "worker",
+      "description": "Ren (benevolence), li (ritual propriety), relational duty, social harmony",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "dewey",
+      "role": "worker",
+      "description": "Consequences in context, democratic deliberation, accessible explanation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "learning-practice-team",
+  "description": "Pipeline-oriented practice team for procedural-fluency work — diagnose the current practice, design drills at the edge of ability, build scaffolds for the practice sessions, and embed the work in a prepared environment. Ericsson leads the pipeline with Vygotsky-learn supplying scaffolds and Montessori-learn supplying materials or environment; Bloom handles routing and synthesis. Use for mastery-loop inner work, plateau escapes, skill-drill design, and maintenance-phase procedural fluency. Not for developmental diagnosis, motivation work, or project-based experiential design.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "bloom",
+      "role": "leader",
+      "description": "Routing, mastery-loop integration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ericsson",
+      "role": "worker",
+      "description": "Diagnose practice, design drill sets, calibrate edge",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "vygotsky-learn",
+      "role": "worker",
+      "description": "Support structures for early practice sessions",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "montessori-learn",
+      "role": "worker",
+      "description": "Physical materials and uninterrupted-time structure",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

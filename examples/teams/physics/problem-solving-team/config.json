@@ -1,0 +1,48 @@
+{
+  "name": "problem-solving-team",
+  "description": "Physics computation and derivation team for problem sets, exam preparation, and step-by-step solutions. Newton leads the workflow, routes to the appropriate domain specialist (Maxwell for E&M, Boltzmann for thermodynamics), enforces dimensional checks, and hands off to Faraday for pedagogical explanation. Use for homework help, exam prep, derivations, and any problem where the domain is clear and the goal is a correct, well-explained solution. Not for multi-domain research, experimental design, or problems requiring quantum or relativistic corrections beyond the classical regime.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "newton",
+      "role": "leader",
+      "description": "Classical mechanics, Lagrangian/Hamiltonian methods, dimensional analysis",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "maxwell",
+      "role": "worker",
+      "description": "Electrostatics, magnetostatics, circuits, waves, optics",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "boltzmann",
+      "role": "worker",
+      "description": "Thermodynamics, statistical mechanics, entropy, heat engines",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "faraday",
+      "role": "worker",
+      "description": "Level-appropriate explanation, physical intuition, learning pathways",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

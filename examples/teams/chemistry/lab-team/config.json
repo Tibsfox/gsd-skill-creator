@@ -1,0 +1,50 @@
+{
+  "name": "lab-team",
+  "description": "Focused chemistry team for experimental design, analytical method development, lab procedures, and safety protocols. Hodgkin leads analytical method selection and data interpretation, Curie-M handles nuclear and radiation chemistry, Lavoisier provides safety oversight and hazard classification, and Avogadro frames results pedagogically. Use for designing experiments, selecting analytical instruments, interpreting spectra, planning lab workflows, and any problem involving radioactive materials. Not for synthesis route planning, bonding theory, or broad multi-domain investigations.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "hodgkin",
+      "role": "leader",
+      "description": "Spectroscopy, chromatography, crystallography, method validation",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "curie-m",
+      "role": "worker",
+      "description": "Radioactivity, isotope chemistry, nuclear reactions, radiation safety",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "lavoisier",
+      "role": "worker",
+      "description": "Hazard classification, safety protocols, chemical taxonomy, regulatory compliance",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "avogadro",
+      "role": "worker",
+      "description": "Level-appropriate explanation, learning pathways, lab technique instruction",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "discovery-team",
+  "description": "Sequential conjecture pipeline for experimental mathematics. Ramanujan runs the pattern search protocol on data, Gauss extends computational evidence to large N and checks boundary cases, Euclid attempts to prove or disprove the conjecture, and Polya documents the full journey including what was tried, what was learned, and what remains open. Use for exploring patterns in mathematical data, generating conjectures from computational evidence, experimental mathematics, and AI-assisted mathematical discovery. Not for problems with known solutions, proof of known conjectures, or teaching requests.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "ramanujan",
+      "role": "leader",
+      "description": "7-step pattern search protocol (differences, ratios, modular, OEIS, generating functions, structural, report)",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "gauss",
+      "role": "worker",
+      "description": "Large-N computation, boundary case verification, stress testing",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "euclid",
+      "role": "worker",
+      "description": "Proof or disproof attempt on the conjecture",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "polya",
+      "role": "worker",
+      "description": "Document the full journey: methods, findings, dead ends, next steps",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

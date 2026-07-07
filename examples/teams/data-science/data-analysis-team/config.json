@@ -1,0 +1,86 @@
+{
+  "name": "data-analysis-team",
+  "description": "Full Data Science Department investigation team for multi-domain problems spanning wrangling, modeling, visualization, experimentation, and ethics. Nightingale classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Cairo. Use for research-level questions, practitioner-level work requiring coordinated specialist input, or any problem where the domain is not obvious and different data science perspectives may yield different insights. Not for routine wrangling, single-model training, or pure visualization design.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "nightingale",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tukey",
+      "role": "worker",
+      "description": "Profiling, distributions, outliers, feature engineering",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "breiman",
+      "role": "worker",
+      "description": "Algorithm selection, ensemble methods, model evaluation",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tufte",
+      "role": "worker",
+      "description": "Chart design, critique, dashboard architecture",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "fisher",
+      "role": "worker",
+      "description": "A/B testing, power analysis, causal inference",
+      "tools": [
+        "Read",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "benjamin",
+      "role": "worker",
+      "description": "Bias audit, fairness metrics, privacy review",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "cairo",
+      "role": "worker",
+      "description": "Level-appropriate explanation, learning pathways",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

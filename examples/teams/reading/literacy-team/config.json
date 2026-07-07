@@ -1,0 +1,50 @@
+{
+  "name": "literacy-team",
+  "description": "Focused literacy instruction team for foundational and developmental reading skills. Clay leads with assessment and instructional design, Chomsky-R provides linguistic analysis of decoding and morphology, Rosenblatt connects skill-building to meaningful reading experiences, and Austen synthesizes findings into a coherent instructional plan. Use for early literacy intervention, phonics and decoding instruction, vocabulary development, fluency building, comprehension strategy instruction, and reading assessment. Not for advanced literary analysis, critical theory, or multi-text research synthesis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "clay",
+      "role": "leader",
+      "description": "Running Records, miscue analysis, scaffolded instruction",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "chomsky-r",
+      "role": "worker",
+      "description": "Phonology, morphology, syntax for reading",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "rosenblatt",
+      "role": "worker",
+      "description": "Transactional theory, reader engagement, comprehension",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "austen",
+      "role": "worker",
+      "description": "Classification, synthesis, level-appropriate response",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    }
+  ]
+}

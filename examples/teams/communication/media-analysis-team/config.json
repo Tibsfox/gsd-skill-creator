@@ -1,0 +1,51 @@
+{
+  "name": "media-analysis-team",
+  "description": "Focused media analysis team for understanding how media technologies, platforms, and messages interact to shape communication. McLuhan provides media ecology and platform analysis, Tannen analyzes conversational dynamics within media environments, Aristotle-C applies rhetorical analysis to media messages, and Freire examines power dynamics and critical media literacy. Use for platform analysis, media comparison, propaganda detection, digital communication analysis, or any task where the primary goal is understanding how media shapes communication.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "mcluhan",
+      "role": "leader",
+      "description": "Tetrad analysis, hot/cool media, platform effects",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "tannen",
+      "role": "worker",
+      "description": "Conversational norms within media, style adaptation, cross-cultural dynamics",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "aristotle-c",
+      "role": "worker",
+      "description": "Ethos/pathos/logos in media messages, rhetorical situation analysis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "freire",
+      "role": "worker",
+      "description": "Power dynamics, media literacy pedagogy, who benefits and who is silenced",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "nutrition-practice-team",
+  "description": "Practice-oriented team for applying nutrition science to everyday food choices and feeding relationships. Pairs Atwater (accounting and reference intakes), Pollan (food-system translation), and Satter (feeding and communication) under Lind's coordination. Optimized for turning nutrition science into actionable guidance — what to put on the plate, how to read a label, how to talk about food — without losing the evidence base or the communication quality. Use for real-world dietary-practice questions, family feeding questions, and curriculum-adjacent questions.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lind",
+      "role": "leader",
+      "description": "Classification, synthesis, tier labeling, routing to practice specialists",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "atwater",
+      "role": "worker",
+      "description": "Reference intakes, macronutrient accounting, label verification",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "pollan",
+      "role": "worker",
+      "description": "Supply chain, ingredient-label reading, real-world translation",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "satter",
+      "role": "worker",
+      "description": "Feeding relationships, communication quality, developmental framing",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

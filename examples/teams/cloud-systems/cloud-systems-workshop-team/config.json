@@ -1,0 +1,52 @@
+{
+  "name": "cloud-systems-workshop-team",
+  "description": "Focused four-agent architecture-review team for cloud systems design work. Pairs the chair (Lamport) with the storage architect (Ghemawat), the scale evaluator (Dean), and the pedagogy agent (Gray) for depth on a single design without the cost of the full analysis team. Use for storage architecture reviews, consensus protocol design, and capacity-sensitive systems where the cross-domain aspects are bounded. Not for pure operations or routine incidents.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "lamport",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, consensus theory",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "ghemawat",
+      "role": "worker",
+      "description": "Storage architecture, replication, durability",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "dean",
+      "role": "worker",
+      "description": "Tail latency, capacity sizing, production patterns",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "gray",
+      "role": "worker",
+      "description": "Level-appropriate explanation, runbook discipline",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

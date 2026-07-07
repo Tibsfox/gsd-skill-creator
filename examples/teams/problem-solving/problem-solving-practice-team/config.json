@@ -1,0 +1,47 @@
+{
+  "name": "problem-solving-practice-team",
+  "description": "Sequential practice pipeline for developing problem-solving skills through structured drills. Jonassen frames the practice question and selects the target problem type, Bransford generates varied anchored example problems, Schoenfeld walks the learner through the solve with explicit control layer, and Brown-PS produces the final explanation and learning-pathway update. Use for skill-building, drill-and-practice sessions, classroom preparation, and systematic development from novice to proficient. Not for solving live problems, open-ended investigation, or ill-structured wicked problems.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "jonassen",
+      "role": "leader",
+      "description": "Frame the practice question, select target type, set the level",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "bransford",
+      "role": "worker",
+      "description": "Generate varied anchored practice problems at the chosen level",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "schoenfeld",
+      "role": "worker",
+      "description": "Walk the learner through the solve with explicit control layer",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "brown-ps",
+      "role": "worker",
+      "description": "Produce final explanation, pathway update, and next-steps",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

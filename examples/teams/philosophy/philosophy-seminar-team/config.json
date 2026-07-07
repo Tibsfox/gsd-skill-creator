@@ -1,0 +1,81 @@
+{
+  "name": "philosophy-seminar-team",
+  "description": "Full Philosophy Department seminar team for multi-domain philosophical inquiry spanning logic, ethics, existentialism, political philosophy, metaphysics, and pedagogy. Socrates classifies the query, activates relevant specialists who contribute their tradition's perspective, then synthesizes findings into a unified philosophical response with Dewey providing accessible explanation. Use for comparative philosophy (East/West), multi-tradition analysis, interdisciplinary philosophical questions, or any inquiry where the relevant tradition is unclear and multiple perspectives will yield richer understanding. Not for simple logic exercises, single-framework ethical analysis, or narrow metaphysical puzzles.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "socrates",
+      "role": "leader",
+      "description": "Socratic method, classification, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "aristotle",
+      "role": "worker",
+      "description": "Formal logic, argument structure, categories",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kant",
+      "role": "worker",
+      "description": "Deontological ethics, duty, categorical imperative",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "beauvoir",
+      "role": "worker",
+      "description": "Existentialist & feminist philosophy, lived experience",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "confucius",
+      "role": "worker",
+      "description": "Relational ethics, social harmony, political order",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "nagarjuna",
+      "role": "worker",
+      "description": "Madhyamaka emptiness, tetralemma, dependent origination",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "dewey",
+      "role": "worker",
+      "description": "Pragmatist education, accessible explanation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

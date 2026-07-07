@@ -1,0 +1,82 @@
+{
+  "name": "art-critique-team",
+  "description": "Full Art Department critique team for multi-domain analysis of artworks spanning observation, color, composition, expression, historical context, contemporary practice, and pedagogy. Leonardo classifies the query and activates relevant specialists in parallel, then synthesizes their independent findings into a unified, level-appropriate response with a learning pathway from Lowenfeld. Use for comprehensive artwork analysis, research-level art-historical questions, cross-domain critique, or any art problem where multiple specialist perspectives are needed. Not for single-domain questions, routine technique instruction, or basic skill exercises.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "leonardo",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kahlo",
+      "role": "worker",
+      "description": "Identity, symbolism, cultural context",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "okeefe",
+      "role": "worker",
+      "description": "Observation, abstraction, nature-to-art",
+      "tools": [
+        "Read",
+        "Grep",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "hokusai",
+      "role": "worker",
+      "description": "Spatial organization, design principles, printmaking",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "albers",
+      "role": "worker",
+      "description": "Color relationships, design, systematic investigation",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "ai-weiwei",
+      "role": "worker",
+      "description": "Conceptual art, installation, social practice",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "lowenfeld",
+      "role": "worker",
+      "description": "Developmental stages, critique facilitation, learning pathways",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "research-design-team",
+  "description": "Focused research design and methodology team. Kahneman leads with experimental design and statistical reasoning, Piaget contributes developmental methodology expertise, James provides pragmatic integration and ensures ecological validity, and Skinner-P designs measurement protocols and operationalizes variables. Use for designing psychological studies, evaluating research methodology, planning replications, and critiquing published research. Not for clinical case formulation, teaching, or multi-perspective theoretical analysis.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "kahneman",
+      "role": "leader",
+      "description": "Experimental design, statistical reasoning, bias identification",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "piaget",
+      "role": "worker",
+      "description": "Longitudinal/cross-sectional design, age-appropriate measures, developmental validity",
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "james",
+      "role": "worker",
+      "description": "Ecological validity, practical significance, real-world applicability",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "skinner-p",
+      "role": "worker",
+      "description": "Variable measurement, behavioral operationalization, schedule design",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}

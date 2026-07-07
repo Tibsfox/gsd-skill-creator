@@ -1,0 +1,80 @@
+{
+  "name": "critical-thinking-analysis-team",
+  "description": "Full Critical Thinking Department investigation team for multi-domain reasoning problems spanning argument analysis, bias detection, creative reframing, and decision support. Paul classifies the query along four dimensions and activates relevant specialists in parallel, then synthesizes their independent findings into a unified response with a learning pathway from Lipman. Use for complex reasoning audits, ill-structured problems where the right frame is not yet clear, and high-stakes judgments benefiting from multiple evaluation lenses. Not for single-concept lookups, routine bias checks, or pure teaching requests.",
+  "topology": "leader-worker",
+  "members": [
+    {
+      "name": "paul",
+      "role": "leader",
+      "description": "Classification, orchestration, synthesis, universal standards",
+      "tools": [
+        "Read",
+        "Glob",
+        "Grep",
+        "Bash",
+        "Write"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "elder",
+      "role": "worker",
+      "description": "Argument reconstruction, elements of reasoning, structural diagnosis",
+      "tools": [
+        "Read",
+        "Grep"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "tversky",
+      "role": "worker",
+      "description": "Heuristics and biases detection, base rates, probability correction",
+      "tools": [
+        "Read",
+        "Bash"
+      ],
+      "model": "opus"
+    },
+    {
+      "name": "kahneman-ct",
+      "role": "worker",
+      "description": "System 1 / System 2 diagnosis, mode-shift support",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "de-bono",
+      "role": "worker",
+      "description": "Lateral thinking, reframings, option generation",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "dewey-ct",
+      "role": "worker",
+      "description": "Ill-structured problem framing, five-phase inquiry",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    },
+    {
+      "name": "lipman",
+      "role": "worker",
+      "description": "Level-appropriate explanation, Socratic dialogue",
+      "tools": [
+        "Read",
+        "Write"
+      ],
+      "model": "sonnet"
+    }
+  ]
+}
