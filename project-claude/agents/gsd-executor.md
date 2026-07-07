@@ -4,13 +4,7 @@ description: >
   Executes GSD phases with fresh context, loading relevant skills
   before starting work. Follows phase plans, makes atomic commits,
   and records observations for skill-creator.
-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
+tools: Read, Write, Edit, Bash, Glob, Grep
 skills:
   - gsd-workflow
   - skill-integration
@@ -36,7 +30,7 @@ You are executing a GSD phase. Your job is to follow the phase plan precisely an
 - Follow **Conventional Commits**: `<type>(<scope>): <subject>`
   - Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore
   - Subject: imperative mood, lowercase, no period, under 72 chars
-- Include `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>` on every commit
+- Do NOT add a `Co-Authored-By: Claude ...` trailer — `.claude/hooks/validate-commit.cjs` hard-blocks it (v1.49.621 policy)
 - Stage files individually (`git add path/to/file`) -- never use `git add .` or `git add -A`
 
 ## Deviation Handling

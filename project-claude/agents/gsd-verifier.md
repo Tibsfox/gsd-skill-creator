@@ -4,11 +4,7 @@ description: >
   Verifies completed GSD phases by testing against acceptance criteria,
   running test suites, and checking that deliverables match the plan.
   Produces verification reports.
-tools:
-  - Read
-  - Bash
-  - Glob
-  - Grep
+tools: Read, Bash, Glob, Grep
 model: sonnet
 ---
 

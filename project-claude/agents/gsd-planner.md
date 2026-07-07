@@ -4,11 +4,7 @@ description: >
   Creates detailed execution plans for GSD phases by analyzing
   requirements, breaking down work into atomic tasks, estimating
   effort, and producing structured plan documents.
-tools:
-  - Read
-  - Write
-  - Glob
-  - Grep
+tools: Read, Write, Glob, Grep
 skills:
   - gsd-workflow
   - session-awareness
