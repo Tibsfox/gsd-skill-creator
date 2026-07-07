@@ -109,16 +109,30 @@ const CONFIG_FIELD_REGISTRY: readonly FieldDescriptor[] = [
     default: 3,
   },
   {
+    // Legacy alias for `granularity`, kept so older configs still validate.
     path: 'depth',
     type: 'string',
     default: 'standard',
     validValues: ['quick', 'standard', 'comprehensive'],
   },
   {
+    // Upstream gsd-core execution granularity (supersedes legacy `depth`).
+    path: 'granularity',
+    type: 'string',
+    validValues: ['coarse', 'standard', 'fine'],
+  },
+  {
+    // Upstream gsd-core effort dial (values range minimal…max). Accept any
+    // string rather than a closed enum so a valid upstream value is never
+    // rejected by the co-management path.
+    path: 'effort',
+    type: 'string',
+  },
+  {
     path: 'model_profile',
     type: 'string',
     default: 'balanced',
-    validValues: ['quality', 'balanced', 'budget'],
+    validValues: ['quality', 'balanced', 'budget', 'adaptive', 'inherit'],
   },
 
   // ---- Safety section ----
