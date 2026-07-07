@@ -16,6 +16,7 @@ import { resolve, join } from 'node:path';
 import { startGateway, type GatewayHandle } from '../../mcp/gateway/server.js';
 import { createGsdGatewayFactory } from '../../mcp/gateway/create-gateway-server.js';
 import { MemoryService } from '../../memory/service.js';
+import { loadPgEnv } from '../../scribe/pg-runtime/env-loader.js';
 import {
   DEFAULT_GATEWAY_PORT,
   DEFAULT_GATEWAY_HOST,
@@ -58,10 +59,22 @@ export async function gatewayCommand(args: string[]): Promise<number> {
     readFlag(args, '--memory-dir') ?? join(process.cwd(), '.claude', 'memory'),
   );
 
+  // --pg enables the LOD-400 PostgreSQL tier, resolving RH_POSTGRES_URL from
+  // process.env or the repo .env. Absent a URL, warn and continue without it.
+  let pgConnectionString: string | undefined;
+  if (args.includes('--pg')) {
+    const env = loadPgEnv();
+    if (env.ok) {
+      pgConnectionString = env.url;
+    } else {
+      console.error('gateway: --pg given but no RH_POSTGRES_URL found; continuing without LOD-400');
+    }
+  }
+
   // indexPath is a filename resolved under memoryDir by IndexManager
   // (join(memoryDir, indexFile)); pass the bare filename, not an absolute path.
   const memoryService = memoryEnabled
-    ? new MemoryService({ memoryDir, indexPath: 'MEMORY.md' })
+    ? new MemoryService({ memoryDir, indexPath: 'MEMORY.md', pgConnectionString })
     : undefined;
 
   const factory = createGsdGatewayFactory({ memoryService });
@@ -81,7 +94,11 @@ export async function gatewayCommand(args: string[]): Promise<number> {
   console.error(`[gateway] listening on http://${host}:${boundPort}${handle.config.mcpEndpoint}`);
   console.error(`[gateway] bearer token: ${tokenPath} (scopes: ${handle.tokenInfo.scopes.join(', ')})`);
   console.error(
-    `[gateway] memory tools: ${memoryService ? `on (FileStore at ${memoryDir})` : 'off'}`,
+    `[gateway] memory tools: ${
+      memoryService
+        ? `on (FileStore at ${memoryDir}${pgConnectionString ? ' + PostgreSQL LOD-400' : ''})`
+        : 'off'
+    }`,
   );
   console.error('[gateway] press Ctrl+C to stop');
 
@@ -122,6 +139,7 @@ Options:
   --token <path>      Bearer token file (default ${DEFAULT_TOKEN_PATH})
   --memory-dir <dir>  Memory FileStore directory (default <cwd>/.claude/memory)
   --no-memory         Disable the memory.* tools
+  --pg                Enable the LOD-400 PostgreSQL tier (uses RH_POSTGRES_URL)
   --json              Return JSON responses instead of SSE streams
   --help, -h          Show this help message
 

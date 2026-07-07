@@ -6,9 +6,9 @@
  * for relational queries, temporal filtering, and graph traversal.
  *
  * Two table groups:
- *   1. Memory tables (artemis.memories, artemis.memory_relations)
+ *   1. Memory tables (gsd_memory.memories, gsd_memory.memory_relations)
  *      — Structured memory records with embeddings and relations
- *   2. Conversation tables (artemis.conversations, artemis.conversation_turns)
+ *   2. Conversation tables (gsd_memory.conversations, gsd_memory.conversation_turns)
  *      — Private local-only conversation logs for searchable session history
  *
  * VISIBILITY ENFORCEMENT:
@@ -52,7 +52,7 @@ export interface PgStoreConfig {
   /** Database name. Default: tibsfox */
   database?: string;
 
-  /** Schema for memory tables. Default: artemis */
+  /** Schema for memory tables. Default: gsd_memory */
   schema?: string;
 
   /** Username. */
@@ -65,7 +65,7 @@ export interface PgStoreConfig {
   autoMigrate?: boolean;
 }
 
-/** Row shape from artemis.memories table. */
+/** Row shape from gsd_memory.memories table. */
 interface MemoryRow {
   id: string;
   type: MemoryType;
@@ -95,7 +95,7 @@ interface MemoryRow {
   embedding: number[] | null;
 }
 
-/** Row shape from artemis.conversation_turns table. */
+/** Row shape from gsd_memory.conversation_turns table. */
 interface ConversationTurnRow {
   id: string;
   session_id: string;
@@ -114,7 +114,7 @@ const MIGRATIONS = [
   `CREATE EXTENSION IF NOT EXISTS vector;`,
 
   // Memory tables
-  `CREATE TABLE IF NOT EXISTS artemis.memories (
+  `CREATE TABLE IF NOT EXISTS gsd_memory.memories (
     id              UUID PRIMARY KEY,
     type            TEXT NOT NULL,
     name            TEXT NOT NULL,
@@ -154,14 +154,14 @@ const MIGRATIONS = [
   );`,
 
   // Memory indexes
-  `CREATE INDEX IF NOT EXISTS idx_memories_type ON artemis.memories (type);`,
-  `CREATE INDEX IF NOT EXISTS idx_memories_scope ON artemis.memories (scope);`,
-  `CREATE INDEX IF NOT EXISTS idx_memories_visibility ON artemis.memories (visibility);`,
-  `CREATE INDEX IF NOT EXISTS idx_memories_temporal ON artemis.memories (valid_from, valid_to);`,
-  `CREATE INDEX IF NOT EXISTS idx_memories_tags ON artemis.memories USING gin (tags);`,
-  `CREATE INDEX IF NOT EXISTS idx_memories_project ON artemis.memories (project);`,
-  `CREATE INDEX IF NOT EXISTS idx_memories_branch ON artemis.memories (branch);`,
-  `CREATE INDEX IF NOT EXISTS idx_memories_fulltext ON artemis.memories
+  `CREATE INDEX IF NOT EXISTS idx_memories_type ON gsd_memory.memories (type);`,
+  `CREATE INDEX IF NOT EXISTS idx_memories_scope ON gsd_memory.memories (scope);`,
+  `CREATE INDEX IF NOT EXISTS idx_memories_visibility ON gsd_memory.memories (visibility);`,
+  `CREATE INDEX IF NOT EXISTS idx_memories_temporal ON gsd_memory.memories (valid_from, valid_to);`,
+  `CREATE INDEX IF NOT EXISTS idx_memories_tags ON gsd_memory.memories USING gin (tags);`,
+  `CREATE INDEX IF NOT EXISTS idx_memories_project ON gsd_memory.memories (project);`,
+  `CREATE INDEX IF NOT EXISTS idx_memories_branch ON gsd_memory.memories (branch);`,
+  `CREATE INDEX IF NOT EXISTS idx_memories_fulltext ON gsd_memory.memories
     USING gin (to_tsvector('english', name || ' ' || description || ' ' || content));`,
 
   // pgvector index — HNSW for cosine similarity. HNSW needs no training data,
@@ -169,31 +169,32 @@ const MIGRATIONS = [
   // centroids degenerate when the index is created before any rows exist), and
   // gives better recall/latency at this scale with no per-query probe tuning.
   // Requires pgvector >= 0.5. (PG-4)
-  `DO $$ BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_memories_embedding') THEN
-      CREATE INDEX idx_memories_embedding ON artemis.memories
-        USING hnsw (embedding vector_cosine_ops);
-    END IF;
-  END $$;`,
+  //
+  // NB: `CREATE INDEX IF NOT EXISTS` resolves the existence check against the
+  // TARGET table's schema. A bare `pg_indexes WHERE indexname = ...` guard does
+  // not — index names collide across schemas, so a same-named index in another
+  // schema would make the guard skip creation here silently.
+  `CREATE INDEX IF NOT EXISTS idx_memories_embedding ON gsd_memory.memories
+    USING hnsw (embedding vector_cosine_ops);`,
 
   // Memory relations
-  `CREATE TABLE IF NOT EXISTS artemis.memory_relations (
+  `CREATE TABLE IF NOT EXISTS gsd_memory.memory_relations (
     id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    subject_id  UUID NOT NULL REFERENCES artemis.memories(id) ON DELETE CASCADE,
+    subject_id  UUID NOT NULL REFERENCES gsd_memory.memories(id) ON DELETE CASCADE,
     predicate   TEXT NOT NULL,
-    object_id   UUID NOT NULL REFERENCES artemis.memories(id) ON DELETE CASCADE,
+    object_id   UUID NOT NULL REFERENCES gsd_memory.memories(id) ON DELETE CASCADE,
     valid_from  TIMESTAMPTZ NOT NULL DEFAULT now(),
     valid_to    TIMESTAMPTZ,
     confidence  REAL NOT NULL DEFAULT 1.0,
     created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
   );`,
 
-  `CREATE INDEX IF NOT EXISTS idx_relations_subject ON artemis.memory_relations (subject_id);`,
-  `CREATE INDEX IF NOT EXISTS idx_relations_object ON artemis.memory_relations (object_id);`,
-  `CREATE INDEX IF NOT EXISTS idx_relations_predicate ON artemis.memory_relations (predicate);`,
+  `CREATE INDEX IF NOT EXISTS idx_relations_subject ON gsd_memory.memory_relations (subject_id);`,
+  `CREATE INDEX IF NOT EXISTS idx_relations_object ON gsd_memory.memory_relations (object_id);`,
+  `CREATE INDEX IF NOT EXISTS idx_relations_predicate ON gsd_memory.memory_relations (predicate);`,
 
   // Conversation sessions (PRIVATE — never synced externally)
-  `CREATE TABLE IF NOT EXISTS artemis.conversation_sessions (
+  `CREATE TABLE IF NOT EXISTS gsd_memory.conversation_sessions (
     id          UUID PRIMARY KEY,
     started_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
     ended_at    TIMESTAMPTZ,
@@ -205,9 +206,9 @@ const MIGRATIONS = [
   );`,
 
   // Conversation turns (PRIVATE — never synced externally)
-  `CREATE TABLE IF NOT EXISTS artemis.conversation_turns (
+  `CREATE TABLE IF NOT EXISTS gsd_memory.conversation_turns (
     id              TEXT PRIMARY KEY,
-    session_id      UUID NOT NULL REFERENCES artemis.conversation_sessions(id) ON DELETE CASCADE,
+    session_id      UUID NOT NULL REFERENCES gsd_memory.conversation_sessions(id) ON DELETE CASCADE,
     role            TEXT NOT NULL,
     content         TEXT NOT NULL,
     timestamp       TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -217,22 +218,19 @@ const MIGRATIONS = [
     embedding       vector(384)
   );`,
 
-  `CREATE INDEX IF NOT EXISTS idx_turns_session ON artemis.conversation_turns (session_id);`,
-  `CREATE INDEX IF NOT EXISTS idx_turns_role ON artemis.conversation_turns (role);`,
-  `CREATE INDEX IF NOT EXISTS idx_turns_timestamp ON artemis.conversation_turns (timestamp);`,
-  `CREATE INDEX IF NOT EXISTS idx_turns_fulltext ON artemis.conversation_turns
+  `CREATE INDEX IF NOT EXISTS idx_turns_session ON gsd_memory.conversation_turns (session_id);`,
+  `CREATE INDEX IF NOT EXISTS idx_turns_role ON gsd_memory.conversation_turns (role);`,
+  `CREATE INDEX IF NOT EXISTS idx_turns_timestamp ON gsd_memory.conversation_turns (timestamp);`,
+  `CREATE INDEX IF NOT EXISTS idx_turns_fulltext ON gsd_memory.conversation_turns
     USING gin (to_tsvector('english', content));`,
-
-  // Schema version tracking
-  `CREATE TABLE IF NOT EXISTS artemis.schema_version (
-    version     INT PRIMARY KEY,
-    applied_at  TIMESTAMPTZ NOT NULL DEFAULT now()
-  );`,
-
-  `INSERT INTO artemis.schema_version (version)
-   VALUES (1)
-   ON CONFLICT (version) DO NOTHING;`,
 ];
+
+/**
+ * Target schema version. Bump when appending migrations; the applier records
+ * this once the full set applies cleanly and skips re-running when the DB is
+ * already at (or past) this version. (PG-3)
+ */
+const SCHEMA_VERSION = 1;
 
 // ─── PgStore ─────────────────────────────────────────────────────────────────
 
@@ -255,6 +253,7 @@ export class PgStore implements MemoryStore {
   };
   private pool: any = null; // pg.Pool — dynamically imported
   private initialized = false;
+  private initPromise: Promise<void> | null = null;
 
   constructor(config: PgStoreConfig = {}) {
     // Resolve credentials via the canonical loader — RH_POSTGRES_URL from
@@ -273,7 +272,7 @@ export class PgStore implements MemoryStore {
       host: config.host ?? 'localhost',
       port: config.port ?? 5432,
       database: config.database ?? 'tibsfox',
-      schema: config.schema ?? 'artemis',
+      schema: config.schema ?? 'gsd_memory',
       user: config.user ?? process.env.PGUSER ?? 'foxy',
       password: config.password ?? process.env.PGPASSWORD ?? '',
       autoMigrate: config.autoMigrate ?? true,
@@ -292,46 +291,127 @@ export class PgStore implements MemoryStore {
     }
   }
 
-  /** Initialize connection pool and run migrations. */
+  /**
+   * Initialize the connection pool and apply migrations.
+   *
+   * A connection failure (pg module missing, DB unreachable) degrades
+   * gracefully: the store stays inactive and its methods no-op, mirroring the
+   * optional Chroma tier. But once connected, a schema/migration failure — e.g.
+   * `CREATE EXTENSION` denied or a table create rejected — is surfaced by
+   * throwing: a connected-but-broken schema must fail loudly rather than
+   * silently drop writes. (PG-3)
+   */
   async init(): Promise<void> {
     if (this.initialized) return;
+    // Memoize so concurrent callers — e.g. two awaited LOD-400 store()s racing
+    // before the first init resolves — share one init instead of each building
+    // a pool and re-running migrations. Cleared when it settles so a failed
+    // init can be retried by a later call.
+    if (!this.initPromise) {
+      this.initPromise = this.doInit().finally(() => {
+        this.initPromise = null;
+      });
+    }
+    return this.initPromise;
+  }
 
+  private async doInit(): Promise<void> {
+    if (this.initialized) return;
+
+    // ── Connect: a failure here degrades gracefully (tier stays inactive). ──
     try {
       const pg = await import('pg');
-      this.pool = new pg.default.Pool(
-        this.config.connectionString
-          ? { connectionString: this.config.connectionString }
-          : {
-              host: this.config.host,
-              port: this.config.port,
-              database: this.config.database,
-              user: this.config.user,
-              password: this.config.password,
-            },
-      );
-
-      // Ensure schema exists
-      await this.pool.query(`CREATE SCHEMA IF NOT EXISTS ${this.config.schema}`);
-
-      // Run migrations
-      if (this.config.autoMigrate) {
-        for (const sql of MIGRATIONS) {
-          try {
-            await this.pool.query(sql);
-          } catch (err: any) {
-            // Skip non-critical migration errors (e.g., extension already exists)
-            if (!err.message?.includes('already exists')) {
-              console.error(`Migration warning: ${err.message}`);
-            }
-          }
-        }
-      }
-
-      this.initialized = true;
+      const base = this.config.connectionString
+        ? { connectionString: this.config.connectionString }
+        : {
+            host: this.config.host,
+            port: this.config.port,
+            database: this.config.database,
+            user: this.config.user,
+            password: this.config.password,
+          };
+      this.pool = new pg.default.Pool({
+        ...base,
+        // Bound the connect wait so an awaited LOD-400 write can't hang for the
+        // full OS TCP timeout when the host is unreachable.
+        connectionTimeoutMillis: 10_000,
+        application_name: 'gsd-skill-creator/pg-store',
+      });
+      // Absorb idle-client errors (DB restart, dropped TCP) — pg re-emits them
+      // as a Pool 'error' event, which crashes the process if unhandled. This
+      // matters most under the long-lived `gateway --pg` server.
+      this.pool.on('error', (err: Error) => {
+        console.error('PgStore: idle pool client error:', err.message);
+      });
+      await this.pool.query('SELECT 1');
     } catch (err) {
-      // pg not available or connection failed — store will be inactive
       console.error('PgStore: PostgreSQL not available:', (err as Error).message);
+      await this.disposePool();
+      return;
     }
+
+    // ── Migrate: a failure here is loud (surface it, don't drop writes). ──
+    try {
+      await this.pool.query(`CREATE SCHEMA IF NOT EXISTS ${this.config.schema}`);
+      if (this.config.autoMigrate) await this.applyMigrations();
+    } catch (err) {
+      await this.disposePool();
+      throw new Error(
+        `PgStore: schema initialization failed (${(err as Error).message}). ` +
+          `The database is reachable but its schema could not be prepared; ` +
+          `refusing to run in a state that would silently drop writes.`,
+      );
+    }
+
+    this.initialized = true;
+  }
+
+  /**
+   * Apply schema migrations, version-checked and failing loudly on real errors.
+   * Reads the recorded `schema_version` and skips when the DB is already at (or
+   * past) SCHEMA_VERSION; otherwise runs the full DDL set and records the
+   * version. Only "already exists" errors are treated as benign. (PG-3)
+   */
+  private async applyMigrations(): Promise<void> {
+    const s = this.config.schema;
+    // schema_version must exist before we can read the applied version.
+    await this.pool.query(
+      `CREATE TABLE IF NOT EXISTS ${s}.schema_version (` +
+        `version INT PRIMARY KEY, applied_at TIMESTAMPTZ NOT NULL DEFAULT now())`,
+    );
+    const { rows } = await this.pool.query(
+      `SELECT COALESCE(MAX(version), 0)::int AS v FROM ${s}.schema_version`,
+    );
+    if ((rows[0]?.v ?? 0) >= SCHEMA_VERSION) return; // already up to date
+
+    for (const sql of MIGRATIONS) {
+      try {
+        await this.pool.query(sql);
+      } catch (err: any) {
+        // Idempotent DDL (e.g. the vector extension) can report "already
+        // exists"; anything else is a real failure that must surface.
+        if (err?.message?.includes('already exists')) continue;
+        throw new Error(`migration to v${SCHEMA_VERSION} failed: ${err?.message ?? err}`);
+      }
+    }
+
+    await this.pool.query(
+      `INSERT INTO ${s}.schema_version (version) VALUES ($1) ON CONFLICT (version) DO NOTHING`,
+      [SCHEMA_VERSION],
+    );
+  }
+
+  /** Best-effort pool teardown used on the init failure paths. */
+  private async disposePool(): Promise<void> {
+    if (this.pool) {
+      try {
+        await this.pool.end();
+      } catch {
+        /* ignore teardown errors */
+      }
+      this.pool = null;
+    }
+    this.initialized = false;
   }
 
   /** Close the connection pool. */
@@ -350,7 +430,7 @@ export class PgStore implements MemoryStore {
 
     // Enforce visibility — never store private data if target is external
     const sql = `
-      INSERT INTO artemis.memories (
+      INSERT INTO gsd_memory.memories (
         id, type, name, description, content,
         scope, visibility, temporal_class, domains, project, branch, worktree, mission, phase,
         tags, confidence, valid_from, valid_to,
@@ -368,7 +448,7 @@ export class PgStore implements MemoryStore {
         content = EXCLUDED.content,
         updated_at = now(),
         last_accessed = now(),
-        access_count = artemis.memories.access_count + 1
+        access_count = gsd_memory.memories.access_count + 1
     `;
 
     const p = record.provenance;
@@ -441,7 +521,7 @@ export class PgStore implements MemoryStore {
           to_tsvector('english', name || ' ' || description || ' ' || content),
           plainto_tsquery('english', ${searchParam})
         ) AS text_rank
-      FROM artemis.memories
+      FROM gsd_memory.memories
       WHERE ${conditions.join(' AND ')}
         AND (
           to_tsvector('english', name || ' ' || description || ' ' || content)
@@ -462,7 +542,7 @@ export class PgStore implements MemoryStore {
 
     // Update access tracking
     const sql = `
-      UPDATE artemis.memories
+      UPDATE gsd_memory.memories
       SET last_accessed = now(), access_count = access_count + 1
       WHERE id = $1
       RETURNING *
@@ -474,19 +554,19 @@ export class PgStore implements MemoryStore {
 
   async remove(id: string): Promise<boolean> {
     if (!await this.ensureReady()) return false;
-    const result = await this.pool.query('DELETE FROM artemis.memories WHERE id = $1', [id]);
+    const result = await this.pool.query('DELETE FROM gsd_memory.memories WHERE id = $1', [id]);
     return result.rowCount > 0;
   }
 
   async has(id: string): Promise<boolean> {
     if (!await this.ensureReady()) return false;
-    const result = await this.pool.query('SELECT 1 FROM artemis.memories WHERE id = $1', [id]);
+    const result = await this.pool.query('SELECT 1 FROM gsd_memory.memories WHERE id = $1', [id]);
     return result.rows.length > 0;
   }
 
   async count(): Promise<number> {
     if (!await this.ensureReady()) return 0;
-    const result = await this.pool.query('SELECT count(*) FROM artemis.memories');
+    const result = await this.pool.query('SELECT count(*) FROM gsd_memory.memories');
     return parseInt(result.rows[0].count, 10);
   }
 
@@ -515,7 +595,7 @@ export class PgStore implements MemoryStore {
     const sql = `
       SELECT *,
         1 - (embedding <=> $1::vector) AS similarity
-      FROM artemis.memories
+      FROM gsd_memory.memories
       WHERE embedding IS NOT NULL
         AND valid_to IS NULL
         ${visFilter}
@@ -538,7 +618,7 @@ export class PgStore implements MemoryStore {
   async storeEmbedding(id: string, embedding: number[]): Promise<void> {
     if (!await this.ensureReady()) return;
     await this.pool.query(
-      `UPDATE artemis.memories SET embedding = $2::vector WHERE id = $1`,
+      `UPDATE gsd_memory.memories SET embedding = $2::vector WHERE id = $1`,
       [id, `[${embedding.join(',')}]`],
     );
   }
@@ -555,7 +635,7 @@ export class PgStore implements MemoryStore {
     if (!await this.ensureReady()) return null;
 
     const sql = `
-      INSERT INTO artemis.memory_relations (subject_id, predicate, object_id, confidence)
+      INSERT INTO gsd_memory.memory_relations (subject_id, predicate, object_id, confidence)
       VALUES ($1, $2, $3, $4)
       RETURNING *
     `;
@@ -578,7 +658,7 @@ export class PgStore implements MemoryStore {
     if (!await this.ensureReady()) return [];
 
     const sql = `
-      SELECT * FROM artemis.memory_relations
+      SELECT * FROM gsd_memory.memory_relations
       WHERE (subject_id = $1 OR object_id = $1)
         AND valid_to IS NULL
       ORDER BY created_at DESC
@@ -606,23 +686,23 @@ export class PgStore implements MemoryStore {
     const sql = `
       WITH RECURSIVE graph AS (
         SELECT object_id AS id, 1 AS depth
-        FROM artemis.memory_relations
+        FROM gsd_memory.memory_relations
         WHERE subject_id = $1 AND valid_to IS NULL
         UNION
         SELECT subject_id AS id, 1 AS depth
-        FROM artemis.memory_relations
+        FROM gsd_memory.memory_relations
         WHERE object_id = $1 AND valid_to IS NULL
         UNION
         SELECT
           CASE WHEN r.subject_id = g.id THEN r.object_id ELSE r.subject_id END,
           g.depth + 1
-        FROM artemis.memory_relations r
+        FROM gsd_memory.memory_relations r
         JOIN graph g ON (r.subject_id = g.id OR r.object_id = g.id)
         WHERE g.depth < $2 AND r.valid_to IS NULL
       )
       SELECT DISTINCT m.*
       FROM graph g
-      JOIN artemis.memories m ON m.id = g.id
+      JOIN gsd_memory.memories m ON m.id = g.id
       WHERE m.id != $1 AND m.valid_to IS NULL
       ORDER BY m.last_accessed DESC
       LIMIT 50
@@ -647,13 +727,13 @@ export class PgStore implements MemoryStore {
     if (!await this.ensureReady()) return;
 
     await this.pool.query(`
-      INSERT INTO artemis.conversation_sessions (id, started_at, ended_at, project, branch, summary, topics)
+      INSERT INTO gsd_memory.conversation_sessions (id, started_at, ended_at, project, branch, summary, topics)
       VALUES ($1, $2, $3, $4, $5, $6, $7)
       ON CONFLICT (id) DO UPDATE SET
-        ended_at = COALESCE(EXCLUDED.ended_at, artemis.conversation_sessions.ended_at),
-        turn_count = artemis.conversation_sessions.turn_count,
-        summary = COALESCE(EXCLUDED.summary, artemis.conversation_sessions.summary),
-        topics = COALESCE(EXCLUDED.topics, artemis.conversation_sessions.topics)
+        ended_at = COALESCE(EXCLUDED.ended_at, gsd_memory.conversation_sessions.ended_at),
+        turn_count = gsd_memory.conversation_sessions.turn_count,
+        summary = COALESCE(EXCLUDED.summary, gsd_memory.conversation_sessions.summary),
+        topics = COALESCE(EXCLUDED.topics, gsd_memory.conversation_sessions.topics)
     `, [
       session.id, session.startedAt, session.endedAt ?? null,
       session.project ?? null, session.branch ?? null,
@@ -675,7 +755,7 @@ export class PgStore implements MemoryStore {
     if (!await this.ensureReady()) return;
 
     await this.pool.query(`
-      INSERT INTO artemis.conversation_turns (id, session_id, role, content, timestamp, tool_calls, files_accessed, tags)
+      INSERT INTO gsd_memory.conversation_turns (id, session_id, role, content, timestamp, tool_calls, files_accessed, tags)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       ON CONFLICT (id) DO NOTHING
     `, [
@@ -685,7 +765,7 @@ export class PgStore implements MemoryStore {
 
     // Update session turn count
     await this.pool.query(`
-      UPDATE artemis.conversation_sessions
+      UPDATE gsd_memory.conversation_sessions
       SET turn_count = turn_count + 1
       WHERE id = $1
     `, [turn.sessionId]);
@@ -715,7 +795,7 @@ export class PgStore implements MemoryStore {
     const sql = `
       SELECT *,
         ts_rank_cd(to_tsvector('english', content), plainto_tsquery('english', $1)) AS rank
-      FROM artemis.conversation_turns
+      FROM gsd_memory.conversation_turns
       WHERE ${conditions.join(' AND ')}
       ORDER BY rank DESC, timestamp DESC
       LIMIT ${limit}
@@ -743,7 +823,7 @@ export class PgStore implements MemoryStore {
     if (!await this.ensureReady()) return [];
 
     const result = await this.pool.query(`
-      SELECT * FROM artemis.conversation_turns
+      SELECT * FROM gsd_memory.conversation_turns
       ORDER BY timestamp DESC
       LIMIT $1
     `, [limit]);
@@ -763,7 +843,7 @@ export class PgStore implements MemoryStore {
     if (!await this.ensureReady()) return [];
 
     const result = await this.pool.query(`
-      SELECT * FROM artemis.memories
+      SELECT * FROM gsd_memory.memories
       WHERE visibility = 'public'
         AND valid_to IS NULL
       ORDER BY updated_at DESC

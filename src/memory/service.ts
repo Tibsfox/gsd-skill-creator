@@ -37,6 +37,7 @@ import { ArenaFileStore } from './arena-file-store.js';
 import type { RustArena, TierKind } from './rust-arena.js';
 import { ChromaStore } from './chroma-store.js';
 import type { ChromaPreloadResult } from './chroma-store.js';
+import { PgStore } from './pg-store.js';
 import {
   hybridRerank, scoreToDistance, distanceToScore,
 } from './hybrid-scorer.js';
@@ -160,8 +161,28 @@ export class MemoryService {
       this.stores.set(LodLevel.CONSTRUCTION, chromaStore);
     }
 
-    // LOD 400 — PostgreSQL (Phase 2, not implemented yet)
-    // if (config.pgConnectionString) { ... }
+    // LOD 400 — PostgreSQL (optional; enabled when a connection string is
+    // supplied, mirroring how LOD 350 Chroma is gated on chromaPath). Init is
+    // lazy (first use), and a connection failure degrades gracefully. (PG-1)
+    if (config.pgConnectionString) {
+      const pgStore = new PgStore({ connectionString: config.pgConnectionString });
+      this.stores.set(LodLevel.FABRICATION, pgStore);
+    }
+  }
+
+  // ─── Lifecycle ────────────────────────────────────────────────────────────
+
+  /**
+   * Release any tier resources that hold open handles — currently the LOD-400
+   * PostgreSQL connection pool. Safe to call when no such tier is active.
+   */
+  async close(): Promise<void> {
+    for (const store of this.stores.values()) {
+      const closable = store as { close?: () => Promise<void> };
+      if (typeof closable.close === 'function') {
+        await closable.close();
+      }
+    }
   }
 
   // ─── Query ──────────────────────────────────────────────────────────────
@@ -335,6 +356,18 @@ export class MemoryService {
       chromaStore.store(record).catch(() => {
         // Silently fail — vectors are optional enhancement
       });
+    }
+
+    // LOD 400 — PostgreSQL, the durable structured tier. Awaited so the tier is
+    // populated deterministically (unlike the fire-and-forget Chroma write), but
+    // a failure must not lose the LOD-300 write that already succeeded. (PG-1)
+    const pgStore = this.stores.get(LodLevel.FABRICATION);
+    if (pgStore) {
+      try {
+        await pgStore.store(record);
+      } catch (err) {
+        console.error('MemoryService: LOD-400 store failed:', (err as Error).message);
+      }
     }
 
     // If high confidence + frequently accessed, promote to LOD 200 index

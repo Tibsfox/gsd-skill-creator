@@ -18,6 +18,9 @@ class MockPool {
   async query(): Promise<{ rows: unknown[] }> {
     return { rows: [] };
   }
+  on(): void {
+    /* pg Pool emits 'error' for idle-client faults; the store registers a listener */
+  }
   async end(): Promise<void> {}
 }
 
@@ -44,8 +47,15 @@ describe('PgStore credential resolution (PG-2)', () => {
     await store.init();
 
     expect(poolConfigs).toHaveLength(1);
-    expect(poolConfigs[0]).toEqual({
+    expect(poolConfigs[0]).toMatchObject({
       connectionString: 'postgresql://tester:pw@db.example:6543/testdb',
+    });
+    // The connectionString branch must not also pass discrete host fields.
+    expect(poolConfigs[0]).not.toHaveProperty('host');
+    // Pool hardening travels with every Pool: bounded connect + a client label.
+    expect(poolConfigs[0]).toMatchObject({
+      connectionTimeoutMillis: 10_000,
+      application_name: 'gsd-skill-creator/pg-store',
     });
   });
 
@@ -54,7 +64,7 @@ describe('PgStore credential resolution (PG-2)', () => {
     const store = new PgStore({ connectionString: 'postgresql://explicit@db/wins' });
     await store.init();
 
-    expect(poolConfigs[0]).toEqual({
+    expect(poolConfigs[0]).toMatchObject({
       connectionString: 'postgresql://explicit@db/wins',
     });
   });
