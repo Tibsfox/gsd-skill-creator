@@ -40,7 +40,7 @@ Use v1.50.13 enforcement from:
 - `src/tools/commands/review-milestone/` — Review gate evaluation
 
 ### Observation System
-Use observation pipeline from `src/platform/observation/`:
+Use observation pipeline from `src/observation/`:
 - Session observations with metrics
 - Determinism analysis for tool operations
 - Promotion candidate identification

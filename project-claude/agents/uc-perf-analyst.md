@@ -72,8 +72,8 @@ Read session observations from:
 - Pattern store persistent observations
 
 Use the transcript parser:
-- `src/platform/observation/transcript-parser.ts`
-- `src/platform/observation/pattern-summarizer.ts`
+- `src/observation/transcript-parser.ts`
+- `src/observation/pattern-summarizer.ts`
 </tools>
 
 <output_format>
