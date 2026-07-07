@@ -16,6 +16,7 @@ import {
   readBooleanFlag,
   readNumber,
   harnessCandidatePaths,
+  dedicatedConfigPath,
   HARNESS_SETTINGS_PATH,
   DEDICATED_SETTINGS_PATH,
 } from './read-settings.js';
@@ -92,6 +93,28 @@ describe('read-settings (QUAL-1a contract)', () => {
     ]);
     // An override path is used verbatim and alone (no sibling fallback).
     expect(harnessCandidatePaths('/tmp/custom.json')).toEqual(['/tmp/custom.json']);
+  });
+
+  it('dedicatedConfigPath: explicit override wins, else env root, else cwd', () => {
+    const savedEnv = process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
+    try {
+      // An explicit override replaces the whole path.
+      expect(dedicatedConfigPath('/custom/x.json')).toBe('/custom/x.json');
+      // No override + env root set → join(envRoot, .claude, gsd-skill-creator.json).
+      process.env.GSD_SKILL_CREATOR_CONFIG_ROOT = '/env/root';
+      expect(dedicatedConfigPath()).toBe(join('/env/root', '.claude', 'gsd-skill-creator.json'));
+      // Env override wins even when it is set, but explicit override still wins over it.
+      expect(dedicatedConfigPath('/override.json')).toBe('/override.json');
+      // Empty env root falls back to cwd.
+      process.env.GSD_SKILL_CREATOR_CONFIG_ROOT = '';
+      expect(dedicatedConfigPath()).toBe(join(process.cwd(), '.claude', 'gsd-skill-creator.json'));
+      // Unset env root falls back to cwd.
+      delete process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
+      expect(dedicatedConfigPath()).toBe(join(process.cwd(), '.claude', 'gsd-skill-creator.json'));
+    } finally {
+      if (savedEnv === undefined) delete process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
+      else process.env.GSD_SKILL_CREATOR_CONFIG_ROOT = savedEnv;
+    }
   });
 
   it('degrades safely (no throw) on malformed JSON', () => {

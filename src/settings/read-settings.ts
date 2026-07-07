@@ -14,12 +14,31 @@
 // Safety: every reader returns `false` (opt-out) on any IO or parse error.
 
 import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 /** The harness-owned settings file (strict schema; rejects unknown keys). */
 export const HARNESS_SETTINGS_PATH = '.claude/settings.json';
 
 /** The dedicated gsd-skill-creator sibling file (checked first). */
 export const DEDICATED_SETTINGS_PATH = '.claude/gsd-skill-creator.json';
+
+/**
+ * Resolve the absolute path to the dedicated `.claude/gsd-skill-creator.json`
+ * config file, honoring the `GSD_SKILL_CREATOR_CONFIG_ROOT` environment
+ * override then `process.cwd()`. An explicit `override` (null/undefined =
+ * "use the resolved default") replaces the whole path.
+ *
+ * This centralizes the copy-pasted `projectRoot()`/`defaultConfigPath()` helper
+ * that the dedicated-file-only extension readers each re-implemented. Pair it
+ * with `readNested(keyPath, [dedicatedConfigPath(settingsPath)])` to read the
+ * dedicated file WITHOUT the harness `settings.json` fallback.
+ */
+export function dedicatedConfigPath(override?: string): string {
+  if (override != null) return override;
+  const envRoot = process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
+  const root = envRoot && envRoot.length > 0 ? envRoot : process.cwd();
+  return join(root, '.claude', 'gsd-skill-creator.json');
+}
 
 const DEFAULT_PROJECT_PATHS = [
   DEDICATED_SETTINGS_PATH,
