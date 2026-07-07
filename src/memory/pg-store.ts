@@ -21,6 +21,7 @@
  */
 
 import { LodLevel } from '../lod/types.js';
+import { loadPgEnv } from '../scribe/pg-runtime/env-loader.js';
 import type {
   MemoryRecord,
   MemoryType,
@@ -163,11 +164,15 @@ const MIGRATIONS = [
   `CREATE INDEX IF NOT EXISTS idx_memories_fulltext ON artemis.memories
     USING gin (to_tsvector('english', name || ' ' || description || ' ' || content));`,
 
-  // pgvector index (IVFFlat for cosine similarity)
+  // pgvector index — HNSW for cosine similarity. HNSW needs no training data,
+  // so it builds correctly even on an empty table (unlike IVFFlat, whose
+  // centroids degenerate when the index is created before any rows exist), and
+  // gives better recall/latency at this scale with no per-query probe tuning.
+  // Requires pgvector >= 0.5. (PG-4)
   `DO $$ BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_memories_embedding') THEN
       CREATE INDEX idx_memories_embedding ON artemis.memories
-        USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
+        USING hnsw (embedding vector_cosine_ops);
     END IF;
   END $$;`,
 
@@ -245,12 +250,26 @@ const MIGRATIONS = [
 export class PgStore implements MemoryStore {
   readonly lod = LodLevel.FABRICATION; // LOD 400
 
-  private readonly config: Required<Omit<PgStoreConfig, 'connectionString'>>;
+  private readonly config: Required<Omit<PgStoreConfig, 'connectionString'>> & {
+    connectionString: string | undefined;
+  };
   private pool: any = null; // pg.Pool — dynamically imported
   private initialized = false;
 
   constructor(config: PgStoreConfig = {}) {
+    // Resolve credentials via the canonical loader — RH_POSTGRES_URL from
+    // process.env or the repo .env — unless the caller pinned a connection
+    // string or an explicit host. Without this the store defaulted to
+    // foxy@localhost with an empty password and never reached the real
+    // database (PG-2). A connection string, when present, takes precedence
+    // over the discrete host/user/password fields in init().
+    let connectionString = config.connectionString;
+    if (!connectionString && !config.host) {
+      const env = loadPgEnv();
+      if (env.ok) connectionString = env.url;
+    }
     this.config = {
+      connectionString,
       host: config.host ?? 'localhost',
       port: config.port ?? 5432,
       database: config.database ?? 'tibsfox',
@@ -279,13 +298,17 @@ export class PgStore implements MemoryStore {
 
     try {
       const pg = await import('pg');
-      this.pool = new pg.default.Pool({
-        host: this.config.host,
-        port: this.config.port,
-        database: this.config.database,
-        user: this.config.user,
-        password: this.config.password,
-      });
+      this.pool = new pg.default.Pool(
+        this.config.connectionString
+          ? { connectionString: this.config.connectionString }
+          : {
+              host: this.config.host,
+              port: this.config.port,
+              database: this.config.database,
+              user: this.config.user,
+              password: this.config.password,
+            },
+      );
 
       // Ensure schema exists
       await this.pool.query(`CREATE SCHEMA IF NOT EXISTS ${this.config.schema}`);
