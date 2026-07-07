@@ -66,11 +66,37 @@ suite now *validates* them), update the debt doc, re-run the validator (expect 0
 - **analog-circuit-design** (electronics example skill) — op-amps/feedback/active filters/
   regulators; fills the "analog systems" wing the `shockley` router names. Binds `horowitz`+`shockley`.
 
-## Proposed follow-ups (documented, not built this pass)
+## Follow-ups — status
 
-Larger/opinionated items recorded for a later milestone: artifact-path-linter CI check;
-generate config.json for the 33 README-only humanities teams; reclassify the half-built
-`media` department; consolidate the three overlapping commit skills (commit-style /
-git-commit / beautiful-commits); add a `benchmark/test-cases.yaml` corpus so each default
-cartridge's declared 0.85 trigger-accuracy benchmark is actually measured; further STEM
-skills (stellar-structure, polymers-ceramics-composites, control-systems, time-series, mlops).
+Addressed in a second pass:
+
+- **Team configs (done).** `tools/generate-team-configs.mjs` extracts each README's Composition
+  table into a `config.json`; all 135 example teams now validate (was 12; 123 generated — larger
+  than the review's 33-team sample). team-validator/team-store suites pass.
+- **`media` cluster (done).** Completed as a valid production/tooling cartridge — added the missing
+  `media-department` chipset + cartridge binding the audio/video/ffmpeg/latex/publishing skills and
+  their agents. Validates clean.
+- **STEM skills (done, 4 of 5).** Added `stellar-structure-and-evolution` (astronomy),
+  `polymers-ceramics-composites` (materials), `control-systems-and-dynamics` (engineering), and
+  `time-series-analysis` (statistics), each bound to a previously skill-less department agent.
+  `mlops-and-deployment` was the lowest-priority proposal and is left for later.
+- **artifact-path-linter (done, narrowed).** `tools/artifact-path-linter.mjs` guards `@`-include
+  directives (load-bearing, expanded at runtime) — reports 0 dangling. A broader linter over
+  free-form `src/…`/`scripts/…` literals was prototyped but not shipped: those are overwhelmingly
+  illustrative example paths or skill-relative script refs, indistinguishable from real references
+  without instruction-context parsing. It did surface real rot — `uc-perf-analyst`/`uc-retro-analyst`
+  pointing at `src/platform/observation/` — now fixed to `src/observation/`.
+- **create-* command refs (done).** `gsd-orchestrator` no longer suggests nonexistent
+  `/gsd:create-skill|agent|team` slash commands; it points at the `skill-creator create` CLI and the
+  `cartridge-forge` skill.
+
+Deliberately not done:
+
+- **Commit-skill consolidation — declined (not a defect).** `commit-style` is a *default* skill,
+  `beautiful-commits` is an *example* skill (`examples/skills/dev/`), and `git-commit` is not in this
+  repo at all — different tiers, no runtime collision, so forcibly merging them would be wrong.
+- **Default-cartridge benchmark corpus — deferred (milestone-sized, gate risk).** The proven pattern
+  (rca-department) needs a `benchmark/test-cases.yaml` corpus *plus a dedicated enforcing test per
+  cartridge* asserting ≥0.85 trigger accuracy (`eval.ts` does not run `benchmark` generically). Corpus
+  with no test that runs it is shelfware; four enforcing tests risk a flaky/failing gate without
+  iterative trigger tuning. Best done as its own scoped milestone.
