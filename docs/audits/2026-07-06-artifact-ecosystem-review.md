@@ -76,10 +76,10 @@ Addressed in a second pass:
 - **`media` cluster (done).** Completed as a valid production/tooling cartridge — added the missing
   `media-department` chipset + cartridge binding the audio/video/ffmpeg/latex/publishing skills and
   their agents. Validates clean.
-- **STEM skills (done, 4 of 5).** Added `stellar-structure-and-evolution` (astronomy),
-  `polymers-ceramics-composites` (materials), `control-systems-and-dynamics` (engineering), and
-  `time-series-analysis` (statistics), each bound to a previously skill-less department agent.
-  `mlops-and-deployment` was the lowest-priority proposal and is left for later.
+- **STEM/domain skills (done, 5 of 5).** Added `stellar-structure-and-evolution` (astronomy),
+  `polymers-ceramics-composites` (materials), `control-systems-and-dynamics` (engineering),
+  `time-series-analysis` (statistics), and `mlops-and-deployment` (data-science), each bound to a
+  previously skill-less department agent.
 - **artifact-path-linter (done, narrowed).** `tools/artifact-path-linter.mjs` guards `@`-include
   directives (load-bearing, expanded at runtime) — reports 0 dangling. A broader linter over
   free-form `src/…`/`scripts/…` literals was prototyped but not shipped: those are overwhelmingly
