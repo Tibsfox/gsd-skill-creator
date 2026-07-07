@@ -13,8 +13,7 @@
  * @module ricci-curvature-audit/settings
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import { readNested, dedicatedConfigPath } from '../settings/read-settings.js';
 
 export interface RicciCurvatureAuditConfig {
   enabled: boolean;
@@ -27,17 +26,6 @@ export const DEFAULT_RICCI_CURVATURE_AUDIT_CONFIG: RicciCurvatureAuditConfig = {
   enabled: false,
 };
 
-function projectRoot(): string {
-  // Tests may override via env var for deterministic reads.
-  const envRoot = process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
-  if (envRoot && envRoot.length > 0) return envRoot;
-  return process.cwd();
-}
-
-function defaultConfigPath(): string {
-  return path.join(projectRoot(), '.claude', 'gsd-skill-creator.json');
-}
-
 /**
  * Read the ricci-curvature-audit config block, or defaults on any error.
  *
@@ -46,21 +34,16 @@ function defaultConfigPath(): string {
 export function readRicciCurvatureAuditConfig(
   settingsPath?: string,
 ): RicciCurvatureAuditConfig {
-  const configPath = settingsPath ?? defaultConfigPath();
-  if (!fs.existsSync(configPath)) {
+  const block = readNested(
+    ['mathematical-foundations', 'ricci-curvature-audit'],
+    [dedicatedConfigPath(settingsPath)],
+  );
+  if (!block || typeof block !== 'object') {
     return { ...DEFAULT_RICCI_CURVATURE_AUDIT_CONFIG };
   }
-  let raw: unknown;
-  try {
-    raw = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  } catch {
-    return { ...DEFAULT_RICCI_CURVATURE_AUDIT_CONFIG };
-  }
-  const block = extractBlock(raw);
-  if (!block) return { ...DEFAULT_RICCI_CURVATURE_AUDIT_CONFIG };
+  const rec = block as Record<string, unknown>;
 
   const out: RicciCurvatureAuditConfig = { enabled: false };
-  const rec = block as Record<string, unknown>;
   if (typeof rec.enabled === 'boolean') out.enabled = rec.enabled;
   if (typeof rec.bottleneckThreshold === 'number' && Number.isFinite(rec.bottleneckThreshold)) {
     out.bottleneckThreshold = rec.bottleneckThreshold;
@@ -70,17 +53,6 @@ export function readRicciCurvatureAuditConfig(
   }
   if (typeof rec.verbose === 'boolean') out.verbose = rec.verbose;
   return out;
-}
-
-function extractBlock(raw: unknown): Record<string, unknown> | null {
-  if (!raw || typeof raw !== 'object') return null;
-  const outer = (raw as Record<string, unknown>)['gsd-skill-creator'];
-  if (!outer || typeof outer !== 'object') return null;
-  const math = (outer as Record<string, unknown>)['mathematical-foundations'];
-  if (!math || typeof math !== 'object') return null;
-  const block = (math as Record<string, unknown>)['ricci-curvature-audit'];
-  if (!block || typeof block !== 'object') return null;
-  return block as Record<string, unknown>;
 }
 
 /**

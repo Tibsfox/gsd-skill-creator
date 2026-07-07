@@ -13,8 +13,7 @@
  * @module hourglass-persistence/settings
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import { readNested, dedicatedConfigPath } from '../settings/read-settings.js';
 
 export interface HourglassPersistenceConfig {
   enabled: boolean;
@@ -27,16 +26,6 @@ export const DEFAULT_HOURGLASS_PERSISTENCE_CONFIG: HourglassPersistenceConfig = 
   enabled: false,
 };
 
-function projectRoot(): string {
-  const envRoot = process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
-  if (envRoot && envRoot.length > 0) return envRoot;
-  return process.cwd();
-}
-
-function defaultConfigPath(): string {
-  return path.join(projectRoot(), '.claude', 'gsd-skill-creator.json');
-}
-
 /**
  * Read the hourglass-persistence config block, or defaults on any error.
  *
@@ -45,21 +34,16 @@ function defaultConfigPath(): string {
 export function readHourglassPersistenceConfig(
   settingsPath?: string,
 ): HourglassPersistenceConfig {
-  const configPath = settingsPath ?? defaultConfigPath();
-  if (!fs.existsSync(configPath)) {
+  const block = readNested(
+    ['mathematical-foundations', 'hourglass-persistence'],
+    [dedicatedConfigPath(settingsPath)],
+  );
+  if (!block || typeof block !== 'object') {
     return { ...DEFAULT_HOURGLASS_PERSISTENCE_CONFIG };
   }
-  let raw: unknown;
-  try {
-    raw = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  } catch {
-    return { ...DEFAULT_HOURGLASS_PERSISTENCE_CONFIG };
-  }
-  const block = extractBlock(raw);
-  if (!block) return { ...DEFAULT_HOURGLASS_PERSISTENCE_CONFIG };
+  const rec = block as Record<string, unknown>;
 
   const out: HourglassPersistenceConfig = { enabled: false };
-  const rec = block as Record<string, unknown>;
   if (typeof rec.enabled === 'boolean') out.enabled = rec.enabled;
   if (typeof rec.waistThreshold === 'number' && Number.isFinite(rec.waistThreshold)) {
     out.waistThreshold = rec.waistThreshold;
@@ -72,17 +56,6 @@ export function readHourglassPersistenceConfig(
   }
   if (typeof rec.verbose === 'boolean') out.verbose = rec.verbose;
   return out;
-}
-
-function extractBlock(raw: unknown): Record<string, unknown> | null {
-  if (!raw || typeof raw !== 'object') return null;
-  const outer = (raw as Record<string, unknown>)['gsd-skill-creator'];
-  if (!outer || typeof outer !== 'object') return null;
-  const math = (outer as Record<string, unknown>)['mathematical-foundations'];
-  if (!math || typeof math !== 'object') return null;
-  const block = (math as Record<string, unknown>)['hourglass-persistence'];
-  if (!block || typeof block !== 'object') return null;
-  return block as Record<string, unknown>;
 }
 
 /**

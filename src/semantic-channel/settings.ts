@@ -13,8 +13,7 @@
  * @module semantic-channel/settings
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import { readNested, dedicatedConfigPath } from '../settings/read-settings.js';
 
 export interface SemanticChannelConfig {
   enabled: boolean;
@@ -29,17 +28,6 @@ export const DEFAULT_SEMANTIC_CHANNEL_CONFIG: SemanticChannelConfig = {
 /** Drift-checker default threshold — fraction of bits-changed per component. */
 export const DEFAULT_DRIFT_THRESHOLD = 0.25;
 
-function projectRoot(): string {
-  // Tests may override via env var for deterministic reads.
-  const envRoot = process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
-  if (envRoot && envRoot.length > 0) return envRoot;
-  return process.cwd();
-}
-
-function defaultConfigPath(): string {
-  return path.join(projectRoot(), '.claude', 'gsd-skill-creator.json');
-}
-
 /**
  * Read the semantic-channel config block, or defaults on any error.
  *
@@ -48,18 +36,13 @@ function defaultConfigPath(): string {
 export function readSemanticChannelConfig(
   settingsPath?: string,
 ): SemanticChannelConfig {
-  const configPath = settingsPath ?? defaultConfigPath();
-  if (!fs.existsSync(configPath)) {
+  const block = readNested(
+    ['mathematical-foundations', 'semantic-channel'],
+    [dedicatedConfigPath(settingsPath)],
+  );
+  if (!block || typeof block !== 'object') {
     return { ...DEFAULT_SEMANTIC_CHANNEL_CONFIG };
   }
-  let raw: unknown;
-  try {
-    raw = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  } catch {
-    return { ...DEFAULT_SEMANTIC_CHANNEL_CONFIG };
-  }
-  const block = extractBlock(raw);
-  if (!block) return { ...DEFAULT_SEMANTIC_CHANNEL_CONFIG };
 
   const out: SemanticChannelConfig = { enabled: false };
   const rec = block as Record<string, unknown>;
@@ -74,17 +57,6 @@ export function readSemanticChannelConfig(
   }
   if (typeof rec.verbose === 'boolean') out.verbose = rec.verbose;
   return out;
-}
-
-function extractBlock(raw: unknown): Record<string, unknown> | null {
-  if (!raw || typeof raw !== 'object') return null;
-  const outer = (raw as Record<string, unknown>)['gsd-skill-creator'];
-  if (!outer || typeof outer !== 'object') return null;
-  const math = (outer as Record<string, unknown>)['mathematical-foundations'];
-  if (!math || typeof math !== 'object') return null;
-  const block = (math as Record<string, unknown>)['semantic-channel'];
-  if (!block || typeof block !== 'object') return null;
-  return block as Record<string, unknown>;
 }
 
 /**
