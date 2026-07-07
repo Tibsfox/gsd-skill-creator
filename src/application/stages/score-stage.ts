@@ -9,6 +9,14 @@ import type { SkillPosition } from '../../plane/types.js';
 import type { PlaneActivationConfig } from '../../plane/activation.js';
 import { analyzeTask, computeEnhancedScore, DEFAULT_PLANE_ACTIVATION_CONFIG } from '../../plane/activation.js';
 
+/** RET-1: max full-set semantic-recall candidates admitted per query. */
+const SEMANTIC_RECALL_K = 10;
+/** RET-1: minimum cosine for a skill to be recalled by the semantic scan. */
+const SEMANTIC_RECALL_MIN_SIM = 0.2;
+/** RET-4: fusion weights — cosine-dominant so the fused score stays cosine-comparable. */
+const FUSION_W_EMBED = 0.7;
+const FUSION_W_LEXICAL = 0.3;
+
 /** Lookup function for skill positions. Returns null for skills without plane data. */
 export type PositionLookup = (skillName: string) => SkillPosition | null;
 
@@ -39,11 +47,32 @@ export class ScoreStage implements PipelineStage {
       return context;
     }
 
-    const matches = await this.skillIndex.findByTrigger(
+    const lexicalMatches = await this.skillIndex.findByTrigger(
       context.intent,
       context.file,
       context.context
     );
+    const query = [context.intent, context.context].filter(Boolean).join(' ');
+
+    // Decide the route before pruning. On the semantic route we RECALL over the
+    // full enabled set rather than only re-ranking lexical hits, so a query that
+    // paraphrases a skill's description but matches none of its trigger patterns
+    // can still surface it. (RET-1)
+    const semantic = !!(
+      this.router &&
+      this.embeddingService &&
+      query &&
+      this.router.classify(query).strategy === 'embedding'
+    );
+
+    let matches = lexicalMatches;
+    if (semantic) {
+      try {
+        matches = await this.recallByEmbedding(query, lexicalMatches);
+      } catch {
+        matches = lexicalMatches; // fall back to lexical candidates on any error
+      }
+    }
     context.matches = matches;
 
     if (matches.length === 0) {
@@ -58,24 +87,17 @@ export class ScoreStage implements PipelineStage {
       return context;
     }
 
-    const query = [context.intent, context.context].filter(Boolean).join(' ');
-
     if (query) {
-      // Use adaptive routing if router is available
-      if (this.router) {
-        const decision = this.router.classify(query);
-        if (decision.strategy === 'embedding' && this.embeddingService) {
-          try {
-            context.scoredSkills = await this.scoreWithEmbeddings(query, matches);
-          } catch {
-            // Fallback to TF-IDF on any embedding error
-            context.scoredSkills = this.scoreWithTfidf(query, matches);
-          }
-        } else {
+      if (semantic) {
+        try {
+          // Fuse the dense (cosine) and lexical (TF-IDF) signals. (RET-4)
+          context.scoredSkills = await this.scoreSemanticFused(query, matches);
+        } catch {
+          // Fallback to TF-IDF on any embedding error
           context.scoredSkills = this.scoreWithTfidf(query, matches);
         }
       } else {
-        // No router: use existing TF-IDF behavior (backward compatible)
+        // TF-IDF fast path (also the no-router backward-compatible behavior)
         context.scoredSkills = this.scoreWithTfidf(query, matches);
       }
     } else {
@@ -147,5 +169,68 @@ export class ScoreStage implements PipelineStage {
     }
 
     return scored.sort((a, b) => b.score - a.score);
+  }
+
+  /**
+   * Semantic recall: embed the query and every enabled skill, take the top
+   * cosine matches above a floor, and union them with the lexical trigger
+   * candidates (dedup by name). This turns the embedding path from a re-ranker
+   * over lexical hits into an actual retriever — a paraphrase that matches no
+   * trigger can still surface. (RET-1)
+   */
+  private async recallByEmbedding(
+    query: string,
+    lexicalMatches: SkillIndexEntry[],
+  ): Promise<SkillIndexEntry[]> {
+    const enabled = await this.skillIndex.getEnabled();
+    const queryEmbedding = (await this.embeddingService!.embed(query)).embedding;
+
+    const scored: Array<{ entry: SkillIndexEntry; sim: number }> = [];
+    for (const entry of enabled) {
+      const desc = [entry.description, ...(entry.triggers?.intents ?? [])].join(' ');
+      const emb = (await this.embeddingService!.embed(desc, entry.name)).embedding;
+      scored.push({ entry, sim: cosineSimilarity(queryEmbedding, emb) });
+    }
+    scored.sort((a, b) => b.sim - a.sim);
+    const recalled = scored
+      .filter(s => s.sim >= SEMANTIC_RECALL_MIN_SIM)
+      .slice(0, SEMANTIC_RECALL_K)
+      .map(s => s.entry);
+
+    // Union with the lexical candidates, keeping the lexical entry on collision.
+    const byName = new Map<string, SkillIndexEntry>();
+    for (const e of lexicalMatches) byName.set(e.name, e);
+    for (const e of recalled) if (!byName.has(e.name)) byName.set(e.name, e);
+    return Array.from(byName.values());
+  }
+
+  /**
+   * Score the candidate set by fusing the dense (cosine) ranking with the
+   * lexical (TF-IDF) ranking: score = W_EMBED*cosine + W_LEXICAL*lexicalRank,
+   * where lexicalRank is the TF-IDF position normalized to [0,1].
+   *
+   * The fused score is divided by the weight actually applied, so a candidate
+   * with NO lexical signal reports its true cosine (not a lexical-penalized
+   * 0.7*cosine). That keeps the output on a genuine cosine-comparable [0,1]
+   * scale — important because the downstream CorrectionStage gates on a cosine
+   * 0.7 threshold — while a candidate strong in BOTH signals still outranks one
+   * strong in only one. (RET-4)
+   */
+  private async scoreSemanticFused(query: string, matches: SkillIndexEntry[]): Promise<ScoredSkill[]> {
+    const cosineRanked = await this.scoreWithEmbeddings(query, matches);
+    const tfidfRanked = this.scoreWithTfidf(query, matches);
+
+    const lexicalRank = new Map<string, number>();
+    tfidfRanked.forEach((s, i) => {
+      lexicalRank.set(s.name, 1 - i / Math.max(1, tfidfRanked.length));
+    });
+
+    const fused = cosineRanked.map<ScoredSkill>(s => {
+      const lex = lexicalRank.get(s.name);
+      const weightMass = FUSION_W_EMBED + (lex !== undefined ? FUSION_W_LEXICAL : 0);
+      const raw = FUSION_W_EMBED * s.score + FUSION_W_LEXICAL * (lex ?? 0);
+      return { name: s.name, matchType: s.matchType, score: raw / weightMass };
+    });
+    return fused.sort((a, b) => b.score - a.score);
   }
 }

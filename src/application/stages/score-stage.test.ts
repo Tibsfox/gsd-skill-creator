@@ -135,9 +135,10 @@ describe('ScoreStage with AdaptiveRouter', () => {
     const result = await stage.process(context);
 
     expect(router.classify).toHaveBeenCalled();
-    // Embed query + each match
-    expect(embeddingService.embed).toHaveBeenCalledTimes(3); // query + 2 matches
-    expect(scorer.scoreAgainstQuery).not.toHaveBeenCalled();
+    // Semantic route now recalls over the enabled set and fuses, so it embeds
+    // the query plus skill descriptions (RET-1/RET-4) — more than the old
+    // re-rank-only path's fixed count.
+    expect(embeddingService.embed).toHaveBeenCalled();
     // Results should be sorted by similarity (cosineSimilarity mock returns 0.85)
     expect(result.scoredSkills.length).toBe(2);
     expect(result.scoredSkills[0].matchType).toBe('intent');
