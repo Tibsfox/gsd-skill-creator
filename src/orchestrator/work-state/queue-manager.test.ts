@@ -185,4 +185,53 @@ describe('QueueManager', () => {
     expect(tasks).toHaveLength(1);
     expect(tasks[0].description).toBe('First ever task');
   });
+
+  // --------------------------------------------------------------------------
+  // Concurrency (ORCH-4) — read-modify-write must not lose updates
+  // --------------------------------------------------------------------------
+
+  it('concurrent add() calls on one instance all persist (no lost updates)', async () => {
+    const manager = new QueueManager(filePath);
+    const N = 12;
+
+    await Promise.all(
+      Array.from({ length: N }, (_, i) => manager.add({ description: `task-${i}` })),
+    );
+
+    const tasks = await manager.list();
+    expect(tasks).toHaveLength(N);
+    // Every task is distinct (no clobbered writes).
+    expect(new Set(tasks.map(t => t.description)).size).toBe(N);
+    expect(new Set(tasks.map(t => t.id)).size).toBe(N);
+  });
+
+  it('concurrent add() across separate instances on the same path all persist', async () => {
+    const N = 8;
+
+    await Promise.all(
+      Array.from({ length: N }, (_, i) =>
+        new QueueManager(filePath).add({ description: `m-${i}` }),
+      ),
+    );
+
+    const tasks = await new QueueManager(filePath).list();
+    expect(tasks).toHaveLength(N);
+    expect(new Set(tasks.map(t => t.description)).size).toBe(N);
+  });
+
+  it('concurrent add() and remove() serialize to a consistent final state', async () => {
+    const manager = new QueueManager(filePath);
+    const seed = await manager.add({ description: 'seed' });
+
+    // Fire an add and a remove of the seed concurrently; both must apply.
+    const [added, removed] = await Promise.all([
+      manager.add({ description: 'added-under-contention' }),
+      manager.remove(seed.id),
+    ]);
+
+    expect(removed).toBe(true);
+    const tasks = await manager.list();
+    expect(tasks).toHaveLength(1);
+    expect(tasks[0].id).toBe(added.id);
+  });
 });

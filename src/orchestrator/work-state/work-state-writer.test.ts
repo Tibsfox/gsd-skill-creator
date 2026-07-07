@@ -144,4 +144,56 @@ describe('WorkStateWriter', () => {
     const sortedKeys = [...topKeys].sort();
     expect(topKeys).toEqual(sortedKeys);
   });
+
+  // --------------------------------------------------------------------------
+  // Atomic write (ORCH-4) — temp file + rename, never a truncated target
+  // --------------------------------------------------------------------------
+
+  it('leaves no temp files behind after save()', async () => {
+    const { readdir } = await import('node:fs/promises');
+    const filePath = join(testDir, 'current-work.yaml');
+    const writer = new WorkStateWriter(filePath);
+
+    await writer.save(makeTestState());
+
+    const entries = await readdir(testDir);
+    expect(entries).toContain('current-work.yaml');
+    expect(entries.filter(e => e.endsWith('.tmp'))).toHaveLength(0);
+  });
+
+  it('cleans up the temp file if the rename fails (no orphaned .tmp)', async () => {
+    const { readdir, mkdir: mkdirp } = await import('node:fs/promises');
+    // Point the writer at an existing directory: rename(file, dir) fails
+    // (EISDIR), exercising the cleanup path.
+    const targetDir = join(testDir, 'iam-a-directory');
+    await mkdirp(targetDir, { recursive: true });
+    const writer = new WorkStateWriter(targetDir);
+
+    await expect(writer.save(makeTestState())).rejects.toBeTruthy();
+
+    const entries = await readdir(testDir);
+    expect(entries.filter(e => e.endsWith('.tmp'))).toHaveLength(0);
+  });
+
+  it('concurrent saves to the same path leave one complete, valid file (no corruption)', async () => {
+    const { readdir } = await import('node:fs/promises');
+    const filePath = join(testDir, 'concurrent.yaml');
+    const writer = new WorkStateWriter(filePath);
+    const yaml = (await import('js-yaml')).default ?? (await import('js-yaml'));
+
+    await Promise.all([
+      writer.save(makeTestState({ session_id: 'sess-a' })),
+      writer.save(makeTestState({ session_id: 'sess-b' })),
+      writer.save(makeTestState({ session_id: 'sess-c' })),
+    ]);
+
+    const content = await readFile(filePath, 'utf-8');
+    const parsed = (yaml as any).load(content) as Record<string, unknown>;
+    // The final file is exactly one of the three complete states — never a
+    // half-written interleave.
+    expect(['sess-a', 'sess-b', 'sess-c']).toContain(parsed.session_id);
+
+    const entries = await readdir(testDir);
+    expect(entries.filter(e => e.endsWith('.tmp'))).toHaveLength(0);
+  });
 });
