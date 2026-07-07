@@ -18,6 +18,11 @@ export interface PipelineContext {
   // Intermediate results (stages read/write these)
   matches: SkillIndexEntry[];
   scoredSkills: ScoredSkill[];
+  // Scale of scoredSkills[].score, set by ScoreStage. 'tfidf' = raw TF-IDF sums
+  // (unbounded, corpus-dependent); 'cosine' = [0,1] cosine-comparable. Read by
+  // CorrectionStage to pick a scale-appropriate confidence gate. Undefined is
+  // treated as cosine (pre-RET-5 behaviour). (RET-5)
+  scoringScale?: 'tfidf' | 'cosine';
   resolvedSkills: ScoredSkill[];
   conflicts: ConflictResult;
 

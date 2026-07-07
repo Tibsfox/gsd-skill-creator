@@ -389,4 +389,117 @@ describe('CorrectionStage', () => {
       minImprovementRate: 0.05,
     });
   });
+
+  // --- RET-5: scale-aware confidence gate ---
+
+  it('l. tfidf route with a dominant top-1 skips correction (no re-embed)', async () => {
+    // The review's verify criterion: a raw TF-IDF top of 0.3 with a correct,
+    // dominant top-1 must NOT trip the cosine 0.7 gate and silently re-embed.
+    // Pre-RET-5 this fired (0.3 < 0.7); now the tfidf scale is gauged by the
+    // top's share of relevance mass (0.3 / 0.32 = 0.94 >= 0.7 -> skip).
+    const stage = new CorrectionStage(mockEmbedding, mockScorer);
+    const context = createMockContext({
+      intent: 'deploy api',
+      scoringScale: 'tfidf',
+      scoredSkills: [
+        { name: 'skill-a', score: 0.3, matchType: 'intent' },
+        { name: 'skill-b', score: 0.02, matchType: 'intent' },
+      ],
+      matches: [createMockMatch({ name: 'skill-a' })],
+    });
+
+    const result = await stage.process(context);
+
+    expect(mockEmbedding.embed).not.toHaveBeenCalled();
+    expect(result.scoredSkills[0]).toEqual({ name: 'skill-a', score: 0.3, matchType: 'intent' });
+  });
+
+  it('m. tfidf route re-anchors previousBestScore on a cosine baseline (mutation-proof)', async () => {
+    // Ambiguous lexical spread (mass-share 0.3/(0.3+0.3) = 0.5 < 0.7) fires
+    // correction, which must re-anchor previousBestScore on a COSINE baseline
+    // over the base query before iterating. This test is built so the FINAL top
+    // score discriminates the re-anchor branch (a plain "embed was called" check
+    // cannot — the pre-RET-5 mutant still calls embed):
+    //   - base query 'deploy the api' embeds to QUERY_HIGH  -> cosine 1.0 baseline
+    //   - stop-word-stripped refinement 'deploy api' -> QUERY_LOW -> cosine 0.5
+    // With the re-anchor: previousBest = 1.0, so iteration 1's 0.5 is no
+    //   improvement -> diminishing-returns keeps the 1.0 baseline. Final top ~1.0.
+    // Without it (pre-RET-5 bug): previousBest seeds from the raw TF-IDF 0.3, so
+    //   iteration 1's 0.5 reads as a +67% improvement and is adopted. Final top
+    //   ~0.5, which fails the assertion below.
+    const MATCH = [1, 0, 0];
+    const QUERY_HIGH = [1, 0, 0]; // cosine 1.0 vs MATCH
+    const QUERY_LOW = [0.5, Math.sqrt(3) / 2, 0]; // unit vector, cosine 0.5 vs MATCH
+    const embed = vi.fn(async (text: string, skillName?: string): Promise<EmbeddingResult> => {
+      // Description embeds carry a skillName and stay constant; query embeds vary
+      // by text so the base query and its stop-word-stripped refinement differ.
+      const embedding = skillName
+        ? MATCH
+        : text === 'deploy the api'
+          ? QUERY_HIGH
+          : QUERY_LOW;
+      return { embedding, fromCache: false, method: 'heuristic' };
+    });
+    const embeddingService = { embed } as unknown as EmbeddingService;
+
+    const stage = new CorrectionStage(embeddingService, mockScorer);
+    const context = createMockContext({
+      intent: 'deploy the api',
+      scoringScale: 'tfidf',
+      scoredSkills: [
+        { name: 'skill-a', score: 0.3, matchType: 'intent' },
+        { name: 'skill-b', score: 0.3, matchType: 'intent' },
+      ],
+      matches: [
+        createMockMatch({ name: 'skill-a', description: 'Deploy API to kubernetes' }),
+        createMockMatch({ name: 'skill-b', description: 'Deploy API to nomad' }),
+      ],
+    });
+
+    const result = await stage.process(context);
+
+    expect(embed).toHaveBeenCalled();
+    // The cosine baseline (1.0) is kept; the raw TF-IDF 0.3 never leaks in as the
+    // improvement denominator (which would land the final top at ~0.5).
+    expect(result.scoredSkills[0].score).toBeCloseTo(1.0, 5);
+  });
+
+  it('n. cosine route is unaffected: a low cosine top still fires correction', async () => {
+    // On the cosine (embedding) route a top of 0.3 is a genuinely weak match and
+    // must still trip correction exactly as before — the gate uses the raw top.
+    const queryEmbedding: EmbeddingResult = { embedding: [0.5, 0.5, 0.5], fromCache: false, method: 'heuristic' };
+    const matchEmbedding: EmbeddingResult = { embedding: [0.5, 0.5, 0.5], fromCache: false, method: 'heuristic' };
+    mockEmbedding = createMockEmbedding([queryEmbedding, matchEmbedding]);
+
+    const stage = new CorrectionStage(mockEmbedding, mockScorer);
+    const context = createMockContext({
+      intent: 'deploy api',
+      scoringScale: 'cosine',
+      scoredSkills: [{ name: 'skill-a', score: 0.3, matchType: 'intent' }],
+      matches: [createMockMatch({ name: 'skill-a', description: 'Deploy API to kubernetes' })],
+    });
+
+    const result = await stage.process(context);
+
+    expect(mockEmbedding.embed).toHaveBeenCalled();
+    expect(result.scoredSkills[0].score).toBeGreaterThan(0.3);
+  });
+
+  it('o. undefined scoringScale behaves as cosine (backward compatible)', async () => {
+    // Contexts built before RET-5 carry no scoringScale; the gate must treat the
+    // raw top score as cosine-comparable, identical to the pre-RET-5 behavior.
+    const stage = new CorrectionStage(mockEmbedding, mockScorer);
+    const context = createMockContext({
+      intent: 'deploy api',
+      // no scoringScale
+      scoredSkills: [{ name: 'skill-a', score: 0.85, matchType: 'intent' }],
+      matches: [createMockMatch({ name: 'skill-a' })],
+    });
+
+    const result = await stage.process(context);
+
+    // 0.85 >= 0.7 -> skip correction, no embedding work.
+    expect(mockEmbedding.embed).not.toHaveBeenCalled();
+    expect(result.scoredSkills[0]).toEqual({ name: 'skill-a', score: 0.85, matchType: 'intent' });
+  });
 });

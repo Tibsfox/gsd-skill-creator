@@ -351,3 +351,74 @@ describe('ScoreStage with geometric scoring', () => {
     expect(result.scoredSkills[1].name).toBe('skill-b');
   });
 });
+
+describe('ScoreStage scoringScale (RET-5)', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('tags the TF-IDF fast path as tfidf scale', async () => {
+    const skillIndex = createMockSkillIndex([SKILL_A]);
+    const scorer = createMockScorer([{ name: 'skill-a', score: 0.9, matchType: 'intent' }]);
+    const router = createMockRouter({ strategy: 'tfidf', reason: 'simple_keyword' });
+    const embeddingService = createMockEmbeddingService();
+
+    const stage = new ScoreStage(skillIndex, scorer, router, embeddingService);
+    const result = await stage.process(createEmptyContext({ intent: 'typescript' }));
+
+    expect(result.scoringScale).toBe('tfidf');
+  });
+
+  it('tags the no-router TF-IDF path as tfidf scale', async () => {
+    const skillIndex = createMockSkillIndex([SKILL_A]);
+    const scorer = createMockScorer([{ name: 'skill-a', score: 0.9, matchType: 'intent' }]);
+
+    const stage = new ScoreStage(skillIndex, scorer);
+    const result = await stage.process(createEmptyContext({ intent: 'typescript' }));
+
+    expect(result.scoringScale).toBe('tfidf');
+  });
+
+  it('tags the fused embedding path as cosine scale', async () => {
+    const skillIndex = createMockSkillIndex([SKILL_A, SKILL_B]);
+    const scorer = createMockScorer([]);
+    const router = createMockRouter({ strategy: 'embedding', reason: 'semantic_markers' });
+    const embeddingService = createMockEmbeddingService();
+
+    const stage = new ScoreStage(skillIndex, scorer, router, embeddingService);
+    const result = await stage.process(
+      createEmptyContext({ intent: 'how do I create a typescript skill' }),
+    );
+
+    expect(result.scoringScale).toBe('cosine');
+  });
+
+  it('tags tfidf scale when the embedding path fails and falls back', async () => {
+    const skillIndex = createMockSkillIndex([SKILL_A]);
+    const scorer = createMockScorer([{ name: 'skill-a', score: 0.7, matchType: 'intent' }]);
+    const router = createMockRouter({ strategy: 'embedding', reason: 'complex_semantic' });
+    const embeddingService = createMockEmbeddingService();
+    (embeddingService.embed as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error('Model unavailable'),
+    );
+
+    const stage = new ScoreStage(skillIndex, scorer, router, embeddingService);
+    const result = await stage.process(
+      createEmptyContext({ intent: 'how do I create a typescript skill' }),
+    );
+
+    expect(result.scoringScale).toBe('tfidf');
+  });
+
+  it('tags the file-only (no query) path as cosine scale', async () => {
+    const skillIndex = createMockSkillIndex([SKILL_A]);
+    const scorer = createMockScorer([]);
+
+    const stage = new ScoreStage(skillIndex, scorer);
+    // No intent/context -> empty query -> file-match branch (fixed unit score).
+    const result = await stage.process(createEmptyContext({ file: '/some/file.ts' }));
+
+    expect(result.scoringScale).toBe('cosine');
+    expect(result.scoredSkills[0].score).toBe(1);
+  });
+});

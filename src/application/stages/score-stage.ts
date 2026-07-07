@@ -92,23 +92,33 @@ export class ScoreStage implements PipelineStage {
         try {
           // Fuse the dense (cosine) and lexical (TF-IDF) signals. (RET-4)
           context.scoredSkills = await this.scoreSemanticFused(query, matches);
+          // Fused output is normalized cosine-comparable [0,1]. (RET-4/RET-5)
+          context.scoringScale = 'cosine';
         } catch {
           // Fallback to TF-IDF on any embedding error
           context.scoredSkills = this.scoreWithTfidf(query, matches);
+          context.scoringScale = 'tfidf';
         }
       } else {
         // TF-IDF fast path (also the no-router backward-compatible behavior)
         context.scoredSkills = this.scoreWithTfidf(query, matches);
+        context.scoringScale = 'tfidf';
       }
     } else {
+      // File-only matches carry a fixed unit score, not a raw TF-IDF sum.
       context.scoredSkills = matches.map<ScoredSkill>(m => ({
         name: m.name,
         score: 1,
         matchType: 'file' as const,
       }));
+      context.scoringScale = 'cosine';
     }
 
-    // Geometric scoring enhancement (ACTIV-02, ACTIV-04)
+    // Geometric scoring enhancement (ACTIV-02, ACTIV-04).
+    // Note: scoringScale (above) reflects the base scoring route; the enhanced
+    // score blends an unbounded geometric term. This never coexists with the
+    // CorrectionStage that reads scoringScale (the retrieval-enabled path builds
+    // ScoreStage without a positionLookup), so the tag stays honest on that path.
     if (this.positionLookup && (this.planeConfig?.enabled ?? true)) {
       const config = this.planeConfig ?? DEFAULT_PLANE_ACTIVATION_CONFIG;
       try {

@@ -60,10 +60,12 @@ export class CorrectionStage implements PipelineStage {
       return context;
     }
 
-    const topScore = context.scoredSkills[0]?.score ?? 0;
+    // Confidence of the top retrieval on a cosine-comparable [0,1] scale,
+    // regardless of which scale ScoreStage produced. (RET-5)
+    const confidence = this.assessConfidence(context.scoredSkills, context.scoringScale);
 
     // High confidence: no correction needed
-    if (topScore >= this.config.confidenceThreshold) {
+    if (confidence >= this.config.confidenceThreshold) {
       return context;
     }
 
@@ -73,9 +75,20 @@ export class CorrectionStage implements PipelineStage {
       return context; // No query to refine
     }
 
-    // Enter correction loop
-    let currentScores = [...context.scoredSkills];
-    let previousBestScore = topScore;
+    // Enter correction loop. The loop re-scores on the cosine scale, so the
+    // baseline must be cosine too: raw TF-IDF scores are not comparable to the
+    // cosine similarities reScoreWithEmbeddings produces, and seeding
+    // previousBestScore with a TF-IDF value would make iteration 1 read as a
+    // massive "improvement" every time — defeating the diminishing-returns and
+    // keep-vs-drop checks below. On the TF-IDF route we re-anchor by cosine-
+    // scoring the base query first. (RET-5)
+    let currentScores: ScoredSkill[];
+    if (context.scoringScale === 'tfidf') {
+      currentScores = await this.reScoreWithEmbeddings(baseQuery, context.matches);
+    } else {
+      currentScores = [...context.scoredSkills];
+    }
+    let previousBestScore = currentScores[0]?.score ?? 0;
     let iterations = 0;
 
     while (iterations < this.config.maxIterations) {
@@ -114,6 +127,37 @@ export class CorrectionStage implements PipelineStage {
 
     context.scoredSkills = currentScores;
     return context;
+  }
+
+  /**
+   * Confidence of the top retrieval, normalized to a cosine-comparable [0,1] so
+   * the single cosine `confidenceThreshold` is a meaningful gate no matter which
+   * scale ScoreStage produced. (RET-5)
+   *
+   * - cosine / undefined: the top score is already cosine-comparable (RET-4
+   *   normalized the embedding route), so use it directly — byte-identical to the
+   *   pre-RET-5 gate.
+   * - tfidf: raw TF-IDF sums are unbounded and corpus-dependent (a strong single-
+   *   word match scores ~0.05-0.3, far below the 0.7 cosine gate), so an absolute
+   *   threshold spuriously trips correction on good fast-path matches and silently
+   *   re-embeds them — defeating the router's route choice. Instead gauge how much
+   *   of the candidates' total relevance mass lands on the top skill: a dominant
+   *   top-1 is a confident lexical retrieval on ANY scale, while a flat / ambiguous
+   *   spread is genuinely low-confidence and worth correcting.
+   */
+  private assessConfidence(
+    scored: ScoredSkill[],
+    scale: PipelineContext['scoringScale'],
+  ): number {
+    const top = scored[0]?.score ?? 0;
+    if (scale !== 'tfidf') {
+      return top;
+    }
+    let mass = 0;
+    for (const s of scored) {
+      if (s.score > 0) mass += s.score;
+    }
+    return mass > 0 ? top / mass : 0;
   }
 
   /**
