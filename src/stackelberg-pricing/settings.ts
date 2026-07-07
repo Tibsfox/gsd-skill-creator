@@ -15,8 +15,7 @@
  * @module stackelberg-pricing/settings
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import { readNested, dedicatedConfigPath } from '../settings/read-settings.js';
 
 export interface StackelbergPricingConfig {
   enabled: boolean;
@@ -30,16 +29,6 @@ export const DEFAULT_STACKELBERG_PRICING_CONFIG: StackelbergPricingConfig = {
   enabled: false,
 };
 
-function projectRoot(): string {
-  const envRoot = process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
-  if (envRoot && envRoot.length > 0) return envRoot;
-  return process.cwd();
-}
-
-function defaultConfigPath(): string {
-  return path.join(projectRoot(), '.claude', 'gsd-skill-creator.json');
-}
-
 /**
  * Read the stackelberg-pricing config block, or defaults on any error.
  *
@@ -48,18 +37,13 @@ function defaultConfigPath(): string {
 export function readStackelbergPricingConfig(
   settingsPath?: string,
 ): StackelbergPricingConfig {
-  const configPath = settingsPath ?? defaultConfigPath();
-  if (!fs.existsSync(configPath)) {
+  const block = readNested(
+    ['upstream-intelligence', 'stackelberg-pricing'],
+    [dedicatedConfigPath(settingsPath)],
+  );
+  if (!block || typeof block !== 'object') {
     return { ...DEFAULT_STACKELBERG_PRICING_CONFIG };
   }
-  let raw: unknown;
-  try {
-    raw = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  } catch {
-    return { ...DEFAULT_STACKELBERG_PRICING_CONFIG };
-  }
-  const block = extractBlock(raw);
-  if (!block) return { ...DEFAULT_STACKELBERG_PRICING_CONFIG };
 
   const out: StackelbergPricingConfig = { enabled: false };
   const rec = block as Record<string, unknown>;
@@ -79,17 +63,6 @@ export function readStackelbergPricingConfig(
     out.innerGridSteps = rec.innerGridSteps;
   }
   return out;
-}
-
-function extractBlock(raw: unknown): Record<string, unknown> | null {
-  if (!raw || typeof raw !== 'object') return null;
-  const outer = (raw as Record<string, unknown>)['gsd-skill-creator'];
-  if (!outer || typeof outer !== 'object') return null;
-  const upstream = (outer as Record<string, unknown>)['upstream-intelligence'];
-  if (!upstream || typeof upstream !== 'object') return null;
-  const block = (upstream as Record<string, unknown>)['stackelberg-pricing'];
-  if (!block || typeof block !== 'object') return null;
-  return block as Record<string, unknown>;
 }
 
 /**

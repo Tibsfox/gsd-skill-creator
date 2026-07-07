@@ -10,8 +10,7 @@
  * @module predictive-skill-loader/settings
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import { readNested, dedicatedConfigPath } from '../settings/read-settings.js';
 
 export interface PredictiveSkillLoaderConfig {
   enabled: boolean;
@@ -37,15 +36,7 @@ export const DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG: PredictiveSkillLoaderConfig
   lowConfidenceThreshold: 0.30,
 };
 
-function projectRoot(): string {
-  const envRoot = process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
-  if (envRoot && envRoot.length > 0) return envRoot;
-  return process.cwd();
-}
-
-function defaultConfigPath(): string {
-  return path.join(projectRoot(), '.claude', 'gsd-skill-creator.json');
-}
+const BLOCK_KEYPATH = ['upstream-intelligence', 'predictive-skill-loader'];
 
 function asNumber(v: unknown, fallback: number): number {
   return typeof v === 'number' && Number.isFinite(v) ? v : fallback;
@@ -57,18 +48,10 @@ function asNumber(v: unknown, fallback: number): number {
 export function readPredictiveSkillLoaderConfig(
   settingsPath?: string,
 ): PredictiveSkillLoaderConfig {
-  const configPath = settingsPath ?? defaultConfigPath();
-  if (!fs.existsSync(configPath)) {
+  const block = readNested(BLOCK_KEYPATH, [dedicatedConfigPath(settingsPath)]);
+  if (!block || typeof block !== 'object') {
     return { ...DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG };
   }
-  let raw: unknown;
-  try {
-    raw = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  } catch {
-    return { ...DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG };
-  }
-  const block = extractBlock(raw);
-  if (!block) return { ...DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG };
   const enabled =
     typeof (block as Record<string, unknown>).enabled === 'boolean'
       ? ((block as Record<string, unknown>).enabled as boolean)
@@ -81,17 +64,6 @@ export function readPredictiveSkillLoaderConfig(
     DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG.lowConfidenceThreshold,
   );
   return { enabled, topK, hops, decay, lowConfidenceThreshold };
-}
-
-function extractBlock(raw: unknown): Record<string, unknown> | null {
-  if (!raw || typeof raw !== 'object') return null;
-  const outer = (raw as Record<string, unknown>)['gsd-skill-creator'];
-  if (!outer || typeof outer !== 'object') return null;
-  const upstream = (outer as Record<string, unknown>)['upstream-intelligence'];
-  if (!upstream || typeof upstream !== 'object') return null;
-  const block = (upstream as Record<string, unknown>)['predictive-skill-loader'];
-  if (!block || typeof block !== 'object') return null;
-  return block as Record<string, unknown>;
 }
 
 /**
