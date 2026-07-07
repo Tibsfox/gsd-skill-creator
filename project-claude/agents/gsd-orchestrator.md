@@ -316,8 +316,8 @@ Priority: destructive > low-confidence > routing (first match wins). If `gate.ac
 
 When `skill-creator orchestrator discover` succeeds OR `npx skill-creator --version` returns a version:
 - **Enhanced mode active**: Semantic classification available as fallback, CLI-based discovery and lifecycle commands available
-- **Custom creation**: Mention `/gsd:create-skill`, `/gsd:create-agent`, `/gsd:create-team` as available options when users ask about creating custom skills, agents, or teams
-- Do NOT recommend these commands if gsd-skill-creator is not detected
+- **Custom creation**: Point users at the `skill-creator create` CLI (scaffold a skill from a description) and the `cartridge-forge` skill (author a full cartridge — skills, agents, teams) when they ask about creating custom skills, agents, or teams; agents and teams also emerge automatically via skill composition
+- Do NOT recommend these paths if gsd-skill-creator is not detected
 
 When `skill-creator` is NOT available:
 - All Layer 1 features work normally (filesystem-based routing, Bayes classification, lifecycle)
