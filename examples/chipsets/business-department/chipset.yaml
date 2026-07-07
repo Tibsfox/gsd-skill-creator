@@ -124,6 +124,26 @@ agents:
       model: opus
       tools: [Read, Grep, Bash]
 
+    - name: ford
+      role: "mass production specialist — high-volume production, scale economics, vertical integration"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: ma
+      role: "platform specialist — two-sided platforms, network effects, cold-start, scaling"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: christensen
+      role: "disruption specialist — disruptive vs sustaining innovation, jobs-to-be-done, innovator's dilemma"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: mintzberg
+      role: "pedagogy specialist — level-appropriate teaching, strategy-as-practice, managerial work"
+      model: sonnet
+      tools: [Read, Write]
+
 # ==========================================================================
 # Teams — 3 pre-composed configurations
 # ==========================================================================

@@ -89,7 +89,7 @@ skills:
 
   inclusive-physical-education:
     domain: physical-education
-    description: "Inclusive PE plus lifetime fitness activities — gender equity, adapted physical education, universal design, aerobic dance, group fitness, lifelong movement practices"
+    description: "Inclusive PE, inclusion, and lifetime-fitness activities — gender equity, adapted physical education, universal design, aerobic dance, group fitness, lifelong movement practices"
     triggers:
       - "inclusion"
       - "adapted PE"
@@ -126,6 +126,26 @@ agents:
     - name: jesse-feiring-williams
       role: "curriculum philosophy specialist — whole-child framing, purpose articulation, principle-based critique"
       model: opus
+      tools: [Read, Grep, Write]
+
+    - name: berenson
+      role: "inclusion and adapted PE specialist — gender equity, disability adaptation, universal design, inclusive unit design"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: siedentop
+      role: "sport education and PE pedagogy specialist — unit plans, seasons, assessment frameworks, curriculum transformation"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: sorensen
+      role: "lifetime fitness and group activities specialist — aerobic dance, group fitness, lifelong activity units"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: wooden
+      role: "coaching and strength-and-conditioning specialist — practice design, periodization, Pyramid of Success, feedback craft"
+      model: sonnet
       tools: [Read, Grep, Write]
 
 # ==========================================================================

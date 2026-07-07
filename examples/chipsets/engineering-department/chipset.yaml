@@ -35,7 +35,7 @@ skills:
 
   structural-analysis:
     domain: engineering
-    description: "Statics, dynamics, stress/strain, materials selection, failure modes, FEA concepts"
+    description: "Statics, dynamics, mechanical stress/strain, materials selection, failure modes, FEA concepts"
     triggers:
       - "structural"
       - "stress"
@@ -50,7 +50,7 @@ skills:
 
   systems-engineering:
     domain: engineering
-    description: "Requirements management, V-model, integration, verification, validation, NASA SE handbook"
+    description: "Requirements management, V-model, integration, verification, validation, aerospace systems, NASA SE handbook"
     triggers:
       - "systems engineering"
       - "V-model"
@@ -90,7 +90,7 @@ skills:
 
   technical-communication:
     domain: engineering
-    description: "Technical writing, specifications, reports, presentations, documentation standards"
+    description: "Technical writing, specifications, reports, presentations, documentation standards, pedagogy and instructional clarity"
     triggers:
       - "technical writing"
       - "engineering report"
@@ -197,7 +197,6 @@ evaluation:
     test_cases_minimum: 30
     domains_covered:
       - structural
-      - electrical
       - aerospace
       - mechanical
       - materials

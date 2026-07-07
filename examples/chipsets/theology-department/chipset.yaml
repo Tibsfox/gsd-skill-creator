@@ -40,7 +40,7 @@ skills:
 
   systematic-theology:
     domain: theology
-    description: "Systematic theology as a method — doctrinal loci, creedal formation, comparative shape of systematics across traditions"
+    description: "Systematic theology as a method — the loci of doctrine, creedal formation, comparative shape of systematics across traditions"
     triggers:
       - "doctrine"
       - "systematic theology"
@@ -53,7 +53,7 @@ skills:
 
   philosophical-theology:
     domain: theology
-    description: "Philosophical analysis of theological claims — classical arguments for God, divine attributes, faith-reason, problem of evil, religious epistemology"
+    description: "Philosophical analysis of theological claims and the philosophy of religion — classical arguments for God, divine attributes, faith-reason, problem of evil, religious epistemology"
     triggers:
       - "existence of God"
       - "natural theology"
@@ -128,6 +128,26 @@ agents:
       role: "Jewish philosophical specialist — Jewish scripture and medieval philosophy, the Jewish-Islamic-Christian philosophical conversation"
       model: opus
       tools: [Read, Glob, Grep]
+
+    - name: rumi
+      role: "Islamic tradition specialist — Sufi contemplative tradition, Qur'anic hermeneutics (tafsir and ta'wil), classical kalam"
+      model: sonnet
+      tools: [Read, Glob, Grep]
+
+    - name: zhuangzi
+      role: "Daoist and classical Chinese traditions specialist — the Zhuangzi and Daodejing, the relation of Daoism to Confucianism and Chinese Buddhism"
+      model: sonnet
+      tools: [Read, Glob, Grep]
+
+    - name: hildegard
+      role: "Western Christian mysticism and integrated-vocation specialist — contemplative primary sources, the classical three-stage map of the contemplative life"
+      model: sonnet
+      tools: [Read, Glob, Grep]
+
+    - name: huston-smith
+      role: "comparative religion and pedagogy specialist — cross-tradition framing, introductory presentation, audience adaptation"
+      model: sonnet
+      tools: [Read, Glob, Grep, Write]
 
 # ==========================================================================
 # Teams — 3 pre-composed configurations

@@ -55,7 +55,7 @@ skills:
 
   somatic-movement-pilates-feldenkrais:
     domain: mind-body
-    description: "Somatic movement and whole-body retraining through Pilates Contrology and Feldenkrais Awareness Through Movement"
+    description: "Somatic movement and somatics education — whole-body retraining through Pilates Contrology and Feldenkrais Awareness Through Movement"
     wings_covered: [pilates, somatics]
     triggers:
       - "Pilates"
@@ -168,6 +168,26 @@ agents:
       role: "clinical mindfulness specialist — MBSR, secular translation, research-honest voice"
       model: opus
       tools: [Read, Grep, Write]
+
+    - name: pilates
+      role: "classical Pilates specialist — Contrology method, mat and apparatus curriculum, six principles, rehab-adjacent core work within the Contrology envelope"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: dogen
+      role: "Sōtō Zen specialist — zazen and shikantaza posture and attention, Fukanzazengi and Shōbōgenzō lineage voice, Rinzai koan cross-reference"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: yang
+      role: "internal arts and martial scholar — YMAA-line Yang-style tai chi, named qigong sets, Chinese martial arts, martial-arts-as-body-discipline frame"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: thich-nhat-hanh
+      role: "engaged mindfulness and pedagogy specialist — Plum Village voice, gatha practice, mindful walking and eating, beginner accessibility and cross-tradition bridge"
+      model: sonnet
+      tools: [Read, Write]
 
 # ==========================================================================
 # Teams — 3 pre-composed configurations

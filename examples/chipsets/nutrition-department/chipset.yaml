@@ -134,6 +134,26 @@ agents:
       model: opus
       tools: [Read, Grep, Write]
 
+    - name: atwater
+      role: "macronutrient and energy-balance specialist — calorie computation, Atwater factors, food composition, reference intakes"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: adelle-davis
+      role: "popular-nutrition writing specialist — historical-transparency treatment, replication-status checking, whole-food advocacy tradition"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: pollan
+      role: "food-system and food-culture specialist — supply-chain framing, food-label reading, grocery-store translation"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: satter
+      role: "feeding pedagogy specialist — Division of Responsibility, child feeding, nutrition curriculum, communication checking"
+      model: sonnet
+      tools: [Read, Write]
+
 # ==========================================================================
 # Teams — 3 pre-composed configurations
 # ==========================================================================

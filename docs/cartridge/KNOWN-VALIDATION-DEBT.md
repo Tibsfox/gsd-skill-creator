@@ -3,11 +3,24 @@
 *Pre-existing source-chipset defects surfaced by the unified cartridge
 validator. Not regressions — documentation.*
 
+> **RESOLVED 2026-07-06.** All 22 departments enumerated below were repaired.
+> The Category-A departments had their already-authored specialist agents
+> (which existed as files under `examples/agents/<dept>/` but were never
+> registered) wired into the chipset `agents:` block, restoring each
+> department's designed 7-agent roster. The Category-B benchmarks were
+> reconciled with actual skill coverage (truthful description broadening, or
+> trimming domains no skill covers). `KNOWN_VALIDATION_DEBT` in
+> `src/cartridge/__tests__/migrations.test.ts` is now empty, so every bulk
+> cartridge runs the cross-chipset validation assertion — all 63 pass
+> (`npx vitest run src/cartridge/__tests__/migrations.test.ts` → 138 passed).
+> The two category descriptions below are retained as a historical record of
+> the defect classes.
+
 The cartridge-forge unified loader is the first tool in the repo that
 applies cross-chipset consistency checks to every migrated department.
-Twenty-two bulk cartridges carry source defects that were invisible
-before the unified validator existed. They are enumerated here and in
-`KNOWN_VALIDATION_DEBT` in
+Twenty-two bulk cartridges carried source defects that were invisible
+before the unified validator existed. They are enumerated here and were
+tracked in `KNOWN_VALIDATION_DEBT` in
 `src/cartridge/__tests__/migrations.test.ts`.
 
 The migrations test **skips cross-chipset validation** for any cartridge

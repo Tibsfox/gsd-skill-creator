@@ -26,7 +26,7 @@ description: >
 skills:
   bloom-taxonomy-and-mastery:
     domain: learning
-    description: "Bloom's Taxonomy and mastery learning as practical instructional-design tools — cognitive levels, objective writing, mastery loops"
+    description: "Bloom's Taxonomy and mastery learning as practical instructional-design tools — cognitive levels, objective-design and objective writing, mastery loops"
     triggers:
       - "objective"
       - "bloom"
@@ -62,7 +62,7 @@ skills:
 
   constructivism-and-schema:
     domain: learning
-    description: "Piagetian constructivism and schema theory — assimilation, accommodation, developmental stages, misconceptions"
+    description: "Piagetian constructivism and schema theory — assimilation, accommodation, developmental stages, developmental-diagnosis, misconceptions"
     triggers:
       - "schema"
       - "constructivism"
@@ -121,6 +121,26 @@ agents:
       role: "mindset and motivation specialist — attribution diagnosis, feedback-language audit, intervention scripts"
       model: opus
       tools: [Read, Grep, Write]
+
+    - name: piaget-learn
+      role: "developmental and constructivist specialist — developmental-readiness diagnosis, schema and misconception analysis, disequilibrium design"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: vygotsky-learn
+      role: "ZPD and scaffolding specialist — zone diagnosis, scaffold design, fading schedules, peer and group configuration"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: dewey-learn
+      role: "experiential learning specialist — continuity and interaction criteria, reflective-thinking cycle, project-based-learning audit"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: montessori-learn
+      role: "prepared environment specialist — self-correcting materials, sensitive-period calibration, environment audit"
+      model: sonnet
+      tools: [Read, Write]
 
 # ==========================================================================
 # Teams — 3 pre-composed configurations

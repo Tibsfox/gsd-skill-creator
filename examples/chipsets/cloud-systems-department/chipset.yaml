@@ -83,7 +83,7 @@ skills:
 
   network-fundamentals-cloud:
     domain: cloud-systems
-    description: "VPC, VXLAN, security groups, load balancers, tail latency, SDN"
+    description: "Cloud networking: VPC, VXLAN, security groups, load balancers, tail latency, SDN"
     triggers:
       - "vpc"
       - "vxlan"

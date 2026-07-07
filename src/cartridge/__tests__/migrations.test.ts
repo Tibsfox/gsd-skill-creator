@@ -40,44 +40,21 @@ const HAND_MIGRATIONS: Expectation[] = [
 const BULK_MIN_COUNT = 35;
 
 /**
- * Source chipsets with pre-existing agent_affinity drift — skills
- * reference agent names that were never defined in the companion
- * agents block. These are real validation defects that the unified
- * loader now surfaces; leaving them in a known-debt set keeps the
- * bulk test green while documenting the defect list for a cleanup
- * pass. Any cartridge added to this set must carry a TODO to fix the
- * underlying chipset before the next cartridge release.
+ * Cartridges that still carry pre-existing source-chipset drift the unified
+ * loader surfaces (agent_affinity names absent from the agents block, or
+ * evaluation benchmark.domains_covered entries no skill mentions). Members
+ * skip the cross-chipset validation assertion. Any cartridge added here must
+ * carry a TODO to fix the underlying chipset before the next cartridge release.
+ *
+ * 2026-07-06: the original 22-department debt (10 Category-A agent_affinity +
+ * 12 Category-B domains_covered) was repaired — the Category-A departments had
+ * their already-authored specialist agents wired into the chipset agents block,
+ * restoring the designed 7-agent rosters, and the Category-B benchmarks were
+ * reconciled with skill coverage. All 63 example cartridges now pass
+ * cross-chipset validation, so the set is empty. See
+ * docs/cartridge/KNOWN-VALIDATION-DEBT.md.
  */
-const KNOWN_VALIDATION_DEBT = new Set<string>([
-  // Category A: agent_affinity drift — skills reference agents that
-  // were never defined in the companion agents block.
-  'business-department',
-  'home-economics-department',
-  'learning-department',
-  'materials-department',
-  'mind-body-department',
-  'nature-studies-department',
-  'nutrition-department',
-  'physical-education-department',
-  'theology-department',
-  'trades-department',
-  // Category B: evaluation benchmark.domains_covered lists domains
-  // that do not appear in any department skill key or description.
-  // Surfaced by the cross-chipset validator once W3.T0 flattened the
-  // legacy gates.pre_deploy nesting.
-  'astronomy-department',
-  'cloud-systems-department',
-  'critical-thinking-department',
-  'data-science-department',
-  'engineering-department',
-  'environmental-department',
-  'geography-department',
-  'languages-department',
-  'math-department',
-  'reading-department',
-  'science-department',
-  'writing-department',
-]);
+const KNOWN_VALIDATION_DEBT = new Set<string>([]);
 
 function bulkCartridges(): string[] {
   return readdirSync(CARTRIDGES)

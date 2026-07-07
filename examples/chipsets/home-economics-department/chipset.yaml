@@ -52,7 +52,7 @@ skills:
 
   food-technique-fundamentals:
     domain: home-economics
-    description: "Fifteen fundamental cooking techniques — knife work, sauté, sear, braise, roast, poach, boil, steam, grill, bake, stew, reduce, deglaze, emulsify, ferment"
+    description: "Fifteen fundamental cooking techniques — the core cooking-technique curriculum: knife work, sauté, sear, braise, roast, poach, boil, steam, grill, bake, stew, reduce, deglaze, emulsify, ferment"
     triggers:
       - "cooking technique"
       - "sauté"
@@ -124,6 +124,26 @@ agents:
     - name: fisher-he
       role: "food writing and sensory specialist — sensory description, narrative recipes, experiential framing; `-he` suffix disambiguates from R.A. Fisher (data-science)"
       model: opus
+      tools: [Read, Grep, Write]
+
+    - name: beecher
+      role: "historical foundations and curriculum specialist — discipline lineage, curriculum sequencing, historical framing"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: child
+      role: "cooking technique specialist — fifteen fundamental techniques, technique-failure diagnosis, step-by-step teaching"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: waters
+      role: "seasonal and ingredient-first specialist — seasonal meal planning, ingredient-first cooking, edible schoolyard"
+      model: sonnet
+      tools: [Read, Grep, Write]
+
+    - name: liebhardt
+      role: "pedagogy and habit-formation specialist — skill sequencing, family retros, habit formation, one-in-one-out rule"
+      model: sonnet
       tools: [Read, Grep, Write]
 
 # ==========================================================================

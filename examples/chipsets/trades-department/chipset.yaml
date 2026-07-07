@@ -135,6 +135,26 @@ agents:
       model: opus
       tools: [Read, Grep, Bash]
 
+    - name: brunel-tr
+      role: "mechanization and mass-production-origin specialist — dedicated tooling, interchangeable parts, shipwork, the skilled-to-machine economic transition"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: taylor
+      role: "work-measurement and time-study specialist — task decomposition, standard times, efficiency analysis, with explicit labor-relations framing"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: rose
+      role: "cognition-of-manual-work and trades pedagogy specialist — how skilled work thinks, tacit-knowledge transmission, ethnographic dignity of craft"
+      model: sonnet
+      tools: [Read, Write]
+
+    - name: crawford
+      role: "philosophy of manual competence and craft-education specialist — the trades-work argument, critique of the knowledge/manual split, craft pedagogy"
+      model: sonnet
+      tools: [Read, Write]
+
 # ==========================================================================
 # Teams — 3 pre-composed configurations
 # ==========================================================================

@@ -22,7 +22,7 @@ description: >
 skills:
   field-identification:
     domain: nature-studies
-    description: "Species identification in the field — keys, gestalt, diagnostic features, confidence protocols"
+    description: "Species identification in the field, including plants-and-fungi — keys, gestalt, diagnostic features, confidence protocols"
     triggers:
       - "identify"
       - "what is this"
@@ -34,7 +34,7 @@ skills:
 
   taxonomic-classification:
     domain: nature-studies
-    description: "Binomial nomenclature, hierarchy, type specimens, rank, and taxonomic authority"
+    description: "Binomial nomenclature, taxonomy, hierarchy, type specimens, rank, and taxonomic authority"
     triggers:
       - "scientific name"
       - "binomial"
@@ -47,7 +47,7 @@ skills:
 
   nature-journaling:
     domain: nature-studies
-    description: "Field notebook practice — sketches, notes, metadata, phenology, sit-spot discipline"
+    description: "Field notebook practice for outdoor-observation — sketches, notes, metadata, phenology, sit-spot discipline"
     triggers:
       - "nature journal"
       - "field notebook"
@@ -59,7 +59,7 @@ skills:
 
   bird-observation:
     domain: nature-studies
-    description: "Birding by sight and sound — behavior, habitat, vocalization, eBird-grade records"
+    description: "Birding by sight and sound for animals-and-birds — behavior, habitat, vocalization, eBird-grade citizen-science records"
     triggers:
       - "bird"
       - "birding"
@@ -72,7 +72,7 @@ skills:
 
   ecosystem-mapping:
     domain: nature-studies
-    description: "Biogeography, habitat typing, food webs, succession, keystone species, landscape patterns"
+    description: "Biogeography, ecology-and-habitats, habitat typing, food webs, succession, keystone species, landscape patterns"
     triggers:
       - "ecosystem"
       - "habitat"
@@ -120,6 +120,26 @@ agents:
       role: "entomology and metamorphosis — insect life cycles, botanical illustration, host-plant ecology"
       model: opus
       tools: [Read, Grep, Bash, Write]
+
+    - name: audubon
+      role: "ornithology — bird identification, vocalization, natural history, illustration"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: von-humboldt-nat
+      role: "biogeography and habitat — species assemblages, elevational gradients, regional context"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: peterson
+      role: "field-guide methodology — diagnostic field marks, confusion-species ruling-out, confidence-rated identification"
+      model: sonnet
+      tools: [Read, Bash]
+
+    - name: louv
+      role: "pedagogy and nature-based learning — level adaptation, beginner entry points, sustained outdoor practice"
+      model: sonnet
+      tools: [Read, Write]
 
 # ==========================================================================
 # Teams — 3 pre-composed configurations

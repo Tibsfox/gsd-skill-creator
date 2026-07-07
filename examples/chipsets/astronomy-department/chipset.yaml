@@ -50,7 +50,7 @@ skills:
 
   orbital-mechanics:
     domain: astronomy
-    description: "Kepler's laws, vis-viva, orbital elements, transfer orbits, gravity assists, binary dynamics, ephemeris computation"
+    description: "Kepler's laws, vis-viva, orbital elements, transfer orbits, gravity assists, binary dynamics, solar-system ephemeris computation"
     triggers:
       - "orbit"
       - "Kepler"
@@ -88,7 +88,7 @@ skills:
 
   naked-eye-observing:
     domain: astronomy
-    description: "Naked-eye and binocular observing — dark adaptation, constellation recognition, star hopping, meteors, Moon phases, practice discipline"
+    description: "Naked-eye and binocular observing — dark adaptation, constellation recognition, star hopping, meteors, Moon phases and Earth-Moon-Sun geometry, practice discipline"
     triggers:
       - "stargazing"
       - "constellation"

@@ -37,7 +37,7 @@ skills:
 
   iron-and-steel-processes:
     domain: materials
-    description: "Iron and steel production from ore to product — blast furnace, puddling, Bessemer, BOF, EAF"
+    description: "Iron and steel production from ore to product — the ferrous-process chain from blast furnace and puddling through Bessemer, BOF, and EAF"
     triggers:
       - "steel"
       - "iron"
@@ -127,6 +127,26 @@ agents:
       role: "nanomaterials specialist — fullerenes, nanotubes, graphene, 2D materials"
       model: opus
       tools: [Read, Grep, Bash]
+
+    - name: cort
+      role: "ferrous process historian — puddling, rolling, cementation, pre-Bessemer process history"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: merica
+      role: "light-metals specialist — aluminum age hardening, precipitation, nickel superalloys"
+      model: sonnet
+      tools: [Read, Grep]
+
+    - name: gordon
+      role: "failure analysis specialist — fracture, fatigue, creep, SCC, embrittlement"
+      model: sonnet
+      tools: [Read, Grep, Bash]
+
+    - name: cottrell
+      role: "pedagogy specialist — dislocation theory, microstructure, level-appropriate explanation"
+      model: sonnet
+      tools: [Read, Write]
 
 # ==========================================================================
 # Teams — 3 pre-composed configurations
