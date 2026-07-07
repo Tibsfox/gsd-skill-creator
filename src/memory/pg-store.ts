@@ -336,6 +336,13 @@ export class PgStore implements MemoryStore {
         // full OS TCP timeout when the host is unreachable.
         connectionTimeoutMillis: 10_000,
         application_name: 'gsd-skill-creator/pg-store',
+        // Bound the pool for a SHARED database: this is a low-throughput memory
+        // tier behind a single CLI/gateway process, so a small ceiling keeps it a
+        // good citizen against other consumers of the shared cluster. (PG-6)
+        max: 5,
+        // Server-side per-statement cap so a runaway or blocked query can't hold a
+        // pooled connection open indefinitely (memory queries are ms-scale). (PG-6)
+        statement_timeout: 30_000,
       });
       // Absorb idle-client errors (DB restart, dropped TCP) — pg re-emits them
       // as a Pool 'error' event, which crashes the process if unhandled. This
@@ -374,31 +381,42 @@ export class PgStore implements MemoryStore {
    */
   private async applyMigrations(): Promise<void> {
     const s = this.config.schema;
-    // schema_version must exist before we can read the applied version.
-    await this.pool.query(
-      `CREATE TABLE IF NOT EXISTS ${s}.schema_version (` +
-        `version INT PRIMARY KEY, applied_at TIMESTAMPTZ NOT NULL DEFAULT now())`,
-    );
-    const { rows } = await this.pool.query(
-      `SELECT COALESCE(MAX(version), 0)::int AS v FROM ${s}.schema_version`,
-    );
-    if ((rows[0]?.v ?? 0) >= SCHEMA_VERSION) return; // already up to date
+    // Run the whole migration on a dedicated client with statement_timeout
+    // disabled: an HNSW index build over a populated table can legitimately
+    // exceed the pool's per-statement cap (PG-6), and DDL must not be killed
+    // mid-flight. release(true) destroys the client afterward so the disabled
+    // timeout never leaks back to a pooled borrower.
+    const client = await this.pool.connect();
+    try {
+      await client.query('SET statement_timeout = 0');
+      // schema_version must exist before we can read the applied version.
+      await client.query(
+        `CREATE TABLE IF NOT EXISTS ${s}.schema_version (` +
+          `version INT PRIMARY KEY, applied_at TIMESTAMPTZ NOT NULL DEFAULT now())`,
+      );
+      const { rows } = await client.query(
+        `SELECT COALESCE(MAX(version), 0)::int AS v FROM ${s}.schema_version`,
+      );
+      if ((rows[0]?.v ?? 0) >= SCHEMA_VERSION) return; // already up to date
 
-    for (const sql of MIGRATIONS) {
-      try {
-        await this.pool.query(sql);
-      } catch (err: any) {
-        // Idempotent DDL (e.g. the vector extension) can report "already
-        // exists"; anything else is a real failure that must surface.
-        if (err?.message?.includes('already exists')) continue;
-        throw new Error(`migration to v${SCHEMA_VERSION} failed: ${err?.message ?? err}`);
+      for (const sql of MIGRATIONS) {
+        try {
+          await client.query(sql);
+        } catch (err: any) {
+          // Idempotent DDL (e.g. the vector extension) can report "already
+          // exists"; anything else is a real failure that must surface.
+          if (err?.message?.includes('already exists')) continue;
+          throw new Error(`migration to v${SCHEMA_VERSION} failed: ${err?.message ?? err}`);
+        }
       }
-    }
 
-    await this.pool.query(
-      `INSERT INTO ${s}.schema_version (version) VALUES ($1) ON CONFLICT (version) DO NOTHING`,
-      [SCHEMA_VERSION],
-    );
+      await client.query(
+        `INSERT INTO ${s}.schema_version (version) VALUES ($1) ON CONFLICT (version) DO NOTHING`,
+        [SCHEMA_VERSION],
+      );
+    } finally {
+      client.release(true);
+    }
   }
 
   /** Best-effort pool teardown used on the init failure paths. */
