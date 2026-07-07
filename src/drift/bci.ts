@@ -31,7 +31,7 @@
  * @module drift/bci
  */
 
-import { readFileSync } from 'node:fs';
+import { readNested, harnessCandidatePaths } from '../settings/read-settings.js';
 
 // ---------------------------------------------------------------------------
 // Public types
@@ -174,35 +174,8 @@ function _embedText(text: string, dim: number): number[] {
 export function readBCIThreshold(
   settingsPath: string = '.claude/settings.json',
 ): number {
-  try {
-    const raw = (() => {
-      const DEFAULT_PATH = '.claude/settings.json';
-      const LIB_PATH = '.claude/gsd-skill-creator.json';
-      // When the caller didn't override settingsPath (i.e. it's the default
-      // harness path), also check the library-native .claude/gsd-skill-creator.json
-      // first, since Claude Code's harness rejects unknown keys in settings.json.
-      const paths = settingsPath === DEFAULT_PATH ? [LIB_PATH, DEFAULT_PATH] : [settingsPath];
-      for (const _p of paths) {
-        try {
-          const _txt = readFileSync(_p, 'utf8');
-          if (_txt) return _txt;
-        } catch {}
-      }
-      throw new Error('no settings file found');
-    })();
-    const parsed = JSON.parse(raw) as Record<string, unknown>;
-    const scope = parsed['gsd-skill-creator'];
-    if (!scope || typeof scope !== 'object') return 0.7;
-    const drift = (scope as Record<string, unknown>).drift;
-    if (!drift || typeof drift !== 'object') return 0.7;
-    const alignment = (drift as Record<string, unknown>).alignment;
-    if (!alignment || typeof alignment !== 'object') return 0.7;
-    const thresh = (alignment as Record<string, unknown>).bciThreshold;
-    if (typeof thresh === 'number' && thresh > 0 && thresh <= 1) return thresh;
-    return 0.7;
-  } catch {
-    return 0.7;
-  }
+  const thresh = readNested(['drift', 'alignment', 'bciThreshold'], harnessCandidatePaths(settingsPath));
+  return typeof thresh === 'number' && thresh > 0 && thresh <= 1 ? thresh : 0.7;
 }
 
 // ---------------------------------------------------------------------------
