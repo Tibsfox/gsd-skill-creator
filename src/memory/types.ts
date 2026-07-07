@@ -659,6 +659,15 @@ export interface MemoryStore {
 
   /** Count memories at this tier. */
   count(): Promise<number>;
+
+  /**
+   * Enumerate every record at this tier. Optional: stores that can list their
+   * full contents implement it so callers (stats, maintenance) can enumerate
+   * without a keyword query. Keyword-scored stores return nothing for an
+   * empty-text query, so those callers must not rely on `query({text:''})`.
+   * Stores without `list` fall back to a broad query.
+   */
+  list?(): Promise<MemoryRecord[]>;
 }
 
 // ─── Promotion/Demotion ──────────────────────────────────────────────────────

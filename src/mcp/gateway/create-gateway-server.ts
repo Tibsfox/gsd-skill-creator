@@ -27,6 +27,9 @@ import { registerWorkflowTools } from './tools/workflow-tools.js';
 import { WorkflowEngine } from './tools/workflow-engine.js';
 import { registerSessionTools } from './tools/session-tools.js';
 import { SessionStore } from './tools/session-store.js';
+import { registerMemoryTools } from './tools/memory-tools.js';
+import type { MemoryService } from '../../memory/service.js';
+import type { ConversationStore } from '../../memory/conversation-store.js';
 import { registerResourceProviders } from './resources/resource-providers.js';
 import type { ResourceProviders } from './resources/types.js';
 import { registerPromptTemplates } from './prompts/prompt-templates.js';
@@ -82,6 +85,14 @@ export interface GatewayFactoryOptions {
   workflowEngine?: WorkflowEngine;
   /** Shared session store (optional -- created internally if not provided). */
   sessionStore?: SessionStore;
+  /**
+   * LOD-tiered memory service. When provided, the factory registers the eight
+   * memory.* tools (query, store, recall, relate, deprecate, wakeup, stats,
+   * search_conversations). Omit to leave memory tools unregistered (default).
+   */
+  memoryService?: MemoryService;
+  /** Conversation store backing memory.search_conversations (optional). */
+  conversationStore?: ConversationStore;
 }
 
 // ============================================================================
@@ -98,6 +109,8 @@ export interface GatewayFactoryOptions {
  * - Agent tools (agent.spawn, agent.status, agent.logs)
  * - Workflow tools (workflow.research, workflow.requirements, workflow.plan, workflow.execute)
  * - Session tools (session.query, session.patterns)
+ * - Memory tools (memory.query/store/recall/relate/deprecate/wakeup/stats/
+ *   search_conversations) -- only when options.memoryService is provided
  * - Resource providers (project config, skill registry, agent telemetry, chipset state)
  * - Prompt templates (added by Plan 298-02)
  *
@@ -152,6 +165,15 @@ export function createGsdGatewayFactory(
 
     // Register session tools (session.query, session.patterns)
     registerSessionTools(server, sessionStore);
+
+    // Register memory tools (memory.query, memory.store, memory.recall,
+    // memory.relate, memory.deprecate, memory.wakeup, memory.stats,
+    // memory.search_conversations) only when a memory service is supplied.
+    // Default-off: callers that pass no memoryService get no memory tools,
+    // so existing callers are unaffected.
+    if (options?.memoryService) {
+      registerMemoryTools(server, options.memoryService, options?.conversationStore);
+    }
 
     // Register resource providers
     registerResourceProviders(server, providers);

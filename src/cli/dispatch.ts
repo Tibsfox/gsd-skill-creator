@@ -37,6 +37,7 @@ import { budgetEstimateCommand } from './commands/budget-estimate.js';
 import { resolveCommand } from './commands/resolve.js';
 import { reloadEmbeddingsCommand } from './commands/reload-embeddings.js';
 import { mcpServerCommand } from './commands/mcp-server.js';
+import { gatewayCommand } from './commands/gateway.js';
 import { statusCommand } from './commands/status.js';
 import { auditCommand } from './commands/audit.js';
 import { teachCliCommand, coEvolutionCliCommand, quintessenceCliCommand } from '../symbiosis/cli.js';
@@ -196,6 +197,9 @@ export const REGISTRY: readonly CommandEntry[] = [
   { aliases: ['sync-reserved', 'sync'], handler: () => syncReservedCommand() },
   { aliases: ['test', 't'], handler: (ctx) => testCommand(ctx.args.slice(1)) },
   { aliases: ['mcp-server'], handler: (ctx) => mcpServerCommand(ctx.args.slice(1)) },
+  { aliases: ['gateway', 'gw'], handler: async (ctx) => {
+    process.exitCode = await gatewayCommand(ctx.args.slice(1));
+  } },
   { aliases: ['audit', 'au'], handler: (ctx) => {
     const skillName = ctx.args.filter((a) => !a.startsWith('-'))[1];
     return auditCommand(skillName, {});

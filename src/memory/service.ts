@@ -740,11 +740,15 @@ export class MemoryService {
     const all = new Map<string, MemoryRecord>();
 
     for (const store of this.stores.values()) {
-      // Query with empty text to get all records
-      const results = await store.query({ text: '', limit: 10_000 });
-      for (const result of results) {
-        if (!all.has(result.record.id)) {
-          all.set(result.record.id, result.record);
+      // Prefer a direct enumeration when the store supports it. Keyword-scored
+      // stores (e.g. FileStore) return nothing for an empty-text query, which
+      // would otherwise hide their records from stats and maintenance.
+      const records = store.list
+        ? await store.list()
+        : (await store.query({ text: '', limit: 10_000 })).map((r) => r.record);
+      for (const record of records) {
+        if (!all.has(record.id)) {
+          all.set(record.id, record);
         }
       }
     }

@@ -131,6 +131,16 @@ const TOOL_SCOPE_MAP: Record<string, GatewayScope> = {
   'chipset.synthesize': 'write',
   'install_skill': 'write',
 
+  // Memory tools (read = retrieval/inspection, write = mutation)
+  'memory.query': 'read',
+  'memory.recall': 'read',
+  'memory.wakeup': 'read',
+  'memory.stats': 'read',
+  'memory.search_conversations': 'read',
+  'memory.store': 'write',
+  'memory.relate': 'write',
+  'memory.deprecate': 'write',
+
   // Admin tools (none yet, but scope exists for future use)
 };
 

@@ -76,6 +76,7 @@ Commands:
   install, inst     Install a skill from local file or remote URL
   gsd-init, gi      Install GSD skill-creator integration into a project
   mcp-server        Start MCP server for skill browsing/installation
+  gateway, gw       Start the MCP HTTP gateway (memory.* tools + chipset/agent/workflow/session)
   coprocessor, cp   Coprocessor MCP tools (list-tools, capabilities, vram, call)
   session, sess     Manage session continuity (save, restore, handoff)
   purge, pg         Compact and clean observation JSONL files
