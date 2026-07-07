@@ -1,4 +1,4 @@
-import type { SkillIndex } from '../storage/skill-index.js';
+import type { SkillIndex, SkillIndexEntry } from '../storage/skill-index.js';
 import type { SkillStore } from '../storage/skill-store.js';
 import { TokenCounter } from './token-counter.js';
 import { RelevanceScorer } from './relevance-scorer.js';
@@ -11,6 +11,7 @@ import { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, Mode
 import { AdaptiveRouter, CorrectionStage } from '../retrieval/index.js';
 import type { CorrectionConfig } from '../retrieval/types.js';
 import { EmbeddingService } from '../embeddings/embedding-service.js';
+import { EmbeddingIndex } from '../memory/embedding-index.js';
 import type { TelemetryEventStore, PatternReport } from '../telemetry/index.js';
 import { TelemetryStage, ScoreAdjuster } from '../telemetry/index.js';
 import type { SensoriaHookOptions } from '../sensoria/applicator-hook.js';
@@ -67,6 +68,13 @@ export class SkillApplicator {
   private modelProfile?: string;
   private indexed = false;
   /**
+   * RET-8: pre-indexed skill-description embeddings. Built once in
+   * initialize()/reindex() and shared by reference with the ScoreStage so
+   * query-time recall is a pure cosine scan. Only constructed when retrieval is
+   * enabled (the sole embedding path); undefined otherwise.
+   */
+  private embeddingIndex?: EmbeddingIndex;
+  /**
    * M5 orchestration-path flag. When true, callers that opt-in via
    * `applyViaSelector()` run through the `ActivationSelector` (M5) which
    * composes M1+M2+M6. Flag-off (default) preserves the legacy pipeline
@@ -109,7 +117,25 @@ export class SkillApplicator {
     if (retrievalConfig?.enabled) {
       const router = new AdaptiveRouter();
       const embeddingService = EmbeddingService.getInstance();
-      this.pipeline.addStage(new ScoreStage(this.skillIndex, this.scorer, router, embeddingService));
+      // RET-8: an empty index shared by reference with the ScoreStage; populated
+      // in initialize()/reindex() so recall scans pre-computed vectors instead of
+      // re-embedding the enabled set per query. Its embedFn is only exercised by
+      // the ingest path (indexBatch); query-time uses searchByVector/getVector.
+      this.embeddingIndex = new EmbeddingIndex({
+        embedFn: async (texts: string[]) =>
+          (await embeddingService.embedBatch(texts)).map(r => Float32Array.from(r.embedding)),
+      });
+      this.pipeline.addStage(
+        new ScoreStage(
+          this.skillIndex,
+          this.scorer,
+          router,
+          embeddingService,
+          undefined,
+          undefined,
+          this.embeddingIndex,
+        ),
+      );
     } else {
       this.pipeline.addStage(new ScoreStage(this.skillIndex, this.scorer));
     }
@@ -202,7 +228,35 @@ export class SkillApplicator {
   async initialize(): Promise<void> {
     const skills = await this.skillIndex.getEnabled();
     this.scorer.indexSkills(skills);
+    await this.buildEmbeddingIndex(skills);
     this.indexed = true;
+  }
+
+  /**
+   * Populate the pre-indexed embedding store (RET-8). No-op unless retrieval is
+   * enabled (the only path that embeds). Rebuilt wholesale so vectors track the
+   * current enabled set and skills removed since the last build don't linger.
+   * Failures degrade gracefully — ScoreStage falls back to per-query embedding —
+   * so skill application is never blocked on the embedding backend.
+   */
+  private async buildEmbeddingIndex(skills: SkillIndexEntry[]): Promise<void> {
+    const index = this.embeddingIndex;
+    if (!index) return;
+    try {
+      const records = skills.map(s => ({
+        hashHex: s.name,
+        text: [s.description, ...(s.triggers?.intents ?? [])].join(' '),
+      }));
+      await index.indexBatch(records);
+      // Drop entries for skills no longer enabled (reindex after removal).
+      const keep = new Set(skills.map(s => s.name));
+      for (const hash of index.hashes()) {
+        if (!keep.has(hash)) await index.remove(hash);
+      }
+    } catch {
+      // Embedding backend unavailable — leave the index as-is and let ScoreStage
+      // fall back to per-query embedding.
+    }
   }
 
   // Auto-apply relevant skills based on context (APPLY-01)
@@ -315,6 +369,7 @@ export class SkillApplicator {
   async reindex(): Promise<void> {
     const skills = await this.skillIndex.getEnabled();
     this.scorer.indexSkills(skills);
+    await this.buildEmbeddingIndex(skills);
   }
 
   /**

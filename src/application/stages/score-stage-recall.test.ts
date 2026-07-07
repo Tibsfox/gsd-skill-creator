@@ -13,6 +13,7 @@ import type { RelevanceScorer } from '../relevance-scorer.js';
 import type { AdaptiveRouter } from '../../retrieval/adaptive-router.js';
 import type { EmbeddingService } from '../../embeddings/embedding-service.js';
 import type { ScoredSkill } from '../../types/application.js';
+import { EmbeddingIndex } from '../../memory/embedding-index.js';
 
 function entry(name: string, description: string): SkillIndexEntry {
   return {
@@ -118,5 +119,116 @@ describe('ScoreStage lexical+dense fusion (RET-4)', () => {
     // cosine (0.7), not a lexical-penalized 0.7*cosine — cosine-comparable.
     const targetScore = result.scoredSkills.find(s => s.name === 'target')!.score;
     expect(targetScore).toBeCloseTo(0.7, 5);
+  });
+});
+
+describe('ScoreStage pre-built EmbeddingIndex (RET-8)', () => {
+  // A throwing embedFn proves the index's own embed path is NEVER exercised at
+  // query time — recall must scan the pre-computed vectors, not re-embed.
+  function prebuiltIndex(vectors: Record<string, number[]>): EmbeddingIndex {
+    const index = new EmbeddingIndex({
+      embedFn: async () => {
+        throw new Error('embedFn must not be called at query time (RET-8)');
+      },
+    });
+    index.importEntries(
+      Object.entries(vectors).map(([hashHex, v]) => ({ hashHex, vector: Float32Array.from(v) })),
+    );
+    return index;
+  }
+
+  it('recalls via the index without re-embedding any enabled skill', async () => {
+    const target = entry('target', 'deploy an application to production servers');
+    const distractor = entry('distractor', 'edit an image into ascii art');
+    const skillIndex = skillIndexMock([target, distractor], []);
+    const embeddings = embeddingMock(
+      { target: [1, 0, 0], distractor: [0, 1, 0] },
+      [1, 0, 0], // query aligns with target, orthogonal to distractor
+    );
+    const index = prebuiltIndex({ target: [1, 0, 0], distractor: [0, 1, 0] });
+
+    const stage = new ScoreStage(
+      skillIndex, scorerMock(), embeddingRouter, embeddings, undefined, undefined, index,
+    );
+
+    const result = await stage.process(createEmptyContext({ intent: 'ship my service to the cluster' }));
+
+    // Same recall outcome as the per-query path: target in, distractor out.
+    expect(result.matches.map(m => m.name)).toContain('target');
+    expect(result.scoredSkills.some(s => s.name === 'target')).toBe(true);
+    expect(result.scoredSkills.some(s => s.name === 'distractor')).toBe(false);
+
+    // The perf win: embed() is called only for the query/queries, NEVER with a
+    // skillName — no per-enabled-skill and no per-match description embedding.
+    const embedCalls = (embeddings.embed as ReturnType<typeof vi.fn>).mock.calls;
+    expect(embedCalls.length).toBeGreaterThan(0);
+    expect(embedCalls.every((c: unknown[]) => c[1] === undefined)).toBe(true);
+  });
+
+  it('falls back to per-query embedding when a match is absent from the index', async () => {
+    // Index holds only `target`; `other` is a lexical trigger match not indexed,
+    // so its description must be embedded on the fly (getVector miss).
+    const target = entry('target', 'deploy an application');
+    const other = entry('other', 'some lexical hit');
+    const skillIndex = skillIndexMock([target, other], [other]);
+    const embeddings = embeddingMock(
+      { target: [1, 0, 0], other: [0, 1, 0] },
+      [1, 0, 0],
+    );
+    const index = prebuiltIndex({ target: [1, 0, 0] }); // `other` NOT indexed
+
+    const stage = new ScoreStage(
+      skillIndex, scorerMock(), embeddingRouter, embeddings, undefined, undefined, index,
+    );
+
+    const result = await stage.process(createEmptyContext({ intent: 'ship it' }));
+
+    // `other` is present (lexical) and gets scored; its embedding came from a
+    // getVector miss -> an embed() call carrying its skillName.
+    expect(result.scoredSkills.some(s => s.name === 'other')).toBe(true);
+    const embedCalls = (embeddings.embed as ReturnType<typeof vi.fn>).mock.calls;
+    expect(embedCalls.some((c: unknown[]) => c[1] === 'other')).toBe(true);
+    // `target` was served from the index — never embedded with its skillName.
+    expect(embedCalls.some((c: unknown[]) => c[1] === 'target')).toBe(false);
+  });
+
+  it('falls back to per-query embedding when the index is present but empty', async () => {
+    // A present-but-empty index (e.g. build not yet run, or degraded) must take
+    // the size===0 fallback, not scan an empty index and recall nothing.
+    const target = entry('target', 'deploy an application');
+    const skillIndex = skillIndexMock([target], []);
+    const embeddings = embeddingMock({ target: [1, 0, 0] }, [1, 0, 0]);
+    const emptyIndex = new EmbeddingIndex({ embedFn: async () => [] }); // size 0
+
+    const stage = new ScoreStage(
+      skillIndex, scorerMock(), embeddingRouter, embeddings, undefined, undefined, emptyIndex,
+    );
+
+    const result = await stage.process(createEmptyContext({ intent: 'ship my service' }));
+
+    // Recalled via the per-skill fallback, so target is embedded on the fly.
+    expect(result.scoredSkills.some(s => s.name === 'target')).toBe(true);
+    const embedCalls = (embeddings.embed as ReturnType<typeof vi.fn>).mock.calls;
+    expect(embedCalls.some((c: unknown[]) => c[1] === 'target')).toBe(true);
+  });
+
+  it('drops index hits no longer in the enabled set, keeps enabled ones', async () => {
+    // The index still holds a stale `ghost` (disabled/removed since the last
+    // build), aligned with the query. searchByVector returns it, but it is not
+    // in the current enabled set, so the name lookup must drop it.
+    const target = entry('target', 'deploy an application');
+    const skillIndex = skillIndexMock([target], []); // enabled = [target] only
+    const embeddings = embeddingMock({ target: [1, 0, 0] }, [1, 0, 0]);
+    const index = prebuiltIndex({ target: [1, 0, 0], ghost: [1, 0, 0] });
+
+    const stage = new ScoreStage(
+      skillIndex, scorerMock(), embeddingRouter, embeddings, undefined, undefined, index,
+    );
+
+    const result = await stage.process(createEmptyContext({ intent: 'ship my service' }));
+
+    expect(result.scoredSkills.some(s => s.name === 'target')).toBe(true);
+    expect(result.matches.some(m => m.name === 'ghost')).toBe(false);
+    expect(result.scoredSkills.some(s => s.name === 'ghost')).toBe(false);
   });
 });

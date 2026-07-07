@@ -8,6 +8,7 @@ import { cosineSimilarity } from '../../embeddings/cosine-similarity.js';
 import type { SkillPosition } from '../../plane/types.js';
 import type { PlaneActivationConfig } from '../../plane/activation.js';
 import { analyzeTask, computeEnhancedScore, DEFAULT_PLANE_ACTIVATION_CONFIG } from '../../plane/activation.js';
+import type { EmbeddingIndex } from '../../memory/embedding-index.js';
 
 /** RET-1: max full-set semantic-recall candidates admitted per query. */
 const SEMANTIC_RECALL_K = 10;
@@ -40,6 +41,7 @@ export class ScoreStage implements PipelineStage {
     private embeddingService?: EmbeddingService,
     private positionLookup?: PositionLookup,
     private planeConfig?: PlaneActivationConfig,
+    private embeddingIndex?: EmbeddingIndex,
   ) {}
 
   async process(context: PipelineContext): Promise<PipelineContext> {
@@ -166,15 +168,25 @@ export class ScoreStage implements PipelineStage {
   /**
    * Score matches using embedding cosine similarity.
    * Embeds the query and each match's description, then ranks by similarity.
+   *
+   * When a pre-built EmbeddingIndex is present, the per-match description vector
+   * is read from it instead of being re-embedded on every query. (RET-8)
    */
   private async scoreWithEmbeddings(query: string, matches: SkillIndexEntry[]): Promise<ScoredSkill[]> {
     const queryResult = await this.embeddingService!.embed(query);
     const scored: ScoredSkill[] = [];
 
     for (const match of matches) {
-      const desc = [match.description, ...(match.triggers?.intents ?? [])].join(' ');
-      const matchResult = await this.embeddingService!.embed(desc, match.name);
-      const similarity = cosineSimilarity(queryResult.embedding, matchResult.embedding);
+      // RET-8: reuse the pre-indexed description vector when available; only
+      // embed on a miss (index absent or this skill not yet indexed).
+      const pre = this.embeddingIndex?.getVector(match.name);
+      const matchEmbedding = pre
+        ? Array.from(pre)
+        : (await this.embeddingService!.embed(
+            [match.description, ...(match.triggers?.intents ?? [])].join(' '),
+            match.name,
+          )).embedding;
+      const similarity = cosineSimilarity(queryResult.embedding, matchEmbedding);
       scored.push({ name: match.name, score: similarity, matchType: 'intent' });
     }
 
@@ -182,11 +194,15 @@ export class ScoreStage implements PipelineStage {
   }
 
   /**
-   * Semantic recall: embed the query and every enabled skill, take the top
-   * cosine matches above a floor, and union them with the lexical trigger
+   * Semantic recall: embed the query, rank the enabled skills by cosine, take
+   * the top matches above a floor, and union them with the lexical trigger
    * candidates (dedup by name). This turns the embedding path from a re-ranker
    * over lexical hits into an actual retriever — a paraphrase that matches no
    * trigger can still surface. (RET-1)
+   *
+   * When a pre-built EmbeddingIndex is present, the ranking is a pure cosine
+   * scan over pre-computed vectors instead of embedding every enabled skill on
+   * this query. (RET-8)
    */
   private async recallByEmbedding(
     query: string,
@@ -195,17 +211,34 @@ export class ScoreStage implements PipelineStage {
     const enabled = await this.skillIndex.getEnabled();
     const queryEmbedding = (await this.embeddingService!.embed(query)).embedding;
 
-    const scored: Array<{ entry: SkillIndexEntry; sim: number }> = [];
-    for (const entry of enabled) {
-      const desc = [entry.description, ...(entry.triggers?.intents ?? [])].join(' ');
-      const emb = (await this.embeddingService!.embed(desc, entry.name)).embedding;
-      scored.push({ entry, sim: cosineSimilarity(queryEmbedding, emb) });
+    let recalled: SkillIndexEntry[];
+    if (this.embeddingIndex && this.embeddingIndex.size > 0) {
+      // RET-8: scan the pre-built index (embedded once at ingest) rather than
+      // re-embedding every enabled skill on this query. searchByVector returns
+      // the top-K by cosine already sorted; filtering the floor over that top-K
+      // equals filtering the floor over the full set then taking K, because the
+      // above-floor entries are a prefix of the sorted list. Skills present in
+      // the index but no longer enabled are dropped by the name lookup.
+      const byNameEnabled = new Map(enabled.map(e => [e.name, e]));
+      recalled = this.embeddingIndex
+        .searchByVector(Float32Array.from(queryEmbedding), SEMANTIC_RECALL_K)
+        .filter(hit => hit.score >= SEMANTIC_RECALL_MIN_SIM)
+        .map(hit => byNameEnabled.get(hit.hashHex))
+        .filter((e): e is SkillIndexEntry => e !== undefined);
+    } else {
+      // Fallback: embed each enabled skill on this query (index unavailable).
+      const scored: Array<{ entry: SkillIndexEntry; sim: number }> = [];
+      for (const entry of enabled) {
+        const desc = [entry.description, ...(entry.triggers?.intents ?? [])].join(' ');
+        const emb = (await this.embeddingService!.embed(desc, entry.name)).embedding;
+        scored.push({ entry, sim: cosineSimilarity(queryEmbedding, emb) });
+      }
+      scored.sort((a, b) => b.sim - a.sim);
+      recalled = scored
+        .filter(s => s.sim >= SEMANTIC_RECALL_MIN_SIM)
+        .slice(0, SEMANTIC_RECALL_K)
+        .map(s => s.entry);
     }
-    scored.sort((a, b) => b.sim - a.sim);
-    const recalled = scored
-      .filter(s => s.sim >= SEMANTIC_RECALL_MIN_SIM)
-      .slice(0, SEMANTIC_RECALL_K)
-      .map(s => s.entry);
 
     // Union with the lexical candidates, keeping the lexical entry on collision.
     const byName = new Map<string, SkillIndexEntry>();
