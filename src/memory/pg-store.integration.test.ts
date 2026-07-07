@@ -163,6 +163,41 @@ describe.skipIf(!RUN)('PgStore integration (PG_TEST)', () => {
     await expect(store2.count()).resolves.toBeGreaterThanOrEqual(0);
     await store2.close();
   });
+
+  it('has() and remove() reflect the record lifecycle', async () => {
+    const rec = track(makeRecord({ content: 'lifecycle record' }));
+    await store.store(rec);
+    expect(await store.has(rec.id)).toBe(true);
+
+    expect(await store.remove(rec.id)).toBe(true);
+    expect(await store.has(rec.id)).toBe(false);
+    expect(await store.get(rec.id)).toBeNull();
+    // Removing an already-absent id is a no-op that returns false.
+    expect(await store.remove(rec.id)).toBe(false);
+  });
+
+  it('getRelations returns empty for a record with no relations', async () => {
+    const rec = track(makeRecord({ content: 'no relations record' }));
+    await store.store(rec);
+    await expect(store.getRelations(rec.id)).resolves.toEqual([]);
+  });
+
+  it('storeEmbedding attaches a vector a later searchByEmbedding finds', async () => {
+    const rec = track(makeRecord({ content: 'embedding attach target' }));
+    await store.store(rec);
+
+    const vec = new Array(384).fill(0);
+    vec[5] = 1; // unit vector e5
+    // No embedding yet -> excluded from vector search entirely.
+    const before = await store.searchByEmbedding(vec, 100);
+    expect(before.find((r) => r.record.id === rec.id)).toBeUndefined();
+
+    await store.storeEmbedding(rec.id, vec);
+    const after = await store.searchByEmbedding(vec, 100);
+    const hit = after.find((r) => r.record.id === rec.id);
+    expect(hit).toBeDefined();
+    expect(hit!.score).toBeGreaterThan(0.9);
+  });
 });
 
 describe.skipIf(!RUN)('MemoryService LOD-400 wiring (PG_TEST)', () => {
@@ -208,5 +243,84 @@ describe.skipIf(!RUN)('MemoryService LOD-400 wiring (PG_TEST)', () => {
 
     const stats = await service.getStats();
     expect(stats.tierCounts[LodLevel.FABRICATION]).toBeGreaterThanOrEqual(1);
+  });
+});
+
+describe.skipIf(!RUN)('PgStore conversation history (PG_TEST)', () => {
+  let store: PgStore;
+  // Raw pool for cleanup: there is no public removeSession, and turns cascade
+  // from their session (conversation_turns.session_id ON DELETE CASCADE).
+  let cleanupPool: any; // pg.Pool — dynamically imported
+  const sessionIds: string[] = [];
+
+  // An alpha-only marker survives to_tsvector/plainto_tsquery cleanly (no digit
+  // token-class surprises) and is unique enough to isolate this run's turns.
+  const marker = 'convmark' + randomUUID().replace(/[0-9-]/g, '').slice(0, 8);
+
+  beforeAll(async () => {
+    const env = loadPgEnv();
+    if (!env.ok) throw new Error('PG_TEST set but RH_POSTGRES_URL is not resolvable');
+    store = new PgStore({ connectionString: env.url });
+    await store.init();
+    const pg = await import('pg');
+    cleanupPool = new pg.default.Pool({ connectionString: env.url });
+  });
+
+  afterAll(async () => {
+    for (const id of sessionIds) {
+      try {
+        await cleanupPool.query('DELETE FROM gsd_memory.conversation_sessions WHERE id = $1', [id]);
+      } catch {
+        /* ignore cleanup errors */
+      }
+    }
+    await cleanupPool.end();
+    await store.close();
+  });
+
+  it('stores sessions + turns, full-text searches them, and honors the session filter', async () => {
+    const sessionId = randomUUID();
+    const otherSessionId = randomUUID();
+    sessionIds.push(sessionId, otherSessionId);
+
+    await store.storeSession({ id: sessionId, startedAt: new Date(), project: 'pgtest', branch: 'dev', topics: ['altimetry'] });
+    await store.storeSession({ id: otherSessionId, startedAt: new Date(), project: 'pgtest' });
+
+    await store.storeTurn({ id: `turn-a-${marker}`, sessionId, role: 'user', content: `${marker} ocean topography experiment`, timestamp: new Date() });
+    await store.storeTurn({ id: `turn-b-${marker}`, sessionId, role: 'assistant', content: `${marker} radar altimeter response`, timestamp: new Date() });
+    await store.storeTurn({ id: `turn-c-${marker}`, sessionId: otherSessionId, role: 'user', content: `${marker} unrelated other-session topic`, timestamp: new Date() });
+
+    // Full-text search returns matching turns with a numeric rank.
+    const found = await store.searchConversations(marker, 20);
+    const ids = found.map((f) => f.turn.id);
+    expect(ids).toContain(`turn-a-${marker}`);
+    expect(ids).toContain(`turn-c-${marker}`);
+    expect(found.every((f) => typeof f.score === 'number')).toBe(true);
+
+    // sessionFilter restricts to the named session (turn-c is excluded).
+    const filtered = await store.searchConversations(marker, 20, [sessionId]);
+    expect(filtered.length).toBeGreaterThan(0);
+    expect(filtered.every((f) => f.sessionId === sessionId)).toBe(true);
+    expect(filtered.some((f) => f.turn.id === `turn-c-${marker}`)).toBe(false);
+
+    // Recent turns include our writes.
+    const recent = await store.getRecentTurns(200);
+    expect(recent.some((t) => t.id === `turn-a-${marker}`)).toBe(true);
+  });
+
+  it('increments the session turn_count as turns are stored', async () => {
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    const tag = sessionId.slice(0, 8);
+
+    await store.storeSession({ id: sessionId, startedAt: new Date() });
+    await store.storeTurn({ id: `tc-1-${tag}`, sessionId, role: 'user', content: 'first turn', timestamp: new Date() });
+    await store.storeTurn({ id: `tc-2-${tag}`, sessionId, role: 'assistant', content: 'second turn', timestamp: new Date() });
+
+    const { rows } = await cleanupPool.query(
+      'SELECT turn_count FROM gsd_memory.conversation_sessions WHERE id = $1',
+      [sessionId],
+    );
+    expect(rows[0].turn_count).toBe(2);
   });
 });
