@@ -97,3 +97,30 @@ export function assertSafePath(resolvedPath: string, baseDir: string): void {
     );
   }
 }
+
+/**
+ * Verify that a resolved absolute path stays within ANY of a set of allowed
+ * roots. This is the multi-root form of {@link assertSafePath}: a path is safe
+ * if it is contained by (or equal to) at least one root. Use it when legitimate
+ * references may cross into sibling trees under a shared ancestor (e.g. a
+ * cartridge that references chipsets in a sibling directory of the project),
+ * while still blocking absolute paths and traversal outside every allowed root.
+ *
+ * @param resolvedPath - The path to check
+ * @param roots - The allowed root directories (at least one must contain it)
+ * @throws PathTraversalError if the path escapes every allowed root
+ */
+export function assertWithinRoots(resolvedPath: string, roots: string[]): void {
+  const absPath = resolve(resolvedPath);
+  for (const root of roots) {
+    const absRoot = resolve(root);
+    if (absPath === absRoot || absPath.startsWith(absRoot + sep)) {
+      return;
+    }
+  }
+  throw new PathTraversalError(
+    `Path escapes allowed roots: "${absPath}" is not within any of [${roots
+      .map((r) => resolve(r))
+      .join(', ')}]`,
+  );
+}

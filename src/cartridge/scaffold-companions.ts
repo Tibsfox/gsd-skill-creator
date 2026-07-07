@@ -36,7 +36,9 @@ export function scaffoldCompanions(
   options: ScaffoldCompanionsOptions,
 ): ScaffoldCompanionsResult {
   const { path: inputPath, overwrite = false } = options;
-  const cartridge = loadCartridge(inputPath);
+  const cartridge = loadCartridge(inputPath, {
+    allowedRoots: [process.cwd()],
+  });
   const cartridgeDir = resolve(cartridgeDirFrom(inputPath));
 
   const filesWritten: string[] = [];

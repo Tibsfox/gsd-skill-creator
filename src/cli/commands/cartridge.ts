@@ -167,7 +167,7 @@ function handleLoad(args: string[], io: CartridgeCommandIO): number {
   const positional = positionalArgs(args);
   const path = positional[0];
   if (!path) return usageError(io, 'load requires <path>');
-  const cartridge = loadCartridge(path);
+  const cartridge = loadCartridge(path, { allowedRoots: [process.cwd()] });
   if (jsonMode(args)) {
     printJson(io, cartridge);
   } else {
@@ -184,7 +184,7 @@ function handleValidate(args: string[], io: CartridgeCommandIO): number {
   const path = positional[0];
   if (!path) return usageError(io, 'validate requires <path>');
   const allowDebt = args.includes('--allow-validation-debt');
-  const cartridge = loadAnyCartridge(path);
+  const cartridge = loadAnyCartridge(path, { allowedRoots: [process.cwd()] });
   const raw = isResearchOutputCartridge(cartridge)
     ? validateResearchOutputCartridge(cartridge)
     : validateCartridge(cartridge);
@@ -282,7 +282,7 @@ function handleMetrics(args: string[], io: CartridgeCommandIO): number {
   const positional = positionalArgs(args);
   const path = positional[0];
   if (!path) return usageError(io, 'metrics requires <path>');
-  const cartridge = loadCartridge(path);
+  const cartridge = loadCartridge(path, { allowedRoots: [process.cwd()] });
   const metrics = collectMetrics(cartridge);
   if (jsonMode(args)) {
     printJson(io, metrics);
@@ -301,7 +301,7 @@ function handleEval(args: string[], io: CartridgeCommandIO): number {
   const positional = positionalArgs(args);
   const path = positional[0];
   if (!path) return usageError(io, 'eval requires <path>');
-  const cartridge = loadCartridge(path);
+  const cartridge = loadCartridge(path, { allowedRoots: [process.cwd()] });
   const report = evalCartridge(cartridge);
   if (jsonMode(args)) {
     printJson(io, report);
@@ -322,7 +322,7 @@ function handleDedup(args: string[], io: CartridgeCommandIO): number {
   const positional = positionalArgs(args);
   const path = positional[0];
   if (!path) return usageError(io, 'dedup requires <path>');
-  const cartridge = loadCartridge(path);
+  const cartridge = loadCartridge(path, { allowedRoots: [process.cwd()] });
   const report = dedupCartridge(cartridge);
   if (jsonMode(args)) {
     printJson(io, report);
@@ -345,7 +345,7 @@ function handleFork(args: string[], io: CartridgeCommandIO): number {
   const positional = positionalArgs(args);
   const [path, newId] = positional;
   if (!path || !newId) return usageError(io, 'fork requires <path> <newId>');
-  const cartridge = loadCartridge(path);
+  const cartridge = loadCartridge(path, { allowedRoots: [process.cwd()] });
   const forked = forkCartridge(cartridge, { newId });
   const out = getFlagValue(args, 'out');
   if (out) {
@@ -443,7 +443,7 @@ function migrateSingle(
     // Self-validate: parse + Zod check via loader.
     let loadValidates = false;
     try {
-      loadCartridge(targetPath);
+      loadCartridge(targetPath, { allowedRoots: [process.cwd()] });
       loadValidates = true;
     } catch {
       loadValidates = false;

@@ -230,6 +230,111 @@ describe('loader — LD-01..LD-08', () => {
   });
 });
 
+describe('loader — AC-1 src: containment (allowedRoots opt-in)', () => {
+  let workDir: string;
+
+  beforeEach(() => {
+    workDir = mkdtempSync(join(tmpdir(), 'cartridge-loader-ac1-'));
+  });
+
+  afterEach(() => {
+    rmSync(workDir, { recursive: true, force: true });
+  });
+
+  it('rejects a src: ../ escape when allowedRoots contains only the cartridge dir', () => {
+    const cartDir = join(workDir, 'pkg');
+    mkdirSync(cartDir, { recursive: true });
+    // A secret one level above the cartridge dir, still inside workDir.
+    writeYaml(join(workDir, 'secret.yaml'), {
+      namespace: 'secret-ns',
+      record_types: [{ name: 'X', description: 'secret' }],
+    });
+    const cartPath = join(cartDir, 'cartridge.yaml');
+    writeYaml(cartPath, {
+      ...identityFields,
+      chipsets: [{ kind: 'grove', src: '../secret.yaml' }, evalInline],
+    });
+    expect(() =>
+      loadCartridge(cartPath, { allowedRoots: [cartDir] }),
+    ).toThrow(/escapes allowed roots/);
+  });
+
+  it('rejects an absolute src: outside the allowed roots before reading it', () => {
+    const cartDir = join(workDir, 'pkg');
+    mkdirSync(cartDir, { recursive: true });
+    // Absolute path to a sibling of the cartridge dir (outside the allowlist).
+    const absOutside = join(workDir, 'outside.yaml');
+    writeYaml(absOutside, {
+      namespace: 'outside-ns',
+      record_types: [{ name: 'X', description: 'outside' }],
+    });
+    const cartPath = join(cartDir, 'cartridge.yaml');
+    writeYaml(cartPath, {
+      ...identityFields,
+      chipsets: [{ kind: 'grove', src: absOutside }, evalInline],
+    });
+    expect(() =>
+      loadCartridge(cartPath, { allowedRoots: [cartDir] }),
+    ).toThrow(/escapes allowed roots/);
+  });
+
+  it('still allows a self-subtree src: even with a tight allowlist', () => {
+    const cartDir = join(workDir, 'pkg');
+    mkdirSync(join(cartDir, 'chipsets'), { recursive: true });
+    writeYaml(join(cartDir, 'chipsets', 'g.yaml'), {
+      namespace: 'self-ns',
+      record_types: [{ name: 'S', description: 'self' }],
+    });
+    const cartPath = join(cartDir, 'cartridge.yaml');
+    writeYaml(cartPath, {
+      ...identityFields,
+      chipsets: [{ kind: 'grove', src: './chipsets/g.yaml' }, evalInline],
+    });
+    const loaded = loadCartridge(cartPath, { allowedRoots: [cartDir] });
+    const grove = loaded.chipsets.find((c) => c.kind === 'grove');
+    if (grove?.kind !== 'grove') throw new Error('unreachable');
+    expect(grove.namespace).toBe('self-ns');
+  });
+
+  it('permits a legitimate cross-tree sibling ref when the shared root is allowlisted', () => {
+    mkdirSync(join(workDir, 'nested'), { recursive: true });
+    mkdirSync(join(workDir, 'sibling'), { recursive: true });
+    writeYaml(join(workDir, 'sibling', 'g.yaml'), {
+      namespace: 'sibling-ns',
+      record_types: [{ name: 'S1', description: 'sibling record' }],
+    });
+    const cartPath = join(workDir, 'nested', 'cartridge.yaml');
+    writeYaml(cartPath, {
+      ...identityFields,
+      chipsets: [{ kind: 'grove', src: '../sibling/g.yaml' }, evalInline],
+    });
+    // workDir is the shared ancestor of nested/ and sibling/ — allowlist it.
+    const loaded = loadCartridge(cartPath, { allowedRoots: [workDir] });
+    const grove = loaded.chipsets.find((c) => c.kind === 'grove');
+    if (grove?.kind !== 'grove') throw new Error('unreachable');
+    expect(grove.namespace).toBe('sibling-ns');
+  });
+
+  it('leaves containment off (legacy behavior) when allowedRoots is omitted', () => {
+    mkdirSync(join(workDir, 'nested'), { recursive: true });
+    mkdirSync(join(workDir, 'sibling'), { recursive: true });
+    writeYaml(join(workDir, 'sibling', 'g.yaml'), {
+      namespace: 'legacy-ns',
+      record_types: [{ name: 'S1', description: 'sibling record' }],
+    });
+    const cartPath = join(workDir, 'nested', 'cartridge.yaml');
+    writeYaml(cartPath, {
+      ...identityFields,
+      chipsets: [{ kind: 'grove', src: '../sibling/g.yaml' }, evalInline],
+    });
+    // No allowedRoots → the cross-tree ref resolves (opt-in security).
+    const loaded = loadCartridge(cartPath);
+    const grove = loaded.chipsets.find((c) => c.kind === 'grove');
+    if (grove?.kind !== 'grove') throw new Error('unreachable');
+    expect(grove.namespace).toBe('legacy-ns');
+  });
+});
+
 describe('parseCartridge — in-memory docs', () => {
   it('parses an already-loaded object against a base directory', () => {
     const doc = {

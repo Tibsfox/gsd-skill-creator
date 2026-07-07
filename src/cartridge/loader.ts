@@ -32,6 +32,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, isAbsolute, resolve } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
+import { assertWithinRoots } from '../validation/path-safety.js';
 import { normalizeEvaluationChipset } from './normalizers/evaluation.js';
 import {
   CartridgeSchema,
@@ -47,6 +48,18 @@ export interface LoadCartridgeOptions {
   maxDepth?: number;
   /** Optional security chokepoint — see src/security/loader-context.ts. */
   ctx?: LoaderContext;
+  /**
+   * When provided, every resolved `src:` file (including nested src: chains)
+   * must be contained within the cartridge's own directory OR one of these
+   * roots. Absolute paths and `../` traversal outside all of them throw a
+   * PathTraversalError, and the check runs BEFORE the file is read — so an
+   * untrusted cartridge cannot read arbitrary local files ahead of the trust
+   * gate. Omitting it keeps the legacy permissive behavior (the `ctx`
+   * chokepoint still applies). CLI entry points pass the project root, which
+   * permits the in-repo sibling-tree references (e.g. `../../chipsets/…`)
+   * while blocking escapes out of the project.
+   */
+  allowedRoots?: string[];
 }
 
 /** Union of all top-level cartridge shapes the loader can return. */
@@ -104,12 +117,16 @@ export function loadCartridge(
   }
 
   const baseDir = dirname(absolutePath);
+  const securityRoots = options.allowedRoots
+    ? [baseDir, ...options.allowedRoots]
+    : undefined;
   const resolved = resolveCartridgeEntries(
     doc,
     baseDir,
     new Set(),
     maxDepth,
     ctx,
+    securityRoots,
   );
 
   return CartridgeSchema.parse(resolved);
@@ -155,12 +172,16 @@ export function loadAnyCartridge(
   }
 
   const baseDir = dirname(absolutePath);
+  const securityRoots = options.allowedRoots
+    ? [baseDir, ...options.allowedRoots]
+    : undefined;
   const resolved = resolveCartridgeEntries(
     doc,
     baseDir,
     new Set(),
     maxDepth,
     ctx,
+    securityRoots,
   );
 
   return CartridgeSchema.parse(resolved);
@@ -186,12 +207,16 @@ export function parseCartridge(
     );
   }
   const docObj = doc as Record<string, unknown>;
+  const securityRoots = options.allowedRoots
+    ? [baseDir, ...options.allowedRoots]
+    : undefined;
   const resolved = resolveCartridgeEntries(
     docObj,
     baseDir,
     new Set(),
     maxDepth,
     ctx,
+    securityRoots,
   );
   return CartridgeSchema.parse(resolved);
 }
@@ -206,6 +231,7 @@ function resolveCartridgeEntries(
   visited: Set<string>,
   maxDepth: number,
   ctx: LoaderContext | undefined,
+  securityRoots: string[] | undefined,
 ): Record<string, unknown> {
   const chipsets = doc.chipsets;
   if (!Array.isArray(chipsets)) {
@@ -214,7 +240,7 @@ function resolveCartridgeEntries(
   }
 
   const resolvedChipsets = chipsets.map((entry) =>
-    resolveChipsetEntry(entry, baseDir, visited, maxDepth, ctx),
+    resolveChipsetEntry(entry, baseDir, visited, maxDepth, ctx, securityRoots),
   );
 
   return { ...doc, chipsets: resolvedChipsets };
@@ -226,6 +252,7 @@ function resolveChipsetEntry(
   visited: Set<string>,
   remainingDepth: number,
   ctx: LoaderContext | undefined,
+  securityRoots: string[] | undefined,
 ): unknown {
   if (entry === null || typeof entry !== 'object' || Array.isArray(entry)) {
     return entry;
@@ -248,6 +275,14 @@ function resolveChipsetEntry(
   if (visited.has(filePath)) {
     const chain = [...visited, filePath].join(' -> ');
     throw new Error(`loader: circular src: reference detected: ${chain}`);
+  }
+
+  // Containment guard (opt-in via allowedRoots): reject reads that escape the
+  // cartridge tree / allowed roots before touching the filesystem, so an
+  // untrusted cartridge can't exfiltrate arbitrary files via src: '../' or an
+  // absolute path. The boundary stays the ORIGINAL roots across nested chains.
+  if (securityRoots) {
+    assertWithinRoots(filePath, securityRoots);
   }
 
   ensureAllowed(ctx, LOADER_SOURCE, 'read-file', filePath, `src: '${src}'`);
@@ -304,6 +339,7 @@ function resolveChipsetEntry(
       nextVisited,
       remainingDepth - 1,
       ctx,
+      securityRoots,
     );
   }
 
