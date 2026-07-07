@@ -4,7 +4,7 @@ description: "Package conversation research into a GSD-ready mission package. Pr
 version: 1.0.0
 format: 2025-10-02
 triggers:
-  - "the user has been discussing, researching, or brainstorming a topic and then asks to turn it into a research mission, research pack, mission package, or says 'p"
+  - "the user has been discussing, researching, or brainstorming a topic and then asks to turn it into a research mission, research pack, or mission package, or says 'package this as a mission'"
   - "if the user asks to 'create a research mission on [topic]' cold — in that case, conduct web research first, then package"
 updated: 2026-04-25
 status: ACTIVE

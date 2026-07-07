@@ -192,5 +192,6 @@ After the loop completes, report to the user:
 - `validate / eval / dedup` verdicts
 - Any validation debt accepted and the follow-up note
 
-Do not report "done" before all four forge gates (validate, eval,
-dedup, metrics) have been run and shown green.
+Do not report "done" before all three gate checks (validate, eval,
+dedup) have been run and shown green; metrics is captured for the
+commit body, not a gate.

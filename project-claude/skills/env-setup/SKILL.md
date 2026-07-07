@@ -4,7 +4,7 @@ description: Environment configuration and secrets management. Use when setting 
 version: 1.0.0
 format: 2025-10-02
 triggers:
-  - setting up
+  - setting up environment variables
 updated: 2026-04-25
 status: ACTIVE
 ---

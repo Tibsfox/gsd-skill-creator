@@ -6,7 +6,8 @@ user-invocable: true
 version: 1.0.0
 format: 2025-10-02
 triggers:
-  - "the user asks \"what should I work on\", mentions GSD phases, ROADMAP, or"
+  - "what should I work on next"
+  - "which GSD command do I run"
 updated: 2026-04-25
 status: ACTIVE
 ---
@@ -45,7 +46,7 @@ The top-10 most common routes:
 | "something's broken" | `/gsd:debug` |
 | "quick fix / small task" | `/gsd:quick` |
 | "verify phase X" | `/gsd:verify-work X` |
-| "add a phase" | `/gsd:add-phase` |
+| "add a phase" | `/gsd:phase` |
 | "start new project" | `/gsd:new-project` |
 
 For full routing tables including skill-creator actions, see `references/command-routing.md`.

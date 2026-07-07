@@ -45,7 +45,7 @@ Generates commit messages following the Conventional Commits / Angular conventio
 - **Imperative test:** "If applied, this commit will _[subject]_".
 - **Scope:** Specific module/component in lowercase — e.g. `feat(auth)`, `fix(api)`, `docs(readme)`, `refactor(core)`.
 - **Body:** Optional. Explain WHY/WHAT, not HOW. Wrap at 72 chars. Blank line between subject and body.
-- **Footer:** Optional. `BREAKING CHANGE: …`, `Closes #N`, `Co-Authored-By: …`.
+- **Footer:** Optional. `BREAKING CHANGE: …`, `Closes #N`, `Co-Authored-By: …` (HUMAN co-authors only — `Co-Authored-By: Claude …` trailers are hard-blocked by `.claude/hooks/validate-commit.cjs`, v1.49.621 policy).
 
 ## Atomic Commits
 

@@ -39,7 +39,7 @@ Complete command routing tables. The condensed version is in SKILL.md. This file
 
 | User Intent | GSD Command | Rationale |
 |-------------|-------------|-----------|
-| "I need to add a phase" | `/gsd:add-phase` | Append to roadmap |
+| "I need to add a phase" | `/gsd:phase` | Append to roadmap |
 | "Urgent work mid-milestone" | `/gsd:insert-phase` | Insert without renumbering |
 | "Remove a planned phase" | `/gsd:remove-phase` | Clean removal with renumbering |
 | "Capture this idea for later" | `/gsd:add-todo` | Park ideas without derailing current work |

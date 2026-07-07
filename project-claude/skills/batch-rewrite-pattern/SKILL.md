@@ -6,7 +6,7 @@ version: 1.0.0
 status: ACTIVE
 updated: 2026-04-17
 triggers:
-  - applying the same refactor to multiple files (e
+  - apply the same refactor across multiple files
 ---
 
 # Batch Rewrite Pattern

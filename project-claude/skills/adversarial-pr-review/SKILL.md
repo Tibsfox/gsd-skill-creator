@@ -160,7 +160,7 @@ For test files:
 ### 4.4 Skill conventions
 For skill files in `.claude/skills/`:
 - Frontmatter: `name`, `description` required
-- Description under 250 chars (upstream enforcement)
+- Description within the 1-1024 char bound (docs/OFFICIAL-FORMAT.md:64); flag as a soft nit only if it lacks a "Use when..." trigger clause, not on raw length
 - `version` present for versioned skills
 - `user-invocable: true` only if the skill should be directly callable
 
