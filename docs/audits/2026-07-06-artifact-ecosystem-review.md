@@ -89,14 +89,15 @@ Addressed in a second pass:
 - **create-* command refs (done).** `gsd-orchestrator` no longer suggests nonexistent
   `/gsd:create-skill|agent|team` slash commands; it points at the `skill-creator create` CLI and the
   `cartridge-forge` skill.
+- **Default-cartridge benchmark corpus (done).** Each of the 4 default cartridges declared a 0.85
+  trigger-accuracy benchmark that nothing ran. Added a `benchmark/test-cases.yaml` corpus per cartridge
+  (28–30 natural queries, 2 per skill, each embedding a real trigger phrase) and
+  `src/chipset/default-cartridge-benchmark.test.ts`, which loads each cartridge's skills/triggers and
+  asserts accuracy ≥ the declared threshold — following the rca-department pattern. All four measure
+  1.000; the benchmark now has data behind it instead of being aspirational scaffolding.
 
 Deliberately not done:
 
 - **Commit-skill consolidation — declined (not a defect).** `commit-style` is a *default* skill,
   `beautiful-commits` is an *example* skill (`examples/skills/dev/`), and `git-commit` is not in this
   repo at all — different tiers, no runtime collision, so forcibly merging them would be wrong.
-- **Default-cartridge benchmark corpus — deferred (milestone-sized, gate risk).** The proven pattern
-  (rca-department) needs a `benchmark/test-cases.yaml` corpus *plus a dedicated enforcing test per
-  cartridge* asserting ≥0.85 trigger accuracy (`eval.ts` does not run `benchmark` generically). Corpus
-  with no test that runs it is shelfware; four enforcing tests risk a flaky/failing gate without
-  iterative trigger tuning. Best done as its own scoped milestone.
