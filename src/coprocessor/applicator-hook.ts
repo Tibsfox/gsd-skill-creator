@@ -18,7 +18,7 @@
  * @module coprocessor/applicator-hook
  */
 
-import { readFileSync } from 'node:fs';
+import { readNested, harnessCandidatePaths } from '../settings/read-settings.js';
 import type { PipelineStage, PipelineContext } from '../application/skill-pipeline.js';
 import { activateCoprocessor, parseCoprocessorSpec } from './activation.js';
 import type { ChipName } from './types.js';
@@ -36,36 +36,7 @@ import type { ChipName } from './types.js';
  * default). Explicit `enabled: false` is the only way to turn it off.
  */
 export function readCoprocessorEnabledFlag(settingsPath: string): boolean {
-  try {
-    const raw = (() => {
-      const DEFAULT_PATH = '.claude/settings.json';
-      const LIB_PATH = '.claude/gsd-skill-creator.json';
-      // When the caller didn't override settingsPath (i.e. it's the default
-      // harness path), also check the library-native .claude/gsd-skill-creator.json
-      // first, since Claude Code's harness rejects unknown keys in settings.json.
-      const paths = settingsPath === DEFAULT_PATH ? [LIB_PATH, DEFAULT_PATH] : [settingsPath];
-      for (const _p of paths) {
-        try {
-          const _txt = readFileSync(_p, 'utf8');
-          if (_txt) return _txt;
-        } catch {}
-      }
-      throw new Error('no settings file found');
-    })();
-    const settings = JSON.parse(raw);
-    const scope = settings?.['gsd-skill-creator'];
-    // Scope missing entirely → default ON
-    if (!scope || typeof scope !== 'object') return true;
-    const coprocessor = (scope as Record<string, unknown>).coprocessor;
-    // coprocessor block missing → default ON
-    if (!coprocessor || typeof coprocessor !== 'object') return true;
-    const enabled = (coprocessor as Record<string, unknown>).enabled;
-    // Explicit false disables; anything else (including missing key) → ON
-    return enabled !== false;
-  } catch {
-    // File missing / malformed → default ON
-    return true;
-  }
+  return readNested(['coprocessor', 'enabled'], harnessCandidatePaths(settingsPath)) !== false;
 }
 
 /**

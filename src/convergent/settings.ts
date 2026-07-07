@@ -17,7 +17,7 @@
  * @module convergent/settings
  */
 
-import { readFileSync } from 'node:fs';
+import { readNested, harnessCandidatePaths } from '../settings/read-settings.js';
 
 /** The 5 Half B module keys; extending this requires matching the config file. */
 export type ConvergentModuleKey =
@@ -37,7 +37,6 @@ export const ALL_CONVERGENT_MODULES: readonly ConvergentModuleKey[] = [
 ] as const;
 
 const DEFAULT_PATH = '.claude/settings.json';
-const LIB_PATH = '.claude/gsd-skill-creator.json';
 
 /**
  * Read the entire convergent config block, or null on any error.
@@ -46,26 +45,10 @@ const LIB_PATH = '.claude/gsd-skill-creator.json';
 export function readConvergentSettings(
   settingsPath: string = DEFAULT_PATH,
 ): Record<string, unknown> | null {
-  try {
-    const raw = (() => {
-      const paths = settingsPath === DEFAULT_PATH ? [LIB_PATH, DEFAULT_PATH] : [settingsPath];
-      for (const p of paths) {
-        try {
-          const txt = readFileSync(p, 'utf8');
-          if (txt) return txt;
-        } catch {}
-      }
-      throw new Error('no settings file found');
-    })();
-    const parsed = JSON.parse(raw) as Record<string, unknown>;
-    const scope = parsed['gsd-skill-creator'];
-    if (!scope || typeof scope !== 'object') return null;
-    const convergent = (scope as Record<string, unknown>).convergent;
-    if (!convergent || typeof convergent !== 'object') return null;
-    return convergent as Record<string, unknown>;
-  } catch {
-    return null;
-  }
+  const convergent = readNested(['convergent'], harnessCandidatePaths(settingsPath));
+  return convergent && typeof convergent === 'object'
+    ? (convergent as Record<string, unknown>)
+    : null;
 }
 
 /**

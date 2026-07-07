@@ -28,7 +28,7 @@
  * @module projection/settings
  */
 
-import { readFileSync } from 'node:fs';
+import { readBooleanFlag, harnessCandidatePaths } from '../settings/read-settings.js';
 
 /**
  * Read the MB-2 projection-enabled flag from settings.json. Returns `false`
@@ -40,32 +40,5 @@ import { readFileSync } from 'node:fs';
 export function readProjectionEnabledFlag(
   settingsPath: string = '.claude/settings.json',
 ): boolean {
-  try {
-    const raw = (() => {
-      const DEFAULT_PATH = '.claude/settings.json';
-      const LIB_PATH = '.claude/gsd-skill-creator.json';
-      // When the caller didn't override settingsPath (i.e. it's the default
-      // harness path), also check the library-native .claude/gsd-skill-creator.json
-      // first, since Claude Code's harness rejects unknown keys in settings.json.
-      const paths = settingsPath === DEFAULT_PATH ? [LIB_PATH, DEFAULT_PATH] : [settingsPath];
-      for (const _p of paths) {
-        try {
-          const _txt = readFileSync(_p, 'utf8');
-          if (_txt) return _txt;
-        } catch {}
-      }
-      throw new Error('no settings file found');
-    })();
-    const parsed = JSON.parse(raw) as Record<string, unknown>;
-    const scope = parsed['gsd-skill-creator'];
-    if (!scope || typeof scope !== 'object') return false;
-    const lyap = (scope as Record<string, unknown>).lyapunov;
-    if (!lyap || typeof lyap !== 'object') return false;
-    const proj = (lyap as Record<string, unknown>).projection;
-    if (!proj || typeof proj !== 'object') return false;
-    const enabled = (proj as Record<string, unknown>).enabled;
-    return enabled === true;
-  } catch {
-    return false;
-  }
+  return readBooleanFlag(['lyapunov', 'projection', 'enabled'], harnessCandidatePaths(settingsPath));
 }
