@@ -61,6 +61,27 @@ skills:
       - "rate law"
     agent_affinity: [mendeleev, pauling]
 
+  physical-chemistry:
+    domain: chemistry
+    description: "Chemical equilibrium, kinetics, and electrochemistry — Keq/Kc/Kp, Le Chatelier, ICE tables, buffers, Ksp, rate laws, Arrhenius, galvanic/electrolytic cells, Nernst equation"
+    triggers:
+      - "equilibrium constant"
+      - "Le Chatelier"
+      - "ICE table"
+      - "buffer"
+      - "Henderson-Hasselbalch"
+      - "Ksp"
+      - "rate law"
+      - "reaction order"
+      - "half-life"
+      - "Arrhenius"
+      - "activation energy"
+      - "electrochemistry"
+      - "galvanic cell"
+      - "cell potential"
+      - "Nernst"
+    agent_affinity: [pauling, lavoisier]
+
   organic-chemistry:
     domain: chemistry
     description: "Functional groups, nomenclature, mechanisms, synthesis, stereochemistry"

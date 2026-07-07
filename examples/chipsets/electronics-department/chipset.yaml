@@ -34,6 +34,24 @@ skills:
       - "transfer function"
     agent_affinity: [shockley, horowitz]
 
+  analog-circuit-design:
+    domain: electronics
+    description: "Active analog design — op-amps, feedback stability, active filters, oscillators, references, regulators"
+    triggers:
+      - "op-amp"
+      - "operational amplifier"
+      - "negative feedback"
+      - "phase margin"
+      - "gain-bandwidth"
+      - "active filter"
+      - "sallen-key"
+      - "instrumentation amplifier"
+      - "schmitt trigger"
+      - "voltage reference"
+      - "voltage regulator"
+      - "oscillator"
+    agent_affinity: [horowitz, shockley]
+
   semiconductor-device-physics:
     domain: electronics
     description: "Device physics underlying diodes, BJTs, and MOSFETs"
