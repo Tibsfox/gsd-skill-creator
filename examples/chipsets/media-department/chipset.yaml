@@ -1,0 +1,248 @@
+# Media Department Chipset Configuration
+# A production/tooling instantiation of the "department template pattern"
+#
+# A department chipset binds named agents, knowledge skills, pre-composed
+# teams, Grove record types, and college integration into a single
+# deployable unit. This department covers media PRODUCTION and tooling:
+# audio engineering, audio/video studio work, FFmpeg processing, LaTeX
+# document authoring, and the markdown→HTML/PDF publish pipeline.
+
+name: media-department-v1.0
+version: 1.0.0
+description: >
+  A coordinated media production department providing domain-routed
+  expertise through six named agents (audio-engineer, ffmpeg-processor,
+  music-analyzer, podcast-producer, stream-producer, video-editor),
+  five knowledge skills, and two pre-composed teams. Persists work via
+  Grove records and integrates with the college media department concept
+  graph. This is a production/tooling department (audio, video, ffmpeg,
+  document authoring, publishing) — not an academic-persona department.
+
+# ==========================================================================
+# Skills — 5 domain skills with trigger patterns and agent affinity
+# ==========================================================================
+
+skills:
+  audio-engineering:
+    domain: media
+    description: "Mastering, mixing, EQ, compression, loudness (LUFS/EBU), synthesis, and audio spectrum analysis for production"
+    triggers:
+      - "audio"
+      - "mastering"
+      - "mixing"
+      - "EQ"
+      - "compression"
+      - "loudness"
+      - "LUFS"
+      - "podcast"
+      - "spectrum"
+      - "synthesis"
+    agent_affinity: [audio-engineer, music-analyzer, podcast-producer]
+
+  av-studio:
+    domain: media
+    description: "Multi-track video editing, color grading, motion graphics, compositing, live streaming, and YouTube publishing"
+    triggers:
+      - "video editing"
+      - "color grading"
+      - "motion graphics"
+      - "compositing"
+      - "green screen"
+      - "screen recording"
+      - "OBS"
+      - "streaming"
+      - "YouTube publish"
+      - "timeline"
+    agent_affinity: [video-editor, stream-producer]
+
+  ffmpeg-media:
+    domain: media
+    description: "FFmpeg video/audio transcoding, trimming, filtering, encoding, and streaming pipelines (CLI and ffmpeg.wasm)"
+    triggers:
+      - "ffmpeg"
+      - "transcode"
+      - "encode"
+      - "codec"
+      - "h264"
+      - "h265"
+      - "webm"
+      - "mp4"
+      - "aac"
+      - "opus"
+    agent_affinity: [ffmpeg-processor, video-editor]
+
+  latex-authoring:
+    domain: media
+    description: "LaTeX document authoring with arXiv submission, Overleaf, BibTeX, and academic publishing conventions"
+    triggers:
+      - "latex"
+      - "tex"
+      - "arxiv"
+      - "overleaf"
+      - "bibtex"
+      - "biblatex"
+      - "xelatex"
+      - "beamer"
+      - "tikz"
+      - "document class"
+    agent_affinity: [audio-engineer]
+
+  publish-pipeline:
+    domain: media
+    description: "Markdown to HTML/PDF production build with Pandoc and xelatex templates, branded output, and FTP deployment"
+    triggers:
+      - "publish"
+      - "pandoc"
+      - "markdown to pdf"
+      - "HTML build"
+      - "FTP sync"
+      - "deploy"
+      - "xelatex template"
+      - "branded output"
+      - "build chain"
+    agent_affinity: [podcast-producer, audio-engineer]
+
+# ==========================================================================
+# Agents — 6 agents in router topology (audio-engineer as CAPCOM chair)
+# ==========================================================================
+
+agents:
+  topology: "router"
+  router_agent: audio-engineer
+
+  agents:
+    - name: audio-engineer
+      role: "department chair — routing, synthesis, mastering/mixing, plus cross-cutting document authoring and publish coordination"
+      model: sonnet
+      tools: [Bash, Read, Write, Glob, Grep]
+      is_capcom: true
+
+    - name: ffmpeg-processor
+      role: "media processor — builds and executes ffmpeg commands for conversion, trimming, thumbnails, waveforms, streaming"
+      model: sonnet
+      tools: [Bash, Read, Write, Glob, Grep]
+
+    - name: music-analyzer
+      role: "audio analyst — BPM/key detection, loudness measurement, spectrum analysis, waveform generation, fingerprinting"
+      model: haiku
+      tools: [Bash, Read, Write]
+
+    - name: podcast-producer
+      role: "podcast producer — recording, editing, mixing, mastering, ID3 tagging, chapter marks, RSS generation"
+      model: sonnet
+      tools: [Bash, Read, Write, Glob]
+
+    - name: stream-producer
+      role: "stream producer — OBS-style capture, RTMP streaming, screencast production, presentation recording"
+      model: sonnet
+      tools: [Bash, Read, Write]
+
+    - name: video-editor
+      role: "video editor — trimming, transitions, color grading, titles, timeline assembly, YouTube-ready export"
+      model: sonnet
+      tools: [Bash, Read, Write, Glob, Grep]
+
+# ==========================================================================
+# Teams — 2 pre-composed configurations
+# ==========================================================================
+
+teams:
+  media-production-team:
+    description: "Full department for end-to-end media production"
+    agents: [audio-engineer, ffmpeg-processor, music-analyzer, podcast-producer, stream-producer, video-editor]
+    use_when: "multi-format production spanning audio, video, streaming, and publishing"
+
+  av-post-team:
+    description: "Audio/video post-production and finishing"
+    agents: [video-editor, stream-producer, ffmpeg-processor, audio-engineer]
+    use_when: "editing, color grading, encoding, and export of captured footage and audio"
+
+# ==========================================================================
+# Evaluation Gates — pre-deploy checks and benchmark thresholds
+# ==========================================================================
+
+evaluation:
+  gates:
+    pre_deploy:
+      - check: "all_skills_have_descriptions"
+        description: "Every skill must have a non-empty description"
+        action: "block"
+
+      - check: "all_agents_have_roles"
+        description: "Every agent must have a non-empty role"
+        action: "block"
+
+      - check: "grove_record_types_defined"
+        description: "All 5 media Grove record types documented"
+        action: "block"
+
+      - check: "college_concept_ids_valid"
+        description: "All referenced concept IDs exist in college media department"
+        action: "block"
+
+      - check: "router_agent_is_capcom"
+        description: "The router agent (audio-engineer) must be CAPCOM"
+        action: "block"
+
+  benchmark:
+    trigger_accuracy_threshold: 0.85
+    test_cases_minimum: 30
+    domains_covered:
+      - media
+      - production
+      - audio
+      - video
+      - ffmpeg
+      - publishing
+      - latex
+
+# ==========================================================================
+# Grove Integration — namespace and record types
+# ==========================================================================
+
+grove:
+  namespace: "media-department"
+  record_types:
+    - name: MediaAsset
+      description: "Source or rendered media file with format, codec, and duration metadata"
+
+    - name: RenderJob
+      description: "Encode/transcode/render job specification with settings and result"
+
+    - name: AudioAnalysis
+      description: "BPM, key, loudness (LUFS), and spectrum measurement result"
+
+    - name: PublishArtifact
+      description: "Built and deployed HTML/PDF document or media output"
+
+    - name: ProductionSession
+      description: "Session log linking deliverables to interaction context"
+
+# ==========================================================================
+# College Integration — department binding
+# ==========================================================================
+
+college:
+  department: "media"
+  concept_graph:
+    read: true
+    write: true
+  try_session_generation: true
+  learning_pathway_updates: true
+  wings:
+    - "Audio Engineering"
+    - "Video Production"
+    - "Media Processing"
+    - "Document Authoring"
+    - "Publishing & Distribution"
+
+# ==========================================================================
+# Customization — forkable department template
+# ==========================================================================
+
+customization:
+  rename_agents: true
+  replace_skills: true
+  swap_grove_types: true
+  remap_college_department: true
+  template_pattern: "department"
