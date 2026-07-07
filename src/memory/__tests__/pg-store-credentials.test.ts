@@ -18,6 +18,11 @@ class MockPool {
   async query(): Promise<{ rows: unknown[] }> {
     return { rows: [] };
   }
+  // applyMigrations() borrows a dedicated client (PG-6) to run the migration
+  // with statement_timeout disabled, then release(true)s it.
+  async connect(): Promise<{ query: () => Promise<{ rows: unknown[] }>; release: (destroy?: boolean) => void }> {
+    return { query: async () => ({ rows: [] }), release: () => {} };
+  }
   on(): void {
     /* pg Pool emits 'error' for idle-client faults; the store registers a listener */
   }
