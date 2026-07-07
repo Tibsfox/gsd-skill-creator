@@ -48,6 +48,20 @@ skills:
       - "abundance"
     agent_affinity: [payne-gaposchkin, burbidge]
 
+  stellar-structure-and-evolution:
+    domain: astronomy
+    description: "Stellar structure and life cycles — HR diagram, hydrostatic equilibrium, main-sequence mass-luminosity, pp-chain/CNO/triple-alpha fusion, nucleosynthesis, red giants and horizontal branch, white dwarfs and the Chandrasekhar limit, supernovae, neutron stars, black holes"
+    triggers:
+      - "HR diagram"
+      - "main sequence"
+      - "stellar evolution"
+      - "hydrostatic equilibrium"
+      - "triple-alpha"
+      - "white dwarf"
+      - "Chandrasekhar limit"
+      - "supernova"
+    agent_affinity: [payne-gaposchkin, chandrasekhar-astro]
+
   orbital-mechanics:
     domain: astronomy
     description: "Kepler's laws, vis-viva, orbital elements, transfer orbits, gravity assists, binary dynamics, solar-system ephemeris computation"

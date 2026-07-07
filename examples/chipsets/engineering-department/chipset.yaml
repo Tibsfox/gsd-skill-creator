@@ -11,12 +11,12 @@ version: 1.0.0
 description: >
   A coordinated engineering department providing domain-routed
   expertise through seven named agents (Brunel, Tesla, Roebling,
-  Johnson-K, Watt, Lovelace-E, Polya-E), six knowledge skills, and
+  Johnson-K, Watt, Lovelace-E, Polya-E), seven knowledge skills, and
   three pre-composed teams. Persists work via Grove records and
   integrates with the college engineering department concept graph.
 
 # ==========================================================================
-# Skills — 6 domain skills with trigger patterns and agent affinity
+# Skills — 7 domain skills with trigger patterns and agent affinity
 # ==========================================================================
 
 skills:
@@ -47,6 +47,26 @@ skills:
       - "bridge"
       - "truss"
     agent_affinity: [roebling, watt]
+
+  control-systems-and-dynamics:
+    domain: engineering
+    description: "Classical control and system dynamics — feedback, closed-loop control, transfer functions, block diagrams, poles/zeros, stability, PID controllers and tuning, frequency response, Bode plots, gain/phase margin, the governor"
+    triggers:
+      - "control system"
+      - "feedback"
+      - "closed-loop"
+      - "transfer function"
+      - "block diagram"
+      - "stability"
+      - "poles and zeros"
+      - "PID"
+      - "controller tuning"
+      - "overshoot"
+      - "settling time"
+      - "Bode plot"
+      - "phase margin"
+      - "governor"
+    agent_affinity: [watt, johnson-k]
 
   systems-engineering:
     domain: engineering

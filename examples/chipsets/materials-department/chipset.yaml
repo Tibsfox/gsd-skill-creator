@@ -62,6 +62,24 @@ skills:
       - "precipitation"
     agent_affinity: [merica, ashby]
 
+  polymers-ceramics-composites:
+    domain: materials
+    description: "Non-metallic engineering materials — polymers (thermoplastics vs thermosets, glass transition, viscoelasticity), ceramics (bonding, sintering, brittleness, Weibull statistics), composites (fiber-reinforced laminates, rule of mixtures, anisotropy)"
+    triggers:
+      - "polymer"
+      - "thermoplastic"
+      - "thermoset"
+      - "glass transition"
+      - "viscoelastic"
+      - "ceramic"
+      - "sintering"
+      - "Weibull"
+      - "composite"
+      - "fiber-reinforced"
+      - "laminate"
+      - "rule of mixtures"
+    agent_affinity: [ashby, gordon]
+
   structural-failure-analysis:
     domain: materials
     description: "Diagnosis of structural failures — fracture, fatigue, creep, SCC, embrittlement"

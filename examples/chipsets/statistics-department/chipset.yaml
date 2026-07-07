@@ -11,12 +11,12 @@ version: 1.0.0
 description: >
   A coordinated statistics department providing domain-routed
   expertise through seven named agents (Pearson, Bayes, Gosset,
-  Box, Efron, Wasserstein, George), six knowledge skills, and
+  Box, Efron, Wasserstein, George), seven knowledge skills, and
   three pre-composed teams. Persists work via Grove records and
   integrates with the college statistics department concept graph.
 
 # ==========================================================================
-# Skills — 6 domain skills with trigger patterns and agent affinity
+# Skills — 7 domain skills with trigger patterns and agent affinity
 # ==========================================================================
 
 skills:
@@ -69,6 +69,19 @@ skills:
       - "residual"
       - "logistic"
       - "fit a model"
+    agent_affinity: [box, efron]
+
+  time-series-analysis:
+    domain: statistics
+    description: "Analyzing time-ordered data — stationarity, differencing, autocorrelation (ACF/PACF), ARIMA, Box-Jenkins, seasonality (SARIMA), forecasting, Ljung-Box diagnostics"
+    triggers:
+      - "time series"
+      - "forecast"
+      - "ARIMA"
+      - "seasonality"
+      - "autocorrelation"
+      - "stationarity"
+      - "Ljung-Box"
     agent_affinity: [box, efron]
 
   bayesian-methods:
