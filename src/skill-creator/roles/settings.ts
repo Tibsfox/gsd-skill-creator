@@ -12,8 +12,7 @@
  * @module skill-creator/roles/settings
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import { readNested, dedicatedConfigPath } from '../../settings/read-settings.js';
 
 export interface WelerRolesConfig {
   enabled: boolean;
@@ -23,37 +22,12 @@ export const DEFAULT_WELER_ROLES_CONFIG: WelerRolesConfig = {
   enabled: false,
 };
 
-function projectRoot(): string {
-  const envRoot = process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
-  if (envRoot && envRoot.length > 0) return envRoot;
-  return process.cwd();
-}
-
-function defaultConfigPath(): string {
-  return path.join(projectRoot(), '.claude', 'gsd-skill-creator.json');
-}
-
 /**
  * Read the W/E/E roles config block, or defaults on any error
  * (missing file / malformed JSON / missing block / wrong shape).
  */
 export function readWelerRolesConfig(settingsPath?: string): WelerRolesConfig {
-  const configPath = settingsPath ?? defaultConfigPath();
-  if (!fs.existsSync(configPath)) {
-    return { ...DEFAULT_WELER_ROLES_CONFIG };
-  }
-  let raw: unknown;
-  try {
-    raw = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  } catch {
-    return { ...DEFAULT_WELER_ROLES_CONFIG };
-  }
-  if (!raw || typeof raw !== 'object') return { ...DEFAULT_WELER_ROLES_CONFIG };
-  const outer = (raw as Record<string, unknown>)['gsd-skill-creator'];
-  if (!outer || typeof outer !== 'object') return { ...DEFAULT_WELER_ROLES_CONFIG };
-  const sweep = (outer as Record<string, unknown>)['cs25-26-sweep'];
-  if (!sweep || typeof sweep !== 'object') return { ...DEFAULT_WELER_ROLES_CONFIG };
-  const block = (sweep as Record<string, unknown>)['weler-roles'];
+  const block = readNested(['cs25-26-sweep', 'weler-roles'], [dedicatedConfigPath(settingsPath)]);
   if (!block || typeof block !== 'object') return { ...DEFAULT_WELER_ROLES_CONFIG };
   const candidate = (block as { enabled?: unknown }).enabled;
   const enabled = typeof candidate === 'boolean' ? candidate : false;

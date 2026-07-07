@@ -22,8 +22,7 @@
  * @module cartridge/megakernel/settings
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import { readNested, dedicatedConfigPath } from '../../settings/read-settings.js';
 
 export type MegakernelSubstrateModule =
   | 'instruction-tensor-schema'
@@ -41,16 +40,6 @@ export const DEFAULT_MEGAKERNEL_SUBSTRATE_CONFIG: MegakernelSubstrateModuleConfi
   enabled: false,
 };
 
-function projectRoot(): string {
-  const envRoot = process.env.GSD_SKILL_CREATOR_CONFIG_ROOT;
-  if (envRoot && envRoot.length > 0) return envRoot;
-  return process.cwd();
-}
-
-function defaultConfigPath(): string {
-  return path.join(projectRoot(), '.claude', 'gsd-skill-creator.json');
-}
-
 /**
  * Read the megakernel-substrate config block for a single module, or defaults
  * on any error (missing file / malformed JSON / missing block / wrong shape).
@@ -62,35 +51,12 @@ export function readMegakernelSubstrateConfig(
   module: MegakernelSubstrateModule,
   settingsPath?: string,
 ): MegakernelSubstrateModuleConfig {
-  const configPath = settingsPath ?? defaultConfigPath();
-  if (!fs.existsSync(configPath)) {
-    return { ...DEFAULT_MEGAKERNEL_SUBSTRATE_CONFIG };
-  }
-  let raw: unknown;
-  try {
-    raw = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  } catch {
-    return { ...DEFAULT_MEGAKERNEL_SUBSTRATE_CONFIG };
-  }
-  const block = extractModuleBlock(raw, module);
-  if (!block) return { ...DEFAULT_MEGAKERNEL_SUBSTRATE_CONFIG };
+  const raw = readNested(['megakernel-substrate', module], [dedicatedConfigPath(settingsPath)]);
+  if (!raw || typeof raw !== 'object') return { ...DEFAULT_MEGAKERNEL_SUBSTRATE_CONFIG };
+  const block = raw as { enabled?: unknown };
   const enabled =
     typeof block.enabled === 'boolean' ? block.enabled : false;
   return { enabled };
-}
-
-function extractModuleBlock(
-  raw: unknown,
-  module: MegakernelSubstrateModule,
-): { enabled?: unknown } | null {
-  if (!raw || typeof raw !== 'object') return null;
-  const outer = (raw as Record<string, unknown>)['gsd-skill-creator'];
-  if (!outer || typeof outer !== 'object') return null;
-  const substrate = (outer as Record<string, unknown>)['megakernel-substrate'];
-  if (!substrate || typeof substrate !== 'object') return null;
-  const block = (substrate as Record<string, unknown>)[module];
-  if (!block || typeof block !== 'object') return null;
-  return block as { enabled?: unknown };
 }
 
 /**
