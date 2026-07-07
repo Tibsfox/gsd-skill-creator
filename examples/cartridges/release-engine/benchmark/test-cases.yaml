@@ -1,0 +1,85 @@
+# release-engine trigger benchmark fixture — natural queries paired with the skill they should activate.
+test_cases:
+  # series-definition
+  - query: "I want to spin up a new release series for the Seattle 360 degrees project."
+    expected_skills: [series-definition]
+  - query: "Let's define series for the upcoming Blender book so each chapter flows as a shipped version."
+    expected_skills: [series-definition]
+
+  # version-policy
+  - query: "Can you bump version to the next subminor before we ship this one?"
+    expected_skills: [version-policy]
+  - query: "There's a version drift between package.json and Cargo.toml — please reconcile it."
+    expected_skills: [version-policy]
+
+  # release-branching
+  - query: "Dev is verified, so it's time to merge to main and cut the tag."
+    expected_skills: [release-branching]
+  - query: "What branch strategy should we adopt for the release pipeline?"
+    expected_skills: [release-branching]
+
+  # changelog-generation
+  - query: "Generate changelog from the conventional-commits history for this release."
+    expected_skills: [changelog-generation]
+  - query: "Were there any breaking changes since the last shipped tag?"
+    expected_skills: [changelog-generation]
+
+  # release-note-authoring
+  - query: "Please write release notes with the Summary and Lessons Learned sections filled in."
+    expected_skills: [release-note-authoring]
+  - query: "Draft the github release body for v1.49.204 in full verbosity."
+    expected_skills: [release-note-authoring]
+
+  # series-cadence-ops
+  - query: "Let's advance cadence and pick up the next mission in the NASA catalog."
+    expected_skills: [series-cadence-ops]
+  - query: "Move on to the next degree — keep it one at a time, no batching."
+    expected_skills: [series-cadence-ops]
+
+  # flywheel-orchestration
+  - query: "Compute the flywheel delta between the last two releases and feed it into planning."
+    expected_skills: [flywheel-orchestration]
+  - query: "How do we improve next release using what we learned from the prior retro?"
+    expected_skills: [flywheel-orchestration]
+
+  # build-and-publish
+  - query: "Run the pandoc build and ftp sync to push this release live."
+    expected_skills: [build-and-publish]
+  - query: "Time to ship release — package the artifacts and upload to the target."
+    expected_skills: [build-and-publish]
+
+  # release-verification
+  - query: "Run the pre ship gate before we create the tag, please."
+    expected_skills: [release-verification]
+  - query: "Do the post ship smoke test to confirm the artifacts are reachable over HTTP."
+    expected_skills: [release-verification]
+
+  # retrospective-and-lessons
+  - query: "Write up the lessons learned before we archive this release."
+    expected_skills: [retrospective-and-lessons]
+  - query: "Let's do the post release retro — what went well and what surprised us?"
+    expected_skills: [retrospective-and-lessons]
+
+  # release-grove-memory
+  - query: "Rehydrate series from grove by walking the activity log in order."
+    expected_skills: [release-grove-memory]
+  - query: "Set up a cross series link so one series' flywheel can feed into another."
+    expected_skills: [release-grove-memory]
+
+  # release-communications
+  - query: "Draft the release announcement and a discord post for the launch."
+    expected_skills: [release-communications]
+  - query: "We need a deprecation notice for the retired release version."
+    expected_skills: [release-communications]
+
+  # hotfix-and-patch
+  - query: "We need a hotfix for the crash that showed up in the shipped build."
+    expected_skills: [hotfix-and-patch]
+  - query: "Ship an out of cadence patch release branched off the last tag."
+    expected_skills: [hotfix-and-patch]
+
+  # series-closeout
+  - query: "We hit degree 360, so it's time to close series and roll up the deltas."
+    expected_skills: [series-closeout]
+  - query: "Write the series retrospective now that the series is complete."
+    expected_skills: [series-closeout]

@@ -1,0 +1,85 @@
+# housekeeping trigger benchmark fixture — natural queries paired with the skill they should activate.
+test_cases:
+  # repo-hygiene
+  - query: "Can you help me clean up repo clutter before the release?"
+    expected_skills: [repo-hygiene]
+  - query: "Let's run a housekeeping sweep and see what untracked junk piled up."
+    expected_skills: [repo-hygiene]
+
+  # gitignore-policy
+  - query: "I need a new gitignore rule so the daemon pids stop showing up."
+    expected_skills: [gitignore-policy]
+  - query: "Why does git check-ignore say this path is tracked?"
+    expected_skills: [gitignore-policy]
+
+  # stale-file-detection
+  - query: "Flag any stale file that nothing references anymore."
+    expected_skills: [stale-file-detection]
+  - query: "Do a dead code scan across the scripts directory."
+    expected_skills: [stale-file-detection]
+
+  # log-retention-and-archival
+  - query: "It's time to rotate logs before the disk fills up."
+    expected_skills: [log-retention-and-archival]
+  - query: "Please archive logs from last quarter into a dated bundle."
+    expected_skills: [log-retention-and-archival]
+
+  # snapshot-and-backup-policy
+  - query: "Go ahead and take snapshot of the whole planning tree now."
+    expected_skills: [snapshot-and-backup-policy]
+  - query: "Our backup policy needs to say which tier each path lands in."
+    expected_skills: [snapshot-and-backup-policy]
+
+  # cold-archive-operations
+  - query: "Move this finished dataset to cold storage and verify it first."
+    expected_skills: [cold-archive-operations]
+  - query: "Can you pack archive these old build outputs with zstd?"
+    expected_skills: [cold-archive-operations]
+
+  # dataset-lifecycle
+  - query: "Help me curate dataset raw inputs into a clean derived set."
+    expected_skills: [dataset-lifecycle]
+  - query: "I want dataset provenance so I can trace this back to source."
+    expected_skills: [dataset-lifecycle]
+
+  # naming-and-layout-conventions
+  - query: "What's our naming convention for versioned folders again?"
+    expected_skills: [naming-and-layout-conventions]
+  - query: "These files break the file naming rules — can you flag them?"
+    expected_skills: [naming-and-layout-conventions]
+
+  # dedup-and-content-addressing
+  - query: "Find duplicates across the repo and the data store."
+    expected_skills: [dedup-and-content-addressing]
+  - query: "Generate a dedup report with the canonical location for each set."
+    expected_skills: [dedup-and-content-addressing]
+
+  # storage-tiering
+  - query: "Which storage tier should this rarely-accessed archive live in?"
+    expected_skills: [storage-tiering]
+  - query: "This path gets hit daily — should we promote tier it to hot?"
+    expected_skills: [storage-tiering]
+
+  # housekeeping-grove-memory
+  - query: "Walk the housekeeping grove and show me the custodial records."
+    expected_skills: [housekeeping-grove-memory]
+  - query: "I need to rehydrate archive history from the grove log."
+    expected_skills: [housekeeping-grove-memory]
+
+  # restore-drill
+  - query: "Schedule a restore drill to prove the backup is usable."
+    expected_skills: [restore-drill]
+  - query: "Let's do a test restore into staging before the migration."
+    expected_skills: [restore-drill]
+
+  # media-and-format-migration
+  - query: "We need a format migration from borg-v1 to borg-v2."
+    expected_skills: [media-and-format-migration]
+  - query: "Plan a media migration from LTO tape to object storage."
+    expected_skills: [media-and-format-migration]
+
+  # retention-policy-enforcement
+  - query: "Run a retention audit against the declared policies."
+    expected_skills: [retention-policy-enforcement]
+  - query: "Check for over retention — data kept hot past its policy."
+    expected_skills: [retention-policy-enforcement]

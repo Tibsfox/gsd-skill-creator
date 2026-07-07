@@ -1,0 +1,85 @@
+# gsd-skill-creator trigger benchmark fixture — natural queries paired with the skill they should activate.
+test_cases:
+  # skill-authoring
+  - query: "I want to create a skill that lints markdown, where do I start?"
+    expected_skills: [skill-authoring]
+  - query: "Help me write skill frontmatter with the right triggers and tools list."
+    expected_skills: [skill-authoring]
+
+  # agent-authoring
+  - query: "Can you help me author an agent that reviews PRs autonomously?"
+    expected_skills: [agent-authoring]
+  - query: "How do I pick a model for this agent — opus or sonnet?"
+    expected_skills: [agent-authoring]
+
+  # team-composition
+  - query: "I need to compose a team for the incident-response workflow."
+    expected_skills: [team-composition]
+  - query: "What should go in the team roster and how do I write the team use_when clause?"
+    expected_skills: [team-composition]
+
+  # chipset-assembly
+  - query: "Walk me through how to build a chipset that bundles these skills and agents."
+    expected_skills: [chipset-assembly]
+  - query: "Which chipset kind do I pick for a discriminated coprocessor chipset?"
+    expected_skills: [chipset-assembly]
+
+  # cartridge-forging
+  - query: "Let's forge a cartridge for the new housekeeping domain from scratch."
+    expected_skills: [cartridge-forging]
+  - query: "Run the cartridge forge loop for me — scaffold, fill, then the gates."
+    expected_skills: [cartridge-forging]
+
+  # cartridge-validation
+  - query: "The forge gate failed on dedup — how do I validate cartridge collisions?"
+    expected_skills: [cartridge-validation]
+  - query: "I have validation debt to track before shipping this cartridge."
+    expected_skills: [cartridge-validation]
+
+  # grove-memory-import
+  - query: "How do I import skills into grove from my flat files directory?"
+    expected_skills: [grove-memory-import]
+  - query: "Run import-filesystem-skills to populate grove with the current library."
+    expected_skills: [grove-memory-import]
+
+  # grove-record-modeling
+  - query: "Help me design grove records for the artifacts this cartridge produces."
+    expected_skills: [grove-record-modeling]
+  - query: "What's a good grove namespace and grove record type for a migration log?"
+    expected_skills: [grove-record-modeling]
+
+  # grove-query-retrieval
+  - query: "I need to query grove for a skill by name and its dependency chain."
+    expected_skills: [grove-query-retrieval]
+  - query: "Show me how multi-hop retrieval works across the grove arena."
+    expected_skills: [grove-query-retrieval]
+
+  # grove-migration
+  - query: "I need to migrate grove state between two format versions safely."
+    expected_skills: [grove-migration]
+  - query: "Explain the grove tier classification during an arenaset migration."
+    expected_skills: [grove-migration]
+
+  # grove-export-snapshot
+  - query: "Can you export grove state to a portable snapshot for the other machine?"
+    expected_skills: [grove-export-snapshot]
+  - query: "I want to write arena.json and produce a grove manifest for CI fixtures."
+    expected_skills: [grove-export-snapshot]
+
+  # skill-testing
+  - query: "How do I test a skill's trigger accuracy with vitest?"
+    expected_skills: [skill-testing]
+  - query: "Write a cartridge round-trip test that validates load and gate assertions."
+    expected_skills: [skill-testing]
+
+  # package-publishing
+  - query: "Time to publish skill-creator — can you bump version across the manifests?"
+    expected_skills: [package-publishing]
+  - query: "I need to write release notes before the npx publish goes out."
+    expected_skills: [package-publishing]
+
+  # gsd-harness-integration
+  - query: "Help me wire the claude hooks and a pretooluse hook into settings."
+    expected_skills: [gsd-harness-integration]
+  - query: "Run the project-claude install and check harness integrity afterward."
+    expected_skills: [gsd-harness-integration]

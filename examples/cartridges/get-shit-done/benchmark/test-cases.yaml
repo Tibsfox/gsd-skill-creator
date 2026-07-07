@@ -1,0 +1,91 @@
+# get-shit-done trigger benchmark fixture — natural queries paired with the skill they should activate.
+test_cases:
+  # project-roadmapping
+  - query: "I want to bootstrap project scaffolding and lay out the phases for my new app idea"
+    expected_skills: [project-roadmapping]
+  - query: "Can you help me author roadmap for the payments rewrite from scratch?"
+    expected_skills: [project-roadmapping]
+
+  # milestone-management
+  - query: "Time to start a new milestone for the Q3 dashboard work"
+    expected_skills: [milestone-management]
+  - query: "Generate a milestone summary before we archive this cycle"
+    expected_skills: [milestone-management]
+
+  # phase-planning
+  - query: "Let's plan phase 3 of the auth refactor with a proper task list"
+    expected_skills: [phase-planning]
+  - query: "I need a phase task breakdown before we start writing any code"
+    expected_skills: [phase-planning]
+
+  # phase-discussion
+  - query: "Let's discuss phase 2 first — it's too ambiguous to plan directly"
+    expected_skills: [phase-discussion]
+  - query: "Can you list phase assumptions so we agree before committing to a plan?"
+    expected_skills: [phase-discussion]
+
+  # phase-research
+  - query: "Run the research phase for the storage migration before we plan it"
+    expected_skills: [phase-research]
+  - query: "Kick off a research pass on the streaming backend options"
+    expected_skills: [phase-research]
+
+  # phase-execution
+  - query: "Go ahead and execute phase 4 now that the plan is frozen"
+    expected_skills: [phase-execution]
+  - query: "Just run phase 5 end to end please, no more questions"
+    expected_skills: [phase-execution]
+
+  # phase-verification
+  - query: "Can you verify work on the checkout flow phase against its goal?"
+    expected_skills: [phase-verification]
+  - query: "I need a phase verdict with the evidence chain before we move on"
+    expected_skills: [phase-verification]
+
+  # backlog-and-todos
+  - query: "Let's review backlog and promote a couple of items into this milestone"
+    expected_skills: [backlog-and-todos]
+  - query: "Can you groom backlog and clear out the stale entries?"
+    expected_skills: [backlog-and-todos]
+
+  # debugging-and-forensics
+  - query: "Start a debug session on this intermittently failing test"
+    expected_skills: [debugging-and-forensics]
+  - query: "We need a regression investigation on the sudden perf drop"
+    expected_skills: [debugging-and-forensics]
+
+  # ui-phase-workflow
+  - query: "Let's kick off the ui phase for the new analytics dashboard"
+    expected_skills: [ui-phase-workflow]
+  - query: "Run a visual audit on the redesigned settings screen"
+    expected_skills: [ui-phase-workflow]
+
+  # codebase-mapping
+  - query: "Can you map codebase so I understand how the modules fit together?"
+    expected_skills: [codebase-mapping]
+  - query: "I want an architecture snapshot of the backend before planning"
+    expected_skills: [codebase-mapping]
+
+  # grove-memory-operations
+  - query: "Run a grove query to pull up the last decision log we recorded"
+    expected_skills: [grove-memory-operations]
+  - query: "Can you do a multi-hop retrieval across the linked phase records?"
+    expected_skills: [grove-memory-operations]
+
+  # session-handoff
+  - query: "Let's pause work and capture where we are so I can resume tomorrow"
+    expected_skills: [session-handoff]
+  - query: "Generate a session report for the next agent before I sign off"
+    expected_skills: [session-handoff]
+
+  # ship-and-release
+  - query: "Time to ship milestone 2 — prep the branch and PR"
+    expected_skills: [ship-and-release]
+  - query: "Draft the release notes for this version's changelog"
+    expected_skills: [ship-and-release]
+
+  # user-and-project-profile
+  - query: "Update my developer preferences to lower the verbosity"
+    expected_skills: [user-and-project-profile]
+  - query: "Show me the gsd stats and progress telemetry for this project"
+    expected_skills: [user-and-project-profile]
