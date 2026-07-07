@@ -263,6 +263,82 @@ function generateHTML(img: ImageData, opts: Pic2HtmlOptions): string {
 
 // ── Main command ──
 
+const PIC2HTML_USAGE = `skill-creator pic2html <image> [options]
+
+Convert an image into HTML table art — each pixel block becomes a colored <td>.
+
+Options:
+  --size <n>        Pixel block size (default 8)
+  --output, -o <f>  Write the HTML to a file instead of stdout
+  --grayscale       Render in grayscale
+  --levels <n>      Grayscale levels (default 16)
+  --max-width <n>   Cap output width in blocks
+  --quantize <n>    Quantize colors to n levels per channel
+  --bg <color>      Background color (default white)
+  --help, -h        Show this help`;
+
+/**
+ * CLI entry point for `skill-creator pic2html` — parses argv into
+ * {@link Pic2HtmlOptions} and runs {@link pic2html}. Returns a process exit
+ * code (0 ok, 1 runtime error, 2 usage error).
+ */
+export async function pic2htmlCli(
+  args: string[],
+  ctx?: ProcessContext,
+): Promise<number> {
+  const opts: Pic2HtmlOptions = { size: 8, grayscale: false, levels: 16, bg: 'white' };
+  const positionals: string[] = [];
+  for (let i = 0; i < args.length; i++) {
+    const a = args[i];
+    switch (a) {
+      case '--help':
+      case '-h':
+        console.log(PIC2HTML_USAGE);
+        return 0;
+      case '--grayscale':
+        opts.grayscale = true;
+        break;
+      case '--size':
+        opts.size = Number(args[++i]);
+        break;
+      case '--levels':
+        opts.levels = Number(args[++i]);
+        break;
+      case '--max-width':
+        opts.maxWidth = Number(args[++i]);
+        break;
+      case '--quantize':
+        opts.quantize = Number(args[++i]);
+        break;
+      case '--bg':
+        opts.bg = args[++i];
+        break;
+      case '--output':
+      case '-o':
+        opts.output = args[++i];
+        break;
+      default:
+        if (a.startsWith('-')) {
+          console.error(`pic2html: unknown flag: ${a}\n\n${PIC2HTML_USAGE}`);
+          return 2;
+        }
+        positionals.push(a);
+    }
+  }
+  const imagePath = positionals[0];
+  if (!imagePath) {
+    console.error(`pic2html: missing <image>\n\n${PIC2HTML_USAGE}`);
+    return 2;
+  }
+  try {
+    await pic2html(imagePath, opts, ctx);
+    return 0;
+  } catch (err) {
+    console.error(`pic2html: ${err instanceof Error ? err.message : String(err)}`);
+    return 1;
+  }
+}
+
 export async function pic2html(
   imagePath: string,
   opts: Pic2HtmlOptions,

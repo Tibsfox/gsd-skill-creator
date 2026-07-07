@@ -27,6 +27,8 @@ Commands:
   skill             Skill-namespaced subcommands (test-triggering)
   simulate, sim     Predict which skill would activate for a prompt
   predict-next, pn  Predict next-likely skill activation + record calibration event
+  activations, act  Show skill activation history and reports
+  cadence, cad      Cadence calibration loop for skill maintenance
   budget, bg        Show character budget usage across all skills
   budget-estimate, be  Show token budget estimates per agent profile
   capabilities, cap  Generate or show capability manifest (CAPABILITIES.md)
@@ -65,6 +67,7 @@ Commands:
   ab, ab-test       Skill A/B harness (variant comparison, status, list)
   discover, disc    Discover skill candidates from session history
   amiga, am         Mine skill candidates via the AMIGA meta-mission detector (--corpus, --emit)
+  pic2html          Convert an image into HTML table art (--size, --grayscale, --levels)
   quality, q        Show per-skill health scores (precision, success rate, efficiency)
   graph, gr         Output Mermaid diagram of skill relationships
   impact, imp       Analyze inheritance impact of modifying a skill
