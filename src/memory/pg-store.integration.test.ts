@@ -16,6 +16,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { PgStore } from './pg-store.js';
+import type { TurnEmbedder } from './pg-store.js';
 import { MemoryService } from './service.js';
 import { loadPgEnv } from '../scribe/pg-runtime/env-loader.js';
 import { inferTemporalClass } from './types.js';
@@ -322,5 +323,141 @@ describe.skipIf(!RUN)('PgStore conversation history (PG_TEST)', () => {
       [sessionId],
     );
     expect(rows[0].turn_count).toBe(2);
+  });
+});
+
+describe.skipIf(!RUN)('PgStore conversation embeddings (PG-5)', () => {
+  let cleanupPool: any; // pg.Pool — dynamically imported
+  const stores: PgStore[] = [];
+  const sessionIds: string[] = [];
+  let envUrl: string | undefined;
+
+  // Unit basis vectors, so cosine is exactly 1 (same axis) or 0 (orthogonal).
+  const E = (i: number): number[] => {
+    const v = new Array(384).fill(0);
+    v[i] = 1;
+    return v;
+  };
+  // Deterministic content → vector mapping keyed by marker word.
+  const markerEmbedder: TurnEmbedder = {
+    embed: async (text: string) => ({
+      embedding: text.includes('alphamark') ? E(0) : text.includes('betamark') ? E(1) : E(2),
+    }),
+  };
+
+  async function makeStore(embedder?: TurnEmbedder): Promise<PgStore> {
+    const s = new PgStore({ connectionString: envUrl }, embedder);
+    await s.init();
+    stores.push(s);
+    return s;
+  }
+
+  beforeAll(async () => {
+    const env = loadPgEnv();
+    if (!env.ok) throw new Error('PG_TEST set but RH_POSTGRES_URL is not resolvable');
+    envUrl = env.url;
+    const pg = await import('pg');
+    cleanupPool = new pg.default.Pool({ connectionString: envUrl });
+  });
+
+  afterAll(async () => {
+    for (const id of sessionIds) {
+      try {
+        await cleanupPool.query('DELETE FROM gsd_memory.conversation_sessions WHERE id = $1', [id]);
+      } catch {
+        /* ignore */
+      }
+    }
+    await cleanupPool.end();
+    await Promise.all(stores.map((s) => s.close()));
+  });
+
+  it('embeds turns at store time and ranks conversation search by cosine', async () => {
+    const store = await makeStore(markerEmbedder);
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    const tag = sessionId.slice(0, 8);
+    await store.storeSession({ id: sessionId, startedAt: new Date() });
+    await store.storeTurn({ id: `near-${tag}`, sessionId, role: 'user', content: 'alphamark near content', timestamp: new Date() });
+    await store.storeTurn({ id: `far-${tag}`, sessionId, role: 'user', content: 'betamark far content', timestamp: new Date() });
+
+    // Query on the alpha axis: the near turn (cosine 1) ranks above far (cosine 0).
+    const hits = await store.searchConversationsByEmbedding(E(0), 10);
+    const near = hits.find((h) => h.turn.id === `near-${tag}`);
+    const far = hits.find((h) => h.turn.id === `far-${tag}`);
+    expect(near).toBeDefined();
+    expect(near!.score).toBeGreaterThan(0.9);
+    expect(far).toBeDefined();
+    expect(near!.score).toBeGreaterThan(far!.score);
+
+    // Direct column check: the vector was actually written, not just retrievable.
+    const chk = await cleanupPool.query('SELECT embedding FROM gsd_memory.conversation_turns WHERE id = $1', [`near-${tag}`]);
+    expect(chk.rows[0].embedding).not.toBeNull();
+  });
+
+  it('honors the session filter on semantic search', async () => {
+    const store = await makeStore(markerEmbedder);
+    const s1 = randomUUID();
+    const s2 = randomUUID();
+    sessionIds.push(s1, s2);
+    const tag = s1.slice(0, 8);
+    await store.storeSession({ id: s1, startedAt: new Date() });
+    await store.storeSession({ id: s2, startedAt: new Date() });
+    await store.storeTurn({ id: `s1-${tag}`, sessionId: s1, role: 'user', content: 'alphamark one', timestamp: new Date() });
+    await store.storeTurn({ id: `s2-${tag}`, sessionId: s2, role: 'user', content: 'alphamark two', timestamp: new Date() });
+
+    const filtered = await store.searchConversationsByEmbedding(E(0), 20, [s1]);
+    expect(filtered.length).toBeGreaterThan(0);
+    expect(filtered.every((h) => h.sessionId === s1)).toBe(true);
+    expect(filtered.some((h) => h.turn.id === `s2-${tag}`)).toBe(false);
+  });
+
+  it('stores turns without a vector when no embedder is configured (excluded from semantic search)', async () => {
+    const store = await makeStore(); // no embedder
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    const tag = sessionId.slice(0, 8);
+    const marker = 'noembedmark' + tag;
+    await store.storeSession({ id: sessionId, startedAt: new Date() });
+    await store.storeTurn({ id: `ne-${tag}`, sessionId, role: 'user', content: `${marker} content`, timestamp: new Date() });
+
+    // No embedding -> excluded from semantic search...
+    const sem = await store.searchConversationsByEmbedding(E(0), 50);
+    expect(sem.some((h) => h.turn.id === `ne-${tag}`)).toBe(false);
+    // ...but still found by full-text search.
+    const ft = await store.searchConversations(marker, 20);
+    expect(ft.some((h) => h.turn.id === `ne-${tag}`)).toBe(true);
+
+    // Direct column check: the embedding column is NULL (nothing written).
+    const chk = await cleanupPool.query('SELECT embedding FROM gsd_memory.conversation_turns WHERE id = $1', [`ne-${tag}`]);
+    expect(chk.rows[0].embedding).toBeNull();
+  });
+
+  it('degrades gracefully when the embedder throws: the turn is still stored (no vector)', async () => {
+    const throwing: TurnEmbedder = {
+      embed: async () => {
+        throw new Error('embed backend down');
+      },
+    };
+    const store = await makeStore(throwing);
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    const tag = sessionId.slice(0, 8);
+    const marker = 'gracemark' + tag;
+    await store.storeSession({ id: sessionId, startedAt: new Date() });
+
+    await expect(
+      store.storeTurn({ id: `g-${tag}`, sessionId, role: 'user', content: `${marker} content`, timestamp: new Date() }),
+    ).resolves.toBeUndefined();
+
+    // Stored (full-text finds it) but with no vector (excluded from semantic).
+    const ft = await store.searchConversations(marker, 20);
+    expect(ft.some((h) => h.turn.id === `g-${tag}`)).toBe(true);
+    const sem = await store.searchConversationsByEmbedding(E(0), 50);
+    expect(sem.some((h) => h.turn.id === `g-${tag}`)).toBe(false);
+
+    // Direct column check: the embed failure left the embedding NULL.
+    const chk = await cleanupPool.query('SELECT embedding FROM gsd_memory.conversation_turns WHERE id = $1', [`g-${tag}`]);
+    expect(chk.rows[0].embedding).toBeNull();
   });
 });

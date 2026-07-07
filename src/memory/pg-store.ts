@@ -107,6 +107,17 @@ interface ConversationTurnRow {
   tags: string[];
 }
 
+/**
+ * Minimal embedder used to vectorize conversation turns at store time (PG-5).
+ * `EmbeddingService` is the intended production implementation (it satisfies
+ * this structurally); tests pass a stub. No production caller wires an embedder
+ * yet — turns are embedded only once a conversation source is wired to a
+ * PgStore constructed with one (a separate ConversationStore follow-up).
+ */
+export interface TurnEmbedder {
+  embed(text: string): Promise<{ embedding: number[] }>;
+}
+
 // ─── SQL Migrations ──────────────────────────────────────────────────────────
 
 const MIGRATIONS = [
@@ -254,8 +265,11 @@ export class PgStore implements MemoryStore {
   private pool: any = null; // pg.Pool — dynamically imported
   private initialized = false;
   private initPromise: Promise<void> | null = null;
+  /** Optional embedder for conversation turns (PG-5); undefined = no vectors. */
+  private readonly embedder?: TurnEmbedder;
 
-  constructor(config: PgStoreConfig = {}) {
+  constructor(config: PgStoreConfig = {}, embedder?: TurnEmbedder) {
+    this.embedder = embedder;
     // Resolve credentials via the canonical loader — RH_POSTGRES_URL from
     // process.env or the repo .env — unless the caller pinned a connection
     // string or an explicit host. Without this the store defaulted to
@@ -772,13 +786,27 @@ export class PgStore implements MemoryStore {
   }): Promise<void> {
     if (!await this.ensureReady()) return;
 
+    // Embed the turn content at store time so semantic conversation search
+    // works without a later re-embedding pass (PG-5). Degrade gracefully: no
+    // embedder, or an embed failure, stores the turn with a NULL vector rather
+    // than dropping it. Serialized as a pgvector literal (NULL casts cleanly).
+    let embedding: string | null = null;
+    if (this.embedder) {
+      try {
+        const { embedding: vec } = await this.embedder.embed(turn.content);
+        if (Array.isArray(vec) && vec.length > 0) embedding = `[${vec.join(',')}]`;
+      } catch {
+        embedding = null;
+      }
+    }
+
     await this.pool.query(`
-      INSERT INTO gsd_memory.conversation_turns (id, session_id, role, content, timestamp, tool_calls, files_accessed, tags)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      INSERT INTO gsd_memory.conversation_turns (id, session_id, role, content, timestamp, tool_calls, files_accessed, tags, embedding)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9::vector)
       ON CONFLICT (id) DO NOTHING
     `, [
       turn.id, turn.sessionId, turn.role, turn.content, turn.timestamp,
-      turn.toolCalls ?? null, turn.filesAccessed ?? null, turn.tags ?? [],
+      turn.toolCalls ?? null, turn.filesAccessed ?? null, turn.tags ?? [], embedding,
     ]);
 
     // Update session turn count
@@ -820,7 +848,15 @@ export class PgStore implements MemoryStore {
     `;
 
     const result = await this.pool.query(sql, params);
-    return result.rows.map((row: any) => ({
+    return result.rows.map((row: any) => this.toTurnResult(row, row.rank));
+  }
+
+  /** Project a conversation_turns row into a search result with a given score. */
+  private toTurnResult(
+    row: any,
+    score: number,
+  ): { turn: ConversationTurnRow; sessionId: string; score: number } {
+    return {
       turn: {
         id: row.id,
         session_id: row.session_id,
@@ -832,8 +868,43 @@ export class PgStore implements MemoryStore {
         tags: row.tags ?? [],
       },
       sessionId: row.session_id,
-      score: row.rank,
-    }));
+      score,
+    };
+  }
+
+  /**
+   * Semantic search over conversation turns via pgvector cosine similarity
+   * (PG-5), complementing the full-text searchConversations. Turns stored
+   * without an embedding are excluded. This data is ALWAYS PRIVATE — never
+   * synced externally.
+   */
+  async searchConversationsByEmbedding(
+    embedding: number[],
+    limit = 20,
+    sessionFilter?: string[],
+  ): Promise<Array<{ turn: ConversationTurnRow; sessionId: string; score: number }>> {
+    if (!await this.ensureReady()) return [];
+
+    const conditions = ['embedding IS NOT NULL'];
+    const params: any[] = [`[${embedding.join(',')}]`, limit];
+    let paramIdx = 3;
+    if (sessionFilter && sessionFilter.length > 0) {
+      conditions.push(`session_id = ANY($${paramIdx})`);
+      params.push(sessionFilter);
+      paramIdx++;
+    }
+
+    const sql = `
+      SELECT *,
+        1 - (embedding <=> $1::vector) AS score
+      FROM gsd_memory.conversation_turns
+      WHERE ${conditions.join(' AND ')}
+      ORDER BY embedding <=> $1::vector
+      LIMIT $2
+    `;
+
+    const result = await this.pool.query(sql, params);
+    return result.rows.map((row: any) => this.toTurnResult(row, row.score));
   }
 
   /** Get recent conversation turns across all sessions. */
