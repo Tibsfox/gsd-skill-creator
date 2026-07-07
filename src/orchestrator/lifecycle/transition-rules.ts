@@ -13,6 +13,7 @@
  * primary suggestion accordingly.
  */
 
+import { canonicalCommandName } from '../command-name.js';
 import type { LifecycleStage } from '../intent/types.js';
 import type { PhaseArtifacts, ActionSuggestion, NextStepSuggestion } from './types.js';
 
@@ -53,7 +54,7 @@ function suggestion(
  */
 function enrichContext(baseContext: string, completedCommand?: string): string {
   if (!completedCommand) return baseContext;
-  if (SIDE_QUEST_COMMANDS.has(completedCommand)) {
+  if (SIDE_QUEST_COMMANDS.has(canonicalCommandName(completedCommand))) {
     return `Returning to phase work after ${completedCommand}. ${baseContext}`;
   }
   return `After ${completedCommand}: ${baseContext}`;
@@ -66,10 +67,14 @@ function enrichContext(baseContext: string, completedCommand?: string): string {
 /** Side-quest commands that don't change the artifact-derived suggestion */
 const SIDE_QUEST_COMMANDS = new Set(['gsd:quick', 'gsd:debug']);
 
-/** Phase mutation commands that override primary to plan-phase */
+/**
+ * Commands whose completion overrides the primary suggestion to plan-phase.
+ * The unified `gsd:phase` (add/insert/edit) replaced the removed granular
+ * `add-phase`/`insert-phase`; a phase mutation means a phase now needs planning.
+ * Keys are canonical (colon) form — `completedCommand` is normalized before lookup.
+ */
 const PHASE_MUTATION_COMMANDS: Record<string, string> = {
-  'gsd:insert-phase': 'Newly inserted phase needs planning.',
-  'gsd:add-phase': 'Newly added phase needs planning.',
+  'gsd:phase': 'Phase roadmap changed; the affected phase needs planning.',
 };
 
 // ============================================================================
@@ -162,7 +167,7 @@ function phaseLevelSuggestion(
       return suggestion(
         action('gsd:plan-phase', 'Context captured. Create detailed execution plans.', phaseNum, true),
         [
-          action('gsd:research-phase', 'Research the domain before planning.', phaseNum),
+          action('gsd:explore', 'Explore the problem space before planning.', phaseNum),
           action('gsd:discuss-phase', 'Continue discussing approach.', phaseNum),
         ],
         stage,
@@ -175,7 +180,7 @@ function phaseLevelSuggestion(
       action('gsd:discuss-phase', 'No context or plans yet. Discuss the phase approach first.', phaseNum),
       [
         action('gsd:plan-phase', 'Skip discussion and create plans directly.', phaseNum, true),
-        action('gsd:research-phase', 'Research the domain before planning.', phaseNum),
+        action('gsd:explore', 'Explore the problem space before planning.', phaseNum),
       ],
       stage,
       enrichContext(`Phase ${phaseNum} has no artifacts. Discuss or plan to begin.`, completedCommand),
@@ -269,7 +274,7 @@ function phaseLevelSuggestion(
  * If completedCommand is provided, it enriches the context field
  * without overriding the artifact-derived primary suggestion.
  * Side-quest commands (quick/debug) add a "Returning to phase work" prefix.
- * Phase mutation commands (insert-phase/add-phase) override the primary
+ * Phase mutation commands (gsd:phase add/insert) override the primary
  * to gsd:plan-phase for the newly added/inserted phase.
  *
  * If nextPhaseNumber is provided and the current phase is fully complete,
@@ -291,9 +296,13 @@ export function deriveNextActions(
   const stageResult = stageLevelSuggestion(stage, completedCommand);
   if (stageResult) return stageResult;
 
-  // Check for phase mutation commands (insert/add) -> override to plan-phase
-  if (completedCommand && completedCommand in PHASE_MUTATION_COMMANDS) {
-    const reason = PHASE_MUTATION_COMMANDS[completedCommand];
+  // Check for phase mutation commands (gsd:phase add/insert) -> override to
+  // plan-phase. Normalize first: completedCommand arrives in hyphen form.
+  const canonicalCompleted = completedCommand
+    ? canonicalCommandName(completedCommand)
+    : undefined;
+  if (canonicalCompleted && canonicalCompleted in PHASE_MUTATION_COMMANDS) {
+    const reason = PHASE_MUTATION_COMMANDS[canonicalCompleted];
     return suggestion(
       action('gsd:plan-phase', reason, artifacts.phaseNumber, true),
       [

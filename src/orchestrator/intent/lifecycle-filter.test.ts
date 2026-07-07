@@ -55,7 +55,8 @@ const ALL_COMMANDS: GsdCommandMetadata[] = [
   makeCommand('gsd:quick'),
   makeCommand('gsd:debug'),
   makeCommand('gsd:settings'),
-  makeCommand('gsd:add-todo'),
+  makeCommand('gsd:config'),
+  makeCommand('gsd:capture'),
   makeCommand('gsd:pause-work'),
   makeCommand('gsd:resume-work'),
   // Stage-specific commands
@@ -63,16 +64,13 @@ const ALL_COMMANDS: GsdCommandMetadata[] = [
   makeCommand('gsd:new-milestone'),
   makeCommand('gsd:plan-phase'),
   makeCommand('gsd:discuss-phase'),
-  makeCommand('gsd:research-phase'),
-  makeCommand('gsd:list-phase-assumptions'),
+  makeCommand('gsd:phase'),
   makeCommand('gsd:execute-phase'),
   makeCommand('gsd:verify-work'),
   makeCommand('gsd:audit-milestone'),
   makeCommand('gsd:complete-milestone'),
-  makeCommand('gsd:plan-milestone-gaps'),
-  makeCommand('gsd:add-phase'),
-  makeCommand('gsd:insert-phase'),
-  makeCommand('gsd:remove-phase'),
+  // Hyphen frontmatter form — must canonicalize and route like gsd:phase
+  makeCommand('gsd-phase'),
   // Unknown command (should be excluded)
   makeCommand('gsd:unknown-command'),
 ];
@@ -228,7 +226,7 @@ describe('UNIVERSAL_COMMANDS', () => {
     expect(UNIVERSAL_COMMANDS.has('gsd:progress')).toBe(true);
     expect(UNIVERSAL_COMMANDS.has('gsd:quick')).toBe(true);
     expect(UNIVERSAL_COMMANDS.has('gsd:debug')).toBe(true);
-    expect(UNIVERSAL_COMMANDS.has('gsd:add-todo')).toBe(true);
+    expect(UNIVERSAL_COMMANDS.has('gsd:capture')).toBe(true);
   });
 
   it('does not include stage-specific commands', () => {
@@ -274,7 +272,9 @@ describe('filterByLifecycle', () => {
     const names = result.map(c => c.name);
     expect(names).toContain('gsd:plan-phase');
     expect(names).toContain('gsd:discuss-phase');
-    expect(names).toContain('gsd:research-phase');
+    expect(names).toContain('gsd:phase');
+    // The hyphen frontmatter form canonicalizes and routes to the same stage.
+    expect(names).toContain('gsd-phase');
     expect(names).not.toContain('gsd:new-project');
   });
 

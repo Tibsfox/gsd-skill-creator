@@ -13,6 +13,7 @@
 
 import type { ProjectState } from '../state/types.js';
 import type { GsdCommandMetadata } from '../discovery/types.js';
+import { canonicalCommandName } from '../command-name.js';
 import type { LifecycleStage } from './types.js';
 
 // ============================================================================
@@ -31,10 +32,8 @@ export const UNIVERSAL_COMMANDS = new Set([
   'gsd:quick',
   'gsd:debug',
   'gsd:settings',
-  'gsd:set-profile',
-  'gsd:add-todo',
-  'gsd:check-todos',
-  'gsd:join-discord',
+  'gsd:config',
+  'gsd:capture',
   'gsd:update',
   'gsd:pause-work',
   'gsd:resume-work',
@@ -49,7 +48,11 @@ export const UNIVERSAL_COMMANDS = new Set([
  * Maps each lifecycle stage to the set of stage-specific commands
  * (excluding universals, which are always added).
  */
-const STAGE_COMMANDS: Record<LifecycleStage, ReadonlySet<string>> = {
+// Every command below must exist in the shipped GSD command set — the unified
+// `gsd:phase` replaced the removed granular `add|insert|remove-phase` commands,
+// and `research-phase` / `list-phase-assumptions` / `plan-milestone-gaps` no
+// longer ship. The ORCH-N1 drift-guard test enforces this membership.
+export const STAGE_COMMANDS: Record<LifecycleStage, ReadonlySet<string>> = {
   uninitialized: new Set([
     'gsd:new-project',
   ]),
@@ -59,49 +62,34 @@ const STAGE_COMMANDS: Record<LifecycleStage, ReadonlySet<string>> = {
   roadmapped: new Set([
     'gsd:plan-phase',
     'gsd:discuss-phase',
-    'gsd:research-phase',
-    'gsd:list-phase-assumptions',
-    'gsd:add-phase',
-    'gsd:insert-phase',
-    'gsd:remove-phase',
+    'gsd:phase',
   ]),
   planning: new Set([
     'gsd:plan-phase',
     'gsd:discuss-phase',
-    'gsd:research-phase',
-    'gsd:list-phase-assumptions',
-    'gsd:add-phase',
-    'gsd:insert-phase',
-    'gsd:remove-phase',
+    'gsd:phase',
   ]),
   executing: new Set([
     'gsd:execute-phase',
     'gsd:plan-phase',
     'gsd:verify-work',
-    'gsd:add-phase',
-    'gsd:insert-phase',
-    'gsd:remove-phase',
+    'gsd:phase',
   ]),
   verifying: new Set([
     'gsd:verify-work',
     'gsd:execute-phase',
     'gsd:plan-phase',
-    'gsd:add-phase',
-    'gsd:insert-phase',
-    'gsd:remove-phase',
+    'gsd:phase',
   ]),
   'between-phases': new Set([
     'gsd:plan-phase',
     'gsd:discuss-phase',
-    'gsd:add-phase',
-    'gsd:insert-phase',
-    'gsd:remove-phase',
+    'gsd:phase',
     'gsd:audit-milestone',
   ]),
   'milestone-end': new Set([
     'gsd:audit-milestone',
     'gsd:complete-milestone',
-    'gsd:plan-milestone-gaps',
     'gsd:new-milestone',
   ]),
 };
@@ -191,7 +179,10 @@ export function filterByLifecycle(
 ): GsdCommandMetadata[] {
   const stageSpecific = STAGE_COMMANDS[stage] ?? new Set<string>();
 
-  return commands.filter(cmd =>
-    UNIVERSAL_COMMANDS.has(cmd.name) || stageSpecific.has(cmd.name),
-  );
+  return commands.filter(cmd => {
+    // Discovered names arrive in hyphen form (gsd-phase); the sets are colon
+    // form (gsd:phase). Canonicalize before membership so filtering works.
+    const name = canonicalCommandName(cmd.name);
+    return UNIVERSAL_COMMANDS.has(name) || stageSpecific.has(name);
+  });
 }

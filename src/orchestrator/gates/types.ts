@@ -63,6 +63,11 @@ export interface GateEvaluatorOptions {
  * via GateEvaluatorOptions.destructiveCommands.
  */
 export const DEFAULT_DESTRUCTIVE_COMMANDS: Set<string> = new Set([
-  'gsd:remove-phase',
+  // `gsd:phase` is multiplex (add/insert/remove/edit). Removal is destructive,
+  // and name-level gating can't see the sub-action, so we gate the whole
+  // command conservatively — this over-confirms benign phase edits in YOLO but
+  // never lets a `phase --remove` auto-execute ungated. (Sub-action-aware
+  // gating is tracked as ORCH-N2.) Replaces the removed `gsd:remove-phase`.
+  'gsd:phase',
   'gsd:complete-milestone',
 ]);

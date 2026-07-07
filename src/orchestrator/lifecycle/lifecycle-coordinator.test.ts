@@ -371,7 +371,7 @@ describe('LifecycleCoordinator - next-phase resolution', () => {
 // ============================================================================
 
 describe('LifecycleCoordinator - phase mutation commands', () => {
-  it('gsd:insert-phase returns plan-phase suggestion', async () => {
+  it('gsd:phase (insert) returns plan-phase suggestion', async () => {
     const planningDir = createTempDir();
     const phasesDir = join(planningDir, 'phases');
     const phaseDir = join(phasesDir, '39-lifecycle-coordination');
@@ -390,13 +390,13 @@ describe('LifecycleCoordinator - phase mutation commands', () => {
       },
     });
 
-    const result = await coordinator.suggestNextStep(state, 'gsd:insert-phase');
+    const result = await coordinator.suggestNextStep(state, 'gsd:phase');
 
     expect(result.primary.command).toBe('gsd:plan-phase');
-    expect(result.context).toMatch(/inserted/i);
+    expect(result.context).toMatch(/needs planning/i);
   });
 
-  it('gsd:add-phase returns plan-phase suggestion', async () => {
+  it('gsd:phase (add) returns plan-phase suggestion', async () => {
     const planningDir = createTempDir();
     const phasesDir = join(planningDir, 'phases');
     const phaseDir = join(phasesDir, '40-cli');
@@ -412,10 +412,10 @@ describe('LifecycleCoordinator - phase mutation commands', () => {
       plansByPhase: { '40': [] },
     });
 
-    const result = await coordinator.suggestNextStep(state, 'gsd:add-phase');
+    const result = await coordinator.suggestNextStep(state, 'gsd:phase');
 
     expect(result.primary.command).toBe('gsd:plan-phase');
-    expect(result.context).toMatch(/added/i);
+    expect(result.context).toMatch(/needs planning/i);
   });
 });
 

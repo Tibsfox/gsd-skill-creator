@@ -10,6 +10,7 @@
 // Gate priority: destructive > low-confidence > confirmation > routing
 
 import { evaluateGate } from './gate-evaluator.js';
+import { canonicalCommandName } from '../command-name.js';
 import type { GateDecision, GateEvaluatorOptions } from './types.js';
 
 /**
@@ -75,7 +76,7 @@ export function evaluateConfirmationGate(
 
   // Confirmation gate: require confirmation in non-YOLO mode for
   // commands in the confirmation set
-  if (mode !== 'yolo' && confirmationCommands.has(commandName)) {
+  if (mode !== 'yolo' && confirmationCommands.has(canonicalCommandName(commandName))) {
     return {
       action: 'confirm',
       reason: `"${commandName}" requires confirmation in interactive mode`,

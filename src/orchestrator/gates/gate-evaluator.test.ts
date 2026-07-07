@@ -17,8 +17,8 @@ import type { GateDecision } from './types.js';
 // ============================================================================
 
 describe('DEFAULT_DESTRUCTIVE_COMMANDS', () => {
-  it('includes gsd:remove-phase', () => {
-    expect(DEFAULT_DESTRUCTIVE_COMMANDS.has('gsd:remove-phase')).toBe(true);
+  it('includes gsd:phase', () => {
+    expect(DEFAULT_DESTRUCTIVE_COMMANDS.has('gsd:phase')).toBe(true);
   });
 
   it('includes gsd:complete-milestone', () => {
@@ -36,7 +36,7 @@ describe('DEFAULT_DESTRUCTIVE_COMMANDS', () => {
 
 describe('evaluateGate - destructive gate', () => {
   it('returns action:confirm for destructive command in YOLO mode', () => {
-    const result = evaluateGate('gsd:remove-phase', 'yolo', 0.95);
+    const result = evaluateGate('gsd:phase', 'yolo', 0.95);
     expect(result.action).toBe('confirm');
     expect(result.gateType).toBe('destructive');
     expect(result.skippedByYolo).toBe(false);
@@ -50,7 +50,7 @@ describe('evaluateGate - destructive gate', () => {
   });
 
   it('never returns action:proceed for destructive commands regardless of confidence', () => {
-    const result = evaluateGate('gsd:remove-phase', 'yolo', 1.0);
+    const result = evaluateGate('gsd:phase', 'yolo', 1.0);
     expect(result.action).not.toBe('proceed');
   });
 
@@ -65,7 +65,7 @@ describe('evaluateGate - destructive gate', () => {
 
   it('does not treat default destructive commands as destructive when overridden', () => {
     const custom = new Set(['gsd:nuke-everything']);
-    const result = evaluateGate('gsd:remove-phase', 'yolo', 0.95, {
+    const result = evaluateGate('gsd:phase', 'yolo', 0.95, {
       destructiveCommands: custom,
     });
     // remove-phase is NOT in the custom set, so it should NOT be destructive
@@ -73,9 +73,16 @@ describe('evaluateGate - destructive gate', () => {
   });
 
   it('includes a reason string', () => {
-    const result = evaluateGate('gsd:remove-phase', 'yolo', 0.95);
+    const result = evaluateGate('gsd:phase', 'yolo', 0.95);
     expect(result.reason).toBeTruthy();
     expect(typeof result.reason).toBe('string');
+  });
+
+  it('canonicalizes the hyphen frontmatter form (gsd-phase) before gating', () => {
+    // Discovery emits the hyphen form; it must gate the same as gsd:phase.
+    const result = evaluateGate('gsd-phase', 'yolo', 0.9);
+    expect(result.action).toBe('confirm');
+    expect(result.gateType).toBe('destructive');
   });
 });
 
@@ -181,12 +188,12 @@ describe('evaluateGate - routing gate', () => {
 describe('evaluateGate - gate priority', () => {
   it('destructive gate takes priority over low-confidence', () => {
     // Destructive command WITH low confidence -- destructive should win
-    const result = evaluateGate('gsd:remove-phase', 'yolo', 0.1);
+    const result = evaluateGate('gsd:phase', 'yolo', 0.1);
     expect(result.gateType).toBe('destructive');
   });
 
   it('destructive gate takes priority over routing', () => {
-    const result = evaluateGate('gsd:remove-phase', 'yolo', 0.99);
+    const result = evaluateGate('gsd:phase', 'yolo', 0.99);
     expect(result.gateType).toBe('destructive');
   });
 
@@ -216,7 +223,7 @@ describe('evaluateGate - GateDecision shape', () => {
 
   it('gateType is one of routing/destructive/low-confidence', () => {
     const r1 = evaluateGate('gsd:plan-phase', 'yolo', 0.8);
-    const r2 = evaluateGate('gsd:remove-phase', 'yolo', 0.8);
+    const r2 = evaluateGate('gsd:phase', 'yolo', 0.8);
     const r3 = evaluateGate('gsd:plan-phase', 'yolo', 0.1);
     expect(['routing', 'destructive', 'low-confidence']).toContain(r1.gateType);
     expect(['routing', 'destructive', 'low-confidence']).toContain(r2.gateType);

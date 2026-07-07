@@ -119,7 +119,7 @@ describe('deriveNextActions - phase-level transitions', () => {
     expect(result.primary.args).toBe('39');
   });
 
-  it('includes gsd:research-phase as alternative when hasContext but no research', () => {
+  it('includes gsd:explore as alternative when hasContext but no research', () => {
     const artifacts = makeArtifacts({
       planCount: 0,
       hasContext: true,
@@ -129,7 +129,7 @@ describe('deriveNextActions - phase-level transitions', () => {
     const result = deriveNextActions(artifacts, 'planning');
 
     const altCommands = result.alternatives.map(a => a.command);
-    expect(altCommands).toContain('gsd:research-phase');
+    expect(altCommands).toContain('gsd:explore');
   });
 
   it('suggests gsd:plan-phase when no plans but hasResearch', () => {
@@ -319,7 +319,7 @@ describe('deriveNextActions - edge case transitions', () => {
   // --------------------------------------------------------------------------
 
   describe('phase mutation commands (insert/add/remove)', () => {
-    it('gsd:insert-phase suggests gsd:plan-phase', () => {
+    it('gsd:phase suggests gsd:plan-phase (colon form)', () => {
       const artifacts = makeArtifacts({
         planIds: ['39-01'],
         summaryIds: ['39-01'],
@@ -328,13 +328,13 @@ describe('deriveNextActions - edge case transitions', () => {
         unexecutedPlans: [],
       });
 
-      const result = deriveNextActions(artifacts, 'executing', 'gsd:insert-phase');
+      const result = deriveNextActions(artifacts, 'executing', 'gsd:phase');
 
       expect(result.primary.command).toBe('gsd:plan-phase');
-      expect(result.context).toMatch(/newly inserted phase needs planning/i);
+      expect(result.context).toMatch(/needs planning/i);
     });
 
-    it('gsd:add-phase suggests gsd:plan-phase', () => {
+    it('gsd-phase (hyphen frontmatter form) is canonicalized to the mutation override', () => {
       const artifacts = makeArtifacts({
         planIds: ['39-01'],
         summaryIds: [],
@@ -343,13 +343,13 @@ describe('deriveNextActions - edge case transitions', () => {
         unexecutedPlans: ['39-01'],
       });
 
-      const result = deriveNextActions(artifacts, 'executing', 'gsd:add-phase');
+      const result = deriveNextActions(artifacts, 'executing', 'gsd-phase');
 
       expect(result.primary.command).toBe('gsd:plan-phase');
-      expect(result.context).toMatch(/newly added phase needs planning/i);
+      expect(result.context).toMatch(/needs planning/i);
     });
 
-    it('gsd:remove-phase returns standard artifact-derived suggestion', () => {
+    it('a non-mutation completed command returns the standard artifact-derived suggestion', () => {
       const artifacts = makeArtifacts({
         planIds: ['39-01', '39-02'],
         summaryIds: ['39-01'],
@@ -358,11 +358,11 @@ describe('deriveNextActions - edge case transitions', () => {
         unexecutedPlans: ['39-02'],
       });
 
-      const result = deriveNextActions(artifacts, 'executing', 'gsd:remove-phase');
+      const result = deriveNextActions(artifacts, 'executing', 'gsd:verify-work');
 
-      // remove-phase is not a mutation override; uses standard artifact-derived
+      // verify-work is not a phase mutation; uses standard artifact-derived
       expect(result.primary.command).toBe('gsd:execute-phase');
-      expect(result.context).toMatch(/remove-phase/i);
+      expect(result.context).toMatch(/verify-work/i);
     });
   });
 

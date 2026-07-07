@@ -34,8 +34,8 @@ describe('evaluateConfirmationGate', () => {
       expect(result.gateType).toBe('destructive');
     });
 
-    it('requires confirmation for remove-phase regardless of mode', () => {
-      const result = evaluateConfirmationGate('gsd:remove-phase', 'yolo', 0.95);
+    it('requires confirmation for gsd:phase (destructive) regardless of mode', () => {
+      const result = evaluateConfirmationGate('gsd:phase', 'yolo', 0.95);
       expect(result.action).toBe('confirm');
       expect(result.gateType).toBe('destructive');
     });
@@ -116,7 +116,7 @@ describe('evaluateConfirmationGate', () => {
       const config: ConfirmationGateConfig = {
         confirmationCommands: new Set(['gsd:custom-cmd']),
       };
-      const result = evaluateConfirmationGate('gsd:remove-phase', 'yolo', 0.9, config);
+      const result = evaluateConfirmationGate('gsd:phase', 'yolo', 0.9, config);
       expect(result.action).toBe('confirm');
       expect(result.gateType).toBe('destructive');
     });

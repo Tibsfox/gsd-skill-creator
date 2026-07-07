@@ -20,6 +20,7 @@
  */
 
 import { DEFAULT_DESTRUCTIVE_COMMANDS } from './types.js';
+import { canonicalCommandName } from '../command-name.js';
 import type { GateDecision, GateEvaluatorOptions } from './types.js';
 
 /**
@@ -40,8 +41,9 @@ export function evaluateGate(
   const destructiveCommands = options?.destructiveCommands ?? DEFAULT_DESTRUCTIVE_COMMANDS;
   const lowConfidenceThreshold = options?.lowConfidenceThreshold ?? 0.5;
 
-  // Gate 1: Destructive commands always require confirmation
-  if (destructiveCommands.has(commandName)) {
+  // Gate 1: Destructive commands always require confirmation. Canonicalize the
+  // incoming name (discovery emits hyphen form) so the colon-form set matches.
+  if (destructiveCommands.has(canonicalCommandName(commandName))) {
     return {
       action: 'confirm',
       reason: `"${commandName}" is a destructive command that requires explicit confirmation`,
