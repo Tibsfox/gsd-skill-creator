@@ -135,7 +135,7 @@ describe('STRANGER content requires user approval', () => {
     expect(result.proceed).toBe(true);
   });
 
-  it('prompts user for STRANGER content with findings', async () => {
+  it('prompts user for STRANGER content with findings (critical force-approved)', async () => {
     const mockPrompt = vi.fn().mockResolvedValue('approved-with-warnings');
     const input = makeSanitizationResult({
       familiarity: 'STRANGER',
@@ -146,8 +146,11 @@ describe('STRANGER content requires user approval', () => {
       ],
     });
 
-    const result = await hitlGate(input, mockPrompt);
+    // With a critical present, reaching the prompt at all requires forceCritical
+    // (otherwise hitlGate hard-blocks before prompting — see the block group).
+    const result = await hitlGate(input, mockPrompt, { forceCritical: true });
 
+    expect(mockPrompt).toHaveBeenCalled();
     expect(result.decision.status).toBe('approved-with-warnings');
     expect(result.proceed).toBe(true);
     expect(result.decision.reviewedFindings).toBe(2);
@@ -165,6 +168,57 @@ describe('STRANGER content requires user approval', () => {
 
     expect(result.decision.status).toBe('rejected');
     expect(result.proceed).toBe(false);
+  });
+});
+
+// === Group 2b: Critical findings hard-block (LEARN-3) ===
+
+describe('critical hygiene findings are hard-blocked before prompting', () => {
+  it('blocks a critical STRANGER finding without calling the promptFn', async () => {
+    const mockPrompt = vi.fn().mockResolvedValue('approved-with-warnings');
+    const input = makeSanitizationResult({
+      familiarity: 'STRANGER',
+      autoApproved: false,
+      findings: [makeFinding('prompt-injection', 'critical')],
+    });
+
+    const result = await hitlGate(input, mockPrompt);
+
+    // Even though the (auto-approving) promptFn would have said yes, the gate
+    // refuses before ever prompting — this is the security invariant.
+    expect(mockPrompt).not.toHaveBeenCalled();
+    expect(result.proceed).toBe(false);
+    expect(result.decision.status).toBe('rejected');
+    expect(result.decision.decidedBy).toBe('auto');
+    expect(result.decision.rationale).toMatch(/critical/i);
+  });
+
+  it('still prompts when only warnings are present (no critical)', async () => {
+    const mockPrompt = vi.fn().mockResolvedValue('approved-with-warnings');
+    const input = makeSanitizationResult({
+      familiarity: 'STRANGER',
+      autoApproved: false,
+      findings: [makeFinding('external-resources', 'warning')],
+    });
+
+    const result = await hitlGate(input, mockPrompt);
+
+    expect(mockPrompt).toHaveBeenCalled();
+    expect(result.proceed).toBe(true);
+  });
+
+  it('forceCritical lets a critical finding reach the prompt and proceed', async () => {
+    const mockPrompt = vi.fn().mockResolvedValue('approved-with-warnings');
+    const input = makeSanitizationResult({
+      familiarity: 'STRANGER',
+      autoApproved: false,
+      findings: [makeFinding('prompt-injection', 'critical')],
+    });
+
+    const result = await hitlGate(input, mockPrompt, { forceCritical: true });
+
+    expect(mockPrompt).toHaveBeenCalled();
+    expect(result.proceed).toBe(true);
   });
 });
 
@@ -308,7 +362,8 @@ describe('prompt function injection', () => {
       findings: [makeFinding('prompt-injection', 'critical')],
     });
 
-    await hitlGate(input, mockPrompt);
+    // forceCritical so the prompt is reached with the critical finding present.
+    await hitlGate(input, mockPrompt, { forceCritical: true });
 
     const message = mockPrompt.mock.calls[0][0] as string;
     expect(message).toContain('prompt-injection');

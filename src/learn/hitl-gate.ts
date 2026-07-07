@@ -28,13 +28,32 @@ export interface HitlGateResult {
   proceed: boolean;
 }
 
-export type PromptFn = (message: string, choices: string[]) => Promise<string>;
+// The optional `report` gives non-interactive prompt implementations the
+// structured hygiene report (notably `report.passed`, which is false when any
+// finding is `critical`) so they can refuse to auto-approve critical content.
+// The interactive default prompt ignores it — the human sees findings inline.
+export type PromptFn = (
+  message: string,
+  choices: string[],
+  report?: HygieneReport,
+) => Promise<string>;
+
+export interface HitlGateOptions {
+  /**
+   * Override the hard-block on critical hygiene findings. Off by default, so a
+   * source with critical findings (prompt-injection, script, path-traversal,
+   * control chars) is rejected even under an auto-approving promptFn. Set only
+   * after a human has reviewed the findings (CLI: `--force-critical`).
+   */
+  forceCritical?: boolean;
+}
 
 // === Main Entry Point ===
 
 export async function hitlGate(
   sanitizationResult: SanitizationResult,
   promptFn?: PromptFn,
+  options?: HitlGateOptions,
 ): Promise<HitlGateResult> {
   // Auto-approve clean local files
   if (sanitizationResult.autoApproved) {
@@ -48,6 +67,31 @@ export async function hitlGate(
       },
       sanitizationResult,
       proceed: true,
+    };
+  }
+
+  // Hard-block on critical hygiene findings BEFORE prompting. `report.passed`
+  // is false whenever a critical is present (prompt-injection, script,
+  // path-traversal, null bytes, directional overrides). Enforcing it centrally
+  // means no caller — interactive, `--yes`, or autonomous arxiv ingest — can
+  // wave a critical STRANGER finding through via an auto-approving promptFn.
+  // This restores the Three Laws invariant ("critical → review required").
+  const gateReport = sanitizationResult.report;
+  const hasCritical = gateReport.findings.some((f) => f.severity === 'critical');
+  if ((hasCritical || gateReport.passed === false) && !options?.forceCritical) {
+    return {
+      decision: {
+        status: 'rejected',
+        rationale:
+          'Blocked: source contains critical hygiene findings ' +
+          '(prompt-injection / script / path-traversal / control characters). ' +
+          'Re-run with --force-critical after manual review to override.',
+        reviewedFindings: gateReport.findings.length,
+        decidedAt: new Date().toISOString(),
+        decidedBy: 'auto',
+      },
+      sanitizationResult,
+      proceed: false,
     };
   }
 
@@ -69,9 +113,10 @@ export async function hitlGate(
 
   const choices: ApprovalStatus[] = ['approved', 'approved-with-warnings', 'rejected'];
 
-  // Use injected promptFn or fall back to default
+  // Use injected promptFn or fall back to default. Pass the report so
+  // non-interactive prompts can gate on severity (report.passed).
   const prompt = promptFn ?? defaultPromptFn;
-  const response = await prompt(message, choices) as ApprovalStatus;
+  const response = await prompt(message, choices, sanitizationResult.report) as ApprovalStatus;
 
   const decision: HitlDecision = {
     status: response,

@@ -494,6 +494,7 @@ describe('sc:learn: pipeline orchestration', () => {
     expect(hitlGate).toHaveBeenCalledWith(
       expect.objectContaining({ autoApproved: true }),
       undefined,
+      expect.anything(),
     );
   });
 
@@ -547,7 +548,7 @@ describe('sc:learn: options', () => {
   it('promptFn passed to hitlGate', async () => {
     const mockPrompt = vi.fn().mockResolvedValue('approved');
     await scLearn('test.md', { promptFn: mockPrompt });
-    expect(hitlGate).toHaveBeenCalledWith(expect.anything(), mockPrompt);
+    expect(hitlGate).toHaveBeenCalledWith(expect.anything(), mockPrompt, expect.anything());
   });
 });
 

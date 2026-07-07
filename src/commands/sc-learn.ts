@@ -49,6 +49,12 @@ export interface ScLearnOptions {
   existingDomainCenters?: PlanePosition[];
   promptFn?: PromptFn;
   onProgress?: (stage: string, detail: string) => void;
+  /**
+   * Override the HITL hard-block on critical hygiene findings. Off by default;
+   * even `--yes`/auto-approve callers are blocked on criticals unless this is
+   * set (CLI: `--force-critical`, only after a human reviews the findings).
+   */
+  forceCritical?: boolean;
 }
 
 export interface ScLearnResult {
@@ -163,7 +169,11 @@ export async function scLearn(
   // === Stage 3: HITL GATE ===
   progress(options.onProgress, 'hitl', 'Checking approval...');
 
-  const hitlResult: HitlGateResult = await hitlGate(sanitizationResult, options.promptFn);
+  const hitlResult: HitlGateResult = await hitlGate(
+    sanitizationResult,
+    options.promptFn,
+    { forceCritical: options.forceCritical },
+  );
 
   if (!hitlResult.proceed) {
     const completedAt = new Date().toISOString();
@@ -380,8 +390,12 @@ Options:
   --dry-run                Run the full pipeline but record no changeset
   --yes, -y                Auto-approve the HITL hygiene gate WITH warnings
                            (non-interactive; the caller accepts responsibility).
-                           Without it, internet/STRANGER content blocks for an
-                           interactive decision and no-ops on a non-TTY (safe).
+                           Content with CRITICAL findings is still rejected —
+                           pass --force-critical to override. Without --yes,
+                           internet/STRANGER content blocks for an interactive
+                           decision and no-ops on a non-TTY (safe).
+  --force-critical         With --yes, also auto-approve content that has
+                           CRITICAL hygiene findings (default: reject critical).
   --help, -h               Print this help text`;
 
 /**
@@ -392,6 +406,7 @@ export async function main(argv: string[]): Promise<number> {
   const options: ScLearnOptions = {};
   let source: string | undefined;
   let autoApprove = false;
+  let forceCritical = false;
 
   for (let i = 0; i < argv.length; i++) {
     const flag = argv[i];
@@ -440,6 +455,10 @@ export async function main(argv: string[]): Promise<number> {
         autoApprove = true;
         break;
 
+      case '--force-critical':
+        forceCritical = true;
+        break;
+
       default:
         if (flag.startsWith('-')) {
           console.error(`[learn] unknown flag: ${flag}`);
@@ -464,6 +483,11 @@ export async function main(argv: string[]): Promise<number> {
   // --yes injects an explicit auto-approve-with-warnings promptFn (mirroring the
   // tools/ingest-*.mts callers), printing findings so they stay visible. Without
   // --yes the gate falls back to its interactive default (safe no-op on non-TTY).
+  // Thread --force-critical to the gate (default off). Even with --yes, content
+  // carrying CRITICAL hygiene findings is rejected by hitlGate unless this is
+  // set after a human has reviewed the findings. Safe to thread unconditionally.
+  options.forceCritical = forceCritical;
+
   if (autoApprove) {
     options.promptFn = async (message, choices) => {
       console.log('[learn] --- sc:learn HITL gate findings ---');
