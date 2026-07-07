@@ -165,8 +165,6 @@ Use this table to match user intent when there's no exact `/gsd:` match. Match o
 |---|---|
 | `discuss-phase` | "discuss phase", "talk about approach", "how should we build" |
 | `plan-phase` | "plan phase", "create plans", "break down phase" |
-| `research-phase` | "research", "investigate", "explore options for phase" |
-| `list-phase-assumptions` | "what will Claude do", "preview approach", "show assumptions" |
 | `map-codebase` | "map codebase", "understand code structure", "analyze codebase" |
 
 ### Executing Work
@@ -189,22 +187,19 @@ Use this table to match user intent when there's no exact `/gsd:` match. Match o
 
 | Command | Intent Patterns |
 |---|---|
-| `add-phase` | "add phase", "append phase", "new phase at end" |
-| `insert-phase` | "insert phase", "urgent phase", "squeeze in phase" |
-| `remove-phase` | "remove phase", "delete phase", "drop phase" |
-| `add-todo` | "remember this", "todo", "park this idea", "note for later" |
-| `check-todos` | "show todos", "pending items", "what's parked" |
-| `plan-milestone-gaps` | "what's missing", "find gaps", "milestone gaps" |
+| `phase` | "add phase", "append phase", "new phase at end" |
+| `phase` | "insert phase", "urgent phase", "squeeze in phase" |
+| `phase` | "remove phase", "delete phase", "drop phase" |
+| `capture` | "remember this", "todo", "park this idea", "note for later" |
 
 ### Settings and Meta
 
 | Command | Intent Patterns |
 |---|---|
 | `settings` | "settings", "configure", "change mode" |
-| `set-profile` | "set profile", "quality mode", "speed mode" |
+| `config` | "set profile", "quality mode", "speed mode" |
 | `update` | "update gsd", "upgrade", "get latest" |
 | `help` | "help", "what commands exist", "how does gsd work" |
-| `join-discord` | "discord", "community", "support channel" |
 
 ### Session Management
 
@@ -220,7 +215,7 @@ Common ambiguous intents and how to resolve them:
 |---|---|---|---|
 | "what's the status" | `progress` | `audit-milestone` | Progress is lightweight; audit is deep validation |
 | "let's start building" | `execute-phase` | `plan-phase` | Building implies plans exist; if not, suggest planning first |
-| "I want to add something" | Ask: feature or phase? | -- | `add-phase` for scope, `quick` for small feature, `insert-phase` for urgent |
+| "I want to add something" | Ask: feature or phase? | -- | `phase` for scope, `quick` for small feature |
 | "fix this" | `debug` | `quick` | Debug has investigation flow; quick is for known fixes |
 | "continue" | `resume-work` | `progress` | Resume restores session state; progress is read-only |
 | "next phase" | `plan-phase N+1` | `execute-phase` | Check if next phase has plans first |
