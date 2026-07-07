@@ -942,7 +942,7 @@ function validateInstallation() {
 }
 
 // --- Uninstall integration ---
-function uninstallIntegration() {
+function uninstallIntegration(manifest) {
   const prefix = dryRun ? '[DRY RUN] ' : '';
   log(`${prefix}Uninstalling integration components...\n`);
 
@@ -1001,6 +1001,86 @@ function uninstallIntegration() {
     } else {
       log(`  . not found: ${file}`);
       notFound++;
+    }
+  }
+
+  // Remove our merged hooks from settings.json so the host doesn't keep
+  // invoking hook scripts we just deleted (mirror of installSettings + the
+  // gsd-init.ts teardown). Filters only the hook groups whose command we own.
+  const settingsEntries = [manifest && manifest.files && manifest.files.settings,
+    manifest && manifest.files && manifest.files.settingsHooks].filter(Boolean);
+  if (settingsEntries.length > 0) {
+    const settingsPath = path.join(projectRoot, '.claude', 'settings.json');
+    const settingsContent = readFileSafe(settingsPath);
+    if (settingsContent === null) {
+      log('  . not found: .claude/settings.json');
+      notFound++;
+    } else {
+      try {
+        const settings = JSON.parse(settingsContent);
+        let changed = false;
+
+        // Collect the hook commands we install + whether we own a statusLine.
+        const ourCommands = new Set();
+        let ourStatusLine = false;
+        for (const entry of settingsEntries) {
+          const srcContent = readFileSafe(path.join(sourceDir, entry.source));
+          if (!srcContent) continue;
+          try {
+            const src = JSON.parse(srcContent);
+            for (const groups of Object.values(src.hooks || {})) {
+              if (!Array.isArray(groups)) continue;
+              for (const group of groups) {
+                const cmd = group.hooks && group.hooks[0] && group.hooks[0].command;
+                if (cmd) ourCommands.add(cmd);
+              }
+            }
+            if (src.statusLine) ourStatusLine = true;
+          } catch { /* ignore malformed source */ }
+        }
+
+        // Strip our hook groups; drop events that empty out; drop empty hooks.
+        const targetHooks = settings.hooks;
+        if (targetHooks && typeof targetHooks === 'object') {
+          for (const [event, groups] of Object.entries(targetHooks)) {
+            if (!Array.isArray(groups)) continue;
+            const filtered = groups.filter((group) => {
+              const cmd = group.hooks && group.hooks[0] && group.hooks[0].command;
+              return !cmd || !ourCommands.has(cmd);
+            });
+            if (filtered.length !== groups.length) {
+              changed = true;
+              if (filtered.length === 0) {
+                delete targetHooks[event];
+              } else {
+                targetHooks[event] = filtered;
+              }
+            }
+          }
+          if (Object.keys(targetHooks).length === 0) {
+            delete settings.hooks;
+          }
+        }
+
+        // Remove the statusLine only if it was one we installed.
+        if (ourStatusLine && settings.statusLine) {
+          delete settings.statusLine;
+          changed = true;
+        }
+
+        if (changed) {
+          if (!dryRun) {
+            fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n');
+          }
+          log('  - cleaned:   .claude/settings.json (hooks removed)');
+          removed++;
+        } else {
+          log('  = current:   .claude/settings.json (no matching hooks)');
+        }
+      } catch {
+        log('  ~ skipped:   .claude/settings.json (invalid JSON)');
+        skipped++;
+      }
     }
   }
 
@@ -1071,7 +1151,7 @@ function main() {
   }
 
   if (uninstall) {
-    uninstallIntegration();
+    uninstallIntegration(manifest);
     return;
   }
 
