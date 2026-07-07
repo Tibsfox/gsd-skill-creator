@@ -11,13 +11,13 @@ version: 1.0.0
 description: >
   A coordinated data science department providing domain-routed
   expertise through seven named agents (Nightingale, Tukey, Breiman,
-  Tufte, Fisher, Benjamin, Cairo), six knowledge skills, and three
+  Tufte, Fisher, Benjamin, Cairo), seven knowledge skills, and three
   pre-composed teams. Persists work via Grove records and integrates
   with the college data science department concept graph. Ethics
   review is a standing requirement for all work involving human data.
 
 # ==========================================================================
-# Skills — 6 domain skills with trigger patterns and agent affinity
+# Skills — 7 domain skills with trigger patterns and agent affinity
 # ==========================================================================
 
 skills:
@@ -65,6 +65,24 @@ skills:
       - "overfitting"
       - "feature importance"
     agent_affinity: breiman
+
+  mlops-and-deployment:
+    domain: data-science
+    description: "Model serving, CI/CD for ML, model registry, drift monitoring, retraining, rollback"
+    triggers:
+      - "mlops"
+      - "model serving"
+      - "model deployment"
+      - "data drift"
+      - "model monitoring"
+      - "retraining"
+      - "model registry"
+      - "feature store"
+      - "inference endpoint"
+      - "ci/cd for ml"
+      - "shadow deployment"
+      - "experiment tracking"
+    agent_affinity: [breiman, nightingale]
 
   data-visualization:
     domain: data-science
