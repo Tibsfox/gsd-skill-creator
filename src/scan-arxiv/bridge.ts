@@ -233,6 +233,12 @@ export async function ingestQueue(
      * the operator's real ingestion ledger.
      */
     seenIdsPath?: string;
+    /**
+     * Optional JSON primitive-registry path. When set, each scLearn call dedups
+     * against it and (non-dry-run) persists newly-added primitives back, so the
+     * changeset is no longer silently discarded and re-ingest dedups (LEARN-2).
+     */
+    registryPath?: string;
   } = {},
 ): Promise<{ successCount: number; failureCount: number; reports: string[] }> {
   const raw = fs.readFileSync(queuePath, 'utf-8');
@@ -262,6 +268,7 @@ export async function ingestQueue(
         domain: 'arxiv-cs',
         depth: 'standard',
         dryRun: options.dryRun,
+        registryPath: options.registryPath,
         onProgress: (stage, detail) => log(`  [${stage}] ${detail}`),
       });
 

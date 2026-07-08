@@ -15,7 +15,7 @@ import type { DocumentAnalysis } from '../learn/analyzer.js';
 import type { CandidatePrimitive, ExtractionResult } from '../learn/extractor.js';
 import type { WiringResult } from '../learn/dependency-wirer.js';
 import type { PrefilterResult } from '../learn/dedup-prefilter.js';
-import type { MergeEngine, MergeResult, ProvenanceEntry, MergeAction } from '../learn/merge-engine.js';
+import type { MergeEngine, MergeResult, ProvenanceEntry, MergeAction, ConflictPresentation } from '../learn/merge-engine.js';
 import type { Changeset, ChangesetManager } from '../learn/changeset-manager.js';
 import type { LearningReport, LearningReportInput } from '../learn/report-generator.js';
 import type { LearnedSkillResult } from '../learn/generators/skill-generator.js';
@@ -36,7 +36,10 @@ import { generateLearnedSkill } from '../learn/generators/skill-generator.js';
 import { generateAgent } from '../learn/generators/agent-generator.js';
 import { generateTeam } from '../learn/generators/team-generator.js';
 import { generateLearningReport } from '../learn/report-generator.js';
+import { harvestAddedPrimitives } from '../scan-arxiv/aggregate-generators.js';
 import { isCliEntrypoint } from '../cli/entrypoint-guard.js';
+import { readFile, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 
 // === Exported Types ===
 
@@ -55,6 +58,13 @@ export interface ScLearnOptions {
    * set (CLI: `--force-critical`, only after a human reviews the findings).
    */
   forceCritical?: boolean;
+  /**
+   * Path to a JSON primitive registry (an array of MathematicalPrimitive — a
+   * DATA file, not installed skills). When set and `existingPrimitives` is not
+   * supplied, the registry is loaded so dedup runs (LEARN-1); a non-dry-run
+   * persists newly-added primitives back to it so re-ingesting dedups (LEARN-2).
+   */
+  registryPath?: string;
 }
 
 export interface ScLearnResult {
@@ -63,6 +73,20 @@ export interface ScLearnResult {
   report: LearningReport;
   changeset: Changeset | null;
   errors: string[];
+  /**
+   * Conflicts (overlapping-distinct pairs) the merge engine flagged for a human
+   * decision. Surfaced here so they are visible, not silently dropped (LEARN-7).
+   * Empty/absent when none.
+   */
+  pendingConflicts?: ConflictPresentation[];
+  /**
+   * True when the pipeline had a registry to dedup against (existingPrimitives
+   * supplied or registryPath given). When false, dedup did not run, so the
+   * "skipped: 0" counts are not meaningful (LEARN-1).
+   */
+  dedupActive?: boolean;
+  /** True when a non-dry-run persisted newly-added primitives to registryPath (LEARN-2). */
+  registryUpdated?: boolean;
 }
 
 // === Progress Helper ===
@@ -77,6 +101,49 @@ function progress(
   }
 }
 
+// === Registry persistence (LEARN-1 / LEARN-2) ===
+//
+// The primitive registry is a plain JSON array of MathematicalPrimitive — a DATA
+// file, not installed skills. Loading it lights up dedup on the CLI / arxiv paths
+// (which previously always passed an empty registry, so every candidate was
+// classified add-new); persisting the added primitives back closes the cross-run
+// loop so re-ingesting the same source dedups.
+
+async function loadRegistry(registryPath: string): Promise<MathematicalPrimitive[]> {
+  if (!existsSync(registryPath)) return [];
+  try {
+    const parsed = JSON.parse(await readFile(registryPath, 'utf-8'));
+    return Array.isArray(parsed) ? (parsed as MathematicalPrimitive[]) : [];
+  } catch {
+    // A malformed registry must not break ingestion; treat as empty (first run).
+    return [];
+  }
+}
+
+async function saveRegistry(
+  registryPath: string,
+  primitives: MathematicalPrimitive[],
+): Promise<void> {
+  await writeFile(registryPath, JSON.stringify(primitives, null, 2), 'utf-8');
+}
+
+// Append `added` primitives to `existing`, skipping ids already present so a
+// re-run over the same source is idempotent.
+function mergeRegistryById(
+  existing: MathematicalPrimitive[],
+  added: MathematicalPrimitive[],
+): MathematicalPrimitive[] {
+  const seen = new Set(existing.map((p) => p.id));
+  const merged = [...existing];
+  for (const p of added) {
+    if (!seen.has(p.id)) {
+      seen.add(p.id);
+      merged.push(p);
+    }
+  }
+  return merged;
+}
+
 // === Main Function ===
 
 export async function scLearn(
@@ -87,8 +154,17 @@ export async function scLearn(
   const startedAt = new Date().toISOString();
   const errors: string[] = [];
   const depth = options.depth ?? 'standard';
-  const existingPrimitives = options.existingPrimitives ?? [];
   const existingDomainCenters = options.existingDomainCenters ?? [];
+
+  // LEARN-1: load the persisted primitive registry so dedup actually runs. The
+  // CLI / arxiv paths historically passed no registry, so existingPrimitives was
+  // always [], the pre-filter never flagged, and every candidate was add-new.
+  let existingPrimitives = options.existingPrimitives ?? [];
+  let dedupActive = existingPrimitives.length > 0;
+  if (!options.existingPrimitives && options.registryPath) {
+    existingPrimitives = await loadRegistry(options.registryPath);
+    dedupActive = true; // a registry is wired (may be empty on the very first run)
+  }
 
   // === Stage 1: ACQUIRE ===
   progress(options.onProgress, 'acquire', `Acquiring ${source}...`);
@@ -359,12 +435,32 @@ export async function scLearn(
     ? null
     : changesetManager.getChangeset(sessionId);
 
+  // LEARN-7: surface the conflicts the merge engine flagged. Overlapping-distinct
+  // pairs get action:'conflict' with empty modifications, so the record loop above
+  // never touched them — without this they vanish while the report still counts them.
+  const pendingConflicts = mergeEngine.getPendingConflicts();
+
+  // LEARN-2: persist newly-added primitives back to the registry so a re-run dedups.
+  // Data-only — generated skills/agents/teams stay in-memory previews and are NOT
+  // installed (skill installation is a separate, gated step).
+  let registryUpdated = false;
+  if (!options.dryRun && options.registryPath && changeset) {
+    const added = harvestAddedPrimitives(changeset);
+    if (added.length > 0) {
+      await saveRegistry(options.registryPath, mergeRegistryById(existingPrimitives, added));
+      registryUpdated = true;
+    }
+  }
+
   return {
     success: true,
     sessionId,
     report,
     changeset,
     errors,
+    pendingConflicts,
+    dedupActive,
+    registryUpdated,
   };
 }
 
@@ -396,6 +492,9 @@ Options:
                            decision and no-ops on a non-TTY (safe).
   --force-critical         With --yes, also auto-approve content that has
                            CRITICAL hygiene findings (default: reject critical).
+  --registry <path>        JSON primitive registry to dedup against and persist
+                           to (enables cross-run dedup; a data file, not skills).
+                           Without it, dedup is disabled and nothing persists.
   --help, -h               Print this help text`;
 
 /**
@@ -459,6 +558,15 @@ export async function main(argv: string[]): Promise<number> {
         forceCritical = true;
         break;
 
+      case '--registry':
+        if (!next || next.startsWith('--')) {
+          console.error('[learn] --registry requires a path');
+          return 2;
+        }
+        options.registryPath = next;
+        i++;
+        break;
+
       default:
         if (flag.startsWith('-')) {
           console.error(`[learn] unknown flag: ${flag}`);
@@ -509,9 +617,21 @@ export async function main(argv: string[]): Promise<number> {
   console.log(`[learn] primitives updated: ${result.report.primitivesUpdated}`);
   console.log(`[learn] primitives skipped: ${result.report.primitivesSkipped}`);
   console.log(`[learn] conflicts:          ${result.report.conflictsPresented}`);
-  console.log(`[learn] skills generated:   ${result.report.skillCount}`);
-  console.log(`[learn] agents generated:   ${result.report.agentCount}`);
-  console.log(`[learn] teams generated:    ${result.report.teamCount}`);
+  console.log(`[learn] skills generated:   ${result.report.skillCount} (preview — not installed)`);
+  console.log(`[learn] agents generated:   ${result.report.agentCount} (preview — not installed)`);
+  console.log(`[learn] teams generated:    ${result.report.teamCount} (preview — not installed)`);
+  if (!result.dedupActive) {
+    console.log('[learn] dedup:              DISABLED — pass --registry <file.json> for cross-run dedup (counts above are all-added)');
+  } else if (result.registryUpdated) {
+    console.log(`[learn] registry updated:   ${options.registryPath}`);
+  }
+  const conflicts = result.pendingConflicts ?? [];
+  if (conflicts.length > 0) {
+    console.log('[learn] unresolved conflicts (overlapping-distinct — NOT added, decide manually):');
+    for (const c of conflicts) {
+      console.log(`  - ${c.conflictId}: candidate "${c.candidate.id}" vs existing "${c.existing.id}"`);
+    }
+  }
   if (result.errors.length > 0) {
     console.error(`[learn] errors: ${result.errors.length}`);
     result.errors.forEach((e, idx) => console.error(`  [${idx}] ${e}`));

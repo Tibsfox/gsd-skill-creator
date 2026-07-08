@@ -1,4 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { mkdtempSync, rmSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 // === Hoisted mock variables (referenced inside vi.mock factories) ===
 
@@ -708,5 +711,100 @@ describe('sc:learn: dry-run', () => {
   it('modifications are recorded when not in dry-run mode', async () => {
     await scLearn('test.md', { dryRun: false });
     expect(mockRecord).toHaveBeenCalled();
+  });
+});
+
+describe('sc:learn: registry-backed dedup + conflict surfacing (LEARN-1/2/7)', () => {
+  let tmpDir: string;
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    setDefaultMockReturns();
+    mockGetPendingConflicts.mockReturnValue([]);
+    tmpDir = mkdtempSync(join(tmpdir(), 'sc-learn-registry-'));
+  });
+
+  afterEach(() => {
+    rmSync(tmpDir, { recursive: true, force: true });
+  });
+
+  it('LEARN-1: dedup is inactive when no registry and no existingPrimitives', async () => {
+    const result = await scLearn('test.md');
+    expect(result.dedupActive).toBe(false);
+  });
+
+  it('LEARN-1: dedup is active when a registryPath is supplied (even on the first run)', async () => {
+    const registryPath = join(tmpDir, 'registry.json'); // absent → empty first run
+    const result = await scLearn('test.md', { registryPath });
+    expect(result.dedupActive).toBe(true);
+  });
+
+  it('LEARN-1: an existing registry file is loaded into the dedup input', async () => {
+    const registryPath = join(tmpDir, 'registry.json');
+    writeFileSync(registryPath, JSON.stringify([{ id: 'seed-prim', domain: 'foundations' }]));
+    await scLearn('test.md', { registryPath });
+    // prefilterDuplicates(candidate, existingPrimitives) — the loaded registry must reach it.
+    expect(vi.mocked(prefilterDuplicates)).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.arrayContaining([expect.objectContaining({ id: 'seed-prim' })]),
+    );
+  });
+
+  it('LEARN-2: a non-dry-run persists newly-added primitives back to the registry', async () => {
+    const registryPath = join(tmpDir, 'registry.json');
+    mockGetChangeset.mockReturnValue({
+      sessionId: 'learn-x',
+      createdAt: new Date().toISOString(),
+      reverted: false,
+      entries: [{ type: 'add', after: { id: 'new-prim', domain: 'foundations' } }],
+    });
+    const result = await scLearn('test.md', { registryPath });
+    expect(result.registryUpdated).toBe(true);
+    const persisted = JSON.parse(readFileSync(registryPath, 'utf-8'));
+    expect(persisted).toEqual(
+      expect.arrayContaining([expect.objectContaining({ id: 'new-prim' })]),
+    );
+  });
+
+  it('LEARN-2: re-persisting the same primitive is idempotent (no duplicate id)', async () => {
+    const registryPath = join(tmpDir, 'registry.json');
+    writeFileSync(registryPath, JSON.stringify([{ id: 'new-prim', domain: 'foundations' }]));
+    mockGetChangeset.mockReturnValue({
+      sessionId: 'learn-x',
+      createdAt: new Date().toISOString(),
+      reverted: false,
+      entries: [{ type: 'add', after: { id: 'new-prim', domain: 'foundations' } }],
+    });
+    await scLearn('test.md', { registryPath });
+    const persisted = JSON.parse(readFileSync(registryPath, 'utf-8')) as Array<{ id: string }>;
+    expect(persisted.filter((p) => p.id === 'new-prim')).toHaveLength(1);
+  });
+
+  it('LEARN-2: dry-run never writes the registry', async () => {
+    const registryPath = join(tmpDir, 'registry.json');
+    mockGetChangeset.mockReturnValue({
+      sessionId: 'learn-x',
+      createdAt: new Date().toISOString(),
+      reverted: false,
+      entries: [{ type: 'add', after: { id: 'new-prim', domain: 'foundations' } }],
+    });
+    const result = await scLearn('test.md', { registryPath, dryRun: true });
+    expect(result.registryUpdated).toBeFalsy();
+    expect(existsSync(registryPath)).toBe(false);
+  });
+
+  it('LEARN-7: pending conflicts are surfaced in the result with their IDs', async () => {
+    mockGetPendingConflicts.mockReturnValue([
+      {
+        conflictId: 'conflict-1',
+        existing: { id: 'existing-prim' },
+        candidate: { id: 'candidate-prim' },
+        comparison: {},
+      },
+    ]);
+    const result = await scLearn('test.md');
+    expect(result.pendingConflicts).toHaveLength(1);
+    expect(result.pendingConflicts?.[0].conflictId).toBe('conflict-1');
+    expect(result.pendingConflicts?.[0].candidate.id).toBe('candidate-prim');
   });
 });
