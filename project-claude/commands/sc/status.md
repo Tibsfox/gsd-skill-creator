@@ -145,6 +145,12 @@ Also show a brief breakdown if there are non-pending entries:
 Total suggestions: 7 (3 pending, 2 accepted, 1 dismissed, 1 deferred)
 ```
 
+Then surface the loop-closure metric — how well the observe → suggest → create loop is actually closing:
+```
+Loop: generated 7 | accepted 2 | skills created 2 (from discover: 5)
+```
+where `generated` = total suggestions, `accepted` = entries with `state === "accepted"`, `skills created` = accepted entries that also carry a `createdSkillName`, and the parenthetical breaks `generated` down by `provenance.source` (e.g. `discover`, `observation`) for entries that have provenance.
+
 ## Step 5.5: Display bounded-learning calibration state (v1.49.801)
 
 Run the following command via the Bash tool with a 5-second timeout (best-effort — failures here MUST NOT block the rest of /sc:status):
