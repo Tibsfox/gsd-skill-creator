@@ -61,6 +61,28 @@ describe('PatternAnalyzer', () => {
       expect(prismaCandidate!.type).toBe('command');
     });
 
+    it('scopes coOccurringTools to the command they appeared with (LEARN-8)', () => {
+      const analyzer = new PatternAnalyzer({ threshold: 3 });
+
+      // 'prisma' only ever ran alongside WebFetch; 'docker' alongside Playwright.
+      const sessions = [
+        createSession({ topCommands: ['prisma'], topTools: ['WebFetch'] }),
+        createSession({ topCommands: ['prisma'], topTools: ['WebFetch'] }),
+        createSession({ topCommands: ['prisma'], topTools: ['WebFetch'] }),
+        createSession({ topCommands: ['docker'], topTools: ['Playwright'] }),
+        createSession({ topCommands: ['docker'], topTools: ['Playwright'] }),
+        createSession({ topCommands: ['docker'], topTools: ['Playwright'] }),
+      ];
+
+      const candidates = analyzer.analyzeFromSessions(sessions);
+      const prisma = candidates.find(c => c.pattern === 'prisma' && c.type === 'command');
+      expect(prisma).toBeDefined();
+      // Before LEARN-8 findCoOccurringTools ignored the command and returned a
+      // global set, so Playwright would leak into prisma's evidence.
+      expect(prisma!.evidence.coOccurringTools).toContain('WebFetch');
+      expect(prisma!.evidence.coOccurringTools).not.toContain('Playwright');
+    });
+
     it('should filter common commands', () => {
       const analyzer = new PatternAnalyzer({ threshold: 2 });
 

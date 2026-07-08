@@ -42,6 +42,7 @@ export interface FrequencyMap {
   files: Map<string, number>;
   tools: Map<string, number>;
   coOccurrences: Map<string, Set<string>>;  // command -> files seen with it
+  toolCoOccurrences: Map<string, Set<string>>; // command -> tools seen with it
   sessionTimestamps: Map<string, number[]>; // pattern -> session timestamps
   sessionIds: Map<string, string[]>;        // pattern -> session IDs
 }

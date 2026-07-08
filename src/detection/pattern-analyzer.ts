@@ -93,6 +93,7 @@ export class PatternAnalyzer {
       files: new Map(),
       tools: new Map(),
       coOccurrences: new Map(),
+      toolCoOccurrences: new Map(),
       sessionTimestamps: new Map(),
       sessionIds: new Map(),
     };
@@ -118,6 +119,16 @@ export class PatternAnalyzer {
         }
         for (const file of session.topFiles || []) {
           freq.coOccurrences.get(key)!.add(file);
+        }
+
+        // Track co-occurrences with the tools actually used in this session,
+        // keyed per command, so findCoOccurringTools reports the tools that
+        // appeared WITH this command rather than a global set. (LEARN-8)
+        if (!freq.toolCoOccurrences.has(key)) {
+          freq.toolCoOccurrences.set(key, new Set());
+        }
+        for (const tool of session.topTools || []) {
+          freq.toolCoOccurrences.get(key)!.add(tool);
         }
       }
     }
@@ -244,16 +255,16 @@ export class PatternAnalyzer {
   }
 
   /**
-   * Find tools that co-occur with a command
+   * Find tools that co-occurred with a specific command (in the same session),
+   * excluding common tools. Previously this ignored `cmd` and returned the
+   * first 5 non-common tools seen anywhere in the corpus. (LEARN-8)
    */
   private findCoOccurringTools(cmd: string, freq: FrequencyMap): string[] {
-    const result: string[] = [];
-    for (const [tool] of freq.tools) {
-      if (!this.isCommonTool(tool)) {
-        result.push(tool);
-      }
-    }
-    return result.slice(0, 5);
+    const tools = freq.toolCoOccurrences.get(`cmd:${cmd}`);
+    if (!tools) return [];
+    return Array.from(tools)
+      .filter(tool => !this.isCommonTool(tool))
+      .slice(0, 5);
   }
 
   /**
