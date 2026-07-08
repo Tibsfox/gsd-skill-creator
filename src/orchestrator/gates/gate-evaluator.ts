@@ -72,11 +72,13 @@ export function evaluateGate(
     };
   }
 
-  // Gate 4: Interactive mode -- always confirm
+  // Gate 4: Interactive mode -- always confirm. YOLO did NOT skip anything
+  // here (the user is being asked to confirm), so skippedByYolo must be false
+  // to stay truthful for any consumer that branches on it. (ORCH-6)
   return {
     action: 'confirm',
     reason: `Interactive mode: confirming "${commandName}" before execution`,
     gateType: 'routing',
-    skippedByYolo: true,
+    skippedByYolo: false,
   };
 }

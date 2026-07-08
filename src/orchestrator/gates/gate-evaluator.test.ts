@@ -153,7 +153,8 @@ describe('evaluateGate - routing gate', () => {
     const result = evaluateGate('gsd:plan-phase', 'interactive', 0.8);
     expect(result.action).toBe('confirm');
     expect(result.gateType).toBe('routing');
-    expect(result.skippedByYolo).toBe(true);
+    // Interactive-mode confirm is not a YOLO skip. (ORCH-6)
+    expect(result.skippedByYolo).toBe(false);
   });
 
   it('returns action:confirm in interactive mode with perfect confidence', () => {
