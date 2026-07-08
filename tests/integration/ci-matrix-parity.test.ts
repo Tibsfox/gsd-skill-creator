@@ -217,3 +217,59 @@ describe('CI cargo lane — load-bearing drift-guard (CF4a v1.49.936 → flipped
     expect(cargoJob).toContain('libwebkit2gtk-4.1-dev');
   });
 });
+
+/**
+ * CI desktop lane — STAGED drift-guard (frontend build+test).
+ *
+ * Closes the desktop-frontend CI blind spot: the Tauri webview's ~84 vitest files plus
+ * its `tsc && vite build` never ran in CI (the root vitest config excludes desktop/**,
+ * and only the intelligence-ui project covered ~30 desktop/intelligence/ files). The
+ * lane was introduced STAGED — a job-level `continue-on-error: true` — following the
+ * cargo lane's staged→load-bearing promotion (v1.49.936 → v1.49.939): it runs on every
+ * push for per-push frontend signal WITHOUT ship-blocking power while it proves itself.
+ *
+ * FLIP: after 3 consecutive green desktop runs across organic churn (lane-stability
+ * model, like cargo — every push fully rebuilds the frontend), DELETE the
+ * `continue-on-error: true` line so a desktop failure folds into the run-level
+ * conclusion the ship gate reads. That flip is DELIBERATE and MUST invert the STAGED
+ * assertion below (PRESENT → GONE) — a silent flip, or a silent removal of a build/test
+ * step, fails here.
+ */
+// Isolate the `desktop` job the same way — bounded to the next top-level (2-space) job
+// header, or EOF if it is the last job.
+const desktopJobIdx = ci.indexOf('\n  desktop:\n');
+const desktopAfter = desktopJobIdx >= 0 ? ci.slice(desktopJobIdx + 1) : '';
+const desktopNextRel = desktopAfter.search(/\n {2}[A-Za-z0-9_-]+:\n/);
+const desktopJob = desktopNextRel >= 0 ? desktopAfter.slice(0, desktopNextRel) : desktopAfter;
+
+describe('CI desktop lane — staged drift-guard (frontend build+test)', () => {
+  it('the desktop lane exists in ci.yml and runs on ubuntu-latest', () => {
+    expect(desktopJob.length).toBeGreaterThan(0);
+    expect(desktopJob).toMatch(/runs-on:\s*ubuntu-latest/);
+  });
+
+  it('SCOPE — the desktop lane installs, builds, and tests the webview', () => {
+    // The three load-bearing frontend invocations. `run build` is `tsc && vite build`
+    // (type-check + bundle); `run test` is the ~84-file jsdom vitest suite.
+    expect(desktopJob).toContain('npm --prefix desktop ci');
+    expect(desktopJob).toContain('npm --prefix desktop run build');
+    expect(desktopJob).toContain('npm --prefix desktop run test');
+  });
+
+  it('STAGED — the desktop lane is non-blocking (continue-on-error: true is PRESENT)', () => {
+    // Introduced STAGED to close the blind spot without ship-blocking power while it
+    // proves itself. FLIPPING to load-bearing DELETES this line — a DELIBERATE act that
+    // MUST invert this assertion to `.not.toMatch`. A silent flip fails here. Anchored to
+    // a real YAML key so the explanatory comment prose does not satisfy the match.
+    expect(desktopJob).toMatch(/\n[ \t]+continue-on-error:[ \t]*true/);
+  });
+
+  it('INDEPENDENT — the desktop lane has no `needs:` and nothing downstream needs it', () => {
+    // While staged/non-blocking, the lane must stay an independent leaf: an independent
+    // job's failure yields run-level `success` UNLESS a downstream `needs:[desktop]`
+    // consumes it. Assert no `needs:` in the job and none referencing desktop anywhere.
+    // Anchored to real YAML keys so comment prose is not a false positive.
+    expect(desktopJob).not.toMatch(/\n[ \t]+needs:/);
+    expect(ci).not.toMatch(/\n[ \t]+needs:[^\n]*\bdesktop\b/);
+  });
+});

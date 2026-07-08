@@ -177,3 +177,35 @@ jobs:
       # GH ubuntu-latest ships a stable Rust toolchain (rustup); no setup action needed.
       - name: cargo test (no default features)
         run: cargo test --no-default-features --manifest-path src-tauri/Cargo.toml
+
+  desktop:
+    name: Desktop Frontend (staged)
+    runs-on: ubuntu-latest
+    # STAGED non-blocking lane — closes the desktop-frontend CI blind spot (the Tauri
+    # webview's ~84 vitest files + its `tsc && vite build` never ran in CI; the root
+    # vitest config excludes desktop/** and only the intelligence-ui project covered
+    # ~30 desktop/intelligence/ files). Follows the SAME staged→load-bearing promotion
+    # pattern as the cargo lane (v1.49.936 staged → v1.49.939 flipped) and the macOS /
+    # windows legs: the `continue-on-error: true` below runs the lane on every push for
+    # per-push desktop signal WITHOUT ship-blocking power while it proves itself.
+    # FLIP CRITERION (lane-stability model, like cargo — every push fully rebuilds the
+    # frontend): after 3 consecutive green desktop runs across ORGANIC churn (not
+    # release/docs-only ships), DELETE the `continue-on-error: true` line so a desktop
+    # failure folds into the run-level conclusion the ship gate reads. The staged lane
+    # is an INDEPENDENT leaf (no `needs:`), so while non-blocking its failure cannot move
+    # the run-level conclusion. The flip is a DELIBERATE act paired with the drift-guard
+    # in tests/integration/ci-matrix-parity.test.ts ("CI desktop lane") — a silent flip
+    # (or silent removal of a build/test step) fails that test.
+    continue-on-error: true
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      # Frontend-only lane: tsc + vite build + vitest (jsdom). No Rust/Tauri system deps
+      # are needed here — that surface is compiled by the `cargo` lane and a future
+      # `tauri build` smoke job (deferred, tracked in the improvement workplan).
+      - run: npm --prefix desktop ci
+      - run: npm --prefix desktop run build
+      - run: npm --prefix desktop run test
