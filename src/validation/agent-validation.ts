@@ -67,7 +67,8 @@ export const AgentFrontmatterSchema = z
             ? 'Agent description is required'
             : 'Agent description must be a string',
       })
-      .min(1, 'Agent description cannot be empty'),
+      .min(1, 'Agent description cannot be empty')
+      .max(1024, 'Agent description must be 1024 characters or less'),
 
     tools: z.string().optional(),
 

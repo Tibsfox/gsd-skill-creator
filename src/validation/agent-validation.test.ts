@@ -100,6 +100,22 @@ describe('AgentFrontmatterSchema', () => {
       });
       expect(result.success).toBe(false);
     });
+
+    it('should accept description at the 1024-character limit', () => {
+      const result = AgentFrontmatterSchema.safeParse({
+        name: 'my-agent',
+        description: 'a'.repeat(1024),
+      });
+      expect(result.success).toBe(true);
+    });
+
+    it('should reject description over 1024 characters (Anthropic frontmatter limit, mirrors skill validation)', () => {
+      const result = AgentFrontmatterSchema.safeParse({
+        name: 'my-agent',
+        description: 'a'.repeat(1025),
+      });
+      expect(result.success).toBe(false);
+    });
   });
 
   describe('name format validation', () => {
