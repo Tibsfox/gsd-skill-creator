@@ -1,6 +1,7 @@
 ---
 name: wrap:phase
 description: Smart router that detects phase state and delegates to the appropriate wrapper (plan, execute, or verify)
+argument-hint: "[phase-number]"
 allowed-tools:
   - Read
   - Bash

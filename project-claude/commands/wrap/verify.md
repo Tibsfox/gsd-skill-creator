@@ -1,6 +1,7 @@
 ---
 name: wrap:verify
 description: Load verification skills before GSD verify-work, then capture verification observations
+argument-hint: "[phase-number]"
 allowed-tools:
   - Read
   - Write

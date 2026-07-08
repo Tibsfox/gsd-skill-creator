@@ -1,6 +1,7 @@
 ---
 name: gsd-dashboard
 description: Generate, watch, or clean the GSD Planning Docs Dashboard from .planning/ artifacts
+argument-hint: "[generate|watch|clean]"
 allowed-tools:
   - Read
   - Bash

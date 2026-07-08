@@ -1,6 +1,7 @@
 ---
 name: wrap:execute
 description: Load phase-relevant skills before GSD execute-phase, then capture execution observations
+argument-hint: "[phase-number]"
 allowed-tools:
   - Read
   - Write

@@ -1,6 +1,7 @@
 ---
 name: wrap:plan
 description: Load planning-relevant skills before GSD plan-phase for more informed phase plans
+argument-hint: "[phase-number]"
 allowed-tools:
   - Read
   - Write
