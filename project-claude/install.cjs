@@ -83,7 +83,11 @@ Existing GSD installation required (.claude/ directory must exist).
 // projectRoot depends on scope:
 //   --global: install to $HOME (targets ~/.claude/)
 //   --local (default): install to cwd (targets ./.claude/)
-const sourceDir = __dirname;
+// SC_INSTALL_SOURCE_DIR overrides the project-claude source root — tests inject a
+// synthetic manifest + sources here. Defaults to this script's own directory.
+const sourceDir = process.env.SC_INSTALL_SOURCE_DIR
+  ? path.resolve(process.env.SC_INSTALL_SOURCE_DIR)
+  : __dirname;
 const projectRoot = isGlobal
   ? require('os').homedir()
   : (isLocal ? process.cwd() : (() => {
@@ -145,6 +149,67 @@ function assertContained(absPath, root) {
   }
 }
 
+// --- Install ledger (INT-3) ---
+// Records every file this installer copies into .claude/ so --uninstall removes
+// exactly what was installed (including auto-discovered files) instead of a
+// hand-maintained hardcoded subset that drifts from the install surface. The
+// ledger is persisted to LEDGER_REL; paths are project-root-relative + forward-slash.
+const LEDGER_REL = '.claude/.skill-creator-install.json';
+const ledgerFiles = new Set();
+
+function recordManaged(targetPath) {
+  const rel = normalizeTarget(path.relative(projectRoot, targetPath));
+  if (rel && !rel.startsWith('..')) ledgerFiles.add(rel);
+}
+
+// Persist the ledger, union-merged with any prior one so idempotent re-installs
+// (which report files as 'current' and don't rewrite them) never shrink the
+// tracked set. Skipped for --dry-run and --only (a partial deploy must not
+// clobber the full ledger).
+function writeLedger() {
+  const ledgerPath = path.join(projectRoot, LEDGER_REL);
+  const merged = new Set(ledgerFiles);
+  const existing = readFileSafe(ledgerPath);
+  if (existing) {
+    try {
+      const prev = JSON.parse(existing);
+      if (prev && Array.isArray(prev.files)) {
+        for (const f of prev.files) merged.add(normalizeTarget(f));
+      }
+    } catch { /* ignore a corrupt prior ledger — overwrite with current */ }
+  }
+  const payload = {
+    version: 1,
+    generatedBy: 'project-claude/install.cjs',
+    files: [...merged].sort(),
+  };
+  ensureDir(ledgerPath);
+  fs.writeFileSync(ledgerPath, JSON.stringify(payload, null, 2) + '\n');
+  log(`  ledger:      ${LEDGER_REL} (${merged.size} tracked)`);
+}
+
+// Remove directories left empty after their files were unlinked, walking up from
+// each touched dir but never past .claude/ (and never .claude/ itself).
+function pruneEmptyDirs(dirs) {
+  const claudeAbs = path.resolve(claudeDir);
+  for (const start of dirs) {
+    let dir = path.resolve(start);
+    while (dir !== claudeAbs && dir.startsWith(claudeAbs + path.sep)) {
+      try {
+        if (fs.existsSync(dir) && fs.readdirSync(dir).length === 0) {
+          if (!dryRun) fs.rmdirSync(dir);
+          log(`  - pruned:    ${normalizeTarget(path.relative(projectRoot, dir))}/`);
+          dir = path.dirname(dir);
+        } else {
+          break;
+        }
+      } catch {
+        break;
+      }
+    }
+  }
+}
+
 // --- Standalone file install ---
 function installStandalone(entry) {
   if (!matchesOnly(entry.target)) return;
@@ -166,10 +231,12 @@ function installStandalone(entry) {
       ensureDir(targetPath);
       fs.writeFileSync(targetPath, sourceContent);
     }
+    recordManaged(targetPath);
     log(`  + installed: ${entry.target}`);
     stats.installed++;
   } else if (sha256(sourceContent) === sha256(targetContent)) {
     // Already current
+    recordManaged(targetPath);
     if (!quiet) log(`  = current:   ${entry.target}`);
     stats.current++;
   } else if (force) {
@@ -177,6 +244,7 @@ function installStandalone(entry) {
     if (!dryRun) {
       fs.writeFileSync(targetPath, sourceContent);
     }
+    recordManaged(targetPath);
     log(`  ↻ updated:   ${entry.target}`);
     stats.updated++;
   } else {
@@ -312,10 +380,12 @@ function installSkillDir(entry) {
         ensureDir(targetPath);
         fs.writeFileSync(targetPath, sourceContent);
       }
+      recordManaged(targetPath);
       log(`  + installed: ${fileTarget}`);
       stats.installed++;
       skillInstalled++;
     } else if (sha256(sourceContent) === sha256(targetContent)) {
+      recordManaged(targetPath);
       if (!quiet) log(`  = current:   ${fileTarget}`);
       stats.current++;
       skillCurrent++;
@@ -323,6 +393,7 @@ function installSkillDir(entry) {
       if (!dryRun) {
         fs.writeFileSync(targetPath, sourceContent);
       }
+      recordManaged(targetPath);
       log(`  ↻ updated:   ${fileTarget}`);
       stats.updated++;
       skillInstalled++;
@@ -388,13 +459,16 @@ function installCartridgeDir(entry) {
         ensureDir(targetPath);
         fs.writeFileSync(targetPath, sourceContent);
       }
+      recordManaged(targetPath);
       log(`  + installed: ${fileTarget}`);
       stats.installed++;
     } else if (sha256(sourceContent) === sha256(targetContent)) {
+      recordManaged(targetPath);
       if (!quiet) log(`  = current:   ${fileTarget}`);
       stats.current++;
     } else if (force) {
       if (!dryRun) fs.writeFileSync(targetPath, sourceContent);
+      recordManaged(targetPath);
       log(`  ↻ updated:   ${fileTarget}`);
       stats.updated++;
     } else {
@@ -430,6 +504,7 @@ function installHookScript(entry) {
       fs.writeFileSync(targetPath, sourceContent);
       chmodSafe(targetPath, 0o755);
     }
+    recordManaged(targetPath);
     log(`  + installed: ${entry.target} (executable)`);
     stats.installed++;
   } else if (sha256(sourceContent) === sha256(targetContent)) {
@@ -437,6 +512,7 @@ function installHookScript(entry) {
     if (!dryRun) {
       try { chmodSafe(targetPath, 0o755); } catch { /* ignore */ }
     }
+    recordManaged(targetPath);
     if (!quiet) log(`  = current:   ${entry.target}`);
     stats.current++;
   } else if (force) {
@@ -444,6 +520,7 @@ function installHookScript(entry) {
       fs.writeFileSync(targetPath, sourceContent);
       chmodSafe(targetPath, 0o755);
     }
+    recordManaged(targetPath);
     log(`  ↻ updated:   ${entry.target} (executable)`);
     stats.updated++;
   } else {
@@ -967,62 +1044,84 @@ function uninstallIntegration(manifest) {
   const prefix = dryRun ? '[DRY RUN] ' : '';
   log(`${prefix}Uninstalling integration components...\n`);
 
-  const integrationTargets = {
-    dirs: [
-      '.claude/commands/sc',
-      '.claude/commands/wrap',
-      '.claude/skills/gsd-workflow',
-      '.claude/skills/skill-integration',
-      '.claude/skills/session-awareness',
-      '.claude/skills/security-hygiene',
-      '.claude/cartridges/gsd-skill-creator',
-      '.claude/cartridges/get-shit-done',
-      '.claude/cartridges/release-engine',
-      '.claude/cartridges/housekeeping',
-    ],
-    files: [
-      '.claude/agents/gsd-executor.md',
-      '.claude/agents/gsd-verifier.md',
-      '.claude/agents/gsd-planner.md',
-      '.claude/hooks/session-state.cjs',
-      '.claude/hooks/validate-commit.cjs',
-      '.claude/hooks/phase-boundary-check.cjs',
-      '.planning/skill-creator.json',
-    ],
-  };
-
   let removed = 0;
   let notFound = 0;
   let skipped = 0;
+  const dirsTouched = new Set();
 
-  // Remove directories
-  for (const dir of integrationTargets.dirs) {
-    const fullPath = path.join(projectRoot, dir);
-    if (fs.existsSync(fullPath)) {
-      if (!dryRun) {
-        fs.rmSync(fullPath, { recursive: true, force: true });
+  // Prefer the install ledger — it records exactly what install wrote (including
+  // auto-discovered files), so uninstall never lags the install surface (INT-3).
+  const ledgerPath = path.join(projectRoot, LEDGER_REL);
+  const ledgerRaw = readFileSafe(ledgerPath);
+  let ledger = null;
+  if (ledgerRaw) {
+    try { ledger = JSON.parse(ledgerRaw); } catch { ledger = null; }
+  }
+
+  if (ledger && Array.isArray(ledger.files)) {
+    for (const rel of ledger.files) {
+      const fullPath = path.join(projectRoot, rel);
+      try {
+        assertContained(fullPath, projectRoot);
+      } catch {
+        log(`  ~ skipped:   ${rel} (escapes project root)`);
+        skipped++;
+        continue;
       }
-      log(`  - removed:   ${dir}/`);
-      removed++;
-    } else {
-      log(`  . not found: ${dir}/`);
-      notFound++;
+      if (fs.existsSync(fullPath)) {
+        if (!dryRun) fs.unlinkSync(fullPath);
+        log(`  - removed:   ${rel}`);
+        removed++;
+        dirsTouched.add(path.dirname(fullPath));
+      } else {
+        notFound++;
+      }
+    }
+  } else {
+    // Legacy fallback: pre-ledger hosts. A partial hardcoded subset — the best
+    // we can do without a receipt of what was written.
+    const legacyDirs = [
+      '.claude/commands/sc', '.claude/commands/wrap',
+      '.claude/skills/gsd-workflow', '.claude/skills/skill-integration',
+      '.claude/skills/session-awareness', '.claude/skills/security-hygiene',
+      '.claude/cartridges/gsd-skill-creator', '.claude/cartridges/get-shit-done',
+      '.claude/cartridges/release-engine', '.claude/cartridges/housekeeping',
+    ];
+    const legacyFiles = [
+      '.claude/agents/gsd-executor.md', '.claude/agents/gsd-verifier.md',
+      '.claude/agents/gsd-planner.md', '.claude/hooks/session-state.cjs',
+      '.claude/hooks/validate-commit.cjs', '.claude/hooks/phase-boundary-check.cjs',
+    ];
+    for (const dir of legacyDirs) {
+      const fullPath = path.join(projectRoot, dir);
+      if (fs.existsSync(fullPath)) {
+        if (!dryRun) fs.rmSync(fullPath, { recursive: true, force: true });
+        log(`  - removed:   ${dir}/`);
+        removed++;
+      } else {
+        notFound++;
+      }
+    }
+    for (const file of legacyFiles) {
+      const fullPath = path.join(projectRoot, file);
+      if (fs.existsSync(fullPath)) {
+        if (!dryRun) fs.unlinkSync(fullPath);
+        log(`  - removed:   ${file}`);
+        removed++;
+        dirsTouched.add(path.dirname(fullPath));
+      } else {
+        notFound++;
+      }
     }
   }
 
-  // Remove files
-  for (const file of integrationTargets.files) {
-    const fullPath = path.join(projectRoot, file);
-    if (fs.existsSync(fullPath)) {
-      if (!dryRun) {
-        fs.unlinkSync(fullPath);
-      }
-      log(`  - removed:   ${file}`);
-      removed++;
-    } else {
-      log(`  . not found: ${file}`);
-      notFound++;
-    }
+  // Remove the install-owned integration config (written by installIntegrationConfig,
+  // outside the .claude/ ledger).
+  const configPath = path.join(projectRoot, '.planning', 'skill-creator.json');
+  if (fs.existsSync(configPath)) {
+    if (!dryRun) fs.unlinkSync(configPath);
+    log('  - removed:   .planning/skill-creator.json');
+    removed++;
   }
 
   // Remove our merged hooks from settings.json so the host doesn't keep
@@ -1122,6 +1221,17 @@ function uninstallIntegration(manifest) {
   } else {
     log('  . not found: .git/hooks/post-commit');
     notFound++;
+  }
+
+  // Prune directories emptied by the removals (skills/<name>, commands/sc,
+  // hooks/lib, hooks/__tests__, cartridges/<name>, ...).
+  pruneEmptyDirs(dirsTouched);
+
+  // Remove the ledger itself, last.
+  if (ledger && fs.existsSync(ledgerPath)) {
+    if (!dryRun) fs.unlinkSync(ledgerPath);
+    log(`  - removed:   ${LEDGER_REL}`);
+    removed++;
   }
 
   log('');
@@ -1282,6 +1392,12 @@ function main() {
     log('Git hooks:');
     installGitHook();
     log('');
+  }
+
+  // Persist the install ledger so --uninstall removes exactly what we wrote
+  // (INT-3). Skipped for --only (a partial deploy must not clobber it).
+  if (!dryRun && !hasOnlyFilter) {
+    writeLedger();
   }
 
   // Summary
