@@ -217,6 +217,11 @@ export async function agentsCommand(args: string[], ctx?: ProcessContext): Promi
     }
 
     default: {
+      // Bare `agents` prints help (exit 0); unknown subcommand is a usage
+      // error (exit 1). (CLI-4)
+      if (subcommand !== undefined) {
+        p.log.error(`Unknown agents subcommand: ${subcommand}`);
+      }
       p.log.message('');
       p.log.message(pc.bold('Agent Management:'));
       p.log.message('');
@@ -239,7 +244,7 @@ export async function agentsCommand(args: string[], ctx?: ProcessContext): Promi
       p.log.message('    skill-creator agents validate');
       p.log.message('    skill-creator agents adoption');
       p.log.message('    skill-creator agents adoption --json');
-      return 0;
+      return subcommand === undefined ? 0 : 1;
     }
   }
 }

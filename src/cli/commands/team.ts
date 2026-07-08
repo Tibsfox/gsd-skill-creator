@@ -64,7 +64,12 @@ export async function teamCommand(args: string[]): Promise<number> {
       return teamEstimateCommand(subArgs);
     }
     default:
+      // A bare `team` invocation prints help and exits 0; an unknown
+      // subcommand is a usage error and exits non-zero. (CLI-4)
+      if (subcommand !== undefined) {
+        console.error(`Unknown team subcommand: ${subcommand}`);
+      }
       showTeamHelp();
-      return 0;
+      return subcommand === undefined ? 0 : 1;
   }
 }

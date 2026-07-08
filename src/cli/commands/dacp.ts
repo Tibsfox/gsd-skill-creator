@@ -63,7 +63,12 @@ export async function dacpCommand(args: string[]): Promise<number> {
       return dacpDriftCheckCommand(subArgs);
     }
     default:
+      // A bare `dacp` invocation prints help and exits 0; an unknown
+      // subcommand is a usage error and exits non-zero. (CLI-4)
+      if (subcommand !== undefined) {
+        console.error(`Unknown dacp subcommand: ${subcommand}`);
+      }
       showDacpHelp();
-      return 0;
+      return subcommand === undefined ? 0 : 1;
   }
 }

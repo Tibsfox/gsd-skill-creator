@@ -25,6 +25,11 @@ export async function skillCommand(
     }
 
     default: {
+      // Bare `skill` prints help (exit 0); unknown subcommand is a usage
+      // error (exit 1). (CLI-4)
+      if (subcommand !== undefined) {
+        p.log.error(`Unknown skill subcommand: ${subcommand}`);
+      }
       p.log.message('');
       p.log.message('Skill subcommands:');
       p.log.message('  test-triggering <name>   Run triggering test for a skill');
@@ -32,7 +37,7 @@ export async function skillCommand(
       p.log.message('Examples:');
       p.log.message('  skill-creator skill test-triggering my-skill');
       p.log.message('  skill-creator skill test-triggering my-skill --mock');
-      return 0;
+      return subcommand === undefined ? 0 : 1;
     }
   }
 }

@@ -3,8 +3,27 @@ import { resolve, join } from 'node:path';
 import { existsSync, mkdtempSync, symlinkSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
-import { parseSkillsDir, parseStringFlag } from './cli.js';
+import { parseSkillsDir, parseStringFlag, formatCliError } from './cli.js';
 import { getSkillsBasePath } from './types/scope.js';
+
+describe('formatCliError (CLI-8)', () => {
+  it('returns the message for an Error', () => {
+    expect(formatCliError(new Error('boom'))).toBe('boom');
+  });
+
+  it('stringifies non-Error throws without accessing .message', () => {
+    expect(formatCliError('plain string')).toBe('plain string');
+    expect(formatCliError(undefined)).toBe('undefined');
+    expect(formatCliError(null)).toBe('null');
+    expect(formatCliError({ code: 'ENOENT' })).toBe('[object Object]');
+  });
+
+  it('never throws on undefined/null/bare-object throws', () => {
+    expect(() => formatCliError(undefined)).not.toThrow();
+    expect(() => formatCliError(null)).not.toThrow();
+    expect(() => formatCliError(Symbol('x'))).not.toThrow();
+  });
+});
 
 describe('parseSkillsDir', () => {
   it('resolves --skills-dir <path> relative to cwd (separated form)', () => {

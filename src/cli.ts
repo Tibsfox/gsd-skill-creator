@@ -59,6 +59,17 @@ export function parseStringFlag(args: string[], name: string): string | undefine
   return undefined;
 }
 
+/**
+ * Format a thrown value for the top-level error line. A non-Error throw
+ * (a string, a bare object, `undefined`) has no `.message`; reading it
+ * blindly renders a blank line and, for `throw undefined`, would itself
+ * throw inside the catch and skip the process exit. Guard like every other
+ * catch site in the codebase. (CLI-8)
+ */
+export function formatCliError(err: unknown): string {
+  return err instanceof Error ? err.message : String(err);
+}
+
 async function printVersion(): Promise<void> {
   const require = createRequire(import.meta.url);
   const pkg = require('../package.json') as { version: string; name: string };
@@ -114,7 +125,7 @@ async function main() {
 
 if (isCliEntrypoint(import.meta.url)) {
   main().catch((err) => {
-    p.log.error(err.message);
+    p.log.error(formatCliError(err));
     process.exit(1);
   });
 }

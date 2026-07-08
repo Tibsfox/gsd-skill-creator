@@ -208,7 +208,7 @@ export const REGISTRY: readonly CommandEntry[] = [
     const verbose = ctx.args.includes('--verbose') || ctx.args.includes('-v');
     await reloadEmbeddingsCommand({ verbose });
   } },
-  { aliases: ['status', 'st'], handler: async (ctx) => { await statusCommand(ctx.args); } },
+  { aliases: ['status', 'st'], handler: (ctx) => statusCommand(ctx.args) },
   { aliases: ['resolve', 'res'], handler: (ctx) => {
     const skillName = ctx.args.filter((a) => !a.startsWith('-'))[1];
     return resolveCommand(skillName);
@@ -504,7 +504,12 @@ export const REGISTRY: readonly CommandEntry[] = [
         const { configValidateCommand } = await import('./commands/config-validate.js');
         return configValidateCommand(subArgs);
       }
-      default:
+      default: {
+        // Distinguish a bare `config` invocation (help, exit 0) from a
+        // genuinely unknown subcommand (usage + exit 1). (CLI-4)
+        if (subcommand !== undefined) {
+          p.log.error(`Unknown config subcommand: ${subcommand}`);
+        }
         p.log.message('');
         p.log.message(pc.bold('Config Management:'));
         p.log.message('');
@@ -515,7 +520,8 @@ export const REGISTRY: readonly CommandEntry[] = [
         p.log.message('    skill-creator config validate');
         p.log.message('    skill-creator config validate --json');
         p.log.message('    skill-creator config validate --config=/path/to/config.json');
-        return 0;
+        return subcommand === undefined ? 0 : 1;
+      }
     }
   } },
   { aliases: ['publish', 'pub'], handler: async (ctx) => {
