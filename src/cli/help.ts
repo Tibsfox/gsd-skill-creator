@@ -77,6 +77,7 @@ Commands:
   gsd-init, gi      Install GSD skill-creator integration into a project
   mcp-server        Start MCP server for skill browsing/installation
   gateway, gw       Start the MCP HTTP gateway (memory.* tools + chipset/agent/workflow/session)
+  ingest-conversations, ingest-convos  Ingest Claude Code transcripts into private conversation memory (--pg for semantic)
   coprocessor, cp   Coprocessor MCP tools (list-tools, capabilities, vram, call)
   session, sess     Manage session continuity (save, restore, handoff)
   purge, pg         Compact and clean observation JSONL files

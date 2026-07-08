@@ -200,6 +200,10 @@ export const REGISTRY: readonly CommandEntry[] = [
   { aliases: ['gateway', 'gw'], handler: async (ctx) => {
     process.exitCode = await gatewayCommand(ctx.args.slice(1));
   } },
+  { aliases: ['ingest-conversations', 'ingest-convos'], handler: async (ctx) => {
+    const { ingestConversationsCommand } = await import('./commands/ingest-conversations.js');
+    process.exitCode = await ingestConversationsCommand(ctx.args.slice(1));
+  } },
   { aliases: ['audit', 'au'], handler: (ctx) => {
     const skillName = ctx.args.filter((a) => !a.startsWith('-'))[1];
     return auditCommand(skillName, {});
