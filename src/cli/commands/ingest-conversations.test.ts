@@ -68,6 +68,48 @@ describe('ingest-conversations command (keyword / no --pg)', () => {
     expect((await store.listSessions()).length).toBe(2);
   });
 
+  it('parses real Claude Code transcript format (type:user, array content, tool_use)', async () => {
+    const workdir = tmp('sc-ingest-');
+    const convDir = join(workdir, 'conversations');
+    const logPath = join(workdir, 'real.jsonl');
+    writeFileSync(
+      logPath,
+      [
+        JSON.stringify({ type: 'user', message: { role: 'user', content: 'What is the quokka protocol?' }, timestamp: '2026-07-08T00:00:00Z' }),
+        JSON.stringify({ type: 'assistant', message: { role: 'assistant', content: [{ type: 'text', text: 'The quokka protocol handles vectors.' }, { type: 'tool_use', name: 'Read', input: {} }] }, timestamp: '2026-07-08T00:00:01Z' }),
+      ].join('\n') + '\n',
+    );
+
+    const code = await ingestConversationsCommand([logPath, '--conversations-dir', convDir]);
+    expect(code).toBe(0);
+
+    const store = new ConversationStore({ storePath: convDir });
+    const turns = await store.getSessionTurns((await store.listSessions())[0]!.id);
+    expect(turns.length).toBe(2);
+    // type:"user" maps to 'human'; string content preserved.
+    expect(turns[0]!.role).toBe('human');
+    expect(turns[0]!.content).toContain('quokka protocol');
+    // array content flattened to its text block; tool_use name extracted.
+    expect(turns[1]!.role).toBe('assistant');
+    expect(turns[1]!.content).toBe('The quokka protocol handles vectors.');
+    expect(turns[1]!.toolCalls).toContain('Read');
+  });
+
+  it('handles an empty transcript without throwing (records a 0-turn session)', async () => {
+    const workdir = tmp('sc-ingest-');
+    const convDir = join(workdir, 'conversations');
+    const logPath = join(workdir, 'empty.jsonl');
+    writeFileSync(logPath, '\n');
+
+    const code = await ingestConversationsCommand([logPath, '--conversations-dir', convDir]);
+    expect(code).toBe(0);
+
+    const store = new ConversationStore({ storePath: convDir });
+    const sessions = await store.listSessions();
+    expect(sessions.length).toBe(1);
+    expect((await store.getSessionTurns(sessions[0]!.id)).length).toBe(0);
+  });
+
   it('returns 1 when the path names no transcripts', async () => {
     const workdir = tmp('sc-ingest-');
     const code = await ingestConversationsCommand([join(workdir, 'nope.jsonl'), '--conversations-dir', join(workdir, 'c')]);

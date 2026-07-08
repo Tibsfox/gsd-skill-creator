@@ -80,10 +80,12 @@ export async function gatewayCommand(args: string[]): Promise<number> {
 
   // indexPath is a filename resolved under memoryDir by IndexManager
   // (join(memoryDir, indexFile)); pass the bare filename, not an absolute path.
-  // MEM-7 step 2: when the PG tier is active, embed conversation turns at store
-  // time and enable semantic search. Use ONE EmbeddingService for both store-time
-  // (via MemoryService → PgStore) and query-time (the adapter below) so turn and
-  // query vectors share a space — heuristic and model vectors are NOT comparable.
+  // MEM-7 step 2: under --pg, build an embedder for QUERY embedding (the semantic
+  // adapter below). Conversation turns are written + embedded by the separate
+  // `ingest-conversations` CLI, so both processes must run in the SAME embedder
+  // MODE (model vs heuristic) for query and turn vectors to be comparable — which
+  // holds when the model is consistently available (or absent) across runs. Also
+  // handed to PgStore so any future gateway-side write embeds consistently.
   const conversationEmbedder = pgConnectionString ? await getEmbeddingService() : undefined;
 
   const memoryService = memoryEnabled

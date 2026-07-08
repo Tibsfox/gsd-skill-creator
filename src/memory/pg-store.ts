@@ -306,6 +306,18 @@ export class PgStore implements MemoryStore {
   }
 
   /**
+   * Whether the store is connected and ready (pool initialized). Triggers lazy
+   * init on first call. Unlike `isAvailable()` (which only checks the pg module
+   * is installed), this reflects real DB connectivity. Callers use it as a
+   * pre-flight before a write batch so an unreachable DB fails fast (one init
+   * attempt) instead of no-op-dropping — and silently re-connecting on — every
+   * write. (MEM-7 step 2)
+   */
+  async isReady(): Promise<boolean> {
+    return this.ensureReady();
+  }
+
+  /**
    * Initialize the connection pool and apply migrations.
    *
    * A connection failure (pg module missing, DB unreachable) degrades

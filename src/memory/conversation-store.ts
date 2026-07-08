@@ -121,6 +121,56 @@ export interface ConversationStoreConfig {
   maxActiveSessions?: number;
 }
 
+// ─── Claude Code transcript parsing ──────────────────────────────────────────
+
+/**
+ * Flatten a Claude Code message `content` to text. Real transcripts carry
+ * `content` as a string OR an array of content blocks (`{type:'text', text}`,
+ * `{type:'tool_use', …}`, `{type:'tool_result', …}`); older/simple logs use a
+ * bare string. Non-text blocks are dropped; the text blocks are joined.
+ */
+function extractTranscriptText(content: unknown): string {
+  if (typeof content === 'string') return content;
+  if (Array.isArray(content)) {
+    return content
+      .filter(
+        (b): b is { type: string; text: string } =>
+          !!b && typeof b === 'object' &&
+          (b as { type?: unknown }).type === 'text' &&
+          typeof (b as { text?: unknown }).text === 'string',
+      )
+      .map((b) => b.text)
+      .join('\n');
+  }
+  return '';
+}
+
+/**
+ * Extract tool-call names from a transcript entry — from `tool_use` blocks in an
+ * array `message.content`, or a flat top-level `tool_calls` array.
+ */
+function extractToolNames(entry: {
+  message?: { content?: unknown };
+  tool_calls?: Array<{ name?: unknown }>;
+}): string[] {
+  const names: string[] = [];
+  const content = entry?.message?.content;
+  if (Array.isArray(content)) {
+    for (const b of content) {
+      if (b && typeof b === 'object' && (b as { type?: unknown }).type === 'tool_use' &&
+          typeof (b as { name?: unknown }).name === 'string') {
+        names.push((b as { name: string }).name);
+      }
+    }
+  }
+  if (Array.isArray(entry?.tool_calls)) {
+    for (const tc of entry.tool_calls) {
+      if (tc && typeof tc.name === 'string') names.push(tc.name);
+    }
+  }
+  return names;
+}
+
 // ─── ConversationStore ───────────────────────────────────────────────────────
 
 /**
@@ -256,24 +306,30 @@ export class ConversationStore {
     for (const line of lines) {
       try {
         const entry = JSON.parse(line);
-        // Claude Code JSONL format: {type, message, ...}
-        const role = entry.type === 'human' ? 'human'
+        // Claude Code JSONL: {type, message, timestamp, ...}. `type` is
+        // "user"/"human" | "assistant" | other; message is a bare string OR
+        // {role, content} where content is a string or an array of blocks.
+        const role: ConversationTurn['role'] =
+          entry.type === 'user' || entry.type === 'human' ? 'human'
           : entry.type === 'assistant' ? 'assistant'
           : 'system';
 
-        const messageContent = typeof entry.message === 'string'
+        const rawContent = typeof entry.message === 'string'
           ? entry.message
-          : entry.message?.content ?? JSON.stringify(entry);
+          : entry.message?.content;
+        const messageContent = extractTranscriptText(rawContent);
 
         if (!messageContent || messageContent.length < 2) continue;
+
+        const toolCalls = extractToolNames(entry);
 
         const turn: ConversationTurn = {
           id: `${sid}-${turnCount}`,
           sessionId: sid,
-          role: role as ConversationTurn['role'],
+          role,
           content: messageContent.slice(0, 10000), // Cap at 10K chars per turn
           timestamp: new Date(entry.timestamp ?? Date.now()),
-          toolCalls: entry.tool_calls?.map((tc: { name: string }) => tc.name),
+          toolCalls: toolCalls.length > 0 ? toolCalls : undefined,
           filesAccessed: entry.files_accessed,
           tags: [],
         };
@@ -285,7 +341,13 @@ export class ConversationStore {
       }
     }
 
-    const session = this.sessions.get(sid)!;
+    let session = this.sessions.get(sid);
+    if (!session) {
+      // No valid turns parsed (empty transcript, or only non-text/tool blocks):
+      // record an empty session rather than throwing on a non-null assertion.
+      session = { id: sid, startedAt: new Date(), endedAt: null, turnCount: 0, topics: [] };
+      this.sessions.set(sid, session);
+    }
     session.endedAt = new Date();
     session.topics = topics;
     await this.saveSessionIndex();

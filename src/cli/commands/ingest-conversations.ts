@@ -84,8 +84,11 @@ export async function ingestConversationsCommand(args: string[]): Promise<number
   const conversationStore = new ConversationStore({ storePath: conversationsDir });
 
   // --pg: mirror into the LOD-400 PgStore with embedded turns so semantic search
-  // works. Same EmbeddingService the gateway uses for queries → shared vector
-  // space. Absent RH_POSTGRES_URL, degrade to JSONL-only rather than failing.
+  // works. Uses the process-local EmbeddingService; the gateway must run in the
+  // SAME embedder MODE (model vs heuristic) at query time for the vectors to be
+  // comparable — which holds when the model is consistently available (or absent)
+  // across runs. Absent RH_POSTGRES_URL or an unreachable DB, degrade to
+  // JSONL-only rather than failing.
   let pg: PgStore | undefined;
   if (args.includes('--pg')) {
     const env = loadPgEnv();
@@ -93,7 +96,16 @@ export async function ingestConversationsCommand(args: string[]): Promise<number
       console.error('ingest-conversations: --pg given but no RH_POSTGRES_URL found; ingesting JSONL only');
     } else {
       const embedder = await getEmbeddingService();
-      pg = new PgStore({ connectionString: env.url }, embedder);
+      const candidate = new PgStore({ connectionString: env.url }, embedder);
+      // Pre-flight the connection ONCE. Without this, an unreachable DB would
+      // both (a) report false "embedded into PostgreSQL" success and (b) re-init
+      // on every storeTurn (~10s each), so an N-turn transcript could hang ~N*10s.
+      if (await candidate.isReady()) {
+        pg = candidate;
+      } else {
+        console.error('ingest-conversations: --pg given but the database is unreachable; ingesting JSONL only');
+        await candidate.close();
+      }
     }
   }
 
@@ -167,6 +179,9 @@ search. With --pg, also mirrors them into the LOD-400 PgStore with per-turn
 embeddings, enabling semantic conversation search on the gateway.
 
 Conversation data is ALWAYS PRIVATE and never leaves the local machine.
+
+Re-ingesting the same transcript creates a NEW session each run (a fresh UUID);
+there is no content-based dedup yet, so avoid ingesting the same file twice.
 
 Arguments:
   <path>              A .jsonl transcript file, or a directory of them.
