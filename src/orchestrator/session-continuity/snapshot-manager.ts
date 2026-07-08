@@ -14,33 +14,16 @@ import { appendFile, readFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { TranscriptParser } from '../../observation/transcript-parser.js';
-import {
-  SessionSnapshotSchema,
-  SNAPSHOT_FILENAME,
-  DEFAULT_MAX_SNAPSHOTS,
-  DEFAULT_SNAPSHOT_MAX_AGE_DAYS,
-} from './types.js';
+import { SessionSnapshotSchema, SNAPSHOT_FILENAME } from './types.js';
 import type { SessionSnapshot } from './types.js';
 import type { TranscriptEntry } from '../../types/observation.js';
 import { extractTextContent } from '../../types/observation.js';
 
-export interface SnapshotManagerOptions {
-  maxSnapshots?: number;
-  maxAgeDays?: number;
-}
-
 export class SnapshotManager {
   private parser: TranscriptParser;
-  private maxSnapshots: number;
-  private maxAgeDays: number;
 
-  constructor(
-    private snapshotDir: string,
-    private options: SnapshotManagerOptions = {},
-  ) {
+  constructor(private snapshotDir: string) {
     this.parser = new TranscriptParser();
-    this.maxSnapshots = options.maxSnapshots ?? DEFAULT_MAX_SNAPSHOTS;
-    this.maxAgeDays = options.maxAgeDays ?? DEFAULT_SNAPSHOT_MAX_AGE_DAYS;
   }
 
   /**

@@ -17,7 +17,6 @@ export {
 } from './types.js';
 export type { SessionSnapshot, WarmStartContext, HandoffSkillMeta } from './types.js';
 export { SnapshotManager } from './snapshot-manager.js';
-export type { SnapshotManagerOptions } from './snapshot-manager.js';
 export { SkillPreloadSuggester } from './skill-preload-suggester.js';
 export { WarmStartGenerator } from './warm-start.js';
 export { HandoffGenerator } from './handoff-generator.js';
