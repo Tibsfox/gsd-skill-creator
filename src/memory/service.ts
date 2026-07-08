@@ -206,6 +206,7 @@ export class MemoryService {
     const tiersToSearch = this.resolveTiers(q);
     const tiersSearched: LodLevel[] = [];
     const allResults = new Map<string, MemoryResult>(); // dedup by ID, keep highest score
+    const resultTier = new Map<string, LodLevel>(); // originating tier per kept result (for access accrual)
 
     for (const tier of tiersToSearch) {
       const store = this.stores.get(tier);
@@ -218,6 +219,7 @@ export class MemoryService {
         const existing = allResults.get(result.record.id);
         if (!existing || result.score > existing.score) {
           allResults.set(result.record.id, result);
+          resultTier.set(result.record.id, tier);
         }
       }
 
@@ -306,6 +308,31 @@ export class MemoryService {
         ...r,
         tokenEstimate: r.tokenEstimate || estimateTokens(r.record.content),
       }));
+    }
+
+    // ─── Access Accrual (D-4) ─────────────────────────────────────────────
+    // A recalled record must accrue accessCount so the promotion gate can fire.
+    // Previously only FileStore.get() / RamCache.query() bumped it, but
+    // MemoryService.query() reaches stores via query() and FileStore.query()
+    // never bumped — so records at the default LOD-300 tier never accrued and
+    // runMaintenance() could never promote a hot memory. Centralize accrual here
+    // (once per returned record, after dedup) and persist to the originating tier
+    // so the count survives to the next maintenance sweep. The per-store query
+    // bumps are removed, so this is the single source of truth (no RAM-vs-file
+    // divergence / double-count). Best-effort: a persist failure must not fail recall.
+    const accrualAt = new Date();
+    for (const result of sorted) {
+      result.record.accessCount += 1;
+      result.record.lastAccessed = accrualAt;
+      const tier = resultTier.get(result.record.id);
+      const store = tier !== undefined ? this.stores.get(tier) : undefined;
+      if (store) {
+        try {
+          await store.store(result.record);
+        } catch {
+          // Access accounting is best-effort; ignore persist failures.
+        }
+      }
     }
 
     const totalTokens = sorted.reduce((sum, r) => sum + r.tokenEstimate, 0);

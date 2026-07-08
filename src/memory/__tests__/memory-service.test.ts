@@ -355,6 +355,34 @@ describe('MemoryService', () => {
     expect(stats).toHaveProperty('deprecatedCount');
     expect(typeof stats.totalMemories).toBe('number');
   });
+
+  it('query() accrues accessCount so a hot record promotes via runMaintenance (D-4)', async () => {
+    // Store at LOD-300 (FileStore) with a high confidence and zero access count.
+    const rec = makeRecord({
+      name: 'group theory',
+      description: 'foundational algebra',
+      content: 'A group is a set with an associative binary operation.',
+      confidence: 1.0,
+      accessCount: 0,
+    });
+    await service.store(rec);
+
+    // Nothing to promote on store alone (accessCount 0; LOD-200 needs >= 5).
+    expect((await service.runMaintenance()).promoted).toBe(0);
+
+    // Recall 5×. Before the D-4 fix FileStore.query() never bumped accessCount,
+    // so MemoryService.query() left the LOD-300 record at 0 forever and promotion
+    // could never fire. Now each query accrues + persists the count.
+    let lastCount = 0;
+    for (let i = 0; i < 5; i++) {
+      const resp = await service.query('group', { limit: 5 });
+      lastCount = resp.results[0]?.record.accessCount ?? lastCount;
+    }
+    expect(lastCount).toBe(5);
+
+    // The LOD-200 promotion rule (minAccessCount 5) now fires.
+    expect((await service.runMaintenance()).promoted).toBeGreaterThan(0);
+  });
 });
 
 // ─── MemoryService with Arena-backed LOD 300 (M7) ────────────────────────────

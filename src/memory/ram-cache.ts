@@ -227,12 +227,10 @@ export class RamCache implements MemoryStore {
       return budgeted;
     }
 
-    // Touch accessed records
-    for (const r of limited) {
-      r.record.lastAccessed = new Date();
-      r.record.accessCount += 1;
-    }
-
+    // Access accrual is centralized in MemoryService.query() (D-4) so RAM and
+    // FileStore accrue uniformly and persist their counts; query() here no longer
+    // bumps (double-counting vs the centralized accrual, and FileStore.query()
+    // never bumped, so the two tiers diverged).
     return limited;
   }
 
