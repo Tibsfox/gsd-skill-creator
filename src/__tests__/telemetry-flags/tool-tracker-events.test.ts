@@ -4,7 +4,7 @@
  * Asserts:
  *  1. tool-tracker.sh exists and is executable
  *  2. project-claude/settings.json registers it on PostCompact, FileChanged,
- *     PermissionDenied, SubagentSpawn (the four W1-missed events)
+ *     PermissionDenied, SubagentStart (the four W1-missed events)
  *  3. The tracker writes a JSONL line (synthetic event in /tmp; never touches
  *     .planning/) with the documented shape
  *  4. The line carries `tier: "B"` and the `data` payload contains no PII
@@ -25,7 +25,7 @@ const REPO_ROOT = join(__dirname, '..', '..', '..');
 const TRACKER = join(REPO_ROOT, 'project-claude', 'hooks', 'tool-tracker.sh');
 const SETTINGS = join(REPO_ROOT, 'project-claude', 'settings.json');
 
-const REQUIRED_EVENTS = ['PostCompact', 'FileChanged', 'PermissionDenied', 'SubagentSpawn'];
+const REQUIRED_EVENTS = ['PostCompact', 'FileChanged', 'PermissionDenied', 'SubagentStart'];
 
 // windows: this suite executes a POSIX shell script (tool-tracker.sh) via bash
 // and asserts on Unix file-mode execute bits — neither is portable to the
