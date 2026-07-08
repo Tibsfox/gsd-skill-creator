@@ -5,10 +5,14 @@
  * Receives session end data via stdin JSON and processes
  * the transcript to extract patterns and suggestions.
  *
- * Configure in .claude/settings.json:
+ * Configure in .claude/settings.json (Claude Code hook schema — PascalCase event
+ * key, value is an array of matcher groups; point command at the installed
+ * package's dist, which the hook imports from):
  * {
  *   "hooks": {
- *     "session_end": "node /path/to/gsd-skill-creator/dist/hooks/session-end.js"
+ *     "SessionEnd": [
+ *       { "hooks": [{ "type": "command", "command": "node /path/to/gsd-skill-creator/dist/hooks/session-end.js" }] }
+ *     ]
  *   }
  * }
  */

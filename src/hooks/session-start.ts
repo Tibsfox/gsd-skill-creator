@@ -5,10 +5,14 @@
  * Receives session start data via stdin JSON and caches it
  * for later use when the session ends.
  *
- * Configure in .claude/settings.json:
+ * Configure in .claude/settings.json (Claude Code hook schema — PascalCase event
+ * key, value is an array of matcher groups; point command at the installed
+ * package's dist, which the hook imports from):
  * {
  *   "hooks": {
- *     "session_start": "node /path/to/gsd-skill-creator/dist/hooks/session-start.js"
+ *     "SessionStart": [
+ *       { "hooks": [{ "type": "command", "command": "node /path/to/gsd-skill-creator/dist/hooks/session-start.js" }] }
+ *     ]
  *   }
  * }
  */

@@ -221,17 +221,31 @@ alias sc-list='skill-creator list'
 
 To enable automatic session observation, configure Claude Code hooks:
 
-**Create `.claude/settings.json`:**
+**Create `.claude/settings.json`** (Claude Code hook schema — the event key is
+PascalCase `SessionStart`/`SessionEnd` and the value is an array of matcher
+groups, each with a `hooks` list of `command` entries):
 ```json
 {
   "hooks": {
-    "session_start": "node /path/to/gsd-skill-creator/dist/hooks/session-start.js",
-    "session_end": "node /path/to/gsd-skill-creator/dist/hooks/session-end.js"
+    "SessionStart": [
+      { "hooks": [{ "type": "command", "command": "node /path/to/gsd-skill-creator/dist/hooks/session-start.js" }] }
+    ],
+    "SessionEnd": [
+      { "hooks": [{ "type": "command", "command": "node /path/to/gsd-skill-creator/dist/hooks/session-end.js" }] }
+    ]
   }
 }
 ```
 
-> **Note:** Hook integration depends on Claude Code's hook system availability. Check Claude Code documentation for current hook support.
+Point `command` at the installed package's `dist/hooks/` (the hooks import the
+rest of `dist/`, so they run from the package location — they are not copied
+into your project's `.claude/hooks/`). Use an absolute path or one resolvable
+from your project root.
+
+> **Note:** The legacy `"session_start"`/`"session_end"` string form is NOT a
+> valid Claude Code hook schema — Claude Code silently ignores unknown event
+> keys, so a settings file using it never fires. Use the `SessionStart`/
+> `SessionEnd` array form above.
 
 ### Manual Usage (Recommended)
 
