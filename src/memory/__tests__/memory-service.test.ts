@@ -144,6 +144,21 @@ describe('FileStore', () => {
     expect(await store.has(record.id)).toBe(false);
   });
 
+  it('stores distinct punctuation-only-named records without collision (AC-6)', async () => {
+    // Both names slugify to '' pre-fix, so both would write `feedback_.md` and
+    // the second clobbers the first → get() of the first returns null.
+    const a = makeRecord({ id: 'id-a', name: '!!!', content: 'punctuation content A' });
+    const b = makeRecord({ id: 'id-b', name: '???', content: 'punctuation content B' });
+    await store.store(a);
+    await store.store(b);
+
+    expect(await store.count()).toBe(2);
+    const ra = await store.get('id-a');
+    const rb = await store.get('id-b');
+    expect(ra?.content).toContain('content A');
+    expect(rb?.content).toContain('content B');
+  });
+
   // ──────────────────────────────────────────────────────────────────────────
   // LoaderContext chokepoint integration (v1.49.907)
   // ──────────────────────────────────────────────────────────────────────────

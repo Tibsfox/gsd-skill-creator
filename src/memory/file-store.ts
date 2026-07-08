@@ -13,6 +13,7 @@
 
 import { readdir, readFile, writeFile, unlink, stat, mkdir } from 'node:fs/promises';
 import { join, basename } from 'node:path';
+import { createHash } from 'node:crypto';
 import { LodLevel } from '../lod/types.js';
 import type {
   MemoryRecord,
@@ -29,10 +30,16 @@ const LOADER_SOURCE = 'memory/file-store';
 
 /** Slugify a name to a safe filename segment: lowercase, hyphens, no special chars. */
 function slugify(name: string): string {
-  return name
+  const slug = name
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+  // A name with no [a-z0-9] characters (all-punctuation, CJK, emoji) slugs to
+  // an empty string, so every such name would collide on `${type}_.md` and the
+  // second store() would silently clobber the first. Fall back to a
+  // content-derived hash so distinct names get distinct, non-colliding
+  // filenames. (AC-6)
+  return slug || `x${createHash('sha1').update(name).digest('hex').slice(0, 8)}`;
 }
 
 /** Build the canonical filename for a memory record. */
