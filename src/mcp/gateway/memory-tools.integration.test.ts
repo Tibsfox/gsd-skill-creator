@@ -20,6 +20,7 @@ import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/
 import { startGateway, type GatewayHandle } from './server.js';
 import { createGsdGatewayFactory } from './create-gateway-server.js';
 import { MemoryService } from '../../memory/service.js';
+import { ConversationStore } from '../../memory/conversation-store.js';
 import { createTokenInfo, writeToken } from './token-manager.js';
 import type { TokenInfo, GatewayScope } from './types.js';
 
@@ -208,6 +209,89 @@ describe('Gateway memory tools integration (MEM-1)', () => {
       }
       // Sanity: the always-on chipset tool is still present.
       expect(names).toContain('chipset.get');
+
+      await client.close();
+    });
+  });
+
+  describe('search_conversations PG semantic preference (MEM-7 step 2)', () => {
+    it('prefers the PG semantic searcher and maps its rows to the tool shape', async () => {
+      const memoryService = new MemoryService({
+        memoryDir: join(tempDir, 'memory'),
+        indexPath: 'MEMORY.md',
+      });
+      const pgConversationSearch = {
+        async search() {
+          return [
+            {
+              turn: {
+                id: 't1',
+                session_id: 'sess-uuid',
+                role: 'assistant',
+                content: 'a semantic answer about gateways and vectors',
+                timestamp: new Date('2026-07-08T00:00:00.000Z'),
+              },
+              sessionId: 'sess-uuid',
+              score: 0.9127,
+            },
+          ];
+        },
+      };
+      await startWithFactory(createGsdGatewayFactory({ memoryService, pgConversationSearch }));
+
+      const transport = createClientTransport(port, storedToken.token);
+      const client = new Client({ name: 'convo-semantic', version: '1.0.0' });
+      await client.connect(transport);
+
+      const res = parseToolResult(
+        await client.callTool({ name: 'memory.search_conversations', arguments: { query: 'gateway' } }),
+      );
+      expect(res).toMatchObject({
+        source: 'semantic',
+        resultCount: 1,
+        results: [
+          {
+            turnId: 't1',
+            sessionId: 'sess-uuid',
+            role: 'assistant',
+            score: 0.913,
+            snippet: 'a semantic answer about gateways and vectors',
+          },
+        ],
+      });
+
+      await client.close();
+    });
+
+    it('falls back to keyword search when the PG searcher returns nothing', async () => {
+      const memoryService = new MemoryService({
+        memoryDir: join(tempDir, 'memory'),
+        indexPath: 'MEMORY.md',
+      });
+      const conversationStore = new ConversationStore({ storePath: join(tempDir, 'conversations') });
+      await conversationStore.ingestTurn({
+        id: 'k1',
+        sessionId: 'sess-1',
+        role: 'human',
+        content: 'the keyword fallback path still answers',
+        timestamp: new Date('2026-07-08T00:00:00.000Z'),
+        tags: [],
+      });
+      const pgConversationSearch = { async search() { return []; } }; // empty → fall back
+
+      await startWithFactory(
+        createGsdGatewayFactory({ memoryService, conversationStore, pgConversationSearch }),
+      );
+
+      const transport = createClientTransport(port, storedToken.token);
+      const client = new Client({ name: 'convo-fallback', version: '1.0.0' });
+      await client.connect(transport);
+
+      const res = parseToolResult(
+        await client.callTool({ name: 'memory.search_conversations', arguments: { query: 'fallback' } }),
+      ) as { source: string; resultCount: number };
+      expect(res.source).toBe('keyword');
+      expect(res.resultCount).toBeGreaterThanOrEqual(1);
 
       await client.close();
     });

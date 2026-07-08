@@ -40,6 +40,7 @@ import type { RustArena, TierKind } from './rust-arena.js';
 import { ChromaStore } from './chroma-store.js';
 import type { ChromaPreloadResult } from './chroma-store.js';
 import { PgStore } from './pg-store.js';
+import type { TurnEmbedder } from './pg-store.js';
 import {
   hybridRerank, scoreToDistance, distanceToScore,
 } from './hybrid-scorer.js';
@@ -87,8 +88,16 @@ export interface MemoryServiceConfig {
   /** ChromaDB path for LOD 350 (optional). */
   chromaPath?: string;
 
-  /** PostgreSQL connection string for LOD 400 (optional, not implemented yet). */
+  /** PostgreSQL connection string for LOD 400 (optional). */
   pgConnectionString?: string;
+
+  /**
+   * Embedder for conversation turns stored in the LOD-400 PgStore (MEM-7 step 2).
+   * When supplied alongside `pgConnectionString`, turns are vectorized at store
+   * time so `searchConversationsByEmbedding` (semantic conversation search) works.
+   * `EmbeddingService` satisfies this structurally. Omit for keyword-only.
+   */
+  conversationEmbedder?: TurnEmbedder;
 
   /** RAM cache max size for LOD 100. */
   ramCacheSize?: number;
@@ -191,9 +200,24 @@ export class MemoryService {
     // supplied, mirroring how LOD 350 Chroma is gated on chromaPath). Init is
     // lazy (first use), and a connection failure degrades gracefully. (PG-1)
     if (config.pgConnectionString) {
-      const pgStore = new PgStore({ connectionString: config.pgConnectionString });
+      const pgStore = new PgStore(
+        { connectionString: config.pgConnectionString },
+        config.conversationEmbedder,
+      );
       this.stores.set(LodLevel.FABRICATION, pgStore);
     }
+  }
+
+  /**
+   * Return the LOD-400 PgStore when the PostgreSQL tier is active, for callers
+   * (the gateway, the `ingest-conversations` command) that need its conversation
+   * methods — `storeSession`/`storeTurn`/`searchConversationsByEmbedding`, which
+   * are not part of the `MemoryStore` interface. Returns undefined when no
+   * `pgConnectionString` was configured. (MEM-7 step 2)
+   */
+  getPgConversationStore(): PgStore | undefined {
+    const store = this.stores.get(LodLevel.FABRICATION);
+    return store instanceof PgStore ? store : undefined;
   }
 
   // ─── Lifecycle ────────────────────────────────────────────────────────────

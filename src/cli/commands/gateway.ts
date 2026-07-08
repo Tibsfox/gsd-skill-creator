@@ -17,6 +17,7 @@ import { startGateway, type GatewayHandle } from '../../mcp/gateway/server.js';
 import { createGsdGatewayFactory } from '../../mcp/gateway/create-gateway-server.js';
 import { MemoryService } from '../../memory/service.js';
 import { ConversationStore } from '../../memory/conversation-store.js';
+import { getEmbeddingService } from '../../embeddings/index.js';
 import { loadPgEnv } from '../../scribe/pg-runtime/env-loader.js';
 import {
   DEFAULT_GATEWAY_PORT,
@@ -79,8 +80,14 @@ export async function gatewayCommand(args: string[]): Promise<number> {
 
   // indexPath is a filename resolved under memoryDir by IndexManager
   // (join(memoryDir, indexFile)); pass the bare filename, not an absolute path.
+  // MEM-7 step 2: when the PG tier is active, embed conversation turns at store
+  // time and enable semantic search. Use ONE EmbeddingService for both store-time
+  // (via MemoryService → PgStore) and query-time (the adapter below) so turn and
+  // query vectors share a space — heuristic and model vectors are NOT comparable.
+  const conversationEmbedder = pgConnectionString ? await getEmbeddingService() : undefined;
+
   const memoryService = memoryEnabled
-    ? new MemoryService({ memoryDir, indexPath: 'MEMORY.md', pgConnectionString })
+    ? new MemoryService({ memoryDir, indexPath: 'MEMORY.md', pgConnectionString, conversationEmbedder })
     : undefined;
 
   // Wire the always-on, no-DB conversation store so memory.search_conversations
@@ -92,7 +99,20 @@ export async function gatewayCommand(args: string[]): Promise<number> {
     ? new ConversationStore({ storePath: conversationsDir })
     : undefined;
 
-  const factory = createGsdGatewayFactory({ memoryService, conversationStore });
+  // Semantic conversation search (MEM-7 step 2): embed the query, then pgvector
+  // cosine over the PgStore conversation tables. Present only under --pg with an
+  // embedder; the search tool prefers it and falls back to keyword when empty.
+  const pgConversationStore = pgConnectionString ? memoryService?.getPgConversationStore() : undefined;
+  const pgConversationSearch = pgConversationStore && conversationEmbedder
+    ? {
+        async search(query: string, limit: number, sessionFilter?: string[]) {
+          const { embedding } = await conversationEmbedder.embed(query);
+          return pgConversationStore.searchConversationsByEmbedding(embedding, limit, sessionFilter);
+        },
+      }
+    : undefined;
+
+  const factory = createGsdGatewayFactory({ memoryService, conversationStore, pgConversationSearch });
 
   let handle: GatewayHandle;
   try {
@@ -116,7 +136,9 @@ export async function gatewayCommand(args: string[]): Promise<number> {
     }`,
   );
   if (conversationStore) {
-    console.error(`[gateway] conversation search: on (ConversationStore at ${conversationsDir})`);
+    console.error(
+      `[gateway] conversation search: on (${pgConversationSearch ? 'PG semantic + ' : ''}keyword at ${conversationsDir})`,
+    );
   }
   console.error('[gateway] press Ctrl+C to stop');
 

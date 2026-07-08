@@ -28,6 +28,7 @@ import { WorkflowEngine } from './tools/workflow-engine.js';
 import { registerSessionTools } from './tools/session-tools.js';
 import { SessionStore } from './tools/session-store.js';
 import { registerMemoryTools } from './tools/memory-tools.js';
+import type { PgConversationSearcher } from './tools/memory-tools.js';
 import type { MemoryService } from '../../memory/service.js';
 import type { ConversationStore } from '../../memory/conversation-store.js';
 import { registerResourceProviders } from './resources/resource-providers.js';
@@ -91,8 +92,14 @@ export interface GatewayFactoryOptions {
    * search_conversations). Omit to leave memory tools unregistered (default).
    */
   memoryService?: MemoryService;
-  /** Conversation store backing memory.search_conversations (optional). */
+  /** Conversation store backing memory.search_conversations keyword search (optional). */
   conversationStore?: ConversationStore;
+  /**
+   * PG semantic conversation searcher (MEM-7 step 2). When provided,
+   * memory.search_conversations prefers it over keyword search, falling back to
+   * the conversationStore when it is empty. Supplied by the gateway under --pg.
+   */
+  pgConversationSearch?: PgConversationSearcher;
 }
 
 // ============================================================================
@@ -172,7 +179,7 @@ export function createGsdGatewayFactory(
     // Default-off: callers that pass no memoryService get no memory tools,
     // so existing callers are unaffected.
     if (options?.memoryService) {
-      registerMemoryTools(server, options.memoryService, options?.conversationStore);
+      registerMemoryTools(server, options.memoryService, options?.conversationStore, options?.pgConversationSearch);
     }
 
     // Register resource providers

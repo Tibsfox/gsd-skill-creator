@@ -73,12 +73,14 @@ function errorContent(message: string): { content: [{ type: 'text'; text: string
  *
  * @param server - The MCP server to register tools on
  * @param memoryService - The unified memory service instance
- * @param conversationStore - Optional conversation store for search_conversations
+ * @param conversationStore - Optional conversation store (keyword) for search_conversations
+ * @param pgConversationSearch - Optional PG semantic searcher; preferred over keyword when present (MEM-7 step 2)
  */
 export function registerMemoryTools(
   server: McpServer,
   memoryService: MemoryService,
   conversationStore?: ConversationStore,
+  pgConversationSearch?: PgConversationSearcher,
 ): void {
   registerQueryTool(server, memoryService);
   registerStoreTool(server, memoryService);
@@ -88,7 +90,7 @@ export function registerMemoryTools(
   registerDeprecateTool(server, memoryService);
   registerWakeupTool(server, memoryService);
   registerStatsTool(server, memoryService);
-  registerSearchConversationsTool(server, conversationStore);
+  registerSearchConversationsTool(server, conversationStore, pgConversationSearch);
 }
 
 // ── memory.query ───────────────────────────────────────────────────────────
@@ -369,9 +371,29 @@ function registerStatsTool(server: McpServer, memoryService: MemoryService): voi
 
 // ── memory.search_conversations ────────────────────────────────────────────
 
+/**
+ * Semantic conversation searcher backed by the LOD-400 PgStore (MEM-7 step 2).
+ * Supplied by the gateway when the PG tier + an embedder are active; it embeds
+ * the query and runs pgvector cosine search over conversation turns. Returns
+ * raw `conversation_turns` rows (snake_case); the tool maps them. Kept as a thin
+ * adapter so this module stays decoupled from PgStore / EmbeddingService.
+ */
+export interface PgConversationSearcher {
+  search(
+    query: string,
+    limit: number,
+    sessionFilter?: string[],
+  ): Promise<Array<{
+    turn: { id: string; session_id: string; role: string; content: string; timestamp: Date };
+    sessionId: string;
+    score: number;
+  }>>;
+}
+
 function registerSearchConversationsTool(
   server: McpServer,
   conversationStore?: ConversationStore,
+  pgConversationSearch?: PgConversationSearcher,
 ): void {
   server.tool(
     'memory.search_conversations',
@@ -382,14 +404,42 @@ function registerSearchConversationsTool(
       sessionId: z.string().optional().describe('Filter to a specific session UUID'),
     },
     async (args) => {
-      if (!conversationStore) {
-        return errorContent('Conversation store not configured. Initialize ConversationStore to enable conversation search.');
-      }
+      const sessionFilter = args.sessionId ? [args.sessionId] : undefined;
 
       try {
-        const sessionFilter = args.sessionId ? [args.sessionId] : undefined;
-        const results = await conversationStore.search(args.query, args.limit, sessionFilter);
+        // Prefer PG semantic search when the PG tier + embedder are active
+        // (MEM-7 step 2). Fall through to keyword when it is absent or returns
+        // nothing (e.g. no embedded turns yet), so the always-on layer still
+        // answers.
+        if (pgConversationSearch) {
+          const pgResults = await pgConversationSearch.search(args.query, args.limit, sessionFilter);
+          if (pgResults.length > 0) {
+            const mapped = pgResults.map(r => ({
+              turnId: r.turn.id,
+              sessionId: r.sessionId,
+              role: r.turn.role,
+              score: Math.round(r.score * 1000) / 1000,
+              snippet: truncate(r.turn.content, 500),
+              timestamp: r.turn.timestamp instanceof Date
+                ? r.turn.timestamp.toISOString()
+                : new Date(r.turn.timestamp).toISOString(),
+              // PG rows carry no session metadata; synthesize the id, leave the rest null.
+              session: { id: r.sessionId, project: null, branch: null, summary: null },
+            }));
+            return jsonContent({
+              query: args.query,
+              resultCount: mapped.length,
+              results: mapped,
+              source: 'semantic',
+            });
+          }
+        }
 
+        if (!conversationStore) {
+          return errorContent('Conversation store not configured. Initialize ConversationStore to enable conversation search.');
+        }
+
+        const results = await conversationStore.search(args.query, args.limit, sessionFilter);
         const mapped = results.map(r => ({
           turnId: r.turn.id,
           sessionId: r.turn.sessionId,
@@ -409,6 +459,7 @@ function registerSearchConversationsTool(
           query: args.query,
           resultCount: mapped.length,
           results: mapped,
+          source: 'keyword',
         });
       } catch (err) {
         return errorContent(`memory.search_conversations failed: ${err instanceof Error ? err.message : String(err)}`);
