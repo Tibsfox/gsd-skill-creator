@@ -1,11 +1,26 @@
 # Feature Flags
 
 Risky autonomous behaviors and experimental code paths in gsd-skill-creator are
-gated behind a top-level `feature_flags` object in `.claude/settings.json`. This
-document describes the opt-in pattern and lists the 44 scaffolded slots.
+gated behind a `feature_flags` object nested under the `gsd-skill-creator`
+namespace — the same config contract that carries the other opt-in flags
+(`sensoria`, `orchestration`, `model_affinity`, …). This document describes the
+opt-in pattern and lists the 44 scaffolded slots.
 
-Source of truth: `project-claude/settings.json` (installed to
-`.claude/settings.json` via `node project-claude/install.cjs`).
+The harness-owned `.claude/settings.json` is validated against a strict schema
+that rejects unknown top-level keys, which is why gsd-skill-creator flags live
+under a dedicated `gsd-skill-creator` scope rather than at the top level.
+
+- **Tracked source:** `project-claude/settings.json`, key
+  `gsd-skill-creator.feature_flags` (all 44 slots, default `false`).
+- **Runtime read location:** `src/settings/read-settings.ts` reads the scope
+  from `.claude/gsd-skill-creator.json` (checked first) with a fallback to
+  `.claude/settings.json`. To actually flip a flag on a deployment, set it under
+  `gsd-skill-creator.feature_flags` in `.claude/gsd-skill-creator.json`.
+- **Note:** the installer (`project-claude/install.cjs`) currently propagates
+  only `hooks` and `statusLine`; it does not yet sync the `gsd-skill-creator`
+  scope into the dedicated file. Auto-propagating the namespace (with a
+  non-clobbering deep merge, so it never overwrites hand-set flags) is a
+  follow-up that applies to the whole namespace, not just `feature_flags`.
 
 Closes: OGA-002.
 
@@ -20,16 +35,22 @@ All flags default to `false`. Behavior gated by a flag is **off** when:
 Behavior is **on** only when the user explicitly sets the key to `true`. This
 is the inverse of an opt-out pattern: missing flags never grant new powers.
 
-Code that consumes a flag SHOULD use a defensive check:
+Code that consumes a flag reads it through the shared settings reader, which
+already enforces the safe-default-off policy (returns `false` on any missing
+key, IO error, or non-`true` value):
 
 ```ts
-function flagOn(flags: Record<string, unknown> | undefined, key: string): boolean {
-  return Boolean(flags && flags[key] === true);
+import { readBooleanFlag } from '../settings/read-settings.js';
+
+if (readBooleanFlag(['feature_flags', 'autonomous_phase_execution'])) {
+  // gated behavior
 }
 ```
 
-Boolean equality (`=== true`) is required so truthy non-boolean values
-(e.g. accidental string `"false"`) do not unlock behavior.
+`readBooleanFlag` uses boolean equality (`=== true`) internally, so truthy
+non-boolean values (e.g. an accidental string `"false"`) do not unlock behavior.
+No flag has a runtime consumer yet — the scaffold defines the vocabulary; wire a
+flag with `readBooleanFlag` at the point it gates.
 
 ## Flag categories
 
@@ -136,14 +157,16 @@ model affinity, and experimental reports.
 
 ## Adding a new flag
 
-1. Add the key to `feature_flags` in `project-claude/settings.json` with
-   value `false`.
+1. Add the key under `gsd-skill-creator.feature_flags` in
+   `project-claude/settings.json` with value `false`.
 2. Document it in this file under the appropriate category.
 3. Update the test in `src/__tests__/telemetry-flags/feature-flag-scaffold.test.ts`
    if the count changes.
-4. Run `node project-claude/install.cjs` to propagate to local `.claude/`.
+4. Consume it with `readBooleanFlag(['feature_flags', '<key>'])` from
+   `src/settings/read-settings.ts` at the point it gates behavior.
 
 ## Verification
 
 Coverage is asserted by `src/__tests__/telemetry-flags/feature-flag-scaffold.test.ts`
-which checks: `feature_flags` object present, >=44 slots, all defaults false.
+which checks: `feature_flags` present under the `gsd-skill-creator` namespace
+(and absent at the top level), >=44 slots, all defaults false.
