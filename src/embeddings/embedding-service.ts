@@ -8,7 +8,7 @@
  * Features:
  * - Singleton pattern with lazy initialization
  * - Automatic caching with content-hash invalidation
- * - Graceful fallback to TF-IDF heuristics
+ * - Graceful fallback to hashed term-frequency heuristics
  * - Progress feedback during model download
  * - Batch embedding support
  */

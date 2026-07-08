@@ -44,6 +44,17 @@ export class TfIdf {
   }
 
   /**
+   * Remove the most recently added document from the corpus.
+   *
+   * Lets a caller add a document temporarily (e.g. to score a query against
+   * the existing corpus) and then undo it, without leaking the temp document
+   * into the corpus and skewing subsequent IDF. No-op on an empty corpus.
+   */
+  removeLastDocument(): void {
+    this.documents.pop();
+  }
+
+  /**
    * Compute TF-IDF score for a term across all documents.
    *
    * Calls the callback for each document with (documentIndex, tfidfScore).

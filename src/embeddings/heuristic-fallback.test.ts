@@ -251,6 +251,34 @@ describe('HeuristicEmbedder', () => {
       expect(mag1).toBeCloseTo(1.0, 5);
       expect(mag2).toBeCloseTo(1.0, 5);
     });
+
+    it('is stable across repeated embeds in corpus mode (no temp-doc leak) (RET-6)', () => {
+      embedder.addDocument('machine learning algorithms');
+      embedder.addDocument('neural network training');
+      embedder.addDocument('deep learning models');
+
+      // Before RET-6 each embed() leaked the query into the corpus, so IDF
+      // drifted and successive embeds of the same text diverged.
+      const first = embedder.embed('learning with neural networks');
+      const second = embedder.embed('learning with neural networks');
+      expect(second).toEqual(first);
+      expect(embedder.getDocumentCount()).toBe(3);
+    });
+
+    it('does not collapse to a zero vector after many embeds in corpus mode (RET-6)', () => {
+      embedder.addDocument('machine learning algorithms');
+      embedder.addDocument('neural network training');
+
+      // Pre-RET-6 the leaked temp docs misaligned tempDocIndex, so a later
+      // embed of fresh vocabulary could read a stale doc and zero out.
+      for (let i = 0; i < 5; i++) {
+        embedder.embed('scratch query number ' + i);
+      }
+      const embedding = embedder.embed('entirely fresh vocabulary terms here');
+      const nonZeroCount = embedding.filter((v) => v !== 0).length;
+      expect(nonZeroCount).toBeGreaterThan(0);
+      expect(embedder.getDocumentCount()).toBe(2);
+    });
   });
 
   describe('special characters and unicode', () => {
