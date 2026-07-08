@@ -141,18 +141,16 @@ gsd-skill-creator's threat model covers six security domains. Each domain addres
 **Threats addressed:**
 
 - **Session crashes** caused by bugs in observation hooks that propagate uncaught exceptions into the Claude Code runtime.
-- **Unsafe hooks** that modify environment variables, call `process.exit()`, use `eval()` or `Function()` constructors, or mutate global state.
-- **Accidental destructive operations** where orchestrator commands like `execute-phase` or `complete-milestone` run without user confirmation.
+- **Accidental destructive operations** where orchestrator commands like `gsd:phase` (remove sub-action) or `gsd:complete-milestone` run without user confirmation.
 - **Unauditable routing** where the orchestrator's intent classification decisions cannot be reviewed after the fact.
 
 **Controls implemented:**
 
-- `withErrorBoundary()` in `src/orchestrator/hook-error-boundary.ts` wraps async hooks with catch-all error handling and `Promise.race` timeout protection. Hooks never re-throw -- errors are caught, logged, and the session continues.
-- `validateHook()` in `src/orchestrator/hook-validator.ts` rejects hooks containing `process.env` mutation, `process.exit`, `eval`, `Function` constructor, and global state modification patterns.
-- `evaluateConfirmationGate()` in `src/orchestrator/confirmation-gate.ts` adds mode-aware confirmation for destructive operations. In YOLO mode, gates are bypassed; in standard mode, user confirmation is required.
-- `ClassificationLogger` in `src/orchestrator/classification-logger.ts` provides JSONL audit trail for all intent classifications, including confidence scores and selected commands.
+- `evaluateGate()` in `src/orchestrator/gates/gate-evaluator.ts` gates orchestrator commands by mode and command class. Commands in `DEFAULT_DESTRUCTIVE_COMMANDS` (e.g. `gsd:phase`, `gsd:complete-milestone`) always return a `confirm` decision; in interactive mode every command confirms, and in YOLO mode only non-destructive commands proceed.
+- `ClassificationLogger` in `src/orchestrator/intent/classification-logger.ts` provides a JSONL audit trail for all intent classifications, including confidence scores and selected commands.
+- **Hook isolation (structural):** observation and commit hooks (`session-start`, `session-end`, commit validation) are trusted, in-repo, manifest-installed scripts spawned as isolated subprocesses -- a bug in a hook fails its own process without crashing the Claude Code session. There is no dynamic hook-registration path that executes untrusted hook source.
 
-**Requirements satisfied:** DOC-03 through DOC-06 (Phase 80)
+**Requirements satisfied:** DOC-05 (confirmation gating) and DOC-06 (classification audit trail). The DOC-03/DOC-04 runtime hook wrappers (`withErrorBoundary`/`validateHook`) were retired as unwired dead code -- hook safety is provided structurally by out-of-process isolation (above).
 
 ## Security Boundaries
 
