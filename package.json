@@ -87,7 +87,10 @@
     "sync:live": "bash scripts/sync-research-to-live.sh",
     "deploy": "bash scripts/sync-research-to-live.sh",
     "state-md:check": "node tools/state-md-normalizer.mjs --check",
-    "state-md:normalize": "node tools/state-md-normalizer.mjs --write"
+    "state-md:normalize": "node tools/state-md-normalizer.mjs --write",
+    "deadcode": "knip --no-config-hints --no-exit-code --exclude exports,nsExports,types,nsTypes,enumMembers,namespaceMembers",
+    "deadcode:all": "knip --no-config-hints --no-exit-code",
+    "deadcode:exports": "knip --no-config-hints --no-exit-code --exports"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",
@@ -154,6 +157,7 @@
     "@vitest/coverage-v8": "^4.1.8",
     "better-sqlite3": "^12.9.0",
     "jsdom": "^29.0.1",
+    "knip": "^6.25.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tsx": "^4.21.0",
