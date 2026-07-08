@@ -32,6 +32,7 @@ import {
   findChipset,
   findChipsets,
 } from './types.js';
+import { validateSafeName } from '../validation/path-safety.js';
 
 export interface CartridgeValidationIssue {
   path: string;
@@ -77,6 +78,7 @@ export function validateCartridge(
   checkEvaluationDomainsCovered(cartridge, errors);
   checkSkillDomainsDeclared(cartridge, warnings);
   checkTrustScope(cartridge, errors);
+  checkSafeCompanionNames(cartridge, errors);
 
   return { valid: errors.length === 0, errors, warnings };
 }
@@ -114,6 +116,42 @@ function checkSkillDomainsDeclared(
           message: `skill '${skillKey}' declares domain '${domain}' but no evaluation chipset lists it in benchmark.domains_covered`,
         });
       }
+    }
+  }
+}
+
+/**
+ * AC-2: skill keys, agent names, and team keys must be filesystem-safe.
+ * `scaffoldCompanions` derives companion write paths directly from them
+ * (skills/<key>.md, agents/<name>.md, teams/<key>.md), so an untrusted cartridge
+ * with a traversal name (e.g. '../../evil') would escape the cartridge directory
+ * on write. `validateSafeName` is the same guard skill-store / team-store apply
+ * to host-supplied names.
+ */
+function checkSafeCompanionNames(
+  cartridge: Cartridge,
+  errors: CartridgeValidationIssue[],
+): void {
+  for (const dept of findChipsets(cartridge, 'department')) {
+    const idx = chipsetIndex(cartridge, dept);
+    const flag = (kind: string, name: string, path: string): void => {
+      const result = validateSafeName(name);
+      if (!result.valid) {
+        errors.push({
+          chipsetKind: 'department',
+          path,
+          message: `${kind} name '${name}' is not filesystem-safe (its companion file would escape the cartridge dir): ${result.error}`,
+        });
+      }
+    };
+    for (const key of Object.keys(dept.skills)) {
+      flag('skill', key, `chipsets[${idx}].skills.${key}`);
+    }
+    for (const agent of dept.agents.agents) {
+      flag('agent', agent.name, `chipsets[${idx}].agents.agents.${agent.name}`);
+    }
+    for (const key of Object.keys(dept.teams ?? {})) {
+      flag('team', key, `chipsets[${idx}].teams.${key}`);
     }
   }
 }

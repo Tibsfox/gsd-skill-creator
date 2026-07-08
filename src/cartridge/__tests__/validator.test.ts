@@ -270,3 +270,52 @@ describe('validator — schema-level rejection', () => {
     expect(result.id).toBe('validator-fixture');
   });
 });
+
+// ---------------------------------------------------------------------------
+// AC-2 — companion names must be filesystem-safe (write-side traversal guard)
+// ---------------------------------------------------------------------------
+
+describe('validator — AC-2 filesystem-safe companion names', () => {
+  it('accepts the safe baseline cartridge', () => {
+    expect(validateCartridge(baseCartridge()).valid).toBe(true);
+  });
+
+  it('rejects a traversal agent name (../../evil)', () => {
+    const cart = baseCartridge();
+    const dept = cart.chipsets[0];
+    if (dept.kind !== 'department') throw new Error('unreachable');
+    dept.agents.agents[0]!.name = '../../evil';
+    dept.agents.router_agent = '../../evil';
+    dept.skills['proofs-logic']!.agent_affinity = '../../evil';
+    const result = validateCartridge(cart);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => /filesystem-safe/.test(e.message))).toBe(true);
+  });
+
+  it('rejects a traversal skill key', () => {
+    const cart = baseCartridge();
+    const dept = cart.chipsets[0];
+    if (dept.kind !== 'department') throw new Error('unreachable');
+    dept.skills = {
+      '../../evil': {
+        domain: 'mathematics',
+        description: 'x',
+        triggers: ['t'],
+        agent_affinity: 'euclid',
+      },
+    };
+    const result = validateCartridge(cart);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => /filesystem-safe/.test(e.message))).toBe(true);
+  });
+
+  it('rejects a traversal team key', () => {
+    const cart = baseCartridge();
+    const dept = cart.chipsets[0];
+    if (dept.kind !== 'department') throw new Error('unreachable');
+    dept.teams = { '../evil': { description: 'x', agents: ['euclid'] } };
+    const result = validateCartridge(cart);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => /filesystem-safe/.test(e.message))).toBe(true);
+  });
+});

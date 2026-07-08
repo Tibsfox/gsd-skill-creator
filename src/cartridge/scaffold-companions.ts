@@ -18,6 +18,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { loadCartridge } from './loader.js';
 import { findChipsets } from './types.js';
+import { assertSafePath } from '../validation/path-safety.js';
 
 export interface ScaffoldCompanionsOptions {
   /** Path to `cartridge.yaml` (or its directory). */
@@ -104,6 +105,11 @@ function writeIfAbsent(
   skipped: string[],
 ): void {
   const abs = join(root, relPath);
+  // AC-2: contain the write. `relPath` embeds cartridge-supplied skill keys /
+  // agent names (skills/<key>.md, agents/<name>.md, teams/<key>.md); a traversal
+  // name like '../../evil' would escape the cartridge dir. Reject before mkdir/write
+  // — defense-in-depth behind the validateCartridge name check.
+  assertSafePath(abs, root);
   if (existsSync(abs) && !overwrite) {
     skipped.push(relPath);
     return;
