@@ -684,10 +684,15 @@ function installSettings(entry) {
   let targetSettings;
 
   if (targetContent === null) {
-    // No existing settings — copy as-is
+    // No existing settings — copy as-is, MINUS the gsd-skill-creator scope: the
+    // harness settings schema rejects unknown top-level keys, and that scope is
+    // propagated separately to .claude/gsd-skill-creator.json by
+    // installDedicatedConfig (CC-6). The merge branch below already drops it.
     if (!dryRun) {
+      const harnessSettings = { ...sourceSettings };
+      delete harnessSettings['gsd-skill-creator'];
       ensureDir(targetPath);
-      fs.writeFileSync(targetPath, JSON.stringify(sourceSettings, null, 2) + '\n');
+      fs.writeFileSync(targetPath, JSON.stringify(harnessSettings, null, 2) + '\n');
     }
     log(`  + installed: ${entry.target}`);
     stats.installed++;
@@ -744,6 +749,81 @@ function installSettings(entry) {
     if (!quiet) log(`  = current:   ${entry.target}`);
     stats.current++;
   }
+}
+
+// --- Dedicated gsd-skill-creator config (CC-6) ---
+// The harness settings.json is validated against a strict schema that rejects
+// unknown top-level keys, so gsd-skill-creator opt-in flags live under a
+// `gsd-skill-creator` scope in a dedicated sibling file
+// `.claude/gsd-skill-creator.json` (read first by src/settings/read-settings.ts).
+// installSettings only carries hooks + statusLine, so it would drop the
+// `gsd-skill-creator` scope from the source settings entirely. Propagate that
+// scope into the dedicated file with a NON-CLOBBERING deep merge: add missing
+// keys, but NEVER overwrite an existing hand-set value (a user-enabled feature
+// flag, or a hand-authored `sensoria`/`orchestration`/etc. block that has no
+// tracked source). Like .planning/skill-creator.json, the dedicated file is NOT
+// ledgered — it is preserved on uninstall.
+function mergeMissingDeep(target, source) {
+  let changed = false;
+  for (const [key, value] of Object.entries(source)) {
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      if (!target[key] || typeof target[key] !== 'object' || Array.isArray(target[key])) {
+        target[key] = {};
+        changed = true;
+      }
+      if (mergeMissingDeep(target[key], value)) changed = true;
+    } else if (!(key in target)) {
+      target[key] = value;
+      changed = true;
+    }
+  }
+  return changed;
+}
+
+function installDedicatedConfig(entry) {
+  const sourcePath = path.join(sourceDir, entry.source);
+  const sourceContent = readFileSafe(sourcePath);
+  if (sourceContent === null) return;
+
+  let sourceSettings;
+  try {
+    sourceSettings = JSON.parse(sourceContent);
+  } catch {
+    return; // installSettings already warned about invalid source JSON
+  }
+
+  const scope = sourceSettings['gsd-skill-creator'];
+  if (!scope || typeof scope !== 'object') return;
+
+  const targetPath = path.join(projectRoot, '.claude', 'gsd-skill-creator.json');
+  assertContained(targetPath, projectRoot);
+
+  let dedicated = {};
+  const existing = readFileSafe(targetPath);
+  if (existing !== null) {
+    try {
+      dedicated = JSON.parse(existing);
+    } catch {
+      warn('Existing .claude/gsd-skill-creator.json is not valid JSON — leaving it untouched');
+      return;
+    }
+  }
+  if (!dedicated['gsd-skill-creator'] || typeof dedicated['gsd-skill-creator'] !== 'object') {
+    dedicated['gsd-skill-creator'] = {};
+  }
+
+  const changed = mergeMissingDeep(dedicated['gsd-skill-creator'], scope);
+  if (!changed) {
+    if (!quiet) log('  = current:   .claude/gsd-skill-creator.json');
+    stats.current++;
+    return;
+  }
+  if (!dryRun) {
+    ensureDir(targetPath);
+    fs.writeFileSync(targetPath, JSON.stringify(dedicated, null, 2) + '\n');
+  }
+  log('  ↻ updated:   .claude/gsd-skill-creator.json (gsd-skill-creator scope merged)');
+  stats.updated++;
 }
 
 // --- Integration config install ---
@@ -1355,6 +1435,9 @@ function main() {
     if (manifest.files.settings) {
       log('Settings:');
       installSettings(manifest.files.settings);
+      // Propagate the gsd-skill-creator scope (dropped by the settings merge)
+      // into the dedicated .claude/gsd-skill-creator.json (CC-6).
+      installDedicatedConfig(manifest.files.settings);
       log('');
     }
 
