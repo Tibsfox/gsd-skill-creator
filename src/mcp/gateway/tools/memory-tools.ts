@@ -18,6 +18,8 @@ import { inferTemporalClass, inferVisibility } from '../../../memory/types.js';
 
 // ── Shared Schemas ─────────────────────────────────────────────────────────
 
+// Mirror of the canonical MemoryType (src/memory/types.ts) — keep the six
+// values in sync with that union. (MEM-3)
 const MemoryTypeSchema = z.enum([
   'user', 'feedback', 'project', 'reference', 'episodic', 'semantic',
 ]);

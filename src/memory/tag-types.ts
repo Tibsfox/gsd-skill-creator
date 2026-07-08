@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+// A proper subset of the canonical MemoryType (src/memory/types.ts) — the four
+// auto-memory tag types. Keep every value here within the canonical union; the
+// taxonomy drift guard (memory-type-taxonomy.test.ts) enforces the subset. (MEM-3)
 export const MemoryTypeSchema = z.enum(['user', 'project', 'reference', 'feedback']);
 export type MemoryType = z.infer<typeof MemoryTypeSchema>;
 
