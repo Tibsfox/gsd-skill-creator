@@ -707,9 +707,6 @@ function installSettings(entry) {
     if (!targetSettings.hooks) targetSettings.hooks = {};
 
     for (const [event, sourceHookGroups] of Object.entries(sourceSettings.hooks)) {
-      if (!targetSettings[event]) {
-        // Ensure we work on targetSettings.hooks[event]
-      }
       if (!targetSettings.hooks[event]) {
         targetSettings.hooks[event] = [];
       }
