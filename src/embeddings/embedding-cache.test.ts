@@ -402,3 +402,44 @@ describe('EmbeddingCache', () => {
     });
   });
 });
+
+describe('EmbeddingCache method identity (RET-2)', () => {
+  const modelVersion = 'ret2-v1';
+
+  it('does not serve a heuristic-cached vector to a model request', () => {
+    const cache = new EmbeddingCache(modelVersion);
+    cache.set('skill', 'content', [0.1, 0.2, 0.3], 'heuristic');
+    expect(cache.get('skill', 'content', 'model')).toBeNull();
+    expect(cache.get('skill', 'content', 'heuristic')).toEqual([0.1, 0.2, 0.3]);
+  });
+
+  it('does not serve a model-cached vector to a heuristic request', () => {
+    const cache = new EmbeddingCache(modelVersion);
+    cache.set('skill', 'content', [1, 2, 3], 'model');
+    expect(cache.get('skill', 'content', 'heuristic')).toBeNull();
+    expect(cache.get('skill', 'content', 'model')).toEqual([1, 2, 3]);
+  });
+
+  it('treats a legacy entry with no method as invalid for a typed request', () => {
+    const cache = new EmbeddingCache(modelVersion);
+    cache.set('skill', 'content', [1, 2, 3]); // defaults to method:'model'
+    // Simulate a pre-RET-2 on-disk entry by stripping the method field.
+    const store = (cache as unknown as {
+      cache: { entries: Record<string, { method?: string }> };
+    }).cache;
+    const key = Object.keys(store.entries)[0];
+    delete store.entries[key].method;
+
+    expect(cache.get('skill', 'content', 'model')).toBeNull();
+    expect(cache.get('skill', 'content', 'heuristic')).toBeNull();
+    // Untyped lookup stays lenient (existence/version checks unaffected).
+    expect(cache.get('skill', 'content')).toEqual([1, 2, 3]);
+  });
+
+  it('a set without an explicit method defaults to model', () => {
+    const cache = new EmbeddingCache(modelVersion);
+    cache.set('skill', 'content', [9, 9]);
+    expect(cache.get('skill', 'content', 'model')).toEqual([9, 9]);
+    expect(cache.get('skill', 'content', 'heuristic')).toBeNull();
+  });
+});

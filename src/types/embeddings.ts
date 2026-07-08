@@ -43,6 +43,14 @@ export interface CacheEntry {
   contentHash: string;
   /** ISO date string when entry was created */
   createdAt: string;
+  /**
+   * Which producer generated this vector: 'model' (transformer) or
+   * 'heuristic' (TF-IDF-hash fallback). Part of the cache identity so a
+   * heuristic vector is never served to a model request — the two occupy
+   * different spaces. Optional because legacy (pre-RET-2) on-disk entries
+   * lack it; a typed lookup treats a missing method as invalid.
+   */
+  method?: 'model' | 'heuristic';
 }
 
 /**

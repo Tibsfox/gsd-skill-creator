@@ -206,14 +206,17 @@ export class EmbeddingService {
       await this.init();
     }
 
-    // Check cache if skillName provided
+    // Check cache if skillName provided. Request the method matching the
+    // current mode so a cached heuristic vector is never served to a model
+    // request (or vice versa) — the two occupy different spaces. (RET-2)
+    const wantMethod: 'model' | 'heuristic' = this.fallbackMode ? 'heuristic' : 'model';
     if (skillName) {
-      const cached = this.cache.get(skillName, text);
+      const cached = this.cache.get(skillName, text, wantMethod);
       if (cached) {
         return {
           embedding: cached,
           fromCache: true,
-          method: this.fallbackMode ? 'heuristic' : 'model',
+          method: wantMethod,
         };
       }
     }
@@ -243,9 +246,10 @@ export class EmbeddingService {
       }
     }
 
-    // Cache result if skillName provided
+    // Cache result if skillName provided, tagged with the producing method so
+    // it is only ever served back to a matching request. (RET-2)
     if (skillName) {
-      this.cache.set(skillName, text, embedding);
+      this.cache.set(skillName, text, embedding, method);
     }
 
     return {
@@ -279,15 +283,18 @@ export class EmbeddingService {
     const results: (EmbeddingResult | null)[] = new Array(texts.length).fill(null);
     const textsToEmbed: { index: number; text: string }[] = [];
 
+    // Request the method matching the current mode so a cached vector of the
+    // other method is never served to this request. (RET-2)
+    const wantMethod: 'model' | 'heuristic' = this.fallbackMode ? 'heuristic' : 'model';
     for (let i = 0; i < texts.length; i++) {
       const skillName = skillNames?.[i];
       if (skillName) {
-        const cached = this.cache.get(skillName, texts[i]);
+        const cached = this.cache.get(skillName, texts[i], wantMethod);
         if (cached) {
           results[i] = {
             embedding: cached,
             fromCache: true,
-            method: this.fallbackMode ? 'heuristic' : 'model',
+            method: wantMethod,
           };
           continue;
         }
@@ -341,9 +348,9 @@ export class EmbeddingService {
       const embedding = embeddings[i];
       const skillName = skillNames?.[index];
 
-      // Cache if skillName provided
+      // Cache if skillName provided, tagged with the producing method. (RET-2)
       if (skillName) {
-        this.cache.set(skillName, text, embedding);
+        this.cache.set(skillName, text, embedding, method);
       }
 
       results[index] = {

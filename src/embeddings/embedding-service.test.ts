@@ -38,6 +38,24 @@ describe('EmbeddingService', () => {
     });
   });
 
+  describe('cache method identity (RET-2)', () => {
+    it('never serves a cached heuristic vector as a model result after a mode flip', async () => {
+      // enabled:false forces heuristic mode, so the first embed caches a
+      // heuristic vector tagged method:'heuristic'.
+      const service = EmbeddingService.createFresh({ enabled: false, cacheDir: testCacheDir });
+      const r1 = await service.embed('some text about lattices', 'skillA');
+      expect(r1.method).toBe('heuristic');
+      expect(r1.fromCache).toBe(false);
+
+      // Force model mode. The transformer pipeline is unavailable in tests so
+      // generation still falls back to heuristic — the point is that the
+      // cached heuristic vector must NOT be served back labeled as 'model'.
+      (service as unknown as { fallbackMode: boolean }).fallbackMode = false;
+      const r2 = await service.embed('some text about lattices', 'skillA');
+      expect(r2.fromCache && r2.method === 'model').toBe(false);
+    });
+  });
+
   describe('Initialization', () => {
     it('service is not initialized until init() called', () => {
       const service = EmbeddingService.createFresh({ cacheDir: testCacheDir });

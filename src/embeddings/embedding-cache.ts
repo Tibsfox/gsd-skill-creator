@@ -132,7 +132,11 @@ export class EmbeddingCache {
    * @param skillName - Name of the skill
    * @param content - Current content to check against cached content hash
    */
-  get(skillName: string, content: string): EmbeddingVector | null {
+  get(
+    skillName: string,
+    content: string,
+    wantMethod?: 'model' | 'heuristic',
+  ): EmbeddingVector | null {
     const contentHash = this.computeContentHash(content);
     const key = this.getCacheKey(skillName, contentHash);
     const entry = this.cache.entries[key];
@@ -143,6 +147,16 @@ export class EmbeddingCache {
 
     // Validate model version matches
     if (entry.modelVersion !== this.modelVersion) {
+      return null;
+    }
+
+    // Method identity (RET-2): heuristic and model vectors occupy different
+    // spaces, so a typed request must not be satisfied by the other method —
+    // nor by a legacy entry that predates method tracking (undefined method),
+    // which forces a re-embed and heals a pre-RET-2 poisoned cache. Untyped
+    // callers (has(), content/version-invalidation checks) keep the prior
+    // lenient behavior since they do not serve a vector to a typed consumer.
+    if (wantMethod !== undefined && entry.method !== wantMethod) {
       return null;
     }
 
@@ -157,7 +171,12 @@ export class EmbeddingCache {
    * @param content - Content used to generate the embedding
    * @param embedding - The embedding vector to cache
    */
-  set(skillName: string, content: string, embedding: EmbeddingVector): void {
+  set(
+    skillName: string,
+    content: string,
+    embedding: EmbeddingVector,
+    method: 'model' | 'heuristic' = 'model',
+  ): void {
     const contentHash = this.computeContentHash(content);
     const key = this.getCacheKey(skillName, contentHash);
 
@@ -169,6 +188,7 @@ export class EmbeddingCache {
       modelVersion: this.modelVersion,
       contentHash,
       createdAt: new Date().toISOString(),
+      method,
     };
     this.dirty = true;
   }
