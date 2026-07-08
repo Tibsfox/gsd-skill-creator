@@ -460,4 +460,112 @@ describe.skipIf(!RUN)('PgStore conversation embeddings (PG-5)', () => {
     const chk = await cleanupPool.query('SELECT embedding FROM gsd_memory.conversation_turns WHERE id = $1', [`g-${tag}`]);
     expect(chk.rows[0].embedding).toBeNull();
   });
+
+  // ── MEM-7 follow-ups ──────────────────────────────────────────────────
+
+  it('tags turns with the embedder method and guards a cross-method query', async () => {
+    const modelEmbedder: TurnEmbedder = {
+      embed: async () => ({ embedding: E(0), method: 'model' }),
+    };
+    const store = await makeStore(modelEmbedder);
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    const tag = sessionId.slice(0, 8);
+    await store.storeSession({ id: sessionId, startedAt: new Date() });
+    await store.storeTurn({ id: `m-${tag}`, sessionId, role: 'user', content: 'method tagged content', timestamp: new Date() });
+
+    // The producing method is recorded on the row.
+    const chk = await cleanupPool.query('SELECT embedding_method FROM gsd_memory.conversation_turns WHERE id = $1', [`m-${tag}`]);
+    expect(chk.rows[0].embedding_method).toBe('model');
+
+    // A same-method query finds it; a different-method query excludes it
+    // (the two occupy incomparable vector spaces).
+    const same = await store.searchConversationsByEmbedding(E(0), 50, [sessionId], 'model');
+    expect(same.some((h) => h.turn.id === `m-${tag}`)).toBe(true);
+    const diff = await store.searchConversationsByEmbedding(E(0), 50, [sessionId], 'heuristic');
+    expect(diff.some((h) => h.turn.id === `m-${tag}`)).toBe(false);
+  });
+
+  it('grandfathers turns with an unknown (NULL) method into a method-scoped query', async () => {
+    const store = await makeStore(markerEmbedder); // returns no method -> NULL column
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    const tag = sessionId.slice(0, 8);
+    await store.storeSession({ id: sessionId, startedAt: new Date() });
+    await store.storeTurn({ id: `null-${tag}`, sessionId, role: 'user', content: 'alphamark legacy', timestamp: new Date() });
+
+    const chk = await cleanupPool.query('SELECT embedding_method FROM gsd_memory.conversation_turns WHERE id = $1', [`null-${tag}`]);
+    expect(chk.rows[0].embedding_method).toBeNull();
+
+    // A method-scoped query still includes the NULL-method row.
+    const scoped = await store.searchConversationsByEmbedding(E(0), 50, [sessionId], 'model');
+    expect(scoped.some((h) => h.turn.id === `null-${tag}`)).toBe(true);
+  });
+
+  it('does not inflate turn_count when the same turn id is stored twice (idempotent)', async () => {
+    const store = await makeStore();
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    const tag = sessionId.slice(0, 8);
+    await store.storeSession({ id: sessionId, startedAt: new Date() });
+    await store.storeTurn({ id: `dup-${tag}`, sessionId, role: 'user', content: 'once', timestamp: new Date() });
+    await store.storeTurn({ id: `dup-${tag}`, sessionId, role: 'user', content: 'once', timestamp: new Date() }); // conflict → no-op
+
+    const { rows } = await cleanupPool.query('SELECT turn_count FROM gsd_memory.conversation_sessions WHERE id = $1', [sessionId]);
+    expect(rows[0].turn_count).toBe(1);
+  });
+
+  it('hasSession and clearSessionTurns support a clean re-ingest', async () => {
+    const store = await makeStore(markerEmbedder);
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    const tag = sessionId.slice(0, 8);
+    const marker = 'clearmark' + tag;
+
+    expect(await store.hasSession(sessionId)).toBe(false);
+    await store.storeSession({ id: sessionId, startedAt: new Date() });
+    expect(await store.hasSession(sessionId)).toBe(true);
+
+    await store.storeTurn({ id: `c-${tag}`, sessionId, role: 'user', content: `${marker} content`, timestamp: new Date() });
+    expect((await store.searchConversations(marker, 20)).some((h) => h.turn.id === `c-${tag}`)).toBe(true);
+
+    await store.clearSessionTurns(sessionId);
+    expect((await store.searchConversations(marker, 20)).some((h) => h.turn.id === `c-${tag}`)).toBe(false);
+    const { rows } = await cleanupPool.query('SELECT turn_count FROM gsd_memory.conversation_sessions WHERE id = $1', [sessionId]);
+    expect(rows[0].turn_count).toBe(0);
+  });
+
+  it('persists source_hash/source_path provenance on the session', async () => {
+    const store = await makeStore();
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    await store.storeSession({
+      id: sessionId,
+      startedAt: new Date(),
+      sourceHash: 'deadbeefcafe',
+      sourcePath: '/tmp/transcript.jsonl',
+    });
+    const { rows } = await cleanupPool.query(
+      'SELECT source_hash, source_path FROM gsd_memory.conversation_sessions WHERE id = $1',
+      [sessionId],
+    );
+    expect(rows[0].source_hash).toBe('deadbeefcafe');
+    expect(rows[0].source_path).toBe('/tmp/transcript.jsonl');
+  });
+
+  it('deleteSession removes the session and cascades its turns', async () => {
+    const store = await makeStore(markerEmbedder);
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId); // harmless double-delete in afterAll if it runs
+    const tag = sessionId.slice(0, 8);
+    await store.storeSession({ id: sessionId, startedAt: new Date() });
+    await store.storeTurn({ id: `del-${tag}`, sessionId, role: 'user', content: 'alphamark doomed', timestamp: new Date() });
+    expect(await store.hasSession(sessionId)).toBe(true);
+
+    await store.deleteSession(sessionId);
+
+    expect(await store.hasSession(sessionId)).toBe(false);
+    const turns = await cleanupPool.query('SELECT count(*)::int AS n FROM gsd_memory.conversation_turns WHERE session_id = $1', [sessionId]);
+    expect(turns.rows[0].n).toBe(0); // cascaded
+  });
 });

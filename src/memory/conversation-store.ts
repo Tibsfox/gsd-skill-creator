@@ -30,9 +30,9 @@
  * @module memory/conversation-store
  */
 
-import { readFile, writeFile, mkdir, readdir, stat } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir, stat, rm } from 'node:fs/promises';
 import { join, basename } from 'node:path';
-import { randomUUID } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
 
 const LOADER_SOURCE = 'memory/conversation-store';
@@ -91,6 +91,38 @@ export interface ConversationSession {
 
   /** Key topics discussed. */
   topics: string[];
+
+  /**
+   * SHA-256 of the source transcript's bytes at ingest time. Used as the
+   * idempotency key: re-ingesting an identical transcript is a no-op, and a
+   * changed one triggers a clean replace rather than duplicate turns. (MEM-7)
+   */
+  sourceHash?: string;
+
+  /** Path of the transcript this session was ingested from (provenance). */
+  sourcePath?: string;
+}
+
+/** Outcome of ingesting a transcript into the store (MEM-7 idempotency). */
+export interface IngestSessionResult {
+  /** The session that was ingested, skipped, or replaced. */
+  session: ConversationSession;
+  /**
+   * `ingested` — a new session; `skipped` — an identical transcript was already
+   * present (no-op); `reingested` — content changed, `reingest` was forced, or
+   * the same source path re-ingested under a different derived id, so the prior
+   * turns were purged and re-ingested.
+   */
+  status: 'ingested' | 'skipped' | 'reingested';
+  /** Turns written this call (0 for a skip). */
+  turnsWritten: number;
+  /**
+   * Id of a PRIOR session at the same source path that this ingest superseded
+   * (set only when the derived id changed for a fixed path — e.g. the transcript
+   * gained or lost its embedded sessionId). The caller drops it from the PG
+   * mirror so the transcript maps to exactly one session, not two. (MEM-7)
+   */
+  replacedId?: string;
 }
 
 /** Result from conversation search. */
@@ -125,22 +157,28 @@ export interface ConversationStoreConfig {
 
 /**
  * Flatten a Claude Code message `content` to text. Real transcripts carry
- * `content` as a string OR an array of content blocks (`{type:'text', text}`,
- * `{type:'tool_use', …}`, `{type:'tool_result', …}`); older/simple logs use a
- * bare string. Non-text blocks are dropped; the text blocks are joined.
+ * `content` as a string OR an array of content blocks; older/simple logs use a
+ * bare string. Kept blocks: `{type:'text', text}` and `{type:'tool_result',
+ * content}` (the tool's output — itself a string or a nested block array, so we
+ * recurse). Other blocks (`tool_use`, images) are dropped; kept text is joined.
+ * Capturing tool_result makes tool outputs searchable in conversation memory. (MEM-7)
  */
 function extractTranscriptText(content: unknown): string {
   if (typeof content === 'string') return content;
   if (Array.isArray(content)) {
-    return content
-      .filter(
-        (b): b is { type: string; text: string } =>
-          !!b && typeof b === 'object' &&
-          (b as { type?: unknown }).type === 'text' &&
-          typeof (b as { text?: unknown }).text === 'string',
-      )
-      .map((b) => b.text)
-      .join('\n');
+    const parts: string[] = [];
+    for (const b of content) {
+      if (!b || typeof b !== 'object') continue;
+      const type = (b as { type?: unknown }).type;
+      if (type === 'text' && typeof (b as { text?: unknown }).text === 'string') {
+        parts.push((b as { text: string }).text);
+      } else if (type === 'tool_result') {
+        // tool_result.content is a string OR a nested block array — recurse.
+        const nested = extractTranscriptText((b as { content?: unknown }).content);
+        if (nested) parts.push(nested);
+      }
+    }
+    return parts.join('\n');
   }
   return '';
 }
@@ -169,6 +207,38 @@ function extractToolNames(entry: {
     }
   }
   return names;
+}
+
+/** Canonical UUID string shape (any version/variant; PG `uuid` accepts it). */
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/**
+ * The transcript's own Claude Code session id, if present. Real transcripts
+ * stamp `sessionId` (a UUID matching the filename) on every entry; it's the
+ * natural stable identity for idempotent re-ingest. Returns undefined for
+ * older/synthetic logs that lack it.
+ */
+function parseTranscriptSessionId(lines: string[]): string | undefined {
+  for (const line of lines) {
+    try {
+      const e = JSON.parse(line) as { sessionId?: unknown };
+      if (typeof e.sessionId === 'string' && UUID_RE.test(e.sessionId)) return e.sessionId;
+    } catch {
+      // skip malformed lines
+    }
+  }
+  return undefined;
+}
+
+/**
+ * A deterministic UUID-shaped id derived from a seed (the transcript path). Used
+ * as the session identity fallback when a transcript carries no `sessionId`, so
+ * re-ingesting the same file is idempotent. Not a real v4 UUID — the bits are a
+ * SHA-256 prefix — but a valid, stable key that PG's `uuid` type accepts.
+ */
+function deterministicUuid(seed: string): string {
+  const h = createHash('sha256').update(seed).digest('hex');
+  return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20, 32)}`;
 }
 
 // ─── ConversationStore ───────────────────────────────────────────────────────
@@ -286,55 +356,108 @@ export class ConversationStore {
   }
 
   /**
-   * Ingest a complete JSONL session log file (Claude Code format).
-   * Parses the log, extracts turns, and indexes them.
+   * Ingest a complete JSONL session log file (Claude Code format). Parses the
+   * log, extracts turns, and indexes them — idempotently (MEM-7):
+   *
+   *   - identity is stable: the caller's `sessionId`, else the transcript's own
+   *     `sessionId`, else a deterministic hash of the PATH (content is NOT in the
+   *     id, so a grown transcript keeps its identity); a prior session at the same
+   *     path under a different derived id is reconciled (superseded);
+   *   - re-ingesting an IDENTICAL transcript is a no-op (`skipped`);
+   *   - a CHANGED transcript (or `reingest: true`) purges the prior turns and
+   *     re-ingests fresh (`reingested`) rather than appending duplicates.
+   *
+   * @param logPath - Path to the JSONL transcript.
+   * @param opts.sessionId - Force a specific session id (overrides derivation).
+   * @param opts.reingest  - Replace even when the content hash is unchanged.
    */
-  async ingestSessionLog(logPath: string, sessionId?: string): Promise<ConversationSession> {
+  async ingestSessionLog(
+    logPath: string,
+    opts: { sessionId?: string; reingest?: boolean } = {},
+  ): Promise<IngestSessionResult> {
     // Gate on logPath BEFORE the readFile that's about to fire. The
     // ingestTurn loop below performs writes that are out-of-scope per
     // #10457; only the read of the external log file gates.
     ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', logPath);
     await this.init();
 
-    const sid = sessionId ?? randomUUID();
     const content = await readFile(logPath, 'utf-8');
     const lines = content.trim().split('\n').filter(l => l.trim());
+    const sourceHash = createHash('sha256').update(content).digest('hex');
+
+    // Stable identity: explicit override → the transcript's own sessionId → a
+    // deterministic hash of the PATH (the file *is* the session): a grown
+    // transcript keeps its identity and re-ingests cleanly; distinct paths stay
+    // distinct. Content changes drive skip-vs-replace via sourceHash below.
+    const sid = opts.sessionId
+      ?? parseTranscriptSessionId(lines)
+      ?? deterministicUuid(logPath);
+
+    const existing = this.sessions.get(sid);
+    let replacedId: string | undefined;
+    if (existing) {
+      if (existing.sourceHash === sourceHash && !opts.reingest) {
+        // Identical transcript already ingested — true no-op.
+        return { session: existing, status: 'skipped', turnsWritten: 0 };
+      }
+      // Changed content or a forced re-ingest: drop the prior turns so we
+      // rebuild the session cleanly instead of appending duplicates.
+      await this.purgeSession(sid);
+    } else {
+      // Reconcile by source path: the same file previously ingested under a
+      // DIFFERENT derived id (it gained or lost its embedded sessionId). Purge
+      // that prior session so the transcript maps to exactly one session, not
+      // two. `replacedId` lets the caller drop the superseded PG mirror too.
+      const prior = [...this.sessions.values()].find(
+        (s) => s.sourcePath === logPath && s.id !== sid,
+      );
+      if (prior) {
+        replacedId = prior.id;
+        await this.purgeSession(prior.id);
+      }
+    }
 
     let turnCount = 0;
-    const topics: string[] = [];
+    let lastTimestamp: Date | undefined;
 
     for (const line of lines) {
       try {
         const entry = JSON.parse(line);
         // Claude Code JSONL: {type, message, timestamp, ...}. `type` is
-        // "user"/"human" | "assistant" | other; message is a bare string OR
-        // {role, content} where content is a string or an array of blocks.
+        // "user"/"human" | "assistant" | "system"/"summary"/other. Content is a
+        // bare string, {role, content} where content is a string or block array,
+        // or — for system/summary entries — a top-level `content`/`summary`.
         const role: ConversationTurn['role'] =
           entry.type === 'user' || entry.type === 'human' ? 'human'
           : entry.type === 'assistant' ? 'assistant'
           : 'system';
 
-        const rawContent = typeof entry.message === 'string'
-          ? entry.message
-          : entry.message?.content;
+        const rawContent =
+          typeof entry.message === 'string' ? entry.message
+          : entry.message?.content !== undefined ? entry.message.content
+          : typeof entry.content === 'string' ? entry.content      // system entries
+          : typeof entry.summary === 'string' ? entry.summary      // summary entries
+          : undefined;
         const messageContent = extractTranscriptText(rawContent);
 
         if (!messageContent || messageContent.length < 2) continue;
 
         const toolCalls = extractToolNames(entry);
+        const timestamp = new Date(entry.timestamp ?? Date.now());
 
         const turn: ConversationTurn = {
           id: `${sid}-${turnCount}`,
           sessionId: sid,
           role,
           content: messageContent.slice(0, 10000), // Cap at 10K chars per turn
-          timestamp: new Date(entry.timestamp ?? Date.now()),
+          timestamp,
           toolCalls: toolCalls.length > 0 ? toolCalls : undefined,
           filesAccessed: entry.files_accessed,
           tags: [],
         };
 
         await this.ingestTurn(turn);
+        lastTimestamp = timestamp;
         turnCount++;
       } catch {
         // Skip malformed lines
@@ -348,11 +471,36 @@ export class ConversationStore {
       session = { id: sid, startedAt: new Date(), endedAt: null, turnCount: 0, topics: [] };
       this.sessions.set(sid, session);
     }
-    session.endedAt = new Date();
-    session.topics = topics;
+    // Deterministic end time (last turn) keeps re-ingested rows stable; the
+    // hash + path stamp the idempotency provenance.
+    session.endedAt = lastTimestamp ?? new Date();
+    session.topics = [];
+    session.sourceHash = sourceHash;
+    session.sourcePath = logPath;
     await this.saveSessionIndex();
 
-    return session;
+    return {
+      session,
+      status: existing || replacedId ? 'reingested' : 'ingested',
+      turnsWritten: turnCount,
+      replacedId,
+    };
+  }
+
+  /**
+   * Drop a session's turns (in-memory index + on-disk chunk file) so it can be
+   * rebuilt from scratch on re-ingest. Write-side, so no LoaderContext gate
+   * (out-of-scope per #10457); the caller already gated the transcript read.
+   */
+  private async purgeSession(sessionId: string): Promise<void> {
+    this.turnIndex.delete(sessionId);
+    this.sessions.delete(sessionId);
+    const chunkFile = join(this.chunksDir, `${sessionId}.jsonl`);
+    try {
+      await rm(chunkFile, { force: true });
+    } catch {
+      // Chunk file may not exist — nothing to purge.
+    }
   }
 
   /** End a session (set endedAt, save index). */

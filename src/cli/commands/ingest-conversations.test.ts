@@ -5,7 +5,7 @@
  * the private ConversationStore so memory.search_conversations has real data.
  * The PG dual-write path is covered by the live pg-store integration suite.
  */
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect, afterEach, vi } from 'vitest';
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -108,6 +108,55 @@ describe('ingest-conversations command (keyword / no --pg)', () => {
     const sessions = await store.listSessions();
     expect(sessions.length).toBe(1);
     expect((await store.getSessionTurns(sessions[0]!.id)).length).toBe(0);
+  });
+
+  it('is idempotent: a second run over the same transcript adds no duplicate session', async () => {
+    const workdir = tmp('sc-ingest-');
+    const convDir = join(workdir, 'conversations');
+    const logPath = join(workdir, 'session.jsonl');
+    writeFileSync(logPath, FIXTURE);
+
+    expect(await ingestConversationsCommand([logPath, '--conversations-dir', convDir])).toBe(0);
+
+    // Re-run: still exit 0, and the report proves it took the no-op skip path.
+    const errs: string[] = [];
+    const spy = vi.spyOn(console, 'error').mockImplementation((...a) => { errs.push(a.join(' ')); });
+    try {
+      expect(await ingestConversationsCommand([logPath, '--conversations-dir', convDir])).toBe(0);
+    } finally {
+      spy.mockRestore();
+    }
+    expect(errs.find((l) => l.includes('[ingest-conversations]'))!).toContain('1 skipped');
+
+    const store = new ConversationStore({ storePath: convDir });
+    expect((await store.listSessions()).length).toBe(1);
+    expect((await store.getSessionTurns((await store.listSessions())[0]!.id)).length).toBe(3);
+  });
+
+  it('--reingest replaces the session (re-ingested, not skipped) without duplicating turns', async () => {
+    const workdir = tmp('sc-ingest-');
+    const convDir = join(workdir, 'conversations');
+    const logPath = join(workdir, 'session.jsonl');
+    writeFileSync(logPath, FIXTURE);
+
+    await ingestConversationsCommand([logPath, '--conversations-dir', convDir]);
+
+    // Spy on the second run's report so a broken --reingest flag (which would
+    // SKIP identical content) fails this test rather than passing on end-state.
+    const errs: string[] = [];
+    const spy = vi.spyOn(console, 'error').mockImplementation((...a) => { errs.push(a.join(' ')); });
+    try {
+      expect(await ingestConversationsCommand([logPath, '--conversations-dir', convDir, '--reingest'])).toBe(0);
+    } finally {
+      spy.mockRestore();
+    }
+    const summary = errs.find((l) => l.includes('[ingest-conversations]'))!;
+    expect(summary).toContain('1 re-ingested');
+    expect(summary).toContain('0 skipped');
+
+    const store = new ConversationStore({ storePath: convDir });
+    expect((await store.listSessions()).length).toBe(1);
+    expect((await store.getSessionTurns((await store.listSessions())[0]!.id)).length).toBe(3);
   });
 
   it('returns 1 when the path names no transcripts', async () => {

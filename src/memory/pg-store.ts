@@ -115,7 +115,7 @@ interface ConversationTurnRow {
  * PgStore constructed with one (a separate ConversationStore follow-up).
  */
 export interface TurnEmbedder {
-  embed(text: string): Promise<{ embedding: number[] }>;
+  embed(text: string): Promise<{ embedding: number[]; method?: string }>;
 }
 
 // ─── SQL Migrations ──────────────────────────────────────────────────────────
@@ -204,7 +204,9 @@ const MIGRATIONS = [
   `CREATE INDEX IF NOT EXISTS idx_relations_object ON gsd_memory.memory_relations (object_id);`,
   `CREATE INDEX IF NOT EXISTS idx_relations_predicate ON gsd_memory.memory_relations (predicate);`,
 
-  // Conversation sessions (PRIVATE — never synced externally)
+  // Conversation sessions (PRIVATE — never synced externally).
+  // source_hash/source_path stamp the ingest provenance and drive idempotent
+  // re-ingest (MEM-7). ADD COLUMN migrations below back-fill existing DBs.
   `CREATE TABLE IF NOT EXISTS gsd_memory.conversation_sessions (
     id          UUID PRIMARY KEY,
     started_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -213,20 +215,25 @@ const MIGRATIONS = [
     branch      TEXT,
     turn_count  INT NOT NULL DEFAULT 0,
     summary     TEXT,
-    topics      TEXT[] NOT NULL DEFAULT '{}'
+    topics      TEXT[] NOT NULL DEFAULT '{}',
+    source_hash TEXT,
+    source_path TEXT
   );`,
 
-  // Conversation turns (PRIVATE — never synced externally)
+  // Conversation turns (PRIVATE — never synced externally). embedding_method
+  // records which embedder produced `embedding` ('model' vs 'heuristic') so a
+  // cross-process mismatch can be guarded at query time (MEM-7).
   `CREATE TABLE IF NOT EXISTS gsd_memory.conversation_turns (
-    id              TEXT PRIMARY KEY,
-    session_id      UUID NOT NULL REFERENCES gsd_memory.conversation_sessions(id) ON DELETE CASCADE,
-    role            TEXT NOT NULL,
-    content         TEXT NOT NULL,
-    timestamp       TIMESTAMPTZ NOT NULL DEFAULT now(),
-    tool_calls      TEXT[],
-    files_accessed  TEXT[],
-    tags            TEXT[] NOT NULL DEFAULT '{}',
-    embedding       vector(384)
+    id               TEXT PRIMARY KEY,
+    session_id       UUID NOT NULL REFERENCES gsd_memory.conversation_sessions(id) ON DELETE CASCADE,
+    role             TEXT NOT NULL,
+    content          TEXT NOT NULL,
+    timestamp        TIMESTAMPTZ NOT NULL DEFAULT now(),
+    tool_calls       TEXT[],
+    files_accessed   TEXT[],
+    tags             TEXT[] NOT NULL DEFAULT '{}',
+    embedding        vector(384),
+    embedding_method TEXT
   );`,
 
   `CREATE INDEX IF NOT EXISTS idx_turns_session ON gsd_memory.conversation_turns (session_id);`,
@@ -234,14 +241,24 @@ const MIGRATIONS = [
   `CREATE INDEX IF NOT EXISTS idx_turns_timestamp ON gsd_memory.conversation_turns (timestamp);`,
   `CREATE INDEX IF NOT EXISTS idx_turns_fulltext ON gsd_memory.conversation_turns
     USING gin (to_tsvector('english', content));`,
+
+  // ── v2 (MEM-7 follow-ups) — back-fill columns on databases already at v1.
+  // Idempotent (ADD COLUMN IF NOT EXISTS); no-ops on a fresh DB where the
+  // CREATE TABLE above already declared them.
+  `ALTER TABLE gsd_memory.conversation_sessions ADD COLUMN IF NOT EXISTS source_hash TEXT;`,
+  `ALTER TABLE gsd_memory.conversation_sessions ADD COLUMN IF NOT EXISTS source_path TEXT;`,
+  `ALTER TABLE gsd_memory.conversation_turns ADD COLUMN IF NOT EXISTS embedding_method TEXT;`,
 ];
 
 /**
  * Target schema version. Bump when appending migrations; the applier records
  * this once the full set applies cleanly and skips re-running when the DB is
  * already at (or past) this version. (PG-3)
+ *
+ * v2 (MEM-7): conversation_sessions.source_hash/source_path +
+ * conversation_turns.embedding_method.
  */
-const SCHEMA_VERSION = 1;
+const SCHEMA_VERSION = 2;
 
 // ─── PgStore ─────────────────────────────────────────────────────────────────
 
@@ -767,21 +784,28 @@ export class PgStore implements MemoryStore {
     branch?: string;
     summary?: string;
     topics?: string[];
+    /** SHA-256 of the source transcript (idempotency provenance, MEM-7). */
+    sourceHash?: string;
+    /** Path of the source transcript (provenance, MEM-7). */
+    sourcePath?: string;
   }): Promise<void> {
     if (!await this.ensureReady()) return;
 
     await this.pool.query(`
-      INSERT INTO gsd_memory.conversation_sessions (id, started_at, ended_at, project, branch, summary, topics)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      INSERT INTO gsd_memory.conversation_sessions (id, started_at, ended_at, project, branch, summary, topics, source_hash, source_path)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       ON CONFLICT (id) DO UPDATE SET
         ended_at = COALESCE(EXCLUDED.ended_at, gsd_memory.conversation_sessions.ended_at),
         turn_count = gsd_memory.conversation_sessions.turn_count,
         summary = COALESCE(EXCLUDED.summary, gsd_memory.conversation_sessions.summary),
-        topics = COALESCE(EXCLUDED.topics, gsd_memory.conversation_sessions.topics)
+        topics = COALESCE(EXCLUDED.topics, gsd_memory.conversation_sessions.topics),
+        source_hash = COALESCE(EXCLUDED.source_hash, gsd_memory.conversation_sessions.source_hash),
+        source_path = COALESCE(EXCLUDED.source_path, gsd_memory.conversation_sessions.source_path)
     `, [
       session.id, session.startedAt, session.endedAt ?? null,
       session.project ?? null, session.branch ?? null,
       session.summary ?? null, session.topics ?? [],
+      session.sourceHash ?? null, session.sourcePath ?? null,
     ]);
   }
 
@@ -802,31 +826,82 @@ export class PgStore implements MemoryStore {
     // works without a later re-embedding pass (PG-5). Degrade gracefully: no
     // embedder, or an embed failure, stores the turn with a NULL vector rather
     // than dropping it. Serialized as a pgvector literal (NULL casts cleanly).
+    // Also record the producing method ('model' vs 'heuristic') so a query in a
+    // different embedder mode can be guarded from comparing incomparable
+    // vectors (MEM-7); NULL when unknown/unembedded.
     let embedding: string | null = null;
+    let method: string | null = null;
     if (this.embedder) {
       try {
-        const { embedding: vec } = await this.embedder.embed(turn.content);
-        if (Array.isArray(vec) && vec.length > 0) embedding = `[${vec.join(',')}]`;
+        const res = await this.embedder.embed(turn.content);
+        if (Array.isArray(res.embedding) && res.embedding.length > 0) {
+          embedding = `[${res.embedding.join(',')}]`;
+          if (typeof res.method === 'string') method = res.method;
+        }
       } catch {
         embedding = null;
+        method = null;
       }
     }
 
-    await this.pool.query(`
-      INSERT INTO gsd_memory.conversation_turns (id, session_id, role, content, timestamp, tool_calls, files_accessed, tags, embedding)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9::vector)
+    const inserted = await this.pool.query(`
+      INSERT INTO gsd_memory.conversation_turns (id, session_id, role, content, timestamp, tool_calls, files_accessed, tags, embedding, embedding_method)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9::vector, $10)
       ON CONFLICT (id) DO NOTHING
     `, [
       turn.id, turn.sessionId, turn.role, turn.content, turn.timestamp,
-      turn.toolCalls ?? null, turn.filesAccessed ?? null, turn.tags ?? [], embedding,
+      turn.toolCalls ?? null, turn.filesAccessed ?? null, turn.tags ?? [], embedding, method,
     ]);
 
-    // Update session turn count
-    await this.pool.query(`
-      UPDATE gsd_memory.conversation_sessions
-      SET turn_count = turn_count + 1
-      WHERE id = $1
-    `, [turn.sessionId]);
+    // Bump the session counter only when a NEW row was actually inserted — a
+    // conflict (idempotent re-ingest of the same turn id) must not inflate it.
+    if (inserted.rowCount && inserted.rowCount > 0) {
+      await this.pool.query(`
+        UPDATE gsd_memory.conversation_sessions
+        SET turn_count = turn_count + 1
+        WHERE id = $1
+      `, [turn.sessionId]);
+    }
+  }
+
+  /** True when a conversation session row exists (used to sync a JSONL-first
+   *  ingest into PG without re-embedding when both stores already have it). */
+  async hasSession(sessionId: string): Promise<boolean> {
+    if (!await this.ensureReady()) return false;
+    const r = await this.pool.query(
+      'SELECT 1 FROM gsd_memory.conversation_sessions WHERE id = $1',
+      [sessionId],
+    );
+    return r.rows.length > 0;
+  }
+
+  /**
+   * Remove a session's turns and reset its counter, so a re-ingest rebuilds it
+   * cleanly (MEM-7). The session row itself is kept (storeSession upserts it).
+   */
+  async clearSessionTurns(sessionId: string): Promise<void> {
+    if (!await this.ensureReady()) return;
+    await this.pool.query(
+      'DELETE FROM gsd_memory.conversation_turns WHERE session_id = $1',
+      [sessionId],
+    );
+    await this.pool.query(
+      'UPDATE gsd_memory.conversation_sessions SET turn_count = 0 WHERE id = $1',
+      [sessionId],
+    );
+  }
+
+  /**
+   * Delete a conversation session entirely (its turns cascade). Used to drop a
+   * session that was superseded when the same source transcript re-ingests under
+   * a different derived id (MEM-7 sourcePath reconciliation).
+   */
+  async deleteSession(sessionId: string): Promise<void> {
+    if (!await this.ensureReady()) return;
+    await this.pool.query(
+      'DELETE FROM gsd_memory.conversation_sessions WHERE id = $1',
+      [sessionId],
+    );
   }
 
   /**
@@ -894,6 +969,7 @@ export class PgStore implements MemoryStore {
     embedding: number[],
     limit = 20,
     sessionFilter?: string[],
+    embeddingMethod?: string,
   ): Promise<Array<{ turn: ConversationTurnRow; sessionId: string; score: number }>> {
     if (!await this.ensureReady()) return [];
 
@@ -903,6 +979,15 @@ export class PgStore implements MemoryStore {
     if (sessionFilter && sessionFilter.length > 0) {
       conditions.push(`session_id = ANY($${paramIdx})`);
       params.push(sessionFilter);
+      paramIdx++;
+    }
+    if (embeddingMethod) {
+      // Cross-process guard (MEM-7): only compare vectors produced by the SAME
+      // embedder method as the query. Turns tagged with a different method are
+      // in an incomparable space, so exclude them; legacy rows with an unknown
+      // (NULL) method are grandfathered in rather than dropped.
+      conditions.push(`(embedding_method = $${paramIdx} OR embedding_method IS NULL)`);
+      params.push(embeddingMethod);
       paramIdx++;
     }
 

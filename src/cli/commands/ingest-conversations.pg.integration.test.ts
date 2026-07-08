@@ -10,7 +10,7 @@
  *
  *   PG_TEST=1 npx vitest run src/cli/commands/ingest-conversations.pg.integration.test.ts
  */
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -84,5 +84,39 @@ describe.skipIf(!RUN)('ingest-conversations --pg end-to-end (PG_TEST)', () => {
     } finally {
       await pgStore.close();
     }
+  }, 60_000);
+
+  it('re-running --pg over the same transcript does not duplicate PG turns (idempotent)', async () => {
+    const convDir = join(workdir, 'conversations-idem');
+    const logPath = join(workdir, 'idem.jsonl');
+    writeFileSync(logPath, FIXTURE);
+
+    // First ingest, then an identical re-run — the second is a no-op skip.
+    expect(await ingestConversationsCommand([logPath, '--pg', '--conversations-dir', convDir])).toBe(0);
+    const errs: string[] = [];
+    const spy = vi.spyOn(console, 'error').mockImplementation((...a) => { errs.push(a.join(' ')); });
+    try {
+      expect(await ingestConversationsCommand([logPath, '--pg', '--conversations-dir', convDir])).toBe(0);
+    } finally {
+      spy.mockRestore();
+    }
+    // The second run must take the skip path (not silently re-embed/re-write).
+    expect(errs.find((l) => l.includes('[ingest-conversations]'))!).toContain('1 skipped');
+
+    const store = new ConversationStore({ storePath: convDir });
+    const sid = (await store.listSessions())[0]!.id;
+    createdSessionIds.push(sid);
+
+    // FIXTURE has two turns; neither the row count nor the counter is doubled.
+    const rows = await cleanupPool.query(
+      'SELECT count(*)::int AS n FROM gsd_memory.conversation_turns WHERE session_id = $1',
+      [sid],
+    );
+    const sess = await cleanupPool.query(
+      'SELECT turn_count FROM gsd_memory.conversation_sessions WHERE id = $1',
+      [sid],
+    );
+    expect(rows.rows[0].n).toBe(2);
+    expect(sess.rows[0].turn_count).toBe(2);
   }, 60_000);
 });

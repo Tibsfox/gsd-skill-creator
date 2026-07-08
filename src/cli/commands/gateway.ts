@@ -108,8 +108,11 @@ export async function gatewayCommand(args: string[]): Promise<number> {
   const pgConversationSearch = pgConversationStore && conversationEmbedder
     ? {
         async search(query: string, limit: number, sessionFilter?: string[]) {
-          const { embedding } = await conversationEmbedder.embed(query);
-          return pgConversationStore.searchConversationsByEmbedding(embedding, limit, sessionFilter);
+          // Pass the query's embedder method so semantic search only compares
+          // vectors from the same mode (guards a cross-process model/heuristic
+          // mismatch, MEM-7). Turns embedded in a different mode are excluded.
+          const { embedding, method } = await conversationEmbedder.embed(query);
+          return pgConversationStore.searchConversationsByEmbedding(embedding, limit, sessionFilter, method);
         },
       }
     : undefined;
