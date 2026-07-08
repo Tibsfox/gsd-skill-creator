@@ -21,7 +21,6 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { UNIVERSAL_COMMANDS, STAGE_COMMANDS } from './intent/lifecycle-filter.js';
 import { DEFAULT_DESTRUCTIVE_COMMANDS } from './gates/types.js';
-import { CONFIRMATION_REQUIRED_COMMANDS } from './gates/confirmation-gate.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -45,7 +44,6 @@ const hardcoded = new Set<string>([
   ...UNIVERSAL_COMMANDS,
   ...Object.values(STAGE_COMMANDS).flatMap((s) => [...s]),
   ...DEFAULT_DESTRUCTIVE_COMMANDS,
-  ...CONFIRMATION_REQUIRED_COMMANDS,
 ]);
 
 const PHASE_BEARING_STAGES = [

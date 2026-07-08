@@ -18,10 +18,3 @@ export type {
 
 // Gate evaluator function
 export { evaluateGate } from './gate-evaluator.js';
-
-// Confirmation gate (mode-aware confirmation for execute-phase etc.)
-export {
-  evaluateConfirmationGate,
-  CONFIRMATION_REQUIRED_COMMANDS,
-} from './confirmation-gate.js';
-export type { ConfirmationGateConfig } from './confirmation-gate.js';
