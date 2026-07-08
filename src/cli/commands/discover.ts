@@ -46,6 +46,9 @@ import { EmbeddingService } from '../../embeddings/embedding-service.js';
 import { SkillStore } from '../../storage/skill-store.js';
 import { getSkillsBasePath } from '../../types/scope.js';
 import { checkGsdInstalled } from '../../detection/gsd-reference-injector.js';
+import { SuggestionStore } from '../../detection/suggestion-store.js';
+import { toSkillCandidate, clusterToSkillCandidate } from '../../discovery/candidate-adapter.js';
+import { gateSkillContent } from '../../validation/skill-content-gate.js';
 
 // ============================================================================
 // Flag parsing
@@ -78,11 +81,16 @@ Usage:
   skill-creator discover --allow=project1,project2    Only scan these projects
   skill-creator discover --dry-run    Show what would be scanned without reading content
 
+By default, selected candidates are STAGED as reviewable suggestions (accept via
+/sc:suggest) rather than written to disk. Use --legacy to write them directly to
+~/.claude/skills, gated through the security-hygiene content gate.
+
 Options:
   --exclude=<projects>  Comma-separated project slugs to skip
   --allow=<projects>    Comma-separated project slugs to scan (allowlist)
   --rescan              Force full rescan, ignore watermarks
   --dry-run             Enumerate sessions and show stats without processing
+  --legacy              Write skills directly to ~/.claude/skills (gated), not staged
   --help, -h            Show this help
 
 Examples:
@@ -123,6 +131,10 @@ export async function discoverCommand(args: string[]): Promise<number> {
     const allowProjects = allowArg ? allowArg.split(',') : undefined;
     const forceRescan = args.includes('--rescan');
     const dryRun = args.includes('--dry-run');
+    // Default: stage selected candidates as reviewable suggestions (/sc:suggest).
+    // --legacy: restore the old direct-write to ~/.claude/skills, but gated through
+    // the security-hygiene content gate first (skip + warn on a blocked draft).
+    const legacy = args.includes('--legacy');
 
     p.intro(pc.bgCyan(pc.black(' Skill Discovery ')));
 
@@ -337,33 +349,61 @@ export async function discoverCommand(args: string[]): Promise<number> {
     }
 
     // -----------------------------------------------------------------------
-    // 11. Generate and write tool pattern skill drafts
+    // 11. Stage (default) or gate-and-write (--legacy) the selected candidates
     // -----------------------------------------------------------------------
     const gsdInstalled = await checkGsdInstalled();
-    for (const candidate of selected) {
-      const draft = generateSkillDraft(candidate, gsdInstalled);
-      const skillDir = join(homedir(), '.claude', 'skills', draft.name);
-      await mkdir(skillDir, { recursive: true });
-      await writeFile(join(skillDir, 'SKILL.md'), draft.content, 'utf-8');
-      p.log.success(`Created skill: ${pc.green(draft.name)}`);
+
+    if (!legacy) {
+      // DEFAULT: route selections through the SuggestionStore for review
+      // (/sc:suggest → accept), stamped with `discover` provenance, instead of
+      // writing generated skills straight into ~/.claude/skills unreviewed.
+      const staged = [
+        ...selected.map(toSkillCandidate),
+        ...selectedClusters.map(clusterToSkillCandidate),
+      ];
+      const added = await new SuggestionStore().addCandidates(staged, { source: 'discover' });
+      const deduped = staged.length - added.length;
+      p.log.success(
+        `Staged ${added.length} suggestion(s)${deduped > 0 ? ` (${deduped} already pending)` : ''}.`,
+      );
+      p.outro(`Review with ${pc.cyan('/sc:suggest')} — accept to create, dismiss to drop.`);
+      return 0;
     }
 
-    // -----------------------------------------------------------------------
-    // 11b. Generate and write cluster-based skill drafts
-    // -----------------------------------------------------------------------
+    // --legacy: direct write to ~/.claude/skills, but every draft passes the
+    // security-hygiene content gate first (blocked drafts are skipped, not written).
+    let written = 0;
+    let blocked = 0;
+    const writeGated = async (name: string, content: string, note = ''): Promise<void> => {
+      const gate = gateSkillContent({ name, content });
+      if (!gate.ok) {
+        blocked++;
+        p.log.warn(`Skipped ${pc.yellow(name)} — blocked: ${gate.blockers.join('; ')}`);
+        return;
+      }
+      const skillDir = join(homedir(), '.claude', 'skills', name);
+      await mkdir(skillDir, { recursive: true });
+      await writeFile(join(skillDir, 'SKILL.md'), gate.sanitizedContent, 'utf-8');
+      written++;
+      const warn = gate.warnings.length ? pc.dim(` (${gate.warnings.length} sanitized)`) : '';
+      p.log.success(`Created skill: ${pc.green(name)}${note}${warn}`);
+    };
+
+    for (const candidate of selected) {
+      const draft = generateSkillDraft(candidate, gsdInstalled);
+      await writeGated(draft.name, draft.content);
+    }
     for (const candidate of selectedClusters) {
       const draft = generateClusterDraft(candidate);
-      const skillDir = join(homedir(), '.claude', 'skills', draft.name);
-      await mkdir(skillDir, { recursive: true });
-      await writeFile(join(skillDir, 'SKILL.md'), draft.content, 'utf-8');
-      p.log.success(`Created skill: ${pc.green(draft.name)} ${pc.dim('(from prompt cluster)')}`);
+      await writeGated(draft.name, draft.content, pc.dim(' (from prompt cluster)'));
     }
 
     // -----------------------------------------------------------------------
     // 12. Summary outro
     // -----------------------------------------------------------------------
-    const totalGenerated = selected.length + selectedClusters.length;
-    p.outro(`Generated ${totalGenerated} skill draft(s). Review and customize in ~/.claude/skills/`);
+    p.outro(
+      `Wrote ${written} skill(s) to ~/.claude/skills/${blocked > 0 ? `; ${blocked} blocked by the content gate` : ''}.`,
+    );
 
     return 0;
   } catch (err) {

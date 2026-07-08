@@ -9,6 +9,8 @@ import { ContentDecomposer } from '../disclosure/index.js';
 import type { ReferenceFile, ScriptFile } from '../disclosure/index.js';
 import { injectGsdReferences } from './gsd-reference-injector.js';
 import { inferAllowedTools, sanitizeGeneratedContent, scanForDangerousCommands } from '../validation/generation-safety.js';
+import { sanitizeMessageText } from '../validation/message-safety.js';
+import { redactSecrets } from '../discovery/discovery-safety.js';
 
 export interface GeneratedSkill {
   name: string;
@@ -54,6 +56,12 @@ export class SkillGenerator {
     if (dangerousFindings.length > 0) {
       body = `<!-- WARNING: ${dangerousFindings.length} dangerous command(s) were detected and blocked during generation. -->\n${body}`;
     }
+
+    // SEC-05b: Neutralize prompt-injection text and redact secrets in the body —
+    // defense-in-depth on the accept path, matching the skill-content-gate policy.
+    const injScan = sanitizeMessageText(body);
+    if (injScan.sanitized) body = injScan.text;
+    body = redactSecrets(body);
 
     // SEC-07: Infer allowed-tools and set on metadata
     const allowedTools = inferAllowedTools({

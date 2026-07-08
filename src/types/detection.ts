@@ -24,6 +24,12 @@ export interface SkillCandidate {
   evidence: PatternEvidence;
 }
 
+// Where a staged suggestion came from (loop provenance).
+export interface SuggestionProvenance {
+  source: string;        // e.g. 'discover', 'observation', 'amiga'
+  discoveredAt: number;  // Timestamp the candidate was surfaced
+}
+
 // Suggestion with state tracking
 export interface Suggestion {
   candidate: SkillCandidate;
@@ -34,6 +40,7 @@ export interface Suggestion {
   dismissReason?: string;      // Optional user explanation
   createdSkillName?: string;   // If accepted, link to created skill
   skillId?: string;            // Domain-prefixed skill identifier (e.g., I-0.prisma)
+  provenance?: SuggestionProvenance; // How this suggestion was generated (loop measurement)
 }
 
 // Internal frequency counting structure

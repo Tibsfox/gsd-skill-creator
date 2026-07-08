@@ -70,17 +70,22 @@ export class SuggestionStore {
   /**
    * Add new suggestions from candidates (skip duplicates)
    */
-  async addCandidates(candidates: SkillCandidate[]): Promise<Suggestion[]> {
+  async addCandidates(
+    candidates: SkillCandidate[],
+    opts?: { source?: string },
+  ): Promise<Suggestion[]> {
     const existing = await this.load();
     const existingIds = new Set(existing.map(s => s.candidate.id));
 
     const newSuggestions: Suggestion[] = [];
     for (const candidate of candidates) {
       if (!existingIds.has(candidate.id)) {
+        const now = Date.now();
         newSuggestions.push({
           candidate,
           state: 'pending',
-          createdAt: Date.now(),
+          createdAt: now,
+          ...(opts?.source ? { provenance: { source: opts.source, discoveredAt: now } } : {}),
         });
       }
     }
