@@ -86,7 +86,7 @@ describe('Gateway memory tools integration (MEM-1)', () => {
       const memoryDir = join(tempDir, 'memory');
       const memoryService = new MemoryService({
         memoryDir,
-        indexPath: 'MEMORY.md',
+        indexFile: 'MEMORY.md',
       });
       await startWithFactory(createGsdGatewayFactory({ memoryService }));
     });
@@ -159,7 +159,7 @@ describe('Gateway memory tools integration (MEM-1)', () => {
   describe('scope enforcement for memory tools', () => {
     beforeEach(async () => {
       const memoryDir = join(tempDir, 'memory');
-      const memoryService = new MemoryService({ memoryDir, indexPath: 'MEMORY.md' });
+      const memoryService = new MemoryService({ memoryDir, indexFile: 'MEMORY.md' });
       // Stored token grants only 'read' — memory reads allowed, writes denied.
       await startWithFactory(createGsdGatewayFactory({ memoryService }), ['read']);
     });
@@ -218,7 +218,7 @@ describe('Gateway memory tools integration (MEM-1)', () => {
     it('prefers the PG semantic searcher and maps its rows to the tool shape', async () => {
       const memoryService = new MemoryService({
         memoryDir: join(tempDir, 'memory'),
-        indexPath: 'MEMORY.md',
+        indexFile: 'MEMORY.md',
       });
       const pgConversationSearch = {
         async search() {
@@ -266,7 +266,7 @@ describe('Gateway memory tools integration (MEM-1)', () => {
     it('falls back to keyword search when the PG searcher returns nothing', async () => {
       const memoryService = new MemoryService({
         memoryDir: join(tempDir, 'memory'),
-        indexPath: 'MEMORY.md',
+        indexFile: 'MEMORY.md',
       });
       const conversationStore = new ConversationStore({ storePath: join(tempDir, 'conversations') });
       await conversationStore.ingestTurn({

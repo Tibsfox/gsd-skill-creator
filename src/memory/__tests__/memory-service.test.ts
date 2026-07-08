@@ -292,7 +292,7 @@ describe('MemoryService', () => {
     dir = await mkdtemp(join(tmpdir(), 'mem-svc-'));
     service = new MemoryService({
       memoryDir: dir,
-      indexPath: 'MEMORY.md',
+      indexFile: 'MEMORY.md',
     });
   });
 
@@ -414,14 +414,14 @@ describe('MemoryService relations (MEM-5)', () => {
   });
 
   it('relate() persists a relation that survives a service restart', async () => {
-    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const service = new MemoryService({ memoryDir: dir, indexFile: 'MEMORY.md' });
     const a = await service.remember('subject memory', 'feedback', 'subject');
     const b = await service.remember('object memory', 'feedback', 'object');
     await service.relate(a.id, 'derives-from', b.id);
 
     // A fresh service over the same directory reads the persisted relation —
     // the in-process array of the old code would have vanished here.
-    const restarted = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const restarted = new MemoryService({ memoryDir: dir, indexFile: 'MEMORY.md' });
     const relations = await restarted.getRelations(a.id);
     expect(relations.length).toBe(1);
     expect(relations[0].subjectId).toBe(a.id);
@@ -430,7 +430,7 @@ describe('MemoryService relations (MEM-5)', () => {
   });
 
   it('getRelations returns relations for both the subject and the object', async () => {
-    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const service = new MemoryService({ memoryDir: dir, indexFile: 'MEMORY.md' });
     const a = await service.remember('a', 'feedback', 'mem-a');
     const b = await service.remember('b', 'feedback', 'mem-b');
     await service.relate(a.id, 'elaborates', b.id);
@@ -440,7 +440,7 @@ describe('MemoryService relations (MEM-5)', () => {
   });
 
   it('query with expandRelations surfaces a one-hop neighbor that did not match the text', async () => {
-    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const service = new MemoryService({ memoryDir: dir, indexFile: 'MEMORY.md' });
     const a = await service.remember(
       'alpha topic about lattices', 'feedback', 'alpha-note', 'the alpha note',
     );
@@ -463,7 +463,7 @@ describe('MemoryService relations (MEM-5)', () => {
   });
 
   it('supersedes deprecates the object and still persists the relation', async () => {
-    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const service = new MemoryService({ memoryDir: dir, indexFile: 'MEMORY.md' });
     const oldMem = await service.remember('old approach', 'feedback', 'old-approach');
     const newMem = await service.remember('new approach', 'feedback', 'new-approach');
 
@@ -587,7 +587,7 @@ describe('MemoryService with Lod300Config.backend="arena"', () => {
 
     const service = new MemoryService({
       memoryDir: dir,
-      indexPath: 'MEMORY.md',
+      indexFile: 'MEMORY.md',
       lod300: { backend: 'arena', arena },
     });
 
@@ -614,7 +614,7 @@ describe('MemoryService with Lod300Config.backend="arena"', () => {
 
     const service = new MemoryService({
       memoryDir: dir,
-      indexPath: 'MEMORY.md',
+      indexFile: 'MEMORY.md',
       lod300: { backend: 'arena', arena },
     });
 
@@ -629,7 +629,7 @@ describe('MemoryService with Lod300Config.backend="arena"', () => {
 
   it('defaults to FileStore when lod300 is omitted (rollback path)', async () => {
     const { readdir } = await import('node:fs/promises');
-    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const service = new MemoryService({ memoryDir: dir, indexFile: 'MEMORY.md' });
 
     await service.remember('disk content', 'feedback', 'disk test');
 
@@ -642,7 +642,7 @@ describe('MemoryService with Lod300Config.backend="arena"', () => {
   it('throws when backend="arena" but arena is missing', () => {
     expect(() => new MemoryService({
       memoryDir: dir,
-      indexPath: 'MEMORY.md',
+      indexFile: 'MEMORY.md',
       lod300: { backend: 'arena' },
     })).toThrow(/requires lod300.arena/);
   });
@@ -655,7 +655,7 @@ describe('MemoryService with Lod300Config.backend="arena"', () => {
 
     const service = new MemoryService({
       memoryDir: dir,
-      indexPath: 'MEMORY.md',
+      indexFile: 'MEMORY.md',
       lod300: { backend: 'arena', arena, arenaTier: 'warm' },
     });
 
@@ -679,7 +679,7 @@ describe('MemoryService.preload() (M10)', () => {
 
   it('returns { available: false } when ChromaDB is not configured', async () => {
     // No chromaPath → no LOD 350 store → preload should short-circuit.
-    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const service = new MemoryService({ memoryDir: dir, indexFile: 'MEMORY.md' });
     const result = await service.preload();
     expect(result.available).toBe(false);
     expect(result.count).toBe(0);
@@ -693,7 +693,7 @@ describe('MemoryService.preload() (M10)', () => {
     // available=false, so preload() reports that cleanly without throwing.
     const service = new MemoryService({
       memoryDir: dir,
-      indexPath: 'MEMORY.md',
+      indexFile: 'MEMORY.md',
       chromaPath: '.chroma-nonexistent-test',
     });
     const result = await service.preload();
@@ -703,7 +703,7 @@ describe('MemoryService.preload() (M10)', () => {
   });
 
   it('is safe to call multiple times', async () => {
-    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const service = new MemoryService({ memoryDir: dir, indexFile: 'MEMORY.md' });
     const first = await service.preload();
     const second = await service.preload();
     const third = await service.preload();

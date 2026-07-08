@@ -47,7 +47,12 @@ export async function gatewayCommand(args: string[]): Promise<number> {
   }
 
   const portRaw = readFlag(args, '--port');
-  const port = portRaw !== undefined ? Number(portRaw) : DEFAULT_GATEWAY_PORT;
+  // A blank value (`--port=` or `--port ""`) must not silently become port 0
+  // via Number('') — which would bind a random ephemeral port. Coerce it to NaN
+  // so the range check below rejects it.
+  const port = portRaw === undefined
+    ? DEFAULT_GATEWAY_PORT
+    : portRaw.trim() === '' ? NaN : Number(portRaw);
   if (!Number.isInteger(port) || port < 0 || port > 65535) {
     console.error(`gateway: invalid --port "${portRaw}" (expected an integer 0-65535)`);
     return 1;
@@ -78,7 +83,7 @@ export async function gatewayCommand(args: string[]): Promise<number> {
     }
   }
 
-  // indexPath is a filename resolved under memoryDir by IndexManager
+  // indexFile is a filename resolved under memoryDir by IndexManager
   // (join(memoryDir, indexFile)); pass the bare filename, not an absolute path.
   // MEM-7 step 2: under --pg, build an embedder for QUERY embedding (the semantic
   // adapter below). Conversation turns are written + embedded by the separate
@@ -89,7 +94,7 @@ export async function gatewayCommand(args: string[]): Promise<number> {
   const conversationEmbedder = pgConnectionString ? await getEmbeddingService() : undefined;
 
   const memoryService = memoryEnabled
-    ? new MemoryService({ memoryDir, indexPath: 'MEMORY.md', pgConnectionString, conversationEmbedder })
+    ? new MemoryService({ memoryDir, indexFile: 'MEMORY.md', pgConnectionString, conversationEmbedder })
     : undefined;
 
   // Wire the always-on, no-DB conversation store so memory.search_conversations

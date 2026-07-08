@@ -82,8 +82,8 @@ export interface MemoryServiceConfig {
   /** Directory for LOD 300 memory files. */
   memoryDir: string;
 
-  /** Path to MEMORY.md for LOD 200 index. */
-  indexPath: string;
+  /** Filename of the LOD-200 index (e.g. `MEMORY.md`), resolved under `memoryDir`. */
+  indexFile: string;
 
   /** ChromaDB path for LOD 350 (optional). */
   chromaPath?: string;
@@ -168,7 +168,7 @@ export class MemoryService {
     this.stores.set(LodLevel.CONCEPT, ramCache);
 
     // LOD 200 — MEMORY.md index
-    const indexManager = new IndexManager({ memoryDir: config.memoryDir, indexFile: config.indexPath });
+    const indexManager = new IndexManager({ memoryDir: config.memoryDir, indexFile: config.indexFile });
     this.stores.set(LodLevel.SCHEMATIC, indexManager);
 
     // LOD 300 — File store (default) or Arena-backed store (opt-in).

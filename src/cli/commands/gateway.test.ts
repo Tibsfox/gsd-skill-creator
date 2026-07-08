@@ -38,4 +38,11 @@ describe('gatewayCommand', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
     expect(await gatewayCommand(['--port=70000'])).toBe(1);
   });
+
+  it('rejects a blank --port= (not silently port 0) with exit 1', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    // Number('') === 0 would otherwise bind a random ephemeral port.
+    expect(await gatewayCommand(['--port='])).toBe(1);
+    expect(await gatewayCommand(['--port', ''])).toBe(1);
+  });
 });

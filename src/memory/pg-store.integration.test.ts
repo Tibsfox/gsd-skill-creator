@@ -213,7 +213,7 @@ describe.skipIf(!RUN)('MemoryService LOD-400 wiring (PG_TEST)', () => {
     tmp = await mkdtemp(join(tmpdir(), 'memsvc-pg-'));
     service = new MemoryService({
       memoryDir: join(tmp, 'm'),
-      indexPath: 'MEMORY.md',
+      indexFile: 'MEMORY.md',
       pgConnectionString: env.url,
     });
     pg = new PgStore({ connectionString: env.url }); // independent handle for count/cleanup

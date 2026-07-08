@@ -11,7 +11,7 @@
  *
  * const memory = new MemoryService({
  *   memoryDir: '.claude/memory',
- *   indexPath: '.claude/MEMORY.md',
+ *   indexFile: 'MEMORY.md',
  *   chromaPath: '.chroma',
  * });
  *
