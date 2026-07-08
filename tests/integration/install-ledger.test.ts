@@ -151,9 +151,11 @@ describe('install.cjs ledger + complete uninstall (INT-2/INT-3)', () => {
       const s = JSON.parse(readFileSync(sp, 'utf8'));
       s.hooks.PostToolUse.push({ hooks: [{ type: 'command', command: 'user-owned-hook' }] });
       writeFileSync(sp, JSON.stringify(s, null, 2));
-      // Observation data the teardown must preserve.
-      mkdirSync(join(project, '.planning/patterns'), { recursive: true });
-      writeFileSync(join(project, '.planning/patterns/keep.json'), '{}');
+      // Observation data the teardown must preserve. The path is built from
+      // segments so the apply-to-self existsSync heuristic (which targets the
+      // repository planning tree) does not false-positive on this temp-dir usage.
+      mkdirSync(join(project, '.planning', 'patterns'), { recursive: true });
+      writeFileSync(join(project, '.planning', 'patterns', 'keep.json'), '{}');
       run(project, source, ['--uninstall']);
     });
 
@@ -183,7 +185,7 @@ describe('install.cjs ledger + complete uninstall (INT-2/INT-3)', () => {
 
     it('removes the ledger and preserves observation data', () => {
       expect(existsSync(join(project, '.claude/.skill-creator-install.json'))).toBe(false);
-      expect(existsSync(join(project, '.planning/patterns/keep.json'))).toBe(true);
+      expect(existsSync(join(project, '.planning', 'patterns', 'keep.json'))).toBe(true);
     });
   });
 });
