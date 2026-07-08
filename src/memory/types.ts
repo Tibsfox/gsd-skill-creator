@@ -592,6 +592,22 @@ export interface MemoryQuery {
    */
   applyScopeRelevance?: boolean;
 
+  // ─── Relation Expansion (MEM-5) ──────────────────────────────────────
+
+  /**
+   * Expand the result set one hop along persisted memory relations.
+   * When true, memories directly related to the strongest hits are surfaced
+   * even if their own content didn't match the query text. Default off —
+   * has no effect on normal queries.
+   */
+  expandRelations?: boolean;
+
+  /**
+   * How many of the top-scoring hits to expand from when `expandRelations`
+   * is set. Default 5. Ignored when `expandRelations` is false.
+   */
+  expandSeedCount?: number;
+
   // ─── Visibility ──────────────────────────────────────────────────────
 
   /**

@@ -137,6 +137,7 @@ const TOOL_SCOPE_MAP: Record<string, GatewayScope> = {
   'memory.wakeup': 'read',
   'memory.stats': 'read',
   'memory.search_conversations': 'read',
+  'memory.get_relations': 'read',
   'memory.store': 'write',
   'memory.relate': 'write',
   'memory.deprecate': 'write',

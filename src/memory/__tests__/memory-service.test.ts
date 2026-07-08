@@ -385,6 +385,87 @@ describe('MemoryService', () => {
   });
 });
 
+// ─── MemoryService relations (MEM-5) ─────────────────────────────────────────
+
+describe('MemoryService relations (MEM-5)', () => {
+  let dir: string;
+
+  beforeEach(async () => {
+    dir = await mkdtemp(join(tmpdir(), 'mem-rel-svc-'));
+  });
+
+  afterEach(async () => {
+    await rm(dir, { recursive: true, force: true });
+  });
+
+  it('relate() persists a relation that survives a service restart', async () => {
+    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const a = await service.remember('subject memory', 'feedback', 'subject');
+    const b = await service.remember('object memory', 'feedback', 'object');
+    await service.relate(a.id, 'derives-from', b.id);
+
+    // A fresh service over the same directory reads the persisted relation —
+    // the in-process array of the old code would have vanished here.
+    const restarted = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const relations = await restarted.getRelations(a.id);
+    expect(relations.length).toBe(1);
+    expect(relations[0].subjectId).toBe(a.id);
+    expect(relations[0].objectId).toBe(b.id);
+    expect(relations[0].predicate).toBe('derives-from');
+  });
+
+  it('getRelations returns relations for both the subject and the object', async () => {
+    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const a = await service.remember('a', 'feedback', 'mem-a');
+    const b = await service.remember('b', 'feedback', 'mem-b');
+    await service.relate(a.id, 'elaborates', b.id);
+
+    expect((await service.getRelations(a.id)).length).toBe(1);
+    expect((await service.getRelations(b.id)).length).toBe(1);
+  });
+
+  it('query with expandRelations surfaces a one-hop neighbor that did not match the text', async () => {
+    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const a = await service.remember(
+      'alpha topic about lattices', 'feedback', 'alpha-note', 'the alpha note',
+    );
+    const b = await service.remember(
+      'beta subject entirely unrelated wording', 'feedback', 'beta-note', 'the beta note',
+    );
+    await service.relate(a.id, 'elaborates', b.id);
+
+    // Baseline: "alpha" alone never surfaces the beta memory.
+    const plain = await service.query('alpha', { limit: 10 });
+    const plainIds = plain.results.map(r => r.record.id);
+    expect(plainIds).toContain(a.id);
+    expect(plainIds).not.toContain(b.id);
+
+    // With expansion, the related beta memory rides along.
+    const expanded = await service.query('alpha', { limit: 10, expandRelations: true });
+    const expandedIds = expanded.results.map(r => r.record.id);
+    expect(expandedIds).toContain(a.id);
+    expect(expandedIds).toContain(b.id);
+  });
+
+  it('supersedes deprecates the object and still persists the relation', async () => {
+    const service = new MemoryService({ memoryDir: dir, indexPath: 'MEMORY.md' });
+    const oldMem = await service.remember('old approach', 'feedback', 'old-approach');
+    const newMem = await service.remember('new approach', 'feedback', 'new-approach');
+
+    await service.relate(newMem.id, 'supersedes', oldMem.id);
+
+    // The relation is recorded...
+    const relations = await service.getRelations(newMem.id);
+    expect(relations.some(r => r.predicate === 'supersedes' && r.objectId === oldMem.id)).toBe(true);
+
+    // ...and the object memory was deprecated (validTo set).
+    const record = await service.query('old approach', { applyTemporalDecay: false });
+    const found = record.results.find(r => r.record.id === oldMem.id);
+    // Either filtered out by validity, or present with validTo set — never active.
+    if (found) expect(found.record.validTo).not.toBeNull();
+  });
+});
+
 // ─── MemoryService with Arena-backed LOD 300 (M7) ────────────────────────────
 
 describe('MemoryService with Lod300Config.backend="arena"', () => {

@@ -1,10 +1,10 @@
 /**
  * Memory gateway tools — MCP interface to the unified memory service.
  *
- * Registers 8 MCP tools that expose the LOD-tiered memory system to
+ * Registers 9 MCP tools that expose the LOD-tiered memory system to
  * external clients (Claude Code, other AI tools). Tools cover the full
- * lifecycle: query, store, recall, relate, deprecate, wakeup, stats,
- * and conversation search.
+ * lifecycle: query, store, recall, relate, get_relations, deprecate,
+ * wakeup, stats, and conversation search.
  *
  * @module mcp/gateway/tools/memory-tools
  */
@@ -58,11 +58,12 @@ function errorContent(message: string): { content: [{ type: 'text'; text: string
 /**
  * Register all memory:* tools on the given MCP server.
  *
- * Provides 8 tools covering the full memory lifecycle:
+ * Provides 9 tools covering the full memory lifecycle:
  *   - memory.query           — hybrid search across all LOD tiers
  *   - memory.store           — persist a new memory
  *   - memory.recall          — quick content-only retrieval
  *   - memory.relate          — create relationships between memories
+ *   - memory.get_relations   — list persisted relations for a memory
  *   - memory.deprecate       — mark a memory as no longer valid
  *   - memory.wakeup          — session start context (LOD 100 + 200)
  *   - memory.stats           — system health metrics
@@ -81,6 +82,7 @@ export function registerMemoryTools(
   registerStoreTool(server, memoryService);
   registerRecallTool(server, memoryService);
   registerRelateTool(server, memoryService);
+  registerGetRelationsTool(server, memoryService);
   registerDeprecateTool(server, memoryService);
   registerWakeupTool(server, memoryService);
   registerStatsTool(server, memoryService);
@@ -100,6 +102,7 @@ function registerQueryTool(server: McpServer, memoryService: MemoryService): voi
       limit: z.number().int().min(1).max(100).default(10).describe('Maximum results to return (default 10)'),
       cascade: z.boolean().default(true).describe('Cascade through LOD tiers (default true)'),
       visibility: MemoryVisibilitySchema.optional().describe('Maximum visibility level to include'),
+      expandRelations: z.boolean().default(false).describe('Also surface memories one hop away from the top hits via persisted relations (default false)'),
     },
     async (args) => {
       try {
@@ -109,6 +112,7 @@ function registerQueryTool(server: McpServer, memoryService: MemoryService): voi
           limit: args.limit,
           cascade: args.cascade,
           visibility: args.visibility as MemoryVisibility | undefined,
+          expandRelations: args.expandRelations,
         });
 
         const results = response.results.map(r => ({
@@ -247,6 +251,38 @@ function registerRelateTool(server: McpServer, memoryService: MemoryService): vo
         });
       } catch (err) {
         return errorContent(`memory.relate failed: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    },
+  );
+}
+
+// ── memory.get_relations ─────────────────────────────────────────────────────
+
+function registerGetRelationsTool(server: McpServer, memoryService: MemoryService): void {
+  server.tool(
+    'memory.get_relations',
+    'List persisted relations for a memory (as subject or object)',
+    {
+      memoryId: z.string().uuid().describe('Memory UUID to fetch relations for'),
+    },
+    async (args) => {
+      try {
+        const relations = await memoryService.getRelations(args.memoryId);
+
+        return jsonContent({
+          memoryId: args.memoryId,
+          relationCount: relations.length,
+          relations: relations.map(r => ({
+            id: r.id,
+            subjectId: r.subjectId,
+            predicate: r.predicate,
+            objectId: r.objectId,
+            confidence: r.confidence,
+            createdAt: r.createdAt.toISOString(),
+          })),
+        });
+      } catch (err) {
+        return errorContent(`memory.get_relations failed: ${err instanceof Error ? err.message : String(err)}`);
       }
     },
   );

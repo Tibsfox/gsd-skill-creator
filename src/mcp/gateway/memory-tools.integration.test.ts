@@ -42,6 +42,7 @@ const MEMORY_TOOL_NAMES = [
   'memory.store',
   'memory.recall',
   'memory.relate',
+  'memory.get_relations',
   'memory.deprecate',
   'memory.wakeup',
   'memory.stats',
@@ -89,7 +90,7 @@ describe('Gateway memory tools integration (MEM-1)', () => {
       await startWithFactory(createGsdGatewayFactory({ memoryService }));
     });
 
-    it('registers all eight memory.* tools', async () => {
+    it('registers all nine memory.* tools', async () => {
       const transport = createClientTransport(port, storedToken.token);
       const client = new Client({ name: 'mem-list', version: '1.0.0' });
       await client.connect(transport);

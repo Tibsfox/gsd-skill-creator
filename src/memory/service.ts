@@ -10,6 +10,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
+import { join } from 'node:path';
 import { LodLevel } from '../lod/types.js';
 import type { LodContext } from '../lod/types.js';
 import { LodService } from '../lod/service.js';
@@ -33,6 +34,7 @@ import {
 import { RamCache } from './ram-cache.js';
 import { IndexManager } from './index-manager.js';
 import { FileStore } from './file-store.js';
+import { FileRelationStore } from './relation-store.js';
 import { ArenaFileStore } from './arena-file-store.js';
 import type { RustArena, TierKind } from './rust-arena.js';
 import { ChromaStore } from './chroma-store.js';
@@ -97,6 +99,13 @@ export interface MemoryServiceConfig {
    * Rust memory arena (requires an initialized RustArena).
    */
   lod300?: Lod300Config;
+
+  /**
+   * Path to the durable relation sidecar (MEM-5). Defaults to
+   * `<memoryDir>/relations.json`. Relations persisted here survive restarts
+   * even when no PostgreSQL tier is configured.
+   */
+  relationsPath?: string;
 }
 
 // ─── Token Estimation ───────────────────────────────────────────────────────
@@ -105,6 +114,16 @@ export interface MemoryServiceConfig {
 function estimateTokens(text: string): number {
   return Math.ceil(text.length / 4);
 }
+
+/** Default filename for the LOD-300-adjacent relation sidecar (MEM-5). */
+const RELATIONS_FILE = 'relations.json';
+
+/**
+ * Score multiplier applied to memories surfaced by one-hop relation
+ * expansion (MEM-5). A related-but-not-directly-matched memory ranks below
+ * its seed hit but can still outrank weaker direct matches.
+ */
+const RELATION_EXPANSION_FACTOR = 0.5;
 
 // ─── Tier Ordering ──────────────────────────────────────────────────────────
 
@@ -122,11 +141,18 @@ const CASCADE_ORDER: LodLevel[] = [
 export class MemoryService {
   private stores: Map<LodLevel, MemoryStore>;
   private lodService: LodService;
-  private relations: MemoryRelation[] = [];
+  /** Durable relation graph (MEM-5) — persisted, survives restarts. */
+  private relationStore: FileRelationStore;
 
   constructor(config: MemoryServiceConfig) {
     this.lodService = new LodService();
     this.stores = new Map();
+
+    // Relation sidecar — persisted next to the LOD-300 files by default so
+    // relations survive restarts even without a PostgreSQL tier (MEM-5).
+    this.relationStore = new FileRelationStore(
+      config.relationsPath ?? join(config.memoryDir, RELATIONS_FILE),
+    );
 
     // LOD 100 — RAM cache
     const ramCache = new RamCache({ maxSize: config.ramCacheSize ?? 256 });
@@ -282,6 +308,35 @@ export class MemoryService {
       });
     }
 
+    // ─── Relation Expansion (MEM-5) ───────────────────────────────────────
+    // When requested, surface memories one hop away from the strongest hits —
+    // even ones whose own content didn't match the query — using the durable
+    // relation graph. Expanded records are fetched via findRecord() (the
+    // canonical single-record access, which accrues access on its own), so
+    // they're tracked here and skipped by the centralized accrual below to
+    // keep a single bump per recall. Default-off: no effect on normal queries.
+    const expandedIds = new Set<string>();
+    if (q.expandRelations) {
+      const seedCount = q.expandSeedCount ?? 5;
+      const seeds = [...merged].sort((a, b) => b.score - a.score).slice(0, seedCount);
+      const present = new Set(merged.map(r => r.record.id));
+      for (const seed of seeds) {
+        const neighborIds = await this.relationStore.getRelatedIds(seed.record.id);
+        for (const neighborId of neighborIds) {
+          if (present.has(neighborId) || expandedIds.has(neighborId)) continue;
+          const record = await this.findRecord(neighborId);
+          if (!record || record.validTo !== null) continue; // skip missing/deprecated
+          expandedIds.add(neighborId);
+          merged.push({
+            record,
+            score: seed.score * RELATION_EXPANSION_FACTOR,
+            sourceLod: record.lodCurrent,
+            tokenEstimate: estimateTokens(record.content),
+          });
+        }
+      }
+    }
+
     // ─── Sort, Limit, Budget ──────────────────────────────────────────
 
     // Sort by score descending (after all re-ranking)
@@ -322,6 +377,9 @@ export class MemoryService {
     // divergence / double-count). Best-effort: a persist failure must not fail recall.
     const accrualAt = new Date();
     for (const result of sorted) {
+      // Expansion records were fetched via findRecord()'s get(), which already
+      // bumped their access count — skip them here to avoid double-counting.
+      if (expandedIds.has(result.record.id)) continue;
       result.record.accessCount += 1;
       result.record.lastAccessed = accrualAt;
       const tier = resultTier.get(result.record.id);
@@ -490,23 +548,53 @@ export class MemoryService {
    * @param objectId - The target memory ID.
    */
   async relate(subjectId: string, predicate: RelationType, objectId: string): Promise<void> {
+    const now = new Date();
     const relation: MemoryRelation = {
       id: randomUUID(),
       subjectId,
       predicate,
       objectId,
-      validFrom: new Date(),
+      validFrom: now,
       validTo: null,
       confidence: 1.0,
-      createdAt: new Date(),
+      createdAt: now,
     };
 
-    this.relations.push(relation);
+    // Durable sidecar — the backend-independent source of truth (MEM-5).
+    await this.relationStore.add(relation);
+
+    // Mirror into the LOD-400 relation graph when a PostgreSQL tier is present,
+    // so its recursive-CTE traversal stays populated for direct-DB consumers.
+    // Best-effort: the sidecar above already persisted, and the FK-constrained
+    // insert can legitimately fail if the endpoints aren't in the PG tier.
+    const pgStore = this.stores.get(LodLevel.FABRICATION);
+    if (pgStore instanceof PgStore) {
+      try {
+        await pgStore.createRelation(subjectId, predicate, objectId, relation.confidence);
+      } catch {
+        // PG mirror is best-effort — the durable sidecar is authoritative.
+      }
+    }
 
     // If supersedes or contradicts, deprecate the object memory
     if (predicate === 'supersedes' || predicate === 'contradicts') {
       await this.deprecate(objectId, `${predicate} by ${subjectId}`);
     }
+  }
+
+  // ─── Relations Query ──────────────────────────────────────────────────────
+
+  /**
+   * Get all active relations touching a memory (as subject or object).
+   *
+   * Reads from the durable relation sidecar, so results survive restarts and
+   * are available in every deployment (no PostgreSQL required). (MEM-5)
+   *
+   * @param memoryId - The memory whose relations to fetch.
+   * @returns Active relations where the memory is the subject or the object.
+   */
+  async getRelations(memoryId: string): Promise<MemoryRelation[]> {
+    return this.relationStore.getForMemory(memoryId);
   }
 
   // ─── Deprecate ──────────────────────────────────────────────────────────

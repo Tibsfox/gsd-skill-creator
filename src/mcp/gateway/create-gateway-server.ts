@@ -109,8 +109,8 @@ export interface GatewayFactoryOptions {
  * - Agent tools (agent.spawn, agent.status, agent.logs)
  * - Workflow tools (workflow.research, workflow.requirements, workflow.plan, workflow.execute)
  * - Session tools (session.query, session.patterns)
- * - Memory tools (memory.query/store/recall/relate/deprecate/wakeup/stats/
- *   search_conversations) -- only when options.memoryService is provided
+ * - Memory tools (memory.query/store/recall/relate/get_relations/deprecate/
+ *   wakeup/stats/search_conversations) -- only when options.memoryService is provided
  * - Resource providers (project config, skill registry, agent telemetry, chipset state)
  * - Prompt templates (added by Plan 298-02)
  *

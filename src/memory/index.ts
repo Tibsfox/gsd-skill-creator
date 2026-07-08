@@ -34,6 +34,7 @@ export type { MemoryServiceConfig, Lod300Config } from './service.js';
 export { RamCache, ramCache } from './ram-cache.js';
 export { IndexManager } from './index-manager.js';
 export { FileStore } from './file-store.js';
+export { FileRelationStore } from './relation-store.js';
 export { ArenaFileStore } from './arena-file-store.js';
 export type { ArenaFileStoreOptions } from './arena-file-store.js';
 export {
