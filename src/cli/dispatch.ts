@@ -204,6 +204,10 @@ export const REGISTRY: readonly CommandEntry[] = [
     const { ingestConversationsCommand } = await import('./commands/ingest-conversations.js');
     process.exitCode = await ingestConversationsCommand(ctx.args.slice(1));
   } },
+  { aliases: ['doctor', 'doc'], handler: async (ctx) => {
+    const { doctorCommand } = await import('./commands/doctor.js');
+    process.exitCode = await doctorCommand(ctx.args.slice(1));
+  } },
   { aliases: ['audit', 'au'], handler: (ctx) => {
     const skillName = ctx.args.filter((a) => !a.startsWith('-'))[1];
     return auditCommand(skillName, {});

@@ -335,6 +335,40 @@ export class PgStore implements MemoryStore {
   }
 
   /**
+   * Read-only conversation-embedding statistics for diagnostics (the `doctor`
+   * command's Postgres check). Tolerates a fresh DB where conversation_turns
+   * does not exist yet (autoMigrate off) — returns zeros rather than throwing,
+   * so a health check never mutates schema or crashes.
+   */
+  async getConversationEmbeddingStats(): Promise<{
+    totalTurns: number;
+    embeddedTurns: number;
+    byMethod: Record<string, number>;
+  }> {
+    if (!(await this.ensureReady())) return { totalTurns: 0, embeddedTurns: 0, byMethod: {} };
+    try {
+      const { rows } = await this.pool.query(
+        `SELECT COALESCE(embedding_method, 'none') AS method,
+                count(*)::int AS n,
+                count(embedding)::int AS embedded
+           FROM gsd_memory.conversation_turns
+          GROUP BY COALESCE(embedding_method, 'none')`,
+      );
+      const byMethod: Record<string, number> = {};
+      let totalTurns = 0;
+      let embeddedTurns = 0;
+      for (const r of rows as Array<{ method: string; n: number; embedded: number }>) {
+        byMethod[r.method] = r.n;
+        totalTurns += r.n;
+        embeddedTurns += r.embedded;
+      }
+      return { totalTurns, embeddedTurns, byMethod };
+    } catch {
+      return { totalTurns: 0, embeddedTurns: 0, byMethod: {} };
+    }
+  }
+
+  /**
    * Initialize the connection pool and apply migrations.
    *
    * A connection failure (pg module missing, DB unreachable) degrades

@@ -37,6 +37,7 @@ Commands:
   advise-parallelization, ap  Analyze plan dependencies for parallel execution
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
+  doctor, doc       One-pass environment health check (node, embeddings, PG, budget, hooks) (--json)
   suggest, sg       Analyze patterns and review skill suggestions
   suggestions, sgs  List/manage skill suggestions
   feedback, fb      View feedback for skills
