@@ -18,6 +18,19 @@ const COMMON_COMMANDS = new Set([
   'curl', 'wget', 'ssh', 'scp',
 ]);
 
+// Generic entry points, manifests, lockfiles: edited constantly but never map
+// to a reusable skill, so they'd only add suggestion noise as file candidates.
+const NOISY_FILE_BASENAMES = new Set([
+  'index.ts', 'index.js', 'index.tsx', 'index.jsx', 'index.mjs',
+  'main.ts', 'main.js', 'mod.ts', 'mod.rs',
+  'package.json', 'package-lock.json', 'pnpm-lock.yaml', 'yarn.lock', 'bun.lockb',
+  'tsconfig.json', 'readme.md', 'cargo.toml', 'cargo.lock',
+]);
+
+// Cap on file candidates emitted per analysis, so a repo with many hot files
+// can't crowd out the higher-signal command/tool suggestions. (LEARN-9)
+const MAX_FILE_CANDIDATES = 3;
+
 export class PatternAnalyzer {
   private config: DetectionConfig;
 
@@ -205,10 +218,36 @@ export class PatternAnalyzer {
       }
     }
 
+    // Process files (frequently-touched, non-noisy). File candidates are the
+    // lowest-signal source, so they're noise-filtered and capped separately
+    // before joining the general pool. (LEARN-9)
+    const fileCandidates: SkillCandidate[] = [];
+    for (const [file, count] of freq.files) {
+      if (count >= this.config.threshold && !this.isNoisyFile(file)) {
+        const key = `file:${file}`;
+        fileCandidates.push(this.createCandidate('file', file, count, key, freq, now, recencyMs));
+      }
+    }
+    const cappedFileCandidates = fileCandidates
+      .sort((a, b) => b.occurrences - a.occurrences)
+      .slice(0, MAX_FILE_CANDIDATES);
+    candidates.push(...cappedFileCandidates);
+
     // Sort by confidence (descending) and limit
     return candidates
       .sort((a, b) => b.confidence - a.confidence)
       .slice(0, this.config.maxSuggestions);
+  }
+
+  /**
+   * Whether a file path is too generic to suggest as a skill. Entry points,
+   * manifests, lockfiles, and dotfiles are edited constantly but never map to
+   * a reusable skill, so emitting them would only add suggestion noise.
+   */
+  private isNoisyFile(file: string): boolean {
+    const base = (file.split(/[\\/]/).pop() ?? file).toLowerCase();
+    if (base.startsWith('.')) return true; // dotfiles: .env, .gitignore, ...
+    return NOISY_FILE_BASENAMES.has(base);
   }
 
   /**

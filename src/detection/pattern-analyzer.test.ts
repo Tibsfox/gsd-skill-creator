@@ -83,6 +83,50 @@ describe('PatternAnalyzer', () => {
       expect(prisma!.evidence.coOccurringTools).not.toContain('Playwright');
     });
 
+    it('emits a candidate for a frequently-touched non-noisy file (LEARN-9)', () => {
+      const analyzer = new PatternAnalyzer({ threshold: 3 });
+      const sessions = [
+        createSession({ topFiles: ['src/auth/login.ts'] }),
+        createSession({ topFiles: ['src/auth/login.ts'] }),
+        createSession({ topFiles: ['src/auth/login.ts'] }),
+      ];
+      const candidates = analyzer.analyzeFromSessions(sessions);
+      const fileCandidate = candidates.find(
+        c => c.type === 'file' && c.pattern === 'src/auth/login.ts',
+      );
+      expect(fileCandidate).toBeDefined();
+      expect(fileCandidate!.occurrences).toBe(3);
+    });
+
+    it('filters out noisy generic files: entry points, manifests, dotfiles (LEARN-9)', () => {
+      const analyzer = new PatternAnalyzer({ threshold: 3 });
+      const sessions = Array.from({ length: 4 }, () =>
+        createSession({
+          topFiles: ['src/index.ts', 'package.json', '.gitignore', 'src/real/feature.ts'],
+        }),
+      );
+      const patterns = analyzer
+        .analyzeFromSessions(sessions)
+        .filter(c => c.type === 'file')
+        .map(c => c.pattern);
+
+      expect(patterns).toContain('src/real/feature.ts');
+      expect(patterns).not.toContain('src/index.ts');
+      expect(patterns).not.toContain('package.json');
+      expect(patterns).not.toContain('.gitignore');
+    });
+
+    it('caps file candidates to avoid suggestion spam (LEARN-9)', () => {
+      const analyzer = new PatternAnalyzer({ threshold: 3, maxSuggestions: 100 });
+      const files = Array.from({ length: 10 }, (_, i) => `src/mod/file-${i}.ts`);
+      const sessions = Array.from({ length: 4 }, () => createSession({ topFiles: files }));
+
+      const fileCandidates = analyzer
+        .analyzeFromSessions(sessions)
+        .filter(c => c.type === 'file');
+      expect(fileCandidates.length).toBeLessThanOrEqual(3);
+    });
+
     it('should filter common commands', () => {
       const analyzer = new PatternAnalyzer({ threshold: 2 });
 
