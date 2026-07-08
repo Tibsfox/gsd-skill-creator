@@ -57,14 +57,11 @@ export {
 
 // Project tools
 export {
-  type GatewayToolsConfig,
   type ProjectToolsConfig,
   type ProjectSummary,
   type ProjectDetails,
   type CreateProjectResult,
   type ExecutePhaseResult,
-  registerAllTools,
-  createGatewayServerFactory,
   discoverProjects,
   getProjectDetails,
   createProject,
