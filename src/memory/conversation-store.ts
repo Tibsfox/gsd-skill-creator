@@ -12,14 +12,14 @@
  * logs manually — slow, unstructured, and context-window expensive.
  * This store indexes conversation data for fast retrieval.
  *
- * Storage locations (all gitignored):
- *   .local/conversations/         — session index + per-session chunk files
- *   .local/conversations/index.db — session index (JSON, not a SQL database)
- *   .local/conversations/chunks/  — verbatim conversation turns, one .jsonl per session
+ * Storage layout (under the configured storePath, which MUST be gitignored; the
+ * gateway defaults it to .claude/conversations):
+ *   <storePath>/sessions.json     — session index (JSON, not a SQL database)
+ *   <storePath>/chunks/<id>.jsonl — verbatim conversation turns, one file per session
  *
- * The store supports two retrieval modes:
- *   1. Keyword/FTS search — fast text search across all sessions
- *   2. Semantic search — via local Chroma collection (private, separate from public)
+ * Retrieval: keyword search across all sessions (in-memory index + on-disk scan).
+ * Semantic/vector search over conversation history is NOT implemented here — it
+ * lives separately in the PgStore conversation tables (opt-in LOD-400, --pg).
  *
  * HARD RULES:
  *   - NEVER synced to external databases
@@ -110,7 +110,8 @@ export interface ConversationSearchResult {
 
 /** Configuration for the conversation store. */
 export interface ConversationStoreConfig {
-  /** Root directory for conversation storage. Default: .local/conversations/ */
+  /** Root directory for conversation storage. MUST be gitignored (the gateway
+   *  defaults it to .claude/conversations). */
   storePath: string;
 
   /** Maximum turns to keep per session before archiving. Default: unlimited. */

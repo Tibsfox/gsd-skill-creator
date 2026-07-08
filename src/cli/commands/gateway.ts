@@ -16,6 +16,7 @@ import { resolve, join } from 'node:path';
 import { startGateway, type GatewayHandle } from '../../mcp/gateway/server.js';
 import { createGsdGatewayFactory } from '../../mcp/gateway/create-gateway-server.js';
 import { MemoryService } from '../../memory/service.js';
+import { ConversationStore } from '../../memory/conversation-store.js';
 import { loadPgEnv } from '../../scribe/pg-runtime/env-loader.js';
 import {
   DEFAULT_GATEWAY_PORT,
@@ -58,6 +59,11 @@ export async function gatewayCommand(args: string[]): Promise<number> {
   const memoryDir = resolve(
     readFlag(args, '--memory-dir') ?? join(process.cwd(), '.claude', 'memory'),
   );
+  // Conversation history lives outside the (committed) memory FileStore dir: it
+  // is always-private and must stay gitignored. Defaults to .claude/conversations.
+  const conversationsDir = resolve(
+    readFlag(args, '--conversations-dir') ?? join(process.cwd(), '.claude', 'conversations'),
+  );
 
   // --pg enables the LOD-400 PostgreSQL tier, resolving RH_POSTGRES_URL from
   // process.env or the repo .env. Absent a URL, warn and continue without it.
@@ -77,7 +83,16 @@ export async function gatewayCommand(args: string[]): Promise<number> {
     ? new MemoryService({ memoryDir, indexPath: 'MEMORY.md', pgConnectionString })
     : undefined;
 
-  const factory = createGsdGatewayFactory({ memoryService });
+  // Wire the always-on, no-DB conversation store so memory.search_conversations
+  // performs real keyword search over JSONL instead of returning "not configured".
+  // Mirrors the FileStore pattern: no LoaderContext in the default runtime
+  // (ensureAllowed is a no-op without one). Only meaningful alongside the memory
+  // tools, which are registered only when memoryService is present.
+  const conversationStore = memoryEnabled
+    ? new ConversationStore({ storePath: conversationsDir })
+    : undefined;
+
+  const factory = createGsdGatewayFactory({ memoryService, conversationStore });
 
   let handle: GatewayHandle;
   try {
@@ -100,6 +115,9 @@ export async function gatewayCommand(args: string[]): Promise<number> {
         : 'off'
     }`,
   );
+  if (conversationStore) {
+    console.error(`[gateway] conversation search: on (ConversationStore at ${conversationsDir})`);
+  }
   console.error('[gateway] press Ctrl+C to stop');
 
   // Keep the process alive until an interrupt/terminate signal, then shut the
@@ -138,6 +156,7 @@ Options:
   --host <addr>       Host to bind (default ${DEFAULT_GATEWAY_HOST})
   --token <path>      Bearer token file (default ${DEFAULT_TOKEN_PATH})
   --memory-dir <dir>  Memory FileStore directory (default <cwd>/.claude/memory)
+  --conversations-dir <dir>  Conversation history directory (default <cwd>/.claude/conversations)
   --no-memory         Disable the memory.* tools
   --pg                Enable the LOD-400 PostgreSQL tier (uses RH_POSTGRES_URL)
   --json              Return JSON responses instead of SSE streams
