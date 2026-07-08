@@ -6,16 +6,16 @@
  * LOD tier. Different record shape, different lifecycle, different consumers.
  *
  * VISIBILITY: ALWAYS PRIVATE. This data never leaves the local machine.
- * Storage: .gitignored local files + local SQLite/PostgreSQL.
+ * Storage: .gitignored local JSONL + JSON files (no database dependency).
  *
  * Problem solved: Currently, resuming context requires scanning .jsonl session
  * logs manually — slow, unstructured, and context-window expensive.
  * This store indexes conversation data for fast retrieval.
  *
  * Storage locations (all gitignored):
- *   .local/conversations/         — SQLite database + conversation chunks
- *   .local/conversations/index.db — Full-text search index (FTS5)
- *   .local/conversations/chunks/  — Verbatim conversation chunks as files
+ *   .local/conversations/         — session index + per-session chunk files
+ *   .local/conversations/index.db — session index (JSON, not a SQL database)
+ *   .local/conversations/chunks/  — verbatim conversation turns, one .jsonl per session
  *
  * The store supports two retrieval modes:
  *   1. Keyword/FTS search — fast text search across all sessions

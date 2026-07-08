@@ -82,9 +82,9 @@ Skills with `references/` directories (gsd-workflow, skill-integration) keep the
 
 Hooks are deterministic -- they execute at specific lifecycle points regardless of what Claude judges relevant. This is the key difference from CLAUDE.md instructions.
 
-- **SessionStart** (`session-state.sh`): Outputs project state from STATE.md at the beginning of every session. Runs in under 1 second.
-- **PreToolUse** (`validate-commit.sh`): Intercepts `git commit` Bash commands and validates the message follows Conventional Commits format. Blocks non-conforming commits with exit code 2.
-- **PostToolUse** (`phase-boundary-check.sh`): Fires after any Write to `.planning/` files, reminding about phase transitions and skill triggers.
+- **SessionStart** (`session-state.cjs`): Outputs project state from STATE.md at the beginning of every session. Runs in under 1 second.
+- **PreToolUse** (`validate-commit.cjs`): Intercepts `git commit` Bash commands and validates the message follows Conventional Commits format. Blocks non-conforming commits with exit code 2.
+- **PostToolUse** (`phase-boundary-check.cjs`): Fires after any Write to `.planning/` files, reminding about phase transitions and skill triggers.
 
 Hook configuration lives in `.claude/settings.json`. The `project-claude/settings-hooks.json` file defines the hook registrations that get merged during install.
 

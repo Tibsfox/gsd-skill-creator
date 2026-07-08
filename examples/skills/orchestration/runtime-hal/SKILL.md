@@ -60,7 +60,7 @@ type StartupStrategy = 'hook_injection' | 'startup_fallback' | 'polling';
 type GUPPStrategy = 'hook_injection' | 'prompt_preamble' | 'polling';
 ```
 
-These types are also declared in the shared Gastown type system at `src/chipset/gastown/types.ts`. The HAL consumes `AgentRole` from the same module when generating startup commands.
+Of these, only `AgentRole` is shared with the Gastown type system at `src/chipset/gastown/types.ts`, which the HAL consumes when generating startup commands. The `RuntimeProvider` / `StartupStrategy` / `GUPPStrategy` types above are illustrative design (mirroring Gastown's Go `runtime.go`), not shipped TypeScript.
 
 ## Provider Detection
 

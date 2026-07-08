@@ -19,10 +19,10 @@
  * generation. When the preloader is absent (integration point not yet wired),
  * the router documents the hook and falls through to direct generation.
  *
- * ## Model tier registry
+ * ## Model tiers
  *
- * Model tiers are expressed as names drawn from the `src/runtime-hal/` tier
- * vocabulary ('haiku', 'sonnet', 'opus'). The router never hard-codes tier
+ * Model tiers are expressed as names ('haiku', 'sonnet', 'opus') from the
+ * self-contained `ModelTier` union below. The router never hard-codes tier
  * names; callers pass the tier via `RouterConfig`.
  *
  * ## Bit-exact decomposition guarantee
@@ -43,7 +43,7 @@ import { anytimeGate, type AnytimeGateConfig, type AnytimeGateInstance, type Any
 // ─── Model tier vocabulary ───────────────────────────────────────────────────
 
 /**
- * Model tier names as used by the runtime-hal tier registry.
+ * Model tier names.
  * Haiku is the lowest tier (fastest/cheapest) → used for drafting.
  * Sonnet is the mid tier → used for verification by default.
  * Opus is the highest tier → optional verify escalation.
