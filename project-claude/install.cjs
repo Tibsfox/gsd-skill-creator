@@ -133,11 +133,24 @@ function readFileSafe(filePath) {
   }
 }
 
+// --- Path-traversal guard ---
+// The install manifest is first-party, but a malformed or hostile entry.target
+// must never let a write escape the project root. gsd-init.ts enforces the same
+// invariant (assertContained); install.cjs now matches it. See INT-2.
+function assertContained(absPath, root) {
+  const normalizedRoot = path.resolve(root) + path.sep;
+  const normalizedTarget = path.resolve(absPath);
+  if (normalizedTarget !== path.resolve(root) && !normalizedTarget.startsWith(normalizedRoot)) {
+    throw new Error(`Path traversal blocked: ${absPath} escapes ${root}`);
+  }
+}
+
 // --- Standalone file install ---
 function installStandalone(entry) {
   if (!matchesOnly(entry.target)) return;
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
 
   const sourceContent = readFileSafe(sourcePath);
   if (sourceContent === null) {
@@ -265,6 +278,7 @@ function enumerateMatches(sourceBase, sourceDirRel, pattern) {
 function installSkillDir(entry) {
   const sourceBase = path.join(sourceDir, entry.source);
   const targetBase = path.join(projectRoot, entry.target);
+  assertContained(targetBase, projectRoot);
 
   if (!fs.existsSync(sourceBase)) {
     warn(`Skill source directory missing: ${entry.source}`);
@@ -283,6 +297,7 @@ function installSkillDir(entry) {
     if (!matchesOnly(fileTarget)) continue;
     const sourcePath = path.join(sourceBase, relFile);
     const targetPath = path.join(targetBase, relFile);
+    assertContained(targetPath, projectRoot);
 
     const sourceContent = readFileSafe(sourcePath);
     if (sourceContent === null) {
@@ -346,6 +361,7 @@ function walkDirRel(baseDir, relBase = '') {
 function installCartridgeDir(entry) {
   const sourceBase = path.join(sourceDir, entry.source);
   const targetBase = path.join(projectRoot, entry.target);
+  assertContained(targetBase, projectRoot);
 
   if (!fs.existsSync(sourceBase)) {
     warn(`Cartridge source directory missing: ${entry.source}`);
@@ -360,6 +376,7 @@ function installCartridgeDir(entry) {
     if (!matchesOnly(fileTarget)) continue;
     const sourcePath = path.join(sourceBase, rel);
     const targetPath = path.join(targetBase, rel);
+    assertContained(targetPath, projectRoot);
     const sourceContent = readFileSafe(sourcePath);
     if (sourceContent === null) {
       warn(`Cartridge file unreadable: ${entry.source}/${rel}`);
@@ -397,6 +414,7 @@ function installHookScript(entry) {
   if (!matchesOnly(entry.target)) return;
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
 
   const sourceContent = readFileSafe(sourcePath);
   if (sourceContent === null) {
@@ -437,6 +455,7 @@ function installHookScript(entry) {
 function installClaudeMd(entry) {
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
   const legacyThreshold = entry.legacyThreshold || 100;
 
   const sourceContent = readFileSafe(sourcePath);
@@ -496,6 +515,7 @@ function installClaudeMd(entry) {
 function installExtension(entry) {
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
   const marker = entry.marker;
 
   const fragmentContent = readFileSafe(sourcePath);
@@ -567,6 +587,7 @@ function installExtension(entry) {
 function installSettings(entry) {
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
+  assertContained(targetPath, projectRoot);
 
   const sourceContent = readFileSafe(sourcePath);
   if (sourceContent === null) {
@@ -1289,4 +1310,10 @@ function main() {
   }
 }
 
-main();
+// Run when invoked as a script (bin / `node install.cjs` / spawned by gsd-init).
+// Guarded so the module can be `require`d in tests without triggering an install.
+if (require.main === module) {
+  main();
+}
+
+module.exports = { assertContained };
