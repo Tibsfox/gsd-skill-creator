@@ -9,6 +9,12 @@ import { CorrectionQuarantineStore } from '../../learning/correction-quarantine.
 import { SkillStore } from '../../storage/skill-store.js';
 import { FileLock } from '../../safety/file-lock.js';
 import { DEFAULT_BOUNDED_CONFIG } from '../../types/learning.js';
+import type { CorrectionCandidate } from '../../types/learning.js';
+import {
+  classifySignal,
+  consolidate,
+  type CapturedSignal,
+} from '../../experience-compression/experience-router.js';
 
 /** Read a `--name=value` flag from an argv slice. */
 function flagValue(args: string[], name: string): string | undefined {
@@ -29,6 +35,21 @@ async function resolveText(args: string[], base: string): Promise<string | undef
   if (file === undefined) return undefined;
   if (file === '-') return readFileSync(0, 'utf-8');
   return readFile(file, 'utf-8');
+}
+
+/**
+ * Reduce a quarantine candidate to a routable CapturedSignal for the
+ * experience-level router. A single candidate is a one-off (occurrences 1) —
+ * it routes to episodic memory; density is discovered by `consolidate`, which
+ * groups candidates by their file path.
+ */
+function candidateToSignal(c: CorrectionCandidate): CapturedSignal {
+  return {
+    id: c.id,
+    payload: { original: c.original, corrected: c.corrected, signal: c.signal },
+    groupKey: c.filePath,
+    occurrences: 1,
+  };
 }
 
 export async function feedbackCommand(
@@ -160,6 +181,12 @@ export async function feedbackCommand(
     case 'q':
       return quarantineSubcommand(args, skillsDir, patternsDir, feedbackStore);
 
+    case 'classify':
+      return classifySubcommand(args, patternsDir);
+
+    case 'consolidate':
+      return consolidateSubcommand(args, patternsDir);
+
     case 'stats':
     case undefined: {
       const count = await feedbackStore.count();
@@ -183,8 +210,94 @@ export async function feedbackCommand(
       p.log.message('  feedback list <skill>     List feedback for a skill');
       p.log.message('  feedback record --skill=<name> --original=<file|-> --corrected=<file|->');
       p.log.message('  feedback quarantine [list|triage|show <id>|accept <id> [--skill]|dismiss <id>]');
+      p.log.message('  feedback classify [<id>]   Route pending candidate(s) along the episodic→procedural→declarative axis');
+      p.log.message('  feedback consolidate       Advise density-gated upward promotion of accumulated corrections');
       return 1;
   }
+}
+
+/**
+ * `feedback classify` — surface the experience-level routing for pending
+ * correction candidates (episodic → memory, procedural → skill, declarative →
+ * College rule). ADVISORY ONLY: reads the quarantine ledger and prints; writes
+ * nothing. A single one-off correction routes to episodic memory; recurring
+ * density is surfaced by `feedback consolidate`.
+ */
+async function classifySubcommand(args: string[], patternsDir: string): Promise<number> {
+  const store = new CorrectionQuarantineStore(patternsDir);
+  const id = args[2];
+
+  if (id) {
+    const c = await store.getById(id);
+    if (!c) {
+      p.log.error(`No correction candidate with id '${id}'.`);
+      return 1;
+    }
+    const d = classifySignal(candidateToSignal(c));
+    p.log.message('');
+    p.log.message(pc.bold(`Candidate ${c.id} — ${c.filePath}`));
+    p.log.message(`  route: ${d.level} → ${d.target}  (confidence ${d.confidence.toFixed(2)})`);
+    p.log.message(pc.dim(`  ${d.rationale}`));
+    return 0;
+  }
+
+  const pending = await store.listPending();
+  if (pending.length === 0) {
+    p.log.info('No pending correction candidates to classify.');
+    return 0;
+  }
+  p.log.message('');
+  p.log.message(pc.bold('Experience-level routing (advisory):'));
+  for (const c of pending) {
+    const d = classifySignal(candidateToSignal(c));
+    p.log.message(`  ${pc.bold(c.id)} ${c.filePath}`);
+    p.log.message(pc.dim(`    → ${d.level} → ${d.target} · ${d.rationale}`));
+  }
+  p.log.message(pc.dim('  Density → promotion advice: `feedback consolidate`'));
+  return 0;
+}
+
+/**
+ * `feedback consolidate` — advise upward promotion of accumulated episodic
+ * corrections as density grows, gated by the thermodynamic ROI gate
+ * (`shouldInstall`). Candidates are grouped by file path; a group that clears
+ * the install-cost density is advised for promotion to a procedural skill
+ * candidate. ADVISORY ONLY: prints; writes nothing. Promotion stays human-gated.
+ */
+async function consolidateSubcommand(args: string[], patternsDir: string): Promise<number> {
+  const store = new CorrectionQuarantineStore(patternsDir);
+  const installCostBits = Number(flagValue(args, '--install-cost') ?? '4');
+  const pending = await store.listPending();
+  if (pending.length === 0) {
+    p.log.info('No pending correction candidates to consolidate.');
+    return 0;
+  }
+
+  const rows = consolidate(pending.map(candidateToSignal), {
+    installCostBits: Number.isFinite(installCostBits) ? installCostBits : 4,
+  }).sort((a, b) => b.occurrences - a.occurrences);
+
+  p.log.message('');
+  p.log.message(pc.bold('Consolidation advice (advisory — nothing written):'));
+  let advised = 0;
+  for (const r of rows) {
+    if (r.shouldPromote) advised++;
+    const mark = r.shouldPromote ? pc.green('promote') : pc.dim('hold');
+    p.log.message(`  [${mark}] ${r.groupKey} · density ${r.occurrences}`);
+    p.log.message(
+      pc.dim(
+        `    ${r.currentLevel}${r.promoteTo ? ` → ${r.promoteTo}` : ''} · ${r.rationale}`,
+      ),
+    );
+  }
+  p.log.message(
+    pc.dim(
+      advised > 0
+        ? `  ${advised} group(s) warrant promotion — human-gated: create a skill candidate, then \`skill-creator\` it.`
+        : '  No group has accumulated enough density to warrant promotion yet.',
+    ),
+  );
+  return 0;
 }
 
 /**
@@ -308,9 +421,10 @@ async function quarantineSubcommand(
           ? c.skillHints.map((h) => (h.ambient ? `${h.skill}?` : h.skill)).slice(0, 3).join(', ')
           : '(no hints)';
         const sim = `sim=${c.preSimilarity.toFixed(2)}`;
+        const route = classifySignal(candidateToSignal(c));
         p.log.message(`  ${pc.bold(c.id)} [${c.status}] ${c.filePath}`);
         p.log.message(
-          pc.dim(`    ${c.signal} · ${sim} · hints: ${hints} · "${c.interposingUserText.slice(0, 60)}"`),
+          pc.dim(`    ${c.signal} · ${sim} · route: ${route.level} → ${route.target} · hints: ${hints} · "${c.interposingUserText.slice(0, 60)}"`),
         );
       }
       p.log.message(pc.dim('  Promote: feedback quarantine accept <id> --skill=<name>'));
@@ -327,6 +441,10 @@ async function quarantineSubcommand(
       p.log.message(pc.bold(`Candidate ${c.id} [${c.status}]`));
       p.log.message(`  file:    ${c.filePath}`);
       p.log.message(`  signal:  ${c.signal}  (similarity ${c.preSimilarity.toFixed(2)})`);
+      {
+        const route = classifySignal(candidateToSignal(c));
+        p.log.message(`  route:   ${route.level} → ${route.target}  (${route.rationale})`);
+      }
       p.log.message(`  session: ${c.sessionId}`);
       p.log.message(`  human:   "${c.interposingUserText}"`);
       p.log.message(`  hints:   ${c.skillHints.map((h) => `${h.skill}${h.ambient ? ' (ambient)' : ''} [${h.source}]`).join(', ') || '(none)'}`);

@@ -76,6 +76,16 @@ export { compress as compressAtLevel, decompress } from './compressor.js';
 // --- Cross-level bridge (the "missing diagonal") ---
 export { bridgeLevels, forceLevel } from './cross-level-bridge.js';
 
+// --- Experience-level router (memory vs skill vs rule) ---
+export type {
+  CapturedSignal,
+  ConsolidationAdvice,
+  ConsolidationOptions,
+  RouteTarget,
+  RoutingDecision,
+} from './experience-router.js';
+export { classifySignal, consolidate, consolidateGroup } from './experience-router.js';
+
 // ---------------------------------------------------------------------------
 // Top-level API functions (thin wrappers that thread the feature flag)
 // ---------------------------------------------------------------------------
