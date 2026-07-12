@@ -437,6 +437,7 @@ async function handleDistill(
       `  gate: ${artifact.gate.ok ? 'OK' : 'BLOCKED'} (${artifact.gate.warnings.length} warning(s))` +
         `  validation: ${artifact.validation.valid ? 'OK' : 'FAIL'}`,
     );
+    io.stdout(`  roi (advisory): ${artifact.roiAdvisory.reason}`);
     for (const b of artifact.gate.blockers) io.stdout(`  blocker: ${b}`);
     for (const e of artifact.validation.errors) io.stdout(`  error: ${e}`);
     for (const n of artifact.notes) io.stdout(`  note: ${n}`);

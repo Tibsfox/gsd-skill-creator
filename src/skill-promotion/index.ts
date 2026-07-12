@@ -23,3 +23,18 @@ export { LANDAUER_FLOOR_JPB } from './types.js';
 
 // ─── ROI gate ─────────────────────────────────────────────────────────────────
 export { computeROI, shouldInstall } from './promotion-roi.js';
+
+// ─── Telemetry-driven advisory ROI verdict ──────────────────────────────────────
+export {
+  advisoryRoiVerdict,
+  deriveCandidateFromSignal,
+  formatRoiAdvisory,
+  signalFromPatternEntry,
+  signalFromRankedCandidate,
+} from './telemetry-roi.js';
+export type {
+  RoiAdvisory,
+  RoiAdvisoryConfig,
+  RoiRecommendation,
+  TelemetryUsageSignal,
+} from './telemetry-roi.js';

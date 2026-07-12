@@ -28,6 +28,12 @@ import type { Cartridge, ContentChipset, ResearchOutputCartridge } from './types
 import { validateCartridge, validateResearchOutputCartridge } from './validator.js';
 import { gateSkillContent } from '../validation/skill-content-gate.js';
 import { runCritiqueLoop } from '../critique/loop.js';
+import {
+  advisoryRoiVerdict,
+  type RoiAdvisory,
+  type RoiAdvisoryConfig,
+  type TelemetryUsageSignal,
+} from '../skill-promotion/telemetry-roi.js';
 import type {
   CritiqueFinding,
   CritiqueStage,
@@ -436,6 +442,16 @@ export interface DistillPipelineDeps {
   hashBody?: (body: string) => string;
   now?: () => number;
   enricher?: DistillEnricher;
+  /**
+   * Telemetry-derived usage signal for the ADVISORY ROI verdict. When supplied
+   * (e.g. from a prior cartridge's usage), it drives value/cost; otherwise the
+   * pipeline falls back to a signal projected from the artifact's own
+   * cross-source support. The verdict is advisory — it never changes
+   * `validation.valid`.
+   */
+  roiSignal?: TelemetryUsageSignal;
+  /** Unit-scale overrides for the advisory ROI verdict. */
+  roiConfig?: RoiAdvisoryConfig;
 }
 
 export interface DistilledArtifact {
@@ -447,6 +463,12 @@ export interface DistilledArtifact {
   gate: { ok: boolean; blockers: string[]; warnings: string[] };
   critique: { status: CritiqueStatus; iterations: number };
   validation: { valid: boolean; errors: string[]; researchValid: boolean };
+  /**
+   * Advisory ROI verdict: does the minted artifact pay for its tokens? Derived
+   * from telemetry (or projected from cross-source support). ADVISORY only —
+   * never gates `validation.valid`.
+   */
+  roiAdvisory: RoiAdvisory;
 }
 
 /**
@@ -499,6 +521,10 @@ export async function distillAndValidate(
   const researchOutput = buildResearchOutput(cartridge, sources);
   const researchValidation = validateResearchOutputCartridge(researchOutput);
 
+  // --- Advisory ROI verdict (never gates validity) ---
+  const roiSignal = deps.roiSignal ?? crossSourceSupportSignal(clusters, sources.length);
+  const roiAdvisory = advisoryRoiVerdict(cartridge.id, roiSignal, deps.roiConfig);
+
   return {
     cartridge,
     researchOutput,
@@ -511,6 +537,29 @@ export async function distillAndValidate(
       errors: contentValidation.errors.map((e) => `${e.path}: ${e.message}`),
       researchValid: researchValidation.valid,
     },
+    roiAdvisory,
+  };
+}
+
+/**
+ * Project a usage signal from the artifact's own cross-source support when no
+ * telemetry is available (a freshly minted cartridge has no usage history):
+ * concepts backed by more distinct sources read as higher-value, and the
+ * concept count stands in for demonstrated demand.
+ */
+function crossSourceSupportSignal(
+  clusters: DistillCluster[],
+  totalSources: number,
+): TelemetryUsageSignal {
+  const avgCoverage =
+    clusters.length > 0
+      ? clusters.reduce((sum, c) => sum + c.sourceIds.length, 0) / clusters.length
+      : 0;
+  return {
+    sessionCount: clusters.length,
+    loadRate: 1,
+    avgScore: totalSources > 0 ? avgCoverage / totalSources : 0,
+    projectCount: totalSources,
   };
 }
 

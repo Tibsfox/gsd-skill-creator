@@ -9,6 +9,11 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import type { RankedCandidate } from './pattern-scorer.js';
+import {
+  advisoryRoiVerdict,
+  signalFromRankedCandidate,
+  type RoiAdvisory,
+} from '../skill-promotion/telemetry-roi.js';
 
 // ============================================================================
 // Type abbreviations for display
@@ -19,6 +24,21 @@ const TYPE_ABBREVIATIONS: Record<RankedCandidate['type'], string> = {
   'tool-trigram': 'tool-tri',
   'bash-pattern': 'bash',
 };
+
+const ROI_TAG: Record<RoiAdvisory['recommendation'], string> = {
+  recommend: 'roi:rec',
+  hold: 'roi:hold',
+  abstain: 'roi:—',
+};
+
+/**
+ * Advisory ROI verdict for a discovery candidate, derived from its usage
+ * evidence (sessions loaded, ranked relevance, project breadth). ADVISORY: it
+ * annotates the selection, it does not filter candidates.
+ */
+export function candidateRoiAdvisory(candidate: RankedCandidate): RoiAdvisory {
+  return advisoryRoiVerdict(candidate.suggestedName, signalFromRankedCandidate(candidate));
+}
 
 // ============================================================================
 // formatCandidateTable
@@ -55,8 +75,9 @@ export function formatCandidateTable(candidates: RankedCandidate[]): string {
     const label = c.label.padEnd(labelCol);
     const projects = pc.dim(`${c.evidence.projects.length}p`);
     const sessions = pc.dim(`${c.evidence.sessions.length}s`);
+    const roi = pc.dim(ROI_TAG[candidateRoiAdvisory(c).recommendation]);
 
-    lines.push(`  ${idx}  ${score}  ${type}  ${label}  ${projects}  ${sessions}`);
+    lines.push(`  ${idx}  ${score}  ${type}  ${label}  ${projects}  ${sessions}  ${roi}`);
   }
 
   return lines.join('\n');
@@ -91,7 +112,7 @@ export async function selectCandidates(
     options: candidates.map((c, i) => ({
       value: i,
       label: c.label,
-      hint: `score: ${c.score.toFixed(3)} | ${c.evidence.projects.length} projects`,
+      hint: `score: ${c.score.toFixed(3)} | ${c.evidence.projects.length} projects | ${ROI_TAG[candidateRoiAdvisory(c).recommendation]}`,
     })),
     required: false,
   });
