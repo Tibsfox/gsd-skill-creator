@@ -51,6 +51,7 @@ interface CollegeLoaderLike {
   loadSummary(id: string): Promise<DepartmentSummaryLike>;
   loadWing(dept: string, wing: string): Promise<WingContentLike>;
   getDepartmentPath(id: string): string;
+  populateRegistry(registry: ConceptRegistryLike): number;
 }
 
 interface DoctorReportLike {
@@ -59,8 +60,16 @@ interface DoctorReportLike {
   proposals: unknown[];
 }
 
+interface ConceptEvidenceLike {
+  id: string;
+  domain: string;
+  relationships: ReadonlyArray<{ type: string; targetId: string; description?: string }>;
+  complexPlanePosition?: { real: number; imaginary: number };
+}
+
 interface ConceptRegistryLike {
   register(concept: ConceptLike): void;
+  getAll(): ConceptEvidenceLike[];
 }
 
 interface ExplorationResultLike {
@@ -110,6 +119,10 @@ interface RosettaCoreBarrel {
   ConceptRegistry: new () => ConceptRegistryLike;
 }
 
+interface XRefEdgesBarrel {
+  ALL_XREF_EDGES: ReadonlyArray<{ from: string; to: string }>;
+}
+
 // ─── Argument parsing (pure, tested) ────────────────────────────────────────
 
 export interface ParsedCollegeArgs {
@@ -118,6 +131,7 @@ export interface ParsedCollegeArgs {
   to?: string;
   topic?: string;
   wings?: string;
+  dept?: string;
   json: boolean;
   help: boolean;
 }
@@ -132,6 +146,7 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
   let to: string | undefined;
   let topic: string | undefined;
   let wings: string | undefined;
+  let dept: string | undefined;
   let json = false;
   let help = false;
   for (let i = 0; i < args.length; i++) {
@@ -152,11 +167,24 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
       wings = args[++i];
     } else if (a.startsWith('--wings=')) {
       wings = a.slice('--wings='.length);
+    } else if (a === '--dept') {
+      dept = args[++i];
+    } else if (a.startsWith('--dept=')) {
+      dept = a.slice('--dept='.length);
     } else if (!a.startsWith('-')) {
       positional.push(a);
     }
   }
-  return { subcommand: positional[0], positional: positional.slice(1), to, topic, wings, json, help };
+  return {
+    subcommand: positional[0],
+    positional: positional.slice(1),
+    to,
+    topic,
+    wings,
+    dept,
+    json,
+    help,
+  };
 }
 
 // ─── Formatting (pure, tested) ──────────────────────────────────────────────
@@ -204,6 +232,12 @@ async function loadRosettaCore(): Promise<RosettaCoreBarrel> {
   return (await import(
     moduleUrl('.college', 'rosetta-core', 'concept-registry')
   )) as unknown as RosettaCoreBarrel;
+}
+
+async function loadXRefEdges(): Promise<XRefEdgesBarrel> {
+  return (await import(
+    moduleUrl('.college', 'cross-references', 'dependency-graph-xrefs')
+  )) as unknown as XRefEdgesBarrel;
 }
 
 // ─── Subcommand handlers ────────────────────────────────────────────────────
@@ -399,6 +433,44 @@ async function handleDoctor(json: boolean): Promise<number> {
   }
 }
 
+async function handleXrefSuggest(dept: string | undefined, json: boolean): Promise<number> {
+  try {
+    const { CollegeLoader } = await loadCollegeBarrel();
+    const { ConceptRegistry } = await loadRosettaCore();
+    const { ALL_XREF_EDGES } = await loadXRefEdges();
+    const { suggestXrefEdges, formatXrefCandidates } = await import(
+      '../../college/xref-suggester.js'
+    );
+
+    const loader = new CollegeLoader(departmentsPath());
+    const registry = new ConceptRegistry();
+    loader.populateRegistry(registry);
+
+    const concepts = registry.getAll().map((c) => ({
+      id: c.id,
+      domain: c.domain,
+      relationships: c.relationships ?? [],
+      complexPlanePosition: c.complexPlanePosition,
+    }));
+
+    const candidates = suggestXrefEdges(
+      concepts,
+      ALL_XREF_EDGES.map((e) => ({ from: e.from, to: e.to })),
+      { dept },
+    );
+
+    if (json) {
+      console.log(JSON.stringify(candidates, null, 2));
+    } else {
+      console.log(formatXrefCandidates(candidates));
+    }
+    return 0;
+  } catch (err) {
+    p.log.error(`Xref suggest failed: ${(err as Error).message}`);
+    return 1;
+  }
+}
+
 // ─── Help ───────────────────────────────────────────────────────────────────
 
 function printCollegeHelp(): void {
@@ -415,6 +487,9 @@ function printCollegeHelp(): void {
   );
   p.log.message(
     `    ${pc.cyan('college doctor [--json]')}             Audit thin/stale department coverage`,
+  );
+  p.log.message(
+    `    ${pc.cyan('college xref suggest [--dept] [--json]')} Propose new cross-dept prerequisite edges`,
   );
   p.log.message('');
   p.log.message('  Examples:');
@@ -458,6 +533,15 @@ export async function collegeCommand(args: string[]): Promise<number> {
     case 'doctor':
     case 'dr':
       return handleDoctor(parsed.json);
+    case 'xref':
+    case 'xr': {
+      const verb = parsed.positional[0];
+      if (verb && verb !== 'suggest') {
+        p.log.error(`Unknown college xref verb: ${verb} (expected 'suggest').`);
+        return 1;
+      }
+      return handleXrefSuggest(parsed.dept, parsed.json);
+    }
     default:
       p.log.error(`Unknown college subcommand: ${parsed.subcommand}`);
       printCollegeHelp();
