@@ -7,6 +7,7 @@ import { ReservedNameValidator } from '../validation/reserved-names.js';
 import { BudgetValidator, formatBudgetDisplay } from '../validation/budget-validation.js';
 import { detectArguments, detectPreprocessing, checkInjectionRisk, suggestArgumentHint } from '../validation/arguments-validation.js';
 import { ContentAnalyzer, WORD_THRESHOLD_WARNING } from '../disclosure/index.js';
+import { buildSkillSkeleton, SKILL_PRESETS, type SkillPreset } from './skill-skeletons.js';
 import type { SkillTrigger, SkillMetadata } from '../types/skill.js';
 import type { GsdSkillCreatorExtension, ForceOverrideReservedName, ForceOverrideBudget } from '../types/extensions.js';
 import type { SkillScope } from '../types/scope.js';
@@ -304,10 +305,24 @@ export async function createSkillWorkflow(
     }
   }
 
+  // Step 4.0: Body template — seed the content prompt with a scaffold so the
+  // author edits a structured skeleton instead of starting from a blank field.
+  const preset = await p.select({
+    message: 'Start the body from a template:',
+    options: SKILL_PRESETS.map((s) => ({ value: s.value, label: s.label, hint: s.hint })),
+    initialValue: 'workflow-guide' as SkillPreset,
+  });
+  const skeleton = buildSkillSkeleton(
+    p.isCancel(preset) ? 'blank' : (preset as SkillPreset),
+    name,
+    description,
+  );
+
   // Step 4: Content
   const content = await p.text({
     message: 'Skill content (Markdown):',
     placeholder: '# Instructions\n\nDescribe what this skill does...',
+    initialValue: skeleton,
     validate: (v) => {
       if (!v) return 'Content is required';
       // SKILL-05: Warn about absolute paths
@@ -529,6 +544,9 @@ export async function createSkillWorkflow(
       p.log.message('');
     }
 
+    p.log.message(
+      pc.dim(`Next: skill-creator skill ship ${name}  (validate -> critique -> test-triggering)`),
+    );
     p.outro(`Skill "${name}" created at ${pc.cyan(targetPath)}`);
   } catch (error) {
     s.stop('Failed to create skill');
