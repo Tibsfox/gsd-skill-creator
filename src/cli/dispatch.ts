@@ -312,6 +312,10 @@ export const REGISTRY: readonly CommandEntry[] = [
     const { sourceCommand } = await import('./commands/source.js');
     process.exitCode = await sourceCommand(ctx.args.slice(1));
   } },
+  { aliases: ['research', 'rsr'], handler: async (ctx) => {
+    const { researchCommand } = await import('./commands/research.js');
+    process.exitCode = await researchCommand(ctx.args.slice(1));
+  } },
   { aliases: ['graph', 'gr'], handler: async (ctx) => {
     const { graphCommand } = await import('./commands/graph.js');
     return graphCommand(ctx.args.slice(1));
