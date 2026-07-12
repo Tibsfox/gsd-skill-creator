@@ -96,6 +96,8 @@ Commands:
   dashboard, db     Generate GSD Planning Docs Dashboard from .planning/
   college, col      Explore the .college/ departments (list, explore, translate, try)
   source, src       Inspect the unified source ledger (ledger list, show, dedup-check)
+  retro, retrospective  Generate a milestone retrospective and route action items (milestone --since)
+  dogfood, df       Route dogfood refinement proposals into staged skill drafts (promote)
   plane-status, ps  Show complex-plane health metrics (versine, exsecant, chord)
   terminal, term    Manage Wetty terminal server (start, stop, status, restart)
   project, proj     Manage GSD projects (init, list, status)
