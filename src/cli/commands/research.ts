@@ -8,8 +8,15 @@
  *
  *   research gaps [--topic <t>] [--subtopics a,b,c] [--json]
  *                 [--citations-db <path>] [--seen-ids <path>]
+ *
+ * `research verify <doc.md>` extracts atomic claims from a research draft and,
+ * for each, checks citation-backed support through the resolver cascade,
+ * printing a per-claim supported | unsupported | unresolved verdict.
+ *
+ *   research verify <doc.md> [--json]
  */
 
+import { readFileSync } from 'node:fs';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import {
@@ -17,11 +24,17 @@ import {
   buildCorpusCoverage,
   type GapReport,
 } from '../../vtm/gap-radar.js';
+import {
+  VerificationStage,
+  createDefaultResolver,
+  type ClaimSupportReport,
+} from '../../citations/verify/index.js';
 
 // ─── Argument parsing (pure, tested) ────────────────────────────────────────
 
 export interface ParsedResearchArgs {
   subcommand: string | undefined;
+  positional: string[];
   json: boolean;
   help: boolean;
   topic?: string;
@@ -77,6 +90,7 @@ export function parseResearchArgs(args: string[]): ParsedResearchArgs {
 
   return {
     subcommand: positional[0],
+    positional: positional.slice(1),
     json,
     help,
     topic,
@@ -111,7 +125,62 @@ export function formatGapReport(report: GapReport): string {
   return lines.join('\n');
 }
 
+const VERDICT_COLOR: Record<string, (s: string) => string> = {
+  supported: pc.green,
+  unresolved: pc.yellow,
+  unsupported: pc.red,
+};
+
+export function formatClaimSupportReport(report: ClaimSupportReport): string {
+  const lines: string[] = [];
+  const { total, supported, unsupported, unresolved } = report.stats;
+  lines.push(
+    `Claim support for ${report.document} ` +
+      `(${total} claims: ${supported} supported, ${unresolved} unresolved, ${unsupported} unsupported)`,
+  );
+  lines.push('');
+  for (const [i, r] of report.claims.entries()) {
+    const color = VERDICT_COLOR[r.verdict] ?? ((s: string) => s);
+    const loc = r.claim.lineNumber ? `L${r.claim.lineNumber}` : '?';
+    const snippet = r.claim.text.length > 100 ? `${r.claim.text.slice(0, 97)}...` : r.claim.text;
+    lines.push(`  ${i + 1}. [${color(r.verdict.toUpperCase())}] ${loc}  ${snippet}`);
+    lines.push(`       ${pc.dim(r.reason)}`);
+  }
+  return lines.join('\n');
+}
+
 // ─── Handlers ───────────────────────────────────────────────────────────────
+
+async function handleVerify(parsed: ParsedResearchArgs): Promise<number> {
+  const docPath = parsed.positional[0];
+  if (!docPath) {
+    p.log.error('research verify requires a document path: research verify <doc.md>');
+    return 1;
+  }
+
+  let markdown: string;
+  try {
+    markdown = readFileSync(docPath, 'utf-8');
+  } catch (err) {
+    p.log.error(`Cannot read ${docPath}: ${(err as Error).message}`);
+    return 1;
+  }
+
+  try {
+    const stage = new VerificationStage(createDefaultResolver());
+    const report = await stage.verify(markdown, docPath);
+
+    if (parsed.json) {
+      console.log(JSON.stringify(report, null, 2));
+    } else {
+      console.log(formatClaimSupportReport(report));
+    }
+    return 0;
+  } catch (err) {
+    p.log.error(`Claim verification failed: ${(err as Error).message}`);
+    return 1;
+  }
+}
 
 async function handleGaps(parsed: ParsedResearchArgs): Promise<number> {
   try {
@@ -139,7 +208,10 @@ function printResearchHelp(): void {
   p.log.message('');
   p.log.message('  Subcommands:');
   p.log.message(
-    `    ${pc.cyan('research gaps')}   Rank under-covered subtopics and re-weight domain weights`,
+    `    ${pc.cyan('research gaps')}     Rank under-covered subtopics and re-weight domain weights`,
+  );
+  p.log.message(
+    `    ${pc.cyan('research verify')}   Check citation-backed support for each claim in a draft`,
   );
   p.log.message('');
   p.log.message('  Flags:');
@@ -174,6 +246,8 @@ export async function researchCommand(args: string[]): Promise<number> {
     case 'gaps':
     case 'gap':
       return handleGaps(parsed);
+    case 'verify':
+      return handleVerify(parsed);
     default:
       p.log.error(`Unknown research subcommand: ${parsed.subcommand}`);
       printResearchHelp();
