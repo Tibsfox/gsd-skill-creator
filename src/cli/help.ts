@@ -94,6 +94,7 @@ Commands:
   config, cfg       Manage GSD configuration (validate)
   event, ev         Manage skill events (list, emit, consume, suggest, expire)
   dashboard, db     Generate GSD Planning Docs Dashboard from .planning/
+  college, col      Explore the .college/ departments (list, explore, translate, try)
   plane-status, ps  Show complex-plane health metrics (versine, exsecant, chord)
   terminal, term    Manage Wetty terminal server (start, stop, status, restart)
   project, proj     Manage GSD projects (init, list, status)
