@@ -24,6 +24,11 @@ describe('OGA-020 — SessionStart latency (WARN-only bench)', () => {
       return;
     }
     const input = JSON.stringify({ session_id: 'c1-bench', cwd: REPO_ROOT });
+    // Warmup: discard a couple of cold runs (node startup + fs caches warm) so
+    // the p50 below measures steady state, not cold-start latency.
+    for (let i = 0; i < 2; i++) {
+      execFileSync('node', [SESSION_STATE_HOOK], { input, encoding: 'utf8', timeout: 5000 });
+    }
     const samples: number[] = [];
     for (let i = 0; i < 10; i++) {
       const start = Date.now();
