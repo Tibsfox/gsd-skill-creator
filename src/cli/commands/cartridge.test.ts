@@ -277,6 +277,37 @@ teams: {}
     expect(parsed.errors).toEqual([]);
   });
 
+  it('CL-17 distill mints a validated cartridge from source files', async () => {
+    const { writeFileSync } = await import('node:fs');
+    const srcA = join(workRoot, 'note-a.md');
+    const srcB = join(workRoot, 'paper-b.md');
+    writeFileSync(
+      srcA,
+      'Neural networks learn representations from data. Gradient descent optimizes the weights over epochs.',
+      'utf8',
+    );
+    writeFileSync(
+      srcB,
+      'Gradient descent is the workhorse optimizer for neural networks. Representations improve as weights update.',
+      'utf8',
+    );
+    const io = makeIO();
+    const code = await cartridgeCommand(['distill', srcA, srcB, '--json'], io);
+    expect(code).toBe(0);
+    const artifact = JSON.parse(io.out.join('\n'));
+    expect(artifact.cartridge.chipsets[0].kind).toBe('content');
+    expect(artifact.validation.valid).toBe(true);
+    expect(artifact.gate.ok).toBe(true);
+    expect(artifact.researchOutput.kind).toBe('research-output');
+  });
+
+  it('CL-18 distill with no sources returns exit 2', async () => {
+    const io = makeIO();
+    const code = await cartridgeCommand(['distill'], io);
+    expect(code).toBe(2);
+    expect(io.err.join('\n')).toContain('distill requires');
+  });
+
   it('cartridge --help prints usage and exits 0 (smoke)', async () => {
     const io = makeIO();
     const code = await cartridgeCommand(['--help'], io);

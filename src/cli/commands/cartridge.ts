@@ -19,9 +19,14 @@
  */
 
 import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { basename, join, resolve } from 'node:path';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import { dedupCartridge } from '../../cartridge/dedup.js';
+import {
+  distillAndValidate,
+  toSafeSkillName,
+  type DistillSource,
+} from '../../cartridge/distill.js';
 import {
   departmentLegacyToUnified,
   DepartmentAdapterError,
@@ -74,6 +79,8 @@ function usageError(io: CartridgeCommandIO, message: string): number {
   io.stderr('  skill-creator cartridge fork <path> <newId> [--out <path>] [--json]');
   io.stderr('  skill-creator cartridge migrate <path> [--dry-run] [--json]');
   io.stderr('  skill-creator cartridge migrate --all <root> [--exclude <pattern>] [--dry-run] [--json]');
+  io.stderr('  skill-creator cartridge distill <sources...> [--template department]');
+  io.stderr('                                       [--id <id>] [--name <name>] [--json]');
   return 2;
 }
 
@@ -126,6 +133,8 @@ export async function cartridgeCommand(
     io.stdout('  skill-creator cartridge fork <path> <newId> [--out <path>] [--json]');
     io.stdout('  skill-creator cartridge migrate <path> [--dry-run] [--json]');
     io.stdout('  skill-creator cartridge migrate --all <root> [--exclude <pattern>] [--dry-run] [--json]');
+    io.stdout('  skill-creator cartridge distill <sources...> [--template department]');
+    io.stdout('                                       [--id <id>] [--name <name>] [--json]');
     return 0;
   }
 
@@ -149,6 +158,8 @@ export async function cartridgeCommand(
         return handleFork(rest, io);
       case 'migrate':
         return handleMigrate(rest, io);
+      case 'distill':
+        return await handleDistill(rest, io);
       default:
         return usageError(io, `unknown subcommand "${sub}"`);
     }
@@ -358,6 +369,72 @@ function handleFork(args: string[], io: CartridgeCommandIO): number {
     if (out) io.stdout(`wrote ${resolve(out)}`);
   }
   return 0;
+}
+
+// ============================================================================
+// `cartridge distill` — mint a validated cartridge from research sources
+// ============================================================================
+
+function inferSourceKind(path: string): DistillSource['kind'] {
+  const lower = path.toLowerCase();
+  if (lower.endsWith('.md') || lower.endsWith('.markdown')) return 'note';
+  if (lower.endsWith('.txt')) return 'note';
+  if (lower.startsWith('http://') || lower.startsWith('https://')) return 'url';
+  return 'note';
+}
+
+async function handleDistill(
+  args: string[],
+  io: CartridgeCommandIO,
+): Promise<number> {
+  const positional = positionalArgs(args);
+  if (positional.length === 0) {
+    return usageError(io, 'distill requires <sources...>');
+  }
+
+  const sources: DistillSource[] = positional.map((p, i) => {
+    const abs = resolve(p);
+    const content = readFileSync(abs, 'utf8');
+    const rawId = basename(abs).replace(/\.[^.]+$/, '');
+    return {
+      id: toSafeSkillName(rawId) || `source-${i}`,
+      kind: inferSourceKind(abs),
+      content,
+      metadata: { path: abs },
+    };
+  });
+
+  const template = getFlagValue(args, 'template') === 'department'
+    ? 'department'
+    : 'content';
+  const idFlag = getFlagValue(args, 'id');
+  const nameFlag = getFlagValue(args, 'name');
+  const cartridgeId = toSafeSkillName(idFlag ?? sources[0]!.id);
+  const name = nameFlag ?? cartridgeId;
+
+  const artifact = await distillAndValidate(sources, {
+    cartridgeId,
+    name,
+    template,
+  });
+
+  if (jsonMode(args)) {
+    printJson(io, artifact);
+  } else {
+    io.stdout(`distilled ${sources.length} source(s) -> ${artifact.cartridge.id}`);
+    io.stdout(
+      `  concepts: ${artifact.clusters.length}  critique: ${artifact.critique.status}`,
+    );
+    io.stdout(
+      `  gate: ${artifact.gate.ok ? 'OK' : 'BLOCKED'} (${artifact.gate.warnings.length} warning(s))` +
+        `  validation: ${artifact.validation.valid ? 'OK' : 'FAIL'}`,
+    );
+    for (const b of artifact.gate.blockers) io.stdout(`  blocker: ${b}`);
+    for (const e of artifact.validation.errors) io.stdout(`  error: ${e}`);
+    for (const n of artifact.notes) io.stdout(`  note: ${n}`);
+  }
+
+  return artifact.validation.valid ? 0 : 1;
 }
 
 // ============================================================================
