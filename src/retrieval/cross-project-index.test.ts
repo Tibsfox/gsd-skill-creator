@@ -251,6 +251,57 @@ describe('CrossProjectIndex', () => {
     });
   });
 
+  describe('searchFindings()', () => {
+    function memResult(project: string, name: string, kind: string, severity: string, score: number) {
+      return {
+        record: {
+          id: `mem-${name}`,
+          type: 'finding',
+          name,
+          description: name,
+          content: name,
+          lodCurrent: 400,
+          tags: ['intelligence-finding', `finding:${kind}`, `severity:${severity}`],
+          confidence: 0.8,
+          provenance: { scope: 'project', visibility: 'internal', project, domains: [] },
+        },
+        score,
+        sourceLod: 400,
+        tokenEstimate: 1,
+      };
+    }
+
+    it('federates mirrored findings across repos, sorted by score', async () => {
+      const recaller = {
+        query: vi.fn().mockResolvedValue([
+          memResult('repo-a', 'Dead code in a', 'dead_code', 'high', 0.5),
+          memResult('repo-b', 'Hot spot in b', 'hot_spot', 'med', 0.9),
+        ]),
+      };
+
+      const out = await index.searchFindings('code', recaller as any);
+
+      expect(recaller.query).toHaveBeenCalledWith(
+        expect.objectContaining({ text: 'code', type: 'finding' }),
+      );
+      expect(out.results).toHaveLength(2);
+      // Sorted by score descending — repo-b first.
+      expect(out.results[0].project).toBe('repo-b');
+      expect(out.results[0].kind).toBe('hot_spot');
+      expect(out.results[0].severity).toBe('med');
+      expect(out.results[1].project).toBe('repo-a');
+      // Distinct repos represented (the cross-project part).
+      expect(out.projects).toEqual(['repo-b', 'repo-a']);
+    });
+
+    it('returns empty federation when the store recalls nothing', async () => {
+      const recaller = { query: vi.fn().mockResolvedValue([]) };
+      const out = await index.searchFindings('none', recaller as any);
+      expect(out.results).toEqual([]);
+      expect(out.projects).toEqual([]);
+    });
+  });
+
   describe('getSearchDirectories()', () => {
     it('returns user + project + CLI-specified plugin dirs', () => {
       const dirs = index.getSearchDirectories({

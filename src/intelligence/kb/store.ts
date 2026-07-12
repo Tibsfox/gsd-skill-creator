@@ -1013,6 +1013,51 @@ export class KBStore implements IntelligenceKB {
     return null;
   }
 
+  /**
+   * Read a finding's cached embedding (the v4 `findings.embedding` column),
+   * or null when unset / not yet embedded. Used by FindingMemorySync to skip
+   * re-embedding an unchanged finding on a later pgvector mirror pass. Tolerates
+   * a DB predating the v4 migration (returns null rather than throwing).
+   */
+  async getFindingEmbedding(
+    projectId: ProjectId,
+    findingId: FindingId,
+  ): Promise<number[] | null> {
+    await this.ensureProjectDB(projectId);
+    const pdb = this._requireProjectDB(projectId);
+    try {
+      const row = pdb
+        .prepare('SELECT embedding FROM findings WHERE id = ?')
+        .get(findingId) as { embedding: string | null } | undefined;
+      if (!row || !row.embedding) return null;
+      const parsed = JSON.parse(row.embedding);
+      return Array.isArray(parsed) ? (parsed as number[]) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Cache a finding's embedding (JSON-encoded) in the v4 `findings.embedding`
+   * column so FindingMemorySync can reuse it. No-op if the column/finding is
+   * absent.
+   */
+  async setFindingEmbedding(
+    projectId: ProjectId,
+    findingId: FindingId,
+    embedding: number[],
+  ): Promise<void> {
+    await this.ensureProjectDB(projectId);
+    const pdb = this._requireProjectDB(projectId);
+    try {
+      pdb
+        .prepare('UPDATE findings SET embedding = ? WHERE id = ?')
+        .run(JSON.stringify(embedding), findingId);
+    } catch {
+      // Column missing (pre-v4 DB) — cache is best-effort; skip silently.
+    }
+  }
+
   async getProjectForSnapshot(
     snapshotId: SnapshotId,
   ): Promise<ProjectId | null> {

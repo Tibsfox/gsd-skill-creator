@@ -11,6 +11,42 @@ import { SkillIndex } from '../storage/skill-index.js';
 import { getSkillsBasePath } from '../types/scope.js';
 import type { SkillScope } from '../types/scope.js';
 import type { ScopedSearchResult } from './types.js';
+import type { MemoryQuery, MemoryResult } from '../memory/types.js';
+
+/**
+ * A federated intelligence finding recalled from the shared memory store,
+ * annotated with the repo it came from. This is the finding facet of
+ * cross-project federation — findings mirrored from many project KBs coexist in
+ * one memory store and are recalled together, grouped by their source repo.
+ */
+export interface FederatedFinding {
+  /** Memory record id of the mirrored finding. */
+  id: string;
+  /** Source repo/project (the cross-project join key); '(unknown)' if absent. */
+  project: string;
+  /** Finding title. */
+  title: string;
+  /** Finding kind (e.g. 'dead_code'), recovered from tags when present. */
+  kind: string;
+  /** Finding severity (high|med|low), recovered from tags when present. */
+  severity: string;
+  /** Original finding confidence (0..1). */
+  confidence: number;
+  /** Recall relevance score for the query. */
+  score: number;
+}
+
+export interface FindingFederationOutput {
+  /** Findings across all repos, highest relevance first. */
+  results: FederatedFinding[];
+  /** Distinct repos represented in the results. */
+  projects: string[];
+}
+
+/** Read surface for mirrored findings — PgStore satisfies this structurally. */
+export interface FindingRecaller {
+  query(q: MemoryQuery): Promise<MemoryResult[]>;
+}
 
 export interface CrossProjectSearchOptions {
   pluginDirs?: string[];
@@ -103,6 +139,52 @@ export class CrossProjectIndex {
         : undefined;
 
     return { results: allResults, versionDriftWarning };
+  }
+
+  /**
+   * Federate intelligence findings across repos from the shared memory store.
+   *
+   * Findings mirrored from per-project KBs (see FindingMemorySync) all live in
+   * one memory store, each tagged with its source repo via provenance.project.
+   * This recalls the type='finding' memories matching `query` and annotates each
+   * with the repo it came from — the finding analogue of the skill federation
+   * `search()` does over directories. Results span every repo represented in the
+   * store (that is the cross-project part); `projects` lists the distinct repos.
+   *
+   * @param query - Search text
+   * @param recaller - The memory store to recall from (PgStore-shaped)
+   * @param opts - Optional result cap (default 20)
+   */
+  async searchFindings(
+    query: string,
+    recaller: FindingRecaller,
+    opts?: { limit?: number },
+  ): Promise<FindingFederationOutput> {
+    const memResults = await recaller.query({
+      text: query,
+      type: 'finding',
+      limit: opts?.limit ?? 20,
+    });
+
+    const results: FederatedFinding[] = memResults.map((r) => {
+      const tags = r.record.tags ?? [];
+      const kindTag = tags.find((t) => t.startsWith('finding:'));
+      const sevTag = tags.find((t) => t.startsWith('severity:'));
+      return {
+        id: r.record.id,
+        project: r.record.provenance.project ?? '(unknown)',
+        title: r.record.name,
+        kind: kindTag ? kindTag.slice('finding:'.length) : 'unknown',
+        severity: sevTag ? sevTag.slice('severity:'.length) : 'unknown',
+        confidence: r.record.confidence,
+        score: r.score,
+      };
+    });
+
+    results.sort((a, b) => b.score - a.score);
+
+    const projects = Array.from(new Set(results.map((r) => r.project)));
+    return { results, projects };
   }
 
   /**

@@ -90,6 +90,19 @@ describe('intelligence/kb — findings round-trip', () => {
     expect(f?.confidence).toBe(0.7);
   });
 
+  it('finding embedding cache (v4) round-trips and defaults to null', async () => {
+    await store.writeFindings(snapshotId, PROJECT_ID, [makeFinding(0)]);
+
+    // Unset embedding reads back as null.
+    expect(await store.getFindingEmbedding(PROJECT_ID, 'F-test-0000' as FindingId)).toBeNull();
+
+    // Cache a vector, then read it back verbatim.
+    await store.setFindingEmbedding(PROJECT_ID, 'F-test-0000' as FindingId, [0.1, 0.2, 0.3]);
+    expect(await store.getFindingEmbedding(PROJECT_ID, 'F-test-0000' as FindingId)).toEqual([
+      0.1, 0.2, 0.3,
+    ]);
+  });
+
   it('update one finding (re-write) → list reflects update', async () => {
     await store.writeFindings(snapshotId, PROJECT_ID, [makeFinding(0)]);
     const updated = { ...makeFinding(0), severity: 'high' as const };
