@@ -16,6 +16,7 @@ import { join } from 'node:path';
 import { SnapshotManager } from '../../orchestrator/session-continuity/snapshot-manager.js';
 import { SkillPreloadSuggester } from '../../orchestrator/session-continuity/skill-preload-suggester.js';
 import { WarmStartGenerator } from '../../orchestrator/session-continuity/warm-start.js';
+import { CorrectionQuarantineStore } from '../../learning/correction-quarantine.js';
 import { HandoffGenerator } from '../../orchestrator/session-continuity/handoff-generator.js';
 import { ProjectStateReader } from '../../orchestrator/state/state-reader.js';
 
@@ -163,6 +164,19 @@ async function handleSessionRestore(args: string[]): Promise<number> {
 
     if (format === 'context') {
       console.log(formatAsMarkdown(context));
+      // item-7: read-only nudge so auto-detected correction candidates don't
+      // rot unreviewed. Best-effort — never affects warm-start success.
+      try {
+        const pending = await new CorrectionQuarantineStore(snapshotDir).countPending();
+        if (pending > 0) {
+          console.log(
+            `\n> ${pending} correction candidate(s) awaiting review — ` +
+              'run `skill-creator feedback quarantine list`.',
+          );
+        }
+      } catch {
+        // surfacing is advisory only
+      }
     } else {
       console.log(JSON.stringify(context, null, 2));
     }
