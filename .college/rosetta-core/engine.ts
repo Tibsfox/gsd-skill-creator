@@ -13,6 +13,7 @@ import type {
   RosettaConcept,
   PanelId,
   CalibrationDelta,
+  CalibrationProfile,
 } from './types.js';
 import { ConceptRegistry, ConceptNotFoundError } from './concept-registry.js';
 import { PanelRouter } from './panel-router.js';
@@ -20,6 +21,10 @@ import type { TranslationContext, PanelSelection } from './panel-router.js';
 import { ExpressionRenderer } from './expression-renderer.js';
 import type { RenderedExpression } from './expression-renderer.js';
 import type { PanelInterface } from '../panels/panel-interface.js';
+import { CalibrationEngine } from '../calibration/engine.js';
+import type { UserFeedback as CalibrationFeedback } from '../calibration/engine.js';
+import { InMemoryDeltaStore } from '../calibration/in-memory-delta-store.js';
+import { complexityModel, COMPLEXITY_DOMAIN } from '../calibration/models/pedagogy.js';
 
 // Re-export for consumers
 export { ConceptNotFoundError } from './concept-registry.js';
@@ -82,6 +87,14 @@ export interface RosettaCoreOptions {
 
   /** Map of panel instances for rendering */
   panelInstances: Map<PanelId, PanelInterface>;
+
+  /**
+   * Calibration engine that turns user feedback into persisted CalibrationDeltas.
+   * Optional -- when omitted, an in-memory engine is created. The pedagogical
+   * `complexity` model is always (re)registered so processFeedback works
+   * regardless of what the injected engine was pre-configured with.
+   */
+  calibrationEngine?: CalibrationEngine;
 }
 
 // ─── Rosetta Core Engine ──────────────────────────────────────────────────────
@@ -105,12 +118,18 @@ export class RosettaCore {
   private readonly router: PanelRouter;
   private readonly renderer: ExpressionRenderer;
   private readonly panelInstances: Map<PanelId, PanelInterface>;
+  private readonly calibrationEngine: CalibrationEngine;
 
   constructor(options: RosettaCoreOptions) {
     this.registry = options.registry;
     this.router = options.router;
     this.renderer = options.renderer;
     this.panelInstances = options.panelInstances;
+    this.calibrationEngine =
+      options.calibrationEngine ?? new CalibrationEngine(new InMemoryDeltaStore());
+    // Guarantee the pedagogical complexity model is available regardless of how
+    // an injected engine was configured. replaceModel is idempotent.
+    this.calibrationEngine.replaceModel(complexityModel);
   }
 
   /**
@@ -206,40 +225,66 @@ export class RosettaCore {
   }
 
   /**
-   * Process user feedback on a translation.
+   * Process user feedback on a translation through the CalibrationEngine.
    *
-   * Builds a CalibrationDelta from the feedback. This is a stub --
-   * Phase 3 (Calibration Engine) will refine the adjustment logic
-   * and add persistence.
+   * The rating is mapped to the pedagogical `complexity` domain and run through
+   * the universal Observe->Compare->Adjust->Record loop, producing a real,
+   * persisted CalibrationDelta on the `complexity` parameter -- the same key
+   * ExpressionRenderer.renderCalibrated reads to select a RenderDepth. A
+   * too-complex rating steps complexity down (toward summary depth); too-simple
+   * steps it up (toward deep); helpful/wrong-panel leave it unchanged.
    *
    * @param translationId - The ID of the translation being rated
    * @param feedback - The user's feedback
-   * @returns A CalibrationDelta derived from the feedback
+   * @returns The persisted CalibrationDelta produced by the CalibrationEngine
    */
   async processFeedback(
     translationId: string,
     feedback: UserFeedback,
   ): Promise<CalibrationDelta> {
-    let complexityAdjustment = 0;
-    if (feedback.rating === 'too-complex') {
-      complexityAdjustment = -0.1;
-    } else if (feedback.rating === 'too-simple') {
-      complexityAdjustment = 0.1;
-    }
-
-    const delta: CalibrationDelta = {
-      observedResult: feedback.rating,
+    const domainFeedback: CalibrationFeedback = {
+      domain: COMPLEXITY_DOMAIN,
+      translationId,
+      observedResult: this.ratingToObserved(feedback.rating),
       expectedResult: 'helpful',
-      adjustment: { complexity: complexityAdjustment },
-      confidence: 0.5, // Stub -- Phase 3 will refine
-      domainModel: 'feedback-stub',
-      timestamp: new Date(),
+      parameters: { complexity: 0 },
     };
 
-    return delta;
+    return this.calibrationEngine.process(domainFeedback);
+  }
+
+  /**
+   * Read the accumulated pedagogical CalibrationProfile.
+   *
+   * Synthesizes every CalibrationDelta recorded through processFeedback into a
+   * profile ready to attach to a concept's `calibration` field, which
+   * translate() then feeds to renderCalibrated.
+   *
+   * @param domain - Calibration domain to read (defaults to the complexity domain)
+   * @returns The synthesized CalibrationProfile
+   */
+  async getCalibrationProfile(
+    domain: string = COMPLEXITY_DOMAIN,
+  ): Promise<CalibrationProfile> {
+    return this.calibrationEngine.getProfile('local', domain);
   }
 
   // ─── Private Helpers ────────────────────────────────────────────────────────
+
+  /**
+   * Map a translation rating to an observed-result phrase the CalibrationEngine's
+   * comparison stage classifies into an over/under/miss direction.
+   */
+  private ratingToObserved(rating: UserFeedback['rating']): string {
+    switch (rating) {
+      case 'too-complex':
+        return 'too much complexity';
+      case 'too-simple':
+        return 'too little complexity';
+      default:
+        return rating;
+    }
+  }
 
   /**
    * Extract the calibration profile from a concept, if present.

@@ -332,7 +332,6 @@ describe('RosettaCore Engine', () => {
 
       expect(delta.adjustment.complexity).toBeLessThan(0);
       expect(delta.adjustment.complexity).toBe(-0.1);
-      expect(delta.observedResult).toBe('too-complex');
       expect(delta.expectedResult).toBe('helpful');
     });
 
@@ -357,15 +356,19 @@ describe('RosettaCore Engine', () => {
       expect(delta.adjustment.complexity).toBe(0);
     });
 
-    it('returns delta with stub confidence of 0.5', async () => {
+    it('produces a real (non-stub) delta attributed to the complexity model', async () => {
       const feedback: UserFeedback = {
         translationId: 'test-translation-4',
-        rating: 'helpful',
+        rating: 'too-complex',
       };
       const delta = await engine.processFeedback('test-translation-4', feedback);
 
-      expect(delta.confidence).toBe(0.5);
-      expect(delta.domainModel).toBe('feedback-stub');
+      // The stub used a fixed 0.5 confidence + 'feedback-stub' domain. The real
+      // CalibrationEngine path attributes the delta to the pedagogy model and
+      // derives confidence from the comparison direction.
+      expect(delta.domainModel).toBe('rosetta-complexity');
+      expect(delta.domainModel).not.toBe('feedback-stub');
+      expect(delta.confidence).toBe(0.7);
     });
 
     it('returns delta with zero complexity for wrong-panel rating', async () => {
@@ -376,6 +379,75 @@ describe('RosettaCore Engine', () => {
       const delta = await engine.processFeedback('test-translation-5', feedback);
 
       expect(delta.adjustment.complexity).toBe(0);
+    });
+
+    it('persists the delta so getCalibrationProfile reflects it', async () => {
+      await engine.processFeedback('test-translation-6', {
+        translationId: 'test-translation-6',
+        rating: 'too-complex',
+      });
+      await engine.processFeedback('test-translation-7', {
+        translationId: 'test-translation-7',
+        rating: 'too-complex',
+      });
+
+      const profile = await engine.getCalibrationProfile();
+      expect(profile.domain).toBe('rosetta-complexity');
+      expect(profile.deltas.length).toBe(2);
+      expect(profile.confidenceScore).toBeGreaterThan(0.7);
+      // Most recent delta drives render depth.
+      expect(profile.deltas[profile.deltas.length - 1].adjustment.complexity).toBe(-0.1);
+    });
+  });
+
+  describe('processFeedback() -> renderCalibrated end-to-end', () => {
+    it('too-complex feedback makes translate() render at summary depth', async () => {
+      const setup = createEngine();
+      const localEngine = setup.engine;
+      const concept = setup.registry.get('exponential-decay')!;
+
+      // Baseline: no calibration -> active depth (formatted panel output).
+      const baseline = await localEngine.translate(
+        'exponential-decay',
+        makeContext({ requestedFormat: 'python' }),
+      );
+      expect(baseline.primary.content).toContain('import math');
+
+      // Feed too-complex feedback, synthesize the profile, attach to the concept.
+      await localEngine.processFeedback('t-complex', {
+        translationId: 't-complex',
+        rating: 'too-complex',
+      });
+      concept.calibration = await localEngine.getCalibrationProfile();
+
+      const calibrated = await localEngine.translate(
+        'exponential-decay',
+        makeContext({ requestedFormat: 'python' }),
+      );
+
+      // Summary depth: concept name + description, no formatted code body.
+      expect(calibrated.primary.content).toContain('Exponential Decay:');
+      expect(calibrated.primary.content).not.toContain('import math');
+    });
+
+    it('too-simple feedback makes translate() render at deep depth', async () => {
+      const setup = createEngine();
+      const localEngine = setup.engine;
+      const concept = setup.registry.get('exponential-decay')!;
+
+      await localEngine.processFeedback('t-simple', {
+        translationId: 't-simple',
+        rating: 'too-simple',
+      });
+      concept.calibration = await localEngine.getCalibrationProfile();
+
+      const calibrated = await localEngine.translate(
+        'exponential-decay',
+        makeContext({ requestedFormat: 'python' }),
+      );
+
+      // Deep depth includes pedagogical notes, absent from active/summary tiers.
+      expect(calibrated.primary.content).toContain('Pedagogical Notes:');
     });
   });
 });
