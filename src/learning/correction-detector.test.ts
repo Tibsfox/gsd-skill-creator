@@ -197,6 +197,40 @@ describe('CorrectionDetector', () => {
     expect(d.detect(entries, 'sess', '/t.jsonl')).toHaveLength(3);
   });
 
+  it('drops candidates on non-deliverable paths (.planning, node_modules, .git)', () => {
+    for (const fp of [
+      '/repo/.planning/HANDOFF-2026-07-12.md',
+      '/repo/node_modules/pkg/index.js',
+      '/repo/.git/COMMIT_EDITMSG',
+    ]) {
+      const entries = [
+        edit(fp, '', OLD, { name: 'Write' }),
+        userTurn('please rework this content, it is wrong'),
+        edit(fp, OLD, NEW, { name: 'Edit' }),
+      ];
+      expect(det().detect(entries, 'sess', '/t.jsonl')).toHaveLength(0);
+    }
+  });
+
+  it('keeps candidates on deliverable source paths', () => {
+    const entries = [
+      edit('/repo/src/foo.ts', '', OLD, { name: 'Write' }),
+      userTurn('please rework this content, it is wrong'),
+      edit('/repo/src/foo.ts', OLD, NEW, { name: 'Edit' }),
+    ];
+    expect(det().detect(entries, 'sess', '/t.jsonl')).toHaveLength(1);
+  });
+
+  it('honors an empty ignorePathSegments override (keeps .planning edits)', () => {
+    const d = new CorrectionDetector({ ignorePathSegments: [] });
+    const entries = [
+      edit('/repo/.planning/x.md', '', OLD, { name: 'Write' }),
+      userTurn('please rework this content, it is wrong'),
+      edit('/repo/.planning/x.md', OLD, NEW, { name: 'Edit' }),
+    ];
+    expect(d.detect(entries, 'sess', '/t.jsonl')).toHaveLength(1);
+  });
+
   it('reads ONLY nested content blocks, not top-level tool_use entries', () => {
     // Synthetic top-level tool_use entries (which real transcripts do NOT use
     // for Write/Edit) must yield nothing — guards the inert-detector trap.
