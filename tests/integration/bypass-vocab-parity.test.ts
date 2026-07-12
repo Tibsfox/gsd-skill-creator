@@ -110,8 +110,9 @@ const helpVocab = extractHelpLogVocab(gate);
 // vocab + not a gate_bypassed token" — i.e. `SC_PRE_TAG_GATE_BYPASS=<token>` is a no-op
 // for each. Wiring one into the CSV is a deliberate act that updates this list.
 const NON_BYPASSABLE_CORE = ['build', 'version-sequence', 'vitest', 'completeness', 'www-bundles'];
-// The two tokens v962 added to the docs (the gate already honored them).
-const V962_RECONCILED_IN = ['card-template-length', 'integration'];
+// The token v962 added to the docs (the gate already honored it). `integration`
+// was reconciled here too, but retired 2026-07-12 with the redundant step 2.8.
+const V962_RECONCILED_IN = ['card-template-length'];
 
 describe('SC_PRE_TAG_GATE_BYPASS vocabulary — parity + drift-guard (cc#29)', () => {
   it('ANTI-VACUOUS — all three parsers found a substantial, structurally-correct set', () => {
@@ -127,7 +128,6 @@ describe('SC_PRE_TAG_GATE_BYPASS vocabulary — parity + drift-guard (cc#29)', (
     for (const anchor of [
       'ci-gate',
       'state-backups',
-      'integration',
       'card-template-length',
       'stale-known-unwired',
     ]) {

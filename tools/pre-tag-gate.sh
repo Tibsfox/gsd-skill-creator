@@ -154,7 +154,6 @@
 #   2   vitest failed
 #   21  tools-suite (vitest.tools.config.mjs) failed (BLOCKER as of v1.49.913)
 #   22  tools-node-test (node --test on tools/ + scripts/ node:test files) failed (BLOCKER as of v1.49.914)
-#   28  integration project (npx vitest run --project integration) failed (BLOCKER as of v1.49.932)
 #   3   completeness gate failed
 #   4   CI-on-dev failed / pending
 #   5   www-bundles build failed
@@ -355,7 +354,7 @@ gate_required() {
 if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
   [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
-  log "[pre-tag-gate] (step names: tools-suite|tools-node-test|integration|ci-gate|depth-audit|depth-audit-mus-elc|claude-md|card-template-length|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md|stale-known-unwired|state-backups|adoption-freshness|trip-vocab|ship-review-attestation)"
+  log "[pre-tag-gate] (step names: tools-suite|tools-node-test|ci-gate|depth-audit|depth-audit-mus-elc|claude-md|card-template-length|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md|stale-known-unwired|state-backups|adoption-freshness|trip-vocab|ship-review-attestation)"
 fi
 
 # ----- step 0.5: STATE.md normalizer auto-run (v1.49.671, Lesson #10373) -----
@@ -469,28 +468,13 @@ else
   log "[pre-tag-gate] step 2.7/22: PASS"
 fi
 
-# ----- step 2.8/22: integration-project gate (v1.49.932 — closes the v1.49.931 red-CI escape) -----
-# The main `npx vitest run` (step 2) does NOT run the integration project: the
-# root vitest project EXCLUDES **/*.integration.test.ts, and the `integration`
-# project is opt-in (vitest.config.ts). CI runs it as its own step
-# (.github/workflows/ci.yml: `npx vitest run --project integration`). Before this
-# step, a red integration test passed the local gate and failed only in CI — the
-# v1.49.931 regression (a malformed BranchManifest fixture turned main red). This
-# mirrors CI exactly so the gate and CI agree on "green" (#10461
-# gate-enforce-every-runnable-surface). Bypass:
-# SC_PRE_TAG_GATE_BYPASS=integration.
-if gate_bypassed "integration" "SC_SKIP_INTEGRATION"; then
-  log "[pre-tag-gate] step 2.8/22: SKIPPED (integration)"
-else
-  log "[pre-tag-gate] step 2.8/22: integration (npx vitest run --project integration — v1.49.932)"
-  if ! npx vitest run --project integration --silent; then
-    echo "[pre-tag-gate] FAIL: integration project failed" >&2
-    echo "[pre-tag-gate]   Reproduce: npx vitest run --project integration" >&2
-    echo "[pre-tag-gate]   These are *.integration.test.ts files, NOT run by step 2's plain vitest run." >&2
-    exit 28
-  fi
-  log "[pre-tag-gate] step 2.8/22: PASS"
-fi
+# NOTE: the former step 2.8 (a dedicated `vitest run --project integration` re-run)
+# was removed 2026-07-12 as redundant — the `integration` project sits in the
+# vitest `projects` array unconditionally (vitest.config.ts), so step 2's bare
+# `npx vitest run` already executes every *.integration.test.ts (verified: a bare
+# run of src/serve-dashboard.integration.test.ts executes under the default set).
+# CI covers it the same way. The SC_PRE_TAG_GATE_BYPASS=integration /
+# SC_SKIP_INTEGRATION tokens retired with it (no in-repo consumer).
 
 log "[pre-tag-gate] step 3/22: release-notes completeness gate"
 if ! node tools/release-history/check-completeness.mjs --current --strict; then
