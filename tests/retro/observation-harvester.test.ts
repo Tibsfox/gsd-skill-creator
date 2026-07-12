@@ -4,7 +4,12 @@ import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 
-describe('observation-harvester', () => {
+/**
+ * The harvester reads the REAL observe.mjs event shape:
+ *   { t, kind, label, payload? }
+ * (Earlier it expected a phantom { type, name } and always returned empty.)
+ */
+describe('observation-harvester (observe.mjs event shape)', () => {
   let tmpDir: string;
 
   beforeEach(() => {
@@ -15,100 +20,102 @@ describe('observation-harvester', () => {
     rmSync(tmpDir, { recursive: true, force: true });
   });
 
-  it('reads JSONL lines and extracts patterns', () => {
-    const jsonlPath = join(tmpDir, 'sessions.jsonl');
-    writeFileSync(
-      jsonlPath,
-      [
-        JSON.stringify({ type: 'pattern_detected', name: 'wave-based-execution' }),
-        JSON.stringify({ type: 'pattern_detected', name: 'tdd-red-green-cycle' }),
-      ].join('\n'),
+  function write(lines: unknown[]): string {
+    const p = join(tmpDir, 'current.jsonl');
+    writeFileSync(p, lines.map((l) => JSON.stringify(l)).join('\n'));
+    return p;
+  }
+
+  it('folds friction / win / decision kinds into new_patterns', () => {
+    const p = write([
+      { t: '2026-07-12T10:00:00Z', kind: 'friction', label: 'read-before-edit', payload: { count: 3 } },
+      { t: '2026-07-12T10:05:00Z', kind: 'win', label: 'idempotent-pipeline' },
+      { t: '2026-07-12T10:10:00Z', kind: 'decision', label: 'defer-live-storage' },
+    ]);
+
+    const result = harvestObservations(p);
+
+    expect(result.new_patterns).toEqual(
+      expect.arrayContaining(['read-before-edit', 'idempotent-pipeline', 'defer-live-storage']),
     );
-
-    const result = harvestObservations(jsonlPath);
-
-    expect(result.new_patterns).toContain('wave-based-execution');
-    expect(result.new_patterns).toContain('tdd-red-green-cycle');
-    expect(result.new_patterns).toHaveLength(2);
+    expect(result.new_patterns).toHaveLength(3);
   });
 
-  it('extracts skill suggestions', () => {
-    const jsonlPath = join(tmpDir, 'sessions.jsonl');
-    writeFileSync(
-      jsonlPath,
-      [
-        JSON.stringify({ type: 'skill_suggested', name: 'auto-format-on-save' }),
-        JSON.stringify({ type: 'skill_suggested', name: 'commit-message-style' }),
-      ].join('\n'),
+  it('maps gap kind to skill_suggestions', () => {
+    const p = write([
+      { t: '2026-07-12T10:00:00Z', kind: 'gap', label: 'batch-rewrite tool' },
+      { t: '2026-07-12T10:05:00Z', kind: 'gap', label: 'retro driver' },
+    ]);
+
+    const result = harvestObservations(p);
+
+    expect(result.skill_suggestions).toEqual(
+      expect.arrayContaining(['batch-rewrite tool', 'retro driver']),
     );
-
-    const result = harvestObservations(jsonlPath);
-
-    expect(result.skill_suggestions).toContain('auto-format-on-save');
-    expect(result.skill_suggestions).toContain('commit-message-style');
     expect(result.skill_suggestions).toHaveLength(2);
   });
 
-  it('extracts promotion candidates', () => {
-    const jsonlPath = join(tmpDir, 'sessions.jsonl');
-    writeFileSync(
-      jsonlPath,
-      JSON.stringify({ type: 'promotion_candidate', name: 'lint-fix-pattern' }),
-    );
+  it('maps promotion kind to promotion_candidates', () => {
+    const p = write([{ t: '2026-07-12T10:00:00Z', kind: 'promotion', label: 'lint-fix-pattern' }]);
 
-    const result = harvestObservations(jsonlPath);
+    const result = harvestObservations(p);
 
-    expect(result.promotion_candidates).toContain('lint-fix-pattern');
-    expect(result.promotion_candidates).toHaveLength(1);
+    expect(result.promotion_candidates).toEqual(['lint-fix-pattern']);
   });
 
-  it('deduplicates entries by name', () => {
-    const jsonlPath = join(tmpDir, 'sessions.jsonl');
-    writeFileSync(
-      jsonlPath,
-      [
-        JSON.stringify({ type: 'pattern_detected', name: 'duplicate-pattern' }),
-        JSON.stringify({ type: 'pattern_detected', name: 'duplicate-pattern' }),
-        JSON.stringify({ type: 'pattern_detected', name: 'duplicate-pattern' }),
-        JSON.stringify({ type: 'pattern_detected', name: 'unique-pattern' }),
-      ].join('\n'),
-    );
+  it('ignores informational kinds (tool-use, checkpoint, tokens, correction)', () => {
+    const p = write([
+      { t: '2026-07-12T10:00:00Z', kind: 'tool-use', label: 'better-sqlite3 installed' },
+      { t: '2026-07-12T10:05:00Z', kind: 'checkpoint', label: 'phase-1 done' },
+      { t: '2026-07-12T10:10:00Z', kind: 'tokens', label: 'pass-2', payload: { total: 48200 } },
+      { t: '2026-07-12T10:15:00Z', kind: 'correction', label: 'no Co-Authored-By' },
+    ]);
 
-    const result = harvestObservations(jsonlPath);
-
-    expect(result.new_patterns).toHaveLength(2);
-    expect(result.new_patterns).toContain('duplicate-pattern');
-    expect(result.new_patterns).toContain('unique-pattern');
-  });
-
-  it('handles missing sessions.jsonl gracefully', () => {
-    const nonExistentPath = join(tmpDir, 'does-not-exist.jsonl');
-
-    const result = harvestObservations(nonExistentPath);
+    const result = harvestObservations(p);
 
     expect(result.new_patterns).toHaveLength(0);
     expect(result.skill_suggestions).toHaveLength(0);
     expect(result.promotion_candidates).toHaveLength(0);
   });
 
-  it('skips malformed JSONL lines', () => {
-    const jsonlPath = join(tmpDir, 'sessions.jsonl');
+  it('deduplicates by label', () => {
+    const p = write([
+      { t: '2026-07-12T10:00:00Z', kind: 'friction', label: 'dupe' },
+      { t: '2026-07-12T10:01:00Z', kind: 'friction', label: 'dupe' },
+      { t: '2026-07-12T10:02:00Z', kind: 'friction', label: 'unique' },
+    ]);
+
+    const result = harvestObservations(p);
+
+    expect(result.new_patterns).toHaveLength(2);
+    expect(result.new_patterns).toEqual(expect.arrayContaining(['dupe', 'unique']));
+  });
+
+  it('handles a missing log gracefully', () => {
+    const result = harvestObservations(join(tmpDir, 'nope.jsonl'));
+    expect(result.new_patterns).toHaveLength(0);
+    expect(result.skill_suggestions).toHaveLength(0);
+    expect(result.promotion_candidates).toHaveLength(0);
+  });
+
+  it('skips malformed lines and events missing kind/label', () => {
+    const p = join(tmpDir, 'current.jsonl');
     writeFileSync(
-      jsonlPath,
+      p,
       [
-        JSON.stringify({ type: 'pattern_detected', name: 'valid-pattern' }),
-        'this is not json {{{',
+        JSON.stringify({ t: '2026-07-12T10:00:00Z', kind: 'gap', label: 'valid-gap' }),
+        'not json {{{',
         '',
-        '{"broken": true',
-        JSON.stringify({ type: 'skill_suggested', name: 'valid-suggestion' }),
+        '{"kind":"gap"', // truncated
+        JSON.stringify({ kind: 'friction' }), // no label
+        JSON.stringify({ label: 'orphan' }), // no kind
+        JSON.stringify({ t: '2026-07-12T10:10:00Z', kind: 'win', label: 'valid-win' }),
       ].join('\n'),
     );
 
-    const result = harvestObservations(jsonlPath);
+    const result = harvestObservations(p);
 
-    expect(result.new_patterns).toHaveLength(1);
-    expect(result.new_patterns).toContain('valid-pattern');
-    expect(result.skill_suggestions).toHaveLength(1);
-    expect(result.skill_suggestions).toContain('valid-suggestion');
+    expect(result.skill_suggestions).toEqual(['valid-gap']);
+    expect(result.new_patterns).toEqual(['valid-win']);
   });
 });

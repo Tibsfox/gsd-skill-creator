@@ -39,3 +39,15 @@ export { generateActionItems } from './action-generator.js';
 // Observation harvester
 export { harvestObservations } from './observation-harvester.js';
 export type { ObservationSummary } from './observation-harvester.js';
+
+// Action router
+export {
+  routeActionItem,
+  routeActionItems,
+  actionItemToLessonRecord,
+} from './action-router.js';
+export type { ActionVerb, RoutedAction } from './action-router.js';
+
+// Milestone driver
+export { runRetroMilestone, summarizeRouting } from './driver.js';
+export type { RetroMilestoneInput, RetroMilestoneResult } from './driver.js';
