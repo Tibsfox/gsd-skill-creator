@@ -1,5 +1,5 @@
-use crate::services::types::*;
 use crate::services::registry::*;
+use crate::services::types::*;
 use std::collections::HashSet;
 
 #[test]
@@ -31,7 +31,10 @@ fn test_tmux_has_no_dependencies() {
 #[test]
 fn test_claude_depends_on_tmux() {
     let graph = service_graph();
-    let claude = graph.iter().find(|s| s.id == ServiceId::ClaudeCode).unwrap();
+    let claude = graph
+        .iter()
+        .find(|s| s.id == ServiceId::ClaudeCode)
+        .unwrap();
     assert_eq!(claude.depends_on, vec![ServiceId::Tmux]);
 }
 
@@ -40,8 +43,14 @@ fn test_claude_depends_on_tmux() {
 #[test]
 fn test_file_watcher_has_no_dependencies() {
     let graph = service_graph();
-    let fw = graph.iter().find(|s| s.id == ServiceId::FileWatcher).unwrap();
-    assert!(fw.depends_on.is_empty(), "FileWatcher should have no dependencies");
+    let fw = graph
+        .iter()
+        .find(|s| s.id == ServiceId::FileWatcher)
+        .unwrap();
+    assert!(
+        fw.depends_on.is_empty(),
+        "FileWatcher should have no dependencies"
+    );
 }
 
 #[test]
@@ -99,12 +108,17 @@ fn test_topological_order_dependencies_before_dependents() {
     for (idx, id) in order.iter().enumerate() {
         let def = graph.iter().find(|s| &s.id == id).unwrap();
         for dep in &def.depends_on {
-            let dep_idx = order.iter().position(|o| o == dep)
+            let dep_idx = order
+                .iter()
+                .position(|o| o == dep)
                 .expect(&format!("dependency {:?} not found in order", dep));
             assert!(
                 dep_idx < idx,
                 "{:?} (pos {}) has dependency {:?} (pos {}) which should come before it",
-                id, idx, dep, dep_idx
+                id,
+                idx,
+                dep,
+                dep_idx
             );
         }
     }
@@ -130,10 +144,6 @@ fn test_led_positions_unique() {
 fn test_service_names_non_empty() {
     let graph = service_graph();
     for svc in &graph {
-        assert!(
-            !svc.name.is_empty(),
-            "Service {:?} has empty name",
-            svc.id
-        );
+        assert!(!svc.name.is_empty(), "Service {:?} has empty name", svc.id);
     }
 }

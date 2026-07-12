@@ -499,8 +499,7 @@ fn is_leap_year(y: i64) -> bool {
 /// Check if content contains ANTHROPIC_BASE_URL pointing to a non-Anthropic domain.
 /// Returns true if the URL is suspicious (NOT anthropic.com), false if safe.
 fn check_sec_002(content: &str) -> bool {
-    let url_re =
-        Regex::new(r#"ANTHROPIC_BASE_URL\s*=\s*"?https?://([^"/\s]+)"?"#).unwrap();
+    let url_re = Regex::new(r#"ANTHROPIC_BASE_URL\s*=\s*"?https?://([^"/\s]+)"?"#).unwrap();
     if let Some(caps) = url_re.captures(content) {
         let domain = caps.get(1).map(|m| m.as_str()).unwrap_or("");
         // Allow official Anthropic domains
@@ -597,7 +596,10 @@ mod tests {
         let s = scanner();
         let findings = s.scan(&fixture_path("clean-mission-pack"));
         let verdict = s.classify(&findings);
-        assert!(findings.is_empty(), "clean content should produce zero findings");
+        assert!(
+            findings.is_empty(),
+            "clean content should produce zero findings"
+        );
         assert!(matches!(verdict, ScanVerdict::Clean));
     }
 
@@ -606,7 +608,10 @@ mod tests {
         let s = scanner();
         let findings = s.scan(&fixture_path("sec-001-hook-override"));
         assert!(!findings.is_empty(), "SEC-001 must detect hook override");
-        let f = findings.iter().find(|f| f.id == "SEC-001").expect("SEC-001 finding missing");
+        let f = findings
+            .iter()
+            .find(|f| f.id == "SEC-001")
+            .expect("SEC-001 finding missing");
         assert_eq!(f.severity, SecuritySeverity::Critical);
         assert_eq!(f.cve_reference, Some("CVE-2025-59536".to_string()));
         let verdict = s.classify(&findings);
@@ -618,7 +623,10 @@ mod tests {
         let s = scanner();
         let findings = s.scan(&fixture_path("sec-002-api-redirect"));
         assert!(!findings.is_empty(), "SEC-002 must detect API URL redirect");
-        let f = findings.iter().find(|f| f.id == "SEC-002").expect("SEC-002 finding missing");
+        let f = findings
+            .iter()
+            .find(|f| f.id == "SEC-002")
+            .expect("SEC-002 finding missing");
         assert_eq!(f.severity, SecuritySeverity::Critical);
         assert_eq!(f.cve_reference, Some("CVE-2026-21852".to_string()));
         let verdict = s.classify(&findings);
@@ -638,7 +646,10 @@ mod tests {
         let s = scanner();
         let findings = s.scan(&fixture_path("sec-005-sandbox-escape"));
         assert!(!findings.is_empty(), "SEC-005 must detect sandbox escape");
-        let f = findings.iter().find(|f| f.id == "SEC-005").expect("SEC-005 finding missing");
+        let f = findings
+            .iter()
+            .find(|f| f.id == "SEC-005")
+            .expect("SEC-005 finding missing");
         assert_eq!(f.severity, SecuritySeverity::Critical);
         let verdict = s.classify(&findings);
         assert!(matches!(verdict, ScanVerdict::Quarantine(_)));
@@ -648,8 +659,14 @@ mod tests {
     fn sec_007_detects_credential_exfiltration_curl_with_api_key() {
         let s = scanner();
         let findings = s.scan(&fixture_path("sec-007-credential-exfil"));
-        assert!(!findings.is_empty(), "SEC-007 must detect credential exfiltration");
-        let f = findings.iter().find(|f| f.id == "SEC-007").expect("SEC-007 finding missing");
+        assert!(
+            !findings.is_empty(),
+            "SEC-007 must detect credential exfiltration"
+        );
+        let f = findings
+            .iter()
+            .find(|f| f.id == "SEC-007")
+            .expect("SEC-007 finding missing");
         assert_eq!(f.severity, SecuritySeverity::Critical);
         let verdict = s.classify(&findings);
         assert!(matches!(verdict, ScanVerdict::Quarantine(_)));
@@ -661,7 +678,9 @@ mod tests {
         // The presence of any Critical finding should produce Quarantine
         let s = scanner();
         let findings = s.scan(&fixture_path("sec-001-hook-override"));
-        let has_critical = findings.iter().any(|f| f.severity == SecuritySeverity::Critical);
+        let has_critical = findings
+            .iter()
+            .any(|f| f.severity == SecuritySeverity::Critical);
         assert!(has_critical, "must have at least one critical finding");
         let verdict = s.classify(&findings);
         assert!(matches!(verdict, ScanVerdict::Quarantine(_)));
@@ -671,12 +690,23 @@ mod tests {
     fn high_only_produces_flagged_not_quarantine() {
         let s = scanner();
         let findings = s.scan(&fixture_path("sec-006-ssh-key-ref"));
-        assert!(!findings.is_empty(), "SEC-006 must detect SSH key reference");
+        assert!(
+            !findings.is_empty(),
+            "SEC-006 must detect SSH key reference"
+        );
         // SEC-006 is High severity only
-        let all_non_critical = findings.iter().all(|f| f.severity != SecuritySeverity::Critical);
-        assert!(all_non_critical, "sec-006 fixture should have no critical findings");
+        let all_non_critical = findings
+            .iter()
+            .all(|f| f.severity != SecuritySeverity::Critical);
+        assert!(
+            all_non_critical,
+            "sec-006 fixture should have no critical findings"
+        );
         let verdict = s.classify(&findings);
-        assert!(matches!(verdict, ScanVerdict::Flagged(_)), "high-only should produce Flagged");
+        assert!(
+            matches!(verdict, ScanVerdict::Flagged(_)),
+            "high-only should produce Flagged"
+        );
     }
 
     #[test]
@@ -684,7 +714,10 @@ mod tests {
         let s = scanner();
         let findings = s.scan(&fixture_path("sec-003-hook-injection"));
         assert!(!findings.is_empty(), "SEC-003 must detect hook injection");
-        let f = findings.iter().find(|f| f.id == "SEC-003").expect("SEC-003 finding missing");
+        let f = findings
+            .iter()
+            .find(|f| f.id == "SEC-003")
+            .expect("SEC-003 finding missing");
         assert_eq!(f.severity, SecuritySeverity::High);
     }
 
@@ -692,8 +725,14 @@ mod tests {
     fn sec_008_base64_obfuscation_produces_heads_up() {
         let s = scanner();
         let findings = s.scan(&fixture_path("sec-008-base64-obfuscation"));
-        assert!(!findings.is_empty(), "SEC-008 must detect base64 obfuscation");
-        let f = findings.iter().find(|f| f.id == "SEC-008").expect("SEC-008 finding missing");
+        assert!(
+            !findings.is_empty(),
+            "SEC-008 must detect base64 obfuscation"
+        );
+        let f = findings
+            .iter()
+            .find(|f| f.id == "SEC-008")
+            .expect("SEC-008 finding missing");
         assert_eq!(f.severity, SecuritySeverity::Medium);
     }
 
@@ -706,7 +745,10 @@ mod tests {
         let s = scanner();
         let report = s.scan_and_report(&fixture_path("sec-001-hook-override"), "sec-001-test");
         assert!(!report.findings.is_empty(), "report must have findings");
-        let f = report.findings.iter().find(|f| f.id == "SEC-001")
+        let f = report
+            .findings
+            .iter()
+            .find(|f| f.id == "SEC-001")
             .expect("SEC-001 finding must be in report");
         assert_eq!(f.file, ".claude/settings.json");
         assert!(f.line > 0, "line number must be positive");
@@ -719,8 +761,14 @@ mod tests {
         let s = scanner();
         let report = s.scan_and_report(&fixture_path("sec-001-hook-override"), "sec-001-test");
         let json = serde_json::to_string(&report).expect("report must serialize to JSON");
-        assert!(json.contains("actionRequired"), "JSON must have actionRequired field");
-        assert!(!report.action_required.is_empty(), "action_required must not be empty");
+        assert!(
+            json.contains("actionRequired"),
+            "JSON must have actionRequired field"
+        );
+        assert!(
+            !report.action_required.is_empty(),
+            "action_required must not be empty"
+        );
         assert_eq!(report.verdict, "quarantine");
     }
 
@@ -728,22 +776,44 @@ mod tests {
     fn mixed_high_only_produces_flagged_not_quarantine() {
         let s = scanner();
         let findings = s.scan(&fixture_path("mixed-high-only"));
-        assert!(!findings.is_empty(), "mixed-high-only must produce findings");
-        let all_non_critical = findings.iter().all(|f| f.severity != SecuritySeverity::Critical);
-        assert!(all_non_critical, "mixed-high-only must have no critical findings");
+        assert!(
+            !findings.is_empty(),
+            "mixed-high-only must produce findings"
+        );
+        let all_non_critical = findings
+            .iter()
+            .all(|f| f.severity != SecuritySeverity::Critical);
+        assert!(
+            all_non_critical,
+            "mixed-high-only must have no critical findings"
+        );
         let verdict = s.classify(&findings);
-        assert!(matches!(verdict, ScanVerdict::Flagged(_)), "high-only -> Flagged");
+        assert!(
+            matches!(verdict, ScanVerdict::Flagged(_)),
+            "high-only -> Flagged"
+        );
     }
 
     #[test]
     fn mixed_critical_plus_high_produces_quarantine() {
         let s = scanner();
         let findings = s.scan(&fixture_path("mixed-critical-plus-high"));
-        assert!(!findings.is_empty(), "mixed-critical-plus-high must produce findings");
-        let has_critical = findings.iter().any(|f| f.severity == SecuritySeverity::Critical);
-        assert!(has_critical, "mixed-critical-plus-high must have critical findings");
+        assert!(
+            !findings.is_empty(),
+            "mixed-critical-plus-high must produce findings"
+        );
+        let has_critical = findings
+            .iter()
+            .any(|f| f.severity == SecuritySeverity::Critical);
+        assert!(
+            has_critical,
+            "mixed-critical-plus-high must have critical findings"
+        );
         let verdict = s.classify(&findings);
-        assert!(matches!(verdict, ScanVerdict::Quarantine(_)), "critical+high -> Quarantine");
+        assert!(
+            matches!(verdict, ScanVerdict::Quarantine(_)),
+            "critical+high -> Quarantine"
+        );
     }
 
     #[test]
@@ -760,7 +830,10 @@ mod tests {
             assert_eq!(event.event_type, "pattern_match");
             // Verify finding_id is in the event detail
             let detail = &event.detail;
-            assert!(detail.get("finding_id").is_some(), "event detail must contain finding_id");
+            assert!(
+                detail.get("finding_id").is_some(),
+                "event detail must contain finding_id"
+            );
         }
     }
 
@@ -771,7 +844,10 @@ mod tests {
         let s = scanner();
         let findings = s.scan(&fixture_path("sec-001-hook-override"));
         let sec001 = findings.iter().find(|f| f.id == "SEC-001");
-        assert!(sec001.is_some(), "SEC-001 must detect even with varied hook structure");
+        assert!(
+            sec001.is_some(),
+            "SEC-001 must detect even with varied hook structure"
+        );
     }
 
     #[test]
@@ -780,6 +856,9 @@ mod tests {
         let findings = s.scan(&fixture_path("sec-007-credential-exfil"));
         // The fixture contains both curl and wget variants
         let sec007 = findings.iter().filter(|f| f.id == "SEC-007").count();
-        assert!(sec007 > 0, "SEC-007 must detect wget credential exfiltration variant");
+        assert!(
+            sec007 > 0,
+            "SEC-007 must detect wget credential exfiltration variant"
+        );
     }
 }

@@ -64,10 +64,8 @@ pub async fn send_chat_message(
         Ok(response) => {
             // Persist conversation history
             let conversations_dir = std::path::PathBuf::from(".planning/conversations");
-            let mut history = ConversationHistory::new(
-                cid.clone(),
-                "claude-sonnet-4-5-20250929".to_string(),
-            );
+            let mut history =
+                ConversationHistory::new(cid.clone(), "claude-sonnet-4-5-20250929".to_string());
             history.add_message(&Message {
                 role: "user".to_string(),
                 content: msg_content,

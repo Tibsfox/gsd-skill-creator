@@ -101,10 +101,12 @@ pub struct ScribeDashboardResult {
 /// file does not exist (e.g. during `tauri dev` before bundling).
 pub fn resolve_bundled_dashboard_path(app: &AppHandle) -> Option<PathBuf> {
     let resource_dir = app.path().resource_dir().ok()?;
-    let index = resource_dir
-        .join("scribe-dashboard")
-        .join("index.html");
-    if index.exists() { Some(index) } else { None }
+    let index = resource_dir.join("scribe-dashboard").join("index.html");
+    if index.exists() {
+        Some(index)
+    } else {
+        None
+    }
 }
 
 /// Tauri command — open (or focus) the SCRIBE dashboard native window.
@@ -202,7 +204,7 @@ fn resolve_dashboard_url(app: &AppHandle) -> WebviewUrl {
     // desktop/dist/scribe-dashboard/ so that it's included in frontendDist.
     if let Ok(frontend_dist) = app.path().resource_dir() {
         let candidate = frontend_dist
-            .parent()  // step up from _up one level inside the bundle
+            .parent() // step up from _up one level inside the bundle
             .map(|p| p.join("scribe-dashboard").join("index.html"));
         if candidate.as_deref().map(|p| p.exists()).unwrap_or(false) {
             return WebviewUrl::App("scribe-dashboard/index.html".into());
@@ -211,8 +213,7 @@ fn resolve_dashboard_url(app: &AppHandle) -> WebviewUrl {
 
     // Strategy 2: dev-server external URL (always works when serve.mjs is running).
     WebviewUrl::External(
-        tauri::Url::parse(DEV_SERVER_URL)
-            .expect("DEV_SERVER_URL is a valid constant URL"),
+        tauri::Url::parse(DEV_SERVER_URL).expect("DEV_SERVER_URL is a valid constant URL"),
     )
 }
 

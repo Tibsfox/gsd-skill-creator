@@ -70,21 +70,27 @@ pub struct VramContext {
 impl VramContext {
     /// Initialize a CUDA context on the given device ordinal.
     pub fn new(device_ordinal: usize) -> ArenaResult<Self> {
-        let ctx = CudaContext::new(device_ordinal)
-            .map_err(|e| ArenaError::CudaError(e.to_string()))?;
+        let ctx =
+            CudaContext::new(device_ordinal).map_err(|e| ArenaError::CudaError(e.to_string()))?;
         let stream = ctx.default_stream();
         Ok(Self { ctx, stream })
     }
 
     /// Query device metadata.
     pub fn device_info(&self) -> ArenaResult<VramDeviceInfo> {
-        let name = self.ctx.name()
+        let name = self
+            .ctx
+            .name()
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
 
-        let (free, total) = self.ctx.mem_get_info()
+        let (free, total) = self
+            .ctx
+            .mem_get_info()
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
 
-        let (major, minor) = self.ctx.compute_capability()
+        let (major, minor) = self
+            .ctx
+            .compute_capability()
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
 
         Ok(VramDeviceInfo {
@@ -111,13 +117,20 @@ impl VramContext {
         if size_bytes == 0 {
             // cudarc doesn't support zero-size allocs; allocate 1 byte
             // but track size=0 for the caller.
-            let slice: CudaSlice<u8> = self.stream.alloc_zeros(1)
+            let slice: CudaSlice<u8> = self
+                .stream
+                .alloc_zeros(1)
                 .map_err(|e| ArenaError::CudaError(e.to_string()))?;
             return Ok(VramAllocation { slice, size: 0 });
         }
-        let slice: CudaSlice<u8> = self.stream.alloc_zeros(size_bytes)
+        let slice: CudaSlice<u8> = self
+            .stream
+            .alloc_zeros(size_bytes)
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
-        Ok(VramAllocation { slice, size: size_bytes })
+        Ok(VramAllocation {
+            slice,
+            size: size_bytes,
+        })
     }
 
     // =====================================================================
@@ -136,9 +149,11 @@ impl VramContext {
                 got: host_data.len(),
             });
         }
-        self.stream.memcpy_htod(host_data, &mut alloc.slice)
+        self.stream
+            .memcpy_htod(host_data, &mut alloc.slice)
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
-        self.stream.synchronize()
+        self.stream
+            .synchronize()
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
         Ok(())
     }
@@ -155,9 +170,11 @@ impl VramContext {
                 got: host_buf.len(),
             });
         }
-        self.stream.memcpy_dtoh(&alloc.slice, host_buf)
+        self.stream
+            .memcpy_dtoh(&alloc.slice, host_buf)
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
-        self.stream.synchronize()
+        self.stream
+            .synchronize()
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
         Ok(())
     }
@@ -185,9 +202,12 @@ impl VramContext {
                 got: host_data.len(),
             });
         }
-        let async_stream = self.ctx.new_stream()
+        let async_stream = self
+            .ctx
+            .new_stream()
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
-        async_stream.memcpy_htod(host_data, &mut alloc.slice)
+        async_stream
+            .memcpy_htod(host_data, &mut alloc.slice)
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
         Ok(VramTransferHandle {
             stream: async_stream,
@@ -214,10 +234,13 @@ impl VramContext {
                 got: size,
             });
         }
-        let async_stream = self.ctx.new_stream()
+        let async_stream = self
+            .ctx
+            .new_stream()
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
         let mut buf = vec![0u8; size];
-        async_stream.memcpy_dtoh(&alloc.slice, &mut buf)
+        async_stream
+            .memcpy_dtoh(&alloc.slice, &mut buf)
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
         Ok(VramTransferHandle {
             stream: async_stream,
@@ -242,14 +265,16 @@ pub struct VramTransferHandle {
 impl VramTransferHandle {
     /// Wait for an upload transfer to complete.
     pub fn wait(self) -> ArenaResult<()> {
-        self.stream.synchronize()
+        self.stream
+            .synchronize()
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
         Ok(())
     }
 
     /// Wait for a download transfer to complete and return the bytes.
     pub fn wait_into(self) -> ArenaResult<Vec<u8>> {
-        self.stream.synchronize()
+        self.stream
+            .synchronize()
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
         Ok(self.download_buf.unwrap_or_default())
     }
@@ -399,8 +424,8 @@ impl std::fmt::Debug for PinnedBuffer {
 // VramPool
 // =========================================================================
 
-use std::collections::HashMap;
 use crate::memory_arena::types::{ChunkId, TierKind, TierPolicy};
+use std::collections::HashMap;
 
 /// A VRAM slot holding an active device allocation and its chunk id.
 struct VramSlot {
@@ -514,7 +539,10 @@ impl VramPool {
 
     /// Download chunk data from VRAM.
     pub fn get(&self, id: ChunkId) -> ArenaResult<Vec<u8>> {
-        let &slot_idx = self.directory.get(&id).ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let &slot_idx = self
+            .directory
+            .get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
         let slot = self.slots[slot_idx]
             .as_ref()
             .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
@@ -529,7 +557,9 @@ impl VramPool {
 
     /// Free a VRAM slot. The device allocation is dropped immediately.
     pub fn free(&mut self, id: ChunkId) -> ArenaResult<()> {
-        let slot_idx = self.directory.remove(&id)
+        let slot_idx = self
+            .directory
+            .remove(&id)
             .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
         self.slots[slot_idx] = None;
         Ok(())
@@ -543,7 +573,9 @@ impl VramPool {
     ///
     /// Returns `(chunk_ids, checksums)` — parallel vectors.
     pub fn verify_checksums(&self) -> ArenaResult<(Vec<ChunkId>, Vec<u32>)> {
-        let occupied: Vec<(ChunkId, usize)> = self.directory.iter()
+        let occupied: Vec<(ChunkId, usize)> = self
+            .directory
+            .iter()
             .map(|(&id, &slot_idx)| (id, slot_idx))
             .collect();
         if occupied.is_empty() {
@@ -560,7 +592,8 @@ impl VramPool {
 
         for (i, (id, slot_idx)) in occupied.iter().enumerate() {
             chunk_ids.push(*id);
-            let slot = self.slots[*slot_idx].as_ref()
+            let slot = self.slots[*slot_idx]
+                .as_ref()
                 .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
             let size = slot.alloc.size_bytes().min(chunk_size as usize);
             if size > 0 {
@@ -576,24 +609,33 @@ impl VramPool {
         self.context.upload(&host_buf, &mut input_alloc)?;
 
         // Allocate output buffer for checksums
-        let mut output_slice = self.context.stream()
+        let mut output_slice = self
+            .context
+            .stream()
             .alloc_zeros::<u32>(num_chunks as usize)
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
 
         // Load and launch kernel
-        let kernel = self.context.load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")?;
+        let kernel = self
+            .context
+            .load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")?;
         let handle = KernelHandle::from_data_len("batch_xor_checksum", num_chunks, 256);
 
         unsafe {
             self.context.launch_checksum(
-                &kernel, &handle, &input_alloc.slice, &mut output_slice,
-                chunk_size, num_chunks,
+                &kernel,
+                &handle,
+                &input_alloc.slice,
+                &mut output_slice,
+                chunk_size,
+                num_chunks,
             )?;
         }
 
         // Download checksums
         let mut checksums = vec![0u32; num_chunks as usize];
-        self.context.stream()
+        self.context
+            .stream()
             .memcpy_dtoh(&output_slice, &mut checksums)
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
 
@@ -609,9 +651,12 @@ impl VramPool {
     /// byte (`grid = ceil(len / 256)`).
     pub fn apply_kernel(&mut self, id: ChunkId, kernel: &CudaKernel) -> ArenaResult<()> {
         let ctx = self.context.clone();
-        let &slot_idx = self.directory.get(&id)
+        let &slot_idx = self
+            .directory
+            .get(&id)
             .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
-        let slot = self.slots[slot_idx].as_mut()
+        let slot = self.slots[slot_idx]
+            .as_mut()
             .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
         let len = slot.alloc.size_bytes() as u32;
         if len == 0 {
@@ -817,21 +862,33 @@ impl VramContext {
     /// an `.entry` or `.func` exported in the PTX.
     pub fn load_ptx(&self, ptx_src: &str, fn_name: &str) -> ArenaResult<CudaKernel> {
         let ptx = Ptx::from_src(ptx_src);
-        let module = self.ctx.load_module(ptx)
+        let module = self
+            .ctx
+            .load_module(ptx)
             .map_err(|e| ArenaError::CudaError(format!("load_module: {e}")))?;
-        let func = module.load_function(fn_name)
+        let func = module
+            .load_function(fn_name)
             .map_err(|e| ArenaError::CudaError(format!("load_function({fn_name}): {e}")))?;
-        Ok(CudaKernel { _module: module, func })
+        Ok(CudaKernel {
+            _module: module,
+            func,
+        })
     }
 
     /// Load a PTX module from a file path and extract a named function.
     pub fn load_ptx_file(&self, path: &std::path::Path, fn_name: &str) -> ArenaResult<CudaKernel> {
         let ptx = Ptx::from_file(path);
-        let module = self.ctx.load_module(ptx)
+        let module = self
+            .ctx
+            .load_module(ptx)
             .map_err(|e| ArenaError::CudaError(format!("load_module: {e}")))?;
-        let func = module.load_function(fn_name)
+        let func = module
+            .load_function(fn_name)
             .map_err(|e| ArenaError::CudaError(format!("load_function({fn_name}): {e}")))?;
-        Ok(CudaKernel { _module: module, func })
+        Ok(CudaKernel {
+            _module: module,
+            func,
+        })
     }
 
     /// Compile CUDA C source to PTX at runtime via NVRTC, then load the named
@@ -845,11 +902,17 @@ impl VramContext {
     pub fn compile_cuda(&self, cuda_src: &str, fn_name: &str) -> ArenaResult<CudaKernel> {
         let ptx = cudarc::nvrtc::compile_ptx(cuda_src)
             .map_err(|e| ArenaError::CudaError(format!("nvrtc compile: {e:?}")))?;
-        let module = self.ctx.load_module(ptx)
+        let module = self
+            .ctx
+            .load_module(ptx)
             .map_err(|e| ArenaError::CudaError(format!("load_module: {e}")))?;
-        let func = module.load_function(fn_name)
+        let func = module
+            .load_function(fn_name)
             .map_err(|e| ArenaError::CudaError(format!("load_function({fn_name}): {e}")))?;
-        Ok(CudaKernel { _module: module, func })
+        Ok(CudaKernel {
+            _module: module,
+            func,
+        })
     }
 
     /// Launch a checksum kernel: computes per-chunk XOR checksums on the GPU.
@@ -882,7 +945,8 @@ impl VramContext {
             .arg(&num_chunks)
             .launch(cfg)
             .map_err(|e| ArenaError::CudaError(format!("launch: {e}")))?;
-        self.stream.synchronize()
+        self.stream
+            .synchronize()
             .map_err(|e| ArenaError::CudaError(format!("synchronize: {e}")))?;
         Ok(())
     }
@@ -917,7 +981,8 @@ impl VramContext {
             .arg(&len)
             .launch(cfg)
             .map_err(|e| ArenaError::CudaError(format!("launch_inplace: {e}")))?;
-        self.stream.synchronize()
+        self.stream
+            .synchronize()
             .map_err(|e| ArenaError::CudaError(format!("synchronize: {e}")))?;
         Ok(())
     }

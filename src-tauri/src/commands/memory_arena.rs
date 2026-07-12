@@ -201,7 +201,9 @@ pub async fn arena_init(
 #[tauri::command]
 pub async fn arena_stats(state: State<'_, ArenaState>) -> Result<ArenaStatsDto, String> {
     let guard = state.handle.lock().await;
-    let handle = guard.as_ref().ok_or_else(|| "arena not initialized".to_string())?;
+    let handle = guard
+        .as_ref()
+        .ok_or_else(|| "arena not initialized".to_string())?;
     Ok(make_stats_dto(handle))
 }
 
@@ -217,11 +219,14 @@ pub async fn arena_alloc(
         .ok_or_else(|| "arena not initialized".to_string())?;
 
     let tier = tier_kind_from_str(&req.tier).map_err(|_| format!("unknown tier: {}", req.tier))?;
-    let payload = B64.decode(&req.payload_base64)
+    let payload = B64
+        .decode(&req.payload_base64)
         .map_err(|e| format!("base64 decode: {}", e))?;
 
     let id = handle.alloc(tier, payload).map_err(err_string)?;
-    Ok(AllocResponse { chunk_id: id.as_u64() })
+    Ok(AllocResponse {
+        chunk_id: id.as_u64(),
+    })
 }
 
 /// Read a chunk by id. Returns metadata + base64 payload.
@@ -231,7 +236,9 @@ pub async fn arena_get(
     state: State<'_, ArenaState>,
 ) -> Result<GetChunkResponse, String> {
     let guard = state.handle.lock().await;
-    let handle = guard.as_ref().ok_or_else(|| "arena not initialized".to_string())?;
+    let handle = guard
+        .as_ref()
+        .ok_or_else(|| "arena not initialized".to_string())?;
 
     let chunk = handle.get(ChunkId::new(chunk_id)).map_err(err_string)?;
     let header = chunk.header();
@@ -250,10 +257,7 @@ pub async fn arena_get(
 
 /// Free a chunk by id. Journaled immediately.
 #[tauri::command]
-pub async fn arena_free(
-    chunk_id: u64,
-    state: State<'_, ArenaState>,
-) -> Result<(), String> {
+pub async fn arena_free(chunk_id: u64, state: State<'_, ArenaState>) -> Result<(), String> {
     let mut guard = state.handle.lock().await;
     let handle = guard
         .as_mut()
@@ -263,10 +267,7 @@ pub async fn arena_free(
 
 /// Touch a chunk — bump access count. Not journaled (in-memory only).
 #[tauri::command]
-pub async fn arena_touch(
-    chunk_id: u64,
-    state: State<'_, ArenaState>,
-) -> Result<(), String> {
+pub async fn arena_touch(chunk_id: u64, state: State<'_, ArenaState>) -> Result<(), String> {
     let mut guard = state.handle.lock().await;
     let handle = guard
         .as_mut()
@@ -276,9 +277,7 @@ pub async fn arena_touch(
 
 /// Write a checkpoint and truncate the journal.
 #[tauri::command]
-pub async fn arena_checkpoint(
-    state: State<'_, ArenaState>,
-) -> Result<CheckpointResponse, String> {
+pub async fn arena_checkpoint(state: State<'_, ArenaState>) -> Result<CheckpointResponse, String> {
     let mut guard = state.handle.lock().await;
     let handle = guard
         .as_mut()
@@ -294,8 +293,14 @@ pub async fn arena_checkpoint(
 #[tauri::command]
 pub async fn arena_list_ids(state: State<'_, ArenaState>) -> Result<ListIdsResponse, String> {
     let guard = state.handle.lock().await;
-    let handle = guard.as_ref().ok_or_else(|| "arena not initialized".to_string())?;
-    let chunk_ids: Vec<u64> = handle.arena().iter_chunk_ids().map(|id| id.as_u64()).collect();
+    let handle = guard
+        .as_ref()
+        .ok_or_else(|| "arena not initialized".to_string())?;
+    let chunk_ids: Vec<u64> = handle
+        .arena()
+        .iter_chunk_ids()
+        .map(|id| id.as_u64())
+        .collect();
     Ok(ListIdsResponse { chunk_ids })
 }
 
@@ -371,7 +376,10 @@ pub async fn arena_set_init(
     let mut guard = state.set.lock().await;
 
     if let Some(set) = guard.as_ref() {
-        let tiers: Vec<String> = set.tiers().map(|t| tier_kind_to_str(t).to_string()).collect();
+        let tiers: Vec<String> = set
+            .tiers()
+            .map(|t| tier_kind_to_str(t).to_string())
+            .collect();
         return Ok(ArenaSetInitResponse {
             initialized: true,
             pool_count: tiers.len(),
@@ -401,7 +409,10 @@ pub async fn arena_set_init(
         ArenaSet::create(config).map_err(err_string)?
     };
 
-    let tiers: Vec<String> = set.tiers().map(|t| tier_kind_to_str(t).to_string()).collect();
+    let tiers: Vec<String> = set
+        .tiers()
+        .map(|t| tier_kind_to_str(t).to_string())
+        .collect();
     let pool_count = tiers.len();
     *guard = Some(set);
 
@@ -420,15 +431,21 @@ pub async fn arena_set_alloc(
     state: State<'_, ArenaSetState>,
 ) -> Result<AllocResponse, String> {
     let mut guard = state.set.lock().await;
-    let set = guard.as_mut().ok_or_else(|| "arena set not initialized".to_string())?;
+    let set = guard
+        .as_mut()
+        .ok_or_else(|| "arena set not initialized".to_string())?;
     let tier_kind = tier_kind_from_str(&tier).map_err(|_| format!("unknown tier: {}", tier))?;
-    let payload = B64.decode(&payload_base64).map_err(|e| format!("base64 decode: {}", e))?;
+    let payload = B64
+        .decode(&payload_base64)
+        .map_err(|e| format!("base64 decode: {}", e))?;
 
     // Route through ArenaSet::alloc — the cgroup-aware allocation chokepoint.
     // With no enforcer attached (the default) this is identical to the old
     // pool_mut(...).alloc(...) path.
     let id = set.alloc(tier_kind, payload).map_err(err_string)?;
-    Ok(AllocResponse { chunk_id: id.as_u64() })
+    Ok(AllocResponse {
+        chunk_id: id.as_u64(),
+    })
 }
 
 /// Read a chunk via get_chunk_hot (zero-copy, single header parse).
@@ -439,11 +456,18 @@ pub async fn arena_set_get_hot(
     state: State<'_, ArenaSetState>,
 ) -> Result<GetChunkHotResponse, String> {
     let guard = state.set.lock().await;
-    let set = guard.as_ref().ok_or_else(|| "arena set not initialized".to_string())?;
+    let set = guard
+        .as_ref()
+        .ok_or_else(|| "arena set not initialized".to_string())?;
     let tier_kind = tier_kind_from_str(&tier).map_err(|_| format!("unknown tier: {}", tier))?;
 
-    let pool = set.pool(tier_kind).ok_or_else(|| format!("no pool for tier: {}", tier))?;
-    let payload = pool.arena().get_chunk_hot(ChunkId::new(chunk_id)).map_err(err_string)?;
+    let pool = set
+        .pool(tier_kind)
+        .ok_or_else(|| format!("no pool for tier: {}", tier))?;
+    let payload = pool
+        .arena()
+        .get_chunk_hot(ChunkId::new(chunk_id))
+        .map_err(err_string)?;
 
     Ok(GetChunkHotResponse {
         chunk_id,
@@ -454,11 +478,11 @@ pub async fn arena_set_get_hot(
 
 /// Run a policy sweep across all pools. Returns promotion/demotion counts.
 #[tauri::command]
-pub async fn arena_set_sweep(
-    state: State<'_, ArenaSetState>,
-) -> Result<SweepReportDto, String> {
+pub async fn arena_set_sweep(state: State<'_, ArenaSetState>) -> Result<SweepReportDto, String> {
     let mut guard = state.set.lock().await;
-    let set = guard.as_mut().ok_or_else(|| "arena set not initialized".to_string())?;
+    let set = guard
+        .as_mut()
+        .ok_or_else(|| "arena set not initialized".to_string())?;
     let report = set.run_policy_sweep();
     Ok(SweepReportDto {
         promotes_initiated: report.promotes_initiated,
@@ -473,11 +497,11 @@ pub async fn arena_set_sweep(
 
 /// Garbage-collect orphaned crossfade targets.
 #[tauri::command]
-pub async fn arena_set_gc(
-    state: State<'_, ArenaSetState>,
-) -> Result<GcReportDto, String> {
+pub async fn arena_set_gc(state: State<'_, ArenaSetState>) -> Result<GcReportDto, String> {
     let mut guard = state.set.lock().await;
-    let set = guard.as_mut().ok_or_else(|| "arena set not initialized".to_string())?;
+    let set = guard
+        .as_mut()
+        .ok_or_else(|| "arena set not initialized".to_string())?;
     let report = set.gc_orphaned_targets();
     Ok(GcReportDto {
         targets_freed: report.targets_freed,
@@ -487,11 +511,11 @@ pub async fn arena_set_gc(
 
 /// Flush all pool mmaps, manifest, and crossfade registry to disk.
 #[tauri::command]
-pub async fn arena_set_flush(
-    state: State<'_, ArenaSetState>,
-) -> Result<(), String> {
+pub async fn arena_set_flush(state: State<'_, ArenaSetState>) -> Result<(), String> {
     let guard = state.set.lock().await;
-    let set = guard.as_ref().ok_or_else(|| "arena set not initialized".to_string())?;
+    let set = guard
+        .as_ref()
+        .ok_or_else(|| "arena set not initialized".to_string())?;
     set.flush().map_err(err_string)
 }
 
@@ -503,10 +527,14 @@ pub async fn arena_set_free(
     state: State<'_, ArenaSetState>,
 ) -> Result<(), String> {
     let mut guard = state.set.lock().await;
-    let set = guard.as_mut().ok_or_else(|| "arena set not initialized".to_string())?;
+    let set = guard
+        .as_mut()
+        .ok_or_else(|| "arena set not initialized".to_string())?;
     let tier_kind = tier_kind_from_str(&tier).map_err(|_| format!("unknown tier: {}", tier))?;
 
-    let pool = set.pool_mut(tier_kind).ok_or_else(|| format!("no pool for tier: {}", tier))?;
+    let pool = set
+        .pool_mut(tier_kind)
+        .ok_or_else(|| format!("no pool for tier: {}", tier))?;
     pool.free(ChunkId::new(chunk_id)).map_err(err_string)
 }
 
@@ -517,11 +545,19 @@ pub async fn arena_set_list_ids(
     state: State<'_, ArenaSetState>,
 ) -> Result<ListIdsResponse, String> {
     let guard = state.set.lock().await;
-    let set = guard.as_ref().ok_or_else(|| "arena set not initialized".to_string())?;
+    let set = guard
+        .as_ref()
+        .ok_or_else(|| "arena set not initialized".to_string())?;
     let tier_kind = tier_kind_from_str(&tier).map_err(|_| format!("unknown tier: {}", tier))?;
 
-    let pool = set.pool(tier_kind).ok_or_else(|| format!("no pool for tier: {}", tier))?;
-    let chunk_ids: Vec<u64> = pool.arena().iter_chunk_ids().map(|id| id.as_u64()).collect();
+    let pool = set
+        .pool(tier_kind)
+        .ok_or_else(|| format!("no pool for tier: {}", tier))?;
+    let chunk_ids: Vec<u64> = pool
+        .arena()
+        .iter_chunk_ids()
+        .map(|id| id.as_u64())
+        .collect();
     Ok(ListIdsResponse { chunk_ids })
 }
 
@@ -577,7 +613,9 @@ mod tests {
         let dir = tempdir().unwrap();
         let id = {
             let mut h = make_test_handle(dir.path());
-            let id = h.alloc(TierKind::Blob, b"warm-start-survivor".to_vec()).unwrap();
+            let id = h
+                .alloc(TierKind::Blob, b"warm-start-survivor".to_vec())
+                .unwrap();
             h.checkpoint().unwrap();
             id
         };

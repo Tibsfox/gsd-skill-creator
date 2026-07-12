@@ -18,8 +18,8 @@ use tauri::Emitter;
 use tokio::sync::Mutex;
 
 use crate::security::{
-    AgentIsolationState, EventSeverity, EventSource, SecurityEvent, SecurityState,
-    SecurityStatus, ShieldState,
+    AgentIsolationState, EventSeverity, EventSource, SecurityEvent, SecurityState, SecurityStatus,
+    ShieldState,
 };
 
 // ============================================================================

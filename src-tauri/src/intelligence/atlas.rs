@@ -157,15 +157,10 @@ pub trait AtlasKbDelegate: Send + Sync + 'static {
         symbol_id: String,
     ) -> Result<Vec<AtlasSymbolReference>, String>;
 
-    fn list_type_relations_from(
-        &self,
-        symbol_id: String,
-    ) -> Result<Vec<AtlasTypeRelation>, String>;
+    fn list_type_relations_from(&self, symbol_id: String)
+        -> Result<Vec<AtlasTypeRelation>, String>;
 
-    fn list_type_relations_to(
-        &self,
-        symbol_id: String,
-    ) -> Result<Vec<AtlasTypeRelation>, String>;
+    fn list_type_relations_to(&self, symbol_id: String) -> Result<Vec<AtlasTypeRelation>, String>;
 
     fn list_files_changed_by_mission(
         &self,
@@ -207,10 +202,7 @@ pub trait AtlasKbDelegate: Send + Sync + 'static {
     /// a full clear (e.g. project not found in registry).
     ///
     /// Default implementation falls through to a full clear.
-    fn invalidate_connection_cache_for_project(
-        &self,
-        _project_id: &str,
-    ) -> (usize, &'static str) {
+    fn invalidate_connection_cache_for_project(&self, _project_id: &str) -> (usize, &'static str) {
         let n = self.invalidate_connection_cache();
         (n, "all")
     }
@@ -218,8 +210,7 @@ pub trait AtlasKbDelegate: Send + Sync + 'static {
 
 // ─── Stub delegate ───────────────────────────────────────────────────────────
 
-const DEFERRED: &str =
-    "AtlasKB stub: implementation lands in W1 Track B (migration-003 SQLite)";
+const DEFERRED: &str = "AtlasKB stub: implementation lands in W1 Track B (migration-003 SQLite)";
 
 pub struct StubAtlasKbDelegate;
 
@@ -253,10 +244,7 @@ impl AtlasKbDelegate for StubAtlasKbDelegate {
     fn list_callees(&self, _id: String) -> Result<Vec<AtlasCallEdge>, String> {
         Err(DEFERRED.to_string())
     }
-    fn list_references_for_symbol(
-        &self,
-        _id: String,
-    ) -> Result<Vec<AtlasSymbolReference>, String> {
+    fn list_references_for_symbol(&self, _id: String) -> Result<Vec<AtlasSymbolReference>, String> {
         Err(DEFERRED.to_string())
     }
     fn list_type_relations_from(&self, _id: String) -> Result<Vec<AtlasTypeRelation>, String> {
@@ -265,10 +253,7 @@ impl AtlasKbDelegate for StubAtlasKbDelegate {
     fn list_type_relations_to(&self, _id: String) -> Result<Vec<AtlasTypeRelation>, String> {
         Err(DEFERRED.to_string())
     }
-    fn list_files_changed_by_mission(
-        &self,
-        _id: String,
-    ) -> Result<Vec<AtlasFilesChanged>, String> {
+    fn list_files_changed_by_mission(&self, _id: String) -> Result<Vec<AtlasFilesChanged>, String> {
         Err(DEFERRED.to_string())
     }
     fn list_missions_for_file(
@@ -521,14 +506,15 @@ impl SqliteAtlasKbDelegate {
     ///
     /// Tuple: `(evicted_count, scope)` where scope is `"project"` on success
     /// or `"all"` when the fallback full-clear fires.
-    pub fn clear_connection_cache_for_project(
-        &self,
-        project_id: &str,
-    ) -> (usize, &'static str) {
+    pub fn clear_connection_cache_for_project(&self, project_id: &str) -> (usize, &'static str) {
         match self.path_for_project(project_id) {
             Some(db_path) => {
                 let evicted = if let Ok(mut cache) = self.connections.lock() {
-                    if cache.remove(&db_path).is_some() { 1 } else { 0 }
+                    if cache.remove(&db_path).is_some() {
+                        1
+                    } else {
+                        0
+                    }
                 } else {
                     0
                 };
@@ -607,9 +593,7 @@ impl SqliteAtlasKbDelegate {
         // the connections map. The outer locks are released before any IO on
         // individual connections (callers hold Arc clones, not the locks).
         let mut out: Vec<Arc<Mutex<Connection>>> = Vec::with_capacity(db_paths.len());
-        if let (Ok(mut cache), Ok(mut order)) =
-            (self.connections.lock(), self.lru_order.lock())
-        {
+        if let (Ok(mut cache), Ok(mut order)) = (self.connections.lock(), self.lru_order.lock()) {
             for path in &db_paths {
                 if cache.contains_key(path) {
                     // Cache hit — promote to back of LRU order.
@@ -626,11 +610,9 @@ impl SqliteAtlasKbDelegate {
                         }
                     }
                     // Insert new connection.
-                    let arc = Arc::new(Mutex::new(
-                        Connection::open(path).unwrap_or_else(|_| {
-                            Connection::open_in_memory().expect("in-memory fallback")
-                        }),
-                    ));
+                    let arc = Arc::new(Mutex::new(Connection::open(path).unwrap_or_else(|_| {
+                        Connection::open_in_memory().expect("in-memory fallback")
+                    })));
                     cache.insert(path.clone(), arc.clone());
                     order.push(path.clone());
                     out.push(arc);
@@ -655,10 +637,7 @@ impl SqliteAtlasKbDelegate {
     ///   * Unknown project_id or registry-less delegate → `None`.
     ///
     /// `get_all_project_conns` semantics are unchanged; this is additive.
-    pub fn get_or_open_for_project(
-        &self,
-        project_id: &str,
-    ) -> Option<Arc<Mutex<Connection>>> {
+    pub fn get_or_open_for_project(&self, project_id: &str) -> Option<Arc<Mutex<Connection>>> {
         // Resolve project_id → db path via existing cached registry lookup.
         let db_path = self.path_for_project(project_id)?;
         if !db_path.exists() {
@@ -684,11 +663,9 @@ impl SqliteAtlasKbDelegate {
                     order.remove(0);
                 }
             }
-            let arc = Arc::new(Mutex::new(
-                Connection::open(&db_path).unwrap_or_else(|_| {
-                    Connection::open_in_memory().expect("in-memory fallback")
-                }),
-            ));
+            let arc = Arc::new(Mutex::new(Connection::open(&db_path).unwrap_or_else(
+                |_| Connection::open_in_memory().expect("in-memory fallback"),
+            )));
             cache.insert(db_path.clone(), arc.clone());
             order.push(db_path);
             Some(arc)
@@ -706,8 +683,7 @@ impl Default for SqliteAtlasKbDelegate {
 
 fn row_to_atlas_symbol(row: &rusqlite::Row<'_>) -> rusqlite::Result<AtlasSymbol> {
     let modifiers_json: String = row.get("modifiers_json")?;
-    let modifiers: Vec<String> =
-        serde_json::from_str(&modifiers_json).unwrap_or_default();
+    let modifiers: Vec<String> = serde_json::from_str(&modifiers_json).unwrap_or_default();
     Ok(AtlasSymbol {
         id: row.get("id")?,
         snapshot_id: row.get("snapshot_id")?,
@@ -887,7 +863,11 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         for conn_arc in self.get_all_project_conns() {
             let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let row = conn
-                .query_row("SELECT * FROM symbols WHERE id = ?", [&id], row_to_atlas_symbol)
+                .query_row(
+                    "SELECT * FROM symbols WHERE id = ?",
+                    [&id],
+                    row_to_atlas_symbol,
+                )
                 .optional()
                 .map_err(|e| format!("get_symbol: {e}"))?;
             if row.is_some() {
@@ -1032,10 +1012,7 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         Ok(out)
     }
 
-    fn list_type_relations_to(
-        &self,
-        symbol_id: String,
-    ) -> Result<Vec<AtlasTypeRelation>, String> {
+    fn list_type_relations_to(&self, symbol_id: String) -> Result<Vec<AtlasTypeRelation>, String> {
         let mut out = Vec::new();
         for conn_arc in self.get_all_project_conns() {
             let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
@@ -1173,10 +1150,7 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         self.clear_connection_cache()
     }
 
-    fn invalidate_connection_cache_for_project(
-        &self,
-        project_id: &str,
-    ) -> (usize, &'static str) {
+    fn invalidate_connection_cache_for_project(&self, project_id: &str) -> (usize, &'static str) {
         self.clear_connection_cache_for_project(project_id)
     }
 }
@@ -1564,7 +1538,9 @@ mod tests {
     #[test]
     fn stub_request_index_snapshot_returns_deferred_error() {
         let kb = StubAtlasKbDelegate;
-        let err = kb.request_index_snapshot("snap-01".to_string()).unwrap_err();
+        let err = kb
+            .request_index_snapshot("snap-01".to_string())
+            .unwrap_err();
         assert!(err.contains("stub"));
     }
 
@@ -1579,7 +1555,10 @@ mod tests {
         //   std::process::Command, tokio::process::Command, Command::new
         // Subprocess spawning lives in intelligence/atlas_sidecar.rs (H1).
         // Test documents the invariant by passing.
-        assert!(true, "S2 invariant: subprocess spawning delegated to atlas_sidecar.rs, not atlas.rs");
+        assert!(
+            true,
+            "S2 invariant: subprocess spawning delegated to atlas_sidecar.rs, not atlas.rs"
+        );
     }
 
     #[test]
@@ -1858,11 +1837,7 @@ mod tests {
         assert_eq!(summary[0].line_count, 1);
 
         let line_prov = kb
-            .list_provenance_for_line(
-                "snap-01".to_string(),
-                "src/foo.ts".to_string(),
-                5,
-            )
+            .list_provenance_for_line("snap-01".to_string(), "src/foo.ts".to_string(), 5)
             .unwrap();
         assert_eq!(line_prov.len(), 2);
 
@@ -1931,9 +1906,7 @@ mod tests {
         // Empty registry / nonexistent DB → empty results, not Err.
         // This is the cold-start state for a freshly-installed shell.
         let tmp = TempDir::new().unwrap();
-        let kb = SqliteAtlasKbDelegate::with_explicit_db_path(
-            tmp.path().join("does-not-exist.db"),
-        );
+        let kb = SqliteAtlasKbDelegate::with_explicit_db_path(tmp.path().join("does-not-exist.db"));
         let rows = kb
             .list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string())
             .unwrap();
@@ -1943,12 +1916,9 @@ mod tests {
         assert!(none_sym.is_none());
 
         // Empty registry path also yields empty (production cold-start path).
-        let kb2 = SqliteAtlasKbDelegate::with_registry_path(
-            tmp.path().join("registry-not-here.db"),
-        );
-        let rows2 = kb2
-            .list_callers("sym-anything".to_string())
-            .unwrap();
+        let kb2 =
+            SqliteAtlasKbDelegate::with_registry_path(tmp.path().join("registry-not-here.db"));
+        let rows2 = kb2.list_callers("sym-anything".to_string()).unwrap();
         assert!(rows2.is_empty());
     }
 
@@ -2040,15 +2010,27 @@ mod tests {
         assert_eq!(kb.cached_connection_count(), 0);
 
         // First query opens and caches the connection.
-        let _ = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
-        assert_eq!(kb.cached_connection_count(), 1, "connection should be cached after first call");
+        let _ = kb
+            .list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string())
+            .unwrap();
+        assert_eq!(
+            kb.cached_connection_count(),
+            1,
+            "connection should be cached after first call"
+        );
 
         // Second distinct method call reuses the same cached connection.
         let _ = kb.list_callers("sym-002".to_string()).unwrap();
-        assert_eq!(kb.cached_connection_count(), 1, "cache size must not grow on reuse");
+        assert_eq!(
+            kb.cached_connection_count(),
+            1,
+            "cache size must not grow on reuse"
+        );
 
         // Third call on yet another method still reuses the same connection.
-        let _ = kb.list_provenance_for_line("snap-01".to_string(), "src/foo.ts".to_string(), 5).unwrap();
+        let _ = kb
+            .list_provenance_for_line("snap-01".to_string(), "src/foo.ts".to_string(), 5)
+            .unwrap();
         assert_eq!(kb.cached_connection_count(), 1);
     }
 
@@ -2060,17 +2042,29 @@ mod tests {
         let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db.clone());
 
         // Warm the cache.
-        let _ = kb.list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None).unwrap();
+        let _ = kb
+            .list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None)
+            .unwrap();
         assert_eq!(kb.cached_connection_count(), 1);
 
         // Invalidate (simulates atlasIndexingCompleted).
         kb.clear_connection_cache();
-        assert_eq!(kb.cached_connection_count(), 0, "cache must be empty after clear");
+        assert_eq!(
+            kb.cached_connection_count(),
+            0,
+            "cache must be empty after clear"
+        );
 
         // Next call re-opens the DB and rows are still accessible.
-        let rows = kb.list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None).unwrap();
+        let rows = kb
+            .list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None)
+            .unwrap();
         assert_eq!(rows.len(), 2, "rows must still be readable after re-open");
-        assert_eq!(kb.cached_connection_count(), 1, "cache repopulated after re-open");
+        assert_eq!(
+            kb.cached_connection_count(),
+            1,
+            "cache repopulated after re-open"
+        );
     }
 
     #[test]
@@ -2084,10 +2078,14 @@ mod tests {
         let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db);
 
         // Four rapid sequential calls — if there were a deadlock they would hang.
-        let r1 = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        let r1 = kb
+            .list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string())
+            .unwrap();
         let r2 = kb.list_callers("sym-002".to_string()).unwrap();
         let r3 = kb.list_type_relations_from("sym-001".to_string()).unwrap();
-        let r4 = kb.list_missions_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        let r4 = kb
+            .list_missions_for_file("snap-01".to_string(), "src/foo.ts".to_string())
+            .unwrap();
 
         assert_eq!(r1.len(), 1);
         assert_eq!(r2.len(), 1);
@@ -2125,11 +2123,15 @@ mod tests {
         let delegate = SqliteAtlasKbDelegate::with_explicit_db_path(db);
 
         // Warm the delegate cache directly.
-        let _ = delegate.list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None).unwrap();
+        let _ = delegate
+            .list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None)
+            .unwrap();
         assert_eq!(delegate.cached_connection_count(), 1);
 
         // Simulate what atlas_invalidate_cache does: route through AtlasState.
-        let state = AtlasState { kb: Box::new(delegate) };
+        let state = AtlasState {
+            kb: Box::new(delegate),
+        };
         state.clear_connection_cache();
 
         // Must be empty — the downcast-via-trait path clears the HashMap.
@@ -2153,7 +2155,11 @@ mod tests {
         // Simulate the command: clear via AtlasState regardless of project_id value.
         let _project_id: Option<String> = Some("gsd-skill-creator".to_string());
         let _ = kb.invalidate_connection_cache(); // same path the command uses
-        assert_eq!(kb.cached_connection_count(), 0, "full clear expected even with project_id set");
+        assert_eq!(
+            kb.cached_connection_count(),
+            0,
+            "full clear expected even with project_id set"
+        );
     }
 
     #[test]
@@ -2169,7 +2175,11 @@ mod tests {
         let _project_id: Option<String> = None;
         let evicted = kb.invalidate_connection_cache();
         assert_eq!(evicted, 1, "full clear must return actual evicted count");
-        assert_eq!(kb.cached_connection_count(), 0, "full clear with project_id=None");
+        assert_eq!(
+            kb.cached_connection_count(),
+            0,
+            "full clear with project_id=None"
+        );
     }
 
     // ─── I1 Surgery 3 — clear_connection_cache evicted_count correctness ──
@@ -2188,7 +2198,9 @@ mod tests {
         assert_eq!(cold, 0, "cold-clear must return 0");
 
         // Warm one connection then clear.
-        let _ = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        let _ = kb
+            .list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string())
+            .unwrap();
         assert_eq!(kb.cached_connection_count(), 1);
         let warm = kb.clear_connection_cache();
         assert_eq!(warm, 1, "clear with 1 cached entry must return 1");
@@ -2248,10 +2260,8 @@ mod tests {
             let handle = std::thread::spawn(move || {
                 let mut errors: Vec<String> = Vec::new();
                 for iter in 0..ITERS {
-                    match kb.list_symbols_for_file(
-                        "snap-01".to_string(),
-                        "src/foo.ts".to_string(),
-                    ) {
+                    match kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string())
+                    {
                         Ok(rows) => {
                             // Seeded DB has exactly 1 symbol in src/foo.ts.
                             if rows.len() != 1 {
@@ -2309,10 +2319,17 @@ mod tests {
             "INSERT INTO projects (id, name, path, branch, kind, priority, \
              last_activity_at, last_snapshot_id) \
              VALUES (?, ?, ?, 'dev', 'code', 'med', '2026-05-05T00:00:00Z', NULL)",
-            params![project_id, "Test Project", project_path.to_string_lossy().to_string()],
+            params![
+                project_id,
+                "Test Project",
+                project_path.to_string_lossy().to_string()
+            ],
         )
         .unwrap();
-        project_path.join(".gsd").join("intelligence").join("intelligence.db")
+        project_path
+            .join(".gsd")
+            .join("intelligence")
+            .join("intelligence.db")
     }
 
     fn create_atlas_db_at(db_path: &PathBuf) {
@@ -2360,20 +2377,25 @@ mod tests {
         std::fs::create_dir_all(&proj_b_root).unwrap();
 
         let registry_path = tmp.path().join("registry.db");
-        let db_a_path =
-            create_atlas_registry_with_project(&registry_path, "proj-a", &proj_a_root);
+        let db_a_path = create_atlas_registry_with_project(&registry_path, "proj-a", &proj_a_root);
         {
             let conn = Connection::open(&registry_path).unwrap();
             conn.execute(
                 "INSERT INTO projects (id, name, path, branch, kind, priority, \
                  last_activity_at, last_snapshot_id) \
                  VALUES (?, ?, ?, 'dev', 'code', 'med', '2026-05-05T00:00:00Z', NULL)",
-                params!["proj-b", "Project B", proj_b_root.to_string_lossy().to_string()],
+                params![
+                    "proj-b",
+                    "Project B",
+                    proj_b_root.to_string_lossy().to_string()
+                ],
             )
             .unwrap();
         }
-        let db_b_path: PathBuf =
-            proj_b_root.join(".gsd").join("intelligence").join("intelligence.db");
+        let db_b_path: PathBuf = proj_b_root
+            .join(".gsd")
+            .join("intelligence")
+            .join("intelligence.db");
 
         std::fs::create_dir_all(db_a_path.parent().unwrap()).unwrap();
         std::fs::create_dir_all(db_b_path.parent().unwrap()).unwrap();
@@ -2384,13 +2406,19 @@ mod tests {
 
         let kb = SqliteAtlasKbDelegate::with_registry_path(registry_path);
         // Warm both connections.
-        let _ = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        let _ = kb
+            .list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string())
+            .unwrap();
         assert_eq!(kb.cached_connection_count(), 2, "both DBs should be cached");
 
         let (evicted, scope) = kb.clear_connection_cache_for_project("proj-a");
         assert_eq!(scope, "project", "targeted per-project evict expected");
         assert_eq!(evicted, 1, "exactly one entry evicted");
-        assert_eq!(kb.cached_connection_count(), 1, "proj-b cache must remain warm");
+        assert_eq!(
+            kb.cached_connection_count(),
+            1,
+            "proj-b cache must remain warm"
+        );
     }
 
     #[test]
@@ -2414,13 +2442,19 @@ mod tests {
         seed_minimal_atlas_rows(&db_path);
 
         let kb = SqliteAtlasKbDelegate::with_registry_path(registry_path);
-        let _ = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        let _ = kb
+            .list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string())
+            .unwrap();
         assert_eq!(kb.cached_connection_count(), 1);
 
         let (evicted, scope) = kb.clear_connection_cache_for_project("proj-unknown");
         assert_eq!(scope, "all", "unknown project triggers full-clear fallback");
         assert_eq!(evicted, 1, "fallback reports actual eviction count (1 entry was cached); scope=='all' is the disambiguator");
-        assert_eq!(kb.cached_connection_count(), 0, "cache empty after fallback full-clear");
+        assert_eq!(
+            kb.cached_connection_count(),
+            0,
+            "cache empty after fallback full-clear"
+        );
     }
 
     #[test]
@@ -2435,7 +2469,9 @@ mod tests {
         kb.clear_connection_cache();
         assert_eq!(kb.cached_connection_count(), 0);
 
-        let rows = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        let rows = kb
+            .list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string())
+            .unwrap();
         assert_eq!(rows.len(), 1, "rows accessible after full-clear re-open");
     }
 
@@ -2448,8 +2484,7 @@ mod tests {
         std::fs::create_dir_all(&proj_b_root).unwrap();
 
         let registry_path = tmp.path().join("registry.db");
-        let db_a_path =
-            create_atlas_registry_with_project(&registry_path, "alpha", &proj_a_root);
+        let db_a_path = create_atlas_registry_with_project(&registry_path, "alpha", &proj_a_root);
         {
             let conn = Connection::open(&registry_path).unwrap();
             conn.execute(
@@ -2460,8 +2495,10 @@ mod tests {
             )
             .unwrap();
         }
-        let db_b_path: PathBuf =
-            proj_b_root.join(".gsd").join("intelligence").join("intelligence.db");
+        let db_b_path: PathBuf = proj_b_root
+            .join(".gsd")
+            .join("intelligence")
+            .join("intelligence.db");
 
         std::fs::create_dir_all(db_a_path.parent().unwrap()).unwrap();
         std::fs::create_dir_all(db_b_path.parent().unwrap()).unwrap();
@@ -2477,9 +2514,15 @@ mod tests {
         let (evicted, scope) = kb.clear_connection_cache_for_project("alpha");
         assert_eq!(scope, "project");
         assert_eq!(evicted, 1, "alpha entry removed");
-        assert_eq!(kb.cached_connection_count(), 1, "beta still in cache — no unnecessary re-open");
+        assert_eq!(
+            kb.cached_connection_count(),
+            1,
+            "beta still in cache — no unnecessary re-open"
+        );
 
-        let syms = kb.list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None).unwrap();
+        let syms = kb
+            .list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None)
+            .unwrap();
         assert!(syms.len() >= 2, "data accessible after alpha re-open");
     }
 
@@ -2511,13 +2554,19 @@ mod tests {
 
     #[test]
     fn invalidate_cache_result_serialises_scope_and_evicted_count() {
-        let r = InvalidateCacheResult { scope: "project".to_string(), evicted_count: 3 };
+        let r = InvalidateCacheResult {
+            scope: "project".to_string(),
+            evicted_count: 3,
+        };
         let json = serde_json::to_string(&r).unwrap();
         let v: serde_json::Value = serde_json::from_str(&json).unwrap();
         assert_eq!(v["scope"], "project");
         assert_eq!(v["evicted_count"], 3);
 
-        let r2 = InvalidateCacheResult { scope: "all".to_string(), evicted_count: 0 };
+        let r2 = InvalidateCacheResult {
+            scope: "all".to_string(),
+            evicted_count: 0,
+        };
         let json2 = serde_json::to_string(&r2).unwrap();
         let v2: serde_json::Value = serde_json::from_str(&json2).unwrap();
         assert_eq!(v2["scope"], "all");
@@ -2585,12 +2634,19 @@ mod tests {
             for i in 0..n {
                 let proj_dir = tmp.path().join(format!("proj{i}"));
                 std::fs::create_dir_all(&proj_dir).unwrap();
-                let db_path = proj_dir.join(".gsd").join("intelligence").join("intelligence.db");
+                let db_path = proj_dir
+                    .join(".gsd")
+                    .join("intelligence")
+                    .join("intelligence.db");
                 std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
                 make_schema_only_db(&db_path);
                 conn.execute(
                     "INSERT INTO projects VALUES (?,?,?,'dev','code','med','2026-05-05',NULL)",
-                    params![format!("p{i}"), format!("P{i}"), proj_dir.to_string_lossy().to_string()],
+                    params![
+                        format!("p{i}"),
+                        format!("P{i}"),
+                        proj_dir.to_string_lossy().to_string()
+                    ],
                 )
                 .unwrap();
             }
@@ -2611,9 +2667,12 @@ mod tests {
     fn lru_evicts_oldest_at_9th_insert_when_limit_is_8() {
         // 9 project DBs, limit=8 → after loading all 9 the cache holds exactly 8.
         let (_tmp, kb) = make_delegate_with_n_projects(8, 9);
-        let _ = kb.list_symbols_for_file("snap".to_string(), "f.ts".to_string()).unwrap();
+        let _ = kb
+            .list_symbols_for_file("snap".to_string(), "f.ts".to_string())
+            .unwrap();
         assert_eq!(
-            kb.cached_connection_count(), 8,
+            kb.cached_connection_count(),
+            8,
             "LRU must evict 1 entry when inserting the 9th into a limit-8 cache"
         );
     }
@@ -2632,13 +2691,9 @@ mod tests {
         let (_tmp, kb) = make_delegate_with_n_projects(2, 3);
 
         // Load p0 (cache: [p0], oldest=p0)
-        let _ = kb
-            .get_or_open_for_project("p0")
-            .expect("p0 should resolve");
+        let _ = kb.get_or_open_for_project("p0").expect("p0 should resolve");
         // Load p1 (cache: [p0, p1], oldest=p0)
-        let _ = kb
-            .get_or_open_for_project("p1")
-            .expect("p1 should resolve");
+        let _ = kb.get_or_open_for_project("p1").expect("p1 should resolve");
         assert_eq!(kb.cached_connection_count(), 2);
 
         // Re-access p0 → promote to MRU. lru_order now: [p1, p0], oldest=p1.
@@ -2647,9 +2702,7 @@ mod tests {
             .expect("p0 re-access should succeed");
 
         // Load p2 — cache miss at capacity → evict oldest (p1). p0 survives.
-        let _ = kb
-            .get_or_open_for_project("p2")
-            .expect("p2 should resolve");
+        let _ = kb.get_or_open_for_project("p2").expect("p2 should resolve");
         assert_eq!(kb.cached_connection_count(), 2, "cache stays at limit=2");
 
         // Verify p0's db path is still cached, p1's is not.
@@ -2709,7 +2762,9 @@ mod tests {
     #[test]
     fn with_max_connections_2_honors_the_limit() {
         let (_tmp, kb) = make_delegate_with_n_projects(2, 3);
-        let _ = kb.list_symbols_for_file("s".to_string(), "f".to_string()).unwrap();
+        let _ = kb
+            .list_symbols_for_file("s".to_string(), "f".to_string())
+            .unwrap();
         assert!(
             kb.cached_connection_count() <= 2,
             "with_max_connections(2) must cap at 2, got {}",
@@ -2729,20 +2784,29 @@ mod tests {
         std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
         create_atlas_db_at(&db_path);
 
-        let kb = SqliteAtlasKbDelegate::with_path_cache_ttl(registry_path.clone(), Duration::from_secs(60));
+        let kb = SqliteAtlasKbDelegate::with_path_cache_ttl(
+            registry_path.clone(),
+            Duration::from_secs(60),
+        );
 
         // First call populates cache.
         let p1 = kb.path_for_project("my-proj");
         assert!(p1.is_some());
         {
             let c = kb.path_cache.lock().unwrap();
-            assert!(c.contains_key("my-proj"), "path_cache populated after first lookup");
+            assert!(
+                c.contains_key("my-proj"),
+                "path_cache populated after first lookup"
+            );
         }
 
         // Delete the registry — second call within TTL must still return from cache.
         std::fs::remove_file(&registry_path).unwrap();
         let p2 = kb.path_for_project("my-proj");
-        assert_eq!(p1, p2, "within-TTL call must return cached value without re-opening registry");
+        assert_eq!(
+            p1, p2,
+            "within-TTL call must return cached value without re-opening registry"
+        );
     }
 
     #[test]
@@ -2762,7 +2826,10 @@ mod tests {
 
         std::fs::remove_file(&registry_path).unwrap();
         let p2 = kb.path_for_project("my-proj");
-        assert!(p2.is_none(), "zero-TTL must re-open registry; deleted file → None");
+        assert!(
+            p2.is_none(),
+            "zero-TTL must re-open registry; deleted file → None"
+        );
     }
 
     #[test]

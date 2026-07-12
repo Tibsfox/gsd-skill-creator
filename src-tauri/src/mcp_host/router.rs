@@ -96,9 +96,9 @@ impl ToolRouter {
             .ok_or_else(|| format!("Unknown tool: {}", tool_name))?
             .to_string();
 
-        let conn = manager.get_connection_mut(&server_id).ok_or_else(|| {
-            format!("Server unavailable: {}", server_id)
-        })?;
+        let conn = manager
+            .get_connection_mut(&server_id)
+            .ok_or_else(|| format!("Server unavailable: {}", server_id))?;
 
         if conn.status != ConnectionStatus::Connected {
             return Err(format!("Server '{}' is not connected", server_id));

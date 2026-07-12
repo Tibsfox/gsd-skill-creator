@@ -43,9 +43,7 @@ pub fn start_watcher(
 ///
 /// Idempotent: returns Ok even if the watcher is not running.
 #[tauri::command]
-pub fn stop_watcher(
-    state: State<'_, Mutex<WatcherState>>,
-) -> Result<(), String> {
+pub fn stop_watcher(state: State<'_, Mutex<WatcherState>>) -> Result<(), String> {
     let mut watcher_state = state.lock().map_err(|e| e.to_string())?;
 
     if let Some(tx) = watcher_state.shutdown_tx.take() {
@@ -57,9 +55,7 @@ pub fn stop_watcher(
 
 /// Returns whether the file watcher is currently running.
 #[tauri::command]
-pub fn watcher_status(
-    state: State<'_, Mutex<WatcherState>>,
-) -> Result<bool, String> {
+pub fn watcher_status(state: State<'_, Mutex<WatcherState>>) -> Result<bool, String> {
     let watcher_state = state.lock().map_err(|e| e.to_string())?;
     Ok(watcher_state.shutdown_tx.is_some())
 }

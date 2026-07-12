@@ -95,10 +95,7 @@ impl HealthMonitor {
         let count = self.get_failure_count(id);
 
         if count >= self.failed_threshold {
-            ServiceState::Failed(format!(
-                "Health check failed {} consecutive times",
-                count
-            ))
+            ServiceState::Failed(format!("Health check failed {} consecutive times", count))
         } else if count >= self.degraded_threshold {
             ServiceState::Degraded
         } else {

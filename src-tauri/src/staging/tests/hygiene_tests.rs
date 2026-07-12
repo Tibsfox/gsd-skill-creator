@@ -133,9 +133,14 @@ fn test_embedded_instructions_system_prompt() {
 #[test]
 fn test_clean_content_passes() {
     let checker = HygieneChecker::new();
-    let content = "# Project Overview\n\nThis is a standard markdown document about software development.";
+    let content =
+        "# Project Overview\n\nThis is a standard markdown document about software development.";
     let status = checker.check(content);
-    assert_eq!(status, HygieneStatus::Clean, "Normal markdown must pass clean");
+    assert_eq!(
+        status,
+        HygieneStatus::Clean,
+        "Normal markdown must pass clean"
+    );
 }
 
 #[test]

@@ -56,9 +56,7 @@ pub fn service_graph() -> Vec<ServiceDef> {
             id: ServiceId::Dashboard,
             name: "Dashboard",
             depends_on: vec![ServiceId::FileWatcher],
-            health_check: HealthCheckType::HttpEndpoint(
-                "http://localhost:3000/health".to_string(),
-            ),
+            health_check: HealthCheckType::HttpEndpoint("http://localhost:3000/health".to_string()),
             start_command: Some(StartCommand::Internal),
             led_position: 3,
             optional: false,
@@ -67,9 +65,7 @@ pub fn service_graph() -> Vec<ServiceDef> {
             id: ServiceId::Console,
             name: "Console",
             depends_on: vec![ServiceId::FileWatcher],
-            health_check: HealthCheckType::FileExists(
-                ".planning/console/inbox/pending".into(),
-            ),
+            health_check: HealthCheckType::FileExists(".planning/console/inbox/pending".into()),
             start_command: Some(StartCommand::Internal),
             led_position: 4,
             optional: false,
@@ -78,9 +74,7 @@ pub fn service_graph() -> Vec<ServiceDef> {
             id: ServiceId::Staging,
             name: "Staging",
             depends_on: vec![ServiceId::Dashboard, ServiceId::Console],
-            health_check: HealthCheckType::DirectoryWatch(
-                ".planning/staging/intake".into(),
-            ),
+            health_check: HealthCheckType::DirectoryWatch(".planning/staging/intake".into()),
             start_command: Some(StartCommand::Internal),
             led_position: 5,
             optional: false,
@@ -89,9 +83,7 @@ pub fn service_graph() -> Vec<ServiceDef> {
             id: ServiceId::Terminal,
             name: "Terminal",
             depends_on: vec![ServiceId::Staging],
-            health_check: HealthCheckType::ProcessRunning(
-                "gsd-terminal".to_string(),
-            ),
+            health_check: HealthCheckType::ProcessRunning("gsd-terminal".to_string()),
             start_command: Some(StartCommand::Internal),
             led_position: 6,
             optional: false,
@@ -175,10 +167,7 @@ pub fn validate_dependencies(graph: &[ServiceDef]) -> Result<(), String> {
     for def in graph {
         // No self-loops
         if def.depends_on.contains(&def.id) {
-            return Err(format!(
-                "Service {:?} has a self-dependency",
-                def.id
-            ));
+            return Err(format!("Service {:?} has a self-dependency", def.id));
         }
 
         // All deps exist

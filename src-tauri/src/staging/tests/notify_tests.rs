@@ -107,9 +107,18 @@ fn test_notification_json_has_required_fields() {
     assert!(json.get("payload").is_some(), "must have payload field");
 
     let payload = json.get("payload").unwrap();
-    assert!(payload.get("content_type").is_some(), "payload must have content_type");
-    assert!(payload.get("location").is_some(), "payload must have location");
-    assert!(payload.get("hygiene_status").is_some(), "payload must have hygiene_status");
+    assert!(
+        payload.get("content_type").is_some(),
+        "payload must have content_type"
+    );
+    assert!(
+        payload.get("location").is_some(),
+        "payload must have location"
+    );
+    assert!(
+        payload.get("hygiene_status").is_some(),
+        "payload must have hygiene_status"
+    );
 }
 
 #[test]
@@ -125,7 +134,11 @@ fn test_notification_id_format() {
     let json: serde_json::Value = serde_json::from_str(&content).unwrap();
     let id = json.get("id").unwrap().as_str().unwrap();
 
-    assert!(id.starts_with("intake-"), "ID must start with 'intake-', got: {}", id);
+    assert!(
+        id.starts_with("intake-"),
+        "ID must start with 'intake-', got: {}",
+        id
+    );
     // ID should contain a date component (YYYYMMDD format)
     assert!(id.len() > 15, "ID must include date component, got: {}", id);
 }

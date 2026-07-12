@@ -1,21 +1,21 @@
-pub mod xdg;
+pub mod api;
 mod claude;
 mod commands;
 mod error;
-mod pty;
-pub mod security;
-pub mod api;
-mod state;
-mod tmux;
-mod mcp_host;
-pub mod memory_arena;
-pub mod staging;
+pub mod intelligence;
 pub mod ipc;
 pub mod magic;
+mod mcp_host;
+pub mod memory_arena;
 pub mod pcg;
+mod pty;
+pub mod security;
 pub mod services;
+pub mod staging;
+mod state;
+mod tmux;
 mod watcher;
-pub mod intelligence;
+pub mod xdg;
 // CAP-024: SCRIBE Dashboard native Tauri window (v1.49.621)
 pub mod scribe_dashboard;
 
@@ -41,7 +41,8 @@ pub fn run() {
             // (~/.gsd/intelligence/registry.db and <project>/.gsd/intelligence/intelligence.db).
             // Read paths fully functional; mutation paths land in Phase 826.
             {
-                let repo_root = std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."));
+                let repo_root =
+                    std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."));
                 app.manage(std::sync::Mutex::new(
                     intelligence::server::IntelligenceState::new(repo_root),
                 ));
@@ -52,14 +53,18 @@ pub fn run() {
             // commands through `SqliteAtlasKbDelegate` against the per-project
             // intelligence DB (migration 003). Empty registry → empty results, so
             // the desktop UI remains safe before any project is indexed.
-            app.manage(std::sync::Mutex::new(intelligence::atlas::AtlasState::new_with_sqlite()));
+            app.manage(std::sync::Mutex::new(
+                intelligence::atlas::AtlasState::new_with_sqlite(),
+            ));
             app.manage(Mutex::new(state::WatcherState::default()));
             app.manage(Mutex::new(PtyManager::default()));
             app.manage(Mutex::new(ClaudeSessionManager::default()));
             app.manage(tokio::sync::Mutex::new(mcp_host::McpHostState::new()));
             app.manage(tokio::sync::Mutex::new(security::SecurityState::new()));
             app.manage(tokio::sync::Mutex::new(state::ApiClientState::default()));
-            app.manage(tokio::sync::Mutex::new(services::launcher::ServiceLauncher::new_without_emitter()));
+            app.manage(tokio::sync::Mutex::new(
+                services::launcher::ServiceLauncher::new_without_emitter(),
+            ));
             app.manage(commands::memory_arena::ArenaState::default());
             app.manage(commands::memory_arena::ArenaSetState::default());
 

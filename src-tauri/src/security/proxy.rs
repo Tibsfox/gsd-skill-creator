@@ -54,9 +54,17 @@ impl std::fmt::Debug for SecretString {
 
 /// How a credential is stored and what it contains.
 pub enum CredentialType {
-    ApiKeyHeader { key: SecretString, header: String },
-    BearerToken { token: SecretString },
-    BasicAuth { username: String, password: SecretString },
+    ApiKeyHeader {
+        key: SecretString,
+        header: String,
+    },
+    BearerToken {
+        token: SecretString,
+    },
+    BasicAuth {
+        username: String,
+        password: SecretString,
+    },
     SshAgent,
 }
 
@@ -138,8 +146,11 @@ impl CredentialProxy {
                 }
                 CredentialType::BasicAuth { username, password } => {
                     use base64::Engine;
-                    let encoded = base64::engine::general_purpose::STANDARD
-                        .encode(format!("{}:{}", username, password.expose()));
+                    let encoded = base64::engine::general_purpose::STANDARD.encode(format!(
+                        "{}:{}",
+                        username,
+                        password.expose()
+                    ));
                     req.headers
                         .retain(|(k, _)| k.to_lowercase() != "authorization");
                     req.headers
@@ -186,10 +197,7 @@ impl CredentialProxy {
         // Create the socket via tokio UnixListener
         let _listener = tokio::net::UnixListener::bind(&self.socket_path)?;
         // Set mode 0600 -- owner read/write only
-        std::fs::set_permissions(
-            &self.socket_path,
-            std::fs::Permissions::from_mode(0o600),
-        )?;
+        std::fs::set_permissions(&self.socket_path, std::fs::Permissions::from_mode(0o600))?;
         Ok(())
     }
 

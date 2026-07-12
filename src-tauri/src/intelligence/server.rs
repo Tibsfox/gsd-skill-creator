@@ -29,12 +29,20 @@ pub trait KbDelegate: Send + Sync + 'static {
     fn register_project(&self, project: ProjectInput) -> Result<Project, String>;
     fn get_briefing(&self, project_id: String) -> Result<Option<Briefing>, String>;
     fn list_findings(&self, project_id: String) -> Result<Vec<Finding>, String>;
-    fn dismiss_finding(&self, finding_id: String, rationale: Option<String>) -> Result<Finding, String>;
+    fn dismiss_finding(
+        &self,
+        finding_id: String,
+        rationale: Option<String>,
+    ) -> Result<Finding, String>;
     fn start_meeting(&self, project_id: String) -> Result<Meeting, String>;
     fn park_meeting(&self, meeting_id: String) -> Result<Meeting, String>;
     fn resume_meeting(&self, meeting_id: String) -> Result<Meeting, String>;
     fn add_decision(&self, meeting_id: String, draft: DecisionDraft) -> Result<Decision, String>;
-    fn edit_decision(&self, decision_id: String, modifications: Vec<String>) -> Result<Decision, String>;
+    fn edit_decision(
+        &self,
+        decision_id: String,
+        modifications: Vec<String>,
+    ) -> Result<Decision, String>;
     fn withdraw_decision(&self, decision_id: String) -> Result<Decision, String>;
     fn send_now(&self, decision_id: String) -> Result<SendNowResult, String>;
     fn preview_bundle(&self, meeting_id: String) -> Result<BundlePreview, String>;
@@ -65,7 +73,11 @@ impl KbDelegate for StubKbDelegate {
     fn list_findings(&self, _project_id: String) -> Result<Vec<Finding>, String> {
         Err(DEFERRED.to_string())
     }
-    fn dismiss_finding(&self, _finding_id: String, _rationale: Option<String>) -> Result<Finding, String> {
+    fn dismiss_finding(
+        &self,
+        _finding_id: String,
+        _rationale: Option<String>,
+    ) -> Result<Finding, String> {
         Err(DEFERRED.to_string())
     }
     fn start_meeting(&self, _project_id: String) -> Result<Meeting, String> {
@@ -80,7 +92,11 @@ impl KbDelegate for StubKbDelegate {
     fn add_decision(&self, _meeting_id: String, _draft: DecisionDraft) -> Result<Decision, String> {
         Err(DEFERRED.to_string())
     }
-    fn edit_decision(&self, _decision_id: String, _modifications: Vec<String>) -> Result<Decision, String> {
+    fn edit_decision(
+        &self,
+        _decision_id: String,
+        _modifications: Vec<String>,
+    ) -> Result<Decision, String> {
         Err(DEFERRED.to_string())
     }
     fn withdraw_decision(&self, _decision_id: String) -> Result<Decision, String> {
@@ -164,9 +180,7 @@ pub fn generate_request_id() -> String {
     let month = (day_in_year / 30) + 1;
     let day_in_month = (day_in_year % 30) + 1;
     let rand8 = &Uuid::new_v4().to_string()[..8];
-    format!(
-        "req_{year:04}-{month:02}-{day_in_month:02}_{hours:02}{minutes:02}_{rand8}"
-    )
+    format!("req_{year:04}-{month:02}-{day_in_month:02}_{hours:02}{minutes:02}_{rand8}")
 }
 
 /// Atomically write `content` to `dir/filename`.
@@ -214,7 +228,11 @@ pub async fn intelligence_list_projects(
     state: State<'_, Mutex<IntelligenceState>>,
     sort: Option<String>,
 ) -> Result<Vec<Project>, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.list_projects(sort)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .list_projects(sort)
 }
 
 #[tauri::command]
@@ -222,7 +240,11 @@ pub async fn intelligence_get_project(
     state: State<'_, Mutex<IntelligenceState>>,
     project_id: String,
 ) -> Result<Option<Project>, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.get_project(project_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .get_project(project_id)
 }
 
 #[tauri::command]
@@ -230,7 +252,11 @@ pub async fn intelligence_register_project(
     state: State<'_, Mutex<IntelligenceState>>,
     project: ProjectInput,
 ) -> Result<Project, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.register_project(project)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .register_project(project)
 }
 
 #[tauri::command]
@@ -238,7 +264,11 @@ pub async fn intelligence_get_briefing(
     state: State<'_, Mutex<IntelligenceState>>,
     project_id: String,
 ) -> Result<Option<Briefing>, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.get_briefing(project_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .get_briefing(project_id)
 }
 
 #[tauri::command]
@@ -246,7 +276,11 @@ pub async fn intelligence_list_findings(
     state: State<'_, Mutex<IntelligenceState>>,
     project_id: String,
 ) -> Result<Vec<Finding>, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.list_findings(project_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .list_findings(project_id)
 }
 
 #[tauri::command]
@@ -255,7 +289,11 @@ pub async fn intelligence_dismiss_finding(
     finding_id: String,
     rationale: Option<String>,
 ) -> Result<Finding, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.dismiss_finding(finding_id, rationale)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .dismiss_finding(finding_id, rationale)
 }
 
 #[tauri::command]
@@ -263,7 +301,11 @@ pub async fn intelligence_start_meeting(
     state: State<'_, Mutex<IntelligenceState>>,
     project_id: String,
 ) -> Result<Meeting, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.start_meeting(project_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .start_meeting(project_id)
 }
 
 #[tauri::command]
@@ -271,7 +313,11 @@ pub async fn intelligence_park_meeting(
     state: State<'_, Mutex<IntelligenceState>>,
     meeting_id: String,
 ) -> Result<Meeting, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.park_meeting(meeting_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .park_meeting(meeting_id)
 }
 
 #[tauri::command]
@@ -279,7 +325,11 @@ pub async fn intelligence_resume_meeting(
     state: State<'_, Mutex<IntelligenceState>>,
     meeting_id: String,
 ) -> Result<Meeting, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.resume_meeting(meeting_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .resume_meeting(meeting_id)
 }
 
 #[tauri::command]
@@ -288,7 +338,11 @@ pub async fn intelligence_add_decision(
     meeting_id: String,
     draft: DecisionDraft,
 ) -> Result<Decision, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.add_decision(meeting_id, draft)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .add_decision(meeting_id, draft)
 }
 
 #[tauri::command]
@@ -297,7 +351,11 @@ pub async fn intelligence_edit_decision(
     decision_id: String,
     modifications: Vec<String>,
 ) -> Result<Decision, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.edit_decision(decision_id, modifications)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .edit_decision(decision_id, modifications)
 }
 
 #[tauri::command]
@@ -305,7 +363,11 @@ pub async fn intelligence_withdraw_decision(
     state: State<'_, Mutex<IntelligenceState>>,
     decision_id: String,
 ) -> Result<Decision, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.withdraw_decision(decision_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .withdraw_decision(decision_id)
 }
 
 #[tauri::command]
@@ -313,7 +375,11 @@ pub async fn intelligence_send_now(
     state: State<'_, Mutex<IntelligenceState>>,
     decision_id: String,
 ) -> Result<SendNowResult, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.send_now(decision_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .send_now(decision_id)
 }
 
 #[tauri::command]
@@ -321,7 +387,11 @@ pub async fn intelligence_preview_bundle(
     state: State<'_, Mutex<IntelligenceState>>,
     meeting_id: String,
 ) -> Result<BundlePreview, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.preview_bundle(meeting_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .preview_bundle(meeting_id)
 }
 
 #[tauri::command]
@@ -329,7 +399,11 @@ pub async fn intelligence_commit_bundle(
     state: State<'_, Mutex<IntelligenceState>>,
     meeting_id: String,
 ) -> Result<Bundle, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.commit_bundle(meeting_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .commit_bundle(meeting_id)
 }
 
 #[tauri::command]
@@ -394,7 +468,11 @@ pub async fn intelligence_get_meeting_record(
     state: State<'_, Mutex<IntelligenceState>>,
     meeting_id: String,
 ) -> Result<String, String> {
-    state.lock().map_err(|e| e.to_string())?.kb.get_meeting_record(meeting_id)
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .get_meeting_record(meeting_id)
 }
 
 // ─── Tests ────────────────────────────────────────────────────────────────────
@@ -458,7 +536,8 @@ mod tests {
             Some("dev"),
             serde_json::json!({"since_snapshot": "latest"}),
             ".planning/console/outbox/status/req_test.json",
-        ).unwrap();
+        )
+        .unwrap();
         let parsed: serde_json::Value = serde_json::from_str(&json).unwrap();
         assert_eq!(parsed["id"], "req_test");
         assert_eq!(parsed["type"], "intelligence.refresh_briefing");
@@ -476,12 +555,16 @@ mod tests {
             None,
             serde_json::json!({}),
             ".planning/console/outbox/status/req_s13.json",
-        ).unwrap();
+        )
+        .unwrap();
         // S13: no Bearer tokens, no API keys in console requests.
         assert!(!json.contains("Bearer "), "Must not contain Bearer token");
         assert!(!json.contains("sk-"), "Must not contain sk- API key");
         assert!(!json.contains("ghp_"), "Must not contain GitHub token");
-        assert!(!json.contains("ANTHROPIC_API_KEY"), "Must not contain ANTHROPIC_API_KEY");
+        assert!(
+            !json.contains("ANTHROPIC_API_KEY"),
+            "Must not contain ANTHROPIC_API_KEY"
+        );
     }
 
     #[test]
@@ -491,7 +574,8 @@ mod tests {
         let outbox = tmp.path().join("console/outbox/status");
         let request_id = generate_request_id();
         let respond_to = outbox.join(format!("{request_id}.json"));
-        let payload = serde_json::json!({"since_snapshot": "latest", "scope": [], "conversation_text": null});
+        let payload =
+            serde_json::json!({"since_snapshot": "latest", "scope": [], "conversation_text": null});
         let content = build_console_request(
             &request_id,
             "intelligence.refresh_briefing",
@@ -499,7 +583,8 @@ mod tests {
             Some("dev"),
             payload,
             &respond_to.to_string_lossy(),
-        ).unwrap();
+        )
+        .unwrap();
         atomic_write(&inbox, &format!("{request_id}.json"), &content).unwrap();
         // File exists and parses correctly.
         let file_path = inbox.join(format!("{request_id}.json"));
@@ -540,6 +625,9 @@ mod tests {
         // - tokio::process::Command
         // - Command::new
         // The absence is the invariant. Test documents it by passing.
-        assert!(true, "S2 invariant: no subprocess spawning in intelligence/server.rs");
+        assert!(
+            true,
+            "S2 invariant: no subprocess spawning in intelligence/server.rs"
+        );
     }
 }

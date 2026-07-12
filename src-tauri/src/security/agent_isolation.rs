@@ -313,7 +313,8 @@ impl AgentIsolationManager {
         };
 
         // Store in active agents
-        self.active_agents.insert(agent_id.clone(), instance.clone());
+        self.active_agents
+            .insert(agent_id.clone(), instance.clone());
 
         // Emit security event
         self.emit_event(
@@ -350,7 +351,9 @@ impl AgentIsolationManager {
         let agent = self
             .active_agents
             .get(id)
-            .ok_or_else(|| IsolationError::WorktreeCreationFailed(format!("agent {} not found", id)))?
+            .ok_or_else(|| {
+                IsolationError::WorktreeCreationFailed(format!("agent {} not found", id))
+            })?
             .clone();
 
         // Copy outbox to shared/results/{id}
@@ -372,7 +375,12 @@ impl AgentIsolationManager {
         )
         .map_err(|e| IsolationError::GitError(e.to_string()))?;
         let output = Command::new("git")
-            .args(["worktree", "remove", "--force", &agent.worktree_path.to_string_lossy()])
+            .args([
+                "worktree",
+                "remove",
+                "--force",
+                &agent.worktree_path.to_string_lossy(),
+            ])
             .current_dir(&self.project_root)
             .output();
 
@@ -418,9 +426,19 @@ impl AgentIsolationManager {
         let b_wt = b.worktree_path.to_string_lossy().to_string();
 
         // Check that agent A's write_dirs do NOT contain agent B's worktree
-        let a_can_write_b = a.sandbox_profile.filesystem.write_dirs.iter().any(|d| d == &b_wt);
+        let a_can_write_b = a
+            .sandbox_profile
+            .filesystem
+            .write_dirs
+            .iter()
+            .any(|d| d == &b_wt);
         // Check that agent B's write_dirs do NOT contain agent A's worktree
-        let b_can_write_a = b.sandbox_profile.filesystem.write_dirs.iter().any(|d| d == &a_wt);
+        let b_can_write_a = b
+            .sandbox_profile
+            .filesystem
+            .write_dirs
+            .iter()
+            .any(|d| d == &a_wt);
 
         !a_can_write_b && !b_can_write_a
     }
@@ -431,15 +449,20 @@ impl AgentIsolationManager {
     /// - `WorktreeRemove`: remove `.sandbox-profile.json`
     /// - `TaskCompleted`: copy outbox to shared results
     /// - Other hooks: no-op
-    pub fn handle_worktree_hook(&mut self, payload: WorktreeHookPayload) -> Result<(), IsolationError> {
+    pub fn handle_worktree_hook(
+        &mut self,
+        payload: WorktreeHookPayload,
+    ) -> Result<(), IsolationError> {
         let wt_path = PathBuf::from(&payload.worktree_path);
 
         match payload.hook.as_str() {
             "WorktreeCreate" => {
                 let agent_type = parse_agent_type(&payload.agent_type);
-                let profile = self
-                    .sandbox_gen
-                    .generate_for_worktree(&payload.agent_id, agent_type, &wt_path)?;
+                let profile = self.sandbox_gen.generate_for_worktree(
+                    &payload.agent_id,
+                    agent_type,
+                    &wt_path,
+                )?;
                 let profile_json = serde_json::to_string_pretty(&profile)
                     .map_err(|e| IsolationError::SandboxGenerationFailed(e.to_string()))?;
                 fs::write(wt_path.join(".sandbox-profile.json"), &profile_json)?;
@@ -465,12 +488,7 @@ impl AgentIsolationManager {
     }
 
     /// Record a security event internally.
-    fn emit_event(
-        &mut self,
-        event_type: &str,
-        severity: EventSeverity,
-        detail: serde_json::Value,
-    ) {
+    fn emit_event(&mut self, event_type: &str, severity: EventSeverity, detail: serde_json::Value) {
         let timestamp = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap()

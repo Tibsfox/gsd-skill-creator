@@ -53,7 +53,8 @@ fn delete_removes_entry() {
 #[test]
 fn delete_absent_entry_is_idempotent() {
     let kr = InMemoryKeyring::new();
-    kr.delete("never-stored").expect("delete absent is idempotent");
+    kr.delete("never-stored")
+        .expect("delete absent is idempotent");
 }
 
 #[test]

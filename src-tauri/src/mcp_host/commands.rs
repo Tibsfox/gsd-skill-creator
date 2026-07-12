@@ -3,13 +3,13 @@
 //! Exposes the host manager to the frontend via 5 IPC commands:
 //! mcp_connect, mcp_disconnect, mcp_list_servers, mcp_call_tool, mcp_get_trace.
 
+use super::manager::HostManager;
 use super::manager::ServerInfo;
 use super::registry::{ServerRegistry, ServerRegistryEntry};
 use super::router::{ToolCallResult, ToolRouter};
 use super::security::{StagingGate, TrustState};
 use super::trace::TraceEmitter;
 use super::types::{TraceEvent, TransportConfig};
-use super::manager::HostManager;
 
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -49,7 +49,9 @@ impl McpHostState {
     /// used `unsafe { &*ptr }` to dodge the checker, which would have been
     /// UB if `rebuild_index` ever touched another field of `self`.
     fn rebuild_router(&mut self) {
-        let Self { manager, router, .. } = self;
+        let Self {
+            manager, router, ..
+        } = self;
         router.rebuild_index(manager.connections());
     }
 }
@@ -86,7 +88,10 @@ pub async fn mcp_connect(
     state: tauri::State<'_, tokio::sync::Mutex<McpHostState>>,
 ) -> Result<String, String> {
     let mut host = state.lock().await;
-    let status = host.manager.connect_server(server_id.clone(), config.clone()).await?;
+    let status = host
+        .manager
+        .connect_server(server_id.clone(), config.clone())
+        .await?;
 
     // Add to registry for persistence
     let entry = ServerRegistryEntry {
@@ -106,8 +111,7 @@ pub async fn mcp_connect(
     // Persist registry
     let _ = host.registry.save().await;
 
-    let status_str = serde_json::to_string(&status)
-        .unwrap_or_else(|_| format!("{:?}", status));
+    let status_str = serde_json::to_string(&status).unwrap_or_else(|_| format!("{:?}", status));
     Ok(status_str)
 }
 
@@ -178,7 +182,10 @@ pub async fn mcp_call_tool(
         .map(|entry| entry.trust_state)
         .unwrap_or(TrustState::Quarantine); // Unknown servers default to quarantine
 
-    if let Err(reason) = host.staging_gate.validate(&trust_state, &tool_name, &params) {
+    if let Err(reason) = host
+        .staging_gate
+        .validate(&trust_state, &tool_name, &params)
+    {
         // Record blocked invocation in trace
         host.trace.record_incoming(
             &server_id_for_call,
@@ -190,9 +197,10 @@ pub async fn mcp_call_tool(
         return Err(format!("Staging gate blocked: {}", reason));
     }
 
-    let conn = host.manager.get_connection_mut(&server_id_for_call).ok_or_else(|| {
-        format!("Server unavailable: {}", server_id_for_call)
-    })?;
+    let conn = host
+        .manager
+        .get_connection_mut(&server_id_for_call)
+        .ok_or_else(|| format!("Server unavailable: {}", server_id_for_call))?;
 
     if conn.status != super::connection::ConnectionStatus::Connected {
         return Err(format!("Server '{}' is not connected", server_id_for_call));
@@ -253,7 +261,11 @@ pub async fn mcp_get_trace(
     let limit = count.unwrap_or(50);
 
     let events: Vec<TraceEvent> = if let Some(sid) = server_id {
-        host.trace.get_by_server(&sid, limit).into_iter().cloned().collect()
+        host.trace
+            .get_by_server(&sid, limit)
+            .into_iter()
+            .cloned()
+            .collect()
     } else {
         host.trace.get_recent(limit).into_iter().cloned().collect()
     };

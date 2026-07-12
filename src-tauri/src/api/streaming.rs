@@ -185,51 +185,41 @@ pub fn parse_sse_event(raw: &str) -> Result<SseEvent, SseParseError> {
 
     // Parse JSON based on event type
     match event_name {
-        "message_start" => {
-            match serde_json::from_str::<MessageStartData>(data_str) {
-                Ok(parsed) => Ok(SseEvent::MessageStart {
-                    id: parsed.message.id,
-                    model: parsed.message.model,
-                    input_tokens: parsed.message.usage.input_tokens,
-                }),
-                Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
-            }
-        }
-        "content_block_start" => {
-            match serde_json::from_str::<ContentBlockStartData>(data_str) {
-                Ok(parsed) => Ok(SseEvent::ContentBlockStart {
-                    index: parsed.index,
-                    block_type: parsed.content_block.block_type,
-                }),
-                Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
-            }
-        }
-        "content_block_delta" => {
-            match serde_json::from_str::<ContentBlockDeltaData>(data_str) {
-                Ok(parsed) => Ok(SseEvent::ContentBlockDelta {
-                    index: parsed.index,
-                    text: parsed.delta.text,
-                }),
-                Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
-            }
-        }
-        "content_block_stop" => {
-            match serde_json::from_str::<ContentBlockStopData>(data_str) {
-                Ok(parsed) => Ok(SseEvent::ContentBlockStop {
-                    index: parsed.index,
-                }),
-                Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
-            }
-        }
-        "message_delta" => {
-            match serde_json::from_str::<MessageDeltaData>(data_str) {
-                Ok(parsed) => Ok(SseEvent::MessageDelta {
-                    stop_reason: parsed.delta.stop_reason,
-                    output_tokens: parsed.usage.output_tokens,
-                }),
-                Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
-            }
-        }
+        "message_start" => match serde_json::from_str::<MessageStartData>(data_str) {
+            Ok(parsed) => Ok(SseEvent::MessageStart {
+                id: parsed.message.id,
+                model: parsed.message.model,
+                input_tokens: parsed.message.usage.input_tokens,
+            }),
+            Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
+        },
+        "content_block_start" => match serde_json::from_str::<ContentBlockStartData>(data_str) {
+            Ok(parsed) => Ok(SseEvent::ContentBlockStart {
+                index: parsed.index,
+                block_type: parsed.content_block.block_type,
+            }),
+            Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
+        },
+        "content_block_delta" => match serde_json::from_str::<ContentBlockDeltaData>(data_str) {
+            Ok(parsed) => Ok(SseEvent::ContentBlockDelta {
+                index: parsed.index,
+                text: parsed.delta.text,
+            }),
+            Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
+        },
+        "content_block_stop" => match serde_json::from_str::<ContentBlockStopData>(data_str) {
+            Ok(parsed) => Ok(SseEvent::ContentBlockStop {
+                index: parsed.index,
+            }),
+            Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
+        },
+        "message_delta" => match serde_json::from_str::<MessageDeltaData>(data_str) {
+            Ok(parsed) => Ok(SseEvent::MessageDelta {
+                stop_reason: parsed.delta.stop_reason,
+                output_tokens: parsed.usage.output_tokens,
+            }),
+            Err(_) => Ok(SseEvent::Unknown(raw.to_string())),
+        },
         "message_stop" => Ok(SseEvent::MessageStop),
         _ => Ok(SseEvent::Unknown(event_name.to_string())),
     }
@@ -331,9 +321,7 @@ pub async fn stream_response(
                             );
                             delta_index += 1;
                         }
-                        SseEvent::MessageDelta {
-                            output_tokens, ..
-                        } => {
+                        SseEvent::MessageDelta { output_tokens, .. } => {
                             let _ = app_handle.emit(
                                 crate::ipc::events::CHAT_USAGE,
                                 serde_json::json!({

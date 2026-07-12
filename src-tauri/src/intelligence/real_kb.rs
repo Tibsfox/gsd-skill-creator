@@ -24,7 +24,7 @@ use super::server::KbDelegate;
 use super::types::{
     AiDraft, BatchHints, Briefing, Bundle, BundlePreview, Confidence, Decision, DecisionDraft,
     DecisionKind, DecisionState, Finding, FindingKind, FindingStatus, Meeting, MeetingStatus,
-    MoveKind, ProducedBy, Priority, Project, ProjectInput, ProjectKind, SendNowResult, Severity,
+    MoveKind, Priority, ProducedBy, Project, ProjectInput, ProjectKind, SendNowResult, Severity,
     SourceRange, SuggestedMove,
 };
 
@@ -311,7 +311,9 @@ fn find_project_conn_for_decision(
             return Ok((conn, project.id.clone()));
         }
     }
-    Err(format!("decision {decision_id} not found in any project DB"))
+    Err(format!(
+        "decision {decision_id} not found in any project DB"
+    ))
 }
 
 /// ISO-8601 timestamp (UTC) for now.
@@ -337,9 +339,7 @@ fn now_iso8601() -> String {
     let day_in_year = days_in_era % 365;
     let month = (day_in_year / 30) + 1;
     let day = (day_in_year % 30) + 1;
-    format!(
-        "{year:04}-{month:02}-{day:02}T{hours:02}:{mins:02}:{secs_in_min:02}Z"
-    )
+    format!("{year:04}-{month:02}-{day:02}T{hours:02}:{mins:02}:{secs_in_min:02}Z")
 }
 
 /// Generate a short unique ID (8 alphanumeric chars) for new rows.
@@ -471,8 +471,7 @@ impl KbDelegate for RealKbDelegate {
         // Ensure the registry DB exists and is migrated before inserting.
         if !self.registry_path.exists() {
             if let Some(parent) = self.registry_path.parent() {
-                std::fs::create_dir_all(parent)
-                    .map_err(|e| format!("create registry dir: {e}"))?;
+                std::fs::create_dir_all(parent).map_err(|e| format!("create registry dir: {e}"))?;
             }
         }
         let conn = Connection::open(&self.registry_path)
@@ -505,7 +504,13 @@ impl KbDelegate for RealKbDelegate {
                 .unwrap_or("project");
             let slug: String = basename
                 .chars()
-                .map(|c| if c.is_alphanumeric() || c == '-' { c } else { '-' })
+                .map(|c| {
+                    if c.is_alphanumeric() || c == '-' {
+                        c
+                    } else {
+                        '-'
+                    }
+                })
                 .collect::<String>()
                 .trim_matches('-')
                 .to_lowercase();
@@ -677,8 +682,7 @@ impl KbDelegate for RealKbDelegate {
         finding_id: String,
         rationale: Option<String>,
     ) -> Result<Finding, String> {
-        let (conn, _project_id) =
-            find_project_conn_for_finding(self, &finding_id)?;
+        let (conn, _project_id) = find_project_conn_for_finding(self, &finding_id)?;
         let n = conn
             .execute(
                 "UPDATE findings SET status = 'dismissed', dismissed_rationale = ?1 \
@@ -766,8 +770,7 @@ impl KbDelegate for RealKbDelegate {
     }
 
     fn park_meeting(&self, meeting_id: String) -> Result<Meeting, String> {
-        let (conn, _project_id) =
-            find_project_conn_for_meeting(self, &meeting_id)?;
+        let (conn, _project_id) = find_project_conn_for_meeting(self, &meeting_id)?;
         let n = conn
             .execute(
                 "UPDATE meetings SET status = 'parked' WHERE id = ?1 AND status = 'in_session'",
@@ -783,8 +786,7 @@ impl KbDelegate for RealKbDelegate {
     }
 
     fn resume_meeting(&self, meeting_id: String) -> Result<Meeting, String> {
-        let (conn, _project_id) =
-            find_project_conn_for_meeting(self, &meeting_id)?;
+        let (conn, _project_id) = find_project_conn_for_meeting(self, &meeting_id)?;
         let n = conn
             .execute(
                 "UPDATE meetings SET status = 'in_session' WHERE id = ?1 AND status = 'parked'",
@@ -799,19 +801,14 @@ impl KbDelegate for RealKbDelegate {
         read_meeting_from_conn(&conn, &meeting_id)
     }
 
-    fn add_decision(
-        &self,
-        meeting_id: String,
-        draft: DecisionDraft,
-    ) -> Result<Decision, String> {
-        let (conn, _project_id) =
-            find_project_conn_for_meeting(self, &meeting_id)?;
+    fn add_decision(&self, meeting_id: String, draft: DecisionDraft) -> Result<Decision, String> {
+        let (conn, _project_id) = find_project_conn_for_meeting(self, &meeting_id)?;
         let id = format!("D-{}", short_id());
         let now = now_iso8601();
         // DecisionDraft has no developer_modifications field; default to empty.
         let dev_mods = "[]";
-        let source_findings = serde_json::to_string(&draft.source_findings)
-            .unwrap_or_else(|_| "[]".to_string());
+        let source_findings =
+            serde_json::to_string(&draft.source_findings).unwrap_or_else(|_| "[]".to_string());
         let kind_str = match draft.kind {
             DecisionKind::ResearchMission => "research_mission",
             DecisionKind::AnalysisRun => "analysis_run",
@@ -845,10 +842,8 @@ impl KbDelegate for RealKbDelegate {
         decision_id: String,
         modifications: Vec<String>,
     ) -> Result<Decision, String> {
-        let (conn, _project_id) =
-            find_project_conn_for_decision(self, &decision_id)?;
-        let mods_json = serde_json::to_string(&modifications)
-            .unwrap_or_else(|_| "[]".to_string());
+        let (conn, _project_id) = find_project_conn_for_decision(self, &decision_id)?;
+        let mods_json = serde_json::to_string(&modifications).unwrap_or_else(|_| "[]".to_string());
         let n = conn
             .execute(
                 "UPDATE decisions SET developer_modifications = ?1 WHERE id = ?2 AND state = 'pending'",
@@ -864,8 +859,7 @@ impl KbDelegate for RealKbDelegate {
     }
 
     fn withdraw_decision(&self, decision_id: String) -> Result<Decision, String> {
-        let (conn, _project_id) =
-            find_project_conn_for_decision(self, &decision_id)?;
+        let (conn, _project_id) = find_project_conn_for_decision(self, &decision_id)?;
         let n = conn
             .execute(
                 "UPDATE decisions SET state = 'withdrawn' WHERE id = ?1 AND state = 'pending'",
@@ -881,8 +875,7 @@ impl KbDelegate for RealKbDelegate {
     }
 
     fn send_now(&self, decision_id: String) -> Result<SendNowResult, String> {
-        let (conn, _project_id) =
-            find_project_conn_for_decision(self, &decision_id)?;
+        let (conn, _project_id) = find_project_conn_for_decision(self, &decision_id)?;
         let now = now_iso8601();
         let n = conn
             .execute(
@@ -980,8 +973,7 @@ impl KbDelegate for RealKbDelegate {
     }
 
     fn commit_bundle(&self, meeting_id: String) -> Result<Bundle, String> {
-        let (conn, _project_id) =
-            find_project_conn_for_meeting(self, &meeting_id)?;
+        let (conn, _project_id) = find_project_conn_for_meeting(self, &meeting_id)?;
         let now = now_iso8601();
         // Transition meeting to 'committed'; transition pending decisions to 'bundled'.
         let _m_rows = conn
@@ -1011,10 +1003,9 @@ impl KbDelegate for RealKbDelegate {
 
         let bundle_id = meeting_id.clone();
         let suggested_order = ids.clone();
-        let parallelizable_json = serde_json::to_string(&[ids.clone()])
-            .unwrap_or_else(|_| "[[]]".to_string());
-        let decisions_json = serde_json::to_string(&ids)
-            .unwrap_or_else(|_| "[]".to_string());
+        let parallelizable_json =
+            serde_json::to_string(&[ids.clone()]).unwrap_or_else(|_| "[[]]".to_string());
+        let decisions_json = serde_json::to_string(&ids).unwrap_or_else(|_| "[]".to_string());
 
         // Upsert bundle row (bundles share the meeting_id).
         let manifest_path = format!(".planning/staging/inbox/{meeting_id}.bundle.yaml");
@@ -1227,8 +1218,7 @@ mod tests {
         let tmp = TempDir::new().unwrap();
         let proj_root = tmp.path().join("proj");
         std::fs::create_dir_all(&proj_root).unwrap();
-        let registry_path =
-            create_registry_with_project(&tmp, "test-proj", &proj_root);
+        let registry_path = create_registry_with_project(&tmp, "test-proj", &proj_root);
         let kb = RealKbDelegate::with_registry_path(registry_path);
 
         let projects = kb.list_projects(None).unwrap();
@@ -1242,8 +1232,7 @@ mod tests {
         let tmp = TempDir::new().unwrap();
         let proj_root = tmp.path().join("proj");
         std::fs::create_dir_all(&proj_root).unwrap();
-        let registry_path =
-            create_registry_with_project(&tmp, "test-proj", &proj_root);
+        let registry_path = create_registry_with_project(&tmp, "test-proj", &proj_root);
         let kb = RealKbDelegate::with_registry_path(registry_path);
 
         let p = kb.get_project("test-proj".to_string()).unwrap();
@@ -1256,8 +1245,7 @@ mod tests {
         let tmp = TempDir::new().unwrap();
         let proj_root = tmp.path().join("proj");
         std::fs::create_dir_all(&proj_root).unwrap();
-        let registry_path =
-            create_registry_with_project(&tmp, "test-proj", &proj_root);
+        let registry_path = create_registry_with_project(&tmp, "test-proj", &proj_root);
         let kb = RealKbDelegate::with_registry_path(registry_path);
 
         let p = kb.get_project("nonexistent".to_string()).unwrap();
@@ -1269,8 +1257,7 @@ mod tests {
         let tmp = TempDir::new().unwrap();
         let proj_root = tmp.path().join("proj");
         std::fs::create_dir_all(&proj_root).unwrap();
-        let registry_path =
-            create_registry_with_project(&tmp, "test-proj", &proj_root);
+        let registry_path = create_registry_with_project(&tmp, "test-proj", &proj_root);
         let _db = create_project_db(&proj_root);
 
         // Insert a briefing
@@ -1320,8 +1307,7 @@ mod tests {
         let tmp = TempDir::new().unwrap();
         let proj_root = tmp.path().join("proj");
         std::fs::create_dir_all(&proj_root).unwrap();
-        let registry_path =
-            create_registry_with_project(&tmp, "test-proj", &proj_root);
+        let registry_path = create_registry_with_project(&tmp, "test-proj", &proj_root);
         let _db = create_project_db(&proj_root);
 
         let conn = Connection::open(
@@ -1378,8 +1364,7 @@ mod tests {
         let tmp = TempDir::new().unwrap();
         let proj_root = tmp.path().join("proj");
         std::fs::create_dir_all(&proj_root).unwrap();
-        let registry_path =
-            create_registry_with_project(&tmp, "test-proj", &proj_root);
+        let registry_path = create_registry_with_project(&tmp, "test-proj", &proj_root);
         let _db = create_project_db(&proj_root);
 
         let kb = RealKbDelegate::with_registry_path(registry_path);
@@ -1415,8 +1400,7 @@ mod tests {
         let tmp = TempDir::new().unwrap();
         let proj_root = tmp.path().join("proj");
         std::fs::create_dir_all(&proj_root).unwrap();
-        let registry_path =
-            create_registry_with_project(&tmp, "test-proj", &proj_root);
+        let registry_path = create_registry_with_project(&tmp, "test-proj", &proj_root);
         let _db = create_project_db(&proj_root);
 
         let kb = RealKbDelegate::with_registry_path(registry_path);

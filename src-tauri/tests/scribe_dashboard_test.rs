@@ -5,9 +5,7 @@
 //! app handle — a full GUI test would need a display server and is out of scope
 //! for the CI environment.
 
-use gsd_os_lib::scribe_dashboard::{
-    expected_dist_subpath, SCRIBE_WINDOW_LABEL,
-};
+use gsd_os_lib::scribe_dashboard::{expected_dist_subpath, SCRIBE_WINDOW_LABEL};
 
 /// The window label must be valid for use as a Tauri window identifier.
 /// Tauri requires labels to be non-empty and contain only alphanumeric

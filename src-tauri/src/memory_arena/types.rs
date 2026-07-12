@@ -60,7 +60,9 @@ impl TierKind {
             3 => Ok(TierKind::Vector),
             4 => Ok(TierKind::Blob),
             5 => Ok(TierKind::Resident),
-            other => Err(crate::memory_arena::error::ArenaError::UnknownTierKind(other)),
+            other => Err(crate::memory_arena::error::ArenaError::UnknownTierKind(
+                other,
+            )),
         }
     }
 
@@ -125,7 +127,9 @@ impl ChunkState {
         match byte {
             0 => Ok(ChunkState::Resident),
             1 => Ok(ChunkState::FadingOut),
-            other => Err(crate::memory_arena::error::ArenaError::UnknownChunkState(other)),
+            other => Err(crate::memory_arena::error::ArenaError::UnknownChunkState(
+                other,
+            )),
         }
     }
 
@@ -425,11 +429,13 @@ impl ArenaConfig {
     /// Validate that a proposed chunk size is within policy.
     pub fn validate_size(&self, size: u64) -> crate::memory_arena::error::ArenaResult<()> {
         if size < self.min_chunk_size || size > self.max_chunk_size {
-            Err(crate::memory_arena::error::ArenaError::ChunkSizeOutOfRange {
-                size,
-                min: self.min_chunk_size,
-                max: self.max_chunk_size,
-            })
+            Err(
+                crate::memory_arena::error::ArenaError::ChunkSizeOutOfRange {
+                    size,
+                    min: self.min_chunk_size,
+                    max: self.max_chunk_size,
+                },
+            )
         } else {
             Ok(())
         }

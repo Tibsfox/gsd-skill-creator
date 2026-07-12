@@ -5,7 +5,7 @@
 //! relative paths, and emits batched events to the webview via Tauri events.
 
 use notify::RecursiveMode;
-use notify_debouncer_full::{new_debouncer, DebouncedEvent, DebounceEventResult};
+use notify_debouncer_full::{new_debouncer, DebounceEventResult, DebouncedEvent};
 use serde::Serialize;
 use std::path::{Path, PathBuf};
 use std::sync::mpsc;
@@ -35,9 +35,8 @@ pub struct WatcherEventBatch {
 
 /// Returns `true` if any component of `path` matches an excluded segment.
 pub fn is_excluded(path: &Path) -> bool {
-    path.components().any(|c| {
-        EXCLUDED_SEGMENTS.contains(&c.as_os_str().to_str().unwrap_or(""))
-    })
+    path.components()
+        .any(|c| EXCLUDED_SEGMENTS.contains(&c.as_os_str().to_str().unwrap_or("")))
 }
 
 /// Maps a notify `EventKind` to a human-readable label.
@@ -94,12 +93,8 @@ pub fn start_watching(
     let (tx, rx) = mpsc::channel::<DebounceEventResult>();
     let (shutdown_tx, shutdown_rx) = mpsc::channel::<()>();
 
-    let mut debouncer = new_debouncer(
-        Duration::from_millis(DEBOUNCE_TIMEOUT_MS),
-        None,
-        tx,
-    )
-    .map_err(|e| e.to_string())?;
+    let mut debouncer = new_debouncer(Duration::from_millis(DEBOUNCE_TIMEOUT_MS), None, tx)
+        .map_err(|e| e.to_string())?;
 
     debouncer
         .watch(&watch_path, RecursiveMode::Recursive)

@@ -63,9 +63,8 @@ pub fn detect_platform() -> SandboxPlatform {
         }
         match Command::new("which").arg("bwrap").output() {
             Ok(output) if output.status.success() => {
-                let bwrap_path = PathBuf::from(
-                    String::from_utf8_lossy(&output.stdout).trim().to_string(),
-                );
+                let bwrap_path =
+                    PathBuf::from(String::from_utf8_lossy(&output.stdout).trim().to_string());
                 let version = ensure_process_allowed(
                     "sandbox/detect_platform",
                     ProcessOp::Output,
@@ -102,10 +101,7 @@ pub fn detect_platform() -> SandboxPlatform {
             sandbox_exec_available: available,
         }
     } else {
-        SandboxPlatform::Unsupported(format!(
-            "Unsupported OS: {}",
-            std::env::consts::OS
-        ))
+        SandboxPlatform::Unsupported(format!("Unsupported OS: {}", std::env::consts::OS))
     }
 }
 
@@ -159,8 +155,7 @@ pub fn check_dependencies(platform: &SandboxPlatform) -> Result<(), Vec<MissingD
                     install_apt: None,
                     install_dnf: None,
                     install_brew: Some(
-                        "sandbox-exec is included with macOS — check system integrity"
-                            .to_string(),
+                        "sandbox-exec is included with macOS — check system integrity".to_string(),
                     ),
                 }])
             }
@@ -209,11 +204,7 @@ pub enum ProfileError {
 // ============================================================================
 
 /// Default domains allowed for all agents except VERIFY (which gets none).
-const BASE_DOMAINS: &[&str] = &[
-    "api.anthropic.com",
-    "github.com",
-    "registry.npmjs.org",
-];
+const BASE_DOMAINS: &[&str] = &["api.anthropic.com", "github.com", "registry.npmjs.org"];
 
 /// Additional domains for SCOUT agents (research access).
 const SCOUT_EXTRA_DOMAINS: &[&str] = &[
@@ -283,10 +274,7 @@ impl SandboxProfileGenerator {
         match agent_type {
             AgentType::Main => InternalSandboxProfile {
                 agent_type: AgentType::Main,
-                write_dirs: vec![
-                    self.project_dir.clone(),
-                    self.planning_dir.clone(),
-                ],
+                write_dirs: vec![self.project_dir.clone(), self.planning_dir.clone()],
                 deny_read_dirs,
                 allowed_domains: BASE_DOMAINS.iter().map(|s| s.to_string()).collect(),
                 proxy_socket: Some(self.proxy_socket.clone()),
@@ -314,8 +302,7 @@ impl SandboxProfileGenerator {
             },
 
             AgentType::Scout => {
-                let mut domains: Vec<String> =
-                    BASE_DOMAINS.iter().map(|s| s.to_string()).collect();
+                let mut domains: Vec<String> = BASE_DOMAINS.iter().map(|s| s.to_string()).collect();
                 domains.extend(SCOUT_EXTRA_DOMAINS.iter().map(|s| s.to_string()));
 
                 InternalSandboxProfile {
@@ -388,11 +375,7 @@ impl SandboxProfileGenerator {
         }
 
         // Read-only bind for project dir if not already in write_dirs
-        if !profile
-            .write_dirs
-            .iter()
-            .any(|d| d == &self.project_dir)
-        {
+        if !profile.write_dirs.iter().any(|d| d == &self.project_dir) {
             args.push("--ro-bind".to_string());
             args.push(self.project_dir.to_string_lossy().to_string());
             args.push(self.project_dir.to_string_lossy().to_string());
@@ -455,10 +438,7 @@ impl SandboxProfileGenerator {
         // Allow reading system directories
         scheme.push_str("; System read access\n");
         for sys_dir in &["/usr", "/System", "/Library", "/bin", "/sbin"] {
-            scheme.push_str(&format!(
-                "(allow file-read* (subpath \"{}\"))\n",
-                sys_dir
-            ));
+            scheme.push_str(&format!("(allow file-read* (subpath \"{}\"))\n", sys_dir));
         }
         scheme.push('\n');
 
@@ -469,11 +449,7 @@ impl SandboxProfileGenerator {
 
         // Project directory access
         scheme.push_str("; Project access\n");
-        if profile
-            .write_dirs
-            .iter()
-            .any(|d| d == &self.project_dir)
-        {
+        if profile.write_dirs.iter().any(|d| d == &self.project_dir) {
             scheme.push_str(&format!(
                 "(allow file-read* file-write* (subpath \"{}\"))\n",
                 self.project_dir.display()
@@ -737,9 +713,7 @@ mod tests {
             "bwrap command must use --proc flag for restricted proc mount"
         );
         // Must NOT use --bind /proc /proc (direct mount)
-        let bind_proc = cmd
-            .windows(3)
-            .any(|w| w[0] == "--bind" && w[1] == "/proc");
+        let bind_proc = cmd.windows(3).any(|w| w[0] == "--bind" && w[1] == "/proc");
         assert!(
             !bind_proc,
             "bwrap must NOT bind-mount /proc directly (use --proc instead)"
@@ -798,8 +772,7 @@ mod tests {
 
     #[test]
     fn test_parse_verification_script_output_with_failure() {
-        let output =
-            "FAIL: SSH key readable inside sandbox\nPASS: Cannot write outside project\n";
+        let output = "FAIL: SSH key readable inside sandbox\nPASS: Cannot write outside project\n";
         let result = parse_verification_output(output, 1);
         assert!(!result.all_passed);
         assert_eq!(result.failure_count, 1);

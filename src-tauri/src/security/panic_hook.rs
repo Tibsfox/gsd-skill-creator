@@ -18,15 +18,12 @@ fn redact_patterns() -> &'static [Regex] {
     REDACT_PATTERNS.get_or_init(|| {
         vec![
             // key=value-style secrets (case-insensitive on the key).
-            Regex::new(
-                r"(?i)(passphrase|password|secret|api[_-]?key|token)\s*[=:]\s*\S+",
-            )
-            .expect("compile passphrase-key regex"),
+            Regex::new(r"(?i)(passphrase|password|secret|api[_-]?key|token)\s*[=:]\s*\S+")
+                .expect("compile passphrase-key regex"),
             // Bare base64-like blobs of >= 32 chars. Conservative — may
             // redact legitimate hashes/paths but the log site is panic-
             // adjacent so over-redaction is safer than leak.
-            Regex::new(r"[A-Za-z0-9+/=]{32,}")
-                .expect("compile base64-blob regex"),
+            Regex::new(r"[A-Za-z0-9+/=]{32,}").expect("compile base64-blob regex"),
         ]
     })
 }
@@ -73,12 +70,12 @@ mod tests {
     fn redact_passphrase_key_value_form() {
         let input = "failed: passphrase=hunter2 boom";
         let out = redact_panic_message(input);
+        assert!(!out.contains("hunter2"), "passphrase value leaked: {}", out);
         assert!(
-            !out.contains("hunter2"),
-            "passphrase value leaked: {}",
+            out.contains("<redacted>"),
+            "expected redaction marker: {}",
             out
         );
-        assert!(out.contains("<redacted>"), "expected redaction marker: {}", out);
     }
 
     #[test]

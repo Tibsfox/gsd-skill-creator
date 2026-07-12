@@ -22,15 +22,18 @@ pub mod error;
 pub mod handle;
 pub mod list;
 pub mod persistence;
-pub mod pool;
-pub mod types;
 #[cfg(feature = "postgres")]
 pub mod pg_cold;
+pub mod pool;
+pub mod types;
 #[cfg(feature = "cuda")]
 pub mod vram;
 pub mod warm_start;
 
 pub use arena::{Arena, ArenaStats};
+pub use cgroup::{
+    CgroupEnforcer, CgroupMemoryState, GROWTH_STEP_BYTES, HARD_CAP_BYTES, INITIAL_LIMIT_BYTES,
+};
 pub use chunk::Chunk;
 pub use error::{ArenaError, ArenaResult};
 pub use handle::{tier_kind_from_str, tier_kind_to_str, ArenaHandle};
@@ -39,18 +42,20 @@ pub use persistence::{
     read_checkpoint, replay_into, replay_into_set, write_checkpoint, JournalOp, JournalReader,
     JournalWriter,
 };
+#[cfg(feature = "postgres")]
+pub use pg_cold::PgColdSource;
 pub use pool::{
     ArenaSet, ArenaSetConfig, CrossfadeHandle, EvictionKind, GcReport, Manifest, PoolSpec,
     TierPolicy, TierPool, ARENA_SET_FORMAT_VERSION,
+};
+pub use types::{
+    AllocatorSelector, ArenaConfig, ChunkHeader, ChunkId, SweepReport, TierKind, CHUNK_MAGIC,
+    HEADER_SIZE,
 };
 pub use warm_start::{
     AsyncColdSource, ColdSource, InMemoryColdSource, WarmStart, WarmStartConfig, WarmStartReport,
     WarmStartStats,
 };
-#[cfg(feature = "postgres")]
-pub use pg_cold::PgColdSource;
-pub use cgroup::{CgroupEnforcer, CgroupMemoryState, GROWTH_STEP_BYTES, HARD_CAP_BYTES, INITIAL_LIMIT_BYTES};
-pub use types::{AllocatorSelector, ArenaConfig, ChunkHeader, ChunkId, SweepReport, TierKind, CHUNK_MAGIC, HEADER_SIZE};
 
 #[cfg(test)]
 mod tests;

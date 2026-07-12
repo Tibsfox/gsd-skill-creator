@@ -272,7 +272,9 @@ fn arena_allocates_distinct_ids() {
 fn arena_fills_up_and_reports_correct_stats() {
     let mut arena = test_arena();
     for i in 0..4 {
-        arena.alloc_chunk(TierKind::Warm, vec![i as u8; 32]).unwrap();
+        arena
+            .alloc_chunk(TierKind::Warm, vec![i as u8; 32])
+            .unwrap();
     }
     let stats = arena.stats();
     assert_eq!(stats.allocated_slots, 4);
@@ -322,7 +324,11 @@ fn arena_free_returns_slot_to_pool() {
 
     // Read should now fail.
     let result = arena.get_chunk(id);
-    assert!(result.is_err(), "expected error after free, got {:?}", result);
+    assert!(
+        result.is_err(),
+        "expected error after free, got {:?}",
+        result
+    );
 }
 
 #[test]
@@ -340,7 +346,11 @@ fn arena_free_then_alloc_does_not_reuse_id() {
 fn arena_free_unknown_id_errors() {
     let mut arena = test_arena();
     let result = arena.free_chunk(ChunkId::new(9999));
-    assert!(result.is_err(), "expected error on bogus id, got {:?}", result);
+    assert!(
+        result.is_err(),
+        "expected error on bogus id, got {:?}",
+        result
+    );
 }
 
 #[test]
@@ -353,7 +363,10 @@ fn arena_multiple_tiers_coexist() {
 
     assert_eq!(arena.get_chunk(hot).unwrap().header().tier, TierKind::Hot);
     assert_eq!(arena.get_chunk(warm).unwrap().header().tier, TierKind::Warm);
-    assert_eq!(arena.get_chunk(vector).unwrap().header().tier, TierKind::Vector);
+    assert_eq!(
+        arena.get_chunk(vector).unwrap().header().tier,
+        TierKind::Vector
+    );
     assert_eq!(arena.get_chunk(blob).unwrap().header().tier, TierKind::Blob);
 }
 
@@ -613,7 +626,9 @@ fn journal_replay_is_idempotent() {
     let journal_path = dir.path().join("idem.journal");
 
     let mut source = test_arena();
-    let id = source.alloc_chunk(TierKind::Blob, b"idempotent".to_vec()).unwrap();
+    let id = source
+        .alloc_chunk(TierKind::Blob, b"idempotent".to_vec())
+        .unwrap();
     let chunk_bytes = source.get_chunk(id).unwrap().serialize();
 
     let mut writer = JournalWriter::open(&journal_path).unwrap();
@@ -712,7 +727,9 @@ fn journal_detects_corrupt_record_checksum() {
     let journal_path = dir.path().join("corrupt.journal");
 
     let mut source = test_arena();
-    let id = source.alloc_chunk(TierKind::Warm, b"pristine".to_vec()).unwrap();
+    let id = source
+        .alloc_chunk(TierKind::Warm, b"pristine".to_vec())
+        .unwrap();
     let bytes = source.get_chunk(id).unwrap().serialize();
 
     let mut writer = JournalWriter::open(&journal_path).unwrap();
@@ -788,7 +805,9 @@ fn full_recovery_from_checkpoint_plus_journal() {
         .alloc_chunk(TierKind::Blob, b"will-be-freed".to_vec())
         .unwrap();
     let transient_bytes = arena.get_chunk(id_transient).unwrap().serialize();
-    journal.append_alloc(id_transient, &transient_bytes).unwrap();
+    journal
+        .append_alloc(id_transient, &transient_bytes)
+        .unwrap();
     journal.append_free(id_transient).unwrap();
     journal.flush().unwrap();
     drop(journal);
@@ -867,8 +886,7 @@ fn mmap_arena_creates_file_of_correct_size() {
     let dir = tempdir().unwrap();
     let path = dir.path().join("mmap-size.bin");
 
-    let arena = Arena::new_mmap_file(ArenaConfig::test(), 4, &path)
-        .expect("mmap arena creation");
+    let arena = Arena::new_mmap_file(ArenaConfig::test(), 4, &path).expect("mmap arena creation");
     assert_eq!(arena.num_slots(), 4);
 
     let metadata = std::fs::metadata(&path).unwrap();
@@ -903,9 +921,7 @@ fn mmap_arena_supports_all_tier_kinds() {
         TierKind::Blob,
         TierKind::Resident,
     ] {
-        let id = arena
-            .alloc_chunk(tier, vec![tier.as_u8(); 64])
-            .unwrap();
+        let id = arena.alloc_chunk(tier, vec![tier.as_u8(); 64]).unwrap();
         let chunk = arena.get_chunk(id).unwrap();
         assert_eq!(chunk.header().tier, tier);
         assert_eq!(chunk.payload()[0], tier.as_u8());
@@ -953,11 +969,8 @@ fn mmap_arena_persists_bytes_through_remount_via_checkpoint() {
     };
 
     // Remount — new mmap-backed arena from the same file + checkpoint.
-    let restored = crate::memory_arena::persistence::read_checkpoint(
-        ArenaConfig::test(),
-        &ckpt_path,
-    )
-    .unwrap();
+    let restored =
+        crate::memory_arena::persistence::read_checkpoint(ArenaConfig::test(), &ckpt_path).unwrap();
     let chunk = restored.get_chunk(id).unwrap();
     assert_eq!(chunk.payload(), expected_payload.as_slice());
     assert_eq!(chunk.header().tier, TierKind::Resident);
@@ -991,8 +1004,7 @@ fn mmap_arena_checkpoint_tamper_detection_still_works() {
     bytes[mid] ^= 0x01;
     std::fs::write(&ckpt_path, &bytes).unwrap();
 
-    let result =
-        crate::memory_arena::persistence::read_checkpoint(ArenaConfig::test(), &ckpt_path);
+    let result = crate::memory_arena::persistence::read_checkpoint(ArenaConfig::test(), &ckpt_path);
     assert!(
         matches!(result, Err(ArenaError::CorruptCheckpoint { .. })),
         "expected CorruptCheckpoint for tampered file, got {:?}",
@@ -1013,9 +1025,7 @@ fn m8_sparse_checkpoint_is_smaller_than_dense_for_lightly_used_arena() {
     let path = dir.path().join("sparse-light.ckpt");
 
     let mut arena = test_arena();
-    arena
-        .alloc_chunk(TierKind::Blob, b"tiny".to_vec())
-        .unwrap();
+    arena.alloc_chunk(TierKind::Blob, b"tiny".to_vec()).unwrap();
 
     write_checkpoint(&arena, &path).expect("write v2 sparse checkpoint");
     let size = std::fs::metadata(&path).unwrap().len() as usize;
@@ -1070,9 +1080,7 @@ fn m8_sparse_checkpoint_roundtrips_many_chunks_with_varied_sizes() {
     let mut arena = Arena::new(cfg.clone(), 8).unwrap();
 
     let id1 = arena.alloc_chunk(TierKind::Hot, vec![0x11; 8]).unwrap();
-    let id2 = arena
-        .alloc_chunk(TierKind::Warm, vec![0x22; 200])
-        .unwrap();
+    let id2 = arena.alloc_chunk(TierKind::Warm, vec![0x22; 200]).unwrap();
     let id3 = arena
         .alloc_chunk(TierKind::Vector, vec![0x33; 1024])
         .unwrap();
@@ -1089,10 +1097,7 @@ fn m8_sparse_checkpoint_roundtrips_many_chunks_with_varied_sizes() {
 
     assert_eq!(restored.stats().allocated_slots, 4);
     assert_eq!(restored.get_chunk(id1).unwrap().payload(), vec![0x11; 8]);
-    assert_eq!(
-        restored.get_chunk(id3).unwrap().payload(),
-        vec![0x33; 1024]
-    );
+    assert_eq!(restored.get_chunk(id3).unwrap().payload(), vec![0x33; 1024]);
     assert_eq!(restored.get_chunk(id4).unwrap().payload(), Vec::<u8>::new());
     assert_eq!(restored.get_chunk(id5).unwrap().payload(), vec![0x55; 128]);
     // id2 was freed so it should not be recoverable.
@@ -1160,7 +1165,10 @@ fn m8_sparse_checkpoint_checkpoint_then_free_then_checkpoint_shrinks() {
     // And it should still restore correctly with the one remaining chunk.
     let restored = read_checkpoint(ArenaConfig::test(), &path).unwrap();
     assert_eq!(restored.stats().allocated_slots, 1);
-    assert_eq!(restored.get_chunk(ids[3]).unwrap().payload(), vec![3u8; 1024]);
+    assert_eq!(
+        restored.get_chunk(ids[3]).unwrap().payload(),
+        vec![3u8; 1024]
+    );
 }
 
 #[test]
@@ -1174,7 +1182,9 @@ fn m8_reader_still_accepts_legacy_v1_dense_checkpoint() {
 
     // Build a canonical arena with one chunk so we know what bytes to emit.
     let mut arena = test_arena();
-    let id = arena.alloc_chunk(TierKind::Warm, b"legacy".to_vec()).unwrap();
+    let id = arena
+        .alloc_chunk(TierKind::Warm, b"legacy".to_vec())
+        .unwrap();
     let expected_slot = {
         // Directory has one entry — its slot number is what we need.
         let entries: Vec<_> = arena
@@ -1235,7 +1245,9 @@ fn m9_streaming_chunk_checksum_matches_oneshot_xxh3() {
     const CHECKSUM_OFFSET: usize = 56;
 
     for payload_len in [0usize, 1, 63, 64, 65, 128, 1024, 4096 - HEADER_SIZE] {
-        let payload: Vec<u8> = (0..payload_len).map(|i| (i as u8).wrapping_mul(13)).collect();
+        let payload: Vec<u8> = (0..payload_len)
+            .map(|i| (i as u8).wrapping_mul(13))
+            .collect();
         let mut chunk = Chunk::new(ChunkId::new(42), TierKind::Warm, payload.clone());
         chunk.finalize();
 
@@ -1332,10 +1344,17 @@ fn m11_alloc_path_produces_valid_checksum() {
     // get_chunk must still validate the streaming checksum.
     let mut arena = test_arena();
     for payload_len in [0usize, 1, 17, 200, 1024, 4096 - HEADER_SIZE] {
-        let payload: Vec<u8> = (0..payload_len).map(|i| (i as u8).wrapping_mul(7)).collect();
+        let payload: Vec<u8> = (0..payload_len)
+            .map(|i| (i as u8).wrapping_mul(7))
+            .collect();
         let id = arena.alloc_chunk(TierKind::Blob, payload.clone()).unwrap();
         let got = arena.get_chunk(id).unwrap();
-        assert_eq!(got.payload(), payload.as_slice(), "payload mismatch at len={}", payload_len);
+        assert_eq!(
+            got.payload(),
+            payload.as_slice(),
+            "payload mismatch at len={}",
+            payload_len
+        );
         arena.free_chunk(id).unwrap();
     }
 }
@@ -1365,7 +1384,11 @@ fn m11_shrinking_realloc_cycle_does_not_leak_stale_bytes() {
     // Directly inspect the raw storage for the slot to confirm the tail
     // is all zero (not leaking old payload bytes). Use the `storage`
     // pub(crate) accessor available in the tests.rs module.
-    let slot = arena.directory_entries().find(|(id, _)| *id == id2).unwrap().1;
+    let slot = arena
+        .directory_entries()
+        .find(|(id, _)| *id == id2)
+        .unwrap()
+        .1;
     let slot_size = arena.config().chunk_size as usize;
     let start = slot * slot_size;
     let payload_start = start + HEADER_SIZE;
@@ -1404,7 +1427,8 @@ fn m11_free_only_zeros_valid_region() {
     // Tail must be identical to the pre-free snapshot (we didn't touch it).
     let tail_after: &[u8] = &arena.storage()[valid_end..start + slot_size];
     assert_eq!(
-        tail_after, tail_snapshot.as_slice(),
+        tail_after,
+        tail_snapshot.as_slice(),
         "free should leave tail untouched"
     );
 }
@@ -1490,7 +1514,9 @@ mod pool_tests {
         pool.alloc(vec![2u8; 64]).expect("alloc 2 should succeed");
 
         // Third alloc must fail with PoolFull.
-        let err = pool.alloc(vec![3u8; 64]).expect_err("third alloc should fail");
+        let err = pool
+            .alloc(vec![3u8; 64])
+            .expect_err("third alloc should fail");
         match err {
             ArenaError::PoolFull { tier, max_chunks } => {
                 assert_eq!(tier, TierKind::Hot);
@@ -1734,12 +1760,7 @@ mod list_tests {
             }
 
             // Invariant check: oldest and len must match the reference.
-            assert_eq!(
-                lru.len(),
-                reference.len(),
-                "len divergence after op {}",
-                op
-            );
+            assert_eq!(lru.len(), reference.len(), "len divergence after op {}", op);
             let expected_oldest = reference.back().copied();
             assert_eq!(
                 lru.oldest(),
@@ -1795,9 +1816,7 @@ mod arena_lru_tests {
         // apply_alloc to replay into a target arena. The replay path must
         // update the LRU so downstream eviction sees the replayed chunk.
         let mut source = Arena::new(ArenaConfig::test(), 4).unwrap();
-        let id = source
-            .alloc_chunk(TierKind::Blob, vec![42u8; 100])
-            .unwrap();
+        let id = source.alloc_chunk(TierKind::Blob, vec![42u8; 100]).unwrap();
         let chunk = source.get_chunk(id).unwrap();
         let chunk_bytes = chunk.serialize();
 
@@ -1830,9 +1849,7 @@ mod arena_lru_tests {
 #[cfg(test)]
 mod arena_set_tests {
     use crate::memory_arena::error::ArenaError;
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind};
     use tempfile::tempdir;
 
@@ -1856,7 +1873,7 @@ mod arena_set_tests {
             chunk_size: cfg.chunk_size,
             num_slots: 8,
             policy: small_policy(max),
-        allocator: Default::default(),
+            allocator: Default::default(),
         }
     }
 
@@ -1895,7 +1912,9 @@ mod arena_set_tests {
             CgroupEnforcer::from_path(cg_dir.path().to_path_buf()).expect("from_path"),
         );
         assert!(set.has_cgroup_enforcer());
-        let _ = set.alloc(TierKind::Hot, vec![7u8; 64]).expect("alloc within headroom");
+        let _ = set
+            .alloc(TierKind::Hot, vec![7u8; 64])
+            .expect("alloc within headroom");
         // Ample headroom → no grow; limit unchanged.
         let state = set.cgroup_state().expect("attached").expect("state");
         assert_eq!(state.limit_bytes, 8u64 << 30);
@@ -1913,7 +1932,9 @@ mod arena_set_tests {
         set.attach_cgroup_enforcer(
             CgroupEnforcer::from_path(cg_dir.path().to_path_buf()).expect("from_path"),
         );
-        let _ = set.alloc(TierKind::Hot, vec![0u8; 64]).expect("alloc forces a grow");
+        let _ = set
+            .alloc(TierKind::Hot, vec![0u8; 64])
+            .expect("alloc forces a grow");
         // memory.max grew by exactly one step.
         let new_max = std::fs::read_to_string(cg_dir.path().join("memory.max")).unwrap();
         assert_eq!(new_max.trim(), (max0 + GROWTH_STEP_BYTES).to_string());
@@ -2050,7 +2071,13 @@ mod arena_set_tests {
             .unwrap()
             .alloc(vec![3u8; 32])
             .expect_err("should be PoolFull");
-        assert!(matches!(err, ArenaError::PoolFull { tier: TierKind::Hot, max_chunks: 2 }));
+        assert!(matches!(
+            err,
+            ArenaError::PoolFull {
+                tier: TierKind::Hot,
+                max_chunks: 2
+            }
+        ));
 
         // Warm still has room (max_chunks = 0 → unlimited).
         set.pool_mut(TierKind::Warm)
@@ -2076,13 +2103,9 @@ mod arena_set_tests {
 
 #[cfg(test)]
 mod warm_start_tests {
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, TierKind};
-    use crate::memory_arena::warm_start::{
-        ColdSource, InMemoryColdSource, WarmStart,
-    };
+    use crate::memory_arena::warm_start::{ColdSource, InMemoryColdSource, WarmStart};
     use tempfile::tempdir;
 
     fn unlimited_spec(tier: TierKind, num_slots: usize) -> PoolSpec {
@@ -2111,15 +2134,14 @@ mod warm_start_tests {
     fn warm_start_empty_arena_set_reports_zero_everywhere() {
         let tmp = tempdir().unwrap();
         {
-            let config = ArenaSetConfig::new(tmp.path())
-                .with_pool(unlimited_spec(TierKind::Hot, 8));
+            let config =
+                ArenaSetConfig::new(tmp.path()).with_pool(unlimited_spec(TierKind::Hot, 8));
             let set = ArenaSet::create(config).expect("create");
             set.flush().expect("flush");
             drop(set);
         }
         let cold = InMemoryColdSource::new();
-        let (reopened, report) =
-            WarmStart::open(tmp.path(), &cold).expect("warm start open");
+        let (reopened, report) = WarmStart::open(tmp.path(), &cold).expect("warm start open");
         assert_eq!(report.slots_walked, 0);
         assert_eq!(report.slots_validated, 0);
         assert_eq!(report.slots_corrupt, 0);
@@ -2157,8 +2179,7 @@ mod warm_start_tests {
         }
 
         let cold = InMemoryColdSource::new();
-        let (reopened, report) =
-            WarmStart::open(tmp.path(), &cold).expect("warm start open");
+        let (reopened, report) = WarmStart::open(tmp.path(), &cold).expect("warm start open");
         assert_eq!(report.slots_corrupt, 0);
         assert_eq!(report.slots_rebuilt_from_cold, 0);
         assert_eq!(report.slots_missing, 0);
@@ -2190,9 +2211,7 @@ mod warm_start_tests {
 
 #[cfg(test)]
 mod warm_start_fault_tests {
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind, HEADER_SIZE};
     use crate::memory_arena::warm_start::{InMemoryColdSource, WarmStart};
     use std::fs::OpenOptions;
@@ -2251,8 +2270,8 @@ mod warm_start_fault_tests {
         // 1. Build set, alloc 5 chunks, capture chunk C's id and original payload.
         let target_id;
         {
-            let config = ArenaSetConfig::new(tmp.path())
-                .with_pool(unlimited_spec(TierKind::Hot, 8));
+            let config =
+                ArenaSetConfig::new(tmp.path()).with_pool(unlimited_spec(TierKind::Hot, 8));
             let mut set = ArenaSet::create(config).unwrap();
             for i in 0..5usize {
                 let payload = if i == 2 {
@@ -2307,7 +2326,10 @@ mod warm_start_fault_tests {
                 }
             }
         }
-        assert!(found_rebuild, "expected to find rebuilt chunk with target payload");
+        assert!(
+            found_rebuild,
+            "expected to find rebuilt chunk with target payload"
+        );
     }
 
     #[test]
@@ -2319,8 +2341,8 @@ mod warm_start_fault_tests {
 
         let target_id;
         {
-            let config = ArenaSetConfig::new(tmp.path())
-                .with_pool(unlimited_spec(TierKind::Blob, 8));
+            let config =
+                ArenaSetConfig::new(tmp.path()).with_pool(unlimited_spec(TierKind::Blob, 8));
             let mut set = ArenaSet::create(config).unwrap();
             for i in 0..3usize {
                 let payload = if i == 1 {
@@ -2381,8 +2403,8 @@ mod warm_start_fault_tests {
         let slot_size = ArenaConfig::test().chunk_size as usize;
 
         {
-            let config = ArenaSetConfig::new(tmp.path())
-                .with_pool(unlimited_spec(TierKind::Hot, 4));
+            let config =
+                ArenaSetConfig::new(tmp.path()).with_pool(unlimited_spec(TierKind::Hot, 4));
             let mut set = ArenaSet::create(config).unwrap();
             // Alloc one chunk (slot 0).
             set.pool_mut(TierKind::Hot)
@@ -2432,9 +2454,7 @@ mod warm_start_fault_tests {
     /// placeholder.
     #[test]
     fn warm_start_truncated_journal_stops_cleanly() {
-        use crate::memory_arena::persistence::{
-            replay_into_set, JournalReader, JournalWriter,
-        };
+        use crate::memory_arena::persistence::{replay_into_set, JournalReader, JournalWriter};
         use crate::memory_arena::Chunk;
 
         let dir = tempdir().unwrap();
@@ -2486,8 +2506,8 @@ mod warm_start_fault_tests {
         .expect("create");
 
         let reader = JournalReader::open(&journal_path).unwrap();
-        let applied = replay_into_set(&mut set, reader)
-            .expect("truncation should stop cleanly, not error");
+        let applied =
+            replay_into_set(&mut set, reader).expect("truncation should stop cleanly, not error");
 
         // All 3 Hot ops should have applied cleanly (they come first).
         // M3 Plan 05: `pool.len()` is now accurate post-replay.
@@ -2535,15 +2555,19 @@ mod open_lazy_tests {
     fn seed_arena_file(
         n_chunks: usize,
         num_slots: usize,
-    ) -> (tempfile::TempDir, std::path::PathBuf, ArenaConfig, usize, Vec<ChunkId>) {
+    ) -> (
+        tempfile::TempDir,
+        std::path::PathBuf,
+        ArenaConfig,
+        usize,
+        Vec<ChunkId>,
+    ) {
         let config = ArenaConfig::test();
         let mut arena = Arena::new(config.clone(), num_slots).expect("heap arena");
         let mut ids = Vec::with_capacity(n_chunks);
         for i in 0..n_chunks {
             let payload = vec![(i as u8).wrapping_mul(13); 64];
-            let id = arena
-                .alloc_chunk(TierKind::Hot, payload)
-                .expect("alloc");
+            let id = arena.alloc_chunk(TierKind::Hot, payload).expect("alloc");
             ids.push(id);
         }
         // Dump the arena's raw storage to a tempfile — this mimics an
@@ -2636,10 +2660,7 @@ mod open_lazy_tests {
             "expected dropped id {} to be gone after bad-magic wipe",
             dropped_id
         );
-        let survived: usize = ids
-            .iter()
-            .filter(|id| arena.contains(**id))
-            .count();
+        let survived: usize = ids.iter().filter(|id| arena.contains(**id)).count();
         assert_eq!(survived, 4);
         // The bad-magic slot is back in the free stack, so free_slot_count
         // should reflect num_slots - 4 (not num_slots - 5).
@@ -2663,8 +2684,7 @@ mod open_lazy_tests {
             f.write_all(&vec![0u8; total_bytes]).unwrap();
             f.sync_all().unwrap();
         }
-        let arena = Arena::open_lazy(config, num_slots, &path)
-            .expect("open_lazy on empty file");
+        let arena = Arena::open_lazy(config, num_slots, &path).expect("open_lazy on empty file");
         assert_eq!(arena.free_slot_count(), num_slots);
         assert_eq!(arena.next_chunk_id(), 1);
         // Suppress unused-import warning when Arena/ArenaError aren't used.
@@ -2704,9 +2724,7 @@ mod validate_chunk_tests {
     #[test]
     fn validate_chunk_catches_single_bit_payload_corruption() {
         let mut arena = Arena::new(ArenaConfig::test(), 4).unwrap();
-        let id = arena
-            .alloc_chunk(TierKind::Hot, vec![0xAA; 256])
-            .unwrap();
+        let id = arena.alloc_chunk(TierKind::Hot, vec![0xAA; 256]).unwrap();
         // Flip one bit deep in the payload via raw storage mutation.
         let slot_size = arena.config().chunk_size as usize;
         // Chunk lives in slot 0 because it's the first alloc.
@@ -2725,9 +2743,7 @@ mod validate_chunk_tests {
     fn validate_chunk_unknown_id() {
         let mut arena = Arena::new(ArenaConfig::test(), 4).unwrap();
         for _ in 0..3 {
-            arena
-                .alloc_chunk(TierKind::Hot, vec![0u8; 32])
-                .unwrap();
+            arena.alloc_chunk(TierKind::Hot, vec![0u8; 32]).unwrap();
         }
         let result = arena.validate_chunk(ChunkId::new(999));
         assert!(
@@ -2785,8 +2801,7 @@ mod validate_chunk_tests {
         }
 
         // Lazy open must succeed; the directory must contain all 10 ids.
-        let arena =
-            Arena::open_lazy(config, num_slots, &path).expect("open_lazy");
+        let arena = Arena::open_lazy(config, num_slots, &path).expect("open_lazy");
         assert_eq!(arena.free_slot_count(), num_slots - n_chunks);
 
         // 9 chunks validate, 1 (slot 4) fails with ChecksumMismatch.
@@ -2816,9 +2831,7 @@ mod journal_dispatch_tests {
     use crate::memory_arena::persistence::{
         replay_into_set, JournalOp, JournalReader, JournalWriter,
     };
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind};
     use crate::memory_arena::Chunk;
     use tempfile::tempdir;
@@ -2874,7 +2887,9 @@ mod journal_dispatch_tests {
         let mut seen_frees = 0;
         while let Some(op) = reader.next_op().unwrap() {
             match op {
-                JournalOp::Alloc { pool_id, chunk_id, .. } => {
+                JournalOp::Alloc {
+                    pool_id, chunk_id, ..
+                } => {
                     assert_eq!(pool_id, TierKind::Hot);
                     assert!(matches!(chunk_id.as_u64(), 1 | 2 | 3));
                     seen_allocs += 1;
@@ -2942,9 +2957,18 @@ mod journal_dispatch_tests {
         let mut vec_allocs = 0;
         while let Some(op) = reader.next_op().unwrap() {
             match op {
-                JournalOp::Alloc { pool_id: TierKind::Hot, .. } => hot_allocs += 1,
-                JournalOp::Alloc { pool_id: TierKind::Warm, .. } => warm_allocs += 1,
-                JournalOp::Alloc { pool_id: TierKind::Vector, .. } => vec_allocs += 1,
+                JournalOp::Alloc {
+                    pool_id: TierKind::Hot,
+                    ..
+                } => hot_allocs += 1,
+                JournalOp::Alloc {
+                    pool_id: TierKind::Warm,
+                    ..
+                } => warm_allocs += 1,
+                JournalOp::Alloc {
+                    pool_id: TierKind::Vector,
+                    ..
+                } => vec_allocs += 1,
                 other => panic!("unexpected op: {:?}", other),
             }
         }
@@ -3039,7 +3063,9 @@ mod journal_dispatch_tests {
         let mut reader = JournalReader::open(&journal_path).unwrap();
         let op1 = reader.next_op().unwrap().expect("alloc op");
         match op1 {
-            JournalOp::Alloc { pool_id, chunk_id, .. } => {
+            JournalOp::Alloc {
+                pool_id, chunk_id, ..
+            } => {
                 assert_eq!(pool_id, TierKind::Hot);
                 assert_eq!(chunk_id.as_u64(), 7);
             }
@@ -3104,7 +3130,11 @@ mod journal_dispatch_tests {
         // Replay stops cleanly at the last intact record — no error.
         let applied = replay_into_set(&mut set, reader).unwrap();
         // All 3 Hot ops landed (they come first).
-        assert!(applied >= 3, "expected at least 3 ops to land, got {}", applied);
+        assert!(
+            applied >= 3,
+            "expected at least 3 ops to land, got {}",
+            applied
+        );
         // M3 Plan 05: pool.len() is accurate post-replay.
         let hot_count = set.pool(TierKind::Hot).unwrap().len() as usize;
         assert_eq!(hot_count, 3, "all 3 Hot ops should have landed");
@@ -3315,9 +3345,7 @@ mod journal_dispatch_tests {
 
 #[cfg(test)]
 mod warm_start_config_tests {
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, ChunkId, TierKind, HEADER_SIZE};
     use crate::memory_arena::warm_start::{
         InMemoryColdSource, WarmStart, WarmStartConfig, WarmStartStats,
@@ -3357,8 +3385,7 @@ mod warm_start_config_tests {
         let tmp = tempdir().unwrap();
         {
             let mut set = ArenaSet::create(
-                ArenaSetConfig::new(tmp.path())
-                    .with_pool(unlimited_spec(TierKind::Hot, 16)),
+                ArenaSetConfig::new(tmp.path()).with_pool(unlimited_spec(TierKind::Hot, 16)),
             )
             .unwrap();
             for i in 0..8usize {
@@ -3373,12 +3400,7 @@ mod warm_start_config_tests {
         // Default (lazy) open.
         let cold = InMemoryColdSource::new();
         let (set, _report, stats): (ArenaSet, _, WarmStartStats) =
-            WarmStart::open_with_config(
-                tmp.path(),
-                &cold,
-                WarmStartConfig::default(),
-            )
-            .unwrap();
+            WarmStart::open_with_config(tmp.path(), &cold, WarmStartConfig::default()).unwrap();
         // Lazy mode: no checksums validated.
         assert_eq!(stats.checksums_validated, 0);
         // 8 allocated slots should appear in the lazy directory.
@@ -3396,8 +3418,7 @@ mod warm_start_config_tests {
         let tmp = tempdir().unwrap();
         {
             let mut set = ArenaSet::create(
-                ArenaSetConfig::new(tmp.path())
-                    .with_pool(unlimited_spec(TierKind::Hot, 16)),
+                ArenaSetConfig::new(tmp.path()).with_pool(unlimited_spec(TierKind::Hot, 16)),
             )
             .unwrap();
             for i in 0..10usize {
@@ -3431,8 +3452,7 @@ mod warm_start_config_tests {
         let target_id;
         {
             let mut set = ArenaSet::create(
-                ArenaSetConfig::new(tmp.path())
-                    .with_pool(unlimited_spec(TierKind::Hot, 8)),
+                ArenaSetConfig::new(tmp.path()).with_pool(unlimited_spec(TierKind::Hot, 8)),
             )
             .unwrap();
             for i in 0..5usize {
@@ -3466,7 +3486,10 @@ mod warm_start_config_tests {
         let cold = InMemoryColdSource::new();
         let (set, report) = WarmStart::open(tmp.path(), &cold).unwrap();
         // Lazy mode reports no corruption.
-        assert_eq!(report.slots_corrupt, 0, "lazy mode should not see payload corruption");
+        assert_eq!(
+            report.slots_corrupt, 0,
+            "lazy mode should not see payload corruption"
+        );
         assert_eq!(report.slots_rebuilt_from_cold, 0);
         assert_eq!(report.slots_missing, 0);
 
@@ -3497,8 +3520,7 @@ mod warm_start_config_tests {
         let tmp = tempdir().unwrap();
         {
             let set = ArenaSet::create(
-                ArenaSetConfig::new(tmp.path())
-                    .with_pool(unlimited_spec(TierKind::Hot, 4)),
+                ArenaSetConfig::new(tmp.path()).with_pool(unlimited_spec(TierKind::Hot, 4)),
             )
             .unwrap();
             set.flush().unwrap();
@@ -3580,8 +3602,8 @@ mod m3_chunk_state {
         bytes[64] = 1;
 
         // Deserialize must succeed — checksum still matches.
-        let back = Chunk::deserialize(&bytes)
-            .expect("state byte mutation must not invalidate checksum");
+        let back =
+            Chunk::deserialize(&bytes).expect("state byte mutation must not invalidate checksum");
         assert_eq!(back.header().state, ChunkState::FadingOut);
         assert_eq!(back.payload(), b"mutable state");
     }
@@ -3665,10 +3687,7 @@ mod m3_chunk_state {
         header.state = ChunkState::FadingOut;
         let mut buf = [0u8; HEADER_SIZE];
         write_header_into(&header, &mut buf);
-        assert_eq!(
-            buf[64], 1,
-            "FadingOut header must serialize byte 64 as 1"
-        );
+        assert_eq!(buf[64], 1, "FadingOut header must serialize byte 64 as 1");
     }
 }
 
@@ -3902,9 +3921,7 @@ mod m3_begin_demote {
 #[cfg(test)]
 mod m3_complete_abort_demote {
     use crate::memory_arena::error::ArenaError;
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, ChunkId, ChunkState, TierKind};
     use tempfile::tempdir;
 
@@ -4214,9 +4231,7 @@ mod m3_complete_abort_demote {
 #[cfg(test)]
 mod m3_hysteresis {
     use crate::memory_arena::error::ArenaError;
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{
         ArenaConfig, ChunkHeader, ChunkId, ChunkState, TierKind, HEADER_SIZE,
     };
@@ -4472,7 +4487,8 @@ mod m3_hysteresis {
         let parsed = Chunk::deserialize(&full).expect("M1 chunk must parse");
         assert_eq!(parsed.header().state, ChunkState::Resident);
         assert_eq!(
-            parsed.header().last_demote_completed_at_ns, 0,
+            parsed.header().last_demote_completed_at_ns,
+            0,
             "M1 chunks must decode last_demote_ns as 0"
         );
 
@@ -4492,8 +4508,8 @@ mod m3_hysteresis {
             "promote_after_hits": 0,
             "demote_after_idle_ns": 0
         }"#;
-        let parsed: TierPolicy = serde_json::from_str(legacy)
-            .expect("legacy TierPolicy JSON must deserialize");
+        let parsed: TierPolicy =
+            serde_json::from_str(legacy).expect("legacy TierPolicy JSON must deserialize");
         assert_eq!(parsed.demote_cooldown_ns, 0);
     }
 
@@ -4544,9 +4560,7 @@ mod m3_hysteresis {
 #[cfg(test)]
 mod m4_promote_header_and_policy {
     use crate::memory_arena::chunk::{read_header_from, write_header_into};
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, ChunkHeader, ChunkId, TierKind, HEADER_SIZE};
     use tempfile::tempdir;
 
@@ -4603,8 +4617,8 @@ mod m4_promote_header_and_policy {
             "demote_after_idle_ns": 10000000000,
             "demote_cooldown_ns": 0
         }"#;
-        let parsed: TierPolicy = serde_json::from_str(legacy)
-            .expect("legacy TierPolicy JSON must deserialize");
+        let parsed: TierPolicy =
+            serde_json::from_str(legacy).expect("legacy TierPolicy JSON must deserialize");
         assert_eq!(parsed.promote_cooldown_ns, 0);
     }
 
@@ -4627,10 +4641,8 @@ mod m4_promote_header_and_policy {
             },
             allocator: Default::default(),
         };
-        let mut set = ArenaSet::create(
-            ArenaSetConfig::new(dir.path()).with_pool(spec),
-        )
-        .expect("create");
+        let mut set =
+            ArenaSet::create(ArenaSetConfig::new(dir.path()).with_pool(spec)).expect("create");
         let id = set
             .pool_mut(TierKind::Hot)
             .unwrap()
@@ -4680,10 +4692,8 @@ mod m4_promote_header_and_policy {
             },
             allocator: Default::default(),
         };
-        let mut set = ArenaSet::create(
-            ArenaSetConfig::new(dir.path()).with_pool(spec),
-        )
-        .expect("create");
+        let mut set =
+            ArenaSet::create(ArenaSetConfig::new(dir.path()).with_pool(spec)).expect("create");
         let id = set
             .pool_mut(TierKind::Hot)
             .unwrap()
@@ -4713,9 +4723,7 @@ mod m4_promote_header_and_policy {
 #[cfg(test)]
 mod m4_begin_promote {
     use crate::memory_arena::error::ArenaError;
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, ChunkId, ChunkState, TierKind};
     use std::cell::Cell;
     use tempfile::tempdir;
@@ -5090,10 +5098,7 @@ mod m4_complete_abort_promote {
         let canonical = set.complete_promote(handle).unwrap();
 
         // Source freed — Warm pool shrunk by 1.
-        assert_eq!(
-            set.pool(TierKind::Warm).unwrap().len(),
-            warm_before - 1
-        );
+        assert_eq!(set.pool(TierKind::Warm).unwrap().len(), warm_before - 1);
 
         // Target is the canonical chunk in Hot.
         assert_eq!(canonical, handle.target);
@@ -5339,9 +5344,7 @@ mod m4_complete_abort_promote {
 
 #[cfg(test)]
 mod m4_orphan_recovery {
-    use crate::memory_arena::pool::{
-        ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy,
-    };
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, EvictionKind, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, ChunkId, ChunkState, TierKind};
     use tempfile::tempdir;
 
@@ -5533,8 +5536,7 @@ mod m4_orphan_recovery {
 
             // Put the first 3 into FadingOut.
             for &id in &ids[..3] {
-                set.begin_demote(TierKind::Hot, id, TierKind::Warm)
-                    .unwrap();
+                set.begin_demote(TierKind::Hot, id, TierKind::Warm).unwrap();
             }
 
             set.flush().unwrap();
@@ -5600,14 +5602,14 @@ fn arena_set_hotter_tier_two_pools() {
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Hot),
-        allocator: Default::default(),
+            allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Warm,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Warm),
-        allocator: Default::default(),
+            allocator: Default::default(),
         });
     let set = ArenaSet::create(config).unwrap();
 
@@ -5626,21 +5628,21 @@ fn arena_set_adjacency_skips_unconfigured_vector() {
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Hot),
-        allocator: Default::default(),
+            allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Warm,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Warm),
-        allocator: Default::default(),
+            allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Blob,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 4,
             policy: TierPolicy::default_for(TierKind::Blob),
-        allocator: Default::default(),
+            allocator: Default::default(),
         });
     let set = ArenaSet::create(config).unwrap();
 
@@ -5653,14 +5655,13 @@ fn arena_set_adjacency_skips_unconfigured_vector() {
 #[test]
 fn arena_set_adjacency_single_pool() {
     let dir = tempdir().unwrap();
-    let config = ArenaSetConfig::new(dir.path())
-        .with_pool(PoolSpec {
-            tier: TierKind::Warm,
-            chunk_size: ArenaConfig::test().chunk_size,
-            num_slots: 4,
-            policy: TierPolicy::default_for(TierKind::Warm),
+    let config = ArenaSetConfig::new(dir.path()).with_pool(PoolSpec {
+        tier: TierKind::Warm,
+        chunk_size: ArenaConfig::test().chunk_size,
+        num_slots: 4,
+        policy: TierPolicy::default_for(TierKind::Warm),
         allocator: Default::default(),
-        });
+    });
     let set = ArenaSet::create(config).unwrap();
 
     assert_eq!(set.hotter_tier(TierKind::Warm), None);
@@ -5670,14 +5671,13 @@ fn arena_set_adjacency_single_pool() {
 #[test]
 fn arena_set_adjacency_unconfigured_tier_returns_none() {
     let dir = tempdir().unwrap();
-    let config = ArenaSetConfig::new(dir.path())
-        .with_pool(PoolSpec {
-            tier: TierKind::Hot,
-            chunk_size: ArenaConfig::test().chunk_size,
-            num_slots: 4,
-            policy: TierPolicy::default_for(TierKind::Hot),
+    let config = ArenaSetConfig::new(dir.path()).with_pool(PoolSpec {
+        tier: TierKind::Hot,
+        chunk_size: ArenaConfig::test().chunk_size,
+        num_slots: 4,
+        policy: TierPolicy::default_for(TierKind::Hot),
         allocator: Default::default(),
-        });
+    });
     let set = ArenaSet::create(config).unwrap();
 
     // Vector is not configured as a pool, but hotter_tier still finds
@@ -5694,21 +5694,20 @@ fn arena_set_adjacency_unconfigured_tier_returns_none() {
 #[test]
 fn evict_lru_removes_least_recently_used() {
     let dir = tempdir().unwrap();
-    let config = ArenaSetConfig::new(dir.path())
-        .with_pool(PoolSpec {
-            tier: TierKind::Hot,
-            chunk_size: ArenaConfig::test().chunk_size,
-            num_slots: 8,
-            policy: TierPolicy {
-                max_chunks: 0,
-                eviction: EvictionKind::Lru,
-                promote_after_hits: 0,
-                demote_after_idle_ns: 0,
-                demote_cooldown_ns: 0,
-                promote_cooldown_ns: 0,
-            },
-            allocator: Default::default(),
-        });
+    let config = ArenaSetConfig::new(dir.path()).with_pool(PoolSpec {
+        tier: TierKind::Hot,
+        chunk_size: ArenaConfig::test().chunk_size,
+        num_slots: 8,
+        policy: TierPolicy {
+            max_chunks: 0,
+            eviction: EvictionKind::Lru,
+            promote_after_hits: 0,
+            demote_after_idle_ns: 0,
+            demote_cooldown_ns: 0,
+            promote_cooldown_ns: 0,
+        },
+        allocator: Default::default(),
+    });
     let mut set = ArenaSet::create(config).unwrap();
 
     let pool = set.pool_mut(TierKind::Hot).unwrap();
@@ -5736,21 +5735,20 @@ fn evict_lru_removes_least_recently_used() {
 #[test]
 fn evict_fifo_removes_oldest_by_creation() {
     let dir = tempdir().unwrap();
-    let config = ArenaSetConfig::new(dir.path())
-        .with_pool(PoolSpec {
-            tier: TierKind::Blob,
-            chunk_size: ArenaConfig::test().chunk_size,
-            num_slots: 8,
-            policy: TierPolicy {
-                max_chunks: 0,
-                eviction: EvictionKind::Fifo,
-                promote_after_hits: 0,
-                demote_after_idle_ns: 0,
-                demote_cooldown_ns: 0,
-                promote_cooldown_ns: 0,
-            },
-            allocator: Default::default(),
-        });
+    let config = ArenaSetConfig::new(dir.path()).with_pool(PoolSpec {
+        tier: TierKind::Blob,
+        chunk_size: ArenaConfig::test().chunk_size,
+        num_slots: 8,
+        policy: TierPolicy {
+            max_chunks: 0,
+            eviction: EvictionKind::Fifo,
+            promote_after_hits: 0,
+            demote_after_idle_ns: 0,
+            demote_cooldown_ns: 0,
+            promote_cooldown_ns: 0,
+        },
+        allocator: Default::default(),
+    });
     let mut set = ArenaSet::create(config).unwrap();
 
     let pool = set.pool_mut(TierKind::Blob).unwrap();
@@ -5770,21 +5768,20 @@ fn evict_fifo_removes_oldest_by_creation() {
 #[test]
 fn evict_empty_pool_returns_none() {
     let dir = tempdir().unwrap();
-    let config = ArenaSetConfig::new(dir.path())
-        .with_pool(PoolSpec {
-            tier: TierKind::Hot,
-            chunk_size: ArenaConfig::test().chunk_size,
-            num_slots: 4,
-            policy: TierPolicy {
-                max_chunks: 0,
-                eviction: EvictionKind::Lru,
-                promote_after_hits: 0,
-                demote_after_idle_ns: 0,
-                demote_cooldown_ns: 0,
-                promote_cooldown_ns: 0,
-            },
-            allocator: Default::default(),
-        });
+    let config = ArenaSetConfig::new(dir.path()).with_pool(PoolSpec {
+        tier: TierKind::Hot,
+        chunk_size: ArenaConfig::test().chunk_size,
+        num_slots: 4,
+        policy: TierPolicy {
+            max_chunks: 0,
+            eviction: EvictionKind::Lru,
+            promote_after_hits: 0,
+            demote_after_idle_ns: 0,
+            demote_cooldown_ns: 0,
+            promote_cooldown_ns: 0,
+        },
+        allocator: Default::default(),
+    });
     let mut set = ArenaSet::create(config).unwrap();
 
     let pool = set.pool_mut(TierKind::Hot).unwrap();
@@ -5795,21 +5792,20 @@ fn evict_empty_pool_returns_none() {
 #[test]
 fn evict_lru_decrements_allocated_chunks() {
     let dir = tempdir().unwrap();
-    let config = ArenaSetConfig::new(dir.path())
-        .with_pool(PoolSpec {
-            tier: TierKind::Hot,
-            chunk_size: ArenaConfig::test().chunk_size,
-            num_slots: 4,
-            policy: TierPolicy {
-                max_chunks: 0,
-                eviction: EvictionKind::Lru,
-                promote_after_hits: 0,
-                demote_after_idle_ns: 0,
-                demote_cooldown_ns: 0,
-                promote_cooldown_ns: 0,
-            },
-            allocator: Default::default(),
-        });
+    let config = ArenaSetConfig::new(dir.path()).with_pool(PoolSpec {
+        tier: TierKind::Hot,
+        chunk_size: ArenaConfig::test().chunk_size,
+        num_slots: 4,
+        policy: TierPolicy {
+            max_chunks: 0,
+            eviction: EvictionKind::Lru,
+            promote_after_hits: 0,
+            demote_after_idle_ns: 0,
+            demote_cooldown_ns: 0,
+            promote_cooldown_ns: 0,
+        },
+        allocator: Default::default(),
+    });
     let mut set = ArenaSet::create(config).unwrap();
 
     let pool = set.pool_mut(TierKind::Hot).unwrap();
@@ -5901,14 +5897,14 @@ fn make_hot_warm_set(
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: hot_slots,
             policy: hot_policy,
-        allocator: Default::default(),
+            allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Warm,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: warm_slots,
             policy: warm_policy,
-        allocator: Default::default(),
+            allocator: Default::default(),
         });
     ArenaSet::create(config).unwrap()
 }
@@ -5935,9 +5931,17 @@ fn sweep_promotes_warm_chunk_above_threshold() {
     let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
 
     // Alloc a chunk in Warm and touch it 3 times to meet threshold.
-    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![42u8; 64]).unwrap();
+    let warm_id = set
+        .pool_mut(TierKind::Warm)
+        .unwrap()
+        .alloc(vec![42u8; 64])
+        .unwrap();
     for _ in 0..3 {
-        set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+        set.pool_mut(TierKind::Warm)
+            .unwrap()
+            .arena_mut()
+            .touch_chunk(warm_id)
+            .unwrap();
     }
 
     let report = set.run_policy_sweep();
@@ -5971,7 +5975,10 @@ fn sweep_noop_when_below_threshold() {
     let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
 
     // Alloc a chunk but don't touch it enough to meet threshold.
-    set.pool_mut(TierKind::Warm).unwrap().alloc(vec![0u8; 64]).unwrap();
+    set.pool_mut(TierKind::Warm)
+        .unwrap()
+        .alloc(vec![0u8; 64])
+        .unwrap();
 
     let report = set.run_policy_sweep();
     assert_eq!(report.promotes_initiated, 0);
@@ -6000,9 +6007,17 @@ fn sweep_resets_access_count_after_promote() {
     };
     let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
 
-    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![99u8; 64]).unwrap();
+    let warm_id = set
+        .pool_mut(TierKind::Warm)
+        .unwrap()
+        .alloc(vec![99u8; 64])
+        .unwrap();
     for _ in 0..2 {
-        set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+        set.pool_mut(TierKind::Warm)
+            .unwrap()
+            .arena_mut()
+            .touch_chunk(warm_id)
+            .unwrap();
     }
 
     let report = set.run_policy_sweep();
@@ -6039,12 +6054,23 @@ fn sweep_promote_with_eviction_on_full_target() {
     let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
 
     // Fill Hot with 1 chunk.
-    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![0u8; 64]).unwrap();
+    set.pool_mut(TierKind::Hot)
+        .unwrap()
+        .alloc(vec![0u8; 64])
+        .unwrap();
     assert_eq!(set.pool(TierKind::Hot).unwrap().len(), 1);
 
     // Alloc in Warm and touch to meet threshold.
-    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![1u8; 64]).unwrap();
-    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+    let warm_id = set
+        .pool_mut(TierKind::Warm)
+        .unwrap()
+        .alloc(vec![1u8; 64])
+        .unwrap();
+    set.pool_mut(TierKind::Warm)
+        .unwrap()
+        .arena_mut()
+        .touch_chunk(warm_id)
+        .unwrap();
 
     let report = set.run_policy_sweep();
     assert_eq!(report.promotes_completed, 1);
@@ -6075,17 +6101,30 @@ fn sweep_skips_chunk_in_promote_cooldown() {
     let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
 
     // Inject a deterministic clock — fn pointer, no captures.
-    fn fixed_clock() -> u64 { 1_000_000_000_000 }
+    fn fixed_clock() -> u64 {
+        1_000_000_000_000
+    }
     set.set_now_ns_for_test(fixed_clock);
     let base_time: u64 = 1_000_000_000_000;
 
     // Alloc in Warm, touch to meet threshold.
-    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![7u8; 64]).unwrap();
-    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+    let warm_id = set
+        .pool_mut(TierKind::Warm)
+        .unwrap()
+        .alloc(vec![7u8; 64])
+        .unwrap();
+    set.pool_mut(TierKind::Warm)
+        .unwrap()
+        .arena_mut()
+        .touch_chunk(warm_id)
+        .unwrap();
 
     // Write a recent promote timestamp on the chunk to trigger cooldown.
-    set.pool_mut(TierKind::Warm).unwrap().arena_mut()
-        .write_last_promote_ns(warm_id, base_time - 1).unwrap();
+    set.pool_mut(TierKind::Warm)
+        .unwrap()
+        .arena_mut()
+        .write_last_promote_ns(warm_id, base_time - 1)
+        .unwrap();
 
     let report = set.run_policy_sweep();
     assert_eq!(report.promotes_initiated, 0);
@@ -6144,10 +6183,15 @@ fn sweep_demotes_idle_hot_chunk() {
     let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
 
     // Alloc a chunk in Hot.
-    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![55u8; 64]).unwrap();
+    set.pool_mut(TierKind::Hot)
+        .unwrap()
+        .alloc(vec![55u8; 64])
+        .unwrap();
 
     // Set clock far in the future (beyond any real last_access_ns).
-    fn future_clock() -> u64 { u64::MAX / 2 }
+    fn future_clock() -> u64 {
+        u64::MAX / 2
+    }
     set.set_now_ns_for_test(future_clock);
 
     let report = set.run_policy_sweep();
@@ -6180,18 +6224,35 @@ fn sweep_mixed_promotes_and_demotes() {
 
     // 3 Hot chunks that will be idle → demote.
     for i in 0..3 {
-        set.pool_mut(TierKind::Hot).unwrap().alloc(vec![i; 64]).unwrap();
+        set.pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(vec![i; 64])
+            .unwrap();
     }
 
     // 3 Warm chunks touched enough to promote.
     for i in 0..3u8 {
-        let id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![i + 10; 64]).unwrap();
-        set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
-        set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
+        let id = set
+            .pool_mut(TierKind::Warm)
+            .unwrap()
+            .alloc(vec![i + 10; 64])
+            .unwrap();
+        set.pool_mut(TierKind::Warm)
+            .unwrap()
+            .arena_mut()
+            .touch_chunk(id)
+            .unwrap();
+        set.pool_mut(TierKind::Warm)
+            .unwrap()
+            .arena_mut()
+            .touch_chunk(id)
+            .unwrap();
     }
 
     // Far-future clock for demote idle check.
-    fn far_future() -> u64 { u64::MAX / 2 }
+    fn far_future() -> u64 {
+        u64::MAX / 2
+    }
     set.set_now_ns_for_test(far_future);
 
     let report = set.run_policy_sweep();
@@ -6226,12 +6287,20 @@ fn sweep_demote_with_eviction_on_full_target() {
     let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
 
     // Fill Warm to capacity.
-    set.pool_mut(TierKind::Warm).unwrap().alloc(vec![0u8; 64]).unwrap();
+    set.pool_mut(TierKind::Warm)
+        .unwrap()
+        .alloc(vec![0u8; 64])
+        .unwrap();
 
     // Alloc in Hot — will need demote.
-    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![1u8; 64]).unwrap();
+    set.pool_mut(TierKind::Hot)
+        .unwrap()
+        .alloc(vec![1u8; 64])
+        .unwrap();
 
-    fn far_future() -> u64 { u64::MAX / 2 }
+    fn far_future() -> u64 {
+        u64::MAX / 2
+    }
     set.set_now_ns_for_test(far_future);
 
     let report = set.run_policy_sweep();
@@ -6261,13 +6330,22 @@ fn sweep_skips_chunk_in_demote_cooldown() {
     let mut set = make_hot_warm_set(dir.path(), 8, 8, hot_policy, warm_policy);
 
     // Clock must be far beyond real system time to satisfy idle threshold.
-    fn fixed_time() -> u64 { u64::MAX / 2 }
+    fn fixed_time() -> u64 {
+        u64::MAX / 2
+    }
     set.set_now_ns_for_test(fixed_time);
 
-    let hot_id = set.pool_mut(TierKind::Hot).unwrap().alloc(vec![5u8; 64]).unwrap();
+    let hot_id = set
+        .pool_mut(TierKind::Hot)
+        .unwrap()
+        .alloc(vec![5u8; 64])
+        .unwrap();
     // Stamp a recent demote timestamp (close to our fake now) to trigger cooldown.
-    set.pool_mut(TierKind::Hot).unwrap().arena_mut()
-        .write_last_demote_ns(hot_id, u64::MAX / 2 - 1).unwrap();
+    set.pool_mut(TierKind::Hot)
+        .unwrap()
+        .arena_mut()
+        .write_last_demote_ns(hot_id, u64::MAX / 2 - 1)
+        .unwrap();
 
     let report = set.run_policy_sweep();
     assert_eq!(report.demotes_initiated, 0);
@@ -6310,33 +6388,50 @@ fn sweep_three_tier_cascade() {
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 8,
             policy: hot_policy,
-        allocator: Default::default(),
+            allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Warm,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 8,
             policy: warm_policy,
-        allocator: Default::default(),
+            allocator: Default::default(),
         })
         .with_pool(PoolSpec {
             tier: TierKind::Blob,
             chunk_size: ArenaConfig::test().chunk_size,
             num_slots: 8,
             policy: blob_policy,
-        allocator: Default::default(),
+            allocator: Default::default(),
         });
     let mut set = ArenaSet::create(config).unwrap();
 
     // Hot chunk idle → should demote to Warm (one tier per sweep).
-    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![1u8; 64]).unwrap();
+    set.pool_mut(TierKind::Hot)
+        .unwrap()
+        .alloc(vec![1u8; 64])
+        .unwrap();
 
     // Warm chunk touched → should promote to Hot.
-    let warm_id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![2u8; 64]).unwrap();
-    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
-    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(warm_id).unwrap();
+    let warm_id = set
+        .pool_mut(TierKind::Warm)
+        .unwrap()
+        .alloc(vec![2u8; 64])
+        .unwrap();
+    set.pool_mut(TierKind::Warm)
+        .unwrap()
+        .arena_mut()
+        .touch_chunk(warm_id)
+        .unwrap();
+    set.pool_mut(TierKind::Warm)
+        .unwrap()
+        .arena_mut()
+        .touch_chunk(warm_id)
+        .unwrap();
 
-    fn far_future() -> u64 { u64::MAX / 2 }
+    fn far_future() -> u64 {
+        u64::MAX / 2
+    }
     set.set_now_ns_for_test(far_future);
 
     let report = set.run_policy_sweep();
@@ -6472,13 +6567,20 @@ mod m6_vram_transfer {
 
 #[cfg(feature = "cuda")]
 mod m6_vram_pool {
-    use std::sync::Arc;
-    use crate::memory_arena::vram::{VramContext, VramPool};
     use crate::memory_arena::types::{TierKind, TierPolicy};
+    use crate::memory_arena::vram::{VramContext, VramPool};
+    use std::sync::Arc;
 
     fn test_pool() -> VramPool {
         let ctx = Arc::new(VramContext::new(0).unwrap());
-        VramPool::new(ctx, TierKind::Vector, 4096, 8, TierPolicy::default_for(TierKind::Vector)).unwrap()
+        VramPool::new(
+            ctx,
+            TierKind::Vector,
+            4096,
+            8,
+            TierPolicy::default_for(TierKind::Vector),
+        )
+        .unwrap()
     }
 
     #[test]
@@ -6538,7 +6640,14 @@ mod m6_vram_pool {
     #[test]
     fn vram_pool_full() {
         let ctx = Arc::new(VramContext::new(0).unwrap());
-        let mut pool = VramPool::new(ctx, TierKind::Vector, 1024, 2, TierPolicy::default_for(TierKind::Vector)).unwrap();
+        let mut pool = VramPool::new(
+            ctx,
+            TierKind::Vector,
+            1024,
+            2,
+            TierPolicy::default_for(TierKind::Vector),
+        )
+        .unwrap();
         pool.alloc(&vec![0u8; 64]).unwrap();
         pool.alloc(&vec![0u8; 64]).unwrap();
         let err = pool.alloc(&vec![0u8; 64]);
@@ -6561,10 +6670,10 @@ mod m6_vram_pool {
 
 #[cfg(feature = "cuda")]
 mod m6_vram_crossfade {
-    use std::sync::Arc;
     use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, PoolSpec, TierPolicy};
     use crate::memory_arena::types::{ArenaConfig, ChunkState, TierKind};
     use crate::memory_arena::vram::VramContext;
+    use std::sync::Arc;
     use tempfile::tempdir;
 
     fn vram_arena_set(dir: &std::path::Path) -> ArenaSet {
@@ -6575,14 +6684,14 @@ mod m6_vram_crossfade {
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: TierPolicy::default_for(TierKind::Hot),
-            allocator: Default::default(),
+                allocator: Default::default(),
             })
             .with_pool(PoolSpec {
                 tier: TierKind::Vector,
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: TierPolicy::default_for(TierKind::Vector),
-            allocator: Default::default(),
+                allocator: Default::default(),
             })
             .with_vram_context(ctx);
         ArenaSet::create(config).unwrap()
@@ -6602,10 +6711,21 @@ mod m6_vram_crossfade {
         let dir = tempdir().unwrap();
         let mut set = vram_arena_set(dir.path());
         let data = vec![0xABu8; 64];
-        let id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
-        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Vector).unwrap();
+        let id = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(data.clone())
+            .unwrap();
+        let handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Vector)
+            .unwrap();
         // Source should be FadingOut
-        let state = set.pool(TierKind::Hot).unwrap().arena().chunk_state(id).unwrap();
+        let state = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .chunk_state(id)
+            .unwrap();
         assert_eq!(state, ChunkState::FadingOut);
         // Target should be in VRAM pool
         let vram_data = set.vram_pool().unwrap().get(handle.target).unwrap();
@@ -6617,8 +6737,14 @@ mod m6_vram_crossfade {
         let dir = tempdir().unwrap();
         let mut set = vram_arena_set(dir.path());
         let data = vec![0xCDu8; 128];
-        let id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
-        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Vector).unwrap();
+        let id = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(data.clone())
+            .unwrap();
+        let handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Vector)
+            .unwrap();
         let target_id = set.complete_demote(handle).unwrap();
         // Source freed
         assert!(!set.pool(TierKind::Hot).unwrap().arena().contains(id));
@@ -6632,12 +6758,23 @@ mod m6_vram_crossfade {
         let dir = tempdir().unwrap();
         let mut set = vram_arena_set(dir.path());
         let data = vec![0xEFu8; 96];
-        let id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
-        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Vector).unwrap();
+        let id = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(data.clone())
+            .unwrap();
+        let handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Vector)
+            .unwrap();
         let vram_target_id = handle.target;
         set.abort_demote(handle).unwrap();
         // Source restored
-        let state = set.pool(TierKind::Hot).unwrap().arena().chunk_state(id).unwrap();
+        let state = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .chunk_state(id)
+            .unwrap();
         assert_eq!(state, ChunkState::Resident);
         // VRAM target freed
         assert!(!set.vram_pool().unwrap().contains(vram_target_id));
@@ -6649,14 +6786,27 @@ mod m6_vram_crossfade {
         let mut set = vram_arena_set(dir.path());
         let data = vec![0x42u8; 200];
         // First demote to get data into VRAM
-        let hot_id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
-        let handle = set.begin_demote(TierKind::Hot, hot_id, TierKind::Vector).unwrap();
+        let hot_id = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(data.clone())
+            .unwrap();
+        let handle = set
+            .begin_demote(TierKind::Hot, hot_id, TierKind::Vector)
+            .unwrap();
         let vram_id = set.complete_demote(handle).unwrap();
         // Now promote back
-        let handle = set.begin_promote(TierKind::Vector, vram_id, TierKind::Hot).unwrap();
+        let handle = set
+            .begin_promote(TierKind::Vector, vram_id, TierKind::Hot)
+            .unwrap();
         let new_hot_id = set.complete_promote(handle).unwrap();
         // Data should be back in Hot RAM
-        let got = set.pool(TierKind::Hot).unwrap().arena().get_chunk(new_hot_id).unwrap();
+        let got = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(new_hot_id)
+            .unwrap();
         assert_eq!(got.payload(), data.as_slice());
         // VRAM source should be freed
         assert!(!set.vram_pool().unwrap().contains(vram_id));
@@ -6667,12 +6817,25 @@ mod m6_vram_crossfade {
         let dir = tempdir().unwrap();
         let mut set = vram_arena_set(dir.path());
         let data = vec![0x77u8; 300];
-        let hot_id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
-        let h = set.begin_demote(TierKind::Hot, hot_id, TierKind::Vector).unwrap();
+        let hot_id = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(data.clone())
+            .unwrap();
+        let h = set
+            .begin_demote(TierKind::Hot, hot_id, TierKind::Vector)
+            .unwrap();
         let vram_id = set.complete_demote(h).unwrap();
-        let h2 = set.begin_promote(TierKind::Vector, vram_id, TierKind::Hot).unwrap();
+        let h2 = set
+            .begin_promote(TierKind::Vector, vram_id, TierKind::Hot)
+            .unwrap();
         let new_id = set.complete_promote(h2).unwrap();
-        let got = set.pool(TierKind::Hot).unwrap().arena().get_chunk(new_id).unwrap();
+        let got = set
+            .pool(TierKind::Hot)
+            .unwrap()
+            .arena()
+            .get_chunk(new_id)
+            .unwrap();
         assert_eq!(got.payload(), data.as_slice());
     }
 
@@ -6687,22 +6850,31 @@ mod m6_vram_crossfade {
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: TierPolicy::default_for(TierKind::Hot),
-            allocator: Default::default(),
+                allocator: Default::default(),
             })
             .with_pool(PoolSpec {
                 tier: TierKind::Warm,
                 chunk_size: ArenaConfig::test().chunk_size,
                 num_slots: 8,
                 policy: TierPolicy::default_for(TierKind::Warm),
-            allocator: Default::default(),
+                allocator: Default::default(),
             })
             .with_vram_context(ctx);
         let mut set = ArenaSet::create(config).unwrap();
         let data = vec![0x99u8; 64];
-        let id = set.pool_mut(TierKind::Hot).unwrap().alloc(data.clone()).unwrap();
+        let id = set
+            .pool_mut(TierKind::Hot)
+            .unwrap()
+            .alloc(data.clone())
+            .unwrap();
         let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).unwrap();
         let warm_id = set.complete_demote(handle).unwrap();
-        let got = set.pool(TierKind::Warm).unwrap().arena().get_chunk(warm_id).unwrap();
+        let got = set
+            .pool(TierKind::Warm)
+            .unwrap()
+            .arena()
+            .get_chunk(warm_id)
+            .unwrap();
         assert_eq!(got.payload(), data.as_slice());
     }
 }
@@ -6710,9 +6882,7 @@ mod m6_vram_crossfade {
 // ===== allocator trait + FixedSlotAllocator tests =====================
 
 mod allocator_tests {
-    use crate::memory_arena::allocator::{
-        AllocatorKind, ChunkAllocator, FixedSlotAllocator,
-    };
+    use crate::memory_arena::allocator::{AllocatorKind, ChunkAllocator, FixedSlotAllocator};
     use crate::memory_arena::error::ArenaError;
 
     const SLOT_SIZE: usize = 4096;
@@ -6905,7 +7075,10 @@ mod slab_allocator_tests {
         // Alloc 100 bytes — lands in 256B class. Internal frag = 1 - 100/256 ≈ 0.61
         slab.alloc(100).unwrap();
         let frag = slab.fragmentation();
-        assert!(frag > 0.0, "fragmentation should be > 0 for 100B in 256B class");
+        assert!(
+            frag > 0.0,
+            "fragmentation should be > 0 for 100B in 256B class"
+        );
         assert!(frag < 1.0, "fragmentation should be < 1.0");
     }
 }
@@ -7049,7 +7222,10 @@ mod buddy_allocator_tests {
         }
         // Large alloc should work — coalescence has recovered capacity
         let result = buddy.alloc(16 * MIN_BLOCK);
-        assert!(result.is_ok(), "should be able to alloc after full free (coalescence)");
+        assert!(
+            result.is_ok(),
+            "should be able to alloc after full free (coalescence)"
+        );
     }
 }
 
@@ -7203,7 +7379,10 @@ mod tlsf_allocator_tests {
         tlsf.free(off4).unwrap();
         // Full recovery: 4*MIN_BLOCK contiguous should be available
         let result = tlsf.alloc(4 * MIN_BLOCK);
-        assert!(result.is_ok(), "chain coalescence should recover contiguous block");
+        assert!(
+            result.is_ok(),
+            "chain coalescence should recover contiguous block"
+        );
     }
 }
 
@@ -7261,7 +7440,10 @@ fn read_header_core_rejects_bad_magic() {
     let mut buf = [0u8; HEADER_SIZE];
     buf[0..8].copy_from_slice(b"BADMAGIC");
     let result = read_header_core(&buf);
-    assert!(result.is_err(), "bad magic should be rejected by core parse");
+    assert!(
+        result.is_err(),
+        "bad magic should be rejected by core parse"
+    );
 }
 
 #[test]
@@ -7270,7 +7452,10 @@ fn read_header_core_short_buffer_rejected() {
     // 63 bytes — one short of the core requirement.
     let buf = [0u8; 63];
     let result = read_header_core(&buf);
-    assert!(result.is_err(), "buffer shorter than 64 bytes should be rejected");
+    assert!(
+        result.is_err(),
+        "buffer shorter than 64 bytes should be rejected"
+    );
 }
 
 #[test]
@@ -7293,9 +7478,13 @@ fn open_lazy_tolerates_fading_out_state_via_core_parse() {
     let config = ArenaConfig::test();
     let path = dir.path().join("test.arena");
     let mut arena = Arena::new_mmap_file(config.clone(), 8, &path).expect("create arena");
-    let id = arena.alloc_chunk(TierKind::Hot, vec![0xAA; 64]).expect("alloc");
+    let id = arena
+        .alloc_chunk(TierKind::Hot, vec![0xAA; 64])
+        .expect("alloc");
     // Mark the chunk as FadingOut directly in storage.
-    arena.mark_state(id, ChunkState::FadingOut).expect("mark state");
+    arena
+        .mark_state(id, ChunkState::FadingOut)
+        .expect("mark state");
 
     // Reopen with open_lazy — should succeed and register the chunk.
     let arena2 = Arena::open_lazy(config, 8, &path).expect("open_lazy should succeed");
@@ -7340,8 +7529,8 @@ fn backward_compat_m1_m2_m3_m7_core_parse() {
 #[cfg(feature = "postgres")]
 mod pg_cold_tests {
     use crate::memory_arena::pg_cold::PgColdSource;
-    use crate::memory_arena::warm_start::ColdSource;
     use crate::memory_arena::types::{ChunkId, TierKind};
+    use crate::memory_arena::warm_start::ColdSource;
 
     fn pg_pool() -> Option<sqlx::PgPool> {
         let url = std::env::var("DATABASE_URL").ok()?;
@@ -7375,7 +7564,9 @@ mod pg_cold_tests {
         };
         let cs = PgColdSource::new(pool, "public", "arena_cold_test");
         cs.ensure_table().expect("ensure_table");
-        let result = cs.fetch(TierKind::Blob, ChunkId::new(999_999)).expect("fetch missing");
+        let result = cs
+            .fetch(TierKind::Blob, ChunkId::new(999_999))
+            .expect("fetch missing");
         assert_eq!(result, None);
     }
 
@@ -7400,7 +7591,8 @@ mod pg_cold_tests {
         };
         let cs = PgColdSource::new(pool, "public", "arena_cold_test");
         cs.ensure_table().expect("first ensure_table");
-        cs.ensure_table().expect("second ensure_table should also succeed");
+        cs.ensure_table()
+            .expect("second ensure_table should also succeed");
     }
 
     #[test]
@@ -7414,7 +7606,8 @@ mod pg_cold_tests {
         let tier = TierKind::Vector;
         let id = ChunkId::new(7777);
         cs.store(tier, id, vec![1, 2, 3]).expect("first store");
-        cs.store(tier, id, vec![4, 5, 6]).expect("second store (upsert)");
+        cs.store(tier, id, vec![4, 5, 6])
+            .expect("second store (upsert)");
         let fetched = cs.fetch(tier, id).expect("fetch after upsert");
         assert_eq!(fetched, Some(vec![4, 5, 6]));
         // Cleanup.
@@ -7467,8 +7660,8 @@ mod hugetlb_tests {
     fn hugetlb_arena_alloc_get_free() {
         let dir = tempdir().expect("tempdir");
         let path = dir.path().join("test.arena");
-        let mut arena = Arena::new_mmap_file_hugetlb(test_config(), 8, &path)
-            .expect("hugetlb arena");
+        let mut arena =
+            Arena::new_mmap_file_hugetlb(test_config(), 8, &path).expect("hugetlb arena");
         let id = arena
             .alloc_chunk(TierKind::Hot, vec![0xBE; 64])
             .expect("alloc on hugetlb arena");
@@ -7482,8 +7675,8 @@ mod hugetlb_tests {
         let dir = tempdir().expect("tempdir");
         let path = dir.path().join("test.arena");
         let config = test_config();
-        let mut arena = Arena::new_mmap_file_hugetlb(config.clone(), 8, &path)
-            .expect("create hugetlb arena");
+        let mut arena =
+            Arena::new_mmap_file_hugetlb(config.clone(), 8, &path).expect("create hugetlb arena");
         let id = arena
             .alloc_chunk(TierKind::Hot, vec![0xAA; 32])
             .expect("alloc");
@@ -7498,8 +7691,7 @@ mod hugetlb_tests {
     fn hugetlb_observability_flag() {
         let dir = tempdir().expect("tempdir");
         let path = dir.path().join("test.arena");
-        let arena = Arena::new_mmap_file_hugetlb(test_config(), 4, &path)
-            .expect("hugetlb arena");
+        let arena = Arena::new_mmap_file_hugetlb(test_config(), 4, &path).expect("hugetlb arena");
         // The flag should be a bool — just verify it compiles and is accessible.
         let active: bool = arena.huge_pages_active();
         // On our system: false.
@@ -7509,14 +7701,13 @@ mod hugetlb_tests {
     #[test]
     fn arena_set_create_with_hugetlb() {
         let dir = tempdir().expect("tempdir");
-        let config = ArenaSetConfig::new(dir.path())
-            .with_pool(PoolSpec {
-                tier: TierKind::Hot,
-                chunk_size: ArenaConfig::test().chunk_size,
-                num_slots: 8,
-                policy: unlimited_policy(),
+        let config = ArenaSetConfig::new(dir.path()).with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: ArenaConfig::test().chunk_size,
+            num_slots: 8,
+            policy: unlimited_policy(),
             allocator: Default::default(),
-            });
+        });
         let mut set = ArenaSet::create_with_hugetlb(config).expect("create with hugetlb");
         let pool = set.pool(TierKind::Hot).expect("hot pool");
         assert!(!pool.arena().huge_pages_active());
@@ -7539,7 +7730,10 @@ fn read_header_core_preserves_checksum_field() {
     write_header_into(chunk.header(), &mut buf);
     let header = read_header_core(&buf).expect("core parse");
     assert_eq!(header.checksum, chunk.header().checksum);
-    assert_ne!(header.checksum, 0, "finalized chunk should have non-zero checksum");
+    assert_ne!(
+        header.checksum, 0,
+        "finalized chunk should have non-zero checksum"
+    );
 }
 
 #[test]
@@ -7554,7 +7748,10 @@ fn read_header_extended_rejects_short_buffer() {
     crate::memory_arena::chunk::write_header_into(chunk.header(), &mut full_buf);
     let mut header = read_header_core(&full_buf).expect("core");
     let result = read_header_extended(&buf, &mut header);
-    assert!(result.is_err(), "extended should reject buffer < HEADER_SIZE");
+    assert!(
+        result.is_err(),
+        "extended should reject buffer < HEADER_SIZE"
+    );
 }
 
 #[test]
@@ -7566,11 +7763,15 @@ fn get_chunk_returns_full_header_after_cache_line_split() {
     let config = ArenaConfig::test();
     let path = dir.path().join("test.arena");
     let mut arena = Arena::new_mmap_file(config.clone(), 8, &path).expect("create");
-    let id = arena.alloc_chunk(TierKind::Hot, vec![0xBB; 32]).expect("alloc");
+    let id = arena
+        .alloc_chunk(TierKind::Hot, vec![0xBB; 32])
+        .expect("alloc");
     // Mark state to FadingOut.
     arena.mark_state(id, ChunkState::FadingOut).expect("mark");
     // Write demote timestamp.
-    arena.write_last_demote_ns(id, 12345).expect("write demote ts");
+    arena
+        .write_last_demote_ns(id, 12345)
+        .expect("write demote ts");
     // get_chunk should return a chunk whose header has the full state.
     let chunk = arena.get_chunk(id).expect("get");
     assert_eq!(chunk.header().state, ChunkState::FadingOut);
@@ -7583,7 +7784,9 @@ fn validate_chunk_works_after_cache_line_split() {
     let config = ArenaConfig::test();
     let path = dir.path().join("test.arena");
     let mut arena = Arena::new_mmap_file(config, 8, &path).expect("create");
-    let id = arena.alloc_chunk(TierKind::Hot, vec![0xAA; 64]).expect("alloc");
+    let id = arena
+        .alloc_chunk(TierKind::Hot, vec![0xAA; 64])
+        .expect("alloc");
     // validate_chunk should still work — it uses read_header_core for the
     // initial size read, then Chunk::deserialize for full validation.
     arena.validate_chunk(id).expect("validate should pass");
@@ -7595,10 +7798,15 @@ fn free_chunk_works_after_cache_line_split() {
     let config = ArenaConfig::test();
     let path = dir.path().join("test.arena");
     let mut arena = Arena::new_mmap_file(config, 8, &path).expect("create");
-    let id = arena.alloc_chunk(TierKind::Hot, vec![0xDD; 48]).expect("alloc");
+    let id = arena
+        .alloc_chunk(TierKind::Hot, vec![0xDD; 48])
+        .expect("alloc");
     // free_chunk uses read_header_core to determine valid_end.
     arena.free_chunk(id).expect("free should succeed");
-    assert!(arena.get_chunk(id).is_err(), "chunk should be gone after free");
+    assert!(
+        arena.get_chunk(id).is_err(),
+        "chunk should be gone after free"
+    );
 }
 
 #[cfg(target_os = "linux")]
@@ -7627,14 +7835,15 @@ fn warm_start_lazy_after_cache_line_split() {
     let dir = tempdir().expect("tempdir");
     let config = ArenaConfig::test();
     let root = dir.path();
-    let set_config = crate::memory_arena::pool::ArenaSetConfig::new(root)
-        .with_pool(crate::memory_arena::pool::PoolSpec {
+    let set_config = crate::memory_arena::pool::ArenaSetConfig::new(root).with_pool(
+        crate::memory_arena::pool::PoolSpec {
             tier: TierKind::Hot,
             chunk_size: config.chunk_size,
             num_slots: 16,
             policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
-        allocator: Default::default(),
-        });
+            allocator: Default::default(),
+        },
+    );
     let mut set = crate::memory_arena::pool::ArenaSet::create(set_config).expect("create");
     let pool = set.pool_mut(TierKind::Hot).expect("hot");
     let id1 = pool.alloc(vec![1; 32]).expect("alloc 1");
@@ -7666,7 +7875,7 @@ mod m9_allocator_selector_tests {
             chunk_size: 4096,
             num_slots: 8,
             policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
-        allocator: Default::default(),
+            allocator: Default::default(),
         };
         assert_eq!(spec.allocator, AllocatorSelector::FixedSlot);
     }
@@ -7697,14 +7906,13 @@ mod m9_allocator_selector_tests {
     fn arena_set_create_with_tlsf_selector() {
         let dir = tempdir().expect("tempdir");
         let config = ArenaConfig::test();
-        let set_config = ArenaSetConfig::new(dir.path())
-            .with_pool(PoolSpec {
-                tier: TierKind::Hot,
-                chunk_size: config.chunk_size,
-                num_slots: 8,
-                policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
-                allocator: AllocatorSelector::Tlsf,
-            });
+        let set_config = ArenaSetConfig::new(dir.path()).with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: config.chunk_size,
+            num_slots: 8,
+            policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+            allocator: AllocatorSelector::Tlsf,
+        });
         let mut set = crate::memory_arena::pool::ArenaSet::create(set_config).expect("create");
         // Should work exactly like FixedSlot for same-size allocations.
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
@@ -7718,14 +7926,13 @@ mod m9_allocator_selector_tests {
         use crate::memory_arena::warm_start::{InMemoryColdSource, WarmStart};
         let dir = tempdir().expect("tempdir");
         let config = ArenaConfig::test();
-        let set_config = ArenaSetConfig::new(dir.path())
-            .with_pool(PoolSpec {
-                tier: TierKind::Hot,
-                chunk_size: config.chunk_size,
-                num_slots: 8,
-                policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
-                allocator: AllocatorSelector::Tlsf,
-            });
+        let set_config = ArenaSetConfig::new(dir.path()).with_pool(PoolSpec {
+            tier: TierKind::Hot,
+            chunk_size: config.chunk_size,
+            num_slots: 8,
+            policy: crate::memory_arena::pool::TierPolicy::default_for(TierKind::Hot),
+            allocator: AllocatorSelector::Tlsf,
+        });
         let mut set = crate::memory_arena::pool::ArenaSet::create(set_config).expect("create");
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
         let id = pool.alloc(vec![99; 128]).expect("alloc");
@@ -7734,10 +7941,7 @@ mod m9_allocator_selector_tests {
         // Reopen — manifest should preserve the allocator selector.
         let cold = InMemoryColdSource::new();
         let (set2, _) = WarmStart::open(dir.path(), &cold).expect("reopen");
-        assert_eq!(
-            set2.manifest().pools[0].allocator,
-            AllocatorSelector::Tlsf,
-        );
+        assert_eq!(set2.manifest().pools[0].allocator, AllocatorSelector::Tlsf,);
         let pool2 = set2.pool(TierKind::Hot).expect("hot");
         assert!(pool2.arena().get_chunk(id).is_ok());
     }
@@ -7765,7 +7969,9 @@ mod m9_get_chunk_hot_tests {
         let config = ArenaConfig::test();
         let mut arena = Arena::new(config, 8).expect("arena");
         let payload = vec![0xAB; 256];
-        let id = arena.alloc_chunk(TierKind::Hot, payload.clone()).expect("alloc");
+        let id = arena
+            .alloc_chunk(TierKind::Hot, payload.clone())
+            .expect("alloc");
 
         let cold = arena.get_chunk(id).expect("get_chunk");
         let hot = arena.get_chunk_hot(id).expect("get_chunk_hot");
@@ -7776,10 +7982,14 @@ mod m9_get_chunk_hot_tests {
     fn get_chunk_hot_returns_same_header_as_get_chunk() {
         let config = ArenaConfig::test();
         let mut arena = Arena::new(config, 8).expect("arena");
-        let id = arena.alloc_chunk(TierKind::Warm, vec![1; 100]).expect("alloc");
+        let id = arena
+            .alloc_chunk(TierKind::Warm, vec![1; 100])
+            .expect("alloc");
 
         let cold = arena.get_chunk(id).expect("get_chunk");
-        let (header, payload) = arena.get_chunk_hot_with_header(id).expect("hot_with_header");
+        let (header, payload) = arena
+            .get_chunk_hot_with_header(id)
+            .expect("hot_with_header");
         assert_eq!(header.chunk_id, cold.header().chunk_id);
         assert_eq!(header.tier, cold.header().tier);
         assert_eq!(header.payload_size, cold.header().payload_size);
@@ -7792,7 +8002,9 @@ mod m9_get_chunk_hot_tests {
         let config = ArenaConfig::test();
         let chunk_size = config.chunk_size as usize;
         let mut arena = Arena::new(config, 8).expect("arena");
-        let id = arena.alloc_chunk(TierKind::Hot, vec![0; 128]).expect("alloc");
+        let id = arena
+            .alloc_chunk(TierKind::Hot, vec![0; 128])
+            .expect("alloc");
 
         // Corrupt a payload byte.
         let slot = 0;
@@ -7858,18 +8070,26 @@ mod m10_registry_persistence_tests {
         // Alloc a chunk in Hot and begin demote to Warm (don't complete).
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
         let id = pool.alloc(vec![42; 64]).expect("alloc");
-        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+        let handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Warm)
+            .expect("begin_demote");
 
         // Flush — should persist the in-flight crossfade.
         set.flush().expect("flush");
 
         // Verify crossfades.json exists on disk.
         let crossfades_path = dir.path().join("crossfades.json");
-        assert!(crossfades_path.exists(), "crossfades.json should exist after flush");
+        assert!(
+            crossfades_path.exists(),
+            "crossfades.json should exist after flush"
+        );
 
         // Read back and verify the handle is in the file.
         let data = std::fs::read_to_string(&crossfades_path).expect("read");
-        assert!(data.contains(&format!("{}", id.as_u64())), "should contain source chunk id");
+        assert!(
+            data.contains(&format!("{}", id.as_u64())),
+            "should contain source chunk id"
+        );
     }
 
     #[test]
@@ -7879,7 +8099,9 @@ mod m10_registry_persistence_tests {
 
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
         let id = pool.alloc(vec![77; 64]).expect("alloc");
-        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+        let handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Warm)
+            .expect("begin_demote");
 
         // Flush with in-flight crossfade, then drop.
         set.flush().expect("flush");
@@ -7891,7 +8113,11 @@ mod m10_registry_persistence_tests {
 
         // The crossfade handle should be resumable: complete_demote should work.
         let result = set2.complete_demote(handle);
-        assert!(result.is_ok(), "should complete the resumed crossfade: {:?}", result.err());
+        assert!(
+            result.is_ok(),
+            "should complete the resumed crossfade: {:?}",
+            result.err()
+        );
     }
 
     #[test]
@@ -7902,7 +8128,9 @@ mod m10_registry_persistence_tests {
         // Alloc, begin demote, complete it — registry is empty.
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
         let id = pool.alloc(vec![10; 32]).expect("alloc");
-        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+        let handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Warm)
+            .expect("begin_demote");
         set.complete_demote(handle).expect("complete");
 
         set.flush().expect("flush");
@@ -7912,7 +8140,10 @@ mod m10_registry_persistence_tests {
         if crossfades_path.exists() {
             let data = std::fs::read_to_string(&crossfades_path).expect("read");
             let entries: Vec<serde_json::Value> = serde_json::from_str(&data).expect("parse");
-            assert!(entries.is_empty(), "registry should be empty after all crossfades complete");
+            assert!(
+                entries.is_empty(),
+                "registry should be empty after all crossfades complete"
+            );
         }
     }
 }
@@ -7950,7 +8181,9 @@ mod m10_orphan_gc_tests {
         // Alloc a chunk in Hot, begin demote to Warm (creates target).
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
         let id = pool.alloc(vec![55; 64]).expect("alloc");
-        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+        let handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Warm)
+            .expect("begin_demote");
         let target_id = handle.target;
 
         // Simulate crash between flush and complete: registry is persisted
@@ -7964,11 +8197,17 @@ mod m10_orphan_gc_tests {
 
         // Run GC — should collect the orphaned target.
         let gc_report = set2.gc_orphaned_targets();
-        assert!(gc_report.targets_freed > 0, "should free at least one orphaned target");
+        assert!(
+            gc_report.targets_freed > 0,
+            "should free at least one orphaned target"
+        );
 
         // The Warm pool should no longer contain the target chunk.
         let warm = set2.pool(TierKind::Warm).expect("warm");
-        assert!(!warm.arena().contains(target_id), "orphaned target should be freed");
+        assert!(
+            !warm.arena().contains(target_id),
+            "orphaned target should be freed"
+        );
     }
 
     #[test]
@@ -7979,7 +8218,9 @@ mod m10_orphan_gc_tests {
         // Alloc, demote, complete — no orphans.
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
         let id = pool.alloc(vec![33; 64]).expect("alloc");
-        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Warm).expect("begin_demote");
+        let handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Warm)
+            .expect("begin_demote");
         set.complete_demote(handle).expect("complete");
 
         set.flush().expect("flush");
@@ -8000,8 +8241,12 @@ mod m10_orphan_gc_tests {
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
         let id1 = pool.alloc(vec![1; 64]).expect("alloc1");
         let id2 = pool.alloc(vec![2; 64]).expect("alloc2");
-        let _h1 = set.begin_demote(TierKind::Hot, id1, TierKind::Warm).expect("demote1");
-        let _h2 = set.begin_demote(TierKind::Hot, id2, TierKind::Warm).expect("demote2");
+        let _h1 = set
+            .begin_demote(TierKind::Hot, id1, TierKind::Warm)
+            .expect("demote1");
+        let _h2 = set
+            .begin_demote(TierKind::Hot, id2, TierKind::Warm)
+            .expect("demote2");
 
         // Flush persists registry, then crash before complete.
         set.flush().expect("flush");
@@ -8012,7 +8257,10 @@ mod m10_orphan_gc_tests {
         let gc_report = set2.gc_orphaned_targets();
         // Sources were reverted to Resident by existing orphan recovery in open.
         // GC should have freed the 2 orphaned targets.
-        assert_eq!(gc_report.targets_freed, 2, "should free both orphaned targets");
+        assert_eq!(
+            gc_report.targets_freed, 2,
+            "should free both orphaned targets"
+        );
     }
 }
 
@@ -8233,7 +8481,8 @@ mod m12_vram_sweep_tests {
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
         let id = pool.alloc(vec![99; 64]).expect("alloc");
 
-        let handle = set.begin_demote(TierKind::Hot, id, TierKind::Vector)
+        let handle = set
+            .begin_demote(TierKind::Hot, id, TierKind::Vector)
             .expect("begin demote to VRAM");
         let vram_id = set.complete_demote(handle).expect("complete demote");
 
@@ -8241,7 +8490,8 @@ mod m12_vram_sweep_tests {
         assert!(set.vram_pool().unwrap().contains(vram_id));
 
         // Crossfade back: Vector (VRAM) → Hot (RAM).
-        let handle2 = set.begin_promote(TierKind::Vector, vram_id, TierKind::Hot)
+        let handle2 = set
+            .begin_promote(TierKind::Vector, vram_id, TierKind::Hot)
             .expect("begin promote from VRAM");
         let ram_id = set.complete_promote(handle2).expect("complete promote");
 
@@ -8277,10 +8527,12 @@ mod m12_pinned_memory_tests {
         staging.as_mut_slice().copy_from_slice(&payload);
 
         let mut vram_alloc = ctx.alloc(1024).expect("vram alloc");
-        ctx.upload(staging.as_slice(), &mut vram_alloc).expect("upload");
+        ctx.upload(staging.as_slice(), &mut vram_alloc)
+            .expect("upload");
 
         let mut download_buf = PinnedBuffer::new(&ctx, 1024).expect("pinned alloc");
-        ctx.download(&vram_alloc, download_buf.as_mut_slice()).expect("download");
+        ctx.download(&vram_alloc, download_buf.as_mut_slice())
+            .expect("download");
         assert_eq!(download_buf.as_slice(), payload.as_slice());
     }
 
@@ -8305,7 +8557,10 @@ mod m13_multi_gpu_tests {
     #[test]
     fn gpu_topology_discovers_at_least_one_device() {
         let topo = GpuTopology::discover().expect("discover GPUs");
-        assert!(topo.device_count() >= 1, "should find at least one CUDA device");
+        assert!(
+            topo.device_count() >= 1,
+            "should find at least one CUDA device"
+        );
     }
 
     #[test]
@@ -8385,7 +8640,8 @@ mod m13_kernel_launch_tests {
     #[test]
     fn launch_checksum_kernel() {
         let ctx = VramContext::new(0).expect("CUDA device 0");
-        let kernel = ctx.load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")
+        let kernel = ctx
+            .load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")
             .expect("load PTX");
 
         // 4 chunks of 8 bytes each
@@ -8406,7 +8662,9 @@ mod m13_kernel_launch_tests {
         ctx.upload(&host_input, &mut input_alloc).expect("upload");
 
         // Allocate output (4 u32s = 16 bytes)
-        let mut output_slice = ctx.stream().alloc_zeros::<u32>(num_chunks as usize)
+        let mut output_slice = ctx
+            .stream()
+            .alloc_zeros::<u32>(num_chunks as usize)
             .expect("alloc output");
 
         let handle = KernelHandle::from_data_len("batch_xor_checksum", num_chunks, 256);
@@ -8419,25 +8677,31 @@ mod m13_kernel_launch_tests {
                 &mut output_slice,
                 chunk_size,
                 num_chunks,
-            ).expect("launch");
+            )
+            .expect("launch");
         }
 
         // Download results
         let mut host_output = vec![0u32; num_chunks as usize];
-        ctx.stream().memcpy_dtoh(&output_slice, &mut host_output)
+        ctx.stream()
+            .memcpy_dtoh(&output_slice, &mut host_output)
             .expect("download");
 
         // XOR of 8 identical bytes: byte ^ byte ^ ... = 0 (even count)
         // Each chunk is [c+1; 8], XOR of 8 identical values = 0
         for (i, &checksum) in host_output.iter().enumerate() {
-            assert_eq!(checksum, 0, "chunk {i} XOR should be 0 for 8 identical bytes");
+            assert_eq!(
+                checksum, 0,
+                "chunk {i} XOR should be 0 for 8 identical bytes"
+            );
         }
     }
 
     #[test]
     fn launch_checksum_odd_count() {
         let ctx = VramContext::new(0).expect("CUDA device 0");
-        let kernel = ctx.load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")
+        let kernel = ctx
+            .load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")
             .expect("load PTX");
 
         // 1 chunk of 3 bytes: [0xAA, 0xBB, 0xCC]
@@ -8458,14 +8722,19 @@ mod m13_kernel_launch_tests {
                 &mut output_slice,
                 3,
                 1,
-            ).expect("launch");
+            )
+            .expect("launch");
         }
 
         let mut host_output = vec![0u32; 1];
-        ctx.stream().memcpy_dtoh(&output_slice, &mut host_output)
+        ctx.stream()
+            .memcpy_dtoh(&output_slice, &mut host_output)
             .expect("download");
 
-        assert_eq!(host_output[0], expected, "XOR of 0xAA^0xBB^0xCC should be 0x{expected:02X}");
+        assert_eq!(
+            host_output[0], expected,
+            "XOR of 0xAA^0xBB^0xCC should be 0x{expected:02X}"
+        );
     }
 
     // ── M14·D1: NVRTC runtime CUDA-C compilation ───────────────────────
@@ -8516,15 +8785,20 @@ extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
         );
         assert!(res.is_err(), "expected NVRTC compile failure");
         let msg = format!("{:?}", res.err().unwrap());
-        assert!(msg.contains("nvrtc compile"), "error should name the nvrtc stage: {msg}");
+        assert!(
+            msg.contains("nvrtc compile"),
+            "error should name the nvrtc stage: {msg}"
+        );
     }
 
     #[test]
     fn nvrtc_compiled_checksum_matches_hand_ptx() {
         let ctx = VramContext::new(0).expect("CUDA device 0");
-        let ptx_kernel = ctx.load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")
+        let ptx_kernel = ctx
+            .load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")
             .expect("load hand PTX");
-        let cuda_kernel = ctx.compile_cuda(CUDA_XOR_CHECKSUM_SRC, "batch_xor_checksum")
+        let cuda_kernel = ctx
+            .compile_cuda(CUDA_XOR_CHECKSUM_SRC, "batch_xor_checksum")
             .expect("nvrtc compile");
 
         // 4 chunks of 8 bytes: chunk c = [c+1; 8].
@@ -8541,21 +8815,51 @@ extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
         ctx.upload(&host_input, &mut input).expect("upload");
         let handle = KernelHandle::from_data_len("batch_xor_checksum", num_chunks, 256);
 
-        let mut out_ptx = ctx.stream().alloc_zeros::<u32>(num_chunks as usize).expect("alloc out");
-        let mut out_cuda = ctx.stream().alloc_zeros::<u32>(num_chunks as usize).expect("alloc out");
+        let mut out_ptx = ctx
+            .stream()
+            .alloc_zeros::<u32>(num_chunks as usize)
+            .expect("alloc out");
+        let mut out_cuda = ctx
+            .stream()
+            .alloc_zeros::<u32>(num_chunks as usize)
+            .expect("alloc out");
         unsafe {
-            ctx.launch_checksum(&ptx_kernel, &handle, &input.slice, &mut out_ptx, chunk_size, num_chunks)
-                .expect("launch ptx");
-            ctx.launch_checksum(&cuda_kernel, &handle, &input.slice, &mut out_cuda, chunk_size, num_chunks)
-                .expect("launch cuda");
+            ctx.launch_checksum(
+                &ptx_kernel,
+                &handle,
+                &input.slice,
+                &mut out_ptx,
+                chunk_size,
+                num_chunks,
+            )
+            .expect("launch ptx");
+            ctx.launch_checksum(
+                &cuda_kernel,
+                &handle,
+                &input.slice,
+                &mut out_cuda,
+                chunk_size,
+                num_chunks,
+            )
+            .expect("launch cuda");
         }
         let mut host_ptx = vec![0u32; num_chunks as usize];
         let mut host_cuda = vec![0u32; num_chunks as usize];
-        ctx.stream().memcpy_dtoh(&out_ptx, &mut host_ptx).expect("download ptx");
-        ctx.stream().memcpy_dtoh(&out_cuda, &mut host_cuda).expect("download cuda");
+        ctx.stream()
+            .memcpy_dtoh(&out_ptx, &mut host_ptx)
+            .expect("download ptx");
+        ctx.stream()
+            .memcpy_dtoh(&out_cuda, &mut host_cuda)
+            .expect("download cuda");
 
-        assert_eq!(host_ptx, host_cuda, "NVRTC-compiled kernel must match hand-PTX byte-for-byte");
-        assert!(host_cuda.iter().all(|&c| c == 0), "8 identical bytes XOR to 0");
+        assert_eq!(
+            host_ptx, host_cuda,
+            "NVRTC-compiled kernel must match hand-PTX byte-for-byte"
+        );
+        assert!(
+            host_cuda.iter().all(|&c| c == 0),
+            "8 identical bytes XOR to 0"
+        );
     }
 
     // ── M14·D2: generic in-place launch ────────────────────────────────
@@ -8563,7 +8867,8 @@ extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
     #[test]
     fn launch_inplace_increments_buffer() {
         let ctx = VramContext::new(0).expect("CUDA device 0");
-        let kernel = ctx.compile_cuda(CUDA_INCREMENT_SRC, "increment")
+        let kernel = ctx
+            .compile_cuda(CUDA_INCREMENT_SRC, "increment")
             .expect("nvrtc compile increment");
 
         let host_input: Vec<u8> = (0..32u8).collect();
@@ -8573,13 +8878,18 @@ extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
 
         let handle = KernelHandle::from_data_len("increment", len, 256);
         unsafe {
-            ctx.launch_inplace_u8(&kernel, &handle, &mut buf.slice, len).expect("launch inplace");
+            ctx.launch_inplace_u8(&kernel, &handle, &mut buf.slice, len)
+                .expect("launch inplace");
         }
 
         let mut host_out = vec![0u8; host_input.len()];
         ctx.download(&buf, &mut host_out).expect("download");
         for (i, &v) in host_out.iter().enumerate() {
-            assert_eq!(v, host_input[i].wrapping_add(1), "byte {i} should be incremented once");
+            assert_eq!(
+                v,
+                host_input[i].wrapping_add(1),
+                "byte {i} should be incremented once"
+            );
         }
     }
 }
@@ -8600,7 +8910,10 @@ mod cgroup_tests {
         assert_eq!(HARD_CAP_BYTES, 48 * 1024 * 1024 * 1024);
         assert_eq!(SWAP_LIMIT_BYTES, 0);
         // 10 growth steps from 8 GiB to 48 GiB
-        assert_eq!((HARD_CAP_BYTES - INITIAL_LIMIT_BYTES) / GROWTH_STEP_BYTES, 10);
+        assert_eq!(
+            (HARD_CAP_BYTES - INITIAL_LIMIT_BYTES) / GROWTH_STEP_BYTES,
+            10
+        );
     }
 
     #[test]
@@ -8610,8 +8923,7 @@ mod cgroup_tests {
         fs::write(tmp.path().join("memory.current"), "1073741824").unwrap(); // 1 GiB
         fs::write(tmp.path().join("memory.swap.max"), "0").unwrap();
 
-        let enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf())
-            .expect("from_path");
+        let enforcer = CgroupEnforcer::from_path(tmp.path().to_path_buf()).expect("from_path");
 
         assert_eq!(enforcer.current_limit(), 8 * 1024 * 1024 * 1024);
     }
@@ -8778,9 +9090,9 @@ mod cgroup_tests {
 
 #[cfg(feature = "cuda")]
 mod vram_verify_checksums_tests {
-    use crate::memory_arena::vram::{VramContext, VramPool};
+    use crate::memory_arena::pool::{EvictionKind, TierPolicy};
     use crate::memory_arena::types::TierKind;
-    use crate::memory_arena::pool::{TierPolicy, EvictionKind};
+    use crate::memory_arena::vram::{VramContext, VramPool};
 
     fn unlimited_policy() -> TierPolicy {
         TierPolicy {
@@ -8796,8 +9108,8 @@ mod vram_verify_checksums_tests {
     #[test]
     fn verify_checksums_empty_pool() {
         let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
-        let pool = VramPool::new(ctx, TierKind::Vector, 64, 16, unlimited_policy())
-            .expect("VramPool");
+        let pool =
+            VramPool::new(ctx, TierKind::Vector, 64, 16, unlimited_policy()).expect("VramPool");
         let (ids, checksums) = pool.verify_checksums().expect("verify");
         assert!(ids.is_empty());
         assert!(checksums.is_empty());
@@ -8806,8 +9118,8 @@ mod vram_verify_checksums_tests {
     #[test]
     fn verify_checksums_single_chunk() {
         let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
-        let mut pool = VramPool::new(ctx, TierKind::Vector, 8, 16, unlimited_policy())
-            .expect("VramPool");
+        let mut pool =
+            VramPool::new(ctx, TierKind::Vector, 8, 16, unlimited_policy()).expect("VramPool");
 
         // Payload: [0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55]
         // XOR = 0xAA ^ 0x55 ^ 0xAA ^ 0x55 ^ 0xAA ^ 0x55 ^ 0xAA ^ 0x55 = 0
@@ -8823,8 +9135,8 @@ mod vram_verify_checksums_tests {
     #[test]
     fn verify_checksums_multiple_chunks() {
         let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
-        let mut pool = VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy())
-            .expect("VramPool");
+        let mut pool =
+            VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy()).expect("VramPool");
 
         // Chunk 0: [1, 1, 1, 1] -> XOR = 1^1^1^1 = 0
         pool.alloc(&[1u8, 1, 1, 1]).expect("alloc 0");
@@ -8838,7 +9150,10 @@ mod vram_verify_checksums_tests {
         assert_eq!(checksums.len(), 3);
 
         // At least one should be 0 (chunks 0 and 2) and one should be 0xFF
-        assert!(checksums.contains(&0), "expected at least one zero checksum");
+        assert!(
+            checksums.contains(&0),
+            "expected at least one zero checksum"
+        );
         assert!(checksums.contains(&0xFF), "expected 0xFF checksum");
     }
 
@@ -8856,7 +9171,9 @@ extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
     #[test]
     fn apply_kernel_transforms_chunk_in_place() {
         let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
-        let kernel = ctx.compile_cuda(CUDA_INCREMENT_SRC, "increment").expect("compile increment");
+        let kernel = ctx
+            .compile_cuda(CUDA_INCREMENT_SRC, "increment")
+            .expect("compile increment");
         let mut pool = VramPool::new(ctx.clone(), TierKind::Vector, 8, 16, unlimited_policy())
             .expect("VramPool");
 
@@ -8864,7 +9181,11 @@ extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
         pool.apply_kernel(id, &kernel).expect("apply");
 
         let got = pool.get(id).expect("get");
-        assert_eq!(got, vec![11u8, 21, 31, 41], "every byte incremented on-device");
+        assert_eq!(
+            got,
+            vec![11u8, 21, 31, 41],
+            "every byte incremented on-device"
+        );
     }
 
     // ── M14·D3: verify_against_host integrity verdict ──────────────────
@@ -8876,8 +9197,8 @@ extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
     #[test]
     fn verify_against_host_clean_pool_passes() {
         let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
-        let mut pool = VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy())
-            .expect("VramPool");
+        let mut pool =
+            VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy()).expect("VramPool");
 
         let p0 = [1u8, 2, 3, 4];
         let p1 = [0xFFu8, 0, 0, 0];
@@ -8889,15 +9210,19 @@ extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
         expected.insert(id1, host_xor(&p1));
 
         let report = pool.verify_against_host(&expected).expect("verify");
-        assert!(report.ok, "clean pool should pass; mismatches: {:?}", report.mismatches);
+        assert!(
+            report.ok,
+            "clean pool should pass; mismatches: {:?}",
+            report.mismatches
+        );
         assert!(report.mismatches.is_empty());
     }
 
     #[test]
     fn verify_against_host_detects_tampered_expectation() {
         let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
-        let mut pool = VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy())
-            .expect("VramPool");
+        let mut pool =
+            VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy()).expect("VramPool");
 
         let p0 = [1u8, 2, 3, 4];
         let p1 = [9u8, 8, 7, 6];
@@ -8910,14 +9235,18 @@ extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
 
         let report = pool.verify_against_host(&expected).expect("verify");
         assert!(!report.ok, "tampered expectation must fail");
-        assert_eq!(report.mismatches, vec![id1], "exactly the tampered chunk is flagged");
+        assert_eq!(
+            report.mismatches,
+            vec![id1],
+            "exactly the tampered chunk is flagged"
+        );
     }
 
     #[test]
     fn verify_against_host_empty_pool_passes() {
         let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
-        let pool = VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy())
-            .expect("VramPool");
+        let pool =
+            VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy()).expect("VramPool");
         let expected = std::collections::HashMap::new();
         let report = pool.verify_against_host(&expected).expect("verify");
         assert!(report.ok);

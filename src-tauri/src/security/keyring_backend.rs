@@ -88,16 +88,16 @@ impl KeyringStore for OsKeyring {
     }
 
     fn store(&self, account: &str, secret: &str) -> Result<(), KeyringError> {
-        let entry = keyring::Entry::new(KEYRING_SERVICE, account)
-            .map_err(|_| KeyringError::Unavailable)?;
+        let entry =
+            keyring::Entry::new(KEYRING_SERVICE, account).map_err(|_| KeyringError::Unavailable)?;
         entry
             .set_password(secret)
             .map_err(|_| KeyringError::WriteFailed)
     }
 
     fn load(&self, account: &str) -> Result<SecretString, KeyringError> {
-        let entry = keyring::Entry::new(KEYRING_SERVICE, account)
-            .map_err(|_| KeyringError::Unavailable)?;
+        let entry =
+            keyring::Entry::new(KEYRING_SERVICE, account).map_err(|_| KeyringError::Unavailable)?;
         match entry.get_password() {
             Ok(value) => Ok(SecretString::new(value)),
             Err(keyring::Error::NoEntry) => Err(KeyringError::NotFound),
@@ -106,8 +106,8 @@ impl KeyringStore for OsKeyring {
     }
 
     fn delete(&self, account: &str) -> Result<(), KeyringError> {
-        let entry = keyring::Entry::new(KEYRING_SERVICE, account)
-            .map_err(|_| KeyringError::Unavailable)?;
+        let entry =
+            keyring::Entry::new(KEYRING_SERVICE, account).map_err(|_| KeyringError::Unavailable)?;
         match entry.delete_credential() {
             Ok(()) => Ok(()),
             Err(keyring::Error::NoEntry) => Ok(()),

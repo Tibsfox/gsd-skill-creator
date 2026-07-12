@@ -1,7 +1,7 @@
 //! Tests for magic level definitions, event visibility, and filter engine.
 
-use crate::magic::types::{MagicLevel, EVENT_VISIBILITY};
 use crate::magic::filter::MagicFilter;
+use crate::magic::types::{MagicLevel, EVENT_VISIBILITY};
 
 #[test]
 fn test_magic_level_values() {

@@ -4,9 +4,7 @@
 //! exact domain matching, API key injection, no credential getter, and socket
 //! file permissions.
 
-use crate::security::proxy::{
-    CredentialProxy, CredentialType, ProxiedRequest, SecretString,
-};
+use crate::security::proxy::{CredentialProxy, CredentialType, ProxiedRequest, SecretString};
 
 // ============================================================================
 // Test 1: SecretString does not print its value
@@ -167,8 +165,7 @@ async fn socket_created_with_mode_0600() {
     use std::os::unix::fs::PermissionsExt;
     let tmp = tempfile::tempdir().unwrap();
     let socket_path = tmp.path().join("proxy.sock");
-    let proxy =
-        CredentialProxy::new_for_test_with_socket(socket_path.clone(), vec![]);
+    let proxy = CredentialProxy::new_for_test_with_socket(socket_path.clone(), vec![]);
     proxy.create_socket().await.unwrap();
     let meta = std::fs::metadata(&socket_path).unwrap();
     let mode = meta.permissions().mode() & 0o777;

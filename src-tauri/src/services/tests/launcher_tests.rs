@@ -1,5 +1,5 @@
-use crate::services::types::*;
 use crate::services::launcher::*;
+use crate::services::types::*;
 
 #[test]
 fn test_new_launcher_all_services_offline() {
@@ -46,8 +46,7 @@ fn test_start_dashboard_without_file_watcher_fails() {
     match result {
         Err(LaunchError::DependencyNotMet { missing }) => {
             assert!(
-                missing.contains(&ServiceId::FileWatcher)
-                    || missing.contains(&ServiceId::Tmux),
+                missing.contains(&ServiceId::FileWatcher) || missing.contains(&ServiceId::Tmux),
                 "Expected FileWatcher or Tmux in missing deps, got {:?}",
                 missing
             );

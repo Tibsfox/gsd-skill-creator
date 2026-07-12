@@ -129,8 +129,6 @@ fn main() {
         "open_scribe_dashboard",
     ]);
 
-    tauri_build::try_build(
-        tauri_build::Attributes::new().app_manifest(manifest),
-    )
-    .expect("failed to run tauri build");
+    tauri_build::try_build(tauri_build::Attributes::new().app_manifest(manifest))
+        .expect("failed to run tauri build");
 }

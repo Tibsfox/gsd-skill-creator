@@ -86,15 +86,20 @@ fn cmd_status() -> ExitCode {
             // surface the upgrade availability.
             if kr.is_available() {
                 println!("Note: This host has OS keyring available but credentials are in Path 2 storage.");
-                println!("      See `skill-creator-keystore migrate --to-keyring` for upgrade options.");
+                println!(
+                    "      See `skill-creator-keystore migrate --to-keyring` for upgrade options."
+                );
             }
         }
         DiscoveredState::Path1WithPath2Orphan => {
             println!("Storage: Path 1 (OS keyring) — Path 2 file present as orphan");
             println!("Service: gsd-skill-creator");
             println!("Account: anthropic-api-key");
-            println!("Orphan: {} — Path 1 wins; consider `rm {}` to clean up.",
-                path2.display(), path2.display());
+            println!(
+                "Orphan: {} — Path 1 wins; consider `rm {}` to clean up.",
+                path2.display(),
+                path2.display()
+            );
         }
         DiscoveredState::V1Plaintext => {
             println!("Storage: v1 plaintext (legacy)");
@@ -103,7 +108,9 @@ fn cmd_status() -> ExitCode {
         }
         DiscoveredState::Empty => {
             println!("Storage: empty");
-            println!("Action: run `skill-creator-keystore set anthropic-api-key` to store a credential.");
+            println!(
+                "Action: run `skill-creator-keystore set anthropic-api-key` to store a credential."
+            );
         }
     }
     ExitCode::SUCCESS
@@ -135,7 +142,10 @@ fn cmd_migrate(args: MigrateArgs) -> ExitCode {
     let state = Keystore::discover(&kr, &path2, &v1);
     match state {
         DiscoveredState::Empty => {
-            eprintln!("no v1 plaintext file detected at {}; nothing to migrate.", v1.display());
+            eprintln!(
+                "no v1 plaintext file detected at {}; nothing to migrate.",
+                v1.display()
+            );
             return ExitCode::SUCCESS;
         }
         DiscoveredState::Path1 | DiscoveredState::Path2 | DiscoveredState::Path1WithPath2Orphan => {
@@ -229,8 +239,14 @@ fn prompt_passphrase(prompt: &str) -> Result<String, String> {
     io::stderr().flush().map_err(|e| e.to_string())?;
     let stdin = io::stdin();
     let mut line = String::new();
-    stdin.lock().read_line(&mut line).map_err(|e| e.to_string())?;
-    let trimmed = line.trim_end_matches('\n').trim_end_matches('\r').to_string();
+    stdin
+        .lock()
+        .read_line(&mut line)
+        .map_err(|e| e.to_string())?;
+    let trimmed = line
+        .trim_end_matches('\n')
+        .trim_end_matches('\r')
+        .to_string();
     if trimmed.is_empty() {
         return Err("empty passphrase".to_string());
     }

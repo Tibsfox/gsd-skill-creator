@@ -4,8 +4,8 @@
 //! matching the TypeScript Zod schemas (snake_case), and that round-trip
 //! serialization (struct -> JSON -> struct) produces identical values.
 
-use crate::ipc::types::*;
 use crate::ipc::events;
+use crate::ipc::types::*;
 use serde_json;
 use std::collections::HashMap;
 
@@ -56,7 +56,10 @@ fn chat_complete_event_json_parity() {
     let event = ChatCompleteEvent {
         conversation_id: "conv-1".into(),
         stop_reason: StopReason::EndTurn,
-        usage: TokenUsage { input_tokens: 100, output_tokens: 50 },
+        usage: TokenUsage {
+            input_tokens: 100,
+            output_tokens: 50,
+        },
     };
     let json = serde_json::to_value(&event).unwrap();
     assert_eq!(json["stop_reason"], "end_turn");
@@ -323,7 +326,10 @@ fn ipc_event_round_trip() {
 #[test]
 fn debug_timing_with_metadata_round_trip() {
     let mut metadata = HashMap::new();
-    metadata.insert("source".into(), serde_json::Value::String("benchmark".into()));
+    metadata.insert(
+        "source".into(),
+        serde_json::Value::String("benchmark".into()),
+    );
     let original = DebugTimingEvent {
         operation: "ipc_round_trip".into(),
         duration_ms: 42,

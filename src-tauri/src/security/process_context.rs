@@ -125,7 +125,10 @@ impl CapturingProcessAuditSink {
 
     /// Snapshot of all records captured so far.
     pub fn records(&self) -> Vec<ProcessAuditRecord> {
-        self.records.lock().expect("capturing sink poisoned").clone()
+        self.records
+            .lock()
+            .expect("capturing sink poisoned")
+            .clone()
     }
 }
 

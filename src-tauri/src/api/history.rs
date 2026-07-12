@@ -211,10 +211,7 @@ impl ConversationHistory {
     /// Generate a filename from a started_at timestamp.
     /// Input: "2026-02-26T14:30:00Z" -> "session-20260226-143000.json"
     fn filename_from_timestamp(started_at: &str) -> String {
-        let clean: String = started_at
-            .chars()
-            .filter(|c| c.is_ascii_digit())
-            .collect();
+        let clean: String = started_at.chars().filter(|c| c.is_ascii_digit()).collect();
         // Take first 14 digits (YYYYMMDDHHMMSS) if available
         let ts = if clean.len() >= 14 {
             &clean[..14]

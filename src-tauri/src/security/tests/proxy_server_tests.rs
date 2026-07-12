@@ -6,10 +6,8 @@
 
 use std::sync::Arc;
 
-use crate::security::proxy::{
-    CredentialProxy, CredentialType, ProxiedRequest, SecretString,
-};
-use crate::security::proxy_server::{ProxyServer, ProxyHealthStatus};
+use crate::security::proxy::{CredentialProxy, CredentialType, ProxiedRequest, SecretString};
+use crate::security::proxy_server::{ProxyHealthStatus, ProxyServer};
 
 /// Build a test ProxyServer with one domain + credential configured.
 fn build_test_server() -> ProxyServer {
@@ -160,10 +158,7 @@ async fn concurrent_requests_no_cross_contamination() {
             success_count += 1;
         }
     }
-    assert_eq!(
-        success_count, 10,
-        "All 10 concurrent requests must succeed"
-    );
+    assert_eq!(success_count, 10, "All 10 concurrent requests must succeed");
 
     // Verify total count
     let health = server.health().await;

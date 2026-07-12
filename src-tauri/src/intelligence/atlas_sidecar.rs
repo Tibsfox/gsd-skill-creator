@@ -101,16 +101,11 @@ pub struct IndexerArgs {
 /// Returns `Err` only if the sidecar cannot be *launched* (e.g. `node` not on
 /// PATH). Indexer failures after launch are surfaced as `atlas:indexing.failed`
 /// events, not as Err here.
-pub fn spawn_indexer_fire_and_forget(
-    app: AppHandle,
-    args: IndexerArgs,
-) -> Result<(), String> {
+pub fn spawn_indexer_fire_and_forget(app: AppHandle, args: IndexerArgs) -> Result<(), String> {
     let cli_path = repo_root().join("tools").join("atlas-index.mjs");
 
     // Build the CLI argument list.
-    let mut argv: Vec<String> = vec![
-        cli_path.to_string_lossy().into_owned(),
-    ];
+    let mut argv: Vec<String> = vec![cli_path.to_string_lossy().into_owned()];
 
     // Prefer --stream-events (H1 extension) for per-event lines.
     argv.push("--stream-events".to_string());
@@ -232,9 +227,10 @@ async fn run_indexer_task(
         // Try to parse as a JSONL stream envelope first.
         if let Ok(val) = serde_json::from_str::<serde_json::Value>(trimmed) {
             // Stream-events envelope: { "event": "atlas:indexing.*", "payload": {...} }
-            if let (Some(event), Some(payload)) =
-                (val.get("event").and_then(|e| e.as_str()), val.get("payload"))
-            {
+            if let (Some(event), Some(payload)) = (
+                val.get("event").and_then(|e| e.as_str()),
+                val.get("payload"),
+            ) {
                 if event.starts_with("atlas:indexing.") {
                     saw_stream_event = true;
                     let _ = app.emit(event, payload);
@@ -414,9 +410,7 @@ mod tests {
     fn timeout_error_message_includes_duration() {
         // Verify the error message format the timeout branch emits.
         let timeout_limit: u64 = 42;
-        let msg = format!(
-            "indexer timed out after {timeout_limit}s and was terminated"
-        );
+        let msg = format!("indexer timed out after {timeout_limit}s and was terminated");
         assert!(msg.contains("42s"));
         assert!(msg.contains("timed out"));
         assert!(msg.contains("terminated"));
@@ -447,7 +441,7 @@ mod tests {
         // by constructing the same strings it would produce.
         let args = IndexerArgs {
             snapshot_id: "snap-bad".to_string(),
-            project_id: Some(String::new()),   // empty project_id
+            project_id: Some(String::new()), // empty project_id
             project_path: None,
             db_override: None,
             registry_override: None,
@@ -498,8 +492,8 @@ mod tests {
         let val: serde_json::Value = serde_json::from_str(line).unwrap();
         let totals = val.get("totals").unwrap();
         let symbols = totals.get("symbols").and_then(|x| x.as_i64()).unwrap_or(0);
-        let calls   = totals.get("calls").and_then(|x| x.as_i64()).unwrap_or(0);
-        let files   = totals.get("files").and_then(|x| x.as_i64()).unwrap_or(0);
+        let calls = totals.get("calls").and_then(|x| x.as_i64()).unwrap_or(0);
+        let files = totals.get("files").and_then(|x| x.as_i64()).unwrap_or(0);
         assert_eq!(symbols, 42);
         assert_eq!(calls, 18);
         assert_eq!(files, 5);

@@ -101,8 +101,7 @@ impl ShutdownManager {
 
         for id in order {
             if let Some(pid) = self.tracked_pids.get(&id).copied() {
-                let result =
-                    Self::graceful_shutdown_pid(pid, self.timeout).await;
+                let result = Self::graceful_shutdown_pid(pid, self.timeout).await;
                 results.push((id, result));
             } else {
                 results.push((id, Ok(())));
@@ -118,10 +117,7 @@ impl ShutdownManager {
     /// 1. Send SIGTERM via `kill` command
     /// 2. Wait up to `timeout` for process to exit
     /// 3. If still running after timeout, send SIGKILL
-    pub async fn graceful_shutdown_pid(
-        pid: u32,
-        timeout: Duration,
-    ) -> Result<(), String> {
+    pub async fn graceful_shutdown_pid(pid: u32, timeout: Duration) -> Result<(), String> {
         // Send SIGTERM via kill command (avoids direct libc dependency)
         ensure_process_allowed(
             "services/graceful_shutdown_pid",
@@ -142,7 +138,11 @@ impl ShutdownManager {
             if stderr.contains("No such process") {
                 return Ok(());
             }
-            return Err(format!("Failed to send SIGTERM to {}: {}", pid, stderr.trim()));
+            return Err(format!(
+                "Failed to send SIGTERM to {}: {}",
+                pid,
+                stderr.trim()
+            ));
         }
 
         // Wait for process to exit. Gate hoisted ONCE above the poll loop
@@ -197,7 +197,11 @@ impl ShutdownManager {
             if stderr.contains("No such process") {
                 return Ok(()); // Process exited between check and kill
             }
-            return Err(format!("Failed to send SIGKILL to {}: {}", pid, stderr.trim()));
+            return Err(format!(
+                "Failed to send SIGKILL to {}: {}",
+                pid,
+                stderr.trim()
+            ));
         }
 
         Err(format!(

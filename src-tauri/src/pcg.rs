@@ -216,7 +216,10 @@ impl Pcg32 {
 pub fn pcg_from_string(seed: &str, stream: u64) -> Pcg32 {
     let mut hash: u64 = 5381;
     for byte in seed.bytes() {
-        hash = hash.wrapping_shl(5).wrapping_add(hash).wrapping_add(byte as u64);
+        hash = hash
+            .wrapping_shl(5)
+            .wrapping_add(hash)
+            .wrapping_add(byte as u64);
     }
     Pcg32::new(hash, stream)
 }
@@ -287,7 +290,8 @@ mod tests {
             counts[rng.bounded(6) as usize] += 1;
         }
         let expected = n as f64 / 6.0;
-        let chi2: f64 = counts.iter()
+        let chi2: f64 = counts
+            .iter()
             .map(|&c| {
                 let diff = c as f64 - expected;
                 diff * diff / expected
@@ -314,8 +318,12 @@ mod tests {
         for _ in 0..10_000 {
             let v = rng.int_range(3, 7);
             assert!((3..=7).contains(&v));
-            if v == 3 { saw_min = true; }
-            if v == 7 { saw_max = true; }
+            if v == 3 {
+                saw_min = true;
+            }
+            if v == 7 {
+                saw_max = true;
+            }
         }
         assert!(saw_min, "never saw min=3");
         assert!(saw_max, "never saw max=7");

@@ -90,8 +90,13 @@ pub fn start_claude_in_tmux(
         argv.push(dir);
     }
     argv.push("claude");
-    ensure_process_allowed("claude/start_claude_in_tmux", ProcessOp::Output, "tmux", &argv)
-        .map_err(|e| e.to_string())?;
+    ensure_process_allowed(
+        "claude/start_claude_in_tmux",
+        ProcessOp::Output,
+        "tmux",
+        &argv,
+    )
+    .map_err(|e| e.to_string())?;
     let mut cmd = Command::new("tmux");
     cmd.args(&argv);
     let output = cmd.output().map_err(|e| e.to_string())?;
@@ -104,10 +109,7 @@ pub fn start_claude_in_tmux(
 /// Stop a Claude Code session in a tmux window.
 ///
 /// Sends Ctrl-C to interrupt Claude, waits briefly, then kills the window.
-pub fn stop_claude_in_tmux(
-    session_name: &str,
-    window_name: &str,
-) -> Result<(), String> {
+pub fn stop_claude_in_tmux(session_name: &str, window_name: &str) -> Result<(), String> {
     let target = format!("{}:{}", session_name, window_name);
     // Gate hoisted ABOVE the swallowed send-keys: a security denial must
     // propagate even though the operational error is intentionally ignored.
@@ -302,10 +304,18 @@ mod tests {
     #[test]
     fn test_generate_session_id() {
         let id = generate_session_id();
-        assert!(id.starts_with("claude-"), "ID should start with 'claude-', got: {}", id);
+        assert!(
+            id.starts_with("claude-"),
+            "ID should start with 'claude-', got: {}",
+            id
+        );
         // Should contain a numeric timestamp after the prefix
         let suffix = &id["claude-".len()..];
-        assert!(suffix.parse::<u128>().is_ok(), "Suffix should be numeric, got: {}", suffix);
+        assert!(
+            suffix.parse::<u128>().is_ok(),
+            "Suffix should be numeric, got: {}",
+            suffix
+        );
     }
 
     #[test]
@@ -322,11 +332,7 @@ mod tests {
     #[test]
     fn test_start_claude_in_tmux_with_project_dir() {
         // Verify the function accepts project_dir without panicking
-        let result = start_claude_in_tmux(
-            "nonexistent-session-xyzzy",
-            "test-window",
-            Some("/tmp"),
-        );
+        let result = start_claude_in_tmux("nonexistent-session-xyzzy", "test-window", Some("/tmp"));
         assert!(result.is_err() || result.is_ok());
     }
 

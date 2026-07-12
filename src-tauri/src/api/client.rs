@@ -138,12 +138,8 @@ impl AnthropicClient {
         app_handle: &tauri::AppHandle,
         conversation_id: &str,
     ) -> Result<MessageResponse, ApiError> {
-        let body = Self::build_request_body(
-            &messages,
-            system.as_deref(),
-            &self.model,
-            self.max_tokens,
-        );
+        let body =
+            Self::build_request_body(&messages, system.as_deref(), &self.model, self.max_tokens);
         let api_key = self.keystore.get_key().map_err(|_| ApiError::NoApiKey)?;
         let response = self
             .http_client
@@ -199,7 +195,12 @@ impl AnthropicClient {
 
         for attempt in 1..=(policy.max_attempts + 1) {
             match self
-                .send_message(messages.clone(), system.clone(), app_handle, conversation_id)
+                .send_message(
+                    messages.clone(),
+                    system.clone(),
+                    app_handle,
+                    conversation_id,
+                )
                 .await
             {
                 Ok(response) => return Ok(response),
@@ -209,8 +210,7 @@ impl AnthropicClient {
                     }
 
                     let delay = if policy.is_rate_limited(&e) {
-                        let retry_after_ms =
-                            extract_retry_after_from_error(&e).unwrap_or(5000);
+                        let retry_after_ms = extract_retry_after_from_error(&e).unwrap_or(5000);
                         let _ = app_handle.emit(
                             crate::ipc::events::CHAT_RATE_LIMITED,
                             serde_json::json!({"retry_after_ms": retry_after_ms}),

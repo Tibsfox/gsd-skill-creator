@@ -113,9 +113,7 @@ impl OrchestratorNotifier {
         let hygiene_report = match &result.hygiene_status {
             HygieneStatus::Clean => None,
             HygieneStatus::Advisory { issues } => Some(issues.join("; ")),
-            HygieneStatus::Quarantine { reason, detail } => {
-                Some(format!("{}: {}", reason, detail))
-            }
+            HygieneStatus::Quarantine { reason, detail } => Some(format!("{}: {}", reason, detail)),
         };
 
         // Map content type to action

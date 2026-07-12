@@ -33,7 +33,9 @@ use memmap2::{MmapMut, MmapOptions};
 use xxhash_rust::xxh3::Xxh3Default;
 
 use crate::memory_arena::allocator::FixedSlotAllocator;
-use crate::memory_arena::chunk::{read_header_core, read_header_from, write_header_into, Chunk, CHECKSUM_OFFSET};
+use crate::memory_arena::chunk::{
+    read_header_core, read_header_from, write_header_into, Chunk, CHECKSUM_OFFSET,
+};
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::list::LruIndex;
 use crate::memory_arena::types::{
@@ -320,7 +322,9 @@ impl Arena {
         // implementation we'd need a HugeMmap storage variant, but for
         // M8 the measurement is the goal — we verify the syscall
         // succeeds and record the flag.
-        unsafe { libc::munmap(ptr, total_bytes); }
+        unsafe {
+            libc::munmap(ptr, total_bytes);
+        }
 
         // Re-mmap with memmap2 (standard path) but set the flag.
         let (storage, slot_size) = Self::mmap_file_storage(&config, num_slots, &path)?;
@@ -428,8 +432,7 @@ impl Arena {
         storage: Storage,
     ) -> ArenaResult<Self> {
         let mut slots: Vec<SlotState> = vec![SlotState::Free; num_slots];
-        let mut directory: HashMap<ChunkId, usize> =
-            HashMap::with_capacity(num_slots);
+        let mut directory: HashMap<ChunkId, usize> = HashMap::with_capacity(num_slots);
         let mut lru = LruIndex::new();
         let mut next_chunk_id: u64 = 1;
 
@@ -585,10 +588,13 @@ impl Arena {
             });
         }
 
-        let slot = self.allocator.pop_free_slot().ok_or(ArenaError::OutOfSlots {
-            requested: 1,
-            available: 0,
-        })?;
+        let slot = self
+            .allocator
+            .pop_free_slot()
+            .ok_or(ArenaError::OutOfSlots {
+                requested: 1,
+                available: 0,
+            })?;
 
         let id = ChunkId::new(self.next_chunk_id);
         self.next_chunk_id += 1;
@@ -742,11 +748,7 @@ impl Arena {
     /// Called by `ArenaSet::complete_demote` to stamp the target chunk
     /// with the current time so subsequent hysteresis checks on it see
     /// the fade.
-    pub(crate) fn write_last_demote_ns(
-        &mut self,
-        id: ChunkId,
-        now_ns: u64,
-    ) -> ArenaResult<()> {
+    pub(crate) fn write_last_demote_ns(&mut self, id: ChunkId, now_ns: u64) -> ArenaResult<()> {
         let slot = *self
             .directory
             .get(&id)
@@ -782,11 +784,7 @@ impl Arena {
     /// Called by `ArenaSet::complete_promote` to stamp the target chunk
     /// with the current time so subsequent hysteresis checks on it see
     /// the fade.
-    pub(crate) fn write_last_promote_ns(
-        &mut self,
-        id: ChunkId,
-        now_ns: u64,
-    ) -> ArenaResult<()> {
+    pub(crate) fn write_last_promote_ns(&mut self, id: ChunkId, now_ns: u64) -> ArenaResult<()> {
         let slot = *self
             .directory
             .get(&id)
@@ -1075,10 +1073,13 @@ impl Arena {
             });
         }
 
-        let slot = self.allocator.pop_free_slot().ok_or(ArenaError::OutOfSlots {
-            requested: 1,
-            available: 0,
-        })?;
+        let slot = self
+            .allocator
+            .pop_free_slot()
+            .ok_or(ArenaError::OutOfSlots {
+                requested: 1,
+                available: 0,
+            })?;
 
         // Write the chunk directly into the slot. No tail zero-fill needed:
         // the invariant "freed slots are zero in the tail region" is

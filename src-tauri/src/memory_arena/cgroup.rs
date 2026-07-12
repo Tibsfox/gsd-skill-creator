@@ -104,8 +104,8 @@ impl CgroupEnforcer {
     pub fn state(&self) -> ArenaResult<CgroupMemoryState> {
         let limit = read_memory_file(&self.cgroup_dir.join("memory.max"))?;
         let current = read_memory_file(&self.cgroup_dir.join("memory.current"))?;
-        let swap_limit = read_memory_file(&self.cgroup_dir.join("memory.swap.max"))
-            .unwrap_or(u64::MAX);
+        let swap_limit =
+            read_memory_file(&self.cgroup_dir.join("memory.swap.max")).unwrap_or(u64::MAX);
 
         let headroom = limit.saturating_sub(current);
         let utilization = if limit > 0 && limit < u64::MAX {

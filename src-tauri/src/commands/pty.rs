@@ -15,8 +15,18 @@ use crate::pty::session::PtySession;
 /// without this gate could call pty_open with `shell = "/bin/rm"` +
 /// `args = ["-rf", "/"]` and never need a single keystroke.
 const ALLOWED_SHELLS: &[&str] = &[
-    "bash", "sh", "zsh", "fish", "dash", "ksh", "tcsh", "csh",
-    "cmd.exe", "powershell.exe", "pwsh.exe", "pwsh",
+    "bash",
+    "sh",
+    "zsh",
+    "fish",
+    "dash",
+    "ksh",
+    "tcsh",
+    "csh",
+    "cmd.exe",
+    "powershell.exe",
+    "pwsh.exe",
+    "pwsh",
 ];
 
 fn shell_allowed(shell_path: &str) -> bool {
@@ -189,7 +199,9 @@ pub fn pty_write(
     let session = mgr
         .get_mut(&id)
         .ok_or_else(|| format!("PTY session '{}' not found", id))?;
-    session.write_input(data.as_bytes()).map_err(|e| e.to_string())
+    session
+        .write_input(data.as_bytes())
+        .map_err(|e| e.to_string())
 }
 
 /// Resize the PTY to the given dimensions.
@@ -248,10 +260,7 @@ pub async fn pty_resume(
 ///
 /// Returns Ok if the session was found and closed, Err if not found.
 #[tauri::command]
-pub fn pty_close(
-    state: tauri::State<'_, Mutex<PtyManager>>,
-    id: String,
-) -> Result<(), String> {
+pub fn pty_close(state: tauri::State<'_, Mutex<PtyManager>>, id: String) -> Result<(), String> {
     let mut mgr = state.lock().map_err(|e| e.to_string())?;
     let mut session = mgr
         .remove(&id)

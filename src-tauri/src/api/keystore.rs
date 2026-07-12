@@ -70,7 +70,9 @@ impl KeyStore {
     /// Store a new API key (sets env var as fallback for this session).
     pub fn store_key(key: String) -> Result<Self, KeyStoreError> {
         // For now, store as env var fallback (future: write to encrypted file)
-        unsafe { std::env::set_var("ANTHROPIC_API_KEY", &key); }
+        unsafe {
+            std::env::set_var("ANTHROPIC_API_KEY", &key);
+        }
         Ok(Self {
             secret: Some(SecretString::new(key)),
             backend: Some(KeystoreBackend::EnvironmentVariable),

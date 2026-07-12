@@ -27,7 +27,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("╔════════════════════════════════════════════════════════════════╗");
     println!("║             Memory Arena Microbenchmark (M5)                   ║");
     println!("║                                                                ║");
-    println!("║  Warmup: {} iters   Measure: {} iters                   ║", WARMUP_ITERS, MEASURE_ITERS);
+    println!(
+        "║  Warmup: {} iters   Measure: {} iters                   ║",
+        WARMUP_ITERS, MEASURE_ITERS
+    );
     println!("╚════════════════════════════════════════════════════════════════╝");
     println!();
 

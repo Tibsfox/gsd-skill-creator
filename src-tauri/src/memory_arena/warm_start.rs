@@ -197,8 +197,7 @@ impl WarmStart {
         root: impl AsRef<Path>,
         cold: &dyn ColdSource,
     ) -> ArenaResult<(ArenaSet, WarmStartReport)> {
-        let (set, report, _stats) =
-            Self::open_with_config(root, cold, WarmStartConfig::default())?;
+        let (set, report, _stats) = Self::open_with_config(root, cold, WarmStartConfig::default())?;
         Ok((set, report))
     }
 
@@ -256,8 +255,7 @@ impl WarmStart {
             let stats = WarmStartStats {
                 pools_walked,
                 headers_walked: report.slots_walked,
-                slots_occupied: report.slots_validated
-                    + report.slots_rebuilt_from_cold,
+                slots_occupied: report.slots_validated + report.slots_rebuilt_from_cold,
                 slots_free,
                 checksums_validated: report.slots_validated,
             };

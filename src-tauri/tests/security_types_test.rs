@@ -31,10 +31,7 @@ fn make_sandbox_profile() -> SandboxProfile {
         agent_type: AgentType::Exec,
         filesystem: Filesystem {
             write_dirs: vec!["/tmp/worktree-exec-001".to_string()],
-            deny_read: vec![
-                "/home/user/.ssh".to_string(),
-                "/home/user/.aws".to_string(),
-            ],
+            deny_read: vec!["/home/user/.ssh".to_string(), "/home/user/.aws".to_string()],
         },
         network: Network {
             allowed_domains: vec![make_domain_credential()],
@@ -140,10 +137,7 @@ fn credential_source_enum_values() {
         serde_json::to_value(CredentialSource::Keychain).unwrap(),
         "keychain"
     );
-    assert_eq!(
-        serde_json::to_value(CredentialSource::Env).unwrap(),
-        "env"
-    );
+    assert_eq!(serde_json::to_value(CredentialSource::Env).unwrap(), "env");
     assert_eq!(
         serde_json::to_value(CredentialSource::File).unwrap(),
         "file"
@@ -176,10 +170,7 @@ fn security_event_json_field_names() {
 
 #[test]
 fn event_severity_enum_values() {
-    assert_eq!(
-        serde_json::to_value(EventSeverity::Info).unwrap(),
-        "info"
-    );
+    assert_eq!(serde_json::to_value(EventSeverity::Info).unwrap(), "info");
     assert_eq!(
         serde_json::to_value(EventSeverity::Warning).unwrap(),
         "warning"
@@ -200,10 +191,7 @@ fn event_source_enum_values() {
         serde_json::to_value(EventSource::Sandbox).unwrap(),
         "sandbox"
     );
-    assert_eq!(
-        serde_json::to_value(EventSource::Proxy).unwrap(),
-        "proxy"
-    );
+    assert_eq!(serde_json::to_value(EventSource::Proxy).unwrap(), "proxy");
     assert_eq!(
         serde_json::to_value(EventSource::Staging).unwrap(),
         "staging"
@@ -250,22 +238,10 @@ fn sandbox_profile_without_worktree() {
 
 #[test]
 fn agent_type_enum_values() {
-    assert_eq!(
-        serde_json::to_value(AgentType::Exec).unwrap(),
-        "exec"
-    );
-    assert_eq!(
-        serde_json::to_value(AgentType::Verify).unwrap(),
-        "verify"
-    );
-    assert_eq!(
-        serde_json::to_value(AgentType::Scout).unwrap(),
-        "scout"
-    );
-    assert_eq!(
-        serde_json::to_value(AgentType::Main).unwrap(),
-        "main"
-    );
+    assert_eq!(serde_json::to_value(AgentType::Exec).unwrap(), "exec");
+    assert_eq!(serde_json::to_value(AgentType::Verify).unwrap(), "verify");
+    assert_eq!(serde_json::to_value(AgentType::Scout).unwrap(), "scout");
+    assert_eq!(serde_json::to_value(AgentType::Main).unwrap(), "main");
 }
 
 // ---------------------------------------------------------------------------

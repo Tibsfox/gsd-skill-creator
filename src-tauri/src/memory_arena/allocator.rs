@@ -323,10 +323,7 @@ impl ChunkAllocator for SlabAllocator {
     }
 
     fn allocated_bytes(&self) -> usize {
-        self.classes
-            .iter()
-            .map(|c| c.allocated * c.size)
-            .sum()
+        self.classes.iter().map(|c| c.allocated * c.size).sum()
     }
 
     fn num_allocations(&self) -> usize {
@@ -371,8 +368,14 @@ pub struct BuddyAllocator {
 
 impl BuddyAllocator {
     pub fn new(total_capacity: usize, min_block: usize) -> Self {
-        assert!(total_capacity.is_power_of_two(), "total_capacity must be power of two");
-        assert!(min_block.is_power_of_two(), "min_block must be power of two");
+        assert!(
+            total_capacity.is_power_of_two(),
+            "total_capacity must be power of two"
+        );
+        assert!(
+            min_block.is_power_of_two(),
+            "min_block must be power of two"
+        );
         assert!(total_capacity >= min_block);
 
         let num_levels = (total_capacity / min_block).trailing_zeros() as usize + 1;
@@ -560,17 +563,25 @@ pub struct TlsfAllocator {
 
 impl TlsfAllocator {
     pub fn new(total_capacity: usize, min_block: usize, config: TlsfConfig) -> Self {
-        assert!(total_capacity.is_power_of_two(), "total_capacity must be power of two");
-        assert!(min_block.is_power_of_two(), "min_block must be power of two");
-        assert!(config.sl_count.is_power_of_two(), "sl_count must be power of two");
+        assert!(
+            total_capacity.is_power_of_two(),
+            "total_capacity must be power of two"
+        );
+        assert!(
+            min_block.is_power_of_two(),
+            "min_block must be power of two"
+        );
+        assert!(
+            config.sl_count.is_power_of_two(),
+            "sl_count must be power of two"
+        );
         assert!(total_capacity >= min_block);
 
         let sl_count = config.sl_count;
         let sl_count_log2 = sl_count.trailing_zeros();
 
         // Number of first-level classes: log2(total_capacity) - log2(min_block) + 1
-        let fl_count =
-            (total_capacity.trailing_zeros() - min_block.trailing_zeros() + 1) as usize;
+        let fl_count = (total_capacity.trailing_zeros() - min_block.trailing_zeros() + 1) as usize;
 
         let fl_bitmap = 0u64;
         let sl_bitmaps = vec![0u64; fl_count];
@@ -685,12 +696,13 @@ impl ChunkAllocator for TlsfAllocator {
         };
 
         // Pop the block
-        let block_offset = self.free_lists[found_fl][found_sl]
-            .pop()
-            .ok_or(ArenaError::OutOfSlots {
-                requested: 1,
-                available: 0,
-            })?;
+        let block_offset =
+            self.free_lists[found_fl][found_sl]
+                .pop()
+                .ok_or(ArenaError::OutOfSlots {
+                    requested: 1,
+                    available: 0,
+                })?;
 
         // Update bitmap if list is now empty
         if self.free_lists[found_fl][found_sl].is_empty() {
@@ -703,7 +715,13 @@ impl ChunkAllocator for TlsfAllocator {
         // Get block info
         let (block_size, is_free) = *self.blocks.get(&block_offset).unwrap();
         debug_assert!(is_free, "block at {} should be free", block_offset);
-        debug_assert!(block_size >= size, "block {} too small: {} < {}", block_offset, block_size, size);
+        debug_assert!(
+            block_size >= size,
+            "block {} too small: {} < {}",
+            block_offset,
+            block_size,
+            size
+        );
 
         // Split if remainder is large enough
         let remainder = block_size - size;
@@ -811,7 +829,9 @@ impl ChunkAllocator for TlsfAllocator {
         }
         // External fragmentation approximation: ratio of wasted space
         // within allocated blocks.
-        let waste = self.total_allocated_bytes.saturating_sub(self.total_requested_bytes);
+        let waste = self
+            .total_allocated_bytes
+            .saturating_sub(self.total_requested_bytes);
         waste as f64 / self.total_allocated_bytes as f64
     }
 }
@@ -970,8 +990,14 @@ unsafe impl<A: ChunkAllocator + Send> Sync for SyncAllocator<A> {}
 impl<A: ChunkAllocator + std::fmt::Debug> std::fmt::Debug for SyncAllocator<A> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self.inner.lock() {
-            Ok(guard) => f.debug_struct("SyncAllocator").field("inner", &*guard).finish(),
-            Err(_) => f.debug_struct("SyncAllocator").field("inner", &"<poisoned>").finish(),
+            Ok(guard) => f
+                .debug_struct("SyncAllocator")
+                .field("inner", &*guard)
+                .finish(),
+            Err(_) => f
+                .debug_struct("SyncAllocator")
+                .field("inner", &"<poisoned>")
+                .finish(),
         }
     }
 }

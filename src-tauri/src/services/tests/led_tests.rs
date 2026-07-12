@@ -16,10 +16,7 @@ fn test_starting_is_amber() {
 
 #[test]
 fn test_online_is_green() {
-    assert_eq!(
-        led_color_for_state(&ServiceState::Online),
-        LedColor::Green
-    );
+    assert_eq!(led_color_for_state(&ServiceState::Online), LedColor::Green);
 }
 
 #[test]

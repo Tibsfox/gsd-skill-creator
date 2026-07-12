@@ -36,9 +36,9 @@ use crate::memory_arena::types::{
 };
 
 #[cfg(feature = "cuda")]
-use std::sync::Arc;
-#[cfg(feature = "cuda")]
 use crate::memory_arena::vram::{VramContext, VramPool};
+#[cfg(feature = "cuda")]
+use std::sync::Arc;
 
 /// Handle returned by `ArenaSet::begin_demote`. Callers pass it to
 /// `complete_demote` or `abort_demote` to finalize or reverse the crossfade.
@@ -94,11 +94,7 @@ impl CrossfadeRegistry {
 
     /// Remove an in-flight fade. Returns the previously-registered handle
     /// if present.
-    pub(crate) fn remove(
-        &mut self,
-        tier: TierKind,
-        id: ChunkId,
-    ) -> Option<CrossfadeHandle> {
+    pub(crate) fn remove(&mut self, tier: TierKind, id: ChunkId) -> Option<CrossfadeHandle> {
         self.by_source.remove(&(tier, id))
     }
 
@@ -223,11 +219,7 @@ impl TierPool {
     /// `Arena::reinsert_slot`. Used exclusively by `WarmStart::open` —
     /// callers MUST have already validated the slot's header + checksum
     /// before calling this.
-    pub(crate) fn warm_start_reinsert(
-        &mut self,
-        slot: usize,
-        id: ChunkId,
-    ) -> ArenaResult<()> {
+    pub(crate) fn warm_start_reinsert(&mut self, slot: usize, id: ChunkId) -> ArenaResult<()> {
         self.arena.reinsert_slot(slot, id)?;
         self.allocated_chunks += 1;
         Ok(())
@@ -248,11 +240,7 @@ impl TierPool {
     /// same `chunk_id` is a no-op for both the arena and the counter.
     ///
     /// Used by `persistence::replay_into_set`.
-    pub(crate) fn replay_alloc(
-        &mut self,
-        id: ChunkId,
-        chunk_bytes: &[u8],
-    ) -> ArenaResult<()> {
+    pub(crate) fn replay_alloc(&mut self, id: ChunkId, chunk_bytes: &[u8]) -> ArenaResult<()> {
         let was_present = self.arena.contains(id);
         self.arena.apply_alloc(id, chunk_bytes)?;
         if !was_present && self.arena.contains(id) {
@@ -401,7 +389,9 @@ fn tier_filename_stem(tier: TierKind) -> &'static str {
 /// validation permissive enough that a reopened pool doesn't spuriously
 /// reject its own stored size.
 fn arena_config_for_spec(spec: &PoolSpec) -> ArenaConfig {
-    let min = (spec.chunk_size / 64).max(MIN_CHUNK_SIZE).min(spec.chunk_size);
+    let min = (spec.chunk_size / 64)
+        .max(MIN_CHUNK_SIZE)
+        .min(spec.chunk_size);
     let max = (spec.chunk_size.saturating_mul(4))
         .min(MAX_CHUNK_SIZE)
         .max(spec.chunk_size);
@@ -490,12 +480,16 @@ impl ArenaSet {
 
         let manifest_path = config.root.join("manifest.json");
         if manifest_path.exists() {
-            return Err(ArenaError::AlreadyExists { path: manifest_path });
+            return Err(ArenaError::AlreadyExists {
+                path: manifest_path,
+            });
         }
 
         let mut pools = HashMap::with_capacity(config.pools.len());
         for spec in &config.pools {
-            let arena_path = config.root.join(format!("{}.arena", tier_filename_stem(spec.tier)));
+            let arena_path = config
+                .root
+                .join(format!("{}.arena", tier_filename_stem(spec.tier)));
             let arena_config = arena_config_for_spec(spec);
             let arena = Arena::new_mmap_file(arena_config, spec.num_slots, &arena_path)?;
             let pool = TierPool::from_arena(spec.tier, arena, spec.policy);
@@ -555,12 +549,16 @@ impl ArenaSet {
 
         let manifest_path = config.root.join("manifest.json");
         if manifest_path.exists() {
-            return Err(ArenaError::AlreadyExists { path: manifest_path });
+            return Err(ArenaError::AlreadyExists {
+                path: manifest_path,
+            });
         }
 
         let mut pools = HashMap::with_capacity(config.pools.len());
         for spec in &config.pools {
-            let arena_path = config.root.join(format!("{}.arena", tier_filename_stem(spec.tier)));
+            let arena_path = config
+                .root
+                .join(format!("{}.arena", tier_filename_stem(spec.tier)));
             let arena_config = arena_config_for_spec(spec);
             let arena = Arena::new_mmap_file_hugetlb(arena_config, spec.num_slots, &arena_path)?;
             let pool = TierPool::from_arena(spec.tier, arena, spec.policy);
@@ -702,8 +700,7 @@ impl ArenaSet {
                 })
                 .collect();
             for id in ids_to_recover {
-                pool.arena_mut()
-                    .mark_state(id, ChunkState::Resident)?;
+                pool.arena_mut().mark_state(id, ChunkState::Resident)?;
             }
         }
 
@@ -1044,7 +1041,12 @@ impl ArenaSet {
         source_id: ChunkId,
         target_tier: TierKind,
     ) -> ArenaResult<CrossfadeHandle> {
-        self.begin_crossfade_inner(CrossfadeDirection::Demote, source_tier, source_id, target_tier)
+        self.begin_crossfade_inner(
+            CrossfadeDirection::Demote,
+            source_tier,
+            source_id,
+            target_tier,
+        )
     }
 
     /// Begin a promote crossfade: copy the source chunk's payload into a
@@ -1062,7 +1064,12 @@ impl ArenaSet {
         source_id: ChunkId,
         target_tier: TierKind,
     ) -> ArenaResult<CrossfadeHandle> {
-        self.begin_crossfade_inner(CrossfadeDirection::Promote, source_tier, source_id, target_tier)
+        self.begin_crossfade_inner(
+            CrossfadeDirection::Promote,
+            source_tier,
+            source_id,
+            target_tier,
+        )
     }
 
     /// Shared implementation for `complete_demote` and `complete_promote`.
@@ -1345,14 +1352,20 @@ impl ArenaSet {
             for id in chunk_ids {
                 // Skip if chunk was freed by an earlier step in this sweep
                 // (e.g. eviction).
-                if !self.pools.get(&tier).map_or(false, |p| p.arena().contains(id)) {
+                if !self
+                    .pools
+                    .get(&tier)
+                    .map_or(false, |p| p.arena().contains(id))
+                {
                     continue;
                 }
 
                 // --- Promote check ---
                 if policy.promote_after_hits > 0 {
                     if let Some(target_tier) = self.hotter_tier(tier) {
-                        let access_count = match self.pools.get(&tier)
+                        let access_count = match self
+                            .pools
+                            .get(&tier)
                             .and_then(|p| p.arena().read_access_count(id).ok())
                         {
                             Some(c) => c,
@@ -1368,7 +1381,8 @@ impl ArenaSet {
                                             report.promotes_completed += 1;
                                             // Reset access count on the promoted target.
                                             if let Some(tp) = self.pools.get_mut(&target_tier) {
-                                                let _ = tp.arena_mut().reset_access_count(target_id);
+                                                let _ =
+                                                    tp.arena_mut().reset_access_count(target_id);
                                             }
                                         }
                                         Err(e) => {
@@ -1401,8 +1415,12 @@ impl ArenaSet {
                                             match self.complete_promote(handle) {
                                                 Ok(target_id) => {
                                                     report.promotes_completed += 1;
-                                                    if let Some(tp) = self.pools.get_mut(&target_tier) {
-                                                        let _ = tp.arena_mut().reset_access_count(target_id);
+                                                    if let Some(tp) =
+                                                        self.pools.get_mut(&target_tier)
+                                                    {
+                                                        let _ = tp
+                                                            .arena_mut()
+                                                            .reset_access_count(target_id);
                                                     }
                                                 }
                                                 Err(e) => {
@@ -1435,11 +1453,17 @@ impl ArenaSet {
                 if policy.demote_after_idle_ns > 0 {
                     if let Some(target_tier) = self.colder_tier(tier) {
                         // Re-check chunk still exists (might have been evicted).
-                        if !self.pools.get(&tier).map_or(false, |p| p.arena().contains(id)) {
+                        if !self
+                            .pools
+                            .get(&tier)
+                            .map_or(false, |p| p.arena().contains(id))
+                        {
                             continue;
                         }
 
-                        let last_access = match self.pools.get(&tier)
+                        let last_access = match self
+                            .pools
+                            .get(&tier)
                             .and_then(|p| p.arena().read_last_access_ns(id).ok())
                         {
                             Some(ts) => ts,
@@ -1579,7 +1603,9 @@ impl ArenaSet {
 
                 if is_fading {
                     if let Some(pool) = self.pools.get_mut(&handle.source_tier) {
-                        let _ = pool.arena_mut().mark_state(handle.source, ChunkState::Resident);
+                        let _ = pool
+                            .arena_mut()
+                            .mark_state(handle.source, ChunkState::Resident);
                     }
                     report.sources_reverted += 1;
                 }

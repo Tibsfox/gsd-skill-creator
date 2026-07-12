@@ -68,9 +68,7 @@ impl RetryPolicy {
     pub fn should_retry(&self, attempt: u32, error: &ApiError) -> bool {
         match error {
             // Network and stream errors: retry up to max
-            ApiError::Network(_) | ApiError::StreamInterrupted(_) => {
-                attempt <= self.max_attempts
-            }
+            ApiError::Network(_) | ApiError::StreamInterrupted(_) => attempt <= self.max_attempts,
             ApiError::HttpError { status, .. } => {
                 match status {
                     // Rate-limited: retry up to max attempts

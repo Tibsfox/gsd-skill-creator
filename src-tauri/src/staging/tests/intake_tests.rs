@@ -1,11 +1,11 @@
 use std::io::Write;
 use tempfile::TempDir;
 
+use crate::staging::hygiene::HygieneStatus;
 use crate::staging::intake::{
     classify_content, move_to_processing, process_intake, route_result, validate_format,
     ContentType, IntakeDirs, IntakeResult,
 };
-use crate::staging::hygiene::HygieneStatus;
 
 #[cfg(test)]
 fn make_dirs(root: &TempDir) -> IntakeDirs {
@@ -258,7 +258,10 @@ fn test_intake_pipeline_end_to_end_clean() {
 
     let result = process_intake(&file_path, &dirs).unwrap();
     assert_eq!(result.content_type, ContentType::VisionDoc);
-    assert!(matches!(result.hygiene_status, HygieneStatus::Clean | HygieneStatus::Advisory { .. }));
+    assert!(matches!(
+        result.hygiene_status,
+        HygieneStatus::Clean | HygieneStatus::Advisory { .. }
+    ));
     // File should be in processed/
     assert!(dirs.processed.join("clean-doc.md").exists() || result.destination.exists());
 }

@@ -471,7 +471,10 @@ mod tests {
             project_id: "gsd-skill-creator".to_string(),
             state: "wave_1".to_string(),
             sub_status: Some("Wave 1 · 3 of 5 modules".to_string()),
-            wave_progress: Some(WaveProgress { current: 3, total: 5 }),
+            wave_progress: Some(WaveProgress {
+                current: 3,
+                total: 5,
+            }),
             result_path: None,
             block_reason: None,
             block_findings: None,

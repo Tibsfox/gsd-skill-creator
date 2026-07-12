@@ -20,8 +20,8 @@
 
 use crate::security::keyring_backend::os_store;
 use crate::security::keystore::{
-    keystore_error_to_user_string, keystore_paths, probe_keystore_status, Keystore,
-    KeystoreStatus, MigrationOutcome,
+    keystore_error_to_user_string, keystore_paths, probe_keystore_status, Keystore, KeystoreStatus,
+    MigrationOutcome,
 };
 
 /// Probe on-disk keystore state without loading any secret.
@@ -39,13 +39,13 @@ pub fn keystore_status() -> KeystoreStatus {
 ///
 /// Surface: `desktop/src/keystore/invoke.ts :: KeystoreApi.migrateV1ToV2()`.
 #[tauri::command]
-pub fn keystore_migrate_v1_to_v2(
-    passphrase: Option<String>,
-) -> Result<MigrationOutcome, String> {
+pub fn keystore_migrate_v1_to_v2(passphrase: Option<String>) -> Result<MigrationOutcome, String> {
     let (v1, path2) = keystore_paths()
         .ok_or_else(|| "Keystore paths unavailable on this platform".to_string())?;
     Keystore::migrate_v1_to_v2(&os_store(), &v1, &path2, passphrase.as_deref())
-        .map(|count| MigrationOutcome { migrated_count: count })
+        .map(|count| MigrationOutcome {
+            migrated_count: count,
+        })
         .map_err(|e| keystore_error_to_user_string(&e))
 }
 
@@ -62,15 +62,9 @@ pub fn keystore_set(
 ) -> Result<(), String> {
     let (_v1, path2) = keystore_paths()
         .ok_or_else(|| "Keystore paths unavailable on this platform".to_string())?;
-    Keystore::save_with_backend(
-        &os_store(),
-        &path2,
-        &account,
-        &value,
-        passphrase.as_deref(),
-    )
-    .map(|_backend| ())
-    .map_err(|e| keystore_error_to_user_string(&e))
+    Keystore::save_with_backend(&os_store(), &path2, &account, &value, passphrase.as_deref())
+        .map(|_backend| ())
+        .map_err(|e| keystore_error_to_user_string(&e))
 }
 
 #[cfg(test)]

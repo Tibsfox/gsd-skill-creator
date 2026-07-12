@@ -116,7 +116,10 @@ pub struct Keystore {
 impl Keystore {
     /// Empty keystore (no credential loaded).
     pub fn empty() -> Self {
-        Self { backend: None, secret: None }
+        Self {
+            backend: None,
+            secret: None,
+        }
     }
 
     /// Which backend, if any, holds the credential.
@@ -164,12 +167,11 @@ impl Keystore {
             }
             DiscoveredState::Path2 => {
                 let pass = passphrase.ok_or(KeystoreError::Locked)?;
-                let ciphertext = std::fs::read(path2_age)
-                    .map_err(|e| KeystoreError::Io(e.to_string()))?;
+                let ciphertext =
+                    std::fs::read(path2_age).map_err(|e| KeystoreError::Io(e.to_string()))?;
                 let plaintext = decrypt_with_passphrase(&ciphertext, pass)
                     .map_err(|_| KeystoreError::InvalidPassphrase)?;
-                let s = String::from_utf8(plaintext)
-                    .map_err(|_| KeystoreError::Tampered)?;
+                let s = String::from_utf8(plaintext).map_err(|_| KeystoreError::Tampered)?;
                 Ok(Self {
                     backend: Some(KeystoreBackend::AgeFile(path2_age.to_path_buf())),
                     secret: Some(SecretString::new(s)),
@@ -200,11 +202,9 @@ impl Keystore {
             let ciphertext = encrypt_with_passphrase(bytes, pass)
                 .map_err(|_| KeystoreError::Backend("encrypt failed".into()))?;
             if let Some(parent) = path2_age.parent() {
-                std::fs::create_dir_all(parent)
-                    .map_err(|e| KeystoreError::Io(e.to_string()))?;
+                std::fs::create_dir_all(parent).map_err(|e| KeystoreError::Io(e.to_string()))?;
             }
-            std::fs::write(path2_age, &ciphertext)
-                .map_err(|e| KeystoreError::Io(e.to_string()))?;
+            std::fs::write(path2_age, &ciphertext).map_err(|e| KeystoreError::Io(e.to_string()))?;
             Ok(KeystoreBackend::AgeFile(path2_age.to_path_buf()))
         }
     }
@@ -227,9 +227,7 @@ impl Keystore {
 //
 // Returns Some only when both `dirs::config_dir()` resolves and the call
 // succeeds; otherwise the caller falls back to the legacy code path.
-pub fn keystore_load_production(
-    passphrase: Option<&str>,
-) -> Result<Keystore, KeystoreError> {
+pub fn keystore_load_production(passphrase: Option<&str>) -> Result<Keystore, KeystoreError> {
     let (v1, path2) = keystore_paths().ok_or(KeystoreError::BackendUnavailable)?;
     Keystore::load_with_backend(&os_store(), &path2, &v1, passphrase)
 }
@@ -332,19 +330,13 @@ pub fn probe_keystore_status_with(keyring: &dyn KeyringStore) -> KeystoreStatus 
 /// in `src-tauri/src/commands/keystore.rs`.
 pub fn keystore_error_to_user_string(e: &KeystoreError) -> String {
     match e {
-        KeystoreError::BackendUnavailable => {
-            "Keystore backend unavailable".to_string()
-        }
+        KeystoreError::BackendUnavailable => "Keystore backend unavailable".to_string(),
         KeystoreError::MigrationRequired => {
             "v1 plaintext credentials detected; migration required".to_string()
         }
-        KeystoreError::Locked => {
-            "Keystore is encrypted; passphrase required".to_string()
-        }
+        KeystoreError::Locked => "Keystore is encrypted; passphrase required".to_string(),
         KeystoreError::InvalidPassphrase => "Invalid passphrase".to_string(),
-        KeystoreError::Tampered => {
-            "Keystore data appears tampered; refusing to load".to_string()
-        }
+        KeystoreError::Tampered => "Keystore data appears tampered; refusing to load".to_string(),
         KeystoreError::Io(msg) => format!("Keystore I/O error: {}", msg),
         KeystoreError::Migration(msg) => format!("Migration error: {}", msg),
         KeystoreError::Backend(msg) => format!("Keystore backend error: {}", msg),
@@ -443,17 +435,13 @@ fn load_from_encrypted_file(
     if service == "anthropic" || account.contains("api_key") {
         if let Ok(key) = std::env::var("ANTHROPIC_API_KEY") {
             if !key.is_empty() {
-                return Ok((
-                    SecretString::new(key),
-                    KeystoreBackend::EnvironmentVariable,
-                ));
+                return Ok((SecretString::new(key), KeystoreBackend::EnvironmentVariable));
             }
         }
     }
 
-    let config_dir = dirs::config_dir().ok_or_else(|| {
-        ProxyError::KeystoreError("Cannot find config directory".to_string())
-    })?;
+    let config_dir = dirs::config_dir()
+        .ok_or_else(|| ProxyError::KeystoreError("Cannot find config directory".to_string()))?;
     let cred_file = config_dir.join("gsd-os").join("credentials.enc");
 
     if !cred_file.exists() {

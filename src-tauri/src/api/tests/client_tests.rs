@@ -17,32 +17,43 @@ fn client_requires_key() {
 #[test]
 fn client_default_model() {
     let _env = super::lock_anthropic_env();
-    unsafe { std::env::set_var("ANTHROPIC_API_KEY", "sk-ant-test-model"); }
+    unsafe {
+        std::env::set_var("ANTHROPIC_API_KEY", "sk-ant-test-model");
+    }
     let ks = KeyStore::load().unwrap();
     let client = AnthropicClient::new(ks).unwrap();
     assert_eq!(client.default_model(), "claude-sonnet-4-5-20250929");
-    unsafe { std::env::remove_var("ANTHROPIC_API_KEY"); }
+    unsafe {
+        std::env::remove_var("ANTHROPIC_API_KEY");
+    }
 }
 
 #[test]
 fn client_default_max_tokens() {
     let _env = super::lock_anthropic_env();
-    unsafe { std::env::set_var("ANTHROPIC_API_KEY", "sk-ant-test-tokens"); }
+    unsafe {
+        std::env::set_var("ANTHROPIC_API_KEY", "sk-ant-test-tokens");
+    }
     let ks = KeyStore::load().unwrap();
     let client = AnthropicClient::new(ks).unwrap();
     assert_eq!(client.default_max_tokens(), 4096);
-    unsafe { std::env::remove_var("ANTHROPIC_API_KEY"); }
+    unsafe {
+        std::env::remove_var("ANTHROPIC_API_KEY");
+    }
 }
 
 #[test]
 fn request_body_shape() {
-    let messages = vec![
-        Message {
-            role: "user".to_string(),
-            content: "Hello".to_string(),
-        },
-    ];
-    let body = AnthropicClient::build_request_body(&messages, Some("You are a helper"), "claude-sonnet-4-5-20250929", 4096);
+    let messages = vec![Message {
+        role: "user".to_string(),
+        content: "Hello".to_string(),
+    }];
+    let body = AnthropicClient::build_request_body(
+        &messages,
+        Some("You are a helper"),
+        "claude-sonnet-4-5-20250929",
+        4096,
+    );
 
     // Must have model, max_tokens, stream, messages
     assert_eq!(body["model"], "claude-sonnet-4-5-20250929");
@@ -58,6 +69,7 @@ fn request_body_shape() {
     assert_eq!(body["system"], "You are a helper");
 
     // Without system prompt
-    let body2 = AnthropicClient::build_request_body(&messages, None, "claude-sonnet-4-5-20250929", 4096);
+    let body2 =
+        AnthropicClient::build_request_body(&messages, None, "claude-sonnet-4-5-20250929", 4096);
     assert!(body2.get("system").is_none());
 }

@@ -61,7 +61,9 @@ pub enum ArenaError {
     #[error("unknown tier: {0:?}")]
     UnknownTier(crate::memory_arena::types::TierKind),
 
-    #[error("invalid crossfade target: source tier {source_tier:?} == target tier {target_tier:?}")]
+    #[error(
+        "invalid crossfade target: source tier {source_tier:?} == target tier {target_tier:?}"
+    )]
     InvalidCrossfadeTarget {
         source_tier: crate::memory_arena::types::TierKind,
         target_tier: crate::memory_arena::types::TierKind,
@@ -73,7 +75,9 @@ pub enum ArenaError {
     #[error("unknown crossfade handle for chunk {chunk_id}")]
     UnknownCrossfade { chunk_id: u64 },
 
-    #[error("crossfade state mismatch for chunk {chunk_id}: expected {expected:?}, found {found:?}")]
+    #[error(
+        "crossfade state mismatch for chunk {chunk_id}: expected {expected:?}, found {found:?}"
+    )]
     CrossfadeStateMismatch {
         chunk_id: u64,
         expected: crate::memory_arena::types::ChunkState,
@@ -86,7 +90,9 @@ pub enum ArenaError {
         cooldown_remaining_ns: u64,
     },
 
-    #[error("arithmetic overflow computing {operation}: slot_size={slot_size}, num_slots={num_slots}")]
+    #[error(
+        "arithmetic overflow computing {operation}: slot_size={slot_size}, num_slots={num_slots}"
+    )]
     ArithmeticOverflow {
         operation: &'static str,
         slot_size: usize,

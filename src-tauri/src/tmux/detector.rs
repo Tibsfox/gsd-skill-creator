@@ -11,8 +11,13 @@ use crate::security::process_context::{ensure_process_allowed, ProcessOp};
 /// record carries the denial signal.
 pub fn detect_tmux() -> Option<String> {
     let output = if cfg!(windows) {
-        ensure_process_allowed("tmux/detect_tmux", ProcessOp::Output, "where.exe", &["tmux"])
-            .ok()?;
+        ensure_process_allowed(
+            "tmux/detect_tmux",
+            ProcessOp::Output,
+            "where.exe",
+            &["tmux"],
+        )
+        .ok()?;
         Command::new("where.exe").arg("tmux").output().ok()?
     } else {
         ensure_process_allowed(
@@ -65,7 +70,11 @@ mod tests {
         // Should not panic -- returns Some(path) or None depending on environment
         let result = detect_tmux();
         if let Some(ref path) = result {
-            assert!(path.contains("tmux"), "path should contain 'tmux', got: {}", path);
+            assert!(
+                path.contains("tmux"),
+                "path should contain 'tmux', got: {}",
+                path
+            );
         }
         // Either way, no panic is the test
     }
@@ -74,7 +83,11 @@ mod tests {
     fn test_tmux_version_format() {
         let version = tmux_version();
         if let Some(ref v) = version {
-            assert!(v.starts_with("tmux "), "version should start with 'tmux ', got: {}", v);
+            assert!(
+                v.starts_with("tmux "),
+                "version should start with 'tmux ', got: {}",
+                v
+            );
         }
     }
 }

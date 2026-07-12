@@ -149,9 +149,8 @@ pub fn write_checkpoint(arena: &Arena, path: impl AsRef<Path>) -> ArenaResult<()
     }
 
     let sparse_dir_bytes = (num_allocated as usize) * 24;
-    let mut buf: Vec<u8> = Vec::with_capacity(
-        CHECKPOINT_HEADER_SIZE + sparse_dir_bytes + total_chunk_bytes + 8,
-    );
+    let mut buf: Vec<u8> =
+        Vec::with_capacity(CHECKPOINT_HEADER_SIZE + sparse_dir_bytes + total_chunk_bytes + 8);
 
     // Header
     buf.extend_from_slice(CHECKPOINT_MAGIC);
@@ -209,10 +208,7 @@ pub fn write_checkpoint(arena: &Arena, path: impl AsRef<Path>) -> ArenaResult<()
 /// The supplied `config` is validated against the checkpoint's chunk_size.
 /// A mismatch is a hard error (the caller built the arena with one size
 /// but the checkpoint was written with another).
-pub fn read_checkpoint(
-    config: ArenaConfig,
-    path: impl AsRef<Path>,
-) -> ArenaResult<Arena> {
+pub fn read_checkpoint(config: ArenaConfig, path: impl AsRef<Path>) -> ArenaResult<Arena> {
     let path = path.as_ref();
     let mut file = File::open(path)?;
     // Pre-size from the file's reported length so read_to_end doesn't
@@ -316,7 +312,8 @@ fn read_v1_into(
     for i in 0..num_allocated as usize {
         let offset = i * 16;
         let id = u64::from_le_bytes(dir_bytes[offset..offset + 8].try_into().unwrap());
-        let slot = u64::from_le_bytes(dir_bytes[offset + 8..offset + 16].try_into().unwrap()) as usize;
+        let slot =
+            u64::from_le_bytes(dir_bytes[offset + 8..offset + 16].try_into().unwrap()) as usize;
 
         let slot_start = slot * (chunk_size as usize);
         let header_bytes = &arena.storage()[slot_start..slot_start + HEADER_SIZE];
@@ -358,8 +355,7 @@ fn read_v2_into(
 
     // First pass: parse directory entries and sum expected chunk bytes.
     let dir_bytes = &content[CHECKPOINT_HEADER_SIZE..storage_start];
-    let mut entries: Vec<(ChunkId, usize, usize)> =
-        Vec::with_capacity(num_allocated as usize);
+    let mut entries: Vec<(ChunkId, usize, usize)> = Vec::with_capacity(num_allocated as usize);
     let mut total_chunk_bytes: usize = 0;
     for i in 0..num_allocated as usize {
         let offset = i * 24;
@@ -453,7 +449,10 @@ impl JournalWriter {
     /// are appended. If not, a fresh file is created with the journal header.
     pub fn open(path: impl AsRef<Path>) -> ArenaResult<Self> {
         let path = path.as_ref().to_path_buf();
-        let exists = path.exists() && std::fs::metadata(&path).map(|m| m.len() >= JOURNAL_HEADER_SIZE as u64).unwrap_or(false);
+        let exists = path.exists()
+            && std::fs::metadata(&path)
+                .map(|m| m.len() >= JOURNAL_HEADER_SIZE as u64)
+                .unwrap_or(false);
 
         let file = OpenOptions::new()
             .create(true)
@@ -583,11 +582,7 @@ impl JournalWriter {
     ///
     /// Record layout: `[payload_len u32][OP_FREE_V2 u8][pool_id u8]
     /// [chunk_id u64 LE][checksum u64]`.
-    pub fn append_free_for_pool(
-        &mut self,
-        pool_id: TierKind,
-        id: ChunkId,
-    ) -> ArenaResult<()> {
+    pub fn append_free_for_pool(&mut self, pool_id: TierKind, id: ChunkId) -> ArenaResult<()> {
         let payload_len = 1 + 1 + 8;
         let len_bytes = (payload_len as u32).to_le_bytes();
         let id_bytes = id.as_u64().to_le_bytes();
@@ -779,8 +774,7 @@ impl JournalReader {
                     });
                 }
                 let pool_id = TierKind::from_u8(payload[1])?;
-                let chunk_id =
-                    u64::from_le_bytes(payload[2..10].try_into().unwrap());
+                let chunk_id = u64::from_le_bytes(payload[2..10].try_into().unwrap());
                 let chunk_bytes = payload[10..].to_vec();
                 Ok(Some(JournalOp::Alloc {
                     pool_id,
@@ -791,15 +785,11 @@ impl JournalReader {
             OP_FREE_V2 => {
                 if payload.len() != 1 + 1 + 8 {
                     return Err(ArenaError::CorruptJournal {
-                        reason: format!(
-                            "FREE_V2 payload wrong size: {}",
-                            payload.len()
-                        ),
+                        reason: format!("FREE_V2 payload wrong size: {}", payload.len()),
                     });
                 }
                 let pool_id = TierKind::from_u8(payload[1])?;
-                let chunk_id =
-                    u64::from_le_bytes(payload[2..10].try_into().unwrap());
+                let chunk_id = u64::from_le_bytes(payload[2..10].try_into().unwrap());
                 Ok(Some(JournalOp::Free {
                     pool_id,
                     chunk_id: ChunkId::new(chunk_id),
@@ -825,7 +815,11 @@ pub fn replay_into(arena: &mut Arena, mut reader: JournalReader) -> ArenaResult<
     let mut applied = 0usize;
     while let Some(op) = reader.next_op()? {
         match op {
-            JournalOp::Alloc { chunk_id, chunk_bytes, .. } => {
+            JournalOp::Alloc {
+                chunk_id,
+                chunk_bytes,
+                ..
+            } => {
                 arena.apply_alloc(chunk_id, &chunk_bytes)?;
             }
             JournalOp::Free { chunk_id, .. } => {
@@ -850,10 +844,7 @@ pub fn replay_into(arena: &mut Arena, mut reader: JournalReader) -> ArenaResult<
 /// through `TierPool::replay_alloc` / `TierPool::replay_free`, which
 /// update the `allocated_chunks` counter atomically with the arena-level
 /// insert/remove. Callers can read `pool.len()` directly post-replay.
-pub fn replay_into_set(
-    set: &mut ArenaSet,
-    mut reader: JournalReader,
-) -> ArenaResult<usize> {
+pub fn replay_into_set(set: &mut ArenaSet, mut reader: JournalReader) -> ArenaResult<usize> {
     let mut applied = 0usize;
     while let Some(op) = reader.next_op()? {
         match op {

@@ -46,9 +46,7 @@ pub struct SecurityInitResponse {
 ///
 /// A `SecurityInitResponse` with details of what was created.
 #[tauri::command]
-pub async fn init_security_directory(
-    project_root: String,
-) -> Result<SecurityInitResponse, String> {
+pub async fn init_security_directory(project_root: String) -> Result<SecurityInitResponse, String> {
     let root = Path::new(&project_root);
     if !root.exists() {
         return Err("Cannot determine project root".to_string());
@@ -62,12 +60,8 @@ pub async fn init_security_directory(
 
     // Create directory structure
     for dir in [&security_dir, &events_dir, &blocked_dir] {
-        ensure_secure_dir(dir).map_err(|e| {
-            format!(
-                "Permission denied creating security directory: {}",
-                e
-            )
-        })?;
+        ensure_secure_dir(dir)
+            .map_err(|e| format!("Permission denied creating security directory: {}", e))?;
         created_dirs.push(dir.display().to_string());
     }
 
@@ -371,9 +365,7 @@ mod tests {
         assert!(resp.success);
         assert_eq!(resp.created_dirs.len(), 3);
 
-        let security_dir = PathBuf::from(&root)
-            .join(".planning")
-            .join("security");
+        let security_dir = PathBuf::from(&root).join(".planning").join("security");
         assert!(security_dir.exists());
         assert!(security_dir.join("events").exists());
         assert!(security_dir.join("blocked").exists());
@@ -386,9 +378,7 @@ mod tests {
 
         init_security_directory(root.clone()).await.unwrap();
 
-        let security_dir = PathBuf::from(&root)
-            .join(".planning")
-            .join("security");
+        let security_dir = PathBuf::from(&root).join(".planning").join("security");
 
         assert!(security_dir.join("README.md").exists());
         assert!(security_dir.join("schemas.json").exists());
@@ -452,9 +442,7 @@ mod tests {
 
         init_security_directory(root.clone()).await.unwrap();
 
-        let security_dir = PathBuf::from(&root)
-            .join(".planning")
-            .join("security");
+        let security_dir = PathBuf::from(&root).join(".planning").join("security");
         let metadata = fs::metadata(&security_dir).unwrap();
         let mode = metadata.permissions().mode() & 0o777;
         assert_eq!(mode, 0o700);
@@ -463,8 +451,7 @@ mod tests {
     #[tokio::test]
     async fn test_init_invalid_root() {
         let result =
-            init_security_directory("/nonexistent/path/that/does/not/exist".to_string())
-                .await;
+            init_security_directory("/nonexistent/path/that/does/not/exist".to_string()).await;
         assert!(result.is_err());
     }
 
@@ -482,13 +469,8 @@ mod tests {
         let content = fs::read_to_string(path).unwrap();
         let parsed: serde_json::Value = serde_json::from_str(&content).unwrap();
 
-        let domains = parsed
-            .get("allowed_domains")
-            .unwrap()
-            .as_array()
-            .unwrap();
-        let domain_strs: Vec<&str> =
-            domains.iter().map(|d| d.as_str().unwrap()).collect();
+        let domains = parsed.get("allowed_domains").unwrap().as_array().unwrap();
+        let domain_strs: Vec<&str> = domains.iter().map(|d| d.as_str().unwrap()).collect();
         assert!(domain_strs.contains(&"api.anthropic.com"));
         assert!(domain_strs.contains(&"github.com"));
         assert!(domain_strs.contains(&"registry.npmjs.org"));

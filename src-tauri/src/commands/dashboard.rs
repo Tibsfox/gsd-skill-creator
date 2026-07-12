@@ -35,10 +35,7 @@ fn is_safe_page_slug(s: &str) -> bool {
 /// generates the requested page to a temp directory, reads the HTML,
 /// and outputs it as JSON to stdout.
 #[tauri::command]
-pub fn generate_dashboard(
-    page: String,
-    planning_dir: String,
-) -> Result<GenerateResponse, String> {
+pub fn generate_dashboard(page: String, planning_dir: String) -> Result<GenerateResponse, String> {
     let start = std::time::Instant::now();
 
     if !is_safe_page_slug(&page) {
@@ -53,8 +50,8 @@ pub fn generate_dashboard(
     // injection vector that the previous single-char escape missed.
     let planning_dir_lit = serde_json::to_string(&planning_dir)
         .map_err(|e| format!("Failed to encode planning_dir: {}", e))?;
-    let page_lit = serde_json::to_string(&page)
-        .map_err(|e| format!("Failed to encode page: {}", e))?;
+    let page_lit =
+        serde_json::to_string(&page).map_err(|e| format!("Failed to encode page: {}", e))?;
 
     // Build a Node.js script that:
     // 1. Dynamically imports the compiled ESM generator
@@ -89,8 +86,7 @@ const os = require('os');
     }}
 }})();
 "#,
-        planning_dir_lit,
-        page_lit,
+        planning_dir_lit, page_lit,
     );
 
     crate::security::process_context::ensure_process_allowed(

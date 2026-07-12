@@ -56,7 +56,10 @@ fn derive_key_differs_for_different_salts() {
 #[test]
 fn round_trip_encrypts_and_decrypts() {
     let ct = encrypt_with_passphrase(PLAINTEXT, PASSPHRASE).expect("encrypt");
-    assert!(ct.len() > HEADER_LEN, "ciphertext includes header + age payload");
+    assert!(
+        ct.len() > HEADER_LEN,
+        "ciphertext includes header + age payload"
+    );
     assert_eq!(&ct[..MAGIC.len()], MAGIC, "magic header at byte 0");
 
     let pt = decrypt_with_passphrase(&ct, PASSPHRASE).expect("decrypt");
@@ -136,7 +139,10 @@ fn sanitizer_passes_clean_messages() {
 fn sanitizer_passes_when_inputs_too_short() {
     // Plaintext < 4 bytes: no 4-byte window possible, sanitizer skips it.
     let result = sanitize_error_message("error", b"abc", b"DERIVED-KEY-32-BYTES-PLACEHOLDER");
-    assert!(result.is_ok(), "sanitizer must skip when plaintext < 4 bytes");
+    assert!(
+        result.is_ok(),
+        "sanitizer must skip when plaintext < 4 bytes"
+    );
 
     let result = sanitize_error_message("error", b"PLACEHOLDER-PLAINTEXT", b"abc");
     assert!(result.is_ok(), "sanitizer must skip when key < 4 bytes");
@@ -173,10 +179,7 @@ fn sanitizer_fires_when_error_contains_key_fragment() {
             assert_eq!(v.source, SanitizerSource::Key);
             assert_eq!(v.length, 4);
         }
-        Ok(_) => panic!(
-            "sanitizer FAILED to detect key fragment in '{}'",
-            leaky_msg
-        ),
+        Ok(_) => panic!("sanitizer FAILED to detect key fragment in '{}'", leaky_msg),
     }
 }
 
@@ -188,5 +191,8 @@ fn sanitizer_does_not_fire_on_3_byte_overlap() {
     // "the" overlaps 0 bytes with `abcdefgh`. Need a real 3-byte overlap:
     let result = sanitize_error_message("error near abc...", plaintext, key);
     // "abc" is 3 bytes — threshold is 4 — must pass.
-    assert!(result.is_ok(), "3-byte overlap must NOT fire 4-byte sanitizer");
+    assert!(
+        result.is_ok(),
+        "3-byte overlap must NOT fire 4-byte sanitizer"
+    );
 }

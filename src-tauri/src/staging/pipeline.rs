@@ -1,6 +1,6 @@
 use std::path::Path;
 
-use super::{SecurityFindingReport, SecurityScanner, ScanVerdict};
+use super::{ScanVerdict, SecurityFindingReport, SecurityScanner};
 
 /// Result of running the security scan in the staging pipeline.
 pub struct StagingPipelineResult {

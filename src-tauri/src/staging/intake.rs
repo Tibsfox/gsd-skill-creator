@@ -93,10 +93,7 @@ pub struct IntakeDirs {
 
 /// Validate that a file has an allowed extension (.md, .json, .zip).
 pub fn validate_format(path: &Path) -> Result<(), IntakeError> {
-    let ext = path
-        .extension()
-        .and_then(|e| e.to_str())
-        .unwrap_or("");
+    let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
 
     match ext {
         "md" | "json" | "zip" => Ok(()),
@@ -108,10 +105,7 @@ pub fn validate_format(path: &Path) -> Result<(), IntakeError> {
 
 /// Classify content type based on file extension.
 pub fn classify_content(path: &Path) -> ContentType {
-    let ext = path
-        .extension()
-        .and_then(|e| e.to_str())
-        .unwrap_or("");
+    let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
 
     match ext {
         "zip" => ContentType::MissionPack,
@@ -128,12 +122,12 @@ pub fn classify_content(path: &Path) -> ContentType {
 pub fn move_to_processing(path: &Path, processing_dir: &Path) -> Result<PathBuf, IntakeError> {
     fs::create_dir_all(processing_dir)?;
 
-    let file_name = path
-        .file_name()
-        .ok_or_else(|| IntakeError::Io(std::io::Error::new(
+    let file_name = path.file_name().ok_or_else(|| {
+        IntakeError::Io(std::io::Error::new(
             std::io::ErrorKind::InvalidInput,
             "no filename",
-        )))?;
+        ))
+    })?;
 
     let dest = processing_dir.join(file_name);
 
@@ -162,7 +156,9 @@ pub fn extract_zip(zip_path: &Path, dest_dir: &Path) -> Result<Vec<PathBuf>, Int
     let mut extracted_paths = Vec::new();
 
     for i in 0..archive.len() {
-        let mut entry = archive.by_index(i).map_err(|e| IntakeError::Zip(e.to_string()))?;
+        let mut entry = archive
+            .by_index(i)
+            .map_err(|e| IntakeError::Zip(e.to_string()))?;
         let entry_name = entry.name().to_string();
 
         // Path traversal prevention: reject entries with ..
@@ -185,7 +181,9 @@ pub fn extract_zip(zip_path: &Path, dest_dir: &Path) -> Result<Vec<PathBuf>, Int
 
             let mut out_file = fs::File::create(&out_path)?;
             let mut buf = Vec::new();
-            entry.read_to_end(&mut buf).map_err(|e| IntakeError::Zip(e.to_string()))?;
+            entry
+                .read_to_end(&mut buf)
+                .map_err(|e| IntakeError::Zip(e.to_string()))?;
             std::io::Write::write_all(&mut out_file, &buf)?;
             extracted_paths.push(out_path);
         }
@@ -204,12 +202,12 @@ pub fn route_result(
     processed_dir: &Path,
     quarantine_dir: &Path,
 ) -> Result<PathBuf, IntakeError> {
-    let file_name = source_path
-        .file_name()
-        .ok_or_else(|| IntakeError::Io(std::io::Error::new(
+    let file_name = source_path.file_name().ok_or_else(|| {
+        IntakeError::Io(std::io::Error::new(
             std::io::ErrorKind::InvalidInput,
             "no filename",
-        )))?;
+        ))
+    })?;
 
     match &result.hygiene_status {
         HygieneStatus::Quarantine { reason, detail } => {
@@ -230,8 +228,10 @@ pub fn route_result(
             let reason_path = quarantine_dir.join(reason_file_name);
             fs::write(
                 &reason_path,
-                format!("Quarantine Reason: {}\nDetail: {}\nNotification ID: {}\n",
-                    reason, detail, result.notification_id),
+                format!(
+                    "Quarantine Reason: {}\nDetail: {}\nNotification ID: {}\n",
+                    reason, detail, result.notification_id
+                ),
             )?;
 
             Ok(dest)

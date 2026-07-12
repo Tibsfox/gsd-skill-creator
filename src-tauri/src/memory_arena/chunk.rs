@@ -244,10 +244,8 @@ pub(crate) fn read_header_extended(buf: &[u8], header: &mut ChunkHeader) -> Aren
         });
     }
     header.state = ChunkState::from_u8(buf[64])?;
-    header.last_demote_completed_at_ns =
-        u64::from_le_bytes(buf[72..80].try_into().unwrap());
-    header.last_promote_completed_at_ns =
-        u64::from_le_bytes(buf[80..88].try_into().unwrap());
+    header.last_demote_completed_at_ns = u64::from_le_bytes(buf[72..80].try_into().unwrap());
+    header.last_promote_completed_at_ns = u64::from_le_bytes(buf[80..88].try_into().unwrap());
     Ok(())
 }
 

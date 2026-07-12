@@ -66,12 +66,10 @@ fn load_conversation_from_file() {
         id: "load-test".to_string(),
         started_at: "2026-02-26T15:00:00Z".to_string(),
         model: "claude-sonnet-4-5-20250929".to_string(),
-        messages: vec![
-            SerializedMessage {
-                role: "user".to_string(),
-                content: "Test".to_string(),
-            },
-        ],
+        messages: vec![SerializedMessage {
+            role: "user".to_string(),
+            content: "Test".to_string(),
+        }],
         token_usage: TokenUsage {
             total_input: 5,
             total_output: 15,

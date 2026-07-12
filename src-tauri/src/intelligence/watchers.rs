@@ -70,10 +70,7 @@ impl ConsoleStatusWatcher {
 
 /// Shared implementation: watch `watch_path` recursively, debounce at 100ms,
 /// parse created/modified `.json` files as `StatusUpdateEvent`, emit to webview.
-fn start_json_watcher(
-    watch_path: PathBuf,
-    app_handle: AppHandle,
-) -> Result<WatcherHandle, String> {
+fn start_json_watcher(watch_path: PathBuf, app_handle: AppHandle) -> Result<WatcherHandle, String> {
     let (tx, rx) = mpsc::channel::<DebounceEventResult>();
     let (shutdown_tx, shutdown_rx) = mpsc::channel::<()>();
 
@@ -129,7 +126,8 @@ fn start_json_watcher(
                                             "path": path.to_string_lossy(),
                                             "updated_at": chrono_or_stub(),
                                         });
-                                        let _ = app_handle.emit("intelligence:status_update", &fallback);
+                                        let _ = app_handle
+                                            .emit("intelligence:status_update", &fallback);
                                     }
                                 }
                             }

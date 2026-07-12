@@ -15,12 +15,7 @@ use super::types::*;
 /// Implementors handle the actual event emission (e.g., Tauri AppHandle).
 /// In tests, a no-op or mock implementation can be used.
 pub trait ServiceEventEmitter: Send + Sync {
-    fn emit_state_change(
-        &self,
-        service_id: &ServiceId,
-        from: &ServiceState,
-        to: &ServiceState,
-    );
+    fn emit_state_change(&self, service_id: &ServiceId, from: &ServiceState, to: &ServiceState);
     fn emit_starting(&self, service_id: &ServiceId, deps_met: &[ServiceId]);
     fn emit_command_result(
         &self,
@@ -29,12 +24,7 @@ pub trait ServiceEventEmitter: Send + Sync {
         result: &str,
         detail: Option<&str>,
     );
-    fn emit_failed(
-        &self,
-        service_id: &ServiceId,
-        error: &str,
-        restart_available: bool,
-    );
+    fn emit_failed(&self, service_id: &ServiceId, error: &str, restart_available: bool);
 }
 
 /// Manages service lifecycle state with dependency-checked startup.
@@ -122,7 +112,11 @@ impl ServiceLauncher {
         }
 
         // Transition to Starting
-        let old_state = self.states.get(&id).cloned().unwrap_or(ServiceState::Offline);
+        let old_state = self
+            .states
+            .get(&id)
+            .cloned()
+            .unwrap_or(ServiceState::Offline);
         self.states.insert(id, ServiceState::Starting);
 
         // Emit events

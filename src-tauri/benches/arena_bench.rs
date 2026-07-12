@@ -26,9 +26,7 @@
 
 use std::time::Duration;
 
-use criterion::{
-    black_box, criterion_group, criterion_main, BenchmarkId, Criterion, Throughput,
-};
+use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
 use tempfile::tempdir;
 
 use gsd_os_lib::memory_arena::{
@@ -209,7 +207,9 @@ fn bench_get_zero_copy_comparison(c: &mut Criterion) {
         let mut idx: u64 = 1;
         b.iter(|| {
             let id = ChunkId::new(idx);
-            let (header, payload) = arena.get_chunk_hot_with_header(black_box(id)).expect("get_with_header");
+            let (header, payload) = arena
+                .get_chunk_hot_with_header(black_box(id))
+                .expect("get_with_header");
             black_box((header, payload));
             idx += 1;
             if idx > 1000 {
@@ -289,8 +289,7 @@ fn bench_warm_start(c: &mut Criterion) {
                     let cold = InMemoryColdSource::new();
                     // Lazy default (M2). See bench_warm_start_eager for
                     // the M1-equivalent path.
-                    let (set, report) =
-                        WarmStart::open(tmp.path(), &cold).expect("warm start");
+                    let (set, report) = WarmStart::open(tmp.path(), &cold).expect("warm start");
                     black_box(set);
                     black_box(report);
                 },
@@ -312,8 +311,7 @@ fn bench_warm_start(c: &mut Criterion) {
             |tmp| {
                 let cold = InMemoryColdSource::new();
                 // Lazy default — this is the M2 headline bench.
-                let (set, report) =
-                    WarmStart::open(tmp.path(), &cold).expect("warm start");
+                let (set, report) = WarmStart::open(tmp.path(), &cold).expect("warm start");
                 black_box(set);
                 black_box(report);
             },
@@ -338,8 +336,7 @@ fn bench_warm_start_eager(c: &mut Criterion) {
                     let cold = InMemoryColdSource::new();
                     // Explicit eager path — matches M1's baseline behavior.
                     let (set, report) =
-                        WarmStart::open_eager(tmp.path(), &cold)
-                            .expect("warm start eager");
+                        WarmStart::open_eager(tmp.path(), &cold).expect("warm start eager");
                     black_box(set);
                     black_box(report);
                 },
@@ -360,8 +357,7 @@ fn bench_warm_start_eager(c: &mut Criterion) {
             |tmp| {
                 let cold = InMemoryColdSource::new();
                 let (set, report) =
-                    WarmStart::open_eager(tmp.path(), &cold)
-                        .expect("warm start eager");
+                    WarmStart::open_eager(tmp.path(), &cold).expect("warm start eager");
                 black_box(set);
                 black_box(report);
             },
@@ -385,8 +381,7 @@ fn bench_validate_chunk(c: &mut Criterion) {
         b.iter_batched(
             || {
                 let tmp = tempdir().expect("tempdir");
-                let cfg = ArenaSetConfig::new(tmp.path())
-                    .with_pool(hot_spec(1000));
+                let cfg = ArenaSetConfig::new(tmp.path()).with_pool(hot_spec(1000));
                 let ids: Vec<ChunkId> = {
                     let mut set = ArenaSet::create(cfg).expect("create");
                     let pool = set.pool_mut(TierKind::Hot).unwrap();
@@ -403,20 +398,15 @@ fn bench_validate_chunk(c: &mut Criterion) {
 
                 // Lazy reopen.
                 let cold = InMemoryColdSource::new();
-                let (set, _report, _stats) = WarmStart::open_with_config(
-                    tmp.path(),
-                    &cold,
-                    WarmStartConfig::default(),
-                )
-                .expect("lazy open");
+                let (set, _report, _stats) =
+                    WarmStart::open_with_config(tmp.path(), &cold, WarmStartConfig::default())
+                        .expect("lazy open");
                 (set, ids, tmp)
             },
             |(set, ids, _tmp)| {
                 let pool = set.pool(TierKind::Hot).expect("hot pool");
                 for id in &ids {
-                    pool.arena()
-                        .validate_chunk(*id)
-                        .expect("validate_chunk ok");
+                    pool.arena().validate_chunk(*id).expect("validate_chunk ok");
                 }
                 black_box(ids);
             },
@@ -465,9 +455,7 @@ fn bench_journal(c: &mut Criterion) {
                 let source = prefilled_arena(1000);
                 let chunk_bytes: Vec<(ChunkId, Vec<u8>)> = (1u64..=1000)
                     .map(|id| {
-                        let chunk = source
-                            .get_chunk(ChunkId::new(id))
-                            .expect("source get");
+                        let chunk = source.get_chunk(ChunkId::new(id)).expect("source get");
                         (ChunkId::new(id), chunk.serialize())
                     })
                     .collect();
@@ -498,12 +486,9 @@ fn bench_journal(c: &mut Criterion) {
                 // Pre-populate the journal file.
                 let source = prefilled_arena(1000);
                 {
-                    let mut writer = JournalWriter::open(&journal_path)
-                        .expect("writer open");
+                    let mut writer = JournalWriter::open(&journal_path).expect("writer open");
                     for id in 1u64..=1000 {
-                        let chunk = source
-                            .get_chunk(ChunkId::new(id))
-                            .expect("source get");
+                        let chunk = source.get_chunk(ChunkId::new(id)).expect("source get");
                         writer
                             .append_alloc(ChunkId::new(id), &chunk.serialize())
                             .expect("append_alloc");
@@ -531,11 +516,7 @@ fn bench_journal(c: &mut Criterion) {
 /// Build a 2-pool ArenaSet with Hot (source) + Warm (target) tiers. Each
 /// pool is sized for `num_slots` chunks of up to `slot_size` bytes. Used
 /// by the M3 demote crossfade benches.
-fn two_pool_set(
-    root: &std::path::Path,
-    num_slots: usize,
-    slot_size: u64,
-) -> ArenaSet {
+fn two_pool_set(root: &std::path::Path, num_slots: usize, slot_size: u64) -> ArenaSet {
     let config = ArenaConfig {
         chunk_size: slot_size,
         min_chunk_size: 64,
@@ -557,12 +538,8 @@ fn two_pool_set(
         policy: unlimited_policy(),
         allocator: AllocatorSelector::FixedSlot,
     };
-    ArenaSet::create(
-        ArenaSetConfig::new(root)
-            .with_pool(hot)
-            .with_pool(warm),
-    )
-    .expect("two-pool ArenaSet create")
+    ArenaSet::create(ArenaSetConfig::new(root).with_pool(hot).with_pool(warm))
+        .expect("two-pool ArenaSet create")
 }
 
 fn bench_demote_crossfade(c: &mut Criterion) {
@@ -643,9 +620,7 @@ fn bench_demote_crossfade(c: &mut Criterion) {
                 (set, handle, tmp)
             },
             |(mut set, handle, _tmp)| {
-                let canonical = set
-                    .complete_demote(black_box(handle))
-                    .expect("complete");
+                let canonical = set.complete_demote(black_box(handle)).expect("complete");
                 black_box(canonical);
             },
             criterion::BatchSize::PerIteration,
@@ -670,9 +645,7 @@ fn bench_demote_crossfade(c: &mut Criterion) {
                 (set, handle, tmp)
             },
             |(mut set, handle, _tmp)| {
-                let canonical = set
-                    .complete_demote(black_box(handle))
-                    .expect("complete");
+                let canonical = set.complete_demote(black_box(handle)).expect("complete");
                 black_box(canonical);
             },
             criterion::BatchSize::PerIteration,
@@ -866,9 +839,7 @@ fn bench_promote_crossfade(c: &mut Criterion) {
                 (set, handle, tmp)
             },
             |(mut set, handle, _tmp)| {
-                let canonical = set
-                    .complete_promote(black_box(handle))
-                    .expect("complete");
+                let canonical = set.complete_promote(black_box(handle)).expect("complete");
                 black_box(canonical);
             },
             criterion::BatchSize::PerIteration,
@@ -893,9 +864,7 @@ fn bench_promote_crossfade(c: &mut Criterion) {
                 (set, handle, tmp)
             },
             |(mut set, handle, _tmp)| {
-                let canonical = set
-                    .complete_promote(black_box(handle))
-                    .expect("complete");
+                let canonical = set.complete_promote(black_box(handle)).expect("complete");
                 black_box(canonical);
             },
             criterion::BatchSize::PerIteration,
@@ -1112,9 +1081,14 @@ fn bench_policy_sweep(c: &mut Criterion) {
                 };
                 let mut set = sweep_set(tmp.path(), 200, hot_policy, warm_policy);
                 for i in 0..100u8 {
-                    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![i; 64]).unwrap();
+                    set.pool_mut(TierKind::Hot)
+                        .unwrap()
+                        .alloc(vec![i; 64])
+                        .unwrap();
                 }
-                fn future() -> u64 { u64::MAX / 2 }
+                fn future() -> u64 {
+                    u64::MAX / 2
+                }
                 set.set_now_ns_for_test(future);
                 (set, tmp)
             },
@@ -1150,8 +1124,16 @@ fn bench_policy_sweep(c: &mut Criterion) {
                 };
                 let mut set = sweep_set(tmp.path(), 200, hot_policy, warm_policy);
                 for i in 0..100u8 {
-                    let id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![i; 64]).unwrap();
-                    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
+                    let id = set
+                        .pool_mut(TierKind::Warm)
+                        .unwrap()
+                        .alloc(vec![i; 64])
+                        .unwrap();
+                    set.pool_mut(TierKind::Warm)
+                        .unwrap()
+                        .arena_mut()
+                        .touch_chunk(id)
+                        .unwrap();
                 }
                 (set, tmp)
             },
@@ -1187,13 +1169,26 @@ fn bench_policy_sweep(c: &mut Criterion) {
                 };
                 let mut set = sweep_set(tmp.path(), 200, hot_policy, warm_policy);
                 for i in 0..50u8 {
-                    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![i; 64]).unwrap();
+                    set.pool_mut(TierKind::Hot)
+                        .unwrap()
+                        .alloc(vec![i; 64])
+                        .unwrap();
                 }
                 for i in 0..50u8 {
-                    let id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![i + 50; 64]).unwrap();
-                    set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
+                    let id = set
+                        .pool_mut(TierKind::Warm)
+                        .unwrap()
+                        .alloc(vec![i + 50; 64])
+                        .unwrap();
+                    set.pool_mut(TierKind::Warm)
+                        .unwrap()
+                        .arena_mut()
+                        .touch_chunk(id)
+                        .unwrap();
                 }
-                fn future() -> u64 { u64::MAX / 2 }
+                fn future() -> u64 {
+                    u64::MAX / 2
+                }
                 set.set_now_ns_for_test(future);
                 (set, tmp)
             },
@@ -1230,10 +1225,16 @@ fn bench_policy_sweep(c: &mut Criterion) {
                 };
                 let mut set = sweep_set(tmp.path(), 200, hot_policy, warm_policy);
                 for i in 0..50u8 {
-                    set.pool_mut(TierKind::Hot).unwrap().alloc(vec![i; 64]).unwrap();
+                    set.pool_mut(TierKind::Hot)
+                        .unwrap()
+                        .alloc(vec![i; 64])
+                        .unwrap();
                 }
                 for i in 0..50u8 {
-                    set.pool_mut(TierKind::Warm).unwrap().alloc(vec![i + 50; 64]).unwrap();
+                    set.pool_mut(TierKind::Warm)
+                        .unwrap()
+                        .alloc(vec![i + 50; 64])
+                        .unwrap();
                 }
                 (set, tmp)
             },
@@ -1270,10 +1271,21 @@ fn bench_policy_sweep(c: &mut Criterion) {
                 };
                 let mut set = sweep_set(tmp.path(), 8, hot_policy, warm_policy);
                 // Fill Hot to capacity.
-                set.pool_mut(TierKind::Hot).unwrap().alloc(vec![0u8; 64]).unwrap();
+                set.pool_mut(TierKind::Hot)
+                    .unwrap()
+                    .alloc(vec![0u8; 64])
+                    .unwrap();
                 // Warm chunk above promote threshold.
-                let id = set.pool_mut(TierKind::Warm).unwrap().alloc(vec![1u8; 64]).unwrap();
-                set.pool_mut(TierKind::Warm).unwrap().arena_mut().touch_chunk(id).unwrap();
+                let id = set
+                    .pool_mut(TierKind::Warm)
+                    .unwrap()
+                    .alloc(vec![1u8; 64])
+                    .unwrap();
+                set.pool_mut(TierKind::Warm)
+                    .unwrap()
+                    .arena_mut()
+                    .touch_chunk(id)
+                    .unwrap();
                 (set, tmp)
             },
             |(mut set, _tmp)| {
@@ -1291,8 +1303,8 @@ fn bench_policy_sweep(c: &mut Criterion) {
 
 #[cfg(feature = "cuda")]
 fn bench_vram_transfer(c: &mut Criterion) {
-    use std::sync::Arc;
     use gsd_os_lib::memory_arena::vram::VramContext;
+    use std::sync::Arc;
 
     let ctx = Arc::new(VramContext::new(0).expect("CUDA device 0"));
 
@@ -1362,8 +1374,8 @@ fn bench_vram_transfer(c: &mut Criterion) {
 
 #[cfg(feature = "cuda")]
 fn bench_vram_crossfade(c: &mut Criterion) {
-    use std::sync::Arc;
     use gsd_os_lib::memory_arena::vram::VramContext;
+    use std::sync::Arc;
 
     let mut group = c.benchmark_group("vram_crossfade");
     group.measurement_time(Duration::from_secs(5));
@@ -1381,14 +1393,14 @@ fn bench_vram_crossfade(c: &mut Criterion) {
                         chunk_size: 4 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
-        allocator: AllocatorSelector::FixedSlot,
+                        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_pool(PoolSpec {
                         tier: TierKind::Vector,
                         chunk_size: 4 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
-        allocator: AllocatorSelector::FixedSlot,
+                        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_vram_context(ctx);
                 let mut set = ArenaSet::create(config).expect("create");
@@ -1423,14 +1435,14 @@ fn bench_vram_crossfade(c: &mut Criterion) {
                         chunk_size: 4 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
-        allocator: AllocatorSelector::FixedSlot,
+                        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_pool(PoolSpec {
                         tier: TierKind::Vector,
                         chunk_size: 4 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
-        allocator: AllocatorSelector::FixedSlot,
+                        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_vram_context(ctx);
                 let mut set = ArenaSet::create(config).expect("create");
@@ -1469,14 +1481,14 @@ fn bench_vram_crossfade(c: &mut Criterion) {
                         chunk_size: 2 * 1024 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
-        allocator: AllocatorSelector::FixedSlot,
+                        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_pool(PoolSpec {
                         tier: TierKind::Vector,
                         chunk_size: 2 * 1024 * 1024,
                         num_slots: 4,
                         policy: unlimited_policy(),
-        allocator: AllocatorSelector::FixedSlot,
+                        allocator: AllocatorSelector::FixedSlot,
                     })
                     .with_vram_context(ctx);
                 let mut set = ArenaSet::create(config).expect("create");
@@ -1932,8 +1944,8 @@ fn bench_hugetlb(c: &mut Criterion) {
             || {
                 let dir = tempdir().expect("tempdir");
                 let path = dir.path().join("hugetlb.arena");
-                let arena = Arena::new_mmap_file_hugetlb(config_small(), 16, &path)
-                    .expect("hugetlb arena");
+                let arena =
+                    Arena::new_mmap_file_hugetlb(config_small(), 16, &path).expect("hugetlb arena");
                 (arena, dir)
             },
             |(mut arena, _dir)| {
@@ -1952,8 +1964,8 @@ fn bench_hugetlb(c: &mut Criterion) {
             || {
                 let dir = tempdir().expect("tempdir");
                 let path = dir.path().join("standard.arena");
-                let arena = Arena::new_mmap_file(config_small(), 16, &path)
-                    .expect("standard arena");
+                let arena =
+                    Arena::new_mmap_file(config_small(), 16, &path).expect("standard arena");
                 (arena, dir)
             },
             |(mut arena, _dir)| {
@@ -1971,8 +1983,8 @@ fn bench_hugetlb(c: &mut Criterion) {
     group.bench_function("get_chunk_hot_hugetlb", |b| {
         let dir = tempdir().expect("tempdir");
         let path = dir.path().join("hugetlb.arena");
-        let mut arena = Arena::new_mmap_file_hugetlb(config_small(), 1000, &path)
-            .expect("hugetlb arena");
+        let mut arena =
+            Arena::new_mmap_file_hugetlb(config_small(), 1000, &path).expect("hugetlb arena");
         for i in 0..1000 {
             arena
                 .alloc_chunk(TierKind::Hot, vec![i as u8; 64])
@@ -1993,8 +2005,7 @@ fn bench_hugetlb(c: &mut Criterion) {
     group.bench_function("get_chunk_hot_standard", |b| {
         let dir = tempdir().expect("tempdir");
         let path = dir.path().join("standard.arena");
-        let mut arena = Arena::new_mmap_file(config_small(), 1000, &path)
-            .expect("standard arena");
+        let mut arena = Arena::new_mmap_file(config_small(), 1000, &path).expect("standard arena");
         for i in 0..1000 {
             arena
                 .alloc_chunk(TierKind::Hot, vec![i as u8; 64])
@@ -2067,11 +2078,13 @@ fn bench_pg_cold(c: &mut Criterion) {
             let base = batch_counter * 100 + 100_000;
             for i in 0..100 {
                 let id = ChunkId::new(base + i);
-                cs.store(TierKind::Warm, id, vec![0xCD; 256]).expect("store");
+                cs.store(TierKind::Warm, id, vec![0xCD; 256])
+                    .expect("store");
             }
             // Cleanup.
             for i in 0..100 {
-                cs.delete(TierKind::Warm, ChunkId::new(base + i)).expect("cleanup");
+                cs.delete(TierKind::Warm, ChunkId::new(base + i))
+                    .expect("cleanup");
             }
             batch_counter += 1;
         });
@@ -2079,7 +2092,9 @@ fn bench_pg_cold(c: &mut Criterion) {
 
     group.bench_function("fetch_missing", |b| {
         b.iter(|| {
-            let result = cs.fetch(TierKind::Blob, ChunkId::new(999_999_999)).expect("fetch");
+            let result = cs
+                .fetch(TierKind::Blob, ChunkId::new(999_999_999))
+                .expect("fetch");
             black_box(result);
         });
     });
@@ -2117,17 +2132,10 @@ criterion_group!(
 );
 
 #[cfg(feature = "cuda")]
-criterion_group!(
-    vram_benches,
-    bench_vram_transfer,
-    bench_vram_crossfade,
-);
+criterion_group!(vram_benches, bench_vram_transfer, bench_vram_crossfade,);
 
 #[cfg(feature = "postgres")]
-criterion_group!(
-    pg_benches,
-    bench_pg_cold,
-);
+criterion_group!(pg_benches, bench_pg_cold,);
 
 #[cfg(all(feature = "cuda", feature = "postgres"))]
 criterion_main!(benches, allocator_bakeoff, vram_benches, pg_benches);

@@ -3,12 +3,12 @@
 //! Manages 7 services with dependency-ordered startup, health monitoring,
 //! LED state reporting, and graceful shutdown.
 
-pub mod types;
-pub mod registry;
-pub mod launcher;
 pub mod health;
+pub mod launcher;
 pub mod led;
+pub mod registry;
 pub mod shutdown;
+pub mod types;
 pub use types::*;
 
 #[cfg(test)]

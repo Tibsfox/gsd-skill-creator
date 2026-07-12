@@ -182,10 +182,7 @@ impl DebriefCollector {
     ///
     /// Creates `missions/{mission}/debrief/debrief.json`.
     pub fn write_debrief(&self, debrief: &Debrief) -> Result<PathBuf, DebriefError> {
-        let debrief_dir = self
-            .missions_path
-            .join(&debrief.mission)
-            .join("debrief");
+        let debrief_dir = self.missions_path.join(&debrief.mission).join("debrief");
         fs::create_dir_all(&debrief_dir)?;
 
         let json = serde_json::to_string_pretty(debrief)

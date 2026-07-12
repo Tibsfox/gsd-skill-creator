@@ -9,8 +9,7 @@
 
 use crate::security::process_context::{
     ensure_process_allowed, evaluate, install_process_policy, matches_command_allow_list,
-    permissive_process_policy, CapturingProcessAuditSink, CommandPattern, ProcessOp,
-    ProcessPolicy,
+    permissive_process_policy, CapturingProcessAuditSink, CommandPattern, ProcessOp, ProcessPolicy,
 };
 
 fn deny_all() -> ProcessPolicy {
@@ -32,7 +31,14 @@ fn exact_pattern_admits_and_rejects() {
         audit: None,
     };
     assert!(evaluate(Some(&policy), "tests/exact", ProcessOp::Output, "tmux", &[]).is_ok());
-    assert!(evaluate(Some(&policy), "tests/exact", ProcessOp::Output, "tmux2", &[]).is_err());
+    assert!(evaluate(
+        Some(&policy),
+        "tests/exact",
+        ProcessOp::Output,
+        "tmux2",
+        &[]
+    )
+    .is_err());
     assert!(evaluate(Some(&policy), "tests/exact", ProcessOp::Output, "sh", &[]).is_err());
 }
 
@@ -50,9 +56,14 @@ fn prefix_pattern_matches_path_prefixes() {
         &[]
     )
     .is_ok());
-    assert!(
-        evaluate(Some(&policy), "tests/prefix", ProcessOp::Spawn, "/usr/bin/node", &[]).is_err()
-    );
+    assert!(evaluate(
+        Some(&policy),
+        "tests/prefix",
+        ProcessOp::Spawn,
+        "/usr/bin/node",
+        &[]
+    )
+    .is_err());
 }
 
 #[test]
@@ -92,10 +103,20 @@ fn audit_records_one_row_per_attempt_allowed_and_denied() {
         &["status"],
     )
     .expect("git is allow-listed");
-    let _ = evaluate(Some(&policy), "tests/audit", ProcessOp::Spawn, "curl", &["evil"]);
+    let _ = evaluate(
+        Some(&policy),
+        "tests/audit",
+        ProcessOp::Spawn,
+        "curl",
+        &["evil"],
+    );
 
     let records = sink.records();
-    assert_eq!(records.len(), 2, "one record per attempt, allowed or denied");
+    assert_eq!(
+        records.len(),
+        2,
+        "one record per attempt, allowed or denied"
+    );
     assert!(records[0].allowed);
     assert_eq!(records[0].target, "git");
     assert_eq!(records[0].argv, vec!["status".to_string()]);
@@ -133,9 +154,7 @@ fn global_policy_lifecycle() {
         .expect("first install must succeed");
 
     // After install: still admitted (Any), but now audited.
-    assert!(
-        ensure_process_allowed("tests/lifecycle", ProcessOp::Output, PROBE, &["--x"]).is_ok()
-    );
+    assert!(ensure_process_allowed("tests/lifecycle", ProcessOp::Output, PROBE, &["--x"]).is_ok());
     let probe_records: Vec<_> = sink
         .records()
         .into_iter()
