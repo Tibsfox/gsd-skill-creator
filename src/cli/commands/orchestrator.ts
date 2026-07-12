@@ -32,6 +32,9 @@ import { QueueManager } from '../../orchestrator/work-state/queue-manager.js';
 import { DEFAULT_WORK_STATE_FILENAME } from '../../orchestrator/work-state/types.js';
 import { SnapshotManager } from '../../orchestrator/session-continuity/snapshot-manager.js';
 import { SNAPSHOT_FILENAME } from '../../orchestrator/session-continuity/types.js';
+import { TranscriptParser } from '../../observation/transcript-parser.js';
+import { CorrectionDetector } from '../../learning/correction-detector.js';
+import { CorrectionQuarantineStore } from '../../learning/correction-quarantine.js';
 import { RetentionManager } from '../../observation/retention-manager.js';
 
 // ============================================================================
@@ -705,6 +708,8 @@ async function handleSnapshot(args: string[]): Promise<number> {
   switch (subSub) {
     case 'generate':
       return handleSnapshotGenerate(handlerArgs);
+    case 'detect-corrections':
+      return handleDetectCorrections(handlerArgs);
     case 'latest':
       return handleSnapshotLatest(handlerArgs);
     case 'list':
@@ -745,7 +750,10 @@ async function handleSnapshotGenerate(args: string[]): Promise<number> {
   try {
     const snapshotDir = resolveSnapshotDir(args);
     const manager = new SnapshotManager(snapshotDir);
-    const snapshot = await manager.generate(transcriptPath, sessionId, activeSkills);
+
+    // Parse ONCE and share entries between the snapshot and correction detection.
+    const entries = await new TranscriptParser().parse(transcriptPath);
+    const snapshot = await manager.generateFromEntries(entries, sessionId, activeSkills);
 
     if (!snapshot) {
       console.log(JSON.stringify({
@@ -755,10 +763,67 @@ async function handleSnapshotGenerate(args: string[]): Promise<number> {
     }
 
     await manager.store(snapshot);
+
+    // item-7: auto-detect correction candidates into the QUARANTINE ledger only.
+    // Runs AFTER the snapshot is stored and inside its own swallow-catch, so a
+    // detection failure can never lose the snapshot or block session exit. It
+    // never writes the live feedback ledger. Kill switch: SC_DISABLE_CORRECTION_DETECT=1.
+    if (process.env.SC_DISABLE_CORRECTION_DETECT !== '1') {
+      try {
+        const candidates = new CorrectionDetector().detect(entries, sessionId, transcriptPath);
+        if (candidates.length > 0) {
+          await new CorrectionQuarantineStore(snapshotDir).addMany(candidates);
+        }
+      } catch {
+        // Best-effort: correction detection is independent of snapshot success.
+      }
+    }
+
     console.log(JSON.stringify({
       stored: true,
       snapshot_id: snapshot.session_id,
     }, null, 2));
+    return 0;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.log(JSON.stringify({ error: message }, null, 2));
+    return 1;
+  }
+}
+
+/**
+ * Run item-7 correction detection standalone and write candidates to the
+ * quarantine ledger. Deterministic entry point for tests and manual runs; the
+ * SessionEnd path runs the same detection inline in handleSnapshotGenerate.
+ *
+ * Required: --transcript-path. Optional: --session-id, --planning-dir.
+ * Never writes the live feedback ledger. Honors SC_DISABLE_CORRECTION_DETECT.
+ */
+async function handleDetectCorrections(args: string[]): Promise<number> {
+  const sessionId = extractFlag(args, 'session-id') ?? 'unknown';
+  const transcriptPath = extractFlag(args, 'transcript-path');
+
+  if (!transcriptPath) {
+    console.log(JSON.stringify({
+      error: 'Missing required flag: --transcript-path',
+      help: 'Usage: skill-creator orchestrator snapshot detect-corrections --transcript-path=<path>',
+    }, null, 2));
+    return 1;
+  }
+
+  if (process.env.SC_DISABLE_CORRECTION_DETECT === '1') {
+    console.log(JSON.stringify({ detected: 0, disabled: true }, null, 2));
+    return 0;
+  }
+
+  try {
+    const snapshotDir = resolveSnapshotDir(args);
+    const entries = await new TranscriptParser().parse(transcriptPath);
+    const candidates = new CorrectionDetector().detect(entries, sessionId, transcriptPath);
+    if (candidates.length > 0) {
+      await new CorrectionQuarantineStore(snapshotDir).addMany(candidates);
+    }
+    console.log(JSON.stringify({ detected: candidates.length }, null, 2));
     return 0;
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
