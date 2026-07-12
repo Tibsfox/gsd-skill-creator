@@ -47,6 +47,13 @@ const config: KnipConfig = {
     'src/**/__tests__/**/fixtures/**',
     'src/**/fixtures/**',
     'src/**/__tests__/_harness/**',
+    // Nested barrel re-exports (src/<dir>/**/index.ts): library public-API
+    // surface that knip reports as "unused file" because nothing imports the
+    // barrel directly (callers reach the concrete modules). 60 today, benign per
+    // the baseline doc. This does NOT match the top-level entry src/index.ts.
+    // Removing the barrel wall makes `npm run deadcode` and the ceiling gate
+    // report only genuinely-orphaned modules + unused deps.
+    'src/*/**/index.ts',
     // Intentionally-parked research islands (mirrors adoption-scan.allowlist.json).
     ...parkedIgnores,
   ],

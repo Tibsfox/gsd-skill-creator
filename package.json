@@ -92,7 +92,8 @@
     "state-md:normalize": "node tools/state-md-normalizer.mjs --write",
     "deadcode": "knip --no-config-hints --no-exit-code --exclude exports,nsExports,types,nsTypes,enumMembers,namespaceMembers",
     "deadcode:all": "knip --no-config-hints --no-exit-code",
-    "deadcode:exports": "knip --no-config-hints --no-exit-code --exports"
+    "deadcode:exports": "knip --no-config-hints --no-exit-code --exports",
+    "deadcode:ceiling": "node tools/check-deadcode-ceiling.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",

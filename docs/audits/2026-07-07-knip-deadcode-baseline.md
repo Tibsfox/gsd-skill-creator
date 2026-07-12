@@ -95,3 +95,28 @@ exports one by one is not a release blocker.
 To park a new module so **both** the adoption scanner and knip stop flagging it, add one
 entry (with a `reason`) to `tools/adoption-scan.allowlist.json`. `knip.ts` reads that file
 at config-load time; no knip-side change is needed.
+
+## Update 2026-07-12 — barrel-ignore + ceiling ratchet
+
+The "promote it to a gate" plan above is now partly shipped, as a **ratchet** rather than a
+hard `--no-exit-code` flip (matches the module-reachability orphan-ledger discipline, which
+the repo chose over a pre-tag-gate WARN step to avoid the ci-gate-enum / bypass-vocab
+surface).
+
+- **Barrel-ignore in `knip.ts`.** Added `'src/*/**/index.ts'` to `ignore` — the 60
+  unreferenced nested `index.ts` barrels are library public-API re-export surface, not dead
+  code. This does **not** match the top-level entry `src/index.ts`. The meaningful count
+  drops from **66 → 6**: `src/branches/lifecycle-adapter.ts`,
+  `src/hooks/session-{start,end}.ts`, `src/scan-arxiv/dedup-cli.ts`, `@mapbox/vector-tile`,
+  `@types/diff`.
+- **`tools/check-deadcode-ceiling.mjs`** — computes the meaningful count (unused files +
+  deps + devDeps) and exits non-zero when it exceeds `SC_DEADCODE_CEILING` (default
+  `DEFAULT_CEILING = 6`). `npm run deadcode:ceiling` runs it.
+- **`tools/__tests__/check-deadcode-ceiling.test.mjs`** — a BLOCKING tools-suite test
+  (`vitest.tools.config.mjs`, so it runs in pre-tag-gate step `tools-suite` + CI) that
+  asserts `count <= 6`. A new dead file/dep fails it, forcing a wire-or-delete decision.
+
+The ceiling only ratchets DOWN. To lock in a reduction (e.g. remove `@types/diff` — `diff@8`
+ships its own types; register or delete `src/scan-arxiv/dedup-cli.ts`; decide the two
+session-hook files), lower `DEFAULT_CEILING` in the same commit that removes the finding.
+The export/type surface (`deadcode:all`) stays out of the gate.
