@@ -568,4 +568,51 @@ describe.skipIf(!RUN)('PgStore conversation embeddings (PG-5)', () => {
     const turns = await cleanupPool.query('SELECT count(*)::int AS n FROM gsd_memory.conversation_turns WHERE session_id = $1', [sessionId]);
     expect(turns.rows[0].n).toBe(0); // cascaded
   });
+
+  // ── item 9a: reembed-conversations repair ─────────────────────────────
+  // NOTE: this test runs LAST in the describe — its whole-corpus re-embed to
+  // 'model' is a side effect that must not precede other tests' assertions.
+
+  it('reembedConversations repairs stale-method turns, drains across batches, and is idempotent', async () => {
+    const heuristic: TurnEmbedder = { embed: async () => ({ embedding: E(0), method: 'heuristic' }) };
+    const model: TurnEmbedder = { embed: async () => ({ embedding: E(2), method: 'model' }) };
+    const hStore = await makeStore(heuristic);
+    const mStore = await makeStore(model);
+    const sessionId = randomUUID();
+    sessionIds.push(sessionId);
+    const tag = sessionId.slice(0, 8);
+    await hStore.storeSession({ id: sessionId, startedAt: new Date() });
+    const ids = [`re-1-${tag}`, `re-2-${tag}`, `re-3-${tag}`];
+    for (const id of ids) {
+      await hStore.storeTurn({ id, sessionId, role: 'user', content: `reembedmark ${id}`, timestamp: new Date() });
+    }
+
+    // Bug repro: a model-method query excludes the heuristic-tagged turns.
+    const before = await mStore.searchConversationsByEmbedding(E(0), 50, [sessionId], 'model');
+    expect(before.some((h) => ids.includes(h.turn.id))).toBe(false);
+
+    // Repair with the model embedder; batchSize 1 exercises keyset pagination.
+    const n = await mStore.reembedConversations({ method: 'model', batchSize: 1 });
+    expect(n).toBeGreaterThanOrEqual(ids.length);
+
+    // Direct column check: all three are now tagged 'model'.
+    const chk = await cleanupPool.query(
+      'SELECT id, embedding_method FROM gsd_memory.conversation_turns WHERE id = ANY($1)',
+      [ids],
+    );
+    expect(chk.rows.length).toBe(3);
+    expect(chk.rows.every((r: { embedding_method: string }) => r.embedding_method === 'model')).toBe(true);
+
+    // Now visible to the model-method query (re-embedded to E(2)).
+    const after = await mStore.searchConversationsByEmbedding(E(2), 50, [sessionId], 'model');
+    expect(after.some((h) => ids.includes(h.turn.id))).toBe(true);
+
+    // Idempotent: a second run re-embeds nothing (whole corpus is now 'model').
+    expect(await mStore.reembedConversations({ method: 'model' })).toBe(0);
+  });
+
+  it('reembedConversations is a no-op (0) when the store has no embedder', async () => {
+    const store = await makeStore(); // no embedder
+    expect(await store.reembedConversations({ method: 'model' })).toBe(0);
+  });
 });

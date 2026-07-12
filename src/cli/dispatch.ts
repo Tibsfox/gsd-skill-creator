@@ -208,6 +208,10 @@ export const REGISTRY: readonly CommandEntry[] = [
     const { doctorCommand } = await import('./commands/doctor.js');
     process.exitCode = await doctorCommand(ctx.args.slice(1));
   } },
+  { aliases: ['reembed-conversations', 'reembed'], handler: async (ctx) => {
+    const { reembedConversationsCommand } = await import('./commands/reembed-conversations.js');
+    process.exitCode = await reembedConversationsCommand(ctx.args.slice(1));
+  } },
   { aliases: ['audit', 'au'], handler: (ctx) => {
     const skillName = ctx.args.filter((a) => !a.startsWith('-'))[1];
     return auditCommand(skillName, {});

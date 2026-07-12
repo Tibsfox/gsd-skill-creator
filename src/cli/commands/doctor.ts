@@ -115,12 +115,21 @@ async function checkPostgres(): Promise<CheckRow> {
       };
     }
     const stats = await store.getConversationEmbeddingStats();
+    // Stale-method detection: turns embedded under a method other than the active
+    // one are invisible to semantic search until re-embedded (item 9a). Advisory.
+    const activeMethod = (await getEmbeddingService()).getStatus().fallbackMode ? 'heuristic' : 'model';
+    const staleTurns = Object.entries(stats.byMethod)
+      .filter(([m]) => m !== activeMethod && m !== 'none')
+      .reduce((n, [, c]) => n + c, 0);
+    const stale = staleTurns > 0;
     return {
       id: 'postgres',
-      level: 'ok',
+      level: stale ? 'warn' : 'ok',
       label: 'Postgres',
-      detail: `reachable (${env.source}) — ${stats.totalTurns} turns, ${stats.embeddedTurns} embedded`,
-      data: { configured: true, ready: true, source: env.source, ...stats },
+      detail:
+        `reachable (${env.source}) — ${stats.totalTurns} turns, ${stats.embeddedTurns} embedded` +
+        (stale ? `; ${staleTurns} under a stale method — run reembed-conversations` : ''),
+      data: { configured: true, ready: true, source: env.source, activeMethod, staleTurns, ...stats },
     };
   } catch (e) {
     return {

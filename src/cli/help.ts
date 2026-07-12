@@ -38,6 +38,7 @@ Commands:
   invoke, i         Manually invoke a skill by name
   status, st        Show active skills and token budget
   doctor, doc       One-pass environment health check (node, embeddings, PG, budget, hooks) (--json)
+  reembed-conversations, reembed  Re-embed stored conversation turns with the active model (repairs stale vectors)
   suggest, sg       Analyze patterns and review skill suggestions
   suggestions, sgs  List/manage skill suggestions
   feedback, fb      View feedback for skills

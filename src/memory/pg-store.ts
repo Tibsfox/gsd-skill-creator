@@ -939,6 +939,83 @@ export class PgStore implements MemoryStore {
   }
 
   /**
+   * Re-embed stored conversation turns whose embedding_method differs from the
+   * active method (or is NULL) with the current embedder — WITHOUT re-parsing any
+   * transcript. Repairs the silent invisibility that occurs when turns were
+   * embedded as 'heuristic' (model unavailable at ingest) and the model later
+   * loads: searchConversationsByEmbedding grandfathers only NULL-method rows, so
+   * stale-method rows drop out of semantic search until re-embedded.
+   *
+   * Idempotent: a second run with the same active method is a no-op (0). Keyset-
+   * paginated by (timestamp, id); a row whose embed FAILS is left untouched (its
+   * prior vector is preserved) and skipped for the remainder of the run, so a
+   * degraded embedder can never overwrite good vectors with NULLs. Tolerant of a
+   * missing conversation_turns table (returns the count updated so far).
+   */
+  async reembedConversations(opts: { method?: string; batchSize?: number } = {}): Promise<number> {
+    if (!this.embedder) return 0;
+    if (!(await this.ensureReady())) return 0;
+
+    // Resolve the target method: caller-supplied, else probe the embedder once.
+    let target = opts.method;
+    if (!target) {
+      try {
+        const probe = await this.embedder.embed('.');
+        target = typeof probe.method === 'string' ? probe.method : 'model';
+      } catch {
+        target = 'model';
+      }
+    }
+    const batchSize = Math.max(1, opts.batchSize ?? 200);
+
+    let updated = 0;
+    let afterTs: string | null = null;
+    let afterId: string | null = null;
+    try {
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        const page = await this.pool.query(
+          `SELECT id, content, timestamp
+             FROM gsd_memory.conversation_turns
+            WHERE embedding_method IS DISTINCT FROM $1
+              AND ($3::timestamptz IS NULL OR (timestamp, id) > ($3, $4))
+            ORDER BY timestamp ASC, id ASC
+            LIMIT $2`,
+          [target, batchSize, afterTs, afterId],
+        );
+        const rows = page.rows as Array<{ id: string; content: string; timestamp: string }>;
+        if (rows.length === 0) break;
+
+        for (const row of rows) {
+          try {
+            const res = await this.embedder.embed(row.content);
+            if (Array.isArray(res.embedding) && res.embedding.length > 0) {
+              await this.pool.query(
+                `UPDATE gsd_memory.conversation_turns
+                    SET embedding = $2::vector, embedding_method = $3
+                  WHERE id = $1`,
+                [row.id, `[${res.embedding.join(',')}]`, target],
+              );
+              updated++;
+            }
+          } catch {
+            // Leave this row's prior vector intact; keyset cursor advances past it.
+          }
+        }
+
+        const last = rows[rows.length - 1];
+        afterTs = last.timestamp;
+        afterId = last.id;
+        if (rows.length < batchSize) break;
+      }
+    } catch {
+      // Missing table / transient error — return what was repaired so far.
+      return updated;
+    }
+    return updated;
+  }
+
+  /**
    * Search conversation history using full-text search.
    * This data is ALWAYS PRIVATE — never synced externally.
    */

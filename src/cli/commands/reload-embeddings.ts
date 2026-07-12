@@ -8,10 +8,43 @@
  */
 
 import { getEmbeddingService } from '../../embeddings/index.js';
+import { loadPgEnv } from '../../scribe/pg-runtime/env-loader.js';
+import { PgStore } from '../../memory/pg-store.js';
 import pc from 'picocolors';
 
 interface ReloadOptions {
   verbose?: boolean;
+}
+
+/**
+ * Best-effort: after the model loads, warn if stored conversation turns are still
+ * embedded under a non-'model' method (invisible to semantic search until repaired).
+ * Postgres is optional — any failure here must never break `reload-embeddings`.
+ */
+async function warnStaleConversationEmbeddings(): Promise<void> {
+  try {
+    const env = loadPgEnv();
+    if (!env.ok) return;
+    const pg = new PgStore({ connectionString: env.url, autoMigrate: false });
+    try {
+      const stats = await pg.getConversationEmbeddingStats();
+      const stale = Object.entries(stats.byMethod)
+        .filter(([m]) => m !== 'model' && m !== 'none')
+        .reduce((n, [, c]) => n + c, 0);
+      if (stale > 0) {
+        console.log(
+          pc.yellow(
+            `! ${stale} conversation turn(s) are embedded under a stale method; run ` +
+              '`skill-creator reembed-conversations` to restore them to semantic search.',
+          ),
+        );
+      }
+    } finally {
+      await pg.close();
+    }
+  } catch {
+    /* Postgres optional — never fail reload on a stale-check error. */
+  }
 }
 
 export async function reloadEmbeddingsCommand(options: ReloadOptions = {}): Promise<void> {
@@ -37,6 +70,7 @@ export async function reloadEmbeddingsCommand(options: ReloadOptions = {}): Prom
     if (success) {
       console.log(pc.green('✓ Model loaded successfully'));
       console.log('Future embedding operations will use the model.');
+      await warnStaleConversationEmbeddings();
     } else {
       console.log(pc.yellow('✗ Model still unavailable'));
       console.log('Continuing with heuristic analysis.');
