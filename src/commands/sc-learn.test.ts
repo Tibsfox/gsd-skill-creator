@@ -808,3 +808,71 @@ describe('sc:learn: registry-backed dedup + conflict surfacing (LEARN-1/2/7)', (
     expect(result.pendingConflicts?.[0].candidate.id).toBe('candidate-prim');
   });
 });
+
+describe('sc:learn: integrity-audit gate', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    setDefaultMockReturns();
+  });
+
+  it('passes through when sourceAudit is clean (merge proceeds)', async () => {
+    const result = await scLearn('test.md', {
+      sourceAudit: { sourceId: 'ok', resolutionConfidence: 0.95 },
+    });
+    expect(result.gate?.action).toBe('pass');
+    expect(mockMerge).toHaveBeenCalled();
+    expect(mockRecord).toHaveBeenCalled();
+    expect(result.changeset).not.toBeNull();
+  });
+
+  it('blocks a failing source: skips the merge and returns a gate verdict', async () => {
+    const result = await scLearn('test.md', {
+      sourceAudit: { sourceId: 'dead', deadReference: true },
+    });
+    expect(result.success).toBe(true);
+    expect(result.gate?.action).toBe('block');
+    expect(result.gate?.blockedBy).toContain('dead-reference');
+    expect(result.changeset).toBeNull();
+    // Merge engine never ran for a blocked source.
+    expect(mockMerge).not.toHaveBeenCalled();
+    expect(mockRecord).not.toHaveBeenCalled();
+    expect(result.errors.join(' ')).toMatch(/integrity-audit gate/);
+  });
+
+  it('routes a blocked source to the review queue file', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'sc-learn-gate-'));
+    const reviewQueuePath = join(dir, 'review-queue.json');
+    try {
+      await scLearn('test.md', {
+        sourceAudit: { sourceId: 'dead', deadReference: true, doi: '10.1/x' },
+        reviewQueuePath,
+      });
+      expect(existsSync(reviewQueuePath)).toBe(true);
+      const queue = JSON.parse(readFileSync(reviewQueuePath, 'utf-8'));
+      expect(queue).toHaveLength(1);
+      expect(queue[0].sourceId).toBe('dead');
+      expect(queue[0].origin).toBe('sc-learn');
+      expect(queue[0].detail.doi).toBe('10.1/x');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('a flagged source still merges but is recorded for review', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'sc-learn-gate-'));
+    const reviewQueuePath = join(dir, 'review-queue.json');
+    try {
+      const result = await scLearn('test.md', {
+        sourceAudit: { sourceId: 'marginal', resolutionConfidence: 0.65 },
+        reviewQueuePath,
+      });
+      expect(result.gate?.action).toBe('flag');
+      // Flagged still ingests.
+      expect(mockMerge).toHaveBeenCalled();
+      const queue = JSON.parse(readFileSync(reviewQueuePath, 'utf-8'));
+      expect(queue[0].action).toBe('flag');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+});
