@@ -21,9 +21,119 @@ import type {
   TokenBudgetConfig,
   PanelId,
   PanelExpression,
+  ComplexPosition,
 } from '../rosetta-core/types.js';
+import { ConceptRegistry } from '../rosetta-core/concept-registry.js';
 import type { DepartmentSummary, WingContent, DeepReference } from './types.js';
 import { countTokens, truncateToTokenBudget } from './token-counter.js';
+
+// ─── Concept Source Extraction ───────────────────────────────────────────────
+
+/**
+ * Extract a string-valued field from a concept object-literal fragment,
+ * handling both single quoted strings and multiline `'a' + 'b'` concatenation.
+ */
+function extractStringField(text: string, field: string): string | undefined {
+  const re = new RegExp(`${field}:\\s*((?:['"][^'"]*['"]\\s*\\+?\\s*\\n?\\s*)+)`);
+  const m = text.match(re);
+  if (!m) return undefined;
+  const parts = m[1].match(/['"]([^'"]*)['"]/g);
+  if (!parts) return undefined;
+  return parts.map((p) => p.slice(1, -1)).join('');
+}
+
+const FORBIDDEN_TOKEN =
+  /\b(require|process|globalThis|global|eval|Function|import|module|exports|constructor|prototype|window|self|document|arguments|__proto__|await|async|new|delete|void|typeof|class|function|return|const|let|var|do|while|for|if|else|switch|throw|try|with)\b/;
+const SAFE_RHS = /^[\sA-Za-z0-9_.+\-*/(),]+$/;
+const SAFE_BLOCK = /^[\sA-Za-z0-9_.+\-*/(),:]+$/;
+
+/**
+ * Extract the Complex Plane position by safely evaluating the numeric
+ * `complexPlanePosition` object literal in a `Math`-only sandbox. Handles both
+ * inline-literal positions and positions computed from top-level `const`
+ * declarations (e.g. `const real = radius * Math.cos(theta)`). Returns
+ * undefined when the source cannot be parsed within the allow-listed grammar.
+ */
+function extractComplexPlanePosition(content: string): ComplexPosition | undefined {
+  const blockMatch = content.match(/complexPlanePosition:\s*\{([^{}]*)\}/);
+  if (!blockMatch) return undefined;
+  const block = blockMatch[1];
+  if (!SAFE_BLOCK.test(block) || FORBIDDEN_TOKEN.test(block)) return undefined;
+
+  const constLines: string[] = [];
+  const constRe = /const\s+([A-Za-z_$][\w$]*)\s*=\s*([^;]+);/g;
+  let cm: RegExpExecArray | null;
+  while ((cm = constRe.exec(content)) !== null) {
+    const name = cm[1];
+    const rhs = cm[2].trim();
+    if (!SAFE_RHS.test(rhs) || FORBIDDEN_TOKEN.test(rhs)) continue;
+    constLines.push(`const ${name} = ${rhs};`);
+  }
+
+  try {
+    const body = `"use strict";\n${constLines.join('\n')}\nreturn ({${block}});`;
+    // eslint-disable-next-line no-new-func
+    const fn = new Function('Math', body) as (m: typeof Math) => unknown;
+    const pos = fn(Math) as Partial<ComplexPosition> | null;
+    if (
+      pos &&
+      typeof pos.real === 'number' &&
+      typeof pos.imaginary === 'number' &&
+      typeof pos.magnitude === 'number' &&
+      typeof pos.angle === 'number' &&
+      Number.isFinite(pos.real) &&
+      Number.isFinite(pos.imaginary) &&
+      Number.isFinite(pos.magnitude) &&
+      Number.isFinite(pos.angle)
+    ) {
+      return {
+        real: pos.real,
+        imaginary: pos.imaginary,
+        magnitude: pos.magnitude,
+        angle: pos.angle,
+      };
+    }
+  } catch {
+    // Non-conforming source -- degrade to no position.
+  }
+  return undefined;
+}
+
+/**
+ * Extract panel expressions from a `panels: new Map([...])` literal. Bounded to
+ * the region before `relationships` / `complexPlanePosition` so relationship
+ * object literals are never mistaken for panel entries.
+ */
+function extractPanels(content: string): Map<PanelId, PanelExpression> {
+  const panels = new Map<PanelId, PanelExpression>();
+  const panelsIdx = content.indexOf('panels:');
+  if (panelsIdx < 0) return panels;
+
+  let end = content.length;
+  for (const marker of ['relationships:', 'complexPlanePosition:', 'calibration:']) {
+    const i = content.indexOf(marker, panelsIdx);
+    if (i >= 0 && i < end) end = i;
+  }
+  const region = content.slice(panelsIdx, end);
+
+  const entryRe = /\[\s*['"]([^'"]+)['"]\s*,\s*\{([^{}]*)\}\s*\]/g;
+  let em: RegExpExecArray | null;
+  while ((em = entryRe.exec(region)) !== null) {
+    const key = em[1] as PanelId;
+    const body = em[2];
+    const expr: PanelExpression = { panelId: key };
+    const pid = extractStringField(body, 'panelId');
+    if (pid) expr.panelId = pid as PanelId;
+    const code = extractStringField(body, 'code');
+    if (code !== undefined) expr.code = code;
+    const explanation = extractStringField(body, 'explanation');
+    if (explanation !== undefined) expr.explanation = explanation;
+    const notes = extractStringField(body, 'pedagogicalNotes');
+    if (notes !== undefined) expr.pedagogicalNotes = notes;
+    panels.set(key, expr);
+  }
+  return panels;
+}
 
 // ─── Error Classes ───────────────────────────────────────────────────────────
 
@@ -457,8 +567,76 @@ export class CollegeLoader {
       name: nameMatch ? nameMatch[1] : basename(filename, '.ts'),
       domain: domainMatch ? domainMatch[1] : 'unknown',
       description,
-      panels: new Map(),
+      panels: extractPanels(content),
       relationships,
+      complexPlanePosition: extractComplexPlanePosition(content),
     };
+  }
+
+  /**
+   * Populate a ConceptRegistry with every concept discovered across all
+   * departments. Recursively walks each department's `concepts/` tree,
+   * parses each concept file (panels + Complex Plane position included), and
+   * registers it. Duplicate IDs and unparseable files are skipped so the
+   * populate step is total. Returns the number of concepts registered.
+   */
+  populateRegistry(registry: ConceptRegistry): number {
+    let count = 0;
+    for (const departmentId of this.listDepartments()) {
+      const deptPath = join(this.basePath, departmentId);
+      for (const file of this.walkConceptFiles(deptPath)) {
+        let concept: RosettaConcept | null;
+        try {
+          concept = this.parseConceptFile(readFileSync(file, 'utf-8'), basename(file));
+        } catch {
+          continue;
+        }
+        if (!concept || registry.get(concept.id)) continue;
+        try {
+          registry.register(concept);
+          count++;
+        } catch {
+          // Concurrent/duplicate registration -- skip.
+        }
+      }
+    }
+    return count;
+  }
+
+  /**
+   * Recursively collect concept source files under a department's `concepts/`
+   * directory, skipping tests, aggregators, and index barrels.
+   */
+  private walkConceptFiles(deptPath: string): string[] {
+    const conceptsRoot = join(deptPath, 'concepts');
+    const out: string[] = [];
+    if (!existsSync(conceptsRoot)) return out;
+
+    const stack: string[] = [conceptsRoot];
+    while (stack.length > 0) {
+      const dir = stack.pop()!;
+      let entries: ReturnType<typeof readdirSync>;
+      try {
+        entries = readdirSync(dir, { withFileTypes: true });
+      } catch {
+        continue;
+      }
+      for (const entry of entries) {
+        const p = join(dir, entry.name);
+        if (entry.isDirectory()) {
+          stack.push(p);
+        } else if (
+          entry.isFile() &&
+          entry.name.endsWith('.ts') &&
+          !entry.name.endsWith('.test.ts') &&
+          entry.name !== 'index.ts' &&
+          !entry.name.endsWith('-department.ts')
+        ) {
+          out.push(p);
+        }
+      }
+    }
+    out.sort();
+    return out;
   }
 }
