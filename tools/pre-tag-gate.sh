@@ -181,6 +181,18 @@
 # Step overrides (v1.49.653 consolidation; CONCERNS §26):
 #   SC_PRE_TAG_GATE_BYPASS=<csv>   skip these steps entirely
 #   SC_PRE_TAG_GATE_REQUIRE=<csv>  escalate WARN-only steps to BLOCKER
+#   SC_GATE_SKIP_DOCS=1            skip the tibsfox.com docs-site step bucket on a
+#                                  code-only ship (depth-audit, depth-audit-mus-elc,
+#                                  card-template-length, catalog-index,
+#                                  sps-cohort-uniqueness, nasa-canonical-layout,
+#                                  nasa-canonical-sidebar, trip-vocab). Fail-safe:
+#                                  docs steps run by DEFAULT; this only opts a known
+#                                  code-only ship OUT. adoption-freshness is NOT in
+#                                  the bucket (it audits tracked docs/ADOPTION-BASELINE-*
+#                                  telemetry, not the www tree, so it stays core).
+#                                  Item 8: these www-page validators do not gate the
+#                                  npm library and many auto-SKIP on CI; this replaces
+#                                  a long SC_PRE_TAG_GATE_BYPASS CSV with one flag.
 #
 #   step-name vocabulary: the gate's honored bypass tokens are the
 #   gate_bypassed "<token>" calls at each step below. The full list is enumerated
@@ -266,7 +278,27 @@ _ptg_trim() {
   printf '%s' "$s"
 }
 
-# Returns 0 if step is in the bypass set (via CSV or legacy env var).
+# Docs-site (tibsfox.com www-page-walking) step bucket — skipped as a GROUP when
+# SC_GATE_SKIP_DOCS=1 (item 8). These validate generated www pages, not the npm
+# library, and are a LOCAL-only ritual on a code-only ship (many auto-SKIP on CI
+# since www/ + .planning/ are gitignored). adoption-freshness is intentionally
+# EXCLUDED: it audits tracked docs/ADOPTION-BASELINE-* telemetry freshness, not
+# the www tree, so it stays a core gate. This is a group ALIAS over existing
+# gate_bypassed tokens (no new bypass vocabulary), so the SC_PRE_TAG_GATE_BYPASS
+# parity surface is unchanged.
+_PTG_DOCS_TOKENS=(
+  depth-audit
+  depth-audit-mus-elc
+  card-template-length
+  catalog-index
+  sps-cohort-uniqueness
+  nasa-canonical-layout
+  nasa-canonical-sidebar
+  trip-vocab
+)
+
+# Returns 0 if step is in the bypass set (via CSV, legacy env var, or the
+# SC_GATE_SKIP_DOCS docs-bucket group alias).
 # Args: $1 = step name, $2 = optional legacy env var name (for back-compat).
 gate_bypassed() {
   local name="$1"
@@ -283,6 +315,17 @@ gate_bypassed() {
   if [ -n "$legacy_var" ] && [ "${!legacy_var:-0}" = "1" ]; then
     echo "[pre-tag-gate] DEPRECATED: $legacy_var=1 → migrate to SC_PRE_TAG_GATE_BYPASS=$name" >&2
     return 0
+  fi
+  # Fail-safe docs-site group skip: default runs everything; only an explicit
+  # SC_GATE_SKIP_DOCS=1 opts a code-only ship out of the www-page validators.
+  if [ "${SC_GATE_SKIP_DOCS:-0}" = "1" ]; then
+    local doc
+    for doc in "${_PTG_DOCS_TOKENS[@]}"; do
+      if [ "$doc" = "$name" ]; then
+        echo "[pre-tag-gate] SC_GATE_SKIP_DOCS=1 → skipping docs-site step: $name" >&2
+        return 0
+      fi
+    done
   fi
   return 1
 }
