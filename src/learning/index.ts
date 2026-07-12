@@ -8,6 +8,18 @@ export type { DetectorConfig, DetectionResult } from './feedback-detector.js';
 // Refinement
 export { RefinementEngine } from './refinement-engine.js';
 
+// Automatic correction detection + quarantine (item-7)
+export { CorrectionDetector } from './correction-detector.js';
+export type { CorrectionDetectorConfig } from './correction-detector.js';
+export { CorrectionQuarantineStore } from './correction-quarantine.js';
+export type {
+  CorrectionCandidate,
+  CorrectionCandidateInput,
+  CorrectionSignal,
+  CandidateStatus,
+  SkillHint,
+} from '../types/learning.js';
+
 // Drift tracking
 export { DriftTracker, DriftThresholdError } from './drift-tracker.js';
 

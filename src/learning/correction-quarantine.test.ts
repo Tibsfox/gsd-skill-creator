@@ -40,7 +40,10 @@ describe('CorrectionQuarantineStore', () => {
     patternsDir = join(root, 'patterns');
     skillsDir = join(root, 'skills');
     await mkdir(join(skillsDir, 'my-skill'), { recursive: true });
-    await writeFile(join(skillsDir, 'my-skill', 'SKILL.md'), '---\nname: my-skill\n---\nbody\n');
+    await writeFile(
+      join(skillsDir, 'my-skill', 'SKILL.md'),
+      '---\nname: my-skill\ndescription: a test skill used for refinement-isolation checks\n---\nbody\n',
+    );
   });
 
   afterEach(async () => {
