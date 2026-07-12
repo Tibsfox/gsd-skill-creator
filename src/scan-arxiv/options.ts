@@ -103,6 +103,10 @@ export function parseArgv(argv: string[]): ParsedArgv {
         options.noCache = true;
         break;
 
+      case '--audit-gate':
+        options.auditGate = true;
+        break;
+
       case '--output-dir': {
         if (!next || next.startsWith('--')) {
           errors.push(`--output-dir requires a value (e.g. --output-dir .planning/arxiv-may-funnel/runs)`);
@@ -201,6 +205,7 @@ export function resolveOptions(opts: ScanArxivOptions): ResolvedScanArxivOptions
     cliMaxBudgetUsd: opts.cliMaxBudgetUsd ?? 0.20,
     preRankTop: opts.preRankTop ?? 100,
     preRankThreshold: opts.preRankThreshold ?? 0.35,
+    auditGate: opts.auditGate ?? false,
   };
 }
 
@@ -241,6 +246,8 @@ OPTIONS
   --categories <list>     Comma-separated arxiv categories (default: cs.AI,cs.CL,cs.LG,cs.MA,cs.SE)
   --min-score <float>     Drop candidates with aggregate score below this threshold (default: 0.5)
   --no-cache              Bypass arxiv API response cache
+  --audit-gate            Run the integrity-audit gate on queued papers; drop dead/unusable
+                          references from the queue and route them to review-queue.json
   --output-dir <path>     Directory to write run artifacts (default: .planning/arxiv-may-funnel/runs)
   --judge-backend <name>  Judge backend: sdk (uses ANTHROPIC_API_KEY), cli (uses local
                           \`claude\` Code OAuth session), embedding-only (skip LLM; cosine

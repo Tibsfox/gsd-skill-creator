@@ -82,6 +82,7 @@ export interface ScanArxivOptions {
   cliMaxBudgetUsd?: number;        // per-call cap when judgeBackend='cli'; default 0.20
   preRankTop?: number;             // max papers to fine-rank; default 100
   preRankThreshold?: number;       // min cosine sim to pass pre-rank; default 0.35
+  auditGate?: boolean;             // run the integrity-audit gate on queued papers; default false
 }
 
 export interface ResolvedScanArxivOptions {
@@ -96,6 +97,7 @@ export interface ResolvedScanArxivOptions {
   cliMaxBudgetUsd: number;
   preRankTop: number;
   preRankThreshold: number;
+  auditGate?: boolean;
 }
 
 // === Ranker contract ===
@@ -116,6 +118,7 @@ export interface Fetcher {
 export interface BridgeOptions {
   outputDir: string;
   hitlAutoConfirm?: boolean;       // affects only the generated shell script; never the bridge itself
+  auditGate?: boolean;             // when true, blocked papers are dropped from the queue and routed to review-queue.json
 }
 
 export interface BridgeResult {
@@ -123,6 +126,7 @@ export interface BridgeResult {
   shellScriptPath: string;
   reportMdPath: string;
   seenIdsPath: string;
+  reviewQueuePath?: string;        // present only when auditGate ran
 }
 
 // === Constants ===

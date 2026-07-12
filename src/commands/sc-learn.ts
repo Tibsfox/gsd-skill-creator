@@ -38,6 +38,15 @@ import { generateTeam } from '../learn/generators/team-generator.js';
 import { generateLearningReport } from '../learn/report-generator.js';
 import { harvestAddedPrimitives } from '../scan-arxiv/aggregate-generators.js';
 import { isCliEntrypoint } from '../cli/entrypoint-guard.js';
+import {
+  evaluateSourceAudit,
+  type SourceAuditInput,
+  type GateVerdict,
+} from '../citations/generator/ingest-gate.js';
+import {
+  appendReviewItems,
+  verdictToReviewItem,
+} from '../citations/generator/review-queue.js';
 import { readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 
@@ -65,6 +74,20 @@ export interface ScLearnOptions {
    * persists newly-added primitives back to it so re-ingesting dedups (LEARN-2).
    */
   registryPath?: string;
+  /**
+   * Integrity-audit signals for the source (dead reference, low-confidence
+   * resolution, mismatched title, folded-in IntegrityAuditor findings). When
+   * supplied and the verdict is `block`, the merge is skipped and the source is
+   * routed to the review queue instead of being ingested. A `flag` verdict still
+   * merges but is recorded for review.
+   */
+  sourceAudit?: SourceAuditInput;
+  /**
+   * Where to append gated (blocked/flagged) sources for out-of-band human
+   * triage. A plain JSON array (see review-queue.ts). Ignored when no
+   * `sourceAudit` is supplied or when the verdict passes.
+   */
+  reviewQueuePath?: string;
 }
 
 export interface ScLearnResult {
@@ -87,6 +110,11 @@ export interface ScLearnResult {
   dedupActive?: boolean;
   /** True when a non-dry-run persisted newly-added primitives to registryPath (LEARN-2). */
   registryUpdated?: boolean;
+  /**
+   * The integrity-audit gate verdict, when `sourceAudit` was supplied. `block`
+   * means the merge was skipped and the source routed to the review queue.
+   */
+  gate?: GateVerdict;
 }
 
 // === Progress Helper ===
@@ -311,6 +339,52 @@ export async function scLearn(
   // === Stage 6: DEDUP + MERGE ===
   progress(options.onProgress, 'dedup', 'Deduplicating against registry...');
 
+  // Integrity-audit gate: evaluate the source on standalone metadata /
+  // DOI-resolution signals BEFORE merging. A `block` verdict short-circuits the
+  // merge and routes the source to the review queue instead of ingesting it; a
+  // `flag` verdict still merges but is recorded for out-of-band triage.
+  let gate: GateVerdict | undefined;
+  if (options.sourceAudit) {
+    gate = evaluateSourceAudit(options.sourceAudit);
+    if (gate.action !== 'pass' && options.reviewQueuePath) {
+      const item = verdictToReviewItem(gate, 'sc-learn', {
+        source,
+        doi: options.sourceAudit.doi,
+      });
+      if (item) appendReviewItems(options.reviewQueuePath, [item]);
+    }
+    if (gate.action === 'block') {
+      const gateError = `Source blocked by integrity-audit gate: ${gate.reasons.join(', ')}`;
+      progress(options.onProgress, 'gate', gateError);
+      const completedAt = new Date().toISOString();
+      return {
+        success: true,
+        sessionId,
+        report: generateLearningReport({
+          sessionId,
+          sourcePath: source,
+          startedAt,
+          completedAt,
+          provenanceChain: [],
+          mergeActions: [],
+          skillsGenerated: [],
+          agentsGenerated: [],
+          teamsGenerated: [],
+          errors: [gateError],
+          options: {
+            domain: options.domain,
+            depth,
+            dryRun: options.dryRun,
+            scope: options.scope,
+          },
+        }),
+        changeset: null,
+        errors: [gateError],
+        gate,
+      };
+    }
+  }
+
   const mergeEngine: MergeEngine = createMergeEngine(sessionId);
   const changesetManager: ChangesetManager = createChangesetManager(sessionId);
 
@@ -461,6 +535,7 @@ export async function scLearn(
     pendingConflicts,
     dedupActive,
     registryUpdated,
+    gate,
   };
 }
 

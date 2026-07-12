@@ -450,3 +450,65 @@ describe('buildBridge', () => {
     fs.rmSync(queueDir, { recursive: true, force: true });
   });
 });
+
+// ── audit-gate (integrity-audit feedback gate) ─────────────────────────────────
+
+import { auditArxivPaper } from './bridge.js';
+
+describe('buildBridge: --audit-gate', () => {
+  let tmpBase: string;
+
+  beforeEach(() => {
+    tmpBase = makeTmpDir();
+  });
+  afterEach(() => {
+    fs.rmSync(tmpBase, { recursive: true, force: true });
+    vi.restoreAllMocks();
+  });
+
+  it('does not write review-queue.json when the gate is off', async () => {
+    const result = await buildBridge(makeInputs({}, tmpBase));
+    expect(result.reviewQueuePath).toBeUndefined();
+  });
+
+  it('auditArxivPaper flags a malformed id / missing pdf as a dead reference', () => {
+    expect(auditArxivPaper(makePaper('2605.00001')).deadReference).toBe(false);
+    const bad = { ...makePaper('not-an-id'), pdfUrl: '' };
+    expect(auditArxivPaper(bad).deadReference).toBe(true);
+  });
+
+  it('drops a blocked paper from the queue and routes it to review-queue.json', async () => {
+    // One well-formed paper and one with a malformed id (blocks).
+    const ranked = [
+      { paper: makePaper('2605.00001'), relevance: makeScore(0.9) },
+      { paper: { ...makePaper('BOGUS-ID'), pdfUrl: '' }, relevance: makeScore(0.8) },
+    ];
+    const inputs = makeInputs({ ranked }, tmpBase);
+    inputs.bridgeOpts.auditGate = true;
+
+    const result = await buildBridge(inputs);
+
+    // Review queue written.
+    expect(result.reviewQueuePath).toBeDefined();
+    expect(fs.existsSync(result.reviewQueuePath!)).toBe(true);
+    const review = JSON.parse(fs.readFileSync(result.reviewQueuePath!, 'utf-8'));
+    expect(review).toHaveLength(1);
+    expect(review[0].sourceId).toBe('BOGUS-ID');
+    expect(review[0].action).toBe('block');
+    expect(review[0].origin).toBe('arxiv-bridge');
+
+    // Blocked paper removed from the ingest queue; survivor re-ranked to 1.
+    const output = JSON.parse(fs.readFileSync(result.queueJsonPath, 'utf-8'));
+    const ids = output.queue.map((e: { paper: { arxivId: string } }) => e.paper.arxivId);
+    expect(ids).toEqual(['2605.00001']);
+    expect(output.queue[0].rank).toBe(1);
+  });
+
+  it('writes an empty review queue when every paper passes', async () => {
+    const inputs = makeInputs({}, tmpBase);
+    inputs.bridgeOpts.auditGate = true;
+    const result = await buildBridge(inputs);
+    const review = JSON.parse(fs.readFileSync(result.reviewQueuePath!, 'utf-8'));
+    expect(review).toEqual([]);
+  });
+});

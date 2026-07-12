@@ -106,12 +106,15 @@ export async function main(
     options: resolved,
     runtimeMs: Date.now() - start,
     fetchedCount: papers.length,
-    bridgeOpts: { outputDir: resolved.outputDir },
+    bridgeOpts: { outputDir: resolved.outputDir, auditGate: resolved.auditGate },
   });
 
   console.log(`[scan-arxiv] queue:  ${bridge.queueJsonPath}`);
   console.log(`[scan-arxiv] report: ${bridge.reportMdPath}`);
   console.log(`[scan-arxiv] run:    bash ${bridge.shellScriptPath}`);
+  if (bridge.reviewQueuePath) {
+    console.log(`[scan-arxiv] review: ${bridge.reviewQueuePath} (audit-gate)`);
+  }
 
   return 0;
 }

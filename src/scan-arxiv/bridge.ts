@@ -36,6 +36,35 @@ import { renderRunReport } from './report.js';
 import { scLearn } from '../commands/sc-learn.js';
 import { SourceLedger, arxivSourceEntry } from '../source-ledger/source-ledger.js';
 import type { SourceLedgerPort } from '../source-ledger/source-ledger.js';
+import {
+  evaluateSourceAudit,
+  type SourceAuditInput,
+} from '../citations/generator/ingest-gate.js';
+import {
+  appendReviewItems,
+  verdictToReviewItem,
+  type ReviewQueueItem,
+} from '../citations/generator/review-queue.js';
+
+// Well-formed arxiv identifier: YYYY.NNNN(N) with an optional version suffix.
+const VALID_ARXIV_ID = /^\d{4}\.\d{4,5}(v\d+)?$/;
+
+/**
+ * Derive standalone integrity-audit signals from a fetched arxiv paper. A paper
+ * whose canonical id is malformed, or that is missing a fetchable PDF url or a
+ * title, is a dead/unusable reference and blocks; well-formed papers pass.
+ */
+export function auditArxivPaper(paper: ArxivPaper): SourceAuditInput {
+  const deadReference =
+    !VALID_ARXIV_ID.test(paper.arxivId) ||
+    !/^https?:\/\//.test(paper.pdfUrl) ||
+    paper.title.trim().length === 0;
+  return {
+    sourceId: paper.arxivId,
+    deadReference,
+    claimedTitle: paper.title,
+  };
+}
 
 // === BuildBridge inputs ===
 
@@ -136,11 +165,32 @@ export async function buildBridge(
     return a.paper.arxivId.localeCompare(b.paper.arxivId);
   });
   const truncated = filtered.slice(0, options.top);
-  const queue: QueueEntry[] = truncated.map((item, idx) => ({
+  let queue: QueueEntry[] = truncated.map((item, idx) => ({
     paper: item.paper,
     relevance: item.relevance,
     rank: idx + 1,
   }));
+
+  // ── 2b. Integrity-audit gate (opt-in via --audit-gate) ──────────────────
+  // Evaluate each queued paper on standalone metadata signals. Blocked papers
+  // are dropped from the ingest queue and routed to review-queue.json; flagged
+  // papers stay in the queue but are recorded for review. Collected here (pure);
+  // the file is written after the output dir is created below.
+  const reviewItems: ReviewQueueItem[] = [];
+  if (bridgeOpts.auditGate) {
+    const kept: QueueEntry[] = [];
+    for (const entry of queue) {
+      const verdict = evaluateSourceAudit(auditArxivPaper(entry.paper));
+      const item = verdictToReviewItem(verdict, 'arxiv-bridge', {
+        title: entry.paper.title,
+        rank: entry.rank,
+      });
+      if (item) reviewItems.push(item);
+      if (verdict.action !== 'block') kept.push(entry);
+    }
+    // Re-rank the survivors so ranks stay contiguous after any drops.
+    queue = kept.map((entry, idx) => ({ ...entry, rank: idx + 1 }));
+  }
 
   // ── 4. Build RunOutput ──────────────────────────────────────────────────
   // Derive a run-id from current timestamp (no colons in dir name).
@@ -188,6 +238,13 @@ export async function buildBridge(
   const outputDir = path.resolve(bridgeOpts.outputDir, runId);
   fs.mkdirSync(outputDir, { recursive: true });
 
+  // ── 5b. Write the review queue (only when the audit gate ran) ────────────
+  let reviewQueuePath: string | undefined;
+  if (bridgeOpts.auditGate) {
+    reviewQueuePath = path.join(outputDir, 'review-queue.json');
+    appendReviewItems(reviewQueuePath, reviewItems);
+  }
+
   // ── 6. Write queue.json ─────────────────────────────────────────────────
   const queueJsonPath = path.join(outputDir, 'queue.json');
   fs.writeFileSync(queueJsonPath, JSON.stringify(runOutput, null, 2), 'utf-8');
@@ -214,6 +271,7 @@ export async function buildBridge(
     shellScriptPath,
     reportMdPath,
     seenIdsPath,
+    reviewQueuePath,
   };
 }
 
