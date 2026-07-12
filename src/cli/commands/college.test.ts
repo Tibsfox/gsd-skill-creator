@@ -48,6 +48,13 @@ describe('parseCollegeArgs', () => {
     expect(r.help).toBe(true);
   });
 
+  it('captures --json for doctor without consuming a positional', () => {
+    const r = parseCollegeArgs(['doctor', '--json']);
+    expect(r.subcommand).toBe('doctor');
+    expect(r.json).toBe(true);
+    expect(r.positional).toEqual([]);
+  });
+
   it('returns undefined subcommand for an empty slice', () => {
     expect(parseCollegeArgs([]).subcommand).toBeUndefined();
   });
@@ -100,5 +107,24 @@ describe('collegeCommand routing', () => {
     expect(code).toBe(0);
     const printed = spy.mock.calls.map((c) => String(c[0])).join('\n');
     expect(printed).toContain('Departments (');
+  });
+
+  it('doctor audits the real corpus and returns 0', async () => {
+    const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const code = await collegeCommand(['doctor']);
+    expect(code).toBe(0);
+    const printed = spy.mock.calls.map((c) => String(c[0])).join('\n');
+    expect(printed).toContain('Department doctor:');
+  });
+
+  it('doctor --json emits a parseable report with ranked proposals', async () => {
+    const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const code = await collegeCommand(['doctor', '--json']);
+    expect(code).toBe(0);
+    const printed = spy.mock.calls.map((c) => String(c[0])).join('\n');
+    const report = JSON.parse(printed);
+    expect(Array.isArray(report.departments)).toBe(true);
+    expect(Array.isArray(report.proposals)).toBe(true);
+    expect(typeof report.flaggedCount).toBe('number');
   });
 });

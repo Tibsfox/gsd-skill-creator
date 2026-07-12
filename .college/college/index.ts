@@ -22,6 +22,25 @@ export { TrySessionRunner } from './try-session-runner.js';
 // Token counter
 export { countTokens, truncateToTokenBudget } from './token-counter.js';
 
+// Department doctor -- read-only coverage audit
+export {
+  runDepartmentDoctor,
+  buildDoctorReport,
+  diagnoseDepartment,
+  formatDoctorReport,
+  gatherAuditInputs,
+  readReferencesState,
+  DEFAULT_THRESHOLDS,
+} from './department-doctor.js';
+export type {
+  DoctorThresholds,
+  DoctorReport,
+  DepartmentDiagnosis,
+  DepartmentAuditInput,
+  FillProposal,
+  ReferencesState,
+} from './department-doctor.js';
+
 // Types
 export type {
   DepartmentSummary,

@@ -50,6 +50,13 @@ interface CollegeLoaderLike {
   listDepartments(): string[];
   loadSummary(id: string): Promise<DepartmentSummaryLike>;
   loadWing(dept: string, wing: string): Promise<WingContentLike>;
+  getDepartmentPath(id: string): string;
+}
+
+interface DoctorReportLike {
+  flaggedCount: number;
+  departments: unknown[];
+  proposals: unknown[];
 }
 
 interface ConceptRegistryLike {
@@ -95,6 +102,8 @@ interface CollegeBarrel {
       sessionId: string,
     ): Promise<TrySessionRunnerLike>;
   };
+  runDepartmentDoctor(loader: CollegeLoaderLike): Promise<DoctorReportLike>;
+  formatDoctorReport(report: DoctorReportLike): string;
 }
 
 interface RosettaCoreBarrel {
@@ -109,6 +118,7 @@ export interface ParsedCollegeArgs {
   to?: string;
   topic?: string;
   wings?: string;
+  json: boolean;
   help: boolean;
 }
 
@@ -122,11 +132,14 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
   let to: string | undefined;
   let topic: string | undefined;
   let wings: string | undefined;
+  let json = false;
   let help = false;
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
     if (a === '--help' || a === '-h') {
       help = true;
+    } else if (a === '--json') {
+      json = true;
     } else if (a === '--to') {
       to = args[++i];
     } else if (a.startsWith('--to=')) {
@@ -143,7 +156,7 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
       positional.push(a);
     }
   }
-  return { subcommand: positional[0], positional: positional.slice(1), to, topic, wings, help };
+  return { subcommand: positional[0], positional: positional.slice(1), to, topic, wings, json, help };
 }
 
 // ─── Formatting (pure, tested) ──────────────────────────────────────────────
@@ -369,6 +382,23 @@ async function handleScaffoldDepartment(
   }
 }
 
+async function handleDoctor(json: boolean): Promise<number> {
+  try {
+    const { CollegeLoader, runDepartmentDoctor, formatDoctorReport } = await loadCollegeBarrel();
+    const loader = new CollegeLoader(departmentsPath());
+    const report = await runDepartmentDoctor(loader);
+    if (json) {
+      console.log(JSON.stringify(report, null, 2));
+    } else {
+      console.log(formatDoctorReport(report));
+    }
+    return 0;
+  } catch (err) {
+    p.log.error(`Department doctor failed: ${(err as Error).message}`);
+    return 1;
+  }
+}
+
 // ─── Help ───────────────────────────────────────────────────────────────────
 
 function printCollegeHelp(): void {
@@ -382,6 +412,9 @@ function printCollegeHelp(): void {
   p.log.message(`    ${pc.cyan('college try <dept> [session]')}        Run or list try-sessions`);
   p.log.message(
     `    ${pc.cyan('college scaffold-department <slug>')}   Mint a discoverable .college tree (--topic, --wings)`,
+  );
+  p.log.message(
+    `    ${pc.cyan('college doctor [--json]')}             Audit thin/stale department coverage`,
   );
   p.log.message('');
   p.log.message('  Examples:');
@@ -422,6 +455,9 @@ export async function collegeCommand(args: string[]): Promise<number> {
     case 'scaffold-department':
     case 'scaffold-dept':
       return handleScaffoldDepartment(parsed.positional[0], parsed.topic, parsed.wings);
+    case 'doctor':
+    case 'dr':
+      return handleDoctor(parsed.json);
     default:
       p.log.error(`Unknown college subcommand: ${parsed.subcommand}`);
       printCollegeHelp();
