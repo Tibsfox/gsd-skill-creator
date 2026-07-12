@@ -1,6 +1,12 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { FeedbackStore, RefinementEngine } from '../../learning/index.js';
+import {
+  FeedbackStore,
+  RefinementEngine,
+  DriftTracker,
+  VersionManager,
+  ContradictionDetector,
+} from '../../learning/index.js';
 import { createStores } from '../../index.js';
 
 export async function refineCommand(args: string[]): Promise<number> {
@@ -13,7 +19,11 @@ export async function refineCommand(args: string[]): Promise<number> {
 
   const feedbackStore = new FeedbackStore('.planning/patterns');
   const { skillStore } = createStores();
-  const engine = new RefinementEngine(feedbackStore, skillStore);
+  // Wire the cumulative-drift safety valve (LRN-01/LRN-02): without a DriftTracker
+  // the engine's 60% drift halt is inert. VersionManager reads the skill's git history.
+  const driftTracker = new DriftTracker(new VersionManager(), skillStore);
+  const contradictionDetector = new ContradictionDetector(feedbackStore);
+  const engine = new RefinementEngine(feedbackStore, skillStore, undefined, driftTracker);
 
   p.intro(`Checking refinement eligibility for '${skillName}'...`);
 
@@ -45,8 +55,25 @@ export async function refineCommand(args: string[]): Promise<number> {
   }
   p.log.message(`  Confidence: ${(suggestion.confidence * 100).toFixed(0)}%`);
 
+  // Surface contradictory corrections (LRN-03) rather than silently averaging them.
+  const contradictions = await contradictionDetector.detect(skillName);
+  if (contradictions.contradictions.length > 0) {
+    p.log.message('');
+    p.log.warn(pc.bold('Contradictory feedback detected:'));
+    for (const c of contradictions.contradictions) {
+      const tag = c.severity === 'conflict' ? pc.red('conflict') : pc.yellow('warning');
+      p.log.message(`  [${tag}] ${c.description}`);
+    }
+    if (contradictions.hasConflicts) {
+      p.log.warn('These corrections reverse each other — review before applying.');
+    }
+  }
+
   const confirm = await p.confirm({
-    message: 'Apply these refinements?',
+    message: contradictions.hasConflicts
+      ? 'Apply these refinements despite the conflicting feedback?'
+      : 'Apply these refinements?',
+    initialValue: !contradictions.hasConflicts,
   });
 
   if (p.isCancel(confirm) || !confirm) {
