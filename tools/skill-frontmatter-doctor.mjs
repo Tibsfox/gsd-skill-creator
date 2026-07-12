@@ -1,14 +1,20 @@
 #!/usr/bin/env node
-// skill-frontmatter-doctor.mjs — ADVISORY linter for skill/agent frontmatter.
-// Reports the four #1 defect classes and ALWAYS exits 0 (not a gate).
+// skill-frontmatter-doctor.mjs — linter for skill/agent frontmatter.
+// Reports the four #1 defect classes. Advisory (exit 0) by default; pass --strict
+// to exit 1 on any finding (usable as a gate / pre-commit hook). Explicit file
+// path args scope the scan to those files (e.g. staged files); with no file args
+// it scans the whole .claude + project-claude skill/agent corpus.
 //   1. trigger that echoes the description (substring either direction)
 //   2. trigger truncated (ends mid-word / at conjunction / open paren)
 //   3. tools: in YAML-array form (must be a comma-separated string)
 //   4. description length outside 1-1024 chars
 import { readdirSync, statSync, readFileSync, existsSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { join, relative, isAbsolute } from 'node:path';
 
 const ROOT = process.cwd();
+const ARGV = process.argv.slice(2);
+const STRICT = ARGV.includes('--strict');
+const FILE_ARGS = ARGV.filter((a) => !a.startsWith('--'));
 const CONJ = new Set(['and', 'or', 'but', 'with', 'for', 'to', 'of', 'the', 'a', 'an', 'in', 'on']);
 
 function walk(dir, match, out) {
@@ -95,7 +101,13 @@ function badTrigger(trig, desc) {
   return null;
 }
 
-const files = collect();
+// Scope to explicit file args (staged files) when given, else the whole corpus.
+// A file arg is only scanned if it looks like a skill/agent markdown file.
+const files = FILE_ARGS.length > 0
+  ? FILE_ARGS.map((f) => (isAbsolute(f) ? f : join(ROOT, f))).filter(
+      (f) => (f.endsWith('SKILL.md') || (f.endsWith('.md') && f.includes('agents'))) && existsSync(f),
+    )
+  : collect();
 const findings = [];
 
 for (const f of files) {
@@ -121,11 +133,12 @@ for (const f of files) {
   }
 }
 
-console.log(`skill-frontmatter-doctor (advisory): scanned ${files.length} file(s)`);
+console.log(`skill-frontmatter-doctor (${STRICT ? 'strict' : 'advisory'}): scanned ${files.length} file(s)`);
 if (findings.length === 0) {
   console.log('No frontmatter defects detected.');
 } else {
-  for (const [rel, msg] of findings) console.log(`  [warn] ${rel}: ${msg}`);
+  const tag = STRICT ? 'fail' : 'warn';
+  for (const [rel, msg] of findings) console.log(`  [${tag}] ${rel}: ${msg}`);
 }
 console.log(`Summary: ${findings.length} finding(s) across ${files.length} file(s).`);
-process.exit(0);
+process.exit(STRICT && findings.length > 0 ? 1 : 0);

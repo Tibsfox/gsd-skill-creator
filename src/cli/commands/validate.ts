@@ -1,8 +1,9 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
-import { stat as fsStat } from 'fs/promises';
+import { stat as fsStat, readFile } from 'fs/promises';
 import { join, dirname } from 'path';
 import { SkillStore } from '../../storage/skill-store.js';
+import { gateSkillContent } from '../../validation/skill-content-gate.js';
 import { validateSkillNameStrict, classifyFields } from '../../validation/skill-validation.js';
 import { validateSkillDirectory, validateDirectoryNameMatch } from '../../validation/directory-validation.js';
 import { SkillMetadataSchema } from '../../validation/skill-validation.js';
@@ -94,6 +95,21 @@ export async function validateSingleSkill(
       for (const issue of schemaResult.error.issues) {
         errors.push(`${issue.path.join('.')}: ${issue.message}`);
       }
+    }
+
+    // Content security gate — surfaces the blockers the Zod schema does NOT cover:
+    // unsafe YAML tags and secrets in frontmatter (name + desc are already checked
+    // above, so only the frontmatter/secret blockers are added here to avoid dupes).
+    try {
+      const raw = await readFile(format === 'current' ? join(skillPath, 'SKILL.md') : skillPath, 'utf-8');
+      const gate = gateSkillContent({ name: skillName, content: raw });
+      for (const blocker of gate.blockers) {
+        if (blocker.startsWith('frontmatter:') || blocker.startsWith('secret')) {
+          errors.push(`security: ${blocker}`);
+        }
+      }
+    } catch {
+      /* raw read is best-effort; the Zod schema above is the primary gate */
     }
 
     // 5. Field classification (standard vs extension vs unknown)
