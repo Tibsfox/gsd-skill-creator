@@ -18,8 +18,7 @@ use tauri::Emitter;
 use tokio::sync::Mutex;
 
 use crate::security::{
-    AgentIsolationState, EventSeverity, EventSource, SecurityEvent, SecurityState, SecurityStatus,
-    ShieldState,
+    AgentIsolationState, EventSeverity, EventSource, SecurityEvent, SecurityState, ShieldState,
 };
 
 // ============================================================================
@@ -280,6 +279,7 @@ pub async fn agent_verify_isolation(
 ///
 /// Called internally by sandbox, proxy, and staging scanner when a critical
 /// event occurs. NOT a Tauri command -- this is an internal function.
+#[allow(dead_code)] // parked API surface, not currently called under default features
 pub async fn emit_critical_security_event(
     app: &tauri::AppHandle,
     event: &SecurityEvent,

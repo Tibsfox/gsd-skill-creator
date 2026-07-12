@@ -218,7 +218,7 @@ impl DebriefCollector {
             let trimmed = line.trim();
             if trimmed.starts_with(key) || trimmed.starts_with(&format!("{}:", key)) {
                 // Try to extract number after the colon
-                if let Some(value_str) = trimmed.split(':').last() {
+                if let Some(value_str) = trimmed.split(':').next_back() {
                     if let Ok(n) = value_str.trim().parse::<u32>() {
                         return n;
                     }

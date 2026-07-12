@@ -246,8 +246,11 @@ mod tests {
 
     #[test]
     fn default_dimensions_are_positive() {
-        assert!(DEFAULT_WIDTH > 0.0);
-        assert!(DEFAULT_HEIGHT > 0.0);
+        #[allow(clippy::assertions_on_constants)]
+        {
+            assert!(DEFAULT_WIDTH > 0.0);
+            assert!(DEFAULT_HEIGHT > 0.0);
+        }
     }
 
     #[test]

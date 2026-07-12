@@ -113,3 +113,9 @@ impl HygieneChecker {
         }
     }
 }
+
+impl Default for HygieneChecker {
+    fn default() -> Self {
+        Self::new()
+    }
+}

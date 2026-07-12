@@ -6,14 +6,9 @@ use crate::api::client::AnthropicClient;
 ///
 /// Wrapped in `tokio::sync::Mutex<ApiClientState>` for async access.
 /// The client is lazily initialized on first use.
+#[derive(Default)]
 pub struct ApiClientState {
     pub client: Option<AnthropicClient>,
-}
-
-impl Default for ApiClientState {
-    fn default() -> Self {
-        Self { client: None }
-    }
 }
 
 /// Application state managed by Tauri.
@@ -31,12 +26,7 @@ pub struct AppState {}
 ///
 /// Note: `mpsc::Sender<()>` does not implement `Debug`, so we implement
 /// it manually for this struct.
+#[derive(Default)]
 pub struct WatcherState {
     pub shutdown_tx: Option<mpsc::Sender<()>>,
-}
-
-impl Default for WatcherState {
-    fn default() -> Self {
-        Self { shutdown_tx: None }
-    }
 }

@@ -305,10 +305,8 @@ impl SecurityScanner {
                     for file_path in &files {
                         if let Ok(content) = fs::read_to_string(file_path) {
                             // SEC-002 special handling: exclude api.anthropic.com
-                            if pattern.id == "SEC-002" {
-                                if !check_sec_002(&content) {
-                                    continue;
-                                }
+                            if pattern.id == "SEC-002" && !check_sec_002(&content) {
+                                continue;
                             }
 
                             if regex.is_match(&content) {
@@ -430,6 +428,12 @@ impl SecurityScanner {
         } else {
             ScanVerdict::Flagged(findings.to_vec())
         }
+    }
+}
+
+impl Default for SecurityScanner {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

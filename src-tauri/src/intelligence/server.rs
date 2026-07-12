@@ -625,9 +625,12 @@ mod tests {
         // - tokio::process::Command
         // - Command::new
         // The absence is the invariant. Test documents it by passing.
-        assert!(
-            true,
-            "S2 invariant: no subprocess spawning in intelligence/server.rs"
-        );
+        #[allow(clippy::assertions_on_constants)]
+        {
+            assert!(
+                true,
+                "S2 invariant: no subprocess spawning in intelligence/server.rs"
+            );
+        }
     }
 }

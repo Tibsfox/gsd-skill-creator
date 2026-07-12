@@ -17,7 +17,7 @@ use tokio::sync::Mutex;
 
 use crate::memory_arena::{
     tier_kind_from_str, tier_kind_to_str, ArenaConfig, ArenaError, ArenaHandle, ArenaSet,
-    ArenaSetConfig, ChunkId, GcReport, PoolSpec, SweepReport, TierKind, TierPolicy,
+    ArenaSetConfig, ChunkId, PoolSpec, TierPolicy,
 };
 
 // ----------------------------------------------------------------------------
@@ -568,7 +568,9 @@ pub async fn arena_set_list_ids(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::memory_arena::ArenaHandle;
+    // TierKind is used only in these tests; scoping it here (not at module level)
+    // keeps the non-test lib build free of an unused-import warning.
+    use crate::memory_arena::{ArenaHandle, TierKind};
     use tempfile::tempdir;
 
     /// Build an ArenaHandle directly (without going through the Tauri state)

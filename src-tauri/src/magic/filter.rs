@@ -5,16 +5,9 @@
 
 use super::types::{MagicLevel, EVENT_VISIBILITY};
 
+#[derive(Default)]
 pub struct MagicFilter {
     level: MagicLevel,
-}
-
-impl Default for MagicFilter {
-    fn default() -> Self {
-        MagicFilter {
-            level: MagicLevel::default(),
-        }
-    }
 }
 
 impl MagicFilter {

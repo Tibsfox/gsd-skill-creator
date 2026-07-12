@@ -195,6 +195,6 @@ impl ServiceLauncher {
     /// Check if a service is marked as optional.
     /// v1.49.7 (PR #24 @PatrickRobotham): supports graceful degradation.
     fn is_optional(&self, id: &ServiceId) -> bool {
-        self.find_service_def(id).map_or(false, |def| def.optional)
+        self.find_service_def(id).is_some_and(|def| def.optional)
     }
 }

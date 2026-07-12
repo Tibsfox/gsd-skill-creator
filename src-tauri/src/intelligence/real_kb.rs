@@ -235,7 +235,7 @@ fn parse_move_kind(s: &str) -> MoveKind {
 /// identified by searching across all registered projects.
 ///
 /// Phase 826 / Carryover 1: mutation paths wired end-to-end.
-
+///
 /// Search all project DBs for a meeting row; return (conn, project_id).
 fn find_project_conn_for_meeting(
     delegate: &RealKbDelegate,
@@ -1003,8 +1003,8 @@ impl KbDelegate for RealKbDelegate {
 
         let bundle_id = meeting_id.clone();
         let suggested_order = ids.clone();
-        let parallelizable_json =
-            serde_json::to_string(&[ids.clone()]).unwrap_or_else(|_| "[[]]".to_string());
+        let parallelizable_json = serde_json::to_string(std::slice::from_ref(&ids))
+            .unwrap_or_else(|_| "[[]]".to_string());
         let decisions_json = serde_json::to_string(&ids).unwrap_or_else(|_| "[]".to_string());
 
         // Upsert bundle row (bundles share the meeting_id).
@@ -1060,8 +1060,7 @@ impl KbDelegate for RealKbDelegate {
                     let name = entry.file_name().to_string_lossy().to_string();
                     if name.contains(&meeting_id) && name.ends_with(".md") {
                         return std::fs::read_to_string(entry.path())
-                            .map_err(|e| format!("read meeting record: {e}"))
-                            .map(|s| s);
+                            .map_err(|e| format!("read meeting record: {e}"));
                     }
                 }
             }
@@ -1429,6 +1428,9 @@ mod tests {
         // This module reads SQLite directly via rusqlite (bundled); zero
         // process::Command / tokio::process invocations. The absence is the
         // invariant.
-        assert!(true, "S2 invariant: no subprocess spawn in real_kb.rs");
+        #[allow(clippy::assertions_on_constants)]
+        {
+            assert!(true, "S2 invariant: no subprocess spawn in real_kb.rs");
+        }
     }
 }

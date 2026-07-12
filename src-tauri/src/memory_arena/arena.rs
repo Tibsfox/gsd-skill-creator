@@ -292,6 +292,7 @@ impl Arena {
             .create(true)
             .read(true)
             .write(true)
+            .truncate(false)
             .open(&path)?;
         file.set_len(total_bytes as u64)?;
         file.sync_all()?;
@@ -376,6 +377,7 @@ impl Arena {
             .create(true)
             .read(true)
             .write(true)
+            .truncate(false)
             .open(&path)?;
 
         // Resize to exact total_bytes. If the file was smaller, new bytes
@@ -437,6 +439,9 @@ impl Arena {
         let mut next_chunk_id: u64 = 1;
 
         // Walk every slot's header. Bytes only touch [start..start+HEADER_SIZE].
+        // slot_idx is used both as a storage byte-offset multiplier and as a
+        // `slots` index, so an iterator rewrite is more awkward than the loop.
+        #[allow(clippy::needless_range_loop)]
         for slot_idx in 0..num_slots {
             let start = slot_idx * slot_size;
             let header_bytes = &storage[start..start + HEADER_SIZE];

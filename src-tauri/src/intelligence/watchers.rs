@@ -169,7 +169,7 @@ fn chrono_or_stub() -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::io::Write;
+
     use tempfile::TempDir;
 
     fn make_status_event(request_id: &str) -> StatusUpdateEvent {
@@ -245,7 +245,7 @@ mod tests {
     #[test]
     fn watcher_handle_stop_is_idempotent() {
         let tmp = TempDir::new().unwrap();
-        let watch_path = tmp.path().to_path_buf();
+        let _watch_path = tmp.path().to_path_buf();
         // We can't easily create a real AppHandle in unit tests.
         // Verify only that the shutdown channel works.
         let (shutdown_tx, shutdown_rx) = mpsc::channel::<()>();

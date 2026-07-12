@@ -417,6 +417,7 @@ fn load_from_macos_keychain(service: &str, _account: &str) -> Result<SecretStrin
 }
 
 #[cfg(not(all(target_os = "macos", feature = "macos-keychain")))]
+#[allow(dead_code)] // macOS-only helper; unused on non-macOS build targets
 fn load_from_macos_keychain(_service: &str, _account: &str) -> Result<SecretString, ProxyError> {
     Err(ProxyError::KeystoreError(
         "macOS Keychain not available (feature not enabled)".to_string(),

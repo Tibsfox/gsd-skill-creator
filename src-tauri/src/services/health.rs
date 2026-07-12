@@ -197,3 +197,9 @@ impl HealthMonitor {
         }
     }
 }
+
+impl Default for HealthMonitor {
+    fn default() -> Self {
+        Self::new()
+    }
+}

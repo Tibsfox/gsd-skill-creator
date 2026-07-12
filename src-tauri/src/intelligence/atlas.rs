@@ -771,7 +771,7 @@ fn row_to_mission_provenance(row: &rusqlite::Row<'_>) -> rusqlite::Result<AtlasM
 
 /// Render a SQL `IN (?, ?, …)` placeholder list of length N.
 fn placeholders(n: usize) -> String {
-    std::iter::repeat("?").take(n).collect::<Vec<_>>().join(",")
+    std::iter::repeat_n("?", n).collect::<Vec<_>>().join(",")
 }
 
 impl AtlasKbDelegate for SqliteAtlasKbDelegate {
@@ -1555,10 +1555,13 @@ mod tests {
         //   std::process::Command, tokio::process::Command, Command::new
         // Subprocess spawning lives in intelligence/atlas_sidecar.rs (H1).
         // Test documents the invariant by passing.
-        assert!(
-            true,
-            "S2 invariant: subprocess spawning delegated to atlas_sidecar.rs, not atlas.rs"
-        );
+        #[allow(clippy::assertions_on_constants)]
+        {
+            assert!(
+                true,
+                "S2 invariant: subprocess spawning delegated to atlas_sidecar.rs, not atlas.rs"
+            );
+        }
     }
 
     #[test]

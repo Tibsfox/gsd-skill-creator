@@ -12,9 +12,11 @@ use std::sync::LazyLock;
 /// Lower values = less output. Serializes as integer 1-5.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(u8)]
+#[derive(Default)]
 pub enum MagicLevel {
     FullMagic = 1,
     Guided = 2,
+    #[default]
     Annotated = 3,
     Verbose = 4,
     NoMagic = 5,
@@ -41,12 +43,6 @@ impl<'de> Deserialize<'de> for MagicLevel {
                 val
             ))),
         }
-    }
-}
-
-impl Default for MagicLevel {
-    fn default() -> Self {
-        MagicLevel::Annotated
     }
 }
 

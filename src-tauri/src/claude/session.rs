@@ -45,6 +45,7 @@ impl ClaudeSessionManager {
     }
 
     /// Get mutable reference to session by ID.
+    #[allow(dead_code)] // parked API surface, not currently called
     pub fn get_mut(&mut self, id: &str) -> Option<&mut ClaudeSessionInfo> {
         self.sessions.get_mut(id)
     }
@@ -67,6 +68,7 @@ impl ClaudeSessionManager {
     }
 
     /// Update last_activity timestamp.
+    #[allow(dead_code)] // parked API surface, not currently called
     pub fn update_activity(&mut self, id: &str, timestamp: u64) {
         if let Some(session) = self.sessions.get_mut(id) {
             session.last_activity = timestamp;

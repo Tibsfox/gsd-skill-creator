@@ -111,7 +111,7 @@ fn test_topological_order_dependencies_before_dependents() {
             let dep_idx = order
                 .iter()
                 .position(|o| o == dep)
-                .expect(&format!("dependency {:?} not found in order", dep));
+                .unwrap_or_else(|| panic!("dependency {:?} not found in order", dep));
             assert!(
                 dep_idx < idx,
                 "{:?} (pos {}) has dependency {:?} (pos {}) which should come before it",

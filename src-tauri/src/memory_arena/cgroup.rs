@@ -13,7 +13,6 @@
 //! the swap tier (managed by us, not the kernel).
 
 use std::fs;
-use std::io;
 use std::path::{Path, PathBuf};
 
 use crate::memory_arena::error::{ArenaError, ArenaResult};
@@ -209,8 +208,8 @@ fn read_self_cgroup_path() -> ArenaResult<String> {
 
     // cgroup v2 format: "0::<path>\n"
     for line in content.lines() {
-        if line.starts_with("0::") {
-            return Ok(line[3..].to_string());
+        if let Some(stripped) = line.strip_prefix("0::") {
+            return Ok(stripped.to_string());
         }
     }
 

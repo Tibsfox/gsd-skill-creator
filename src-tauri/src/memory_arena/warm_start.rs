@@ -44,6 +44,10 @@ pub trait ColdSource: Send + Sync {
     fn fetch(&self, tier: TierKind, id: ChunkId) -> ArenaResult<Option<Vec<u8>>>;
 }
 
+/// Boxed, pinned future returned by `AsyncColdSource::fetch`.
+type ColdFetchFuture<'a> =
+    std::pin::Pin<Box<dyn std::future::Future<Output = ArenaResult<Option<Vec<u8>>>> + Send + 'a>>;
+
 /// Async version of `ColdSource`. Uses `Pin<Box<dyn Future>>` return type
 /// for object safety (no `async fn` in traits without `async-trait`).
 ///
@@ -51,25 +55,13 @@ pub trait ColdSource: Send + Sync {
 /// `Box<dyn AsyncColdSource>`.
 pub trait AsyncColdSource: Send + Sync {
     /// Fetch the original payload for a given `(tier, id)` asynchronously.
-    fn fetch(
-        &self,
-        tier: TierKind,
-        id: ChunkId,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = ArenaResult<Option<Vec<u8>>>> + Send + '_>,
-    >;
+    fn fetch(&self, tier: TierKind, id: ChunkId) -> ColdFetchFuture<'_>;
 }
 
 /// Blanket: every sync `ColdSource` is also an `AsyncColdSource` (wraps
 /// the sync call in an immediately-ready future).
 impl<T: ColdSource> AsyncColdSource for T {
-    fn fetch(
-        &self,
-        tier: TierKind,
-        id: ChunkId,
-    ) -> std::pin::Pin<
-        Box<dyn std::future::Future<Output = ArenaResult<Option<Vec<u8>>>> + Send + '_>,
-    > {
+    fn fetch(&self, tier: TierKind, id: ChunkId) -> ColdFetchFuture<'_> {
         let result = ColdSource::fetch(self, tier, id);
         Box::pin(async move { result })
     }
@@ -136,20 +128,12 @@ pub struct WarmStartReport {
 /// preserved: every occupied slot is walked, its full header + checksum
 /// is validated via `Chunk::deserialize`, and corrupt slots are routed
 /// through `ColdSource` for rebuild.
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct WarmStartConfig {
     /// If true, validate every chunk's payload checksum during open.
     /// If false (default), walk only headers and defer payload
     /// validation to caller-driven `validate_chunk` / `get_chunk` calls.
     pub eager_validation: bool,
-}
-
-impl Default for WarmStartConfig {
-    fn default() -> Self {
-        Self {
-            eager_validation: false,
-        }
-    }
 }
 
 /// Per-invocation stats for `WarmStart::open_with_config`. Returned
@@ -323,6 +307,8 @@ fn recover_pool(
     let storage = arena.storage();
 
     enum Decision {
+        #[allow(dead_code)]
+        // documents the "no chunk at this slot" case; not constructed on this path
         Empty,
         Valid(ChunkId),
         Corrupt(ChunkId),

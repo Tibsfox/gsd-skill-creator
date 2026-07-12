@@ -259,9 +259,10 @@ impl ChunkHeader {
 /// others (Slab, Buddy, TLSF) are available for workloads that benefit
 /// from different allocation patterns (e.g. TLSF for O(1) bitmap lookup
 /// under high churn).
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
 pub enum AllocatorSelector {
     /// Fixed-slot stack allocator. O(1) alloc/free. Default.
+    #[default]
     FixedSlot,
     /// Slab allocator with size classes.
     Slab,
@@ -269,12 +270,6 @@ pub enum AllocatorSelector {
     Buddy,
     /// Two-level segregated fit. O(1) bitmap search.
     Tlsf,
-}
-
-impl Default for AllocatorSelector {
-    fn default() -> Self {
-        AllocatorSelector::FixedSlot
-    }
 }
 
 /// Eviction policy selector for a tier pool. The actual eviction driver
@@ -454,6 +449,12 @@ pub struct SweepReport {
     pub skipped_cooldown: u32,
     pub skipped_already_fading: u32,
     pub errors: Vec<(ChunkId, TierKind, crate::memory_arena::error::ArenaError)>,
+}
+
+impl Default for SweepReport {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl SweepReport {

@@ -6,7 +6,7 @@ fn test_new_launcher_all_services_offline() {
     let launcher = ServiceLauncher::new_without_emitter();
     let states = launcher.get_all_states();
     assert_eq!(states.len(), 7);
-    for (_id, state) in states {
+    for state in states.values() {
         assert_eq!(*state, ServiceState::Offline);
     }
 }

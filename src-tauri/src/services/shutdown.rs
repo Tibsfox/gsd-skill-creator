@@ -211,3 +211,9 @@ impl ShutdownManager {
         ))
     }
 }
+
+impl Default for ShutdownManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}

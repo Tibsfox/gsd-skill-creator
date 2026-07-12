@@ -32,10 +32,7 @@ const ALLOWED_SHELLS: &[&str] = &[
 fn shell_allowed(shell_path: &str) -> bool {
     // Split on both POSIX `/` and Windows `\` so that the basename check
     // works regardless of which platform we're compiled for.
-    let basename = shell_path
-        .rsplit(|c| c == '/' || c == '\\')
-        .next()
-        .unwrap_or(shell_path);
+    let basename = shell_path.rsplit(['/', '\\']).next().unwrap_or(shell_path);
     if basename.is_empty() {
         return false;
     }
@@ -155,10 +152,8 @@ pub async fn pty_open(
 
                     let (valid, rest) = split_utf8_safe(data);
 
-                    if !valid.is_empty() {
-                        if on_data.send(valid.to_vec()).is_err() {
-                            break; // Channel closed (webview disconnected)
-                        }
+                    if !valid.is_empty() && on_data.send(valid.to_vec()).is_err() {
+                        break; // Channel closed (webview disconnected)
                     }
 
                     // Store remainder for next iteration

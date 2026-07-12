@@ -141,7 +141,7 @@ mod tests {
         // Paused: last activity 15 seconds ago
         let elapsed = now.saturating_sub(985);
         assert_eq!(elapsed, 15);
-        assert!(elapsed >= 5 && elapsed < 30); // Paused
+        assert!((5..30).contains(&elapsed)); // Paused
 
         // Idle: last activity 60 seconds ago
         let elapsed = now.saturating_sub(940);

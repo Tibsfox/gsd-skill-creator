@@ -7,7 +7,7 @@
 use std::sync::Arc;
 
 use crate::security::proxy::{CredentialProxy, CredentialType, ProxiedRequest, SecretString};
-use crate::security::proxy_server::{ProxyHealthStatus, ProxyServer};
+use crate::security::proxy_server::ProxyServer;
 
 /// Build a test ProxyServer with one domain + credential configured.
 fn build_test_server() -> ProxyServer {
@@ -120,8 +120,10 @@ async fn health_endpoint_returns_status() {
     let server = build_test_server();
     let health = server.health().await;
     assert_eq!(health.status, "running");
-    assert!(health.uptime_s == 0 || health.uptime_s >= 0);
-    assert!(health.requests_total >= 0);
+    assert_eq!(
+        health.requests_total, 0,
+        "a freshly built server has served no requests"
+    );
     assert!(
         health
             .domains_active

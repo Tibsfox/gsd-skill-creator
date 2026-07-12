@@ -1714,7 +1714,7 @@ mod list_tests {
     fn lru_index_property_matches_naive_reference_10k_ops() {
         let mut lru = LruIndex::new();
         let mut reference: VecDeque<ChunkId> = VecDeque::new();
-        let mut rng = Lcg::new(0xDEADBEEF_CAFE_1234);
+        let mut rng = Lcg::new(0xDEAD_BEEF_CAFE_1234);
 
         // Keep a small ID pool so inserts/removes actually hit each other.
         const ID_POOL: u64 = 32;
@@ -2473,7 +2473,7 @@ mod warm_start_fault_tests {
                 .append_alloc_for_pool(
                     TierKind::Hot,
                     ChunkId::new(i),
-                    &mk(i, TierKind::Hot, vec![(i as u8); 48]),
+                    &mk(i, TierKind::Hot, vec![i as u8; 48]),
                 )
                 .unwrap();
         }
@@ -2482,7 +2482,7 @@ mod warm_start_fault_tests {
                 .append_alloc_for_pool(
                     TierKind::Warm,
                     ChunkId::new(i),
-                    &mk(i, TierKind::Warm, vec![(i as u8 + 20); 48]),
+                    &mk(i, TierKind::Warm, vec![i as u8 + 20; 48]),
                 )
                 .unwrap();
         }
@@ -2679,6 +2679,7 @@ mod open_lazy_tests {
             let mut f = OpenOptions::new()
                 .create(true)
                 .write(true)
+                .truncate(true)
                 .open(&path)
                 .unwrap();
             f.write_all(&vec![0u8; total_bytes]).unwrap();
@@ -2726,9 +2727,8 @@ mod validate_chunk_tests {
         let mut arena = Arena::new(ArenaConfig::test(), 4).unwrap();
         let id = arena.alloc_chunk(TierKind::Hot, vec![0xAA; 256]).unwrap();
         // Flip one bit deep in the payload via raw storage mutation.
-        let slot_size = arena.config().chunk_size as usize;
-        // Chunk lives in slot 0 because it's the first alloc.
-        let target_offset = 0 * slot_size + HEADER_SIZE + 50;
+        // Chunk lives in slot 0 (first alloc), so its payload base offset is 0.
+        let target_offset = HEADER_SIZE + 50;
         arena.storage_mut()[target_offset] ^= 0x01;
 
         let result = arena.validate_chunk(id);
@@ -2891,7 +2891,7 @@ mod journal_dispatch_tests {
                     pool_id, chunk_id, ..
                 } => {
                     assert_eq!(pool_id, TierKind::Hot);
-                    assert!(matches!(chunk_id.as_u64(), 1 | 2 | 3));
+                    assert!(matches!(chunk_id.as_u64(), 1..=3));
                     seen_allocs += 1;
                 }
                 JournalOp::Free { pool_id, chunk_id } => {
@@ -3095,7 +3095,7 @@ mod journal_dispatch_tests {
                 .append_alloc_for_pool(
                     TierKind::Hot,
                     ChunkId::new(i),
-                    &mk_chunk_bytes(i, TierKind::Hot, vec![(i as u8); 24]),
+                    &mk_chunk_bytes(i, TierKind::Hot, vec![i as u8; 24]),
                 )
                 .unwrap();
         }
@@ -3104,7 +3104,7 @@ mod journal_dispatch_tests {
                 .append_alloc_for_pool(
                     TierKind::Warm,
                     ChunkId::new(i),
-                    &mk_chunk_bytes(i, TierKind::Warm, vec![(i as u8 + 10); 24]),
+                    &mk_chunk_bytes(i, TierKind::Warm, vec![i as u8 + 10; 24]),
                 )
                 .unwrap();
         }
@@ -3310,7 +3310,7 @@ mod journal_dispatch_tests {
                 .append_alloc_for_pool(
                     TierKind::Hot,
                     ChunkId::new(i),
-                    &mk_chunk_bytes(i, TierKind::Hot, vec![(i as u8); 16]),
+                    &mk_chunk_bytes(i, TierKind::Hot, vec![i as u8; 16]),
                 )
                 .unwrap();
         }
@@ -4250,7 +4250,7 @@ mod m3_hysteresis {
     // thread-local, which means the clock stays scoped to the thread
     // the test is running on.
     thread_local! {
-        static FAKE_NOW: Cell<u64> = Cell::new(1_000_000_000_000);
+        static FAKE_NOW: Cell<u64> = const { Cell::new(1_000_000_000_000) };
     }
 
     fn set_fake_now(ns: u64) {
@@ -4729,7 +4729,7 @@ mod m4_begin_promote {
     use tempfile::tempdir;
 
     thread_local! {
-        static FAKE_NOW: Cell<u64> = Cell::new(1_000_000_000_000);
+        static FAKE_NOW: Cell<u64> = const { Cell::new(1_000_000_000_000) };
     }
 
     fn set_fake_now(ns: u64) {
@@ -5033,7 +5033,7 @@ mod m4_complete_abort_promote {
     use tempfile::tempdir;
 
     thread_local! {
-        static FAKE_NOW: Cell<u64> = Cell::new(1_000_000_000_000);
+        static FAKE_NOW: Cell<u64> = const { Cell::new(1_000_000_000_000) };
     }
 
     fn set_fake_now(ns: u64) {
@@ -7137,11 +7137,8 @@ mod buddy_allocator_tests {
         let mut buddy = make_buddy();
         // Alloc all min-blocks
         let mut offsets = Vec::new();
-        loop {
-            match buddy.alloc(MIN_BLOCK) {
-                Ok((off, _)) => offsets.push(off),
-                Err(_) => break,
-            }
+        while let Ok((off, _)) = buddy.alloc(MIN_BLOCK) {
+            offsets.push(off);
         }
         assert_eq!(offsets.len(), TOTAL / MIN_BLOCK);
         // Free all
@@ -8039,7 +8036,7 @@ mod m9_get_chunk_hot_tests {
 
 mod m10_registry_persistence_tests {
     use super::*;
-    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, CrossfadeHandle, PoolSpec};
+    use crate::memory_arena::pool::{ArenaSet, ArenaSetConfig, PoolSpec};
     use crate::memory_arena::warm_start::{InMemoryColdSource, WarmStart};
 
     fn two_tier_set(dir: &std::path::Path) -> ArenaSet {
@@ -8070,7 +8067,7 @@ mod m10_registry_persistence_tests {
         // Alloc a chunk in Hot and begin demote to Warm (don't complete).
         let pool = set.pool_mut(TierKind::Hot).expect("hot");
         let id = pool.alloc(vec![42; 64]).expect("alloc");
-        let handle = set
+        let _handle = set
             .begin_demote(TierKind::Hot, id, TierKind::Warm)
             .expect("begin_demote");
 
@@ -8270,8 +8267,7 @@ mod m10_orphan_gc_tests {
 
 mod m11_sync_allocator_tests {
     use crate::memory_arena::allocator::{
-        BuddyAllocator, ChunkAllocator, FixedSlotAllocator, SlabAllocator, SlabConfig,
-        SyncAllocator, TlsfAllocator,
+        BuddyAllocator, FixedSlotAllocator, SyncAllocator, TlsfAllocator,
     };
 
     #[test]

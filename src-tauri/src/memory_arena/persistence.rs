@@ -458,6 +458,7 @@ impl JournalWriter {
             .create(true)
             .read(true)
             .write(true)
+            .truncate(false)
             .open(&path)?;
 
         let mut file = BufWriter::new(file);

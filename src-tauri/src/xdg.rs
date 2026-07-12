@@ -53,7 +53,6 @@ pub fn runtime_dir() -> Option<PathBuf> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::path::Path;
 
     #[test]
     fn config_dir_returns_some() {

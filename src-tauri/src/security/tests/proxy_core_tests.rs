@@ -125,7 +125,10 @@ fn proxy_has_no_credential_getter() {
     // Only allowed operations: is_allowed, inject_credential, configure_ssh_forwarding
     let _ = proxy.is_allowed("test.com");
     // If compilation fails due to missing method, the type system is enforcing the constraint
-    assert!(true, "No getter methods exist on CredentialProxy");
+    #[allow(clippy::assertions_on_constants)]
+    {
+        assert!(true, "No getter methods exist on CredentialProxy");
+    }
 }
 
 // ============================================================================

@@ -8,7 +8,7 @@
 //! - Error messages never contain the API key
 //! - The key is injected into the x-api-key header only in send_message
 
-use crate::api::keystore::{KeyStore, KeyStoreError};
+use crate::api::keystore::KeyStore;
 use crate::api::retry::RetryPolicy;
 use crate::api::streaming::{self, MessageResponse};
 

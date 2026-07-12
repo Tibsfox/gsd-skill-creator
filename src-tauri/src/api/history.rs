@@ -137,7 +137,7 @@ impl ConversationHistory {
             }
         }
         // Sort by modification time, most recent first
-        entries.sort_by(|a, b| b.1.cmp(&a.1));
+        entries.sort_by_key(|b| std::cmp::Reverse(b.1));
         Ok(entries.into_iter().map(|(p, _)| p).collect())
     }
 
@@ -205,7 +205,7 @@ impl ConversationHistory {
     }
 
     fn is_leap(year: u64) -> bool {
-        (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
+        (year.is_multiple_of(4) && !year.is_multiple_of(100)) || year.is_multiple_of(400)
     }
 
     /// Generate a filename from a started_at timestamp.

@@ -1,6 +1,6 @@
 //! Tests for the SSE parser -- all Anthropic event types.
 
-use crate::api::streaming::{parse_sse_event, process_sse_stream, SseEvent, SseParseError};
+use crate::api::streaming::{parse_sse_event, process_sse_stream, SseEvent};
 
 #[test]
 fn parse_content_block_delta() {

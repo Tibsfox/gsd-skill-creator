@@ -219,6 +219,7 @@ struct SizeClass {
 #[derive(Debug)]
 pub struct SlabAllocator {
     classes: Vec<SizeClass>,
+    #[allow(dead_code)] // retained for Debug/diagnostics; not read in current paths
     total_capacity: usize,
 }
 
@@ -553,6 +554,7 @@ pub struct TlsfAllocator {
     /// predecessor lookup during coalescence.
     blocks: BTreeMap<usize, (usize, bool)>,
     sl_count: usize,
+    #[allow(dead_code)] // retained for Debug/diagnostics; not read in current paths
     sl_count_log2: u32,
     min_block: usize,
     total_capacity: usize,
@@ -628,11 +630,9 @@ impl TlsfAllocator {
 
         // sl = linear subdivision within the fl class
         let fl_size = 1usize << (log2_min + fl);
-        let sl = if fl_size == 0 {
-            0
-        } else {
-            ((size - fl_size) * self.sl_count) / fl_size
-        };
+        let sl = ((size - fl_size) * self.sl_count)
+            .checked_div(fl_size)
+            .unwrap_or(0);
         let sl = sl.min(self.sl_count - 1);
 
         (fl, sl)
@@ -915,6 +915,7 @@ impl ChunkAllocator for AllocatorKind {
 
 impl AllocatorKind {
     /// Downcast to FixedSlotAllocator, if this is the FixedSlot variant.
+    #[allow(dead_code)] // parked API surface, not currently called
     pub(crate) fn as_fixed_slot(&self) -> Option<&FixedSlotAllocator> {
         match self {
             AllocatorKind::FixedSlot(a) => Some(a),
@@ -923,6 +924,7 @@ impl AllocatorKind {
     }
 
     /// Mutable downcast to FixedSlotAllocator.
+    #[allow(dead_code)] // parked API surface, not currently called
     pub(crate) fn as_fixed_slot_mut(&mut self) -> Option<&mut FixedSlotAllocator> {
         match self {
             AllocatorKind::FixedSlot(a) => Some(a),

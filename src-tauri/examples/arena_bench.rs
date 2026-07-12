@@ -35,10 +35,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!();
 
     // Bench config: 1 MiB slots, enough for our largest test payload.
-    let mut config = ArenaConfig::default();
-    config.chunk_size = 1024 * 1024;
-    config.min_chunk_size = 64 * 1024;
-    config.max_chunk_size = 4 * 1024 * 1024;
+    let config = ArenaConfig {
+        chunk_size: 1024 * 1024,
+        min_chunk_size: 64 * 1024,
+        max_chunk_size: 4 * 1024 * 1024,
+        ..Default::default()
+    };
 
     // 2048 slots × 1 MiB = 2 GiB total per arena. Room for MEASURE_ITERS
     // allocations plus a safety margin.

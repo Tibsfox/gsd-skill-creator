@@ -198,7 +198,7 @@ pub fn encrypt_with_passphrase(
     // Wrap derived key as age passphrase (hex-encoded for stability across
     // any internal Unicode handling).
     let hex_key = hex_encode(&derived);
-    let age_passphrase = SecretString::new(hex_key.into());
+    let age_passphrase = SecretString::new(hex_key);
 
     let encryptor = age::Encryptor::with_user_passphrase(age_passphrase);
     let mut encrypted = Vec::new();
@@ -243,7 +243,7 @@ pub fn decrypt_with_passphrase(
 
     let derived = derive_key(passphrase, salt)?;
     let hex_key = hex_encode(&derived);
-    let age_passphrase = SecretString::new(hex_key.into());
+    let age_passphrase = SecretString::new(hex_key);
 
     let decryptor = match age::Decryptor::new(body).map_err(|_| EncryptionError::Decrypt)? {
         age::Decryptor::Passphrase(d) => d,

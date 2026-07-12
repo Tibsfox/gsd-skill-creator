@@ -6,7 +6,7 @@
 
 use serde::{Deserialize, Serialize};
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use uuid::Uuid;
 
 use super::hygiene::HygieneStatus;
@@ -144,8 +144,7 @@ impl OrchestratorNotifier {
         };
 
         // Serialize and write
-        let json = serde_json::to_string_pretty(&notification)
-            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+        let json = serde_json::to_string_pretty(&notification).map_err(std::io::Error::other)?;
 
         let file_path = self.inbox_path.join(format!("{}.json", notification_id));
         fs::write(&file_path, json)?;

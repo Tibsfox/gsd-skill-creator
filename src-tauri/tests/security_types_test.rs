@@ -10,7 +10,6 @@ use gsd_os_lib::security::types::{
     AgentIsolationState, AgentType, CredentialSource, CredentialType, DomainCredential,
     EventSeverity, EventSource, Filesystem, Network, ProxyConfig, SandboxProfile, SecurityEvent,
 };
-use serde_json;
 
 // ---------------------------------------------------------------------------
 // Helper fixtures

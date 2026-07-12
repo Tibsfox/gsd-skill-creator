@@ -1335,7 +1335,7 @@ impl ArenaSet {
 
         // Collect configured tiers sorted by heat_index descending (hottest first).
         let mut tiers: Vec<TierKind> = self.pools.keys().copied().collect();
-        tiers.sort_by(|a, b| b.heat_index().cmp(&a.heat_index()));
+        tiers.sort_by_key(|b| std::cmp::Reverse(b.heat_index()));
 
         for tier in tiers {
             // Snapshot chunk ids to avoid borrow conflicts on &mut self.
@@ -1355,7 +1355,7 @@ impl ArenaSet {
                 if !self
                     .pools
                     .get(&tier)
-                    .map_or(false, |p| p.arena().contains(id))
+                    .is_some_and(|p| p.arena().contains(id))
                 {
                     continue;
                 }
@@ -1456,7 +1456,7 @@ impl ArenaSet {
                         if !self
                             .pools
                             .get(&tier)
-                            .map_or(false, |p| p.arena().contains(id))
+                            .is_some_and(|p| p.arena().contains(id))
                         {
                             continue;
                         }
@@ -1592,14 +1592,14 @@ impl ArenaSet {
             let source_exists = self
                 .pools
                 .get(&handle.source_tier)
-                .map_or(false, |p| p.arena().contains(handle.source));
+                .is_some_and(|p| p.arena().contains(handle.source));
 
             if source_exists {
                 let is_fading = self
                     .pools
                     .get(&handle.source_tier)
                     .and_then(|p| p.arena().chunk_state(handle.source).ok())
-                    .map_or(false, |s| s == ChunkState::FadingOut);
+                    == Some(ChunkState::FadingOut);
 
                 if is_fading {
                     if let Some(pool) = self.pools.get_mut(&handle.source_tier) {
