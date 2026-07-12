@@ -1,5 +1,7 @@
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
+import { homedir } from 'node:os';
+import { join } from 'node:path';
 import { createStores } from '../../index.js';
 import { listAgentsInDir } from './migrate-agent.js';
 import { validateAgentFrontmatter } from '../../validation/agent-validation.js';
@@ -83,6 +85,77 @@ export async function agentsCommand(args: string[], ctx?: ProcessContext): Promi
       return 0;
     }
 
+    case 'create':
+    case 'c': {
+      const { AgentGenerator, DEFAULT_AGENT_GENERATOR_CONFIG } = await import('../../agents/index.js');
+      const getFlag = (name: string): string | undefined => {
+        const pfx = `--${name}=`;
+        const a = args.find((x) => x.startsWith(pfx));
+        return a ? a.slice(pfx.length) : undefined;
+      };
+      const scope: 'user' | 'project' = args.includes('--user') ? 'user' : 'project';
+      let name = getFlag('name');
+      let description = getFlag('description');
+      const skillsFlag = getFlag('skills');
+      const toolsFlag = getFlag('tools');
+      const available = await skillStore.list();
+      let skills = skillsFlag ? skillsFlag.split(',').map((s) => s.trim()).filter(Boolean) : [];
+
+      // Interactive wizard when name/description are not supplied (mirrors team create).
+      if (!name || !description) {
+        p.intro('Create an agent');
+        if (!name) {
+          const r = await p.text({ message: 'Agent name (lowercase-hyphen)', validate: (v) => (v ? undefined : 'Required') });
+          if (p.isCancel(r)) { p.cancel('Cancelled.'); return 1; }
+          name = r;
+        }
+        if (!description) {
+          const r = await p.text({ message: 'What does this agent do?', validate: (v) => (v ? undefined : 'Required') });
+          if (p.isCancel(r)) { p.cancel('Cancelled.'); return 1; }
+          description = r;
+        }
+        if (skills.length === 0 && available.length > 0) {
+          const r = await p.multiselect({
+            message: 'Member skills (space to toggle, optional)',
+            options: available.map((s) => ({ value: s, label: s })),
+            required: false,
+          });
+          if (!p.isCancel(r)) skills = r as string[];
+        }
+      }
+
+      if (!name || !description) {
+        p.log.error('agents create requires --name and --description (or run interactively).');
+        return 1;
+      }
+
+      const agentsDir = scope === 'user' ? join(homedir(), '.claude', 'agents') : '.claude/agents';
+      const config = {
+        ...DEFAULT_AGENT_GENERATOR_CONFIG,
+        agentsDir,
+        scope,
+        ...(toolsFlag ? { tools: toolsFlag.split(',').map((s) => s.trim()).filter(Boolean) } : {}),
+      };
+      const generator = new AgentGenerator(skillStore, config);
+      const cluster = {
+        id: `manual-${name}`,
+        skills,
+        coActivationScore: 1,
+        stabilityDays: 0,
+        suggestedName: name,
+        suggestedDescription: description,
+      };
+      try {
+        const agent = await generator.create(cluster);
+        p.log.success(`Created agent: ${pc.green(agent.filePath)}`);
+        if (agent.warning) p.log.warn(agent.warning);
+        return 0;
+      } catch (e) {
+        p.log.error(`Failed to create agent: ${(e as Error).message}`);
+        return 1;
+      }
+    }
+
     case 'validate':
     case 'v': {
       const agentsDir = '.claude/agents';
@@ -146,7 +219,9 @@ export async function agentsCommand(args: string[], ctx?: ProcessContext): Promi
         p.log.message('');
         p.log.message(`Run ${pc.cyan('skill-creator migrate-agent')} to fix issues.`);
       }
-      return 0;
+      // Exit non-zero on any invalid/needs-migration agent so `agents validate`
+      // is a real gate (tools-as-array etc. fail AgentFrontmatterSchema).
+      return needsMigrationCount > 0 ? 1 : 0;
     }
 
     case 'list':
@@ -233,12 +308,14 @@ export async function agentsCommand(args: string[], ctx?: ProcessContext): Promi
       p.log.message(pc.yellow('  bug (GitHub #11205). Consider using project-level agents instead.'));
       p.log.message('');
       p.log.message('  Subcommands:');
+      p.log.message(`    ${pc.cyan('agents create')}     Create an agent (interactive or --name/--description)`);
       p.log.message(`    ${pc.cyan('agents suggest')}    Analyze co-activations, suggest agents`);
       p.log.message(`    ${pc.cyan('agents list')}       List agents with validation status`);
       p.log.message(`    ${pc.cyan('agents validate')}   Check all agent files for format issues`);
       p.log.message(`    ${pc.cyan('agents adoption')}   Scan dispatch sites: living vs dormant agents`);
       p.log.message('');
       p.log.message('  Examples:');
+      p.log.message('    skill-creator agents create --name=my-agent --description="..."');
       p.log.message('    skill-creator agents suggest');
       p.log.message('    skill-creator agents list');
       p.log.message('    skill-creator agents validate');
