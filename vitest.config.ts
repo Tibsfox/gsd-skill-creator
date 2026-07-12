@@ -96,19 +96,25 @@ export default defineConfig({
         },
       },
       // Intelligence Dashboard performance tests (WARN-only, advisory).
-      // Run via: npm run test:perf
-      // Excluded from default run to avoid flakiness in CI.
-      {
-        test: {
-          name: 'intelligence-perf',
-          globals: true,
-          testTimeout: 60000,
-          include: [
-            'src/intelligence/__tests__/performance/**/*.perf.test.ts',
-          ],
-          exclude: ['**/node_modules/**', 'dist/**'],
-        },
-      },
+      // Run via: npm run test:perf (sets VITEST_INCLUDE_PERF=1).
+      // Env-gated OUT of the default `vitest run`: these are wall-clock benches
+      // whose thresholds flake under full-suite contention, so they must not sit
+      // in the blocking lane. (The prior "Excluded from default run" comment was
+      // stale — the entry was unconditionally in the array and DID run by default.
+      // Item 8 made the exclusion real via VITEST_INCLUDE_PERF.)
+      ...(process.env.VITEST_INCLUDE_PERF
+        ? [{
+            test: {
+              name: 'intelligence-perf',
+              globals: true,
+              testTimeout: 60000,
+              include: [
+                'src/intelligence/__tests__/performance/**/*.perf.test.ts',
+              ],
+              exclude: ['**/node_modules/**', 'dist/**'],
+            },
+          }]
+        : []),
       // Integration tests (*.integration.test.ts). NOT opt-in: this project sits in the
       // `projects` array unconditionally, so it runs on every bare `vitest run` — which is
       // exactly what CI (ci.yml `npx vitest run`) and the local pre-tag-gate execute.

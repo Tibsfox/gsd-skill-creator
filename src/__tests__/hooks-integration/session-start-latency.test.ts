@@ -12,14 +12,12 @@
  * @module __tests__/hooks-integration/session-start-latency
  */
 
-import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 const REPO_ROOT = process.cwd();
 const SETTINGS_PATH = join(REPO_ROOT, 'project-claude', 'settings.json');
-const SESSION_STATE_HOOK = join(REPO_ROOT, '.claude', 'hooks', 'session-state.cjs');
 
 interface HookEntry {
   type: string;
@@ -67,26 +65,7 @@ describe('OGA-020 — SessionStart consolidation', () => {
     expect(cmds.length).toBe(2);
   });
 
-  it('CF-H-020c: session-state.cjs latency benchmark <200ms over 10 runs', () => {
-    if (!existsSync(SESSION_STATE_HOOK)) {
-      // Hook may be absent in clean checkouts; skip rather than fail.
-      return;
-    }
-    const input = JSON.stringify({ session_id: 'c1-bench', cwd: REPO_ROOT });
-    const samples: number[] = [];
-    for (let i = 0; i < 10; i++) {
-      const start = Date.now();
-      execFileSync('node', [SESSION_STATE_HOOK], {
-        input,
-        encoding: 'utf8',
-        timeout: 5000,
-      });
-      samples.push(Date.now() - start);
-    }
-    const max = Math.max(...samples);
-    const median = [...samples].sort((a, b) => a - b)[Math.floor(samples.length / 2)];
-    // Budget: <200ms p50; allow generous p100 since CI cold-cache can spike.
-    expect(median).toBeLessThan(200);
-    expect(max).toBeLessThan(1000);
-  });
+  // CF-H-020c (session-state.cjs latency benchmark) relocated to the WARN-only
+  // intelligence-perf project (item 8):
+  // src/intelligence/__tests__/performance/session-start-latency.perf.test.ts.
 });
