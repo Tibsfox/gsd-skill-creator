@@ -51,6 +51,11 @@
     "override_behavior": "`=1` → skip the docs-site step bucket as a GROUP on a code-only ship (item 8). Fail-safe: docs steps run by default; this opts a known code-only ship out of the www-page validators. adoption-freshness is intentionally NOT in the bucket (it audits tracked `docs/ADOPTION-BASELINE-*` telemetry, not the www tree). A group alias over existing `gate_bypassed` tokens — the SC_PRE_TAG_GATE_BYPASS vocabulary is unchanged"
   },
   {
+    "name": "SC_DISABLE_CORRECTION_DETECT",
+    "default_behavior": "unset → session-end correction auto-detection runs (item 7): `orchestrator snapshot generate` scans the transcript and writes correction CANDIDATES to the quarantine ledger `.planning/patterns/correction-quarantine.jsonl` only",
+    "override_behavior": "`=1` → skip auto-detection entirely (no quarantine writes). Detection is already best-effort and never touches the live `feedback.jsonl` or blocks session exit; this kill-switch is for opting a session out of candidate generation. Promote candidates with `skill-creator feedback quarantine accept <id> --skill=<name>`"
+  },
+  {
     "name": "SC_ADOPTION_BASELINE_MAX_DRIFT",
     "default_behavior": "unset → pre-tag-gate step 20 (adoption-freshness, v1.49.965 Ship 0.1) tolerates the newest `docs/ADOPTION-BASELINE-v*.json` trailing the shipping version by up to 30 ships before it BLOCKs (exit 23, default-BLOCK as of v1.49.1029; forward-progress mode, not exact-match — avoids churning a fresh baseline every ship)",
     "override_behavior": "`=<N>` → set a custom ship-drift tolerance (e.g. `=10` strict, `=50` lenient). Refresh the baseline with `node tools/adoption-refresh.mjs` (AFTER bump-version, #10424). Consumed by `tools/adoption-baseline-freshness.mjs`"
