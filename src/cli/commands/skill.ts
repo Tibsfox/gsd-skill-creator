@@ -67,6 +67,74 @@ export async function skillCommand(
       return 1;
     }
 
+    case 'retire': {
+      // Suggest-first, human-confirmed retirement. `--suggest` only RANKS
+      // candidates from the measured activation signal (nothing moves). Naming a
+      // skill MOVES it out of the auto-load path (reversible via `restore`);
+      // never deletes.
+      const scope = parseScope(subArgs);
+      const skillsDir = parseSkillsDir(subArgs, scope);
+      const { buildRetireCandidates, retireSkill } = await import('../../skill/retire.js');
+
+      if (subArgs.includes('--suggest')) {
+        const candidates = await buildRetireCandidates({ skillsDir });
+        if (candidates.length === 0) {
+          p.log.success('No retire candidates. (Run `activations --write` first so the signal is measured.)');
+          return 0;
+        }
+        p.log.message(pc.bold('Retire candidates (suggest-only — nothing changed):'));
+        for (const c of candidates) {
+          p.log.message(`  ${pc.yellow(c.name)} — ${c.reason}`);
+        }
+        p.log.message('Retire one with: skill-creator skill retire <name> [--reason="..."]');
+        return 0;
+      }
+
+      const skillName = subArgs.filter((a) => !a.startsWith('-'))[0];
+      if (!skillName) {
+        p.log.error('skill retire requires a skill name or --suggest. Usage: skill-creator skill retire <name> | --suggest');
+        return 1;
+      }
+      const res = await retireSkill({
+        name: skillName,
+        skillsDir,
+        reason: parseStringFlag(subArgs, '--reason'),
+        dryRun: subArgs.includes('--dry-run'),
+      });
+      if (!res.ok) {
+        p.log.error(res.error ?? 'retire failed');
+        return 1;
+      }
+      if (res.planned) {
+        p.log.message(`[dry-run] would move ${skillName} -> ${res.movedTo}`);
+        return 0;
+      }
+      p.log.success(`Retired ${skillName} -> ${res.movedTo}`);
+      if (res.bundled) {
+        p.log.warn(`${skillName} has a project-claude/ source — \`node project-claude/install.cjs\` will resurrect it. Retire the source too for a durable removal.`);
+      }
+      p.log.message(`Restore with: skill-creator skill restore ${skillName}`);
+      return 0;
+    }
+
+    case 'restore': {
+      const scope = parseScope(subArgs);
+      const skillsDir = parseSkillsDir(subArgs, scope);
+      const skillName = subArgs.filter((a) => !a.startsWith('-'))[0];
+      if (!skillName) {
+        p.log.error('skill restore requires a skill name. Usage: skill-creator skill restore <name>');
+        return 1;
+      }
+      const { restoreSkill } = await import('../../skill/retire.js');
+      const res = await restoreSkill({ name: skillName, skillsDir });
+      if (!res.ok) {
+        p.log.error(res.error ?? 'restore failed');
+        return 1;
+      }
+      p.log.success(`Restored ${skillName} -> ${res.movedTo}`);
+      return 0;
+    }
+
     default: {
       // Bare `skill` prints help (exit 0); unknown subcommand is a usage
       // error (exit 1). (CLI-4)
@@ -77,10 +145,14 @@ export async function skillCommand(
       p.log.message('Skill subcommands:');
       p.log.message('  test-triggering <name>   Run triggering test for a skill');
       p.log.message('  ship <name>              Run validate -> critique -> test-triggering gates');
+      p.log.message('  retire <name>|--suggest  Retire a skill (move out of auto-load) or list candidates');
+      p.log.message('  restore <name>           Restore a retired skill back into auto-load');
       p.log.message('');
       p.log.message('Examples:');
       p.log.message('  skill-creator skill test-triggering my-skill');
       p.log.message('  skill-creator skill ship my-skill --mock');
+      p.log.message('  skill-creator skill retire --suggest');
+      p.log.message('  skill-creator skill retire stale-skill --reason="zero activations"');
       return subcommand === undefined ? 0 : 1;
     }
   }
