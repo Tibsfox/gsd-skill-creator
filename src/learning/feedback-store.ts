@@ -18,6 +18,19 @@ export class FeedbackStore {
   async record(
     event: Omit<FeedbackEvent, 'id' | 'timestamp'>
   ): Promise<FeedbackEvent> {
+    // Idempotency (item-7): when the event carries a sourceCandidateId, a prior
+    // event with the same key means this is a replayed promotion — return the
+    // existing event WITHOUT a second append so a crash between the ledger write
+    // and the quarantine status flip cannot double-count the correction. The
+    // explicit `feedback record` path never sets this key, so its behaviour is
+    // unchanged.
+    if (event.sourceCandidateId) {
+      const existing = (await this.readAll()).find(
+        e => e.sourceCandidateId === event.sourceCandidateId
+      );
+      if (existing) return existing;
+    }
+
     const fullEvent: FeedbackEvent = {
       ...event,
       id: randomUUID(),

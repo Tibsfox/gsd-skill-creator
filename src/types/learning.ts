@@ -24,6 +24,12 @@ export interface FeedbackEvent {
   corrected?: string;
   diff?: Change[];
 
+  // Provenance + idempotency key. Set when this correction was promoted from a
+  // quarantine candidate (item-7): carries the candidate id so a replayed
+  // promotion (crash between the ledger write and the status flip) appends the
+  // correction exactly once instead of double-counting toward refinement.
+  sourceCandidateId?: string;
+
   // For overrides: user rejected skill suggestion
   rejected?: boolean;
   reason?: string;

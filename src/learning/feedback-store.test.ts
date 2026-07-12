@@ -35,6 +35,38 @@ describe('FeedbackStore', () => {
       expect(event.skillName).toBe('test-skill');
     });
 
+    it('is idempotent on sourceCandidateId (replayed promotion appends once)', async () => {
+      const store = new FeedbackStore(testDir);
+      const base = {
+        type: 'correction' as const,
+        skillName: 'test-skill',
+        sessionId: 'session-1',
+        original: 'alpha beta gamma',
+        corrected: 'one two three',
+        sourceCandidateId: 'cand-1',
+      };
+
+      const first = await store.record(base);
+      const second = await store.record(base); // replay
+
+      expect(second.id).toBe(first.id); // same event returned, not a new one
+      expect(await store.count()).toBe(1); // only one row appended
+    });
+
+    it('does not dedup events without a sourceCandidateId', async () => {
+      const store = new FeedbackStore(testDir);
+      const base = {
+        type: 'correction' as const,
+        skillName: 'test-skill',
+        sessionId: 'session-1',
+        original: 'alpha beta gamma',
+        corrected: 'one two three',
+      };
+      await store.record(base);
+      await store.record(base);
+      expect(await store.count()).toBe(2); // explicit path is unchanged
+    });
+
     it('should persist event to JSONL file', async () => {
       const store = new FeedbackStore(testDir);
 

@@ -344,6 +344,8 @@ async function quarantineSubcommand(
       }
 
       // Live write — the only bridge from quarantine into the feedback ledger.
+      // Keyed on the candidate id so a replayed accept (crash between this write
+      // and the status flip below) appends exactly once, never double-counting.
       const ev = await feedbackStore.record({
         type: 'correction',
         skillName: chosen,
@@ -351,6 +353,7 @@ async function quarantineSubcommand(
         original: c.original,
         corrected: c.corrected,
         diff: detection.analysis.changes,
+        sourceCandidateId: c.id,
       });
       await store.updateStatus(id, {
         status: 'promoted',

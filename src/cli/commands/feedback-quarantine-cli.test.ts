@@ -102,6 +102,29 @@ describe('feedback quarantine', () => {
     expect(await feedback().count()).toBe(1); // still just one write
   });
 
+  it('is idempotent under replay: a crash before the status flip does not double-write', async () => {
+    const c = await q().add(candidate());
+    // Simulate: accept wrote the correction to the ledger, then crashed BEFORE
+    // flipping the candidate to 'promoted' (it is still 'pending').
+    const pre = await feedback().record({
+      type: 'correction',
+      skillName: 'my-skill',
+      sessionId: c.sessionId,
+      original: c.original,
+      corrected: c.corrected,
+      sourceCandidateId: c.id,
+    });
+    expect(await feedback().count()).toBe(1);
+
+    // Re-run accept — must NOT append a second correction.
+    const code = await accept(c.id, '--skill=my-skill');
+    expect(code).toBe(0);
+    expect(await feedback().count()).toBe(1); // still exactly one
+    const promoted = (await q().getById(c.id))!;
+    expect(promoted.status).toBe('promoted');
+    expect(promoted.promotedFeedbackId).toBe(pre.id); // reused the existing event
+  });
+
   it('dismiss records a dismissal and never writes the feedback ledger', async () => {
     const c = await q().add(candidate());
     const code = await feedbackCommand(
