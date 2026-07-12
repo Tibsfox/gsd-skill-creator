@@ -216,6 +216,11 @@ describe('CI cargo lane — load-bearing drift-guard (CF4a v1.49.936 → flipped
     // red-on-compile. Pins the dep so a silent removal is caught.
     expect(cargoJob).toContain('libwebkit2gtk-4.1-dev');
   });
+
+  it('HYGIENE — the cargo lane runs fmt --check and clippy with -D warnings', () => {
+    expect(cargoJob).toContain('cargo fmt --check');
+    expect(cargoJob).toMatch(/clippy .*-D warnings/);
+  });
 });
 
 /**
