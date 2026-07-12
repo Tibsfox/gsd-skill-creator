@@ -119,6 +119,13 @@ export async function gatewayCommand(args: string[]): Promise<number> {
           const { embedding, method } = await conversationEmbedder.embed(query);
           return pgConversationStore.searchConversationsByEmbedding(embedding, limit, sessionFilter, method);
         },
+        // Lexical arm over the same conversation_turns corpus (PG full-text).
+        // Fused + reranked with the semantic arm so the hybrid scorer applies to
+        // conversation search (item 9b). Reuses the existing PgStore method — no
+        // pg-store.ts change — and surfaces turns the embedder-method filter drops.
+        async searchKeyword(query: string, limit: number, sessionFilter?: string[]) {
+          return pgConversationStore.searchConversations(query, limit, sessionFilter);
+        },
       }
     : undefined;
 

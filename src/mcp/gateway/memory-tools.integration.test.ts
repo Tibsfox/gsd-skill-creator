@@ -263,6 +263,60 @@ describe('Gateway memory tools integration (MEM-1)', () => {
       await client.close();
     });
 
+    it('fuses the semantic + lexical PG arms and reranks (source: hybrid)', async () => {
+      const memoryService = new MemoryService({
+        memoryDir: join(tempDir, 'memory'),
+        indexFile: 'MEMORY.md',
+      });
+      // Two distinct arms over the same corpus: the semantic arm returns a
+      // higher-raw-score distractor, the lexical arm returns a lower-raw-score
+      // gold whose content holds the query's quoted phrase. The hybrid reranker
+      // must lift the gold to the top and the source must read 'hybrid'.
+      const pgConversationSearch = {
+        async search() {
+          return [
+            {
+              turn: {
+                id: 'distract', session_id: 'sess-uuid', role: 'assistant',
+                content: 'an unrelated note about scheduling and calendars',
+                timestamp: new Date('2026-07-08T00:00:00.000Z'),
+              },
+              sessionId: 'sess-uuid', score: 0.7,
+            },
+          ];
+        },
+        async searchKeyword() {
+          return [
+            {
+              turn: {
+                id: 'gold', session_id: 'sess-uuid', role: 'assistant',
+                content: 'we locked in the duckdb analytics choice after trials',
+                timestamp: new Date('2026-07-08T00:00:00.000Z'),
+              },
+              sessionId: 'sess-uuid', score: 0.3,
+            },
+          ];
+        },
+      };
+      await startWithFactory(createGsdGatewayFactory({ memoryService, pgConversationSearch }));
+
+      const transport = createClientTransport(port, storedToken.token);
+      const client = new Client({ name: 'convo-hybrid', version: '1.0.0' });
+      await client.connect(transport);
+
+      const res = parseToolResult(
+        await client.callTool({
+          name: 'memory.search_conversations',
+          arguments: { query: "engine 'duckdb analytics choice'" },
+        }),
+      ) as { source: string; resultCount: number; results: Array<{ turnId: string }> };
+      expect(res.source).toBe('hybrid');
+      expect(res.resultCount).toBe(2);
+      expect(res.results[0].turnId).toBe('gold');
+
+      await client.close();
+    });
+
     it('falls back to keyword search when the PG searcher returns nothing', async () => {
       const memoryService = new MemoryService({
         memoryDir: join(tempDir, 'memory'),

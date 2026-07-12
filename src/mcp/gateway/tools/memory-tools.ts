@@ -15,6 +15,12 @@ import type { MemoryService } from '../../../memory/service.js';
 import type { ConversationStore } from '../../../memory/conversation-store.js';
 import type { MemoryType, MemoryScope, MemoryVisibility } from '../../../memory/types.js';
 import { inferTemporalClass, inferVisibility } from '../../../memory/types.js';
+import {
+  hybridRerank,
+  scoreToDistance,
+  distanceToScore,
+  type ScoredDocument,
+} from '../../../memory/hybrid-scorer.js';
 
 // ── Shared Schemas ─────────────────────────────────────────────────────────
 
@@ -383,11 +389,68 @@ export interface PgConversationSearcher {
     query: string,
     limit: number,
     sessionFilter?: string[],
-  ): Promise<Array<{
-    turn: { id: string; session_id: string; role: string; content: string; timestamp: Date };
-    sessionId: string;
-    score: number;
-  }>>;
+  ): Promise<ConversationHit[]>;
+  /**
+   * Optional lexical arm over the SAME conversation_turns corpus (PG full-text).
+   * When present, its rows are fused with the semantic arm and reranked so the
+   * hybrid scorer applies to the most-used tier. Absent on searchers that only
+   * do semantic search — the fusion degrades to semantic-only in that case.
+   */
+  searchKeyword?(
+    query: string,
+    limit: number,
+    sessionFilter?: string[],
+  ): Promise<ConversationHit[]>;
+}
+
+/** A conversation search hit as returned by the PG search arms. */
+export interface ConversationHit {
+  turn: { id: string; session_id: string; role: string; content: string; timestamp: Date };
+  sessionId: string;
+  score: number;
+}
+
+/**
+ * Fuse conversation search hits from one or both PG arms (semantic + lexical)
+ * over the same `conversation_turns` corpus and rerank them with the shared
+ * hybrid scorer — the same reranker MemoryService.query() applies to the memory
+ * tiers, now extended to the conversation tier.
+ *
+ * Dedups by turn id (keeping the stronger raw score), then mirrors
+ * MemoryService.query()'s `merged.length > 1` gate: a single candidate is
+ * returned untouched (reranking a set of one cannot change order and would only
+ * mutate the displayed score), so single-arm results keep their original score.
+ * The polarity bridge matches service.ts exactly — PG cosine/rank score is
+ * higher=better, the reranker consumes rawDistance lower=better, so
+ * scoreToDistance runs BEFORE and distanceToScore AFTER.
+ */
+export function fuseConversationHits(
+  query: string,
+  hits: ConversationHit[],
+  now: Date,
+): ConversationHit[] {
+  const byId = new Map<string, ConversationHit>();
+  for (const hit of hits) {
+    const existing = byId.get(hit.turn.id);
+    if (!existing || hit.score > existing.score) byId.set(hit.turn.id, hit);
+  }
+  const deduped = Array.from(byId.values());
+
+  if (deduped.length <= 1) return deduped;
+
+  const docs: ScoredDocument[] = deduped.map(h => ({
+    id: h.turn.id,
+    text: h.turn.content,
+    rawDistance: scoreToDistance(h.score),
+    date: h.turn.timestamp instanceof Date ? h.turn.timestamp : new Date(h.turn.timestamp),
+  }));
+
+  const reranked = hybridRerank(query, docs, now);
+  const byIdOrig = new Map(deduped.map(h => [h.turn.id, h]));
+  return reranked.map(rr => {
+    const orig = byIdOrig.get(rr.doc.id)!;
+    return { ...orig, score: distanceToScore(rr.fusedDistance) };
+  });
 }
 
 function registerSearchConversationsTool(
@@ -407,14 +470,20 @@ function registerSearchConversationsTool(
       const sessionFilter = args.sessionId ? [args.sessionId] : undefined;
 
       try {
-        // Prefer PG semantic search when the PG tier + embedder are active
-        // (MEM-7 step 2). Fall through to keyword when it is absent or returns
-        // nothing (e.g. no embedded turns yet), so the always-on layer still
-        // answers.
+        // Prefer PG search when the PG tier + embedder are active (MEM-7 step 2).
+        // Gather the semantic arm and, when available, the lexical arm over the
+        // same conversation_turns corpus, then fuse + rerank so the hybrid scorer
+        // applies to the conversation tier. Fall through to the always-on JSONL
+        // keyword layer when PG is absent or returns nothing.
         if (pgConversationSearch) {
-          const pgResults = await pgConversationSearch.search(args.query, args.limit, sessionFilter);
-          if (pgResults.length > 0) {
-            const mapped = pgResults.map(r => ({
+          const semantic = await pgConversationSearch.search(args.query, args.limit, sessionFilter);
+          const keyword = pgConversationSearch.searchKeyword
+            ? await pgConversationSearch.searchKeyword(args.query, args.limit, sessionFilter)
+            : [];
+          const candidates = [...semantic, ...keyword];
+          if (candidates.length > 0) {
+            const fused = fuseConversationHits(args.query, candidates, new Date()).slice(0, args.limit);
+            const mapped = fused.map(r => ({
               turnId: r.turn.id,
               sessionId: r.sessionId,
               role: r.turn.role,
@@ -426,11 +495,17 @@ function registerSearchConversationsTool(
               // PG rows carry no session metadata; synthesize the id, leave the rest null.
               session: { id: r.sessionId, project: null, branch: null, summary: null },
             }));
+            // 'hybrid' only when both arms contributed rows; otherwise the single
+            // arm's label ('semantic' or 'keyword') so single-arm behavior and its
+            // score are unchanged (the rerank gate skips a lone candidate).
+            const source = semantic.length > 0 && keyword.length > 0
+              ? 'hybrid'
+              : semantic.length > 0 ? 'semantic' : 'keyword';
             return jsonContent({
               query: args.query,
               resultCount: mapped.length,
               results: mapped,
-              source: 'semantic',
+              source,
             });
           }
         }
