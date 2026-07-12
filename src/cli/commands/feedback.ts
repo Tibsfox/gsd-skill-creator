@@ -4,6 +4,7 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { FeedbackStore } from '../../learning/index.js';
 import { FeedbackDetector } from '../../learning/feedback-detector.js';
+import { CorrectionQuarantineStore } from '../../learning/correction-quarantine.js';
 import { SkillStore } from '../../storage/skill-store.js';
 import { DEFAULT_BOUNDED_CONFIG } from '../../types/learning.js';
 
@@ -153,12 +154,22 @@ export async function feedbackCommand(
       return 0;
     }
 
+    case 'quarantine':
+    case 'q':
+      return quarantineSubcommand(args, skillsDir, patternsDir, feedbackStore);
+
     case 'stats':
     case undefined: {
       const count = await feedbackStore.count();
+      const pending = await new CorrectionQuarantineStore(patternsDir).countPending();
       p.log.message('');
       p.log.message(pc.bold('Feedback Statistics:'));
       p.log.message(`  Total events: ${count}`);
+      if (pending > 0) {
+        p.log.message(
+          pc.dim(`  ${pending} correction candidate(s) awaiting review — \`feedback quarantine list\``),
+        );
+      }
       return 0;
     }
 
@@ -169,6 +180,203 @@ export async function feedbackCommand(
       p.log.message('  feedback, fb              Show feedback stats');
       p.log.message('  feedback list <skill>     List feedback for a skill');
       p.log.message('  feedback record --skill=<name> --original=<file|-> --corrected=<file|->');
+      p.log.message('  feedback quarantine [list|show <id>|accept <id> [--skill]|dismiss <id>]');
+      return 1;
+  }
+}
+
+/**
+ * `feedback quarantine` — human review of auto-detected correction candidates.
+ *
+ * Candidates are auto-detected at session-end into a SEPARATE quarantine ledger
+ * that RefinementEngine never reads. `accept` is the ONLY bridge into the live
+ * feedback ledger, and it reuses the exact fail-closed skill-exists +
+ * significance gates that `feedback record` uses. The detector never attributes
+ * a skill (skillName is always null), so a human MUST supply --skill (or pick a
+ * hint interactively) to promote — the pipeline never guesses.
+ */
+async function quarantineSubcommand(
+  args: string[],
+  skillsDir: string | undefined,
+  patternsDir: string,
+  feedbackStore: FeedbackStore,
+): Promise<number> {
+  const store = new CorrectionQuarantineStore(patternsDir);
+  const action = args[2];
+  const id = args[3];
+
+  switch (action) {
+    case 'list':
+    case 'ls':
+    case undefined: {
+      const items = args.includes('--all') ? await store.readAll() : await store.listPending();
+      if (items.length === 0) {
+        p.log.info('No pending correction candidates.');
+        return 0;
+      }
+      p.log.message('');
+      p.log.message(pc.bold('Correction candidates awaiting review:'));
+      for (const c of items) {
+        const hints = c.skillHints.length
+          ? c.skillHints.map((h) => (h.ambient ? `${h.skill}?` : h.skill)).slice(0, 3).join(', ')
+          : '(no hints)';
+        const sim = `sim=${c.preSimilarity.toFixed(2)}`;
+        p.log.message(`  ${pc.bold(c.id)} [${c.status}] ${c.filePath}`);
+        p.log.message(
+          pc.dim(`    ${c.signal} · ${sim} · hints: ${hints} · "${c.interposingUserText.slice(0, 60)}"`),
+        );
+      }
+      p.log.message(pc.dim('  Promote: feedback quarantine accept <id> --skill=<name>'));
+      return 0;
+    }
+
+    case 'show': {
+      const c = id ? await store.getById(id) : undefined;
+      if (!c) {
+        p.log.error(`No correction candidate with id '${id}'.`);
+        return 1;
+      }
+      p.log.message('');
+      p.log.message(pc.bold(`Candidate ${c.id} [${c.status}]`));
+      p.log.message(`  file:    ${c.filePath}`);
+      p.log.message(`  signal:  ${c.signal}  (similarity ${c.preSimilarity.toFixed(2)})`);
+      p.log.message(`  session: ${c.sessionId}`);
+      p.log.message(`  human:   "${c.interposingUserText}"`);
+      p.log.message(`  hints:   ${c.skillHints.map((h) => `${h.skill}${h.ambient ? ' (ambient)' : ''} [${h.source}]`).join(', ') || '(none)'}`);
+      p.log.message(pc.dim('  --- original ---'));
+      p.log.message(c.original);
+      p.log.message(pc.dim('  --- corrected ---'));
+      p.log.message(c.corrected);
+      return 0;
+    }
+
+    case 'dismiss': {
+      if (!id) {
+        p.log.error('Usage: feedback quarantine dismiss <id> [--reason=<text>]');
+        return 1;
+      }
+      const c = await store.getById(id);
+      if (!c) {
+        p.log.error(`No correction candidate with id '${id}'.`);
+        return 1;
+      }
+      if (c.status !== 'pending') {
+        p.log.error(`Candidate '${id}' is already '${c.status}'.`);
+        return 1;
+      }
+      await store.updateStatus(id, {
+        status: 'dismissed',
+        reviewedAt: new Date().toISOString(),
+        dismissedReason: flagValue(args, '--reason') ?? 'dismissed by reviewer',
+      });
+      p.log.success(`Dismissed candidate '${id}'. Nothing written to the feedback ledger.`);
+      return 0;
+    }
+
+    case 'accept': {
+      if (!id) {
+        p.log.error('Usage: feedback quarantine accept <id> --skill=<name>');
+        return 1;
+      }
+      const c = await store.getById(id);
+      if (!c) {
+        p.log.error(`No correction candidate with id '${id}'.`);
+        return 1;
+      }
+      if (c.status !== 'pending') {
+        p.log.error(`Candidate '${id}' is already '${c.status}' — cannot re-promote.`);
+        return 1;
+      }
+
+      // Human attribution is load-bearing: the detector never guesses. Take
+      // --skill; else offer the hints interactively; else refuse.
+      let chosen = flagValue(args, '--skill');
+      if (!chosen) {
+        if (process.stdin.isTTY && c.skillHints.length > 0) {
+          const sel = await p.select({
+            message: `Attribute correction '${id}' to which skill?`,
+            options: c.skillHints.map((h) => ({
+              value: h.skill,
+              label: h.ambient ? `${h.skill} (ambient — unlikely)` : h.skill,
+            })),
+          });
+          if (p.isCancel(sel)) {
+            p.log.info('Cancelled — nothing recorded.');
+            return 0;
+          }
+          chosen = sel as string;
+        } else {
+          p.log.error(
+            `Candidate '${id}' is unattributed — pass --skill=<name> to promote it. ` +
+              `The detector never guesses which skill a correction is against; a human must choose.`,
+          );
+          return 1;
+        }
+      }
+
+      // Fail-closed skill-exists gate (identical to `feedback record`).
+      const skillStore = new SkillStore(skillsDir ?? '.claude/skills');
+      let known: boolean;
+      try {
+        known = await skillStore.exists(chosen);
+      } catch (err) {
+        p.log.error(`Invalid skill name '${chosen}': ${(err as Error).message}`);
+        return 1;
+      }
+      if (!known) {
+        p.log.error(
+          `Unknown skill '${chosen}' — refusing to record a correction against a skill that ` +
+            `does not exist (fail-closed). Check the name with \`skill-creator list\`.`,
+        );
+        return 1;
+      }
+
+      // Significance gate re-run at promote time (identical to `feedback record`).
+      const detection = new FeedbackDetector().detect(c.original, c.corrected, chosen);
+      if (!detection) {
+        await store.updateStatus(id, {
+          status: 'dismissed',
+          reviewedAt: new Date().toISOString(),
+          dismissedReason: 'not_significant',
+        });
+        p.log.info('Change is not a significant correction — candidate dismissed, nothing recorded.');
+        return 0;
+      }
+
+      // Live write — the only bridge from quarantine into the feedback ledger.
+      const ev = await feedbackStore.record({
+        type: 'correction',
+        skillName: chosen,
+        sessionId: c.sessionId,
+        original: c.original,
+        corrected: c.corrected,
+        diff: detection.analysis.changes,
+      });
+      await store.updateStatus(id, {
+        status: 'promoted',
+        reviewedAt: new Date().toISOString(),
+        promotedFeedbackId: ev.id,
+      });
+
+      const total = await feedbackStore.count(chosen);
+      const need = DEFAULT_BOUNDED_CONFIG.minCorrectionsForRefinement;
+      p.log.success(`Promoted candidate '${id}' → correction for '${chosen}'.`);
+      p.log.message(
+        pc.dim(
+          total >= need
+            ? `  ${total} correction(s) recorded — eligible for a refinement proposal ` +
+                `(run \`skill-creator refine ${chosen}\`).`
+            : `  ${total}/${need} correction(s) toward a refinement proposal.`,
+        ),
+      );
+      return 0;
+    }
+
+    default:
+      p.log.error(`Unknown quarantine action: ${action}`);
+      p.log.message(
+        'Usage: feedback quarantine [list|show <id>|accept <id> [--skill=<name>]|dismiss <id> [--reason=<text>]]',
+      );
       return 1;
   }
 }
