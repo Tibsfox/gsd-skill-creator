@@ -34,6 +34,8 @@ import {
 
 import { renderRunReport } from './report.js';
 import { scLearn } from '../commands/sc-learn.js';
+import { SourceLedger, arxivSourceEntry } from '../source-ledger/source-ledger.js';
+import type { SourceLedgerPort } from '../source-ledger/source-ledger.js';
 
 // === BuildBridge inputs ===
 
@@ -239,6 +241,16 @@ export async function ingestQueue(
      * changeset is no longer silently discarded and re-ingest dedups (LEARN-2).
      */
     registryPath?: string;
+    /**
+     * Unified source ledger. Each successfully-ingested arxiv id is appended
+     * (content-hash + provenance) so it is dedup-visible to every other entry
+     * point, not just this seen-ids silo. Defaults to a real `SourceLedger`;
+     * tests inject a stub or a tmp-path ledger. Ledger writes are best-effort
+     * and never fail an ingest.
+     */
+    ledger?: SourceLedgerPort;
+    /** Override path for the default SourceLedger (ignored if `ledger` is set). */
+    ledgerPath?: string;
   } = {},
 ): Promise<{ successCount: number; failureCount: number; reports: string[] }> {
   const raw = fs.readFileSync(queuePath, 'utf-8');
@@ -250,6 +262,7 @@ export async function ingestQueue(
 
   const seenPath = options.seenIdsPath;  // undefined → defaults inside dedup.ts
   let state = loadSeenIds(seenPath);
+  const ledger: SourceLedgerPort = options.ledger ?? new SourceLedger(options.ledgerPath);
   let successCount = 0;
   let failureCount = 0;
   const reports: string[] = [];
@@ -278,6 +291,13 @@ export async function ingestQueue(
         const reportRef = result.sessionId;
         state = recordSeen(state, entry.paper.arxivId, reportRef);
         saveSeenIds(state, seenPath);
+        // Mirror into the unified source ledger (best-effort — never fail an
+        // ingest on a ledger write).
+        try {
+          await ledger.record(arxivSourceEntry(entry.paper.arxivId, reportRef));
+        } catch {
+          // Swallow: seen-ids is the authoritative arxiv dedup; ledger is spine.
+        }
         reports.push(reportRef);
         successCount++;
         log(`  ✓ ingested ${entry.paper.arxivId}`);

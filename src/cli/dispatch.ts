@@ -308,6 +308,10 @@ export const REGISTRY: readonly CommandEntry[] = [
     const { collegeCommand } = await import('./commands/college.js');
     process.exitCode = await collegeCommand(ctx.args.slice(1));
   } },
+  { aliases: ['source', 'src'], handler: async (ctx) => {
+    const { sourceCommand } = await import('./commands/source.js');
+    process.exitCode = await sourceCommand(ctx.args.slice(1));
+  } },
   { aliases: ['graph', 'gr'], handler: async (ctx) => {
     const { graphCommand } = await import('./commands/graph.js');
     return graphCommand(ctx.args.slice(1));

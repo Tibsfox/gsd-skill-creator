@@ -14,6 +14,10 @@ import {
   ProcessContextDenied,
   type ProcessContext,
 } from '../security/process-context.js';
+import {
+  acquiredSourceEntry,
+  type SourceLedgerPort,
+} from '../source-ledger/source-ledger.js';
 
 // Module-internal helper: hoists ensureProcessAllowed at the single helper
 // site (#10433). All 9 spawn sites in this module route through here so
@@ -70,6 +74,15 @@ export interface AcquireOptions {
   maxTotalSize?: number;
   githubScope?: string[];
   timeout?: number;
+  /**
+   * When supplied, every successfully-staged source is appended to the unified
+   * SourceLedger (content-hash + provenance). This is one of the ledger's real
+   * entry points — a source acquired here becomes dedup-visible to any other
+   * path that shares the same ledger. A ledger write never blocks acquisition:
+   * failures are swallowed. Opt-in so the widely-used acquirer stays I/O-free
+   * by default.
+   */
+  ledger?: SourceLedgerPort;
 }
 
 // === Constants ===
@@ -151,11 +164,26 @@ export async function acquireSource(
       break;
   }
 
+  const timestamp = new Date().toISOString();
+
+  // Unified source ledger (opt-in): record each staged source keyed by content
+  // hash so a document acquired here is dedup-visible to other entry points.
+  // Best-effort — a ledger failure must never fail acquisition.
+  if (options?.ledger) {
+    for (const item of staged) {
+      try {
+        await options.ledger.record(acquiredSourceEntry(item.sourceFile, item.content, timestamp));
+      } catch {
+        // Swallow — the ledger is an observability spine, not a gate here.
+      }
+    }
+  }
+
   return {
     source,
     staged,
     stagingDir,
-    timestamp: new Date().toISOString(),
+    timestamp,
     errors,
   };
 }

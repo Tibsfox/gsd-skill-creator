@@ -102,6 +102,62 @@ describe('source type detection', () => {
   });
 });
 
+// === Group 1.5: Unified source ledger wiring ===
+
+describe('source ledger wiring', () => {
+  it('records each staged source into an injected ledger (content-hash keyed)', async () => {
+    const { hashContent } = await import('../source-ledger/source-ledger.js');
+    const recorded: Array<{ contentHash: string; origin: string; sourceId: string }> = [];
+    const ledger = {
+      async record(entry: {
+        contentHash: string;
+        provenance: { origin: string; sourceId: string };
+      }) {
+        recorded.push({
+          contentHash: entry.contentHash,
+          origin: entry.provenance.origin,
+          sourceId: entry.provenance.sourceId,
+        });
+        return { entry, appended: true } as never;
+      },
+      async has() {
+        return false;
+      },
+      async findByHash() {
+        return [] as never;
+      },
+      async findBySource() {
+        return [] as never;
+      },
+      async list() {
+        return [] as never;
+      },
+    };
+
+    const mdPath = path.join(tmpDir, 'ledgered.md');
+    fs.writeFileSync(mdPath, '# Ledger me');
+
+    const result = await acquireSource(mdPath, {
+      stagingDir: path.join(tmpDir, 'staging'),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ledger: ledger as any,
+    });
+
+    expect(result.staged).toHaveLength(1);
+    expect(recorded).toHaveLength(1);
+    expect(recorded[0].contentHash).toBe(hashContent('# Ledger me'));
+    expect(recorded[0].origin).toBe('learn-acquirer');
+    expect(recorded[0].sourceId).toBe(mdPath);
+  });
+
+  it('never touches the ledger when none is supplied', async () => {
+    const mdPath = path.join(tmpDir, 'no-ledger.md');
+    fs.writeFileSync(mdPath, 'x');
+    const result = await acquireSource(mdPath, { stagingDir: path.join(tmpDir, 'staging') });
+    expect(result.staged).toHaveLength(1);
+  });
+});
+
 // === Group 2: Local file acquisition ===
 
 describe('local file acquisition', () => {

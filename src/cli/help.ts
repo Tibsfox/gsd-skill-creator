@@ -95,6 +95,7 @@ Commands:
   event, ev         Manage skill events (list, emit, consume, suggest, expire)
   dashboard, db     Generate GSD Planning Docs Dashboard from .planning/
   college, col      Explore the .college/ departments (list, explore, translate, try)
+  source, src       Inspect the unified source ledger (ledger list, show, dedup-check)
   plane-status, ps  Show complex-plane health metrics (versine, exsecant, chord)
   terminal, term    Manage Wetty terminal server (start, stop, status, restart)
   project, proj     Manage GSD projects (init, list, status)

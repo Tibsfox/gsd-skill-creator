@@ -373,4 +373,80 @@ describe('buildBridge', () => {
 
     fs.rmSync(queueDir, { recursive: true, force: true });
   });
+
+  // Test 9: ingestQueue mirrors each successful ingest into the unified
+  //         source ledger (best-effort), and skips failures.
+  it('ingestQueue records successful arxiv ingests into the injected source ledger', async () => {
+    const queueDir = makeTmpDir();
+    const seenPath = path.join(queueDir, 'seen-ids.json');
+
+    const paper1 = makePaper('2605.20001');
+    const paper2 = makePaper('2605.20002');
+    const runOutput = {
+      runId: 'ledger-run',
+      invokedAt: ISO_NOW,
+      options: DEFAULT_OPTIONS,
+      totalsByCategory: { 'cs.AI': 2 },
+      totalsByDomain: { 'agent-orchestration': 1, 'skill-design': 1, 'code-gen': 1, 'memory-retrieval': 1 },
+      fetchedCount: 2,
+      rankedCount: 2,
+      dedupSkipCount: 0,
+      queue: [
+        { paper: paper1, relevance: makeScore(0.9), rank: 1 },
+        { paper: paper2, relevance: makeScore(0.8), rank: 2 },
+      ],
+      runtimeMs: 500,
+    };
+    const queuePath = path.join(queueDir, 'queue.json');
+    fs.writeFileSync(queuePath, JSON.stringify(runOutput), 'utf-8');
+
+    const mockScLearn = vi.mocked(scLearn);
+    const ok = (sessionId: string) => ({
+      success: true,
+      sessionId,
+      report: {
+        markdown: '# report', sessionId,
+        primitivesAdded: 1, primitivesUpdated: 0, primitivesSkipped: 0,
+        conflictsPresented: 0, skillCount: 1, agentCount: 0, teamCount: 0,
+      },
+      changeset: null,
+      errors: [],
+    });
+    mockScLearn
+      .mockResolvedValueOnce(ok('learn-a'))
+      .mockResolvedValueOnce({ ...ok('learn-b'), success: false, errors: ['boom'] });
+
+    const dedupModule = await import('./dedup.js');
+    vi.spyOn(dedupModule, 'saveSeenIds').mockImplementation(() => {});
+    vi.spyOn(dedupModule, 'loadSeenIds').mockReturnValue({ version: 1, ids: {} });
+
+    const recorded: Array<{ contentHash: string; sourceId: string; origin: string }> = [];
+    const ledger = {
+      async record(entry: { contentHash: string; provenance: { origin: string; sourceId: string } }) {
+        recorded.push({ contentHash: entry.contentHash, sourceId: entry.provenance.sourceId, origin: entry.provenance.origin });
+        return { entry, appended: true };
+      },
+      async has() { return false; },
+      async findByHash() { return []; },
+      async findBySource() { return []; },
+      async list() { return []; },
+    };
+
+    const result = await ingestQueue(queuePath, {
+      dryRun: true,
+      seenIdsPath: seenPath,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ledger: ledger as any,
+    });
+
+    // Only the successful ingest is mirrored into the ledger.
+    expect(result.successCount).toBe(1);
+    expect(recorded).toHaveLength(1);
+    expect(recorded[0].sourceId).toBe('2605.20001');
+    expect(recorded[0].origin).toBe('arxiv');
+    expect(recorded[0].contentHash).toMatch(/^[0-9a-f]{64}$/);
+
+    vi.restoreAllMocks();
+    fs.rmSync(queueDir, { recursive: true, force: true });
+  });
 });
