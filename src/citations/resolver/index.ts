@@ -33,3 +33,6 @@ export { NasaNtrsAdapter } from './adapters/nasa-ntrs.js';
 export { GitHubAdapter } from './adapters/github.js';
 export { ArchiveOrgAdapter } from './adapters/archive-org.js';
 export { GenericWebAdapter } from './adapters/generic-web.js';
+export { SemanticScholarAdapter } from './adapters/semantic-scholar.js';
+export { DblpAdapter } from './adapters/dblp.js';
+export { PubMedAdapter } from './adapters/pubmed.js';

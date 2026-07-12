@@ -26,7 +26,8 @@ export type CitedWorkType = z.infer<typeof CitedWorkTypeSchema>;
 
 /** API sources for citation resolution. */
 export const SourceApiSchema = z.enum([
-  'crossref', 'openalex', 'nasa-ntrs', 'github', 'archive-org', 'manual', 'extracted',
+  'crossref', 'openalex', 'nasa-ntrs', 'github', 'archive-org',
+  'semantic-scholar', 'dblp', 'pubmed', 'manual', 'extracted',
 ]);
 export type SourceApi = z.infer<typeof SourceApiSchema>;
 
