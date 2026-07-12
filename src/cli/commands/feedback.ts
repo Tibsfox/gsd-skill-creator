@@ -182,8 +182,93 @@ export async function feedbackCommand(
       p.log.message('  feedback, fb              Show feedback stats');
       p.log.message('  feedback list <skill>     List feedback for a skill');
       p.log.message('  feedback record --skill=<name> --original=<file|-> --corrected=<file|->');
-      p.log.message('  feedback quarantine [list|show <id>|accept <id> [--skill]|dismiss <id>]');
+      p.log.message('  feedback quarantine [list|triage|show <id>|accept <id> [--skill]|dismiss <id>]');
       return 1;
+  }
+}
+
+/**
+ * Promote a single attributed candidate into the live feedback ledger.
+ *
+ * The sole bridge from quarantine into `feedback.jsonl`, shared by `accept` and
+ * `triage`. Runs the promotion critical section under a cross-process FileLock so
+ * two simultaneous promotions cannot both write, re-reads under the lock (a
+ * concurrent review may have resolved the candidate), re-runs the significance
+ * gate, and records keyed on `sourceCandidateId` so a crash-replay appends once.
+ * The caller must have already resolved + fail-closed-validated `chosen`.
+ */
+async function promoteCandidate(
+  store: CorrectionQuarantineStore,
+  feedbackStore: FeedbackStore,
+  patternsDir: string,
+  id: string,
+  chosen: string,
+): Promise<number> {
+  const lock = new FileLock(join(patternsDir, '.feedback-promotion.lock'));
+  let acq = await lock.acquire(`promote:${id}`);
+  for (let attempt = 0; attempt < 30 && !acq.acquired; attempt++) {
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    acq = await lock.acquire(`promote:${id}`);
+  }
+  if (!acq.acquired) {
+    p.log.error(`Could not acquire the promotion lock — ${acq.message} Try again in a moment.`);
+    return 1;
+  }
+
+  try {
+    // Re-read under the lock: a concurrent review may have already resolved this
+    // candidate while we were resolving the attribution above.
+    const fresh = await store.getById(id);
+    if (!fresh || fresh.status !== 'pending') {
+      p.log.info(
+        `Candidate '${id}' was already ${fresh?.status ?? 'removed'} by a concurrent review — nothing to do.`,
+      );
+      return 0;
+    }
+
+    // Significance gate re-run at promote time (identical to `feedback record`).
+    const detection = new FeedbackDetector().detect(fresh.original, fresh.corrected, chosen);
+    if (!detection) {
+      await store.updateStatus(id, {
+        status: 'dismissed',
+        reviewedAt: new Date().toISOString(),
+        dismissedReason: 'not_significant',
+      });
+      p.log.info('Change is not a significant correction — candidate dismissed, nothing recorded.');
+      return 0;
+    }
+
+    // Live write — keyed on the candidate id so a replayed accept (crash between
+    // this write and the status flip below) appends exactly once.
+    const ev = await feedbackStore.record({
+      type: 'correction',
+      skillName: chosen,
+      sessionId: fresh.sessionId,
+      original: fresh.original,
+      corrected: fresh.corrected,
+      diff: detection.analysis.changes,
+      sourceCandidateId: fresh.id,
+    });
+    await store.updateStatus(id, {
+      status: 'promoted',
+      reviewedAt: new Date().toISOString(),
+      promotedFeedbackId: ev.id,
+    });
+
+    const total = await feedbackStore.count(chosen);
+    const need = DEFAULT_BOUNDED_CONFIG.minCorrectionsForRefinement;
+    p.log.success(`Promoted candidate '${id}' → correction for '${chosen}'.`);
+    p.log.message(
+      pc.dim(
+        total >= need
+          ? `  ${total} correction(s) recorded — eligible for a refinement proposal ` +
+              `(run \`skill-creator refine ${chosen}\`).`
+          : `  ${total}/${need} correction(s) toward a refinement proposal.`,
+      ),
+    );
+    return 0;
+  } finally {
+    await acq.release();
   }
 }
 
@@ -333,85 +418,135 @@ async function quarantineSubcommand(
         return 1;
       }
 
-      // Cross-process lock: serialize the promotion critical section so two
-      // simultaneous `accept <id>` invocations cannot both write the correction.
-      // (The sourceCandidateId idempotency key already covers the crash-replay
-      // case; this closes the concurrent-process window.) The read-only exists /
-      // attribution work above is intentionally OUTSIDE the lock so user prompts
-      // never hold it.
-      const lock = new FileLock(join(patternsDir, '.feedback-promotion.lock'));
-      let acq = await lock.acquire(`promote:${id}`);
-      for (let attempt = 0; attempt < 30 && !acq.acquired; attempt++) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        acq = await lock.acquire(`promote:${id}`);
+      return promoteCandidate(store, feedbackStore, patternsDir, id, chosen);
+    }
+
+    case 'triage': {
+      const filter = flagValue(args, '--skill-filter');
+      const pending = await store.listPending();
+      const candidates = filter
+        ? pending.filter((c) => c.skillHints.some((h) => h.skill === filter))
+        : pending;
+
+      if (candidates.length === 0) {
+        p.log.info(filter ? `No pending candidates hinting '${filter}'.` : 'No pending correction candidates.');
+        return 0;
       }
-      if (!acq.acquired) {
-        p.log.error(`Could not acquire the promotion lock — ${acq.message} Try again in a moment.`);
+
+      // Triage is a reviewed batch pass — accept still routes through the exact
+      // FileLock + significance re-gate + idempotency chokepoint that `accept` uses,
+      // and there is no confidence-based auto-accept. It is interactive by design.
+      if (!process.stdin.isTTY) {
+        p.log.error(
+          '`feedback quarantine triage` is interactive — run it in a terminal, ' +
+            'or use `accept <id> --skill` / `dismiss <id>` per candidate.',
+        );
         return 1;
       }
 
-      try {
-        // Re-read under the lock: a concurrent review may have already resolved
-        // this candidate while we were resolving the attribution above.
-        const fresh = await store.getById(id);
-        if (!fresh || fresh.status !== 'pending') {
-          p.log.info(
-            `Candidate '${id}' was already ${fresh?.status ?? 'removed'} by a concurrent review — nothing to do.`,
-          );
-          return 0;
-        }
+      const skillStore = new SkillStore(skillsDir ?? '.claude/skills');
+      const groupOf = (c: (typeof candidates)[number]): string =>
+        c.skillHints.find((h) => !h.ambient)?.skill ?? c.skillHints[0]?.skill ?? '(unattributed)';
 
-        // Significance gate re-run at promote time (identical to `feedback record`).
-        const detection = new FeedbackDetector().detect(fresh.original, fresh.corrected, chosen);
-        if (!detection) {
-          await store.updateStatus(id, {
-            status: 'dismissed',
-            reviewedAt: new Date().toISOString(),
-            dismissedReason: 'not_significant',
-          });
-          p.log.info('Change is not a significant correction — candidate dismissed, nothing recorded.');
-          return 0;
-        }
-
-        // Live write — the only bridge from quarantine into the feedback ledger.
-        // Keyed on the candidate id so a replayed accept (crash between this write
-        // and the status flip below) appends exactly once, never double-counting.
-        const ev = await feedbackStore.record({
-          type: 'correction',
-          skillName: chosen,
-          sessionId: fresh.sessionId,
-          original: fresh.original,
-          corrected: fresh.corrected,
-          diff: detection.analysis.changes,
-          sourceCandidateId: fresh.id,
-        });
-        await store.updateStatus(id, {
-          status: 'promoted',
-          reviewedAt: new Date().toISOString(),
-          promotedFeedbackId: ev.id,
-        });
-
-        const total = await feedbackStore.count(chosen);
-        const need = DEFAULT_BOUNDED_CONFIG.minCorrectionsForRefinement;
-        p.log.success(`Promoted candidate '${id}' → correction for '${chosen}'.`);
-        p.log.message(
-          pc.dim(
-            total >= need
-              ? `  ${total} correction(s) recorded — eligible for a refinement proposal ` +
-                  `(run \`skill-creator refine ${chosen}\`).`
-              : `  ${total}/${need} correction(s) toward a refinement proposal.`,
-          ),
-        );
-        return 0;
-      } finally {
-        await acq.release();
+      const groups = new Map<string, typeof candidates>();
+      for (const c of candidates) {
+        const g = groupOf(c);
+        const arr = groups.get(g) ?? [];
+        arr.push(c);
+        groups.set(g, arr);
       }
+
+      p.intro(`Triaging ${candidates.length} candidate(s) across ${groups.size} hint group(s).`);
+      let promoted = 0;
+      let dismissed = 0;
+      let skipped = 0;
+
+      outer: for (const [group, items] of groups) {
+        p.log.message('');
+        p.log.message(pc.bold(`Hint group: ${group} (${items.length})`));
+        for (const c of items) {
+          p.log.message(`  ${pc.bold(c.id)} ${c.filePath}`);
+          p.log.message(pc.dim(`    ${c.signal} · sim=${c.preSimilarity.toFixed(2)} · "${c.interposingUserText.slice(0, 60)}"`));
+
+          const action = await p.select({
+            message: `Candidate ${c.id}?`,
+            options: [
+              { value: 'accept', label: 'Accept → attribute & promote' },
+              { value: 'dismiss', label: 'Dismiss (nothing recorded)' },
+              { value: 'skip', label: 'Skip (leave pending)' },
+              { value: 'quit', label: 'Stop triage' },
+            ],
+          });
+          if (p.isCancel(action) || action === 'quit') break outer;
+          if (action === 'skip') {
+            skipped++;
+            continue;
+          }
+          if (action === 'dismiss') {
+            await store.updateStatus(c.id, {
+              status: 'dismissed',
+              reviewedAt: new Date().toISOString(),
+              dismissedReason: flagValue(args, '--reason') ?? 'triaged',
+            });
+            dismissed++;
+            continue;
+          }
+
+          // Human attribution — offer the ranked hints, else let them type a name.
+          const sel = await p.select({
+            message: `Attribute '${c.id}' to which skill?`,
+            options: [
+              ...c.skillHints.map((h) => ({
+                value: h.skill,
+                label: h.ambient ? `${h.skill} (ambient — unlikely)` : h.skill,
+              })),
+              { value: '__other__', label: 'Type another skill name…' },
+            ],
+            initialValue: c.skillHints.find((h) => !h.ambient)?.skill ?? c.skillHints[0]?.skill,
+          });
+          if (p.isCancel(sel)) {
+            skipped++;
+            continue;
+          }
+          let chosen: string | undefined = sel === '__other__' ? undefined : (sel as string);
+          if (!chosen) {
+            const typed = await p.text({ message: 'Skill name:' });
+            if (p.isCancel(typed) || !typed) {
+              skipped++;
+              continue;
+            }
+            chosen = typed as string;
+          }
+
+          // Fail-closed skill-exists gate (identical to `accept` / `feedback record`).
+          let known: boolean;
+          try {
+            known = await skillStore.exists(chosen);
+          } catch (err) {
+            p.log.error(`Invalid skill name '${chosen}': ${(err as Error).message} — skipped.`);
+            skipped++;
+            continue;
+          }
+          if (!known) {
+            p.log.error(`Unknown skill '${chosen}' — skipped (fail-closed; nothing recorded).`);
+            skipped++;
+            continue;
+          }
+
+          const code = await promoteCandidate(store, feedbackStore, patternsDir, c.id, chosen);
+          if (code === 0) promoted++;
+          else skipped++;
+        }
+      }
+
+      p.outro(`Triage done — ${promoted} promoted, ${dismissed} dismissed, ${skipped} skipped.`);
+      return 0;
     }
 
     default:
       p.log.error(`Unknown quarantine action: ${action}`);
       p.log.message(
-        'Usage: feedback quarantine [list|show <id>|accept <id> [--skill=<name>]|dismiss <id> [--reason=<text>]]',
+        'Usage: feedback quarantine [list|triage [--skill-filter=<name>]|show <id>|accept <id> [--skill=<name>]|dismiss <id> [--reason=<text>]]',
       );
       return 1;
   }
