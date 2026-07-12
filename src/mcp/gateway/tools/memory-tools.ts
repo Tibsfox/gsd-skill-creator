@@ -24,10 +24,11 @@ import {
 
 // ── Shared Schemas ─────────────────────────────────────────────────────────
 
-// Mirror of the canonical MemoryType (src/memory/types.ts) — keep the six
+// Mirror of the canonical MemoryType (src/memory/types.ts) — keep these
 // values in sync with that union. (MEM-3)
 const MemoryTypeSchema = z.enum([
   'user', 'feedback', 'project', 'reference', 'episodic', 'semantic',
+  'lesson', 'finding',
 ]);
 
 const MemoryScopeSchema = z.enum([

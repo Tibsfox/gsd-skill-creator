@@ -167,6 +167,21 @@ export {
   type ObservationSink,
 } from './observation-hooks.js';
 
+// ============================================================================
+// Memory sink (knowledge spine write path)
+// ============================================================================
+
+export {
+  MemorySink,
+  createMemorySink,
+  patternToMemoryRecord,
+} from './memory-sink.js';
+export type {
+  PatternMemoryWriter,
+  PatternDetector,
+  MemorySinkOptions,
+} from './memory-sink.js';
+
 export {
   ActivityCompletionSchema,
   AssessmentResultSchema,

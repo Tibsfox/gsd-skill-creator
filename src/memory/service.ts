@@ -825,6 +825,7 @@ export class MemoryService {
     const typeCounts: Record<MemoryType, number> = {
       user: 0, feedback: 0, project: 0,
       reference: 0, episodic: 0, semantic: 0,
+      lesson: 0, finding: 0,
     };
     let activeCount = 0;
     let deprecatedCount = 0;

@@ -447,7 +447,9 @@ export type MemoryType =
   | 'project'    // Ongoing work, goals, deadlines
   | 'reference'  // Pointers to external resources
   | 'episodic'   // Session events, what happened
-  | 'semantic';  // Concepts, relationships, facts
+  | 'semantic'   // Concepts, relationships, facts
+  | 'lesson'     // A mined learning pattern promoted into recallable memory
+  | 'finding';   // A verified observation/finding promoted into recallable memory
 
 /** A memory record that can exist at any LOD tier. */
 export interface MemoryRecord {
