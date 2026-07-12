@@ -6,7 +6,7 @@
  *
  * - list                        all discovered departments + coverage counts
  * - explore <dept[/wing[/id]]>  resolve a path through the department hierarchy
- * - translate <conceptId>       (deferred) Rosetta cross-panel translation
+ * - translate <conceptId>       render a concept through a Rosetta language panel
  * - try <dept> [session]        run / list a department's try-sessions
  *
  * The `.college/` tree lives outside the `src/` rootDir, so its classes cannot
@@ -124,6 +124,68 @@ interface XRefEdgesBarrel {
   ALL_XREF_EDGES: ReadonlyArray<{ from: string; to: string }>;
 }
 
+type TranslatePanelId =
+  | 'python'
+  | 'cpp'
+  | 'java'
+  | 'lisp'
+  | 'pascal'
+  | 'fortran'
+  | 'perl'
+  | 'algol'
+  | 'unison'
+  | 'natural';
+
+interface PanelInstanceLike {
+  readonly panelId: TranslatePanelId;
+}
+
+interface RenderedExpressionLike {
+  content: string;
+  panelId: string;
+  tokenCost: number;
+  crossReferences?: string[];
+}
+
+interface TranslationLike {
+  id: string;
+  primary: RenderedExpressionLike;
+  secondary?: RenderedExpressionLike[];
+  concept: { id: string; name?: string };
+  panels: { primary: string; secondary?: string[]; rationale: string };
+  dependenciesLoaded: Array<{ id: string; name?: string }>;
+}
+
+interface TranslationContextLike {
+  userExpertise: string;
+  requestedFormat?: string;
+  currentDomain: string;
+  recentPanels: string[];
+  taskType: string;
+}
+
+interface RosettaCoreLike {
+  translate(conceptId: string, context: TranslationContextLike): Promise<TranslationLike>;
+}
+
+interface PanelRouterLike {
+  registerPanel(panel: PanelInstanceLike): void;
+}
+
+interface TranslateStackBarrel {
+  ConceptRegistry: new () => ConceptRegistryLike;
+  ConceptNotFoundError: new (...args: unknown[]) => Error;
+  RosettaCore: new (opts: {
+    registry: ConceptRegistryLike;
+    router: PanelRouterLike;
+    renderer: unknown;
+    panelInstances: Map<string, PanelInstanceLike>;
+  }) => RosettaCoreLike;
+  PanelRouter: new () => PanelRouterLike;
+  ExpressionRenderer: new () => unknown;
+  panels: PanelInstanceLike[];
+}
+
 // ─── Argument parsing (pure, tested) ────────────────────────────────────────
 
 export interface ParsedCollegeArgs {
@@ -135,6 +197,8 @@ export interface ParsedCollegeArgs {
   wing?: string;
   dept?: string;
   out?: string;
+  task?: string;
+  level?: string;
   json: boolean;
   help: boolean;
 }
@@ -152,6 +216,8 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
   let wing: string | undefined;
   let dept: string | undefined;
   let out: string | undefined;
+  let task: string | undefined;
+  let level: string | undefined;
   let json = false;
   let help = false;
   for (let i = 0; i < args.length; i++) {
@@ -184,6 +250,14 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
       dept = args[++i];
     } else if (a.startsWith('--dept=')) {
       dept = a.slice('--dept='.length);
+    } else if (a === '--task') {
+      task = args[++i];
+    } else if (a.startsWith('--task=')) {
+      task = a.slice('--task='.length);
+    } else if (a === '--level') {
+      level = args[++i];
+    } else if (a.startsWith('--level=')) {
+      level = a.slice('--level='.length);
     } else if (!a.startsWith('-')) {
       positional.push(a);
     }
@@ -197,6 +271,8 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
     wing,
     dept,
     out,
+    task,
+    level,
     json,
     help,
   };
@@ -253,6 +329,49 @@ async function loadXRefEdges(): Promise<XRefEdgesBarrel> {
   return (await import(
     moduleUrl('.college', 'cross-references', 'dependency-graph-xrefs')
   )) as unknown as XRefEdgesBarrel;
+}
+
+/** The nine language panels the Rosetta stack can render into. */
+const PANEL_MODULES: ReadonlyArray<readonly [string, string]> = [
+  ['python-panel', 'PythonPanel'],
+  ['cpp-panel', 'CppPanel'],
+  ['java-panel', 'JavaPanel'],
+  ['lisp-panel', 'LispPanel'],
+  ['pascal-panel', 'PascalPanel'],
+  ['fortran-panel', 'FortranPanel'],
+  ['perl-panel', 'PerlPanel'],
+  ['algol-panel', 'AlgolPanel'],
+  ['unison-panel', 'UnisonPanel'],
+];
+
+/**
+ * Assemble the full Rosetta translation stack (registry + engine + router +
+ * renderer + the nine panel instances) via computed dynamic imports, since the
+ * concrete classes live outside src/ rootDir.
+ */
+async function loadTranslateStack(): Promise<TranslateStackBarrel> {
+  const [reg, eng, rtr, rnd] = await Promise.all([
+    import(moduleUrl('.college', 'rosetta-core', 'concept-registry')),
+    import(moduleUrl('.college', 'rosetta-core', 'engine')),
+    import(moduleUrl('.college', 'rosetta-core', 'panel-router')),
+    import(moduleUrl('.college', 'rosetta-core', 'expression-renderer')),
+  ]);
+  const panels: PanelInstanceLike[] = [];
+  for (const [mod, cls] of PANEL_MODULES) {
+    const m = (await import(moduleUrl('.college', 'panels', mod))) as Record<
+      string,
+      new () => PanelInstanceLike
+    >;
+    panels.push(new m[cls]!());
+  }
+  return {
+    ConceptRegistry: reg.ConceptRegistry,
+    ConceptNotFoundError: reg.ConceptNotFoundError,
+    RosettaCore: eng.RosettaCore,
+    PanelRouter: rtr.PanelRouter,
+    ExpressionRenderer: rnd.ExpressionRenderer,
+    panels,
+  } as TranslateStackBarrel;
 }
 
 // ─── Subcommand handlers ────────────────────────────────────────────────────
@@ -326,19 +445,101 @@ async function handleExplore(pathArg: string | undefined): Promise<number> {
   }
 }
 
-function handleTranslate(conceptId: string | undefined, to: string | undefined): number {
-  // Deferred: a real translation needs a fully wired RosettaCore (concept
-  // registry + panel router + expression renderer + panel instances) and a
-  // TranslationContext. Those cross-subsystem seams are a follow-up; the verb
-  // is registered here so the front door stays complete and stable.
-  const target = to ? ` --to ${to}` : '';
-  const subject = conceptId ?? '<conceptId>';
-  p.log.warn('college translate is not yet wired.');
-  p.log.message(
-    `Requested: translate ${subject}${target}. Cross-panel translation requires the` +
-      ' Rosetta panel/renderer stack and a populated concept registry (follow-up).',
-  );
-  return 0;
+const VALID_TRANSLATE_PANELS: readonly string[] = [
+  'python',
+  'cpp',
+  'java',
+  'lisp',
+  'pascal',
+  'fortran',
+  'perl',
+  'algol',
+  'unison',
+  'natural',
+];
+
+async function handleTranslate(
+  conceptId: string | undefined,
+  to: string | undefined,
+  taskType: string | undefined,
+  expertise: string | undefined,
+  json: boolean,
+): Promise<number> {
+  if (!conceptId) {
+    p.log.error(
+      'Usage: skill-creator college translate <conceptId> [--to <panel>] [--task <type>] [--level <expertise>] [--json]',
+    );
+    return 1;
+  }
+  if (to && !VALID_TRANSLATE_PANELS.includes(to)) {
+    p.log.error(`Unknown panel '${to}'. Valid panels: ${VALID_TRANSLATE_PANELS.join(', ')}.`);
+    return 1;
+  }
+  try {
+    const { CollegeLoader } = await loadCollegeBarrel();
+    const stack = await loadTranslateStack();
+    const loader = new CollegeLoader(departmentsPath());
+    const registry = new stack.ConceptRegistry();
+    loader.populateRegistry(registry);
+
+    const router = new stack.PanelRouter();
+    const panelInstances = new Map<string, PanelInstanceLike>();
+    for (const panel of stack.panels) {
+      router.registerPanel(panel);
+      panelInstances.set(panel.panelId, panel);
+    }
+    const renderer = new stack.ExpressionRenderer();
+    const core = new stack.RosettaCore({ registry, router, renderer, panelInstances });
+
+    const context: TranslationContextLike = {
+      userExpertise: expertise ?? 'intermediate',
+      requestedFormat: to,
+      currentDomain: 'general',
+      recentPanels: [],
+      taskType: taskType ?? 'explain',
+    };
+
+    let translation: TranslationLike;
+    try {
+      translation = await core.translate(conceptId, context);
+    } catch (err) {
+      if (err instanceof stack.ConceptNotFoundError || /not found/i.test((err as Error).message)) {
+        p.log.error(
+          `No concept '${conceptId}' in the College registry. ` +
+            'Run `skill-creator college list` or `college explore <dept>` to find concept ids.',
+        );
+        return 1;
+      }
+      throw err;
+    }
+
+    if (json) {
+      console.log(JSON.stringify(translation, null, 2));
+      return 0;
+    }
+
+    p.log.message('');
+    p.log.message(
+      pc.bold(`${translation.concept.name ?? translation.concept.id} (${translation.concept.id})`),
+    );
+    p.log.message(pc.dim(`  panel: ${translation.panels.primary} — ${translation.panels.rationale}`));
+    p.log.message('');
+    console.log(translation.primary.content);
+    p.log.message('');
+    p.log.message(pc.dim(`  ~${translation.primary.tokenCost} tokens`));
+    if (translation.panels.secondary && translation.panels.secondary.length > 0) {
+      p.log.message(pc.dim(`  also available: ${translation.panels.secondary.join(', ')}`));
+    }
+    if (translation.dependenciesLoaded.length > 0) {
+      p.log.message(
+        pc.dim(`  depends on: ${translation.dependenciesLoaded.map((d) => d.id).join(', ')}`),
+      );
+    }
+    return 0;
+  } catch (err) {
+    p.log.error(`Translation failed: ${(err as Error).message}`);
+    return 1;
+  }
 }
 
 async function handleTry(
@@ -590,7 +791,9 @@ function printCollegeHelp(): void {
   p.log.message('  Subcommands:');
   p.log.message(`    ${pc.cyan('college list')}                        List all departments and coverage`);
   p.log.message(`    ${pc.cyan('college explore <dept[/wing[/id]]>')}  Resolve a path in the hierarchy`);
-  p.log.message(`    ${pc.cyan('college translate <conceptId>')}       Cross-panel translation (deferred)`);
+  p.log.message(
+    `    ${pc.cyan('college translate <conceptId>')}       Render a concept through a Rosetta panel (--to, --task, --level, --json)`,
+  );
   p.log.message(`    ${pc.cyan('college try <dept> [session]')}        Run or list try-sessions`);
   p.log.message(
     `    ${pc.cyan('college scaffold-department <slug>')}   Mint a discoverable .college tree (--topic, --wings)`,
@@ -608,7 +811,7 @@ function printCollegeHelp(): void {
   p.log.message('  Examples:');
   p.log.message('    skill-creator college list');
   p.log.message('    skill-creator college explore mathematics/algebra');
-  p.log.message('    skill-creator college translate exponential-decay --to graph');
+  p.log.message('    skill-creator college translate math-complex-numbers --to python');
   p.log.message('    skill-creator college try chemistry first-reaction');
 }
 
@@ -637,7 +840,7 @@ export async function collegeCommand(args: string[]): Promise<number> {
       return handleExplore(parsed.positional[0]);
     case 'translate':
     case 'tr':
-      return handleTranslate(parsed.positional[0], parsed.to);
+      return handleTranslate(parsed.positional[0], parsed.to, parsed.task, parsed.level, parsed.json);
     case 'try':
       return handleTry(parsed.positional[0], parsed.positional[1]);
     case 'scaffold-department':

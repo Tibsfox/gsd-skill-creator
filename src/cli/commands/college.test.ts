@@ -28,6 +28,12 @@ describe('parseCollegeArgs', () => {
     expect(r.positional).toEqual(['x']);
   });
 
+  it('captures --task and --level for translate', () => {
+    const r = parseCollegeArgs(['translate', 'x', '--task', 'implement', '--level', 'expert']);
+    expect(r.task).toBe('implement');
+    expect(r.level).toBe('expert');
+  });
+
   it('captures --topic and --wings for scaffold-department', () => {
     const r = parseCollegeArgs([
       'scaffold-department',
@@ -90,9 +96,39 @@ describe('collegeCommand routing', () => {
     expect(code).toBe(1);
   });
 
-  it('translate is a graceful no-op stub (deferred wiring)', async () => {
-    const code = await collegeCommand(['translate', 'exponential-decay', '--to', 'graph']);
+  it('translate renders a real concept through a panel and returns 0', async () => {
+    const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const code = await collegeCommand(['translate', 'math-complex-numbers', '--to', 'python']);
     expect(code).toBe(0);
+    const printed = spy.mock.calls.map((c) => String(c[0])).join('\n');
+    expect(printed).toContain('Complex Numbers');
+  });
+
+  it('translate --json emits a parseable translation for the concept', async () => {
+    const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const code = await collegeCommand(['translate', 'math-complex-numbers', '--json']);
+    expect(code).toBe(0);
+    const printed = spy.mock.calls.map((c) => String(c[0])).join('\n');
+    const t = JSON.parse(printed);
+    expect(t.concept.id).toBe('math-complex-numbers');
+    expect(typeof t.primary.content).toBe('string');
+    expect(t.panels.primary).toBeTruthy();
+  });
+
+  it('translate on an unknown concept exits 1', async () => {
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    const code = await collegeCommand(['translate', 'definitely-not-a-real-concept-xyz']);
+    expect(code).toBe(1);
+  });
+
+  it('translate rejects an unknown panel with exit 1', async () => {
+    const code = await collegeCommand(['translate', 'math-complex-numbers', '--to', 'ruby']);
+    expect(code).toBe(1);
+  });
+
+  it('translate without a conceptId exits 1', async () => {
+    const code = await collegeCommand(['translate']);
+    expect(code).toBe(1);
   });
 
   it('scaffold-department without required flags exits 1', async () => {
