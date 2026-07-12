@@ -35,3 +35,21 @@ ALLOW_WWW_COMMIT=1 git commit ...
 ```
 
 Use sparingly; prefer extending the ignore rule or relocating the content.
+
+## pre-commit — skill/agent frontmatter gate
+
+Runs `skill-frontmatter-doctor --strict` over any staged `SKILL.md` or
+`agents/*.md` file, blocking the commit on hard frontmatter defects (echoed or
+truncated triggers, `tools` as a YAML array instead of a comma-separated
+string, description length out of bounds, missing `Use when...`).
+
+Only **staged** skill/agent files are scanned (`git diff --cached`), so the
+corpus's pre-existing findings never block an unrelated commit — you fix
+frontmatter only on the file you're actually editing. Commits that touch no
+skill/agent frontmatter never invoke the doctor.
+
+### Override (emergency)
+
+```bash
+SC_SKIP_FM_DOCTOR=1 git commit ...
+```

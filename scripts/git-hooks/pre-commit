@@ -25,4 +25,20 @@ if [ -n "$staged" ]; then
   exit 1
 fi
 
+# Gate staged skill/agent frontmatter through skill-frontmatter-doctor --strict.
+# Only STAGED SKILL.md and agents/*.md files are checked, so the corpus's
+# pre-existing findings never block a commit that doesn't touch them — you fix
+# frontmatter only on the file you're editing.
+#
+# Bypass (emergency): SC_SKIP_FM_DOCTOR=1 git commit ...
+fm_staged=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '(^|/)SKILL\.md$|(^|/)agents/[^/]+\.md$' || true)
+
+if [ -n "$fm_staged" ] && [ "${SC_SKIP_FM_DOCTOR:-0}" != "1" ]; then
+  if ! node tools/skill-frontmatter-doctor.mjs --strict $fm_staged; then
+    printf '\033[31m[pre-commit] BLOCKED: staged skill/agent frontmatter has hard defects (above).\033[0m\n' >&2
+    printf '\n  Fix the frontmatter, or override (only if you really mean it):\n    SC_SKIP_FM_DOCTOR=1 git commit ...\n\n' >&2
+    exit 1
+  fi
+fi
+
 exit 0
