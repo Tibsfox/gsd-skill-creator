@@ -125,6 +125,20 @@ describe('feedback quarantine', () => {
     expect(promoted.promotedFeedbackId).toBe(pre.id); // reused the existing event
   });
 
+  it('serializes two concurrent accepts on the same candidate (exactly one write)', async () => {
+    const c = await q().add(candidate());
+    const [a, b] = await Promise.all([
+      accept(c.id, '--skill=my-skill'),
+      accept(c.id, '--skill=my-skill'),
+    ]);
+    // Both return success (one promotes, one sees it already promoted).
+    expect(a).toBe(0);
+    expect(b).toBe(0);
+    expect(await feedback().count()).toBe(1); // exactly one correction, no double-write
+    const promoted = (await q().getById(c.id))!;
+    expect(promoted.status).toBe('promoted');
+  });
+
   it('dismiss records a dismissal and never writes the feedback ledger', async () => {
     const c = await q().add(candidate());
     const code = await feedbackCommand(

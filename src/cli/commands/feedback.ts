@@ -1,11 +1,13 @@
 import { readFile } from 'node:fs/promises';
 import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { FeedbackStore } from '../../learning/index.js';
 import { FeedbackDetector } from '../../learning/feedback-detector.js';
 import { CorrectionQuarantineStore } from '../../learning/correction-quarantine.js';
 import { SkillStore } from '../../storage/skill-store.js';
+import { FileLock } from '../../safety/file-lock.js';
 import { DEFAULT_BOUNDED_CONFIG } from '../../types/learning.js';
 
 /** Read a `--name=value` flag from an argv slice. */
@@ -331,48 +333,79 @@ async function quarantineSubcommand(
         return 1;
       }
 
-      // Significance gate re-run at promote time (identical to `feedback record`).
-      const detection = new FeedbackDetector().detect(c.original, c.corrected, chosen);
-      if (!detection) {
-        await store.updateStatus(id, {
-          status: 'dismissed',
-          reviewedAt: new Date().toISOString(),
-          dismissedReason: 'not_significant',
-        });
-        p.log.info('Change is not a significant correction — candidate dismissed, nothing recorded.');
-        return 0;
+      // Cross-process lock: serialize the promotion critical section so two
+      // simultaneous `accept <id>` invocations cannot both write the correction.
+      // (The sourceCandidateId idempotency key already covers the crash-replay
+      // case; this closes the concurrent-process window.) The read-only exists /
+      // attribution work above is intentionally OUTSIDE the lock so user prompts
+      // never hold it.
+      const lock = new FileLock(join(patternsDir, '.feedback-promotion.lock'));
+      let acq = await lock.acquire(`promote:${id}`);
+      for (let attempt = 0; attempt < 30 && !acq.acquired; attempt++) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        acq = await lock.acquire(`promote:${id}`);
+      }
+      if (!acq.acquired) {
+        p.log.error(`Could not acquire the promotion lock — ${acq.message} Try again in a moment.`);
+        return 1;
       }
 
-      // Live write — the only bridge from quarantine into the feedback ledger.
-      // Keyed on the candidate id so a replayed accept (crash between this write
-      // and the status flip below) appends exactly once, never double-counting.
-      const ev = await feedbackStore.record({
-        type: 'correction',
-        skillName: chosen,
-        sessionId: c.sessionId,
-        original: c.original,
-        corrected: c.corrected,
-        diff: detection.analysis.changes,
-        sourceCandidateId: c.id,
-      });
-      await store.updateStatus(id, {
-        status: 'promoted',
-        reviewedAt: new Date().toISOString(),
-        promotedFeedbackId: ev.id,
-      });
+      try {
+        // Re-read under the lock: a concurrent review may have already resolved
+        // this candidate while we were resolving the attribution above.
+        const fresh = await store.getById(id);
+        if (!fresh || fresh.status !== 'pending') {
+          p.log.info(
+            `Candidate '${id}' was already ${fresh?.status ?? 'removed'} by a concurrent review — nothing to do.`,
+          );
+          return 0;
+        }
 
-      const total = await feedbackStore.count(chosen);
-      const need = DEFAULT_BOUNDED_CONFIG.minCorrectionsForRefinement;
-      p.log.success(`Promoted candidate '${id}' → correction for '${chosen}'.`);
-      p.log.message(
-        pc.dim(
-          total >= need
-            ? `  ${total} correction(s) recorded — eligible for a refinement proposal ` +
-                `(run \`skill-creator refine ${chosen}\`).`
-            : `  ${total}/${need} correction(s) toward a refinement proposal.`,
-        ),
-      );
-      return 0;
+        // Significance gate re-run at promote time (identical to `feedback record`).
+        const detection = new FeedbackDetector().detect(fresh.original, fresh.corrected, chosen);
+        if (!detection) {
+          await store.updateStatus(id, {
+            status: 'dismissed',
+            reviewedAt: new Date().toISOString(),
+            dismissedReason: 'not_significant',
+          });
+          p.log.info('Change is not a significant correction — candidate dismissed, nothing recorded.');
+          return 0;
+        }
+
+        // Live write — the only bridge from quarantine into the feedback ledger.
+        // Keyed on the candidate id so a replayed accept (crash between this write
+        // and the status flip below) appends exactly once, never double-counting.
+        const ev = await feedbackStore.record({
+          type: 'correction',
+          skillName: chosen,
+          sessionId: fresh.sessionId,
+          original: fresh.original,
+          corrected: fresh.corrected,
+          diff: detection.analysis.changes,
+          sourceCandidateId: fresh.id,
+        });
+        await store.updateStatus(id, {
+          status: 'promoted',
+          reviewedAt: new Date().toISOString(),
+          promotedFeedbackId: ev.id,
+        });
+
+        const total = await feedbackStore.count(chosen);
+        const need = DEFAULT_BOUNDED_CONFIG.minCorrectionsForRefinement;
+        p.log.success(`Promoted candidate '${id}' → correction for '${chosen}'.`);
+        p.log.message(
+          pc.dim(
+            total >= need
+              ? `  ${total} correction(s) recorded — eligible for a refinement proposal ` +
+                  `(run \`skill-creator refine ${chosen}\`).`
+              : `  ${total}/${need} correction(s) toward a refinement proposal.`,
+          ),
+        );
+        return 0;
+      } finally {
+        await acq.release();
+      }
     }
 
     default:
