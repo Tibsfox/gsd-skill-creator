@@ -38,7 +38,22 @@ export class SnapshotManager {
     startTime?: number,
   ): Promise<SessionSnapshot | null> {
     const entries = await this.parser.parse(transcriptPath);
+    return this.generateFromEntries(entries, sessionId, activeSkills, startTime);
+  }
 
+  /**
+   * Build a SessionSnapshot from already-parsed transcript entries.
+   *
+   * Split out of generate() so a caller can parse the transcript ONCE and share
+   * the entries with other session-end consumers (item-7 correction detection),
+   * rather than parsing twice. Returns null for an empty entry list.
+   */
+  async generateFromEntries(
+    entries: TranscriptEntry[],
+    sessionId: string,
+    activeSkills: string[] = [],
+    startTime?: number,
+  ): Promise<SessionSnapshot | null> {
     if (entries.length === 0) {
       return null;
     }
