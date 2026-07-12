@@ -28,6 +28,20 @@ describe('parseCollegeArgs', () => {
     expect(r.positional).toEqual(['x']);
   });
 
+  it('captures --topic and --wings for scaffold-department', () => {
+    const r = parseCollegeArgs([
+      'scaffold-department',
+      'widgets',
+      '--topic',
+      'widget craft',
+      '--wings=alpha,beta',
+    ]);
+    expect(r.subcommand).toBe('scaffold-department');
+    expect(r.positional).toEqual(['widgets']);
+    expect(r.topic).toBe('widget craft');
+    expect(r.wings).toBe('alpha,beta');
+  });
+
   it('flags help and ignores unknown dashed tokens', () => {
     const r = parseCollegeArgs(['list', '--help', '--bogus']);
     expect(r.subcommand).toBe('list');
@@ -72,6 +86,12 @@ describe('collegeCommand routing', () => {
   it('translate is a graceful no-op stub (deferred wiring)', async () => {
     const code = await collegeCommand(['translate', 'exponential-decay', '--to', 'graph']);
     expect(code).toBe(0);
+  });
+
+  it('scaffold-department without required flags exits 1', async () => {
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    const code = await collegeCommand(['scaffold-department', 'my-dept']);
+    expect(code).toBe(1);
   });
 
   it('list wires through to the real CollegeLoader and returns 0', async () => {

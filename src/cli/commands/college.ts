@@ -107,16 +107,21 @@ export interface ParsedCollegeArgs {
   subcommand: string | undefined;
   positional: string[];
   to?: string;
+  topic?: string;
+  wings?: string;
   help: boolean;
 }
 
 /**
- * Parse the argument slice after `college`. Recognises `--to <panel>` /
- * `--to=<panel>` and `--help`/`-h`; all other dashed tokens are ignored.
+ * Parse the argument slice after `college`. Recognises `--to <panel>`,
+ * `--topic <t>`, `--wings <a,b,c>` (and their `--flag=value` forms) plus
+ * `--help`/`-h`; all other dashed tokens are ignored.
  */
 export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
   const positional: string[] = [];
   let to: string | undefined;
+  let topic: string | undefined;
+  let wings: string | undefined;
   let help = false;
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
@@ -126,11 +131,19 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
       to = args[++i];
     } else if (a.startsWith('--to=')) {
       to = a.slice('--to='.length);
+    } else if (a === '--topic') {
+      topic = args[++i];
+    } else if (a.startsWith('--topic=')) {
+      topic = a.slice('--topic='.length);
+    } else if (a === '--wings') {
+      wings = args[++i];
+    } else if (a.startsWith('--wings=')) {
+      wings = a.slice('--wings='.length);
     } else if (!a.startsWith('-')) {
       positional.push(a);
     }
   }
-  return { subcommand: positional[0], positional: positional.slice(1), to, help };
+  return { subcommand: positional[0], positional: positional.slice(1), to, topic, wings, help };
 }
 
 // ─── Formatting (pure, tested) ──────────────────────────────────────────────
@@ -315,6 +328,47 @@ async function handleTry(
   }
 }
 
+async function handleScaffoldDepartment(
+  slug: string | undefined,
+  topic: string | undefined,
+  wingsCsv: string | undefined,
+): Promise<number> {
+  if (!slug || !topic || !wingsCsv) {
+    p.log.error(
+      'Usage: skill-creator college scaffold-department <slug> --topic <t> --wings a,b,c',
+    );
+    return 1;
+  }
+  const wings = wingsCsv
+    .split(',')
+    .map((w) => w.trim())
+    .filter(Boolean);
+  if (wings.length === 0) {
+    p.log.error('At least one wing is required (--wings a,b,c).');
+    return 1;
+  }
+  try {
+    const { scaffoldDepartment } = await import('../../college/scaffold-department.js');
+    const result = scaffoldDepartment({
+      slug,
+      topic,
+      wings,
+      targetRoot: departmentsPath(),
+    });
+    p.log.success(`Scaffolded department '${result.slug}' at ${result.departmentDir}`);
+    p.log.message(pc.bold(`  ${result.wings.length} wing(s):`));
+    for (const w of result.wings) {
+      p.log.message(`    ${w.id} — ${w.name} (${w.conceptId})`);
+    }
+    p.log.message(pc.dim(`  ${result.filesWritten.length} files written.`));
+    p.log.message('  Run: skill-creator college list');
+    return 0;
+  } catch (err) {
+    p.log.error(`Scaffold failed: ${(err as Error).message}`);
+    return 1;
+  }
+}
+
 // ─── Help ───────────────────────────────────────────────────────────────────
 
 function printCollegeHelp(): void {
@@ -326,6 +380,9 @@ function printCollegeHelp(): void {
   p.log.message(`    ${pc.cyan('college explore <dept[/wing[/id]]>')}  Resolve a path in the hierarchy`);
   p.log.message(`    ${pc.cyan('college translate <conceptId>')}       Cross-panel translation (deferred)`);
   p.log.message(`    ${pc.cyan('college try <dept> [session]')}        Run or list try-sessions`);
+  p.log.message(
+    `    ${pc.cyan('college scaffold-department <slug>')}   Mint a discoverable .college tree (--topic, --wings)`,
+  );
   p.log.message('');
   p.log.message('  Examples:');
   p.log.message('    skill-creator college list');
@@ -362,6 +419,9 @@ export async function collegeCommand(args: string[]): Promise<number> {
       return handleTranslate(parsed.positional[0], parsed.to);
     case 'try':
       return handleTry(parsed.positional[0], parsed.positional[1]);
+    case 'scaffold-department':
+    case 'scaffold-dept':
+      return handleScaffoldDepartment(parsed.positional[0], parsed.topic, parsed.wings);
     default:
       p.log.error(`Unknown college subcommand: ${parsed.subcommand}`);
       printCollegeHelp();
