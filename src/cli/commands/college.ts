@@ -17,8 +17,8 @@
  * dispatcher.
  */
 
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
@@ -40,6 +40,7 @@ interface ConceptLike {
   id: string;
   name?: string;
   description?: string;
+  relationships?: ReadonlyArray<{ type: string; targetId: string; description?: string }>;
 }
 
 interface WingContentLike {
@@ -131,7 +132,9 @@ export interface ParsedCollegeArgs {
   to?: string;
   topic?: string;
   wings?: string;
+  wing?: string;
   dept?: string;
+  out?: string;
   json: boolean;
   help: boolean;
 }
@@ -146,7 +149,9 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
   let to: string | undefined;
   let topic: string | undefined;
   let wings: string | undefined;
+  let wing: string | undefined;
   let dept: string | undefined;
+  let out: string | undefined;
   let json = false;
   let help = false;
   for (let i = 0; i < args.length; i++) {
@@ -167,6 +172,14 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
       wings = args[++i];
     } else if (a.startsWith('--wings=')) {
       wings = a.slice('--wings='.length);
+    } else if (a === '--wing') {
+      wing = args[++i];
+    } else if (a.startsWith('--wing=')) {
+      wing = a.slice('--wing='.length);
+    } else if (a === '--out') {
+      out = args[++i];
+    } else if (a.startsWith('--out=')) {
+      out = a.slice('--out='.length);
     } else if (a === '--dept') {
       dept = args[++i];
     } else if (a.startsWith('--dept=')) {
@@ -181,7 +194,9 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
     to,
     topic,
     wings,
+    wing,
     dept,
+    out,
     json,
     help,
   };
@@ -471,6 +486,101 @@ async function handleXrefSuggest(dept: string | undefined, json: boolean): Promi
   }
 }
 
+async function handleGenTrysession(
+  dept: string | undefined,
+  wing: string | undefined,
+  out: string | undefined,
+  json: boolean,
+): Promise<number> {
+  if (!dept) {
+    p.log.error('Usage: skill-creator college gen-trysession <dept> [--wing <id>] [--out <path>]');
+    return 1;
+  }
+  try {
+    const { CollegeLoader } = await loadCollegeBarrel();
+    const { generateTrySession, serializeTrySession, validateGeneratedSession } = await import(
+      '../../college/try-session-generator.js'
+    );
+    const loader = new CollegeLoader(departmentsPath());
+    const summary = await loader.loadSummary(dept);
+
+    const targetWings = wing ? summary.wings.filter((w) => w.id === wing) : summary.wings;
+    if (wing && targetWings.length === 0) {
+      p.log.error(
+        `Wing '${wing}' not found in department '${dept}'. ` +
+          `Available: ${summary.wings.map((w) => w.id).join(', ') || '(none)'}.`,
+      );
+      return 1;
+    }
+
+    const concepts: Array<{
+      id: string;
+      name?: string;
+      description?: string;
+      relationships?: ReadonlyArray<{ type: string; targetId: string; description?: string }>;
+    }> = [];
+    for (const w of targetWings) {
+      try {
+        const wc = await loader.loadWing(dept, w.id);
+        for (const c of wc.concepts) {
+          concepts.push({
+            id: c.id,
+            name: c.name,
+            description: c.description,
+            relationships: c.relationships,
+          });
+        }
+      } catch {
+        // Skip wings whose concepts fail to parse.
+      }
+    }
+
+    if (concepts.length === 0) {
+      p.log.info(
+        `No parseable concepts found in department '${dept}'${wing ? ` wing '${wing}'` : ''}.`,
+      );
+      return 0;
+    }
+
+    const session = generateTrySession(concepts, { departmentId: dept, wingId: wing });
+    const check = validateGeneratedSession(session);
+    if (!check.valid) {
+      p.log.error(`Generated session failed the structural quality bar: ${check.errors.join('; ')}`);
+      return 1;
+    }
+
+    if (json) {
+      console.log(JSON.stringify(session, null, 2));
+      return 0;
+    }
+
+    if (out) {
+      const source = serializeTrySession(session);
+      mkdirSync(dirname(out), { recursive: true });
+      writeFileSync(out, source, 'utf8');
+      p.log.success(`Wrote draft try-session '${session.id}' to ${out}`);
+      p.log.message(pc.dim(`  ${session.steps.length} step(s). Review the DRAFT prompts before publishing.`));
+      return 0;
+    }
+
+    p.log.message(pc.bold(`${session.title}`));
+    p.log.message(`  id: ${session.id}`);
+    p.log.message(`  steps: ${session.steps.length} (~${session.estimatedMinutes} min)`);
+    if (session.prerequisites.length > 0) {
+      p.log.message(`  prerequisites: ${session.prerequisites.join(', ')}`);
+    }
+    p.log.message(pc.bold('  ordered concepts:'));
+    session.steps.forEach((s, i) => {
+      p.log.message(`    ${i + 1}. ${s.conceptsExplored[0]}`);
+    });
+    p.log.message(pc.dim('  DRAFT scaffold — pass --out <path> to write, --json for the full definition.'));
+    return 0;
+  } catch (err) {
+    p.log.error(`Try-session generation failed: ${(err as Error).message}`);
+    return 1;
+  }
+}
+
 // ─── Help ───────────────────────────────────────────────────────────────────
 
 function printCollegeHelp(): void {
@@ -490,6 +600,9 @@ function printCollegeHelp(): void {
   );
   p.log.message(
     `    ${pc.cyan('college xref suggest [--dept] [--json]')} Propose new cross-dept prerequisite edges`,
+  );
+  p.log.message(
+    `    ${pc.cyan('college gen-trysession <dept>')}          Generate a DRAFT try-session (--wing, --out, --json)`,
   );
   p.log.message('');
   p.log.message('  Examples:');
@@ -542,6 +655,9 @@ export async function collegeCommand(args: string[]): Promise<number> {
       }
       return handleXrefSuggest(parsed.dept, parsed.json);
     }
+    case 'gen-trysession':
+    case 'gen-try':
+      return handleGenTrysession(parsed.positional[0], parsed.wing, parsed.out, parsed.json);
     default:
       p.log.error(`Unknown college subcommand: ${parsed.subcommand}`);
       printCollegeHelp();
