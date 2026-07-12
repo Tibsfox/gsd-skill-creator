@@ -40,7 +40,9 @@ import {
   type ScaffoldTemplate,
 } from '../../cartridge/scaffold.js';
 import { scaffoldCompanions } from '../../cartridge/scaffold-companions.js';
+import { mintDepartmentFromCoOccurrence } from '../../cartridge/co-occurrence-department.js';
 import { isResearchOutputCartridge } from '../../cartridge/types.js';
+import { validateCoOccurrenceMatrix } from '../../traces/co-occurrence-schema.js';
 import {
   validateCartridge,
   validateResearchOutputCartridge,
@@ -81,6 +83,8 @@ function usageError(io: CartridgeCommandIO, message: string): number {
   io.stderr('  skill-creator cartridge migrate --all <root> [--exclude <pattern>] [--dry-run] [--json]');
   io.stderr('  skill-creator cartridge distill <sources...> [--template department]');
   io.stderr('                                       [--id <id>] [--name <name>] [--json]');
+  io.stderr('  skill-creator cartridge distill-cooccurrence <co-occurrence-log> [--min-support <n>]');
+  io.stderr('                                       [--id <id>] [--name <name>] [--out <path>] [--json]');
   return 2;
 }
 
@@ -135,6 +139,8 @@ export async function cartridgeCommand(
     io.stdout('  skill-creator cartridge migrate --all <root> [--exclude <pattern>] [--dry-run] [--json]');
     io.stdout('  skill-creator cartridge distill <sources...> [--template department]');
     io.stdout('                                       [--id <id>] [--name <name>] [--json]');
+    io.stdout('  skill-creator cartridge distill-cooccurrence <co-occurrence-log> [--min-support <n>]');
+    io.stdout('                                       [--id <id>] [--name <name>] [--out <path>] [--json]');
     return 0;
   }
 
@@ -160,6 +166,8 @@ export async function cartridgeCommand(
         return handleMigrate(rest, io);
       case 'distill':
         return await handleDistill(rest, io);
+      case 'distill-cooccurrence':
+        return handleDistillCooccurrence(rest, io);
       default:
         return usageError(io, `unknown subcommand "${sub}"`);
     }
@@ -435,6 +443,112 @@ async function handleDistill(
   }
 
   return artifact.validation.valid ? 0 : 1;
+}
+
+// ============================================================================
+// `cartridge distill-cooccurrence` — mint a department DRAFT from co-activation
+// ============================================================================
+
+/**
+ * Read a JP-016 co-occurrence log (a serialized `CoOccurrenceMatrix` JSON
+ * file), bundle the co-activating skills, and package them into a validated
+ * department-cartridge DRAFT. Refuses to mint below `--min-support`.
+ *
+ * The co-occurrence log is expected to be a pre-computed matrix. Deriving it
+ * from the raw decision-trace JSONL is out of scope (the trace activation
+ * writers are still unwired, so the live matrix is sparse).
+ */
+function handleDistillCooccurrence(
+  args: string[],
+  io: CartridgeCommandIO,
+): number {
+  const positional = positionalArgs(args);
+  const logPath = positional[0];
+  if (!logPath) {
+    return usageError(io, 'distill-cooccurrence requires <co-occurrence-log>');
+  }
+
+  const raw = JSON.parse(readFileSync(resolve(logPath), 'utf8'));
+  const parsed = validateCoOccurrenceMatrix(raw);
+  if (!parsed.ok) {
+    if (jsonMode(args)) {
+      printJson(io, { ok: false, error: `invalid co-occurrence log: ${parsed.error}` });
+    } else {
+      io.stderr(`cartridge: invalid co-occurrence log: ${parsed.error}`);
+    }
+    return 1;
+  }
+
+  const minSupportFlag = getFlagValue(args, 'min-support');
+  let minSupport: number | undefined;
+  if (minSupportFlag !== undefined) {
+    minSupport = Number(minSupportFlag);
+    if (!Number.isFinite(minSupport) || minSupport < 0) {
+      return usageError(io, 'min-support must be a non-negative number');
+    }
+  }
+
+  const result = mintDepartmentFromCoOccurrence(parsed.matrix, {
+    minSupport,
+    id: getFlagValue(args, 'id'),
+    name: getFlagValue(args, 'name'),
+    description: getFlagValue(args, 'description'),
+    trust: getFlagValue(args, 'trust') as
+      | 'system'
+      | 'user'
+      | 'community'
+      | undefined,
+    author: getFlagValue(args, 'author'),
+  });
+
+  if (!result.ok) {
+    if (jsonMode(args)) {
+      printJson(io, {
+        ok: false,
+        reason: result.reason,
+        support: result.support,
+        skillCount: result.skillCount,
+      });
+    } else {
+      io.stderr(`cartridge: refused to mint — ${result.reason}`);
+    }
+    return 1;
+  }
+
+  const out = getFlagValue(args, 'out');
+  if (out) {
+    writeFileSync(resolve(out), result.yaml, 'utf8');
+  }
+
+  if (jsonMode(args)) {
+    printJson(io, {
+      ok: true,
+      id: result.cartridge.id,
+      support: result.support,
+      skillCount: result.skillCount,
+      slotCount: result.slotCount,
+      validation: result.validation,
+      out: out ? resolve(out) : null,
+    });
+  } else {
+    io.stdout(
+      `minted DRAFT ${result.cartridge.id} from ${result.skillCount} co-activating skill(s)`,
+    );
+    io.stdout(
+      `  slots: ${result.slotCount}  support: ${result.support}` +
+        `  validation: ${result.validation.valid ? 'OK' : 'FAIL'}`,
+    );
+    for (const e of result.validation.errors) {
+      io.stdout(`  error: ${e.path}: ${e.message}`);
+    }
+    if (out) {
+      io.stdout(`  draft written to ${resolve(out)} (review before install)`);
+    } else {
+      io.stdout('  (no --out given — pass --out <path> to save the draft)');
+    }
+  }
+
+  return result.validation.valid ? 0 : 1;
 }
 
 // ============================================================================

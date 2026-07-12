@@ -5,7 +5,7 @@
  * sink. Does not spawn the real binary — these are library-level tests.
  */
 
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -306,6 +306,72 @@ teams: {}
     const code = await cartridgeCommand(['distill'], io);
     expect(code).toBe(2);
     expect(io.err.join('\n')).toContain('distill requires');
+  });
+
+  function writeCoLog(pairs: unknown[]): string {
+    const logPath = join(workRoot, 'co-occurrence.json');
+    writeFileSync(
+      logPath,
+      JSON.stringify({
+        generatedAt: 1_700_000_000_000,
+        traceWindowStart: 1_699_000_000_000,
+        traceWindowEnd: 1_700_000_000_000,
+        pairs,
+      }),
+      'utf8',
+    );
+    return logPath;
+  }
+
+  function coPair(a: string, b: string, observationCount: number): unknown {
+    return {
+      event_a: { skillId: a, eventType: 'activation' },
+      event_b: { skillId: b, eventType: 'activation' },
+      probability: 0.8,
+      temporalLagMs: 200,
+      observationCount,
+      windowMs: 30_000,
+    };
+  }
+
+  it('CL-19 distill-cooccurrence mints a DRAFT and writes it with --out', async () => {
+    const logPath = writeCoLog([
+      coPair('alpha', 'beta', 8),
+      coPair('beta', 'gamma', 6),
+    ]);
+    const outPath = join(workRoot, 'draft.yaml');
+    const io = makeIO();
+    const code = await cartridgeCommand(
+      ['distill-cooccurrence', logPath, '--min-support', '4', '--out', outPath, '--json'],
+      io,
+    );
+    expect(code).toBe(0);
+    const report = JSON.parse(io.out.join('\n'));
+    expect(report.ok).toBe(true);
+    expect(report.skillCount).toBe(3);
+    expect(report.validation.valid).toBe(true);
+    const draft = readFileSync(outPath, 'utf8');
+    expect(draft).toContain('co-activation');
+  });
+
+  it('CL-20 distill-cooccurrence refuses to mint below min-support', async () => {
+    const logPath = writeCoLog([coPair('alpha', 'beta', 2)]);
+    const io = makeIO();
+    const code = await cartridgeCommand(
+      ['distill-cooccurrence', logPath, '--min-support', '5', '--json'],
+      io,
+    );
+    expect(code).toBe(1);
+    const report = JSON.parse(io.out.join('\n'));
+    expect(report.ok).toBe(false);
+    expect(report.reason).toMatch(/too thin/);
+  });
+
+  it('CL-21 distill-cooccurrence with no log path returns exit 2', async () => {
+    const io = makeIO();
+    const code = await cartridgeCommand(['distill-cooccurrence'], io);
+    expect(code).toBe(2);
+    expect(io.err.join('\n')).toContain('distill-cooccurrence requires');
   });
 
   it('cartridge --help prints usage and exits 0 (smoke)', async () => {
