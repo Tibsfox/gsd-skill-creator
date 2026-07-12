@@ -171,7 +171,29 @@ export const DEFAULT_DRIFT_THRESHOLD = 60;
 //    turn intervened before (redo-after-input) — the workhorse signal.
 //  - 'user-modified': the harness flagged the tool result userModified===true
 //    (provably ~0 recall in practice; retained for completeness).
-export type CorrectionSignal = 'user-interposed-edit' | 'user-modified';
+//  - 'reverted-commit': a git revert (or a same-session commit that undoes a
+//    prior change) rolled a deliverable back — a strong "the output was wrong"
+//    signal. Git history is INJECTED into the detector (it stays pure), so the
+//    detector never spawns git itself.
+export type CorrectionSignal = 'user-interposed-edit' | 'user-modified' | 'reverted-commit';
+
+// Injected git-revert fact for the 'reverted-commit' signal. The caller (a
+// git-aware layer) resolves revert pairs out of history and hands them to the
+// PURE detector, which applies the same significance gate before quarantining.
+export interface RevertedCommitSignal {
+  // File the revert restored.
+  filePath: string;
+  // Content introduced by the reverted (mistaken) commit.
+  original: string;
+  // Content after the revert (restored / undone) — the "correction".
+  corrected: string;
+  // Reverted (mistake) commit hash.
+  revertedCommitHash: string;
+  // Revert (fixer) commit hash.
+  revertCommitHash: string;
+  // Optional revert-commit subject — reviewer triage context.
+  revertMessage?: string;
+}
 
 // Review lifecycle of a quarantined candidate.
 export type CandidateStatus = 'pending' | 'promoted' | 'dismissed';
@@ -211,13 +233,18 @@ export interface CorrectionCandidateInput {
   skillName: null;
   // Ranked shortlist for the reviewer; ambient hints ranked last.
   skillHints: SkillHint[];
-  // The human turn that triggered the redo — reviewer triage context.
+  // The human turn that triggered the redo — reviewer triage context. For a
+  // 'reverted-commit' candidate this carries the revert-commit subject instead.
   interposingUserText: string;
   original: string;
   corrected: string;
   diff: Change[];
   // Advisory FeedbackDetector similarity at detect time; re-checked at promote.
   preSimilarity: number;
+  // Present only for signal==='reverted-commit': the git commits involved, so a
+  // reviewer can inspect the actual revert. Absent for transcript signals.
+  revertedCommitHash?: string;
+  revertCommitHash?: string;
 }
 
 // Persisted quarantine record = detector input + review lifecycle.

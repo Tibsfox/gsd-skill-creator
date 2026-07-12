@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { CorrectionDetector } from './correction-detector.js';
 import type { TranscriptEntry, ContentBlock } from '../types/observation.js';
+import type { RevertedCommitSignal } from '../types/learning.js';
 
 // --- fixture builders (real Claude Code transcript shape) --------------------
 
@@ -244,6 +245,84 @@ describe('CorrectionDetector', () => {
         tool_input: { file_path: '/f.ts' } },
     ];
     expect(det().detect(entries, 'sess', '/t.jsonl')).toHaveLength(0);
+  });
+
+  // --- reverted-commit signal (injected git facts) -------------------------
+
+  function revert(overrides: Partial<RevertedCommitSignal> = {}): RevertedCommitSignal {
+    return {
+      filePath: '/repo/src/foo.ts',
+      original: NEW,
+      corrected: OLD,
+      revertedCommitHash: 'deadbeef',
+      revertCommitHash: 'cafef00d',
+      revertMessage: 'Revert "feat: bad change"',
+      ...overrides,
+    };
+  }
+
+  it('emits a null-attribution reverted-commit candidate from injected revert data', () => {
+    const [c] = det().detect([], 'sess', '/t.jsonl', [revert()]);
+    expect(c).toBeDefined();
+    expect(c.signal).toBe('reverted-commit');
+    expect(c.skillName).toBeNull();
+    expect(c.kind).toBe('correction-candidate');
+    expect(c.filePath).toBe('/repo/src/foo.ts');
+    expect(c.original).toBe(NEW);
+    expect(c.corrected).toBe(OLD);
+    expect(c.revertedCommitHash).toBe('deadbeef');
+    expect(c.revertCommitHash).toBe('cafef00d');
+    expect(c.interposingUserText).toBe('Revert "feat: bad change"');
+    expect(c.mistakeAssistantUuid).toBeNull();
+    expect(c.fixerAssistantUuid).toBeNull();
+  });
+
+  it('applies the significance gate to reverts (drops trivial rollbacks)', () => {
+    const cands = det().detect([], 'sess', '/t.jsonl', [
+      revert({ original: 'hello world foo bar', corrected: 'hello world foo' }),
+    ]);
+    expect(cands).toHaveLength(0);
+  });
+
+  it('drops reverts on non-deliverable paths', () => {
+    const cands = det().detect([], 'sess', '/t.jsonl', [
+      revert({ filePath: '/repo/.planning/x.md' }),
+    ]);
+    expect(cands).toHaveLength(0);
+  });
+
+  it('dedups reverts by (revert commit, file)', () => {
+    const cands = det().detect([], 'sess', '/t.jsonl', [revert(), revert()]);
+    expect(cands).toHaveLength(1);
+  });
+
+  it('carries session-active skill hints on revert candidates, still null attribution', () => {
+    const entries = [skillActivation('typescript-patterns')];
+    const [c] = det().detect(entries, 'sess', '/t.jsonl', [revert()]);
+    expect(c.skillName).toBeNull();
+    expect(c.skillHints.map((h) => h.skill)).toContain('typescript-patterns');
+    expect(c.skillHints.find((h) => h.skill === 'typescript-patterns')!.source).toBe(
+      'session-active-skill',
+    );
+  });
+
+  it('emits both signals together (interposed edit + revert)', () => {
+    const entries = [
+      edit('/f.ts', '', OLD, { name: 'Write', uuid: 'w1' }),
+      userTurn('please rework the retry logic, it is wrong'),
+      edit('/f.ts', OLD, NEW, { name: 'Edit', uuid: 'e2' }),
+    ];
+    const cands = det().detect(entries, 'sess', '/t.jsonl', [revert()]);
+    expect(cands.map((c) => c.signal).sort()).toEqual(['reverted-commit', 'user-interposed-edit']);
+  });
+
+  it('degrades to transcript-only when no reverts are injected', () => {
+    const entries = [
+      edit('/f.ts', '', OLD, { name: 'Write' }),
+      userTurn('please rework the retry logic, it is wrong'),
+      edit('/f.ts', OLD, NEW, { name: 'Edit' }),
+    ];
+    expect(det().detect(entries, 'sess', '/t.jsonl')).toHaveLength(1);
   });
 
   it('is pure: never touches fs and never throws on malformed entries', () => {
