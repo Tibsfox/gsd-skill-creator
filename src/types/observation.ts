@@ -48,6 +48,23 @@ export interface TranscriptEntry {
   };
   tool_use_id?: string;   // Present on tool_result entries, references the tool_use
   tool_output?: string;   // The result content from tool execution
+
+  // ---- Optional Claude Code harness fields (item-7 correction detection) ----
+  // All optional and defensively read: on harness schema drift the detector
+  // simply yields no candidates rather than throwing. Verified present on real
+  // transcripts (2026-07).
+  userType?: string;                 // 'external' on genuine human turns
+  isMeta?: boolean;                  // true on synthetic/meta user turns
+  attributionSkill?: string;         // per-turn skill tag on assistant entries
+  sourceToolAssistantUUID?: string;  // tool_result -> producing assistant uuid
+  toolUseResult?: {
+    filePath?: string;
+    oldString?: string;
+    newString?: string;
+    originalFile?: string;
+    userModified?: boolean;
+    structuredPatch?: unknown;
+  };
 }
 
 // Metrics for session summary

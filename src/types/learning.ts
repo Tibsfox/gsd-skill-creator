@@ -150,3 +150,77 @@ export interface DriftResult {
 
 // Default cumulative drift threshold (60%)
 export const DEFAULT_DRIFT_THRESHOLD = 60;
+
+// ---------------------------------------------------------------------------
+// Automatic correction-attribution (item-7). These types describe candidates
+// detected from a transcript at session-end. They live in a SEPARATE quarantine
+// ledger (.planning/patterns/correction-quarantine.jsonl) and NEVER flow into
+// FeedbackStore/RefinementEngine automatically — only a human `feedback
+// quarantine accept` promotes one into the live feedback ledger, reusing the
+// shipped fail-closed skill-exists + significance gates.
+// ---------------------------------------------------------------------------
+
+// Which transcript signal produced a candidate.
+//  - 'user-interposed-edit': assistant Edit of a file that a substantive human
+//    turn intervened before (redo-after-input) — the workhorse signal.
+//  - 'user-modified': the harness flagged the tool result userModified===true
+//    (provably ~0 recall in practice; retained for completeness).
+export type CorrectionSignal = 'user-interposed-edit' | 'user-modified';
+
+// Review lifecycle of a quarantined candidate.
+export type CandidateStatus = 'pending' | 'promoted' | 'dismissed';
+
+// A ranked, provenance-labelled attribution hint for the human reviewer.
+// The automatic pipeline NEVER commits to an attribution — it only offers hints.
+export interface SkillHint {
+  skill: string;
+  source:
+    | 'attribution-skill-mistake-turn'
+    | 'explicit-skill-mistake-turn'
+    | 'session-active-skill';
+  // Ambient context-guardian skills (e.g. security-hygiene, session-awareness)
+  // auto-load in exactly the contexts with the highest correction density, so a
+  // hint from them is near-worthless. Flagged + de-ranked so a reviewer never
+  // rubber-stamps one.
+  ambient: boolean;
+}
+
+// What the detector emits — no lifecycle fields yet.
+export interface CorrectionCandidateInput {
+  // Discriminator: NEVER 'correction' — a candidate can never be mistaken for a
+  // FeedbackEvent, and RefinementEngine (which reads type==='correction') is
+  // structurally blind to it.
+  kind: 'correction-candidate';
+  schemaVersion: 1;
+  sessionId: string;
+  transcriptPath: string;
+  signal: CorrectionSignal;
+  filePath: string;
+  // Producing turn of the ORIGINAL (mistaken) output being corrected.
+  mistakeAssistantUuid: string | null;
+  // Producing turn of the redo (audit only).
+  fixerAssistantUuid: string | null;
+  // ALWAYS null in the automatic path (type-pinned). A human supplies the skill
+  // at promotion time; the pipeline never guesses.
+  skillName: null;
+  // Ranked shortlist for the reviewer; ambient hints ranked last.
+  skillHints: SkillHint[];
+  // The human turn that triggered the redo — reviewer triage context.
+  interposingUserText: string;
+  original: string;
+  corrected: string;
+  diff: Change[];
+  // Advisory FeedbackDetector similarity at detect time; re-checked at promote.
+  preSimilarity: number;
+}
+
+// Persisted quarantine record = detector input + review lifecycle.
+export interface CorrectionCandidate extends CorrectionCandidateInput {
+  id: string; // UUID
+  detectedAt: string; // ISO timestamp
+  status: CandidateStatus;
+  reviewedAt?: string;
+  // FeedbackEvent.id written to feedback.jsonl when promoted.
+  promotedFeedbackId?: string;
+  dismissedReason?: string;
+}
