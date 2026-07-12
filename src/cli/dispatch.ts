@@ -137,7 +137,7 @@ export const REGISTRY: readonly CommandEntry[] = [
   // ---- already-extracted ----
   { aliases: ['suggest', 'sg'], handler: () => suggestCommand() },
   { aliases: ['suggestions', 'sgs'], handler: (ctx) => suggestionsCommand(ctx.args) },
-  { aliases: ['feedback', 'fb'], handler: (ctx) => feedbackCommand(ctx.args) },
+  { aliases: ['feedback', 'fb'], handler: (ctx) => feedbackCommand(ctx.args, ctx.parseSkillsDir(ctx.args, ctx.parseScope(ctx.args))) },
   { aliases: ['refine', 'rf'], handler: (ctx) => refineCommand(ctx.args) },
   { aliases: ['delete', 'del', 'rm'], handler: (ctx) => deleteCommand(ctx.args) },
   { aliases: ['invoke', 'i'], handler: (ctx) => invokeCommand(ctx.args) },
