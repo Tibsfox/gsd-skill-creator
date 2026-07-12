@@ -56,6 +56,11 @@ import {
   eventsToObservations as observationRetentionEventsToObservations,
   readObservationRetentionEvents,
 } from './observation-retention-events.js';
+import {
+  DEFAULT_REFINEMENT_EVENTS_PATH,
+  eventsToObservations as refinementEventsToObservations,
+  readRefinementEvents,
+} from './refinement-events.js';
 import type { CalibrationObservation, CalibratableThreshold } from './types.js';
 import type { SuggestionEntry } from './suggestions-mapper.js';
 
@@ -90,6 +95,11 @@ export interface ObservationLoaderOptions {
    * callers that already pass `suggestionsPath` do not need to duplicate it.
    */
   amigaSuggestionsPath?: string;
+  /**
+   * Path to refinement-events.jsonl (consumed by the `refinement.*` threshold
+   * class — `min_confidence`, `min_corrections`, `cooldown_days`; v1054 wire).
+   */
+  refinementEventsPath?: string;
 }
 
 /**
@@ -179,6 +189,21 @@ export function observationSourceFor(threshold: CalibratableThreshold): Observat
         'candidates in suggestions.json — accept = sequence bar was appropriately ' +
         'low (favor decrease), dismiss = sequences were noisy (favor increase). ' +
         'Wire: v1.49.1027.',
+      wired: true,
+    };
+  }
+  if (threshold.startsWith('refinement.')) {
+    return {
+      sourceId: 'refinement-events',
+      description:
+        'Operator accept/dismiss decisions on RefinementEngine-surfaced ' +
+        'suggestions (/sc:suggest) and correction-quarantine candidates ' +
+        '(feedback quarantine accept/dismiss) — accept = the refinement gate ' +
+        'was appropriately permissive (favor decrease), dismiss = the gate let ' +
+        'noise through (favor increase). All three refinement knobs ' +
+        '(min_confidence, min_corrections, cooldown_days) share this source ' +
+        '(v1.49.1054 wire — append-only JSONL at ' +
+        '.planning/patterns/refinement-events.jsonl).',
       wired: true,
     };
   }
@@ -284,6 +309,13 @@ export async function loadObservationsForThreshold(
     const filtered = filterBySourceTag(entries, '[source: AMIGA sequence_repetition]');
     return entriesToObservations(filtered);
   }
-  // No unwired classes remain as of v1027.
+  if (threshold.startsWith('refinement.')) {
+    // All three refinement.* knobs share one accept/dismiss signal, exactly as
+    // the suggestions.* knobs share suggestions.json.
+    const path = options.refinementEventsPath ?? DEFAULT_REFINEMENT_EVENTS_PATH;
+    const events = await readRefinementEvents(path);
+    return refinementEventsToObservations(events);
+  }
+  // No unwired classes remain as of v1054.
   return [];
 }

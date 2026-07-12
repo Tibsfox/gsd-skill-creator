@@ -63,7 +63,7 @@ function mentionContent(threshold: string): string {
 
 describe('cadence command', () => {
   describe('ALL_CALIBRATABLE_THRESHOLDS drift guard (#10461)', () => {
-    it('runtime array enumerates exactly the 8 union members in order', () => {
+    it('runtime array enumerates exactly the 11 union members in order', () => {
       // Pins the runtime array to disk reality; the compile-time `satisfies` +
       // _AllThresholdsCovered guard in types.ts pin the type<->array directions.
       expect([...ALL_CALIBRATABLE_THRESHOLDS]).toEqual([
@@ -75,6 +75,9 @@ describe('cadence command', () => {
         'observation.retention_days',
         'predictive.low_confidence_threshold',
         'amiga.min_sequence_count',
+        'refinement.min_confidence',
+        'refinement.min_corrections',
+        'refinement.cooldown_days',
       ]);
     });
   });
@@ -1454,6 +1457,9 @@ describe('cadence command', () => {
         'token_budget.max_percent',
         'observation.retention_days',
         'predictive.low_confidence_threshold',
+        'refinement.min_confidence',
+        'refinement.min_corrections',
+        'refinement.cooldown_days',
       ]) {
         expect(per.find((p) => p.threshold === t)!.covered).toBe(true);
       }

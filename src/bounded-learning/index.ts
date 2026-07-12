@@ -90,6 +90,16 @@ export type {
 } from './observation-retention-events.js';
 
 export {
+  DEFAULT_REFINEMENT_EVENTS_PATH,
+  appendRefinementEvent,
+  eventKindToValue as refinementEventKindToValue,
+  eventToObservation as refinementEventToObservation,
+  eventsToObservations as refinementEventsToObservations,
+  readRefinementEvents,
+} from './refinement-events.js';
+export type { RefinementEvent, RefinementEventKind, RefinementEventSource } from './refinement-events.js';
+
+export {
   DEFAULT_AUDIT_LOG_PATH,
   appendAuditLogEntry,
   buildAuditLogEntry,
