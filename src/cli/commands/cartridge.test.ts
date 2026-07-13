@@ -11,6 +11,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { cartridgeCommand, positionalArgs, type CartridgeCommandIO } from './cartridge.js';
+import { SourceLedger, acquiredSourceEntry } from '../../source-ledger/source-ledger.js';
 
 interface CapturedIO extends CartridgeCommandIO {
   out: string[];
@@ -308,6 +309,33 @@ teams: {}
     expect(io.err.join('\n')).toContain('distill requires');
   });
 
+  it('CL-17b distill --ledger (WITHOUT --enrich) attaches ledger provenance to citations', async () => {
+    // Guards the decoupling: --ledger must work standalone, not only alongside
+    // --enrich. Seed the ledger by the source's content hash, then distill.
+    const src = join(workRoot, 'known-source.md');
+    const content =
+      'Reproducibility requires pinned dependencies. Deterministic builds enable auditing.';
+    writeFileSync(src, content, 'utf8');
+    const ledgerPath = join(workRoot, 'ledger.jsonl');
+    await new SourceLedger(ledgerPath).record(
+      acquiredSourceEntry(src, content, '2026-07-13T00:00:00.000Z'),
+    );
+
+    const io = makeIO();
+    const code = await cartridgeCommand(
+      ['distill', src, '--ledger', '--ledger-path', ledgerPath, '--json'],
+      io,
+    );
+    expect(code).toBe(0);
+    const artifact = JSON.parse(io.out.join('\n'));
+    const citations = (artifact.cartridge.chipsets[0].deepMap.concepts as Array<{
+      citations?: Array<{ sourceId: string; provenance?: Array<{ origin: string }> }>;
+    }>).flatMap((c) => c.citations ?? []);
+    const withProvenance = citations.filter((c) => c.provenance);
+    expect(withProvenance.length).toBeGreaterThan(0);
+    expect(withProvenance[0]!.provenance![0]!.origin).toBe('learn-acquirer');
+  });
+
   function writeCoLog(pairs: unknown[]): string {
     const logPath = join(workRoot, 'co-occurrence.json');
     writeFileSync(
@@ -398,5 +426,20 @@ describe('positionalArgs', () => {
   it('still consumes the value of a value-taking flag', () => {
     expect(positionalArgs(['--id', 'my-id', 'a.md'])).toEqual(['a.md']);
     expect(positionalArgs(['--template=department', 'a.md'])).toEqual(['a.md']);
+  });
+
+  it('treats --ledger as valueless but --ledger-path as value-taking', () => {
+    // --ledger is a boolean gate: it must not swallow the next source path.
+    expect(positionalArgs(['a.md', 'b.md', '--ledger'])).toEqual(['a.md', 'b.md']);
+    expect(positionalArgs(['--ledger', 'a.md', 'b.md'])).toEqual(['a.md', 'b.md']);
+    // --ledger-path consumes its value and neither is a positional.
+    expect(positionalArgs(['a.md', '--ledger-path', './ledger.jsonl', 'b.md'])).toEqual([
+      'a.md',
+      'b.md',
+    ]);
+    expect(positionalArgs(['a.md', 'b.md', '--ledger', '--ledger-path', './l.jsonl'])).toEqual([
+      'a.md',
+      'b.md',
+    ]);
   });
 });

@@ -148,7 +148,8 @@ export async function cartridgeCommand(
     io.stdout('  skill-creator cartridge migrate <path> [--dry-run] [--json]');
     io.stdout('  skill-creator cartridge migrate --all <root> [--exclude <pattern>] [--dry-run] [--json]');
     io.stdout('  skill-creator cartridge distill <sources...> [--template department]');
-    io.stdout('                                       [--id <id>] [--name <name>] [--json]');
+    io.stdout('                                       [--id <id>] [--name <name>] [--enrich]');
+    io.stdout('                                       [--ledger [--ledger-path <path>]] [--json]');
     io.stdout('  skill-creator cartridge distill-cooccurrence <co-occurrence-log> [--min-support <n>]');
     io.stdout('                                       [--id <id>] [--name <name>] [--out <path>] [--json]');
     return 0;
@@ -430,25 +431,31 @@ async function handleDistill(
   const cartridgeId = toSafeSkillName(idFlag ?? sources[0]!.id);
   const name = nameFlag ?? cartridgeId;
 
-  // Opt-in semantic enrichment: embed clusters and add semantic cross-references.
-  // Constructed only with --enrich; otherwise the default no-op enricher runs.
+  // Opt-in enrichment backends — each is INDEPENDENT and default-OFF. The
+  // enricher is built if ANY backend is requested; with none the default no-op
+  // enricher runs (v1 behavior unchanged). --ledger works with OR without
+  // --enrich (citation resolution is a distinct enricher step from semantic edges).
   const deps: Parameters<typeof distillAndValidate>[2] = {};
-  if (args.includes('--enrich')) {
-    const { EmbeddingService } = await import('../../embeddings/embedding-service.js');
+  const wantEnrich = args.includes('--enrich');
+  const wantLedger = args.includes('--ledger');
+  if (wantEnrich || wantLedger) {
     const { createSemanticEnricher } = await import('../../cartridge/distill-enricher-semantic.js');
-    const enricherOptions: Parameters<typeof createSemanticEnricher>[0] = {
-      embedder: EmbeddingService.createFresh(),
-    };
+    const enricherOptions: Parameters<typeof createSemanticEnricher>[0] = {};
 
-    // Opt-in LLM concept naming (SC_DISTILL_NAMER_LLM=1 + ANTHROPIC_API_KEY).
-    // Absent either gate, the factory returns null and the heuristic labels stand.
-    const { createClaudeDistillNamer } = await import('../../cartridge/distill-namer-llm.js');
-    const namer = createClaudeDistillNamer();
-    if (namer) enricherOptions.namer = namer;
+    // --enrich: semantic cross-references (embedder) + opt-in LLM concept naming.
+    if (wantEnrich) {
+      const { EmbeddingService } = await import('../../embeddings/embedding-service.js');
+      enricherOptions.embedder = EmbeddingService.createFresh();
+      // LLM concept naming (SC_DISTILL_NAMER_LLM=1 + ANTHROPIC_API_KEY). Absent
+      // either gate, the factory returns null and the heuristic labels stand.
+      const { createClaudeDistillNamer } = await import('../../cartridge/distill-namer-llm.js');
+      const namer = createClaudeDistillNamer();
+      if (namer) enricherOptions.namer = namer;
+    }
 
-    // Opt-in ledger-resolved citation provenance (--ledger, default path or
-    // --ledger-path <path>). Off unless --ledger is passed.
-    if (args.includes('--ledger')) {
+    // --ledger: ledger-resolved citation provenance (default path, or
+    // --ledger-path <path>). Independent of --enrich.
+    if (wantLedger) {
       const { SourceLedger } = await import('../../source-ledger/source-ledger.js');
       const { LedgerCitationResolver } = await import('../../cartridge/distill-citation-resolver.js');
       const ledgerPath = getFlagValue(args, 'ledger-path');
