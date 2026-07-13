@@ -6,16 +6,14 @@
  * names through an injected LLM namer.
  *
  * OPT-IN · INERT WITHOUT A BACKEND. With no embedder, semantic edges are
- * skipped; with no namer, cluster labels are left untouched; with neither it is
- * exactly {@link ./distill.js asyncIdentityEnricher}. Both backends are injected
+ * skipped; with no namer, cluster labels are left untouched; with no
+ * citationResolver, citations carry only their source id; with none it is
+ * exactly {@link ./distill.js asyncIdentityEnricher}. Every backend is injected
  * — the real embedder is {@link ../embeddings/embedding-service.js
  * EmbeddingService} (BGE-small, heuristic fallback); the namer is a plug-in
- * (e.g. a Claude-backed synthesizer) with no default.
- *
- * Ledger-backed citation resolution (attaching resolved source provenance to
- * each concept's citations) is a separable follow-up — it needs the SourceLedger
- * and a change to concept-citation assembly; this enricher owns cross-references
- * and names.
+ * (e.g. a Claude-backed synthesizer, {@link ./distill-namer-llm.js}); the
+ * citation resolver is {@link ./distill-citation-resolver.js
+ * LedgerCitationResolver} over a SourceLedger.
  *
  * Pure of fs/child_process — all IO lives inside the injected backends.
  *
@@ -26,6 +24,8 @@ import type {
   AsyncDistillEnricher,
   DistillCluster,
   DistillFinding,
+  DistillSource,
+  ResolvedCitationProvenance,
 } from './distill.js';
 
 /** The embedding backend — injected. EmbeddingService satisfies this shape. */
@@ -42,9 +42,20 @@ export interface DistillNamer {
   }): Promise<string | null>;
 }
 
+/**
+ * Ledger citation resolver — injected, no default. Given a distill source's id
+ * and content, returns the cross-origin provenance a SourceLedger holds for it
+ * (empty when the ledger has never seen the source). Best-effort at the call
+ * site: a throw is caught and the source simply carries no resolved provenance.
+ */
+export interface CitationResolver {
+  resolve(sourceId: string, content: string): Promise<ResolvedCitationProvenance[]>;
+}
+
 export interface SemanticEnricherOptions {
   embedder?: DistillEmbedder;
   namer?: DistillNamer;
+  citationResolver?: CitationResolver;
   /** Minimum cosine to emit a semantic cross-reference. Default 0.6. */
   similarityThreshold?: number;
   /** Cap semantic edges per cluster (highest-similarity kept). Default 3. */
@@ -62,7 +73,10 @@ export function createSemanticEnricher(
   const maxEdges = options.maxEdgesPerCluster ?? 3;
 
   return {
-    async enrich(clusters: DistillCluster[]): Promise<DistillCluster[]> {
+    async enrich(
+      clusters: DistillCluster[],
+      sources: DistillSource[] = [],
+    ): Promise<DistillCluster[]> {
       let out = clusters;
 
       // 1) Optional concept-name synthesis (best-effort per cluster).
@@ -112,6 +126,44 @@ export function createSemanticEnricher(
           edges.sort((a, b) => b.similarity - a.similarity || a.to.localeCompare(b.to));
           return { ...c, semanticEdges: edges.slice(0, maxEdges) };
         });
+      }
+
+      // 3) Optional ledger-resolved citation provenance. Resolve each DISTINCT
+      // contributing source once (deduped), then attach per-sourceId provenance
+      // to the clusters that cite it. Best-effort: an unresolvable source is
+      // simply omitted.
+      if (options.citationResolver && sources.length > 0) {
+        const resolver = options.citationResolver;
+        const contentById = new Map(sources.map((s) => [s.id, s.content]));
+        const neededIds = new Set<string>();
+        for (const c of out) for (const sid of c.sourceIds) neededIds.add(sid);
+
+        const provById = new Map<string, ResolvedCitationProvenance[]>();
+        await Promise.all(
+          [...neededIds].map(async (sid) => {
+            const content = contentById.get(sid);
+            if (content === undefined) return;
+            try {
+              const prov = await resolver.resolve(sid, content);
+              if (prov.length > 0) provById.set(sid, prov);
+            } catch {
+              // best-effort: leave this source without resolved provenance
+            }
+          }),
+        );
+
+        if (provById.size > 0) {
+          out = out.map((c) => {
+            const resolved: Record<string, ResolvedCitationProvenance[]> = {};
+            for (const sid of c.sourceIds) {
+              const prov = provById.get(sid);
+              if (prov) resolved[sid] = prov;
+            }
+            return Object.keys(resolved).length > 0
+              ? { ...c, resolvedCitations: resolved }
+              : c;
+          });
+        }
       }
 
       return out;

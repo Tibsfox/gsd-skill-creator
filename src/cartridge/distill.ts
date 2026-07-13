@@ -76,6 +76,23 @@ export interface DistillFinding {
   tokens: string[];
 }
 
+/**
+ * Ledger-resolved provenance for one contributing source — the cross-origin
+ * identity a {@link ../source-ledger/source-ledger.js SourceLedger} holds for it
+ * (where it was first ingested and under what id). Attached to concept citations
+ * by an async enricher with a `citationResolver`; absent when unresolved.
+ */
+export interface ResolvedCitationProvenance {
+  /** The ingestion entry point, e.g. 'arxiv', 'learn-acquirer', 'citation'. */
+  origin: string;
+  /** The origin-local identity (arxiv id, file path, url, citation id). */
+  sourceId: string;
+  /** ISO-8601 timestamp of when the source was first recorded. */
+  ingestedAt: string;
+  /** Optional human/session label (e.g. a learn sessionId or report ref). */
+  label?: string;
+}
+
 /** A cluster of findings that became one concept. */
 export interface DistillCluster {
   id: string;
@@ -92,6 +109,13 @@ export interface DistillCluster {
    * it. Deduped against source co-occurrence edges.
    */
   semanticEdges?: Array<{ to: string; similarity: number }>;
+  /**
+   * Ledger-resolved provenance per contributing `sourceId`, populated by an
+   * async enricher with a `citationResolver`. `conceptFromCluster` attaches it to
+   * the matching concept citation (schema-safe: citations pass through
+   * ConceptNodeSchema.passthrough()). Unset without a resolver.
+   */
+  resolvedCitations?: Record<string, ResolvedCitationProvenance[]>;
 }
 
 export interface DistillResult {
@@ -445,7 +469,12 @@ function conceptFromCluster(
       ...new Set(cluster.findings.map((f) => f.kind)),
       ...cluster.topTokens,
     ]).slice(0, 8),
-    citations: cluster.sourceIds.map((sourceId) => ({ sourceId })),
+    citations: cluster.sourceIds.map((sourceId) => {
+      const provenance = cluster.resolvedCitations?.[sourceId];
+      return provenance && provenance.length > 0
+        ? { sourceId, provenance }
+        : { sourceId };
+    }),
   };
 }
 

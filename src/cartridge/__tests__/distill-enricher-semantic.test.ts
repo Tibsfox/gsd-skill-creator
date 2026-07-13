@@ -3,6 +3,7 @@ import {
   createSemanticEnricher,
   type DistillEmbedder,
   type DistillNamer,
+  type CitationResolver,
 } from '../distill-enricher-semantic.js';
 import {
   distillSources,
@@ -90,6 +91,43 @@ describe('createSemanticEnricher — name synthesis', () => {
   });
 });
 
+describe('createSemanticEnricher — ledger-resolved citations', () => {
+  const clusters = (): DistillCluster[] => [
+    { id: 'c0', label: 'A', findings: [mkFinding('a')], sourceIds: ['s1'], topTokens: ['a'] },
+    { id: 'c1', label: 'B', findings: [mkFinding('b')], sourceIds: ['s2'], topTokens: ['b'] },
+  ];
+  const sources: DistillSource[] = [
+    { id: 's1', kind: 'note', content: 'content one' },
+    { id: 's2', kind: 'note', content: 'content two' },
+  ];
+  const resolver: CitationResolver = {
+    async resolve(sourceId) {
+      return sourceId === 's1'
+        ? [{ origin: 'arxiv', sourceId: '2401.00001', ingestedAt: 't0' }]
+        : [];
+    },
+  };
+
+  it('attaches resolvedCitations only for sources the resolver knows', async () => {
+    const out = await createSemanticEnricher({ citationResolver: resolver }).enrich(clusters(), sources);
+    expect(out.find((c) => c.id === 'c0')!.resolvedCitations).toEqual({
+      s1: [{ origin: 'arxiv', sourceId: '2401.00001', ingestedAt: 't0' }],
+    });
+    expect(out.find((c) => c.id === 'c1')!.resolvedCitations).toBeUndefined();
+  });
+
+  it('is inert (no resolvedCitations) without a resolver', async () => {
+    const out = await createSemanticEnricher({}).enrich(clusters(), sources);
+    expect(out.every((c) => c.resolvedCitations === undefined)).toBe(true);
+  });
+
+  it('is best-effort — a throwing resolver leaves sources unresolved (no throw)', async () => {
+    const throwing: CitationResolver = { async resolve() { throw new Error('boom'); } };
+    const out = await createSemanticEnricher({ citationResolver: throwing }).enrich(clusters(), sources);
+    expect(out.every((c) => c.resolvedCitations === undefined)).toBe(true);
+  });
+});
+
 describe('DistillEnricher wiring through distillSourcesAsync / distillAndValidate', () => {
   const SOURCES: DistillSource[] = [
     { id: 's1', kind: 'note', content: 'Review code quality. Review pull requests carefully.' },
@@ -124,6 +162,32 @@ describe('DistillEnricher wiring through distillSourcesAsync / distillAndValidat
       { cartridgeId: 'test-enriched', name: 'Test Enriched' },
       { enricher: createSemanticEnricher({ embedder: identical }) },
     );
+    expect(artifact.validation.valid).toBe(true);
+  });
+
+  it('attaches ledger provenance to concept citations end-to-end (and still validates)', async () => {
+    const resolver: CitationResolver = {
+      async resolve(sourceId) {
+        return sourceId === 's1'
+          ? [{ origin: 'learn-acquirer', sourceId: '/x.md', ingestedAt: 't0' }]
+          : [];
+      },
+    };
+    const artifact = await distillAndValidate(
+      SOURCES,
+      { cartridgeId: 'test-cited', name: 'Test Cited' },
+      { enricher: createSemanticEnricher({ citationResolver: resolver }) },
+    );
+    const content = artifact.cartridge.chipsets[0] as ContentChipset;
+    type Cited = { sourceId: string; provenance?: Array<{ origin: string }> };
+    const citations = content.deepMap.concepts.flatMap(
+      (c) => (c as unknown as { citations?: Cited[] }).citations ?? [],
+    );
+    const withProvenance = citations.filter((c) => c.provenance);
+    expect(withProvenance.length).toBeGreaterThan(0);
+    expect(withProvenance.some((c) => c.provenance![0]!.origin === 'learn-acquirer')).toBe(true);
+    // Citations for other sources carry no provenance key.
+    expect(citations.some((c) => !c.provenance)).toBe(true);
     expect(artifact.validation.valid).toBe(true);
   });
 });
