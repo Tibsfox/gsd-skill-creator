@@ -245,6 +245,10 @@ export interface CorrectionCandidateInput {
   // reviewer can inspect the actual revert. Absent for transcript signals.
   revertedCommitHash?: string;
   revertCommitHash?: string;
+  // Stable, content-derived dedup key (set by the detector). Re-detecting the
+  // same correction on the same session yields the same key, so the quarantine
+  // store skips a duplicate append. Undefined on hand-built inputs → no dedup.
+  dedupKey?: string;
 }
 
 // Persisted quarantine record = detector input + review lifecycle.

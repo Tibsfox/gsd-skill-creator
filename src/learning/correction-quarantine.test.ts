@@ -103,4 +103,44 @@ describe('CorrectionQuarantineStore', () => {
     expect(elig.eligible).toBe(false);
     expect(elig.reason).toBe('insufficient_feedback');
   });
+
+  it('is idempotent: re-detecting the same correction returns the existing record, no duplicate', async () => {
+    const first = await store().add(makeCandidate());
+    const second = await store().add(makeCandidate()); // identical content → same dedupKey
+    expect(second.id).toBe(first.id);
+    expect(await store().readAll()).toHaveLength(1);
+  });
+
+  it('dedup is content-keyed, not blanket: a genuinely different correction still persists', async () => {
+    await store().add(makeCandidate());
+    await store().add(makeCandidate({ corrected: 'a genuinely different correction body' }));
+    expect(await store().readAll()).toHaveLength(2);
+  });
+
+  it('addMany dedups within the incoming batch AND against the existing ledger', async () => {
+    await store().add(makeCandidate()); // seed the ledger with the plain candidate
+    const res = await store().addMany([
+      makeCandidate(), // dup of the seed
+      makeCandidate({ filePath: '/g.ts' }), // new
+      makeCandidate(), // in-batch dup
+    ]);
+    expect(res).toHaveLength(3); // a record returned per input (dups point to the existing one)
+    expect(res[0].id).toBe(res[2].id); // both plain candidates resolve to the same record
+    expect(await store().readAll()).toHaveLength(2); // only seed + /g.ts on disk
+  });
+
+  it('cross-instance FileLock serializes a concurrent append + rewrite so neither is lost', async () => {
+    const a = store();
+    const b = store(); // distinct instance over the SAME dir — per-instance WriteQueues do NOT
+    const seed = await a.add(makeCandidate({ filePath: '/seed.ts' }));
+    // Fire an append (new candidate, via b) and a status rewrite (via a) concurrently.
+    // Without the cross-process lock the rewrite could clobber the append.
+    await Promise.all([
+      b.addMany([makeCandidate({ filePath: '/new.ts' })]),
+      a.updateStatus(seed.id, { status: 'dismissed', dismissedReason: 'x' }),
+    ]);
+    const all = await store().readAll();
+    expect(all.map((c) => c.filePath).sort()).toEqual(['/new.ts', '/seed.ts']);
+    expect(all.find((c) => c.filePath === '/seed.ts')!.status).toBe('dismissed');
+  });
 });
