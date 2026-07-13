@@ -1,0 +1,121 @@
+import { describe, it, expect } from 'vitest';
+import {
+  createSemanticEnricher,
+  type DistillEmbedder,
+  type DistillNamer,
+} from '../distill-enricher-semantic.js';
+import {
+  distillSources,
+  distillSourcesAsync,
+  distillAndValidate,
+  type DistillCluster,
+  type DistillFinding,
+  type DistillSource,
+} from '../distill.js';
+import type { ContentChipset } from '../types.js';
+
+function mkFinding(text: string): DistillFinding {
+  return { sourceId: 's', kind: 'note', text, tokens: text.toLowerCase().split(/\s+/) };
+}
+function mkCluster(id: string, label: string, topTokens: string[], text: string): DistillCluster {
+  return { id, label, findings: [mkFinding(text)], sourceIds: ['s'], topTokens };
+}
+
+/** 2-dim keyword embedder: [has "review", has "calculus"]. */
+const keywordEmbedder: DistillEmbedder = {
+  async embed(text: string) {
+    const t = text.toLowerCase();
+    return { embedding: [t.includes('review') ? 1 : 0, t.includes('calculus') ? 1 : 0] };
+  },
+};
+
+const CLUSTERS = (): DistillCluster[] => [
+  mkCluster('cluster-0', 'Code Review', ['review', 'code'], 'reviewing code changes for quality'),
+  mkCluster('cluster-1', 'Peer Review', ['review', 'peer'], 'peer review of pull requests'),
+  mkCluster('cluster-2', 'Calculus', ['calculus', 'derivative'], 'the calculus of derivatives'),
+];
+
+describe('createSemanticEnricher — semantic cross-references', () => {
+  it('adds semantic edges between similar clusters and none for dissimilar ones', async () => {
+    const out = await createSemanticEnricher({ embedder: keywordEmbedder }).enrich(CLUSTERS(), []);
+    const c0 = out.find((c) => c.id === 'cluster-0')!;
+    const c2 = out.find((c) => c.id === 'cluster-2')!;
+    expect(c0.semanticEdges?.map((e) => e.to)).toContain('cluster-1');
+    expect(c0.semanticEdges?.some((e) => e.to === 'cluster-2')).toBe(false);
+    expect(c2.semanticEdges ?? []).toEqual([]);
+  });
+
+  it('caps semantic edges per cluster and sorts by similarity desc', async () => {
+    const identical: DistillEmbedder = { async embed() { return { embedding: [1, 1] }; } };
+    const many = ['a', 'b', 'c', 'd'].map((x, i) => mkCluster(`cluster-${i}`, x, [x], `text ${x}`));
+    const out = await createSemanticEnricher({ embedder: identical, maxEdgesPerCluster: 2 }).enrich(many, []);
+    for (const c of out) {
+      const edges = c.semanticEdges ?? [];
+      expect(edges.length).toBeLessThanOrEqual(2);
+      for (let i = 1; i < edges.length; i++) {
+        expect(edges[i - 1]!.similarity).toBeGreaterThanOrEqual(edges[i]!.similarity);
+      }
+    }
+  });
+
+  it('is inert (returns clusters unchanged) with no backend', async () => {
+    const clusters = CLUSTERS();
+    const out = await createSemanticEnricher({}).enrich(clusters, []);
+    expect(out).toEqual(clusters);
+    expect(out.every((c) => c.semanticEdges === undefined)).toBe(true);
+  });
+});
+
+describe('createSemanticEnricher — name synthesis', () => {
+  it('replaces labels via an injected namer', async () => {
+    const namer: DistillNamer = { async name(input) { return `Synth: ${input.label}`; } };
+    const out = await createSemanticEnricher({ namer }).enrich(CLUSTERS(), []);
+    expect(out.map((c) => c.label)).toEqual(['Synth: Code Review', 'Synth: Peer Review', 'Synth: Calculus']);
+  });
+
+  it('keeps the heuristic label when the namer returns null or throws (best-effort)', async () => {
+    const original = CLUSTERS().map((c) => c.label);
+    const nullNamer: DistillNamer = { async name() { return null; } };
+    const throwNamer: DistillNamer = { async name() { throw new Error('boom'); } };
+    expect((await createSemanticEnricher({ namer: nullNamer }).enrich(CLUSTERS(), [])).map((c) => c.label)).toEqual(original);
+    expect((await createSemanticEnricher({ namer: throwNamer }).enrich(CLUSTERS(), [])).map((c) => c.label)).toEqual(original);
+  });
+});
+
+describe('DistillEnricher wiring through distillSourcesAsync / distillAndValidate', () => {
+  const SOURCES: DistillSource[] = [
+    { id: 's1', kind: 'note', content: 'Review code quality. Review pull requests carefully.' },
+    { id: 's2', kind: 'note', content: 'Calculus derivatives integrals. Calculus limits continuity.' },
+  ];
+
+  it('emits relates-semantically connections from enricher-populated edges', async () => {
+    const identical: DistillEmbedder = { async embed() { return { embedding: [1, 1, 1] }; } };
+    const result = await distillSourcesAsync(
+      SOURCES,
+      { cartridgeId: 't', name: 'T' },
+      createSemanticEnricher({ embedder: identical }),
+    );
+    const content = result.cartridge.chipsets[0] as ContentChipset;
+    const semantic = content.deepMap.connections.filter((c) => c.relationship === 'relates-semantically');
+    // The two topic clusters share no source (no co-occurs edge), so the only
+    // connection is the semantic one the enricher produced.
+    expect(semantic.length).toBeGreaterThan(0);
+  });
+
+  it('the async no-op enricher yields the same clusters/notes as sync distillSources', async () => {
+    const sync = distillSources(SOURCES, { cartridgeId: 't', name: 'T' });
+    const asyncResult = await distillSourcesAsync(SOURCES, { cartridgeId: 't', name: 'T' });
+    expect(asyncResult.clusters).toEqual(sync.clusters);
+    expect(asyncResult.notes).toEqual(sync.notes);
+  });
+
+  it('an enriched artifact still passes cartridge validation', async () => {
+    const identical: DistillEmbedder = { async embed() { return { embedding: [1, 1, 1] }; } };
+    const artifact = await distillAndValidate(
+      SOURCES,
+      { cartridgeId: 'test-enriched', name: 'Test Enriched' },
+      { enricher: createSemanticEnricher({ embedder: identical }) },
+    );
+    expect(artifact.validation.valid).toBe(true);
+  });
+});

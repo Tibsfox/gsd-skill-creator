@@ -15,10 +15,12 @@
  * security gate (`gateSkillContent`), the iterative critique loop, and both
  * cartridge validators. It is the function the CLI drives.
  *
- * v2 seam (DEFERRED — see `DistillEnricher`): the "intelligent fill" pass that
- * calls the research coprocessor and reuses vtm / knowledge-graph context to
- * synthesize concept names, resolve citations against the source ledger, and
- * add cross-references. v1 ships an identity enricher.
+ * v2 enrichment seam (`DistillEnricher` / `AsyncDistillEnricher`): the
+ * "intelligent fill" pass that synthesizes concept names and adds semantic
+ * cross-references. The real async implementation lives in
+ * `distill-enricher-semantic.ts` (embedder-backed, opt-in via `--enrich`);
+ * ledger-resolved citations remain a follow-up. The default is an identity
+ * enricher, so v1 behavior is unchanged unless a backend is injected.
  *
  * Pure module: no fs / no child_process. Sources are supplied in-memory; the
  * CLI is responsible for reading files.
@@ -83,6 +85,13 @@ export interface DistillCluster {
   sourceIds: string[];
   /** Salient tokens ranked by frequency across the cluster. */
   topTokens: string[];
+  /**
+   * Semantic neighbours discovered by an async enricher (embedding cosine).
+   * `buildConnections` turns these into `relates-semantically` connections. v1
+   * (heuristic) distillation leaves this unset; only the semantic enricher fills
+   * it. Deduped against source co-occurrence edges.
+   */
+  semanticEdges?: Array<{ to: string; similarity: number }>;
 }
 
 export interface DistillResult {
@@ -105,11 +114,24 @@ export interface DistillEnricher {
   enrich(clusters: DistillCluster[], sources: DistillSource[]): DistillCluster[];
 }
 
-// TODO(v2): replace `identityEnricher` with a research-coprocessor-backed
-// enricher that reuses vtm + the unified source ledger. Tracked as a deferred
-// follow-up of the `cartridge distill` feature.
+/**
+ * Async variant of {@link DistillEnricher}. Enrichment that reaches a live
+ * backend (embedder, LLM namer, source ledger) is inherently async, so the
+ * already-async {@link distillAndValidate} path accepts this shape. The
+ * concrete implementation is {@link ../cartridge/distill-enricher-semantic.js
+ * createSemanticEnricher}, which stays INERT without an injected backend.
+ */
+export interface AsyncDistillEnricher {
+  enrich(clusters: DistillCluster[], sources: DistillSource[]): Promise<DistillCluster[]>;
+}
+
 export const identityEnricher: DistillEnricher = {
   enrich: (clusters) => clusters,
+};
+
+/** Async no-op — the default for {@link distillSourcesAsync}. */
+export const asyncIdentityEnricher: AsyncDistillEnricher = {
+  enrich: async (clusters) => clusters,
 };
 
 // ============================================================================
@@ -134,15 +156,47 @@ export function distillSources(
   options: DistillOptions,
   enricher: DistillEnricher = identityEnricher,
 ): DistillResult {
+  const { findings, rawClusters } = prepareClusters(sources, options);
+  const clusters = enricher.enrich(rawClusters, sources);
+  return assembleResult(clusters, findings, sources, options);
+}
+
+/**
+ * Async counterpart of {@link distillSources}. Accepts a sync OR async enricher
+ * (both are awaited), so a live-backend enricher can run. With the default
+ * {@link asyncIdentityEnricher} it is byte-identical to {@link distillSources}.
+ */
+export async function distillSourcesAsync(
+  sources: DistillSource[],
+  options: DistillOptions,
+  enricher: DistillEnricher | AsyncDistillEnricher = asyncIdentityEnricher,
+): Promise<DistillResult> {
+  const { findings, rawClusters } = prepareClusters(sources, options);
+  const clusters = await enricher.enrich(rawClusters, sources);
+  return assembleResult(clusters, findings, sources, options);
+}
+
+/** Shared pre-enrichment stage: validate, extract findings, cluster. */
+function prepareClusters(
+  sources: DistillSource[],
+  options: DistillOptions,
+): { findings: DistillFinding[]; rawClusters: DistillCluster[] } {
   if (sources.length === 0) {
     throw new Error('distillSources: at least one source is required');
   }
-
   const maxClusters = Math.max(1, options.maxClusters ?? 8);
   const findings = extractFindings(sources);
   const rawClusters = clusterFindings(findings, maxClusters);
-  const clusters = enricher.enrich(rawClusters, sources);
+  return { findings, rawClusters };
+}
 
+/** Assemble the cartridge + result from (already enriched) clusters. */
+function assembleResult(
+  clusters: DistillCluster[],
+  findings: DistillFinding[],
+  sources: DistillSource[],
+  options: DistillOptions,
+): DistillResult {
   const totalSources = new Set(sources.map((s) => s.id)).size;
   const maxCoverage = Math.max(...clusters.map((c) => c.sourceIds.length), 1);
 
@@ -399,6 +453,10 @@ function buildConnections(
   clusters: DistillCluster[],
 ): ContentChipset['deepMap']['connections'] {
   const connections: ContentChipset['deepMap']['connections'] = [];
+  const seen = new Set<string>();
+  const pairKey = (a: string, b: string): string => (a < b ? `${a}\x00${b}` : `${b}\x00${a}`);
+
+  // Source co-occurrence edges (v1 signal).
   for (let i = 0; i < clusters.length; i++) {
     for (let j = i + 1; j < clusters.length; j++) {
       const a = clusters[i]!;
@@ -412,6 +470,25 @@ function buildConnections(
         from: a.id,
         to: b.id,
         relationship: 'co-occurs',
+        strength: strength === 0 ? 0.1 : strength,
+      });
+      seen.add(pairKey(a.id, b.id));
+    }
+  }
+
+  // Semantic edges contributed by an async enricher (deduped against co-occurs).
+  const ids = new Set(clusters.map((c) => c.id));
+  for (const c of clusters) {
+    for (const edge of c.semanticEdges ?? []) {
+      if (edge.to === c.id || !ids.has(edge.to)) continue;
+      const key = pairKey(c.id, edge.to);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const strength = clampUnit(edge.similarity);
+      connections.push({
+        from: c.id,
+        to: edge.to,
+        relationship: 'relates-semantically',
         strength: strength === 0 ? 0.1 : strength,
       });
     }
@@ -441,7 +518,8 @@ export interface DistillPipelineDeps {
   /** Override the body hash (default: FNV-1a). */
   hashBody?: (body: string) => string;
   now?: () => number;
-  enricher?: DistillEnricher;
+  /** Sync or async cluster enricher. Default: {@link asyncIdentityEnricher} (no-op). */
+  enricher?: DistillEnricher | AsyncDistillEnricher;
   /**
    * Telemetry-derived usage signal for the ADVISORY ROI verdict. When supplied
    * (e.g. from a prior cartridge's usage), it drives value/cost; otherwise the
@@ -480,10 +558,10 @@ export async function distillAndValidate(
   options: DistillOptions,
   deps: DistillPipelineDeps = {},
 ): Promise<DistilledArtifact> {
-  const { cartridge, clusters, notes } = distillSources(
+  const { cartridge, clusters, notes } = await distillSourcesAsync(
     sources,
     options,
-    deps.enricher ?? identityEnricher,
+    deps.enricher ?? asyncIdentityEnricher,
   );
 
   // --- Security gate over the rendered narrative body ---

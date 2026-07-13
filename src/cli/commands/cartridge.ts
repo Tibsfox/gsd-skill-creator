@@ -420,11 +420,20 @@ async function handleDistill(
   const cartridgeId = toSafeSkillName(idFlag ?? sources[0]!.id);
   const name = nameFlag ?? cartridgeId;
 
-  const artifact = await distillAndValidate(sources, {
-    cartridgeId,
-    name,
-    template,
-  });
+  // Opt-in semantic enrichment: embed clusters and add semantic cross-references.
+  // Constructed only with --enrich; otherwise the default no-op enricher runs.
+  const deps: Parameters<typeof distillAndValidate>[2] = {};
+  if (args.includes('--enrich')) {
+    const { EmbeddingService } = await import('../../embeddings/embedding-service.js');
+    const { createSemanticEnricher } = await import('../../cartridge/distill-enricher-semantic.js');
+    deps.enricher = createSemanticEnricher({ embedder: EmbeddingService.createFresh() });
+  }
+
+  const artifact = await distillAndValidate(
+    sources,
+    { cartridgeId, name, template },
+    deps,
+  );
 
   if (jsonMode(args)) {
     printJson(io, artifact);
