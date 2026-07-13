@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
   buildNamePrompt,
   parseNameCompletion,
@@ -127,5 +127,48 @@ describe('createClaudeDistillNamer — gated factory', () => {
     const namer = createClaudeDistillNamer({ SC_DISTILL_NAMER_LLM: '1', ANTHROPIC_API_KEY: 'sk-test' });
     expect(namer).not.toBeNull();
     expect(typeof namer!.name).toBe('function');
+  });
+});
+
+describe('createClaudeDistillNamer — key forwarding (guards the un-forwarded-key regression)', () => {
+  const mockFetch = vi.fn();
+  beforeEach(() => {
+    mockFetch.mockReset();
+    vi.stubGlobal('fetch', mockFetch);
+    delete process.env['ANTHROPIC_API_KEY'];
+  });
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    delete process.env['ANTHROPIC_API_KEY'];
+  });
+
+  function anthropicText(text: string) {
+    return {
+      id: 'msg-1',
+      model: 'claude-haiku-4-5-20251001',
+      content: [{ type: 'text', text }],
+      usage: { input_tokens: 5, output_tokens: 3 },
+      stop_reason: 'end_turn',
+    };
+  }
+  function jsonResponse(body: unknown, status = 200): Response {
+    return {
+      ok: status >= 200 && status < 300,
+      status,
+      json: async () => body,
+      text: async () => JSON.stringify(body),
+    } as unknown as Response;
+  }
+
+  it('forwards the INJECTED env key into the request (usable when env !== process.env)', async () => {
+    // process.env.ANTHROPIC_API_KEY is deleted, so the chip has no ambient key —
+    // a request carrying the key proves the factory forwarded the env-arg key.
+    mockFetch.mockResolvedValueOnce(jsonResponse(anthropicText('{"name":"Ok"}')));
+    const namer = createClaudeDistillNamer({ SC_DISTILL_NAMER_LLM: '1', ANTHROPIC_API_KEY: 'factory-key' });
+    expect(namer).not.toBeNull();
+    await namer!.name(INPUT);
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+    const headers = mockFetch.mock.calls[0]![1].headers as Record<string, string>;
+    expect(headers['x-api-key']).toBe('factory-key');
   });
 });
