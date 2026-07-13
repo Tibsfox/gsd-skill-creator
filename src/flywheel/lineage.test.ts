@@ -6,9 +6,13 @@ import {
   normalizeSkillName,
   conceptMatchesSkill,
   sourceMatchesSkill,
+  precedentMatchesSkill,
+  citationMatchesSkill,
   type FlywheelInput,
   type LedgerSourceLike,
   type ConceptLike,
+  type PrecedentLike,
+  type CitationProvenanceLike,
 } from './lineage.js';
 
 // A fixture wiring two upstream subsystems (source ledger + college concepts)
@@ -33,10 +37,32 @@ function fixture(overrides: Partial<FlywheelInput> = {}): FlywheelInput {
     { id: 'exponential-decay', name: 'Exponential Decay', domain: 'mathematics' },
     { id: 'conventional-commits', name: 'Conventional Commits', domain: 'git', skills: ['commit-style'] },
   ];
+  const precedents: PrecedentLike[] = [
+    {
+      id: 'dt-1',
+      intent: 'standardize commit subjects',
+      skills: ['commit-style'],
+      actor: 'executor',
+      score: 0.42,
+    },
+    { id: 'dt-2', intent: 'unrelated refactor', skills: ['other-skill'] },
+    { id: 'dt-3', intent: 'no skill attribution at all' },
+  ];
+  const citations: CitationProvenanceLike[] = [
+    {
+      citationId: 'cite-1',
+      skills: ['commit-style'],
+      title: 'Angular commit convention',
+      artifactPath: 'docs/commits.md',
+    },
+    { citationId: 'cite-2', skills: ['something-else'], title: 'Unrelated paper' },
+  ];
   return {
     skill: 'commit-style',
     sources,
     concepts,
+    precedents,
+    citations,
     telemetry: {
       skillName: 'commit-style',
       sessionCount: 20,
@@ -107,30 +133,74 @@ describe('sourceMatchesSkill', () => {
   });
 });
 
+describe('precedentMatchesSkill', () => {
+  it('matches explicitly when the precedent back-links the skill', () => {
+    const r = precedentMatchesSkill({ id: 'x', intent: 'i', skills: ['commit-style'] }, 'commit-style');
+    expect(r).toEqual({ matched: true, confidence: 'explicit' });
+  });
+  it('drops precedents with no matching skill attribution', () => {
+    expect(precedentMatchesSkill({ id: 'x', intent: 'i', skills: ['other'] }, 'commit-style').matched).toBe(false);
+    expect(precedentMatchesSkill({ id: 'x', intent: 'i' }, 'commit-style').matched).toBe(false);
+  });
+});
+
+describe('citationMatchesSkill', () => {
+  it('matches explicitly when the citation attributes its artifact to the skill', () => {
+    const r = citationMatchesSkill({ citationId: 'c', skills: ['commit-style'] }, 'commit-style');
+    expect(r).toEqual({ matched: true, confidence: 'explicit' });
+  });
+  it('drops citations attributed to other skills', () => {
+    expect(citationMatchesSkill({ citationId: 'c', skills: ['nope'] }, 'commit-style').matched).toBe(false);
+  });
+});
+
 describe('assembleFlywheelChain', () => {
-  it('joins matched upstream artifacts and downstream telemetry onto the skill spine', () => {
+  it('joins precise upstream artifacts and downstream telemetry onto the skill spine', () => {
     const chain = assembleFlywheelChain(fixture());
 
-    // Sources: label match + explicit extra.skill match; unrelated dropped.
-    expect(chain.sources.map((s) => s.meta.contentHash)).toEqual([
-      'aaaaaaaaaaaa1111',
-      'cccccccccccc3333',
+    // PRECISE by default: only EXPLICIT ledger source (extra.skill) survives; the
+    // loose label match ('commit-style research') is dropped, unrelated dropped.
+    // Precedent + citation sources join explicitly and appear alongside.
+    expect(chain.sources.map((s) => s.id)).toEqual([
+      'source:cccccccccccc3333',
+      'precedent:dt-1',
+      'citation:cite-1',
     ]);
 
-    // Concepts: heuristic token match + explicit back-link; math concept dropped.
-    expect(chain.concepts.map((c) => c.meta.conceptId).sort()).toEqual([
-      'commit-message',
-      'conventional-commits',
-    ]);
+    // Concepts: only the explicit back-link survives; the loose token match
+    // ('commit-message', the spurious 'style'/'commit' overlap) is dropped.
+    expect(chain.concepts.map((c) => c.meta.conceptId)).toEqual(['conventional-commits']);
 
     expect(chain.activations?.meta.loadCount).toBe(12);
     expect(chain.corrections?.meta.correctionCount).toBe(3);
 
-    // Downstream links are exact; the explicit source link is tagged explicit.
+    // Every surviving upstream link is explicit; downstream links are exact.
+    for (const src of chain.sources) {
+      expect(chain.links.find((l) => l.from === src.id)?.confidence).toBe('explicit');
+    }
     const actLink = chain.links.find((l) => l.to === chain.activations!.id);
     expect(actLink?.confidence).toBe('exact');
-    const explicitSrc = chain.links.find((l) => l.from === 'source:cccccccccccc3333');
-    expect(explicitSrc?.confidence).toBe('explicit');
+  });
+
+  it('folds precedent and citation provenance into the sources with useful meta', () => {
+    const chain = assembleFlywheelChain(fixture());
+    const prec = chain.sources.find((s) => s.id === 'precedent:dt-1');
+    expect(prec?.meta.kind).toBe('precedent');
+    expect(prec?.meta.score).toBe(0.42);
+    expect(prec?.label).toBe('standardize commit subjects');
+    const cite = chain.sources.find((s) => s.id === 'citation:cite-1');
+    expect(cite?.meta.kind).toBe('citation');
+    expect(cite?.meta.artifactPath).toBe('docs/commits.md');
+    expect(cite?.label).toBe('Angular commit convention');
+  });
+
+  it('surfaces the low-confidence heuristic tier only when opted in', () => {
+    const chain = assembleFlywheelChain(fixture({ allowHeuristic: true }));
+    // Heuristic ledger label match + heuristic concept token match now appear.
+    expect(chain.sources.map((s) => s.id)).toContain('source:aaaaaaaaaaaa1111');
+    expect(chain.concepts.map((c) => c.meta.conceptId)).toContain('commit-message');
+    const heurSrc = chain.links.find((l) => l.from === 'source:aaaaaaaaaaaa1111');
+    expect(heurSrc?.confidence).toBe('heuristic');
   });
 
   it('degrades gracefully when telemetry and corrections are absent', () => {
@@ -154,8 +224,11 @@ describe('formatFlywheelChain', () => {
   it('renders the full source -> ... -> corrections chain', () => {
     const out = formatFlywheelChain(assembleFlywheelChain(fixture()));
     expect(out).toContain("Flywheel lineage for 'commit-style'");
-    expect(out).toContain('sources (2)');
-    expect(out).toContain('concepts (2)');
+    // 3 precise sources: explicit ledger + precedent trace + citation provenance.
+    expect(out).toContain('sources (3)');
+    expect(out).toContain('precedent:dt-1');
+    expect(out).toContain('citation:cite-1');
+    expect(out).toContain('concepts (1)');
     expect(out).toContain('activations: 12 load session(s)');
     expect(out).toContain('corrections: 3 [correction-magnet]');
     expect(out).toContain('source -> concept -> skill -> activations -> corrections');

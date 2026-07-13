@@ -17,14 +17,24 @@
  *     • skill → activations / corrections : telemetry keys every event by
  *       `skillName`, so this join is EXACT.
  *
- *   The UPSTREAM half (source/concept → skill) has no shared id. Those links are
- *   inferred and each carries the confidence of the inference so the output is
- *   never dishonest about what was guessed:
+ *   The UPSTREAM half (source/concept → skill) has no shared id. The join is
+ *   PRECISE by default — only EXPLICIT links survive:
  *
- *     • concept → skill : EXPLICIT when a concept lists the skill in `skills`,
- *       else HEURISTIC on skill-name / concept-name token overlap.
- *     • source  → skill : EXPLICIT when a source's provenance names the skill
- *       (`extra.skill` or `label`), else HEURISTIC on a name substring match.
+ *     • concept    → skill : EXPLICIT when a concept lists the skill in `skills`.
+ *     • source     → skill : EXPLICIT when a source's provenance names the skill
+ *       (`extra.skill` or a `label` equal to the skill).
+ *     • precedent  → skill : EXPLICIT when a decision-trace precedent back-links
+ *       the skill (`skills`). Precedent traces (src/traces/precedent.ts) enter
+ *       the chain as upstream `source`-stage nodes.
+ *     • citation   → skill : EXPLICIT when a citation-store provenance record
+ *       attributes its artifact to the skill (`skills`). Citation provenance
+ *       (src/citations/store/) enters the chain as upstream `source`-stage nodes.
+ *
+ *   The loose token-overlap / substring HEURISTIC tier is OFF by default (it
+ *   over-matched — e.g. skill `commit-style` matched every concept containing
+ *   `style`). Callers that want the low-confidence tier opt in with
+ *   `allowHeuristic: true`; those links are tagged `heuristic` so the output is
+ *   never dishonest about what was guessed.
  *
  *   Upstream artifacts that match nothing are DROPPED, never fabricated. A full
  *   content-hash-based join-key unification across every subsystem is a
@@ -94,6 +104,34 @@ export interface ConceptLike {
   skills?: string[];
 }
 
+/**
+ * A decision-trace precedent, structurally (a subset of DecisionTrace enriched
+ * with an explicit `skills` back-link and an optional precedent-query score).
+ * Enters the chain as an upstream `source`-stage node.
+ */
+export interface PrecedentLike {
+  id: string;
+  intent: string;
+  /** Explicit skill back-links resolved from the trace refs. */
+  skills?: string[];
+  actor?: string;
+  /** Precedent-query similarity score (0–1), when the trace came from a query. */
+  score?: number;
+}
+
+/**
+ * A citation-store provenance record, structurally. `skills` is the explicit
+ * attribution of the cited artifact to one or more skills. Enters the chain as
+ * an upstream `source`-stage node.
+ */
+export interface CitationProvenanceLike {
+  citationId: string;
+  /** Skill(s) this citation's artifact is attributed to. */
+  skills?: string[];
+  title?: string;
+  artifactPath?: string;
+}
+
 /** Per-skill telemetry, structurally (a UsagePatternDetector SkillPatternEntry). */
 export interface TelemetryLike {
   skillName: string;
@@ -109,12 +147,22 @@ export interface FlywheelInput {
   skill: string;
   sources: LedgerSourceLike[];
   concepts: ConceptLike[];
+  /** Decision-trace precedents that back-link the skill (upstream sources). */
+  precedents?: PrecedentLike[];
+  /** Citation-store provenance records attributing artifacts to the skill. */
+  citations?: CitationProvenanceLike[];
   /** Per-skill telemetry entry, or undefined when telemetry is unavailable. */
   telemetry?: TelemetryLike;
   /** Whether the pattern detector flagged this skill as a correction magnet. */
   correctionMagnet?: boolean;
   /** Raw count of `skill-correction` events observed for the skill. */
   correctionCount?: number;
+  /**
+   * Opt into the low-confidence heuristic tier (loose token-overlap on concepts,
+   * substring match on source labels). OFF by default — precise EXPLICIT joins
+   * only. Precedent and citation joins are always explicit regardless.
+   */
+  allowHeuristic?: boolean;
 }
 
 // ─── Normalization + token helpers ───────────────────────────────────────────
@@ -203,6 +251,35 @@ export function sourceMatchesSkill(
   return NO_MATCH;
 }
 
+/**
+ * Precedent → skill. EXPLICIT (precise only) when the precedent back-links the
+ * skill in `skills`. No heuristic tier: precedent traces are joined by explicit
+ * attribution or not at all.
+ */
+export function precedentMatchesSkill(
+  precedent: PrecedentLike,
+  normalizedSkill: string,
+): MatchResult {
+  if (precedent.skills?.some((s) => normalizeSkillName(s) === normalizedSkill)) {
+    return { matched: true, confidence: 'explicit' };
+  }
+  return NO_MATCH;
+}
+
+/**
+ * Citation → skill. EXPLICIT (precise only) when the citation provenance
+ * attributes its artifact to the skill in `skills`. No heuristic tier.
+ */
+export function citationMatchesSkill(
+  citation: CitationProvenanceLike,
+  normalizedSkill: string,
+): MatchResult {
+  if (citation.skills?.some((s) => normalizeSkillName(s) === normalizedSkill)) {
+    return { matched: true, confidence: 'explicit' };
+  }
+  return NO_MATCH;
+}
+
 // ─── Assembly ────────────────────────────────────────────────────────────────
 
 /**
@@ -212,6 +289,7 @@ export function sourceMatchesSkill(
 export function assembleFlywheelChain(input: FlywheelInput): FlywheelChain {
   const normalizedSkill = normalizeSkillName(input.skill);
   const skillTokens = tokenize(input.skill);
+  const allowHeuristic = input.allowHeuristic ?? false;
 
   const skillNodeId = `skill:${normalizedSkill}`;
   const skillNode: FlywheelNode = {
@@ -224,16 +302,19 @@ export function assembleFlywheelChain(input: FlywheelInput): FlywheelChain {
   const nodes: FlywheelNode[] = [];
   const links: FlywheelLink[] = [];
 
-  // ── Upstream: sources ──
+  // ── Upstream: sources (ledger + precedent traces + citation provenance) ──
   const sources: FlywheelNode[] = [];
+
   for (const src of input.sources) {
     const m = sourceMatchesSkill(src, input.skill, normalizedSkill);
     if (!m.matched) continue;
+    if (m.confidence === 'heuristic' && !allowHeuristic) continue;
     const node: FlywheelNode = {
       stage: 'source',
       id: `source:${src.contentHash}`,
       label: `${src.provenance.origin}:${src.provenance.sourceId}`,
       meta: {
+        kind: 'ledger',
         contentHash: src.contentHash,
         origin: src.provenance.origin,
         sourceId: src.provenance.sourceId,
@@ -245,11 +326,49 @@ export function assembleFlywheelChain(input: FlywheelInput): FlywheelChain {
     links.push({ from: node.id, to: skillNodeId, joinKey: normalizedSkill, confidence: m.confidence });
   }
 
+  for (const prec of input.precedents ?? []) {
+    const m = precedentMatchesSkill(prec, normalizedSkill);
+    if (!m.matched) continue;
+    const node: FlywheelNode = {
+      stage: 'source',
+      id: `precedent:${prec.id}`,
+      label: prec.intent,
+      meta: {
+        kind: 'precedent',
+        precedentId: prec.id,
+        intent: prec.intent,
+        actor: prec.actor,
+        score: prec.score,
+      },
+    };
+    sources.push(node);
+    links.push({ from: node.id, to: skillNodeId, joinKey: normalizedSkill, confidence: m.confidence });
+  }
+
+  for (const cit of input.citations ?? []) {
+    const m = citationMatchesSkill(cit, normalizedSkill);
+    if (!m.matched) continue;
+    const node: FlywheelNode = {
+      stage: 'source',
+      id: `citation:${cit.citationId}`,
+      label: cit.title ?? cit.citationId,
+      meta: {
+        kind: 'citation',
+        citationId: cit.citationId,
+        title: cit.title,
+        artifactPath: cit.artifactPath,
+      },
+    };
+    sources.push(node);
+    links.push({ from: node.id, to: skillNodeId, joinKey: normalizedSkill, confidence: m.confidence });
+  }
+
   // ── Upstream: department concepts ──
   const concepts: FlywheelNode[] = [];
   for (const c of input.concepts) {
     const m = conceptMatchesSkill(c, normalizedSkill, skillTokens);
     if (!m.matched) continue;
+    if (m.confidence === 'heuristic' && !allowHeuristic) continue;
     const node: FlywheelNode = {
       stage: 'concept',
       id: `concept:${c.id}`,
@@ -341,7 +460,11 @@ export function formatFlywheelChain(chain: FlywheelChain): string {
     lines.push('    (none joined — no source names this skill)');
   } else {
     for (const s of chain.sources) {
-      lines.push(`    - [${CONF_TAG[confOf(chain, s.id)]}] ${s.meta.contentHash ? String(s.meta.contentHash).slice(0, 12) : ''}  ${s.label}`);
+      const kind = typeof s.meta.kind === 'string' ? s.meta.kind : 'ledger';
+      const ref = s.meta.contentHash
+        ? String(s.meta.contentHash).slice(0, 12)
+        : `${kind}:${s.id.split(':').slice(1).join(':')}`;
+      lines.push(`    - [${CONF_TAG[confOf(chain, s.id)]}] ${ref}  ${s.label}`);
     }
   }
 
