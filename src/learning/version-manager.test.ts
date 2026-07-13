@@ -242,4 +242,52 @@ describe('VersionManager', () => {
       );
     });
   });
+
+  describe('resolveReverts', () => {
+    it('resolves a real git revert into a RevertedCommitSignal', async () => {
+      const file = join(testDir, 'src', 'thing.ts');
+      await mkdir(join(testDir, 'src'), { recursive: true });
+
+      await writeFile(file, 'export const value = "original";\n');
+      await execAsync('git add .', { cwd: testDir });
+      await execAsync('git commit -m "feat: seed thing"', { cwd: testDir });
+
+      await writeFile(file, 'export const value = "mistaken change";\n');
+      await execAsync('git add .', { cwd: testDir });
+      await execAsync('git commit -m "feat: bad change to thing"', { cwd: testDir });
+      const { stdout: mistakeHash } = await execAsync('git rev-parse HEAD', { cwd: testDir });
+
+      await execAsync('git revert --no-edit HEAD', { cwd: testDir });
+      const { stdout: revertHash } = await execAsync('git rev-parse HEAD', { cwd: testDir });
+
+      const reverts = await manager.resolveReverts();
+      const match = reverts.find((r) => r.filePath === 'src/thing.ts');
+
+      expect(match).toBeDefined();
+      expect(match!.revertedCommitHash).toBe(mistakeHash.trim());
+      expect(match!.revertCommitHash).toBe(revertHash.trim());
+      expect(match!.original).toBe('export const value = "mistaken change";\n');
+      expect(match!.corrected).toBe('export const value = "original";\n');
+      expect(match!.revertMessage).toContain('Revert');
+    });
+
+    it('returns [] when there are no revert commits', async () => {
+      await writeFile(join(testDir, 'plain.txt'), 'hello\n');
+      await execAsync('git add .', { cwd: testDir });
+      await execAsync('git commit -m "feat: plain"', { cwd: testDir });
+
+      expect(await manager.resolveReverts()).toEqual([]);
+    });
+
+    it('propagates ProcessContextDenied from the gated git runner', async () => {
+      const ctx: ProcessContext = {
+        allowList: [],
+        audit: NULL_PROCESS_AUDIT_SINK,
+      };
+      const managerWithCtx = new VersionManager('.claude/skills', testDir, ctx);
+      await expect(managerWithCtx.resolveReverts()).rejects.toBeInstanceOf(
+        ProcessContextDenied,
+      );
+    });
+  });
 });

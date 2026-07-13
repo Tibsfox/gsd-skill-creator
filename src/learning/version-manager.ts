@@ -1,6 +1,11 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { SkillVersion } from '../types/learning.js';
+import type { RevertedCommitSignal } from '../types/learning.js';
+import {
+  resolveRevertsFromGit,
+  type ResolveRevertsOptions,
+} from './revert-resolver.js';
 import {
   ensureProcessAllowed,
   ProcessContextDenied,
@@ -46,6 +51,17 @@ export class VersionManager {
       cwd: this.workDir,
     });
     return stdout;
+  }
+
+  /**
+   * Resolve reverted-commit correction facts from real git history.
+   *
+   * Feeds the PURE CorrectionDetector's injected `reverts[]` (item-7). Git access
+   * routes through the ProcessContext-gated `git` helper; `ProcessContextDenied`
+   * propagates, ordinary git failures degrade to []. See revert-resolver.ts.
+   */
+  async resolveReverts(opts?: ResolveRevertsOptions): Promise<RevertedCommitSignal[]> {
+    return resolveRevertsFromGit((command) => this.git(command), opts);
   }
 
   /**

@@ -35,6 +35,8 @@ import { SNAPSHOT_FILENAME } from '../../orchestrator/session-continuity/types.j
 import { TranscriptParser } from '../../observation/transcript-parser.js';
 import { CorrectionDetector } from '../../learning/correction-detector.js';
 import { CorrectionQuarantineStore } from '../../learning/correction-quarantine.js';
+import { VersionManager } from '../../learning/version-manager.js';
+import type { RevertedCommitSignal } from '../../types/learning.js';
 import { RetentionManager } from '../../observation/retention-manager.js';
 
 // ============================================================================
@@ -726,6 +728,22 @@ async function handleSnapshot(args: string[]): Promise<number> {
 }
 
 /**
+ * Resolve reverted-commit correction facts from git history, best-effort.
+ *
+ * Activates the 'reverted-commit' signal in production: real `git revert` pairs
+ * become injected `reverts[]` for the PURE CorrectionDetector. Git failures
+ * (not a repo, denied context) degrade to [] so correction detection — itself a
+ * best-effort session-exit step — never blocks. See revert-resolver.ts.
+ */
+async function resolveSessionReverts(): Promise<RevertedCommitSignal[]> {
+  try {
+    return await new VersionManager().resolveReverts();
+  } catch {
+    return [];
+  }
+}
+
+/**
  * Generate a session snapshot from a transcript file and store it.
  *
  * Required: --session-id, --transcript-path
@@ -770,7 +788,13 @@ async function handleSnapshotGenerate(args: string[]): Promise<number> {
     // never writes the live feedback ledger. Kill switch: SC_DISABLE_CORRECTION_DETECT=1.
     if (process.env.SC_DISABLE_CORRECTION_DETECT !== '1') {
       try {
-        const candidates = new CorrectionDetector().detect(entries, sessionId, transcriptPath);
+        const reverts = await resolveSessionReverts();
+        const candidates = new CorrectionDetector().detect(
+          entries,
+          sessionId,
+          transcriptPath,
+          reverts,
+        );
         if (candidates.length > 0) {
           await new CorrectionQuarantineStore(snapshotDir).addMany(candidates);
         }
@@ -819,7 +843,13 @@ async function handleDetectCorrections(args: string[]): Promise<number> {
   try {
     const snapshotDir = resolveSnapshotDir(args);
     const entries = await new TranscriptParser().parse(transcriptPath);
-    const candidates = new CorrectionDetector().detect(entries, sessionId, transcriptPath);
+    const reverts = await resolveSessionReverts();
+    const candidates = new CorrectionDetector().detect(
+      entries,
+      sessionId,
+      transcriptPath,
+      reverts,
+    );
     if (candidates.length > 0) {
       await new CorrectionQuarantineStore(snapshotDir).addMany(candidates);
     }
