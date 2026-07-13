@@ -20,8 +20,9 @@
  * The output is a DRAFT — callers write it to disk for review and must NOT
  * auto-install it.
  *
- * KNOWN CONSTRAINT: the trace activation writers are still largely unwired
- * (Phase 646), so the live co-occurrence log is sparse. This module is
+ * KNOWN CONSTRAINT: the trace activation writers ARE wired (M5 selector +
+ * M4 branch explorer), but the live co-occurrence log stays sparse until real
+ * multi-skill usage accrues. This module is
  * deliberately gated on `minSupport` and TDD'd against synthetic fixtures; the
  * hard core of *deriving* a co-occurrence matrix from the raw decision-trace
  * JSONL log is out of scope here (see deferred notes).

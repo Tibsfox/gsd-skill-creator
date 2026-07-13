@@ -1,9 +1,10 @@
 /**
  * M3 Decision-Trace Ledger — activation-writer convenience wrapper.
  *
- * Convenience entry point invoked by the M5 applicator and M4 branch lifecycle
- * (both will wire to it in Phase 646).  For now the API is fully exposed and
- * call sites are defined; wiring lands in Phase 646.
+ * Convenience entry point invoked by the M5 selector and the M4 branch
+ * lifecycle. Both wirings are LIVE: the M5 selector (src/orchestration/selector.ts)
+ * and the M4 branch explorer (src/branches/explore.ts) each construct an
+ * ActivationWriter, so skill fires and compositions are traced in production.
  *
  * Two helper factories cover the two call-site patterns:
  *
@@ -17,7 +18,8 @@
  * SC-M3-APPEND append-only invariant throughout.
  *
  * Phase 644, Wave 1 Track D (M3).
- * Wiring: Phase 646 (M5 applicator hook + M4 branch lifecycle).
+ * Wired: M5 selector (src/orchestration/selector.ts) + M4 branch lifecycle
+ * (src/branches/explore.ts).
  *
  * @module traces/activation-writer
  */
@@ -84,7 +86,7 @@ export interface CompositionTraceOptions {
 /**
  * Write a trace for a single skill activation.
  *
- * Called by M5 applicator hook on every skill fire (Phase 646 wiring).
+ * Called by the M5 selector on every skill fire (src/orchestration/selector.ts).
  * Returns the redacted canonical form that was written.
  */
 export async function writeActivationTrace(
@@ -112,7 +114,7 @@ export async function writeActivationTrace(
 /**
  * Write a trace for a multi-skill agent composition decision.
  *
- * Called by M4 branch lifecycle and M5 multi-skill invocations (Phase 646).
+ * Called by the M4 branch lifecycle and M5 multi-skill invocations (both live).
  * Returns the redacted canonical form that was written.
  */
 export async function writeCompositionTrace(
@@ -145,8 +147,9 @@ export async function writeCompositionTrace(
 // ─── ActivationWriter class ───────────────────────────────────────────────────
 
 /**
- * Stateful wrapper for DI contexts (M5 applicator, M4 branch lifecycle).
- * Both Phase 646 wiring points will receive an ActivationWriter instance.
+ * Stateful wrapper for DI contexts (M5 selector, M4 branch lifecycle).
+ * Both live wiring points construct/receive an ActivationWriter instance
+ * (src/orchestration/selector.ts, src/branches/explore.ts).
  */
 export class ActivationWriter {
   constructor(private readonly logPath: string = DEFAULT_TRACE_PATH) {}
