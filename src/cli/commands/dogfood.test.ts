@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { existsSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import {
   parseDogfoodArgs,
   resolveRun,
@@ -50,15 +50,19 @@ describe('parseDogfoodArgs', () => {
 
 describe('resolveRun', () => {
   it('resolves a bare id under .dogfood/runs', () => {
+    // Expected values are composed with the same path primitives as the
+    // implementation so the assertions hold on POSIX and Windows alike
+    // (join yields OS-native separators).
     const r = resolveRun('my-run', { cwd: '/work' });
-    expect(r.runDir).toBe('/work/.dogfood/runs/my-run');
-    expect(r.inputFile).toBe('/work/.dogfood/runs/my-run/skill-updates.json');
-    expect(r.draftsDir).toBe('/work/.dogfood/runs/my-run/drafts');
+    const runDir = join('/work', '.dogfood', 'runs', 'my-run');
+    expect(r.runDir).toBe(runDir);
+    expect(r.inputFile).toBe(join(runDir, 'skill-updates.json'));
+    expect(r.draftsDir).toBe(join(runDir, 'drafts'));
   });
 
   it('treats a path-like run as a directory', () => {
     const r = resolveRun('./out/refine', { cwd: '/work' });
-    expect(r.runDir).toBe('/work/out/refine');
+    expect(r.runDir).toBe(resolve('/work', './out/refine'));
   });
 });
 
