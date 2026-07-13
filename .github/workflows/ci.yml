@@ -212,6 +212,11 @@ jobs:
       # Frontend-only lane: tsc + vite build + vitest (jsdom). No Rust/Tauri system deps
       # are needed here — that surface is compiled by the `cargo` lane and a future
       # `tauri build` smoke job (deferred, tracked in the improvement workplan).
+      # Root JS deps ARE needed: desktop `tsc` type-checks the shared cross-root import
+      # ../src/keystore/passphrase-quality.ts (@zxcvbn-ts/*) plus node:crypto/`process`
+      # (@types/node), which live only in the repo-root node_modules (resolved by walking
+      # up the tree). Without the root install the lane fails TS2307/TS2580.
+      - run: npm ci
       - run: npm --prefix desktop ci
       - run: npm --prefix desktop run build
       - run: npm --prefix desktop run test
