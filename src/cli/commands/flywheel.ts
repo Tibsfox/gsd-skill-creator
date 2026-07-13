@@ -31,11 +31,14 @@
  */
 
 import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { SourceLedger, type SourceLedgerEntry } from '../../source-ledger/source-ledger.js';
+import { runDevMemory } from '../../knowledge/dev-memory-run.js';
+import type { PatternMemoryWriter } from '../../knowledge/memory-sink.js';
+import type { MemoryRecord } from '../../memory/types.js';
 import { TelemetryEventStore } from '../../telemetry/telemetry-event-store.js';
 import { UsagePatternDetector } from '../../telemetry/usage-pattern-detector.js';
 import type { SkillPatternEntry } from '../../telemetry/types.js';
@@ -69,6 +72,18 @@ export interface ParsedFlywheelArgs {
    * heuristic tier reachable in the meantime.
    */
   allowHeuristic: boolean;
+
+  // ─── dev-memory subcommand ─────────────────────────────────────────────
+  /** Actually persist mined dev-session memories. OFF by default (dry run prints only). */
+  execute: boolean;
+  /** Opt in to writing correction-cluster memories (QUARANTINE-gated per item-7). */
+  includeCorrections: boolean;
+  /** Override the session-streams dir (default .planning/sessions). */
+  sessionsDir?: string;
+  /** Override the memory dir used by --execute (default .). */
+  memoryDir?: string;
+  /** Override the detector's recurrence threshold. */
+  minRecurrence?: number;
 }
 
 /** Parse the argument slice after `flywheel`. */
@@ -80,20 +95,47 @@ export function parseFlywheelArgs(args: string[]): ParsedFlywheelArgs {
   let json = false;
   let help = false;
   let allowHeuristic = false;
+  let execute = false;
+  let includeCorrections = false;
+  let sessionsDir: string | undefined;
+  let memoryDir: string | undefined;
+  let minRecurrence: number | undefined;
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
     if (a === '--help' || a === '-h') help = true;
     else if (a === '--json') json = true;
     else if (a === '--allow-heuristic') allowHeuristic = true;
+    else if (a === '--execute') execute = true;
+    else if (a === '--include-corrections') includeCorrections = true;
     else if (a === '--path') path = args[++i];
     else if (a.startsWith('--path=')) path = a.slice('--path='.length);
     else if (a === '--telemetry') telemetry = args[++i];
     else if (a.startsWith('--telemetry=')) telemetry = a.slice('--telemetry='.length);
     else if (a === '--html') html = args[++i];
     else if (a.startsWith('--html=')) html = a.slice('--html='.length);
+    else if (a === '--sessions-dir') sessionsDir = args[++i];
+    else if (a.startsWith('--sessions-dir=')) sessionsDir = a.slice('--sessions-dir='.length);
+    else if (a === '--memory-dir') memoryDir = args[++i];
+    else if (a.startsWith('--memory-dir=')) memoryDir = a.slice('--memory-dir='.length);
+    else if (a === '--min-recurrence') minRecurrence = parseInt(args[++i] ?? '', 10);
+    else if (a.startsWith('--min-recurrence=')) minRecurrence = parseInt(a.slice('--min-recurrence='.length), 10);
     else if (!a.startsWith('-')) positional.push(a);
   }
-  return { subcommand: positional[0], skill: positional[1], path, telemetry, html, json, help, allowHeuristic };
+  return {
+    subcommand: positional[0],
+    skill: positional[1],
+    path,
+    telemetry,
+    html,
+    json,
+    help,
+    allowHeuristic,
+    execute,
+    includeCorrections,
+    sessionsDir,
+    memoryDir,
+    ...(Number.isFinite(minRecurrence) ? { minRecurrence } : {}),
+  };
 }
 
 // ─── .college/ runtime resolution (mirrors college.ts) ───────────────────────
@@ -383,6 +425,8 @@ function printFlywheelHelp(): void {
   p.log.message('  Subcommands:');
   p.log.message(`    ${pc.cyan('flywheel status')}                 Subsystem overview + telemetry-ranked skills`);
   p.log.message(`    ${pc.cyan('flywheel status <skill>')}         Full lineage chain for one skill`);
+  p.log.message(`    ${pc.cyan('flywheel dev-memory')}             Mine dev-session patterns into memory (dry run)`);
+  p.log.message(`    ${pc.cyan('flywheel dev-memory --execute')}   ...and persist them into the memory corpus`);
   p.log.message('');
   p.log.message('  Flags:');
   p.log.message('    --json             Machine-readable output');
@@ -392,6 +436,11 @@ function printFlywheelHelp(): void {
   p.log.message('    --allow-heuristic  Include token-overlap (heuristic) upstream links.');
   p.log.message('                       OFF by default; the concept stage is empty without it');
   p.log.message('                       until a real concept->skill back-link exists.');
+  p.log.message('    --execute          dev-memory: persist (default is dry run — print only)');
+  p.log.message('    --include-corrections  dev-memory: also write correction memories (QUARANTINE-gated)');
+  p.log.message('    --sessions-dir <d> dev-memory: session-streams dir (default .planning/sessions)');
+  p.log.message('    --memory-dir <d>   dev-memory: memory dir for --execute (default .)');
+  p.log.message('    --min-recurrence <n>  dev-memory: detector recurrence threshold (default 2)');
   p.log.message('');
   p.log.message('  Examples:');
   p.log.message('    skill-creator flywheel status');
@@ -401,6 +450,77 @@ function printFlywheelHelp(): void {
 }
 
 // ─── Entry point ─────────────────────────────────────────────────────────────
+
+/** Best-effort dev session id from current.meta.json (mission/started_at), else a default. */
+function resolveDevSessionId(sessionsDir: string): string {
+  try {
+    const meta = JSON.parse(readFileSync(join(sessionsDir, 'current.meta.json'), 'utf-8')) as {
+      mission?: string;
+      started_at?: string;
+    };
+    return meta.mission || meta.started_at || 'dev-session';
+  } catch {
+    return 'dev-session';
+  }
+}
+
+/**
+ * `flywheel dev-memory` — the opt-in dev-domain memory path. Reads the current
+ * session's on-disk streams, mines dev patterns, and (with `--execute`) writes
+ * them into the MemoryService as episodic/feedback records. DRY RUN BY DEFAULT:
+ * it prints the candidate memories and constructs no storage. Dev sessions are
+ * intentionally NOT routed through the education LearningPatternDetector /
+ * ObservationEmitter — see
+ * .planning/HANDOFF-2026-07-13-learner-observation-producer-decision.md.
+ */
+async function handleDevMemory(parsed: ParsedFlywheelArgs): Promise<number> {
+  const sessionsDir = parsed.sessionsDir ?? join('.planning', 'sessions');
+  const repo = basename(process.cwd());
+  const sessionId = resolveDevSessionId(sessionsDir);
+  const options = {
+    includeCorrections: parsed.includeCorrections,
+    ...(parsed.minRecurrence !== undefined ? { minRecurrence: parsed.minRecurrence } : {}),
+  };
+
+  if (!parsed.execute) {
+    // Dry run: collect candidates without constructing any storage backend.
+    const collected: MemoryRecord[] = [];
+    const collector: PatternMemoryWriter = {
+      store: async (r) => {
+        collected.push(r);
+        return r;
+      },
+    };
+    const records = await runDevMemory({ sessionsDir, sessionId, repo, writer: collector, options });
+    if (parsed.json) {
+      console.log(JSON.stringify({ dryRun: true, count: records.length, records }, null, 2));
+    } else {
+      p.log.message('');
+      p.log.message(pc.bold(`Flywheel dev-memory (dry run) — ${records.length} candidate memory(ies)`));
+      for (const r of records) {
+        p.log.message(`  ${pc.cyan(r.type)}  ${r.name}  ${pc.dim(r.description)}`);
+      }
+      if (records.length === 0) {
+        p.log.message(pc.dim('  (no dev patterns cleared the thresholds)'));
+      }
+      p.log.message('');
+      p.log.message(pc.dim('  Re-run with --execute to persist into the memory corpus.'));
+    }
+    return 0;
+  }
+
+  // --execute: persist through a real MemoryService. Imported lazily so the
+  // dry-run default carries no memory-infra dependency.
+  const { MemoryService } = await import('../../memory/service.js');
+  const svc = new MemoryService({ memoryDir: parsed.memoryDir ?? '.', indexFile: 'MEMORY.md' });
+  const records = await runDevMemory({ sessionsDir, sessionId, repo, writer: svc, options });
+  if (parsed.json) {
+    console.log(JSON.stringify({ dryRun: false, count: records.length, ids: records.map((r) => r.id) }, null, 2));
+  } else {
+    p.log.success(`Wrote ${records.length} dev-session memory(ies) to the corpus.`);
+  }
+  return 0;
+}
 
 /**
  * Flywheel CLI command entry point.
@@ -420,6 +540,8 @@ export async function flywheelCommand(args: string[]): Promise<number> {
     case 'status':
     case 'st':
       return handleStatus(parsed);
+    case 'dev-memory':
+      return handleDevMemory(parsed);
     default:
       p.log.error(`Unknown flywheel subcommand: ${parsed.subcommand}`);
       printFlywheelHelp();
