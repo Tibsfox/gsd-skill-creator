@@ -82,7 +82,8 @@ function usageError(io: CartridgeCommandIO, message: string): number {
   io.stderr('  skill-creator cartridge migrate <path> [--dry-run] [--json]');
   io.stderr('  skill-creator cartridge migrate --all <root> [--exclude <pattern>] [--dry-run] [--json]');
   io.stderr('  skill-creator cartridge distill <sources...> [--template department]');
-  io.stderr('                                       [--id <id>] [--name <name>] [--json]');
+  io.stderr('                                       [--id <id>] [--name <name>] [--enrich]');
+  io.stderr('                                       [--ledger [--ledger-path <path>]] [--json]');
   io.stderr('  skill-creator cartridge distill-cooccurrence <co-occurrence-log> [--min-support <n>]');
   io.stderr('                                       [--id <id>] [--name <name>] [--out <path>] [--json]');
   return 2;
@@ -101,7 +102,7 @@ function getFlagValue(args: string[], name: string): string | undefined {
 }
 
 /** Valueless boolean flags — they must NOT consume the following positional token. */
-const VALUELESS_FLAGS = new Set(['--json', '--enrich']);
+const VALUELESS_FLAGS = new Set(['--json', '--enrich', '--ledger']);
 
 /** Extract positional (non-flag) args. Exported for unit testing. */
 export function positionalArgs(args: string[]): string[] {
@@ -435,7 +436,28 @@ async function handleDistill(
   if (args.includes('--enrich')) {
     const { EmbeddingService } = await import('../../embeddings/embedding-service.js');
     const { createSemanticEnricher } = await import('../../cartridge/distill-enricher-semantic.js');
-    deps.enricher = createSemanticEnricher({ embedder: EmbeddingService.createFresh() });
+    const enricherOptions: Parameters<typeof createSemanticEnricher>[0] = {
+      embedder: EmbeddingService.createFresh(),
+    };
+
+    // Opt-in LLM concept naming (SC_DISTILL_NAMER_LLM=1 + ANTHROPIC_API_KEY).
+    // Absent either gate, the factory returns null and the heuristic labels stand.
+    const { createClaudeDistillNamer } = await import('../../cartridge/distill-namer-llm.js');
+    const namer = createClaudeDistillNamer();
+    if (namer) enricherOptions.namer = namer;
+
+    // Opt-in ledger-resolved citation provenance (--ledger, default path or
+    // --ledger-path <path>). Off unless --ledger is passed.
+    if (args.includes('--ledger')) {
+      const { SourceLedger } = await import('../../source-ledger/source-ledger.js');
+      const { LedgerCitationResolver } = await import('../../cartridge/distill-citation-resolver.js');
+      const ledgerPath = getFlagValue(args, 'ledger-path');
+      enricherOptions.citationResolver = new LedgerCitationResolver(
+        new SourceLedger(ledgerPath),
+      );
+    }
+
+    deps.enricher = createSemanticEnricher(enricherOptions);
   }
 
   const artifact = await distillAndValidate(
