@@ -100,14 +100,23 @@ function getFlagValue(args: string[], name: string): string | undefined {
   return undefined;
 }
 
-function positionalArgs(args: string[]): string[] {
+/** Valueless boolean flags — they must NOT consume the following positional token. */
+const VALUELESS_FLAGS = new Set(['--json', '--enrich']);
+
+/** Extract positional (non-flag) args. Exported for unit testing. */
+export function positionalArgs(args: string[]): string[] {
   const out: string[] = [];
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
     if (a.startsWith('--')) {
-      // `--key=value` consumes itself. `--key value` consumes next token unless
-      // next token is also a flag.
-      if (!a.includes('=') && i + 1 < args.length && !args[i + 1]!.startsWith('-')) {
+      // `--key=value` consumes itself. A valueless boolean flag consumes nothing.
+      // Otherwise `--key value` consumes the next token unless it is also a flag.
+      if (
+        !a.includes('=') &&
+        !VALUELESS_FLAGS.has(a) &&
+        i + 1 < args.length &&
+        !args[i + 1]!.startsWith('-')
+      ) {
         i++;
       }
       continue;

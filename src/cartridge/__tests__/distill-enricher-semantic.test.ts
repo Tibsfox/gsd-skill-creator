@@ -45,17 +45,25 @@ describe('createSemanticEnricher — semantic cross-references', () => {
     expect(c2.semanticEdges ?? []).toEqual([]);
   });
 
-  it('caps semantic edges per cluster and sorts by similarity desc', async () => {
-    const identical: DistillEmbedder = { async embed() { return { embedding: [1, 1] }; } };
+  it('keeps the highest-similarity edges (descending sort) and caps per cluster', async () => {
+    // Graded vectors so cluster-0 is progressively less similar to 1,2,3 — this
+    // makes the descending sort + top-N retention observable (an inverted sort
+    // would keep cluster-3 and drop cluster-1).
+    const graded: DistillEmbedder = {
+      async embed(text: string) {
+        const byLabel: Record<string, number[]> = {
+          a: [1, 0], b: [1, 0.1], c: [1, 0.3], d: [1, 0.6],
+        };
+        return { embedding: byLabel[text.trim()[0] ?? ''] ?? [0, 1] };
+      },
+    };
     const many = ['a', 'b', 'c', 'd'].map((x, i) => mkCluster(`cluster-${i}`, x, [x], `text ${x}`));
-    const out = await createSemanticEnricher({ embedder: identical, maxEdgesPerCluster: 2 }).enrich(many, []);
-    for (const c of out) {
-      const edges = c.semanticEdges ?? [];
-      expect(edges.length).toBeLessThanOrEqual(2);
-      for (let i = 1; i < edges.length; i++) {
-        expect(edges[i - 1]!.similarity).toBeGreaterThanOrEqual(edges[i]!.similarity);
-      }
-    }
+    const out = await createSemanticEnricher({ embedder: graded, maxEdgesPerCluster: 2 }).enrich(many, []);
+    const c0 = out.find((c) => c.id === 'cluster-0')!;
+    const edges = c0.semanticEdges!;
+    expect(edges).toHaveLength(2); // capped at maxEdgesPerCluster
+    expect(edges.map((e) => e.to)).toEqual(['cluster-1', 'cluster-2']); // top-2, cluster-3 dropped
+    expect(edges[0]!.similarity).toBeGreaterThan(edges[1]!.similarity); // strictly descending
   });
 
   it('is inert (returns clusters unchanged) with no backend', async () => {

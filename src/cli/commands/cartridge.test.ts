@@ -10,7 +10,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { cartridgeCommand, type CartridgeCommandIO } from './cartridge.js';
+import { cartridgeCommand, positionalArgs, type CartridgeCommandIO } from './cartridge.js';
 
 interface CapturedIO extends CartridgeCommandIO {
   out: string[];
@@ -383,5 +383,20 @@ teams: {}
     for (const sub of ['load', 'validate', 'scaffold', 'metrics', 'eval', 'dedup', 'fork']) {
       expect(out).toContain(`cartridge ${sub}`);
     }
+  });
+});
+
+describe('positionalArgs', () => {
+  it('does not let a valueless boolean flag swallow a following positional', () => {
+    // The --enrich footgun: a valueless flag must not consume the next source path.
+    expect(positionalArgs(['--enrich', 'a.md', 'b.md'])).toEqual(['a.md', 'b.md']);
+    expect(positionalArgs(['a.md', '--enrich', 'b.md'])).toEqual(['a.md', 'b.md']);
+    expect(positionalArgs(['a.md', 'b.md', '--enrich'])).toEqual(['a.md', 'b.md']);
+    expect(positionalArgs(['--json', 'a.md'])).toEqual(['a.md']);
+  });
+
+  it('still consumes the value of a value-taking flag', () => {
+    expect(positionalArgs(['--id', 'my-id', 'a.md'])).toEqual(['a.md']);
+    expect(positionalArgs(['--template=department', 'a.md'])).toEqual(['a.md']);
   });
 });
