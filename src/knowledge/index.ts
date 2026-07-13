@@ -182,6 +182,40 @@ export type {
   MemorySinkOptions,
 } from './memory-sink.js';
 
+// ============================================================================
+// Dev-domain memory path (dev sessions → Knowledge Spine, NOT the education
+// LearningPatternDetector/ObservationEmitter — see
+// .planning/HANDOFF-2026-07-13-learner-observation-producer-decision.md)
+// ============================================================================
+
+export {
+  DevSessionObservationSchema,
+  DevObservationKind,
+  type DevSessionObservation,
+} from './dev-observation-types.js';
+export {
+  readDevObservations,
+  mapEventLine,
+  mapTraceLine,
+  mapSessionSummary,
+  type DevObservationSourceCtx,
+  type DevSessionSummaryInput,
+  type ReadDevObservationsInput,
+} from './dev-observation-source.js';
+export {
+  DevPatternDetector,
+  type DevPattern,
+  type DevPatternType,
+  type DevPatternDetectorOptions,
+} from './dev-pattern-detector.js';
+export {
+  DevMemorySink,
+  createDevMemorySink,
+  devPatternToMemoryRecord,
+  type DevMemorySinkOptions,
+  type DevPatternSource,
+} from './dev-memory-sink.js';
+
 export {
   ActivityCompletionSchema,
   AssessmentResultSchema,
