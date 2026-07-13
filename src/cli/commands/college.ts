@@ -70,6 +70,8 @@ interface DoctorThresholdsLike {
 interface ConceptEvidenceLike {
   id: string;
   domain: string;
+  name?: string;
+  description?: string;
   relationships: ReadonlyArray<{ type: string; targetId: string; description?: string }>;
   complexPlanePosition?: { real: number; imaginary: number };
 }
@@ -211,6 +213,7 @@ export interface ParsedCollegeArgs {
   level?: string;
   minConcepts?: number;
   minSessions?: number;
+  semantic: boolean;
   json: boolean;
   help: boolean;
 }
@@ -240,6 +243,7 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
   let level: string | undefined;
   let minConcepts: number | undefined;
   let minSessions: number | undefined;
+  let semantic = false;
   let json = false;
   let help = false;
   for (let i = 0; i < args.length; i++) {
@@ -248,6 +252,8 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
       help = true;
     } else if (a === '--json') {
       json = true;
+    } else if (a === '--semantic') {
+      semantic = true;
     } else if (a === '--to') {
       to = args[++i];
     } else if (a.startsWith('--to=')) {
@@ -305,6 +311,7 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
     level,
     minConcepts,
     minSessions,
+    semantic,
     json,
     help,
   };
@@ -691,12 +698,16 @@ async function handleDoctor(
   }
 }
 
-async function handleXrefSuggest(dept: string | undefined, json: boolean): Promise<number> {
+async function handleXrefSuggest(
+  dept: string | undefined,
+  json: boolean,
+  semantic: boolean,
+): Promise<number> {
   try {
     const { CollegeLoader } = await loadCollegeBarrel();
     const { ConceptRegistry } = await loadRosettaCore();
     const { ALL_XREF_EDGES } = await loadXRefEdges();
-    const { suggestXrefEdges, formatXrefCandidates } = await import(
+    const { suggestXrefEdges, suggestXrefEdgesSemantic, formatXrefCandidates } = await import(
       '../../college/xref-suggester.js'
     );
 
@@ -707,15 +718,22 @@ async function handleXrefSuggest(dept: string | undefined, json: boolean): Promi
     const concepts = registry.getAll().map((c) => ({
       id: c.id,
       domain: c.domain,
+      name: c.name,
+      description: c.description,
       relationships: c.relationships ?? [],
       complexPlanePosition: c.complexPlanePosition,
     }));
 
-    const candidates = suggestXrefEdges(
-      concepts,
-      ALL_XREF_EDGES.map((e) => ({ from: e.from, to: e.to })),
-      { dept },
-    );
+    const existing = ALL_XREF_EDGES.map((e) => ({ from: e.from, to: e.to }));
+
+    let candidates;
+    if (semantic) {
+      const { EmbeddingService } = await import('../../embeddings/embedding-service.js');
+      const embedder = EmbeddingService.createFresh();
+      candidates = await suggestXrefEdgesSemantic(concepts, existing, embedder, { dept });
+    } else {
+      candidates = suggestXrefEdges(concepts, existing, { dept });
+    }
 
     if (json) {
       console.log(JSON.stringify(candidates, null, 2));
@@ -844,7 +862,7 @@ function printCollegeHelp(): void {
     `    ${pc.cyan('college doctor [--json]')}             Audit coverage (--min-concepts, --min-sessions)`,
   );
   p.log.message(
-    `    ${pc.cyan('college xref suggest [--dept] [--json]')} Propose new cross-dept prerequisite edges`,
+    `    ${pc.cyan('college xref suggest [--dept] [--semantic] [--json]')} Propose new cross-dept prerequisite edges`,
   );
   p.log.message(
     `    ${pc.cyan('college gen-trysession <dept>')}          Generate a DRAFT try-session (--wing, --out, --json)`,
@@ -898,7 +916,7 @@ export async function collegeCommand(args: string[]): Promise<number> {
         p.log.error(`Unknown college xref verb: ${verb} (expected 'suggest').`);
         return 1;
       }
-      return handleXrefSuggest(parsed.dept, parsed.json);
+      return handleXrefSuggest(parsed.dept, parsed.json, parsed.semantic);
     }
     case 'gen-trysession':
     case 'gen-try':

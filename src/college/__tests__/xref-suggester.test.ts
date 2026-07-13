@@ -1,10 +1,21 @@
 import { describe, it, expect } from 'vitest';
 import {
   suggestXrefEdges,
+  suggestXrefEdgesSemantic,
   formatXrefCandidates,
   type ConceptEvidence,
   type ExistingEdge,
+  type XrefEmbedder,
 } from '../xref-suggester.js';
+
+/** Deterministic mock embedder keyed by the exact description text. */
+function mockEmbedder(vectors: Record<string, number[]>): XrefEmbedder {
+  return {
+    async embed(text: string) {
+      return { embedding: vectors[text] ?? [0, 0] };
+    },
+  };
+}
 
 const concepts: ConceptEvidence[] = [
   {
@@ -127,6 +138,94 @@ describe('suggestXrefEdges', () => {
     const frozen = Object.freeze([...existing]);
     expect(() => suggestXrefEdges(concepts, frozen)).not.toThrow();
     expect(frozen.length).toBe(1);
+  });
+});
+
+describe('suggestXrefEdgesSemantic', () => {
+  const semConcepts: ConceptEvidence[] = [
+    { id: 'algebra', domain: 'math', description: 'symbolic structure', relationships: [] },
+    { id: 'symmetry', domain: 'physics', description: 'invariance under transformation', relationships: [] },
+    { id: 'counterpoint', domain: 'music', description: 'independent melodic lines', relationships: [] },
+  ];
+  const vectors = {
+    'symbolic structure': [1, 0],
+    'invariance under transformation': [0.98, 0.2], // ~0.98 cos with [1,0]
+    'independent melodic lines': [0, 1], // orthogonal to both
+  };
+
+  it('discovers cross-department edges from description similarity (both directions)', async () => {
+    const out = await suggestXrefEdgesSemantic(semConcepts, [], mockEmbedder(vectors));
+    const keys = out.map((c) => `${c.from}->${c.to}`);
+    expect(keys).toContain('math->physics');
+    expect(keys).toContain('physics->math');
+    // music is orthogonal to both -> no edge to/from it
+    expect(keys.some((k) => k.includes('music'))).toBe(false);
+  });
+
+  it('scores a pure-semantic candidate by semanticWeight * semanticCount', async () => {
+    const out = await suggestXrefEdgesSemantic(semConcepts, [], mockEmbedder(vectors));
+    const mp = out.find((c) => c.from === 'math' && c.to === 'physics')!;
+    expect(mp.relationCount).toBe(0);
+    expect(mp.semanticCount).toBe(1);
+    expect(mp.topSimilarity).toBeCloseTo(0.98, 1);
+    expect(mp.score).toBeCloseTo(0.5); // default semanticWeight 0.5 * 1
+  });
+
+  it('respects the similarity threshold', async () => {
+    // Threshold above the observed ~0.98 similarity drops all semantic votes.
+    const out = await suggestXrefEdgesSemantic(semConcepts, [], mockEmbedder(vectors), {
+      similarityThreshold: 0.99,
+    });
+    expect(out).toEqual([]);
+  });
+
+  it('dedups semantic candidates against existing edges', async () => {
+    const out = await suggestXrefEdgesSemantic(
+      semConcepts,
+      [{ from: 'math', to: 'physics' }],
+      mockEmbedder(vectors),
+    );
+    expect(out.some((c) => c.from === 'math' && c.to === 'physics')).toBe(false);
+    // reverse direction is a distinct edge and still surfaces
+    expect(out.some((c) => c.from === 'physics' && c.to === 'math')).toBe(true);
+  });
+
+  it('merges semantic votes into relationship-derived candidates without duplicating', async () => {
+    const merged: ConceptEvidence[] = [
+      {
+        id: 'derivative',
+        domain: 'math',
+        description: 'rate of change',
+        relationships: [{ type: 'analogy', targetId: 'velocity' }],
+      },
+      {
+        id: 'velocity',
+        domain: 'physics',
+        description: 'rate of change of position',
+        relationships: [{ type: 'cross-reference', targetId: 'derivative' }],
+      },
+    ];
+    const embedder = mockEmbedder({
+      'rate of change': [1, 0],
+      'rate of change of position': [0.98, 0.2],
+    });
+    const out = await suggestXrefEdgesSemantic(merged, [], embedder);
+    // Exactly the two directed dept edges — semantic did not duplicate them.
+    expect(out.length).toBe(2);
+    const pm = out.find((c) => c.from === 'physics' && c.to === 'math')!;
+    expect(pm.relationCount).toBe(1);
+    expect(pm.semanticCount).toBe(1);
+    expect(pm.score).toBeCloseTo(1.5); // 1 relation + 0.5 * 1 semantic
+    expect(pm.rationale).toContain('description-similar');
+  });
+
+  it('skips concepts with no description or name', async () => {
+    const noText: ConceptEvidence[] = [
+      { id: 'a', domain: 'x', relationships: [] },
+      { id: 'b', domain: 'y', relationships: [] },
+    ];
+    const out = await suggestXrefEdgesSemantic(noText, [], mockEmbedder({}));
+    expect(out).toEqual([]);
   });
 });
 
