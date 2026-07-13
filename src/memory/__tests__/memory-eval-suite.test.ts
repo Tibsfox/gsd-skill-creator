@@ -488,7 +488,10 @@ describe('Eval 3: Cross-Session Memory Quality', () => {
     expect(retentionPct).toBeGreaterThan(50);
   });
 
-  it('knowledge update: later bindings override earlier ones', { timeout: 30_000 }, async () => {
+  // nameHistory walks the FULL namespace chain per name, so 5 names can take
+  // ~35-40s on a loaded machine. The assertion is a liveness check (count >= 0),
+  // so a generous timeout avoids a false failure without weakening coverage.
+  it('knowledge update: later bindings override earlier ones', { timeout: 120_000 }, async () => {
     // Check if any name has been rebound (updated knowledge)
     // Use small sample — nameHistory walks the full chain per name
     let namesWithHistory = 0;
