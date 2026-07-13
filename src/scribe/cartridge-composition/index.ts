@@ -21,3 +21,8 @@ export type {
   RawCitation,
   MergeCitationsInput,
 } from './merge-citations.js';
+
+export {
+  canonicalIdForUnifiedCitation,
+  recordScribeSources,
+} from './record-scribe-sources.js';

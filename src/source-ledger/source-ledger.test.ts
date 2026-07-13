@@ -10,6 +10,7 @@ import {
   acquiredSourceEntry,
   canonicalCitationId,
   citationSourceEntry,
+  scribeSourceEntry,
   DEFAULT_SOURCE_LEDGER_PATH,
   type SourceLedgerEntry,
 } from './source-ledger.js';
@@ -156,5 +157,28 @@ describe('adapters', () => {
     expect(await ledger.has(arxivSourceEntry('2601.00001v2').contentHash)).toBe(true);
     const byHash = await ledger.findByHash(hashSourceId('arxiv:2601.00001'));
     expect(byHash.map((e) => e.provenance.origin)).toContain('citation');
+  });
+
+  it('scribeSourceEntry keys via hashSourceId and tags origin scribe', () => {
+    const e = scribeSourceEntry('arxiv:2601.00001', 'markup-lineage-1', 't', 'v1.49.621');
+    expect(e.contentHash).toBe(hashSourceId('arxiv:2601.00001'));
+    expect(e.provenance.origin).toBe('scribe');
+    expect(e.provenance.sourceId).toBe('markup-lineage-1');
+    expect(e.provenance.label).toBe('v1.49.621');
+  });
+
+  it('a scribe source shares one dedup key with the arxiv/citation path for the same paper', async () => {
+    // The cross-entry-point promise, reached from the scribe side: record a
+    // source via the scribe origin, then dedup-check it via the arxiv path and
+    // find both the scribe and citation provenances under one key.
+    const ledger = new SourceLedger(ledgerPath);
+    const cid = canonicalCitationId({ arxivId: '2601.00001' })!;
+    await ledger.record(citationSourceEntry(cid, 'ref.md', 't'));
+    await ledger.record(scribeSourceEntry(cid, 'code-svg-hdl-bridge-3', 't'));
+
+    // The arxiv path (a different version suffix) hashes to the same key.
+    expect(await ledger.has(arxivSourceEntry('2601.00001v2').contentHash)).toBe(true);
+    const byHash = await ledger.findByHash(hashSourceId('arxiv:2601.00001'));
+    expect(byHash.map((e) => e.provenance.origin).sort()).toEqual(['citation', 'scribe']);
   });
 });

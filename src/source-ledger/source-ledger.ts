@@ -185,6 +185,33 @@ export function citationSourceEntry(
   };
 }
 
+/**
+ * Build a ledger entry for a source recorded from the scribe cartridge-
+ * composition path (the unified `CITATIONS.json` merge). `canonicalId` is a
+ * cross-origin identity from {@link canonicalCitationId}; the key is derived via
+ * {@link hashSourceId} so a scribe source that resolves to an arxiv paper (or a
+ * DOI) shares its dedup key with `arxivSourceEntry` / `citationSourceEntry` —
+ * the "visible across entry points" guarantee, reached from the scribe side.
+ * `scribeSourceId` is the unified citation's stable kebab-case id; `label` is
+ * typically the composition milestone.
+ */
+export function scribeSourceEntry(
+  canonicalId: string,
+  scribeSourceId: string,
+  ingestedAt: string = new Date().toISOString(),
+  label?: string,
+): SourceLedgerEntry {
+  return {
+    contentHash: hashSourceId(canonicalId),
+    provenance: {
+      origin: 'scribe',
+      sourceId: scribeSourceId,
+      ingestedAt,
+      ...(label ? { label } : {}),
+    },
+  };
+}
+
 // ─── SourceLedger ────────────────────────────────────────────────────────────
 
 /**

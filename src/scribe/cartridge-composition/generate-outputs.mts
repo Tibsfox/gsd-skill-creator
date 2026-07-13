@@ -20,6 +20,8 @@ import { fileURLToPath } from 'node:url';
 
 import { composeFoundationalChipset } from './compose-chipset.js';
 import { mergeCitations, TRACK_CITATIONS } from './merge-citations.js';
+import { recordScribeSources } from './record-scribe-sources.js';
+import { SourceLedger } from '../../source-ledger/source-ledger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const REPO_ROOT = resolve(dirname(__filename), '..', '..', '..');
@@ -77,3 +79,10 @@ writeOut('cartridges/foundational/scribe/composition-graph.json', jsonStable(gra
 writeOut('.planning/missions/v1-49-621-scribe/CITATIONS.json', jsonStable(citations));
 
 console.log(`unique sources: ${citations.totalUniqueSources}`);
+
+// Forward every unified source onto the shared source-ledger spine so an
+// arxiv/DOI scribe source is visible to the arxiv / citation entry points under
+// one dedup key. Best-effort and observability-only — it never gates generation
+// and writes to a separate file, so the three output artifacts stay byte-stable.
+await recordScribeSources(citations, new SourceLedger());
+console.log(`recorded ${citations.totalUniqueSources} scribe sources to source-ledger`);
