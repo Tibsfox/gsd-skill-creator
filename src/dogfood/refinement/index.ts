@@ -1,6 +1,7 @@
 export { generatePatches } from './patch-generator.js';
 export { generateTickets } from './ticket-generator.js';
 export { refineSkills } from './skill-refiner.js';
+export { assembleRefinementResult, writeRefinementRun, SKILL_UPDATES_FILENAME } from './run-writer.js';
 export { buildReport } from './report-builder.js';
 export type { ReportInput, EightLayerMapping } from './report-builder.js';
 export { validateSafety } from './safety-validator.js';

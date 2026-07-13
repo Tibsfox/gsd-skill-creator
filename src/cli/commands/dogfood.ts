@@ -4,12 +4,15 @@
  * Routes the SkillUpdate proposals produced by the dogfood refinement pass
  * (`refineSkills`) into staged skill DRAFTS ready for the human ship gate.
  *
+ * - refine <run>    Run the refinement pass and WRITE its skill-updates.json.
  * - promote <run>   Materialize the 'create' updates of a run as staged drafts.
  *
- * A "run" is a directory holding the refinement output. `promote` reads its
- * `skill-updates.json` (either a RefinementResult with a `skillUpdates` array,
- * or a bare SkillUpdate[]) and writes drafts under `<run>/drafts/`. Nothing
- * lands in `.claude/skills/` — promotion into the auto-load path stays a human
+ * A "run" is a directory holding the refinement output. `refine` reads a
+ * concepts/gaps source (`--input <file>`), runs `refineSkills`, and persists a
+ * RefinementResult to `<run>/skill-updates.json`. `promote` then reads that file
+ * (either a RefinementResult with a `skillUpdates` array, or a bare
+ * SkillUpdate[]) and writes drafts under `<run>/drafts/`. Nothing lands in
+ * `.claude/skills/` — promotion into the auto-load path stays a human
  * `skill-creator skill ship <name>` step.
  */
 
@@ -17,8 +20,11 @@ import { existsSync, readFileSync } from 'node:fs';
 import { isAbsolute, join, resolve } from 'node:path';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
+import type { LearnedConcept } from '../../dogfood/learning/types.js';
+import type { GapRecord } from '../../dogfood/verification/types.js';
 import type { SkillUpdate } from '../../dogfood/refinement/types.js';
 import { routeSkillUpdatesToDrafts } from '../../dogfood/refinement/draft-router.js';
+import { assembleRefinementResult, writeRefinementRun } from '../../dogfood/refinement/run-writer.js';
 
 // ─── Argument parsing (pure, tested) ────────────────────────────────────────
 
@@ -97,7 +103,66 @@ export function extractSkillUpdates(payload: unknown): SkillUpdate[] {
   throw new Error('skill-updates JSON must be a SkillUpdate[] or an object with a skillUpdates array');
 }
 
+/** The concepts + gaps a refine pass consumes. */
+export interface RefineInput {
+  concepts: LearnedConcept[];
+  gaps: GapRecord[];
+}
+
+/** Extract the refine input (concepts, optional gaps) from a parsed payload. */
+export function extractRefineInput(payload: unknown): RefineInput {
+  const obj = payload && typeof payload === 'object' ? (payload as Record<string, unknown>) : {};
+  if (!Array.isArray(obj.concepts)) {
+    throw new Error('refine input JSON must be an object with a concepts array (gaps array optional)');
+  }
+  const gaps = Array.isArray(obj.gaps) ? (obj.gaps as GapRecord[]) : [];
+  return { concepts: obj.concepts as LearnedConcept[], gaps };
+}
+
 // ─── Subcommand handlers ────────────────────────────────────────────────────
+
+async function handleRefine(run: string | undefined, parsed: ParsedDogfoodArgs): Promise<number> {
+  if (!run) {
+    p.log.error('Usage: skill-creator dogfood refine <run> --input <concepts-and-gaps.json> [--out <dir>]');
+    return 1;
+  }
+  if (!parsed.input) {
+    p.log.error('dogfood refine requires --input <concepts-and-gaps.json>');
+    p.log.message('The source JSON is an object with a concepts array (and optional gaps array).');
+    return 1;
+  }
+  const { runDir } = resolveRun(run, { out: parsed.out });
+  const sourceFile = resolve(process.cwd(), parsed.input);
+  if (!existsSync(sourceFile)) {
+    p.log.error(`No refine source at ${sourceFile}`);
+    return 1;
+  }
+
+  let input;
+  try {
+    input = extractRefineInput(JSON.parse(readFileSync(sourceFile, 'utf8')));
+  } catch (err) {
+    p.log.error(`Failed to read refine input: ${(err as Error).message}`);
+    return 1;
+  }
+
+  const result = assembleRefinementResult(input.concepts, input.gaps);
+  const outFile = writeRefinementRun(runDir, result);
+
+  if (parsed.json) {
+    console.log(JSON.stringify({ file: outFile, statistics: result.statistics }, null, 2));
+    return 0;
+  }
+
+  p.log.message(pc.bold(`dogfood refine ${run}`));
+  p.log.message(pc.dim(`  run:     ${runDir}`));
+  p.log.message(pc.dim(`  updates: ${outFile}`));
+  p.log.success(`Wrote ${result.skillUpdates.length} skill update(s) from ${input.concepts.length} concept(s).`);
+  p.log.message('');
+  p.log.message('Stage the create updates as drafts:');
+  p.log.message(`  skill-creator dogfood promote ${run}`);
+  return 0;
+}
 
 async function handlePromote(run: string | undefined, parsed: ParsedDogfoodArgs): Promise<number> {
   if (!run) {
@@ -164,14 +229,16 @@ function printDogfoodHelp(): void {
   p.log.message(pc.bold('Dogfood — route refinement proposals into staged skill drafts'));
   p.log.message('');
   p.log.message('  Subcommands:');
+  p.log.message(`    ${pc.cyan('dogfood refine <run>')}    Run refineSkills and write the run\'s skill-updates.json`);
   p.log.message(`    ${pc.cyan('dogfood promote <run>')}   Stage the run\'s 'create' updates as skill drafts`);
   p.log.message('');
   p.log.message('  Flags:');
-  p.log.message('    --input <file>   Override the skill-updates.json source');
+  p.log.message('    --input <file>   refine: concepts/gaps source · promote: skill-updates.json source');
   p.log.message('    --out <dir>      Override the drafts output directory');
-  p.log.message('    --json           Emit the machine-readable route result');
+  p.log.message('    --json           Emit the machine-readable result');
   p.log.message('');
   p.log.message('  Examples:');
+  p.log.message('    skill-creator dogfood refine 2026-07-12-run --input concepts.json');
   p.log.message('    skill-creator dogfood promote 2026-07-12-run');
   p.log.message('    skill-creator dogfood promote ./out/refine --json');
 }
@@ -193,6 +260,9 @@ export async function dogfoodCommand(args: string[]): Promise<number> {
   }
 
   switch (parsed.subcommand) {
+    case 'refine':
+    case 'rf':
+      return handleRefine(parsed.positional[0], parsed);
     case 'promote':
     case 'pr':
       return handlePromote(parsed.positional[0], parsed);

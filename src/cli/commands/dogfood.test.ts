@@ -6,9 +6,12 @@ import {
   parseDogfoodArgs,
   resolveRun,
   extractSkillUpdates,
+  extractRefineInput,
   dogfoodCommand,
 } from './dogfood.js';
 import type { SkillUpdate } from '../../dogfood/refinement/types.js';
+import type { LearnedConcept } from '../../dogfood/learning/types.js';
+import type { GapRecord } from '../../dogfood/verification/types.js';
 
 function createUpdate(overrides: Partial<SkillUpdate>): SkillUpdate {
   return {
@@ -71,6 +74,109 @@ describe('extractSkillUpdates', () => {
 
   it('throws on a malformed payload', () => {
     expect(() => extractSkillUpdates({ nope: true })).toThrow();
+  });
+});
+
+function makeConcept(overrides: Partial<LearnedConcept>): LearnedConcept {
+  return {
+    id: 'c1',
+    name: 'Koopman Operator',
+    sourceChunk: 'chunk-1',
+    sourceChapter: 7,
+    sourcePart: 3,
+    theta: 0.5,
+    radius: 0.9,
+    angularVelocity: 0.1,
+    definition: 'A linear operator advancing observables of a nonlinear system.',
+    keyRelationships: ['dynamic mode decomposition'],
+    prerequisites: [],
+    applications: ['forecasting'],
+    ecosystemMappings: [],
+    confidence: 0.9,
+    mathDensity: 0.5,
+    abstractionLevel: 3,
+    detectedAt: '2026-07-12T00:00:00.000Z',
+    ...overrides,
+  };
+}
+
+function makeGap(overrides: Partial<GapRecord>): GapRecord {
+  return {
+    id: 'g1',
+    type: 'missing-in-ecosystem',
+    severity: 'significant',
+    concept: 'Koopman Operator',
+    textbookSource: 'ch7',
+    ecosystemSource: '',
+    textbookClaim: '',
+    ecosystemClaim: '',
+    analysis: '',
+    suggestedResolution: '',
+    affectsComponents: [],
+    ...overrides,
+  };
+}
+
+describe('extractRefineInput', () => {
+  it('reads concepts and gaps', () => {
+    const r = extractRefineInput({ concepts: [makeConcept({})], gaps: [makeGap({})] });
+    expect(r.concepts).toHaveLength(1);
+    expect(r.gaps).toHaveLength(1);
+  });
+
+  it('defaults gaps to an empty array', () => {
+    const r = extractRefineInput({ concepts: [makeConcept({})] });
+    expect(r.gaps).toEqual([]);
+  });
+
+  it('throws when concepts is missing', () => {
+    expect(() => extractRefineInput({ gaps: [] })).toThrow();
+  });
+});
+
+describe('dogfoodCommand refine', () => {
+  let dir: string;
+
+  beforeEach(() => {
+    dir = mkdtempSync(join(tmpdir(), 'dogfood-refine-'));
+  });
+
+  afterEach(() => {
+    rmSync(dir, { recursive: true, force: true });
+  });
+
+  it('writes skill-updates.json that promote then consumes to stage a draft', async () => {
+    const sourceFile = join(dir, 'concepts.json');
+    writeFileSync(
+      sourceFile,
+      JSON.stringify({ concepts: [makeConcept({})], gaps: [makeGap({})] }),
+    );
+
+    const cwd = process.cwd();
+    process.chdir(dir);
+    try {
+      const refineCode = await dogfoodCommand(['refine', 'r1', '--input', 'concepts.json']);
+      expect(refineCode).toBe(0);
+
+      const runDir = join(dir, '.dogfood', 'runs', 'r1');
+      expect(existsSync(join(runDir, 'skill-updates.json'))).toBe(true);
+
+      const promoteCode = await dogfoodCommand(['promote', 'r1']);
+      expect(promoteCode).toBe(0);
+      expect(existsSync(join(runDir, 'drafts', 'koopman-operator', 'SKILL.md'))).toBe(true);
+    } finally {
+      process.chdir(cwd);
+    }
+  });
+
+  it('errors without --input', async () => {
+    const code = await dogfoodCommand(['refine', 'r1']);
+    expect(code).toBe(1);
+  });
+
+  it('errors when the refine source is missing', async () => {
+    const code = await dogfoodCommand(['refine', 'r1', '--input', 'nope.json']);
+    expect(code).toBe(1);
   });
 });
 
