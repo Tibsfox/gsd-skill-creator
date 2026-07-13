@@ -90,6 +90,7 @@ describe('formatGapReport', () => {
       },
       workCount: 5,
       arxivSeenCount: 10,
+      spineCount: 0,
       confidence: 0.43,
     };
     const out = formatGapReport(report);

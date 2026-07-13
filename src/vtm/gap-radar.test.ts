@@ -11,6 +11,8 @@ import {
   DEFAULT_GAP_SUBTOPICS,
   type CorpusCoverage,
   type CitationSource,
+  type MemorySource,
+  type SpineMemory,
 } from './gap-radar.js';
 
 // A fixture corpus heavy on agent-orchestration + memory-retrieval, thin on
@@ -162,5 +164,121 @@ describe('buildCorpusCoverage', () => {
     expect(coverage.arxivSeenCount).toBe(0);
     expect(coverage.workCount).toBe(1);
     expect(coverage.termCounts.get('skill')).toBe(1);
+  });
+
+  it('degrades to two signals when no memory source is injected', async () => {
+    const source: CitationSource = {
+      async init() {},
+      async all() {
+        return [{ title: 'Skill Design', tags: [] }];
+      },
+    };
+    const coverage = await buildCorpusCoverage({
+      citationSource: source,
+      seenIdsPath: path.join(os.tmpdir(), 'gap-radar-nonexistent-xyz.json'),
+    });
+    expect(coverage.spineCount ?? 0).toBe(0);
+  });
+});
+
+describe('buildCorpusCoverage — Knowledge Spine signal', () => {
+  const emptyCitations: CitationSource = {
+    async init() {},
+    async all() {
+      return [];
+    },
+  };
+  const noArxiv = path.join(os.tmpdir(), 'gap-radar-nonexistent-spine.json');
+
+  // A mock MemoryService.query that returns lessons/findings by type filter.
+  function memorySourceOf(byType: Partial<Record<string, SpineMemory[]>>): MemorySource {
+    return {
+      async query(_text, options) {
+        const records = byType[options?.type ?? ''] ?? [];
+        return { results: records.map((record) => ({ record })) };
+      },
+    };
+  }
+
+  it('folds lesson/finding memories into the coverage map as a third signal', async () => {
+    const memorySource = memorySourceOf({
+      lesson: [
+        { name: 'Code Generation Repair', description: 'synthesis loop', tags: ['codegen'] },
+      ],
+      finding: [{ name: 'Program Synthesis', description: 'coding wins', tags: [] }],
+    });
+
+    const coverage = await buildCorpusCoverage({
+      citationSource: emptyCitations,
+      seenIdsPath: noArxiv,
+      memorySource,
+    });
+
+    expect(coverage.workCount).toBe(0);
+    expect(coverage.spineCount).toBe(2);
+    // 'code' from the lesson name; 'generation' from it too — corpus now covers
+    // the previously-bare code-gen vocabulary.
+    expect(coverage.termCounts.get('code')).toBe(1);
+    expect(coverage.termCounts.get('generation')).toBe(1);
+    // 'synthesis' appears in both memories -> covered by 2.
+    expect(coverage.termCounts.get('synthesis')).toBe(2);
+  });
+
+  it('increments term counts on top of the citation vocabulary', async () => {
+    const citationSource: CitationSource = {
+      async init() {},
+      async all() {
+        return [{ title: 'Agent Orchestration', tags: [] }];
+      },
+    };
+    const memorySource = memorySourceOf({
+      lesson: [{ name: 'Agent Coordination', description: '', tags: [] }],
+    });
+
+    const coverage = await buildCorpusCoverage({
+      citationSource,
+      seenIdsPath: noArxiv,
+      memorySource,
+    });
+
+    // 'agent' covered by one work + one lesson.
+    expect(coverage.termCounts.get('agent')).toBe(2);
+    expect(coverage.workCount).toBe(1);
+    expect(coverage.spineCount).toBe(1);
+  });
+
+  it('counts a memory once even when both type queries return it', async () => {
+    const shared: SpineMemory = { name: 'Memory Retrieval', description: '', tags: [] };
+    const memorySource = memorySourceOf({ lesson: [shared], finding: [shared] });
+
+    const coverage = await buildCorpusCoverage({
+      citationSource: emptyCitations,
+      seenIdsPath: noArxiv,
+      memorySource,
+    });
+
+    expect(coverage.spineCount).toBe(1);
+    expect(coverage.termCounts.get('memory')).toBe(1);
+  });
+
+  it('lets a mined lesson close a corpus gap in the ranked report', async () => {
+    const memorySource = memorySourceOf({
+      lesson: [
+        { name: 'Code Generation', description: 'program synthesis', tags: ['codegen'] },
+      ],
+    });
+    const coverage = await buildCorpusCoverage({
+      citationSource: emptyCitations,
+      seenIdsPath: noArxiv,
+      memorySource,
+    });
+
+    const report = analyzeGaps('mission', [...DEFAULT_GAP_SUBTOPICS], coverage);
+    const codeGen = report.subtopics.find((s) => s.subtopic === 'code generation')!;
+    // Spine coverage lifts code-gen off the floor.
+    expect(codeGen.coverage).toBeGreaterThan(0);
+    expect(report.spineCount).toBe(1);
+    // The spine memory also raises corpus-maturity confidence above bare.
+    expect(report.confidence).toBeGreaterThan(0);
   });
 });

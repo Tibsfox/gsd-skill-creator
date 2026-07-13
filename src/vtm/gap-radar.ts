@@ -6,7 +6,7 @@
  * scores a topic's vocabulary against what the corpus *already covers* and
  * emits ranked under-covered subtopics.
  *
- * Coverage is assembled from two corpus signals (first cut, per review):
+ * Coverage is assembled from three corpus signals:
  *   1. Citation WorkIndex — the vocabulary signal. Every stored work's title
  *      and tags contribute term frequencies (one increment per work covering
  *      a term), giving a `term -> #works` coverage map.
@@ -14,6 +14,12 @@
  *      ingested arxiv papers tempers confidence: a zero-coverage subtopic in
  *      a large, well-scanned corpus is a stronger gap than the same subtopic
  *      in a bare corpus.
+ *   3. Knowledge Spine — the mined-experience signal. Flagship
+ *      MemoryService 'lesson'/'finding' memories fold into the same coverage
+ *      map: a lesson or finding about a topic counts as corpus coverage of it
+ *      (one increment per memory covering a term), and their count adds to the
+ *      corpus-maturity mass. When no MemorySource is injected the radar
+ *      degrades cleanly to the citation + arxiv signals.
  *
  * The emitted report re-weights DEFAULT_DOMAIN_WEIGHTS (boosting the mission
  * domains whose subtopics are under-covered) so it can directly seed the vtm
@@ -28,6 +34,7 @@
  */
 
 import type { RelevanceDomain } from '../scan-arxiv/types.js';
+import type { MemoryType } from '../memory/types.js';
 import { RELEVANCE_DOMAINS } from '../scan-arxiv/types.js';
 import { DEFAULT_DOMAIN_WEIGHTS } from '../scan-arxiv/ranker.js';
 import { loadSeenIds } from '../scan-arxiv/dedup.js';
@@ -44,6 +51,11 @@ export interface CorpusCoverage {
   workCount: number;
   /** Number of arxiv papers already ingested (seen-ids ledger size). */
   arxivSeenCount: number;
+  /**
+   * Number of Knowledge Spine memories ('lesson'/'finding') folded into the
+   * coverage map. Absent/zero when no MemorySource was injected.
+   */
+  spineCount?: number;
 }
 
 /** One ranked subtopic gap. */
@@ -72,6 +84,8 @@ export interface GapReport {
   workCount: number;
   /** Arxiv papers already ingested. */
   arxivSeenCount: number;
+  /** Knowledge Spine memories folded into the coverage map. */
+  spineCount: number;
   /** Confidence the gaps are real, derived from corpus maturity, in [0, 1]. */
   confidence: number;
 }
@@ -161,9 +175,12 @@ function clamp01(n: number): number {
   return n;
 }
 
-/** Corpus-maturity confidence: more works + seen papers -> higher confidence. */
-function confidenceOf(workCount: number, arxivSeenCount: number): number {
-  const mass = workCount + arxivSeenCount;
+/**
+ * Corpus-maturity confidence: more works + seen papers + mined spine memories
+ * -> higher confidence.
+ */
+function confidenceOf(workCount: number, arxivSeenCount: number, spineCount: number): number {
+  const mass = workCount + arxivSeenCount + spineCount;
   return clamp01(mass / (mass + 20));
 }
 
@@ -245,13 +262,15 @@ export function analyzeGaps(
       a.subtopic.localeCompare(b.subtopic),
   );
 
+  const spineCount = coverage.spineCount ?? 0;
   return {
     topic,
     subtopics: gaps,
     reweightedDomainWeights: reweightDomains(gaps),
     workCount: coverage.workCount,
     arxivSeenCount: coverage.arxivSeenCount,
-    confidence: confidenceOf(coverage.workCount, coverage.arxivSeenCount),
+    spineCount,
+    confidence: confidenceOf(coverage.workCount, coverage.arxivSeenCount, spineCount),
   };
 }
 
@@ -265,6 +284,28 @@ export interface CitationSource {
   all(): Promise<Array<{ title: string; tags: string[] }>>;
 }
 
+/** One Knowledge Spine memory as the radar consumes it. */
+export interface SpineMemory {
+  name: string;
+  description: string;
+  tags: string[];
+}
+
+/**
+ * Minimal structural view of the flagship MemoryService the radar consumes.
+ * Satisfied by `MemoryService.query` for `type` in {lesson, finding}: the
+ * radar only reads each result record's name/description/tags.
+ */
+export interface MemorySource {
+  query(
+    text: string,
+    options?: { type?: MemoryType; limit?: number },
+  ): Promise<{ results: Array<{ record: SpineMemory }> }>;
+}
+
+/** The two Knowledge Spine memory types folded into corpus coverage. */
+const SPINE_TYPES: readonly MemoryType[] = ['lesson', 'finding'] as const;
+
 export interface BuildCoverageOptions {
   /** Injected citation source (tests). Defaults to a real CitationStore. */
   citationSource?: CitationSource;
@@ -272,6 +313,12 @@ export interface BuildCoverageOptions {
   citationBasePath?: string;
   /** Override for the arxiv seen-ids ledger path. */
   seenIdsPath?: string;
+  /**
+   * Injected Knowledge Spine source (flagship MemoryService). When present,
+   * 'lesson'/'finding' memories fold into the coverage map as a third signal;
+   * when absent, coverage uses citations + arxiv only.
+   */
+  memorySource?: MemorySource;
 }
 
 /**
@@ -294,10 +341,48 @@ export async function buildCorpusCoverage(
     for (const t of terms) termCounts.set(t, (termCounts.get(t) ?? 0) + 1);
   }
 
+  const spineCount = opts.memorySource
+    ? await foldSpineCoverage(opts.memorySource, termCounts)
+    : 0;
+
   const seen = loadSeenIds(opts.seenIdsPath);
   const arxivSeenCount = Object.keys(seen.ids).length;
 
-  return { termCounts, workCount: works.length, arxivSeenCount };
+  return { termCounts, workCount: works.length, arxivSeenCount, spineCount };
+}
+
+/**
+ * Fold Knowledge Spine memories into an existing coverage map. Each
+ * 'lesson'/'finding' memory contributes its distinct name/description/tag
+ * terms exactly once, mirroring how a citation work contributes its title/tag
+ * terms — so a mined lesson about a topic reads as one more work covering it.
+ * Returns the number of distinct memories folded (deduplicated across types).
+ */
+async function foldSpineCoverage(
+  source: MemorySource,
+  termCounts: Map<string, number>,
+): Promise<number> {
+  const seenIds = new Set<string>();
+  const memories: SpineMemory[] = [];
+  for (const type of SPINE_TYPES) {
+    const response = await source.query('', { type, limit: 10_000 });
+    for (const { record } of response.results) {
+      // A record satisfying two type queries must only be counted once.
+      const identity = `${record.name} ${record.description}`;
+      if (seenIds.has(identity)) continue;
+      seenIds.add(identity);
+      memories.push(record);
+    }
+  }
+
+  for (const memory of memories) {
+    const terms = new Set<string>(tokenize(memory.name));
+    for (const t of tokenize(memory.description)) terms.add(t);
+    for (const tag of memory.tags) for (const t of tokenize(tag)) terms.add(t);
+    for (const t of terms) termCounts.set(t, (termCounts.get(t) ?? 0) + 1);
+  }
+
+  return memories.length;
 }
 
 async function defaultCitationSource(basePath?: string): Promise<CitationSource> {

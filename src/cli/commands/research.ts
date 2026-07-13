@@ -107,7 +107,7 @@ export function formatGapReport(report: GapReport): string {
   lines.push(
     `Research gaps for "${report.topic}" ` +
       `(${report.workCount} works, ${report.arxivSeenCount} arxiv seen, ` +
-      `confidence ${report.confidence.toFixed(2)})`,
+      `${report.spineCount} spine memories, confidence ${report.confidence.toFixed(2)})`,
   );
   lines.push('');
   lines.push('  Ranked under-covered subtopics (gap 1.0 = uncovered):');
