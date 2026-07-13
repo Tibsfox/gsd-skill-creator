@@ -177,4 +177,37 @@ describe('collegeCommand routing', () => {
     expect(Array.isArray(report.proposals)).toBe(true);
     expect(typeof report.flaggedCount).toBe('number');
   });
+
+  it('obs-pump --json is a no-op (forwarded:0, enabled:false) when SC_COLLEGE_OBS is unset', async () => {
+    const prev = process.env.SC_COLLEGE_OBS;
+    delete process.env.SC_COLLEGE_OBS;
+    try {
+      const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
+      const code = await collegeCommand(['obs-pump', '--json']);
+      expect(code).toBe(0);
+      const printed = spy.mock.calls.map((c) => String(c[0])).join('\n');
+      const result = JSON.parse(printed);
+      expect(result.enabled).toBe(false);
+      expect(result.forwarded).toBe(0);
+    } finally {
+      if (prev === undefined) delete process.env.SC_COLLEGE_OBS;
+      else process.env.SC_COLLEGE_OBS = prev;
+    }
+  });
+
+  it('obs-pump stays disabled for a falsy SC_COLLEGE_OBS value', async () => {
+    const prev = process.env.SC_COLLEGE_OBS;
+    process.env.SC_COLLEGE_OBS = '0';
+    try {
+      const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
+      const code = await collegeCommand(['obs-pump', '--json']);
+      expect(code).toBe(0);
+      const result = JSON.parse(spy.mock.calls.map((c) => String(c[0])).join('\n'));
+      expect(result.enabled).toBe(false);
+      expect(result.forwarded).toBe(0);
+    } finally {
+      if (prev === undefined) delete process.env.SC_COLLEGE_OBS;
+      else process.env.SC_COLLEGE_OBS = prev;
+    }
+  });
 });

@@ -24,8 +24,11 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import {
   recordCollegeEvent,
+  pumpCollegeObservations,
   DEFAULT_COLLEGE_OBS_PATH,
 } from '../../observation/college-observation-buffer.js';
+import { PatternStore } from '../../storage/pattern-store.js';
+import type { PatternCategory } from '../../types/pattern.js';
 
 // ─── Structural handles on the .college/ surface ────────────────────────────
 // Declared locally because the concrete types live outside src/ rootDir.
@@ -965,6 +968,58 @@ async function handleGenTrysession(
   }
 }
 
+/**
+ * `college obs-pump` — the session-boundary caller of the College observation
+ * pump. Drains the persistent buffer that `college explore` (with SC_COLLEGE_OBS)
+ * fills and forwards each batch into the `PatternStore` `sessions` collection
+ * through the existing `wireCollegeObservations` connector.
+ *
+ * Forwarding is gated on the SAME switch as the emitter (SC_COLLEGE_OBS): with it
+ * off the pump is a no-op that PRESERVES the buffer for a later enabled run.
+ * `SC_COLLEGE_SESSION_ID` optionally tags the forwarded observation. Best-effort
+ * everywhere — a failure prints and returns 1 but never corrupts the buffer.
+ */
+async function handleObsPump(json: boolean): Promise<number> {
+  const enabled = /^(1|true|on)$/i.test((process.env.SC_COLLEGE_OBS ?? '').trim());
+  try {
+    const store = new PatternStore();
+    // The pump appends under `sessions`; PatternStore.append narrows to a
+    // PatternCategory, so the sink casts the connector's `collection` string.
+    const sink = {
+      append: (category: string, data: Record<string, unknown>): Promise<void> =>
+        store.append(category as PatternCategory, data),
+    };
+    const sessionId = process.env.SC_COLLEGE_SESSION_ID?.trim();
+    const forwarded = await pumpCollegeObservations(DEFAULT_COLLEGE_OBS_PATH, sink, {
+      enabled,
+      ...(sessionId ? { sessionId } : {}),
+    });
+
+    if (json) {
+      console.log(
+        JSON.stringify({ enabled, forwarded, buffer: DEFAULT_COLLEGE_OBS_PATH }, null, 2),
+      );
+    } else if (!enabled) {
+      p.log.info(
+        'College observation forwarding is opt-in: set SC_COLLEGE_OBS=1. Buffer preserved.',
+      );
+    } else {
+      p.log.success(
+        `Forwarded ${forwarded} college observation(s) into the pattern pipeline.`,
+      );
+    }
+    return 0;
+  } catch (err) {
+    const message = (err as Error).message;
+    if (json) {
+      console.log(JSON.stringify({ enabled, forwarded: 0, error: message }, null, 2));
+    } else {
+      p.log.error(`obs-pump failed: ${message}`);
+    }
+    return 1;
+  }
+}
+
 // ─── Help ───────────────────────────────────────────────────────────────────
 
 function printCollegeHelp(): void {
@@ -992,6 +1047,9 @@ function printCollegeHelp(): void {
   );
   p.log.message(
     `    ${pc.cyan('college gen-trysession <dept>')}          Generate a DRAFT try-session (--wing, --out, --json, --author llm)`,
+  );
+  p.log.message(
+    `    ${pc.cyan('college obs-pump [--json]')}           Forward buffered observations to patterns (SC_COLLEGE_OBS=1)`,
   );
   p.log.message('');
   p.log.message('  Examples:');
@@ -1047,6 +1105,8 @@ export async function collegeCommand(args: string[]): Promise<number> {
     case 'concept-skill-suggest':
     case 'cs-suggest':
       return handleConceptSkillSuggest(parsed.json);
+    case 'obs-pump':
+      return handleObsPump(parsed.json);
     case 'gen-trysession':
     case 'gen-try':
       return handleGenTrysession(parsed.positional[0], parsed.wing, parsed.out, parsed.json, parsed.author);
