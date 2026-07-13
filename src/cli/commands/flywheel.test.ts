@@ -70,6 +70,12 @@ describe('parseFlywheelArgs — dev-memory flags', () => {
     expect(p.minRecurrence).toBeUndefined();
   });
 
+  it('parses --traces and --provenance status sources', () => {
+    const p = parseFlywheelArgs(['status', 'code-review', '--traces', 't.jsonl', '--provenance', 'p/dir']);
+    expect(p.traces).toBe('t.jsonl');
+    expect(p.provenance).toBe('p/dir');
+  });
+
   it('parses --execute, --include-corrections, --sessions-dir, --memory-dir, --min-recurrence', () => {
     const p = parseFlywheelArgs([
       'dev-memory',

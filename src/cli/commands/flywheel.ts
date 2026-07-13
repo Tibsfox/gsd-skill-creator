@@ -51,6 +51,10 @@ import {
   type ConceptLike,
   type FlywheelChain,
 } from '../../flywheel/lineage.js';
+import { loadPrecedents, loadCitations } from '../../flywheel/lineage-attribution.js';
+import { DEFAULT_TRACE_PATH } from '../../traces/writer.js';
+
+const DEFAULT_PROVENANCE_DIR = join('.citations', 'provenance');
 
 const DEFAULT_TELEMETRY_PATH = '.planning/patterns/telemetry-events.jsonl';
 
@@ -84,6 +88,12 @@ export interface ParsedFlywheelArgs {
   memoryDir?: string;
   /** Override the detector's recurrence threshold. */
   minRecurrence?: number;
+
+  // ─── status precedent/citation sources ─────────────────────────────────
+  /** Override the decision-trace log path (default .planning/traces/decisions.jsonl). */
+  traces?: string;
+  /** Override the citation provenance dir (default .citations/provenance). */
+  provenance?: string;
 }
 
 /** Parse the argument slice after `flywheel`. */
@@ -100,6 +110,8 @@ export function parseFlywheelArgs(args: string[]): ParsedFlywheelArgs {
   let sessionsDir: string | undefined;
   let memoryDir: string | undefined;
   let minRecurrence: number | undefined;
+  let traces: string | undefined;
+  let provenance: string | undefined;
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
     if (a === '--help' || a === '-h') help = true;
@@ -119,6 +131,10 @@ export function parseFlywheelArgs(args: string[]): ParsedFlywheelArgs {
     else if (a.startsWith('--memory-dir=')) memoryDir = a.slice('--memory-dir='.length);
     else if (a === '--min-recurrence') minRecurrence = parseInt(args[++i] ?? '', 10);
     else if (a.startsWith('--min-recurrence=')) minRecurrence = parseInt(a.slice('--min-recurrence='.length), 10);
+    else if (a === '--traces') traces = args[++i];
+    else if (a.startsWith('--traces=')) traces = a.slice('--traces='.length);
+    else if (a === '--provenance') provenance = args[++i];
+    else if (a.startsWith('--provenance=')) provenance = a.slice('--provenance='.length);
     else if (!a.startsWith('-')) positional.push(a);
   }
   return {
@@ -134,6 +150,8 @@ export function parseFlywheelArgs(args: string[]): ParsedFlywheelArgs {
     includeCorrections,
     sessionsDir,
     memoryDir,
+    traces,
+    provenance,
     ...(Number.isFinite(minRecurrence) ? { minRecurrence } : {}),
   };
 }
@@ -374,12 +392,21 @@ async function handleStatus(parsed: ParsedFlywheelArgs): Promise<number> {
   }
 
   const skill = parsed.skill;
-  const [concepts, slice] = await Promise.all([loadConcepts(), loadTelemetry(telemetryPath, skill)]);
+  const tracesPath = parsed.traces ?? DEFAULT_TRACE_PATH;
+  const provenanceDir = parsed.provenance ?? DEFAULT_PROVENANCE_DIR;
+  const [concepts, slice, precedents, citations] = await Promise.all([
+    loadConcepts(),
+    loadTelemetry(telemetryPath, skill),
+    loadPrecedents(tracesPath),
+    loadCitations(provenanceDir, skill),
+  ]);
 
   const chain = assembleFlywheelChain({
     skill,
     sources,
     concepts,
+    precedents,
+    citations,
     telemetry: slice.entry,
     correctionMagnet: slice.correctionMagnet,
     correctionCount: slice.correctionCount,
@@ -433,6 +460,8 @@ function printFlywheelHelp(): void {
   p.log.message('    --html <path>      Emit a self-contained Sankey render (atlas)');
   p.log.message('    --path <ledger>    Override the source-ledger path');
   p.log.message('    --telemetry <p>    Override the telemetry event-store path');
+  p.log.message('    --traces <p>       status: decision-trace log for precedent join');
+  p.log.message('    --provenance <d>   status: citation provenance dir for citation join');
   p.log.message('    --allow-heuristic  Include token-overlap (heuristic) upstream links.');
   p.log.message('                       OFF by default; the concept stage is empty without it');
   p.log.message('                       until a real concept->skill back-link exists.');
