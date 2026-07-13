@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import {
   recordCollegeEvent,
   drainCollegeEvents,
+  readCollegeEvents,
   eventsToSessionObservation,
   pumpCollegeObservations,
   type CollegeObservationEventLike,
@@ -138,5 +139,35 @@ describe('pumpCollegeObservations', () => {
     expect(appended).toHaveLength(0);
     // Buffer preserved for a later (enabled) pump.
     expect((await drainCollegeEvents(storePath)).map((e) => e.id)).toEqual(['e1']);
+  });
+
+  it('PRESERVES the buffer when the forward throws (two-phase: clear only on success)', async () => {
+    await recordCollegeEvent(storePath, ev({ id: 'e1' }));
+    await recordCollegeEvent(storePath, ev({ id: 'e2', conceptId: 'integral' }));
+
+    // A connector whose pump() throws AFTER the buffer has been read — the events
+    // must survive so a later retry can forward them.
+    class ThrowingConnector implements CollegeConnectorLike {
+      constructor(
+        private readonly _b: CollegeBridgeLike,
+        private readonly _s: (o: Record<string, unknown>) => void | Promise<void>,
+        _c: { enabled?: boolean },
+      ) {}
+      isEnabled(): boolean { return true; }
+      setEnabled(): void {}
+      async pump(): Promise<number> {
+        throw new Error('sink append failed');
+      }
+    }
+
+    await expect(
+      pumpCollegeObservations(storePath, { append: () => {} }, {
+        enabled: true,
+        deps: { loadConnectorCtor: async () => ThrowingConnector },
+      }),
+    ).rejects.toThrow('sink append failed');
+
+    // Buffer intact — the failed forward did NOT delete the events.
+    expect((await readCollegeEvents(storePath)).map((e) => e.id)).toEqual(['e1', 'e2']);
   });
 });

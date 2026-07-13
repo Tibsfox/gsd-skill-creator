@@ -8,10 +8,10 @@
  * pump occur — which is why `wireCollegeObservations(bridge).pump()` forwarded
  * nothing (no producer fed the same bridge). This buffer closes that gap:
  *   - EMITTER: `recordCollegeEvent` appends an event as a college command runs.
- *   - PUMP: `pumpCollegeObservations` presents the buffer to the existing
- *     `wireCollegeObservations` adapter as a `CollegeBridgeLike` whose `flush()`
- *     drains the persisted events, so the tested connector forwards them into
- *     the pattern pipeline.
+ *   - PUMP: `pumpCollegeObservations` READS the buffer, presents the batch to the
+ *     existing `wireCollegeObservations` adapter as a `CollegeBridgeLike`, forwards
+ *     it into the pattern pipeline, and CLEARS the buffer only after a successful
+ *     forward — so a transient forward failure never loses buffered events.
  *
  * Strictly opt-in: emitting and pumping are gated by the caller; nothing writes
  * or forwards by default. Best-effort — a buffer failure never breaks a college
@@ -60,8 +60,8 @@ export async function recordCollegeEvent(
   }
 }
 
-/** Read every buffered event and CLEAR the buffer. Returns [] on any read error. */
-export async function drainCollegeEvents(
+/** Read every buffered event WITHOUT clearing. Returns [] on any read error. */
+export async function readCollegeEvents(
   storePath: string,
 ): Promise<CollegeObservationEventLike[]> {
   let content: string;
@@ -80,11 +80,24 @@ export async function drainCollegeEvents(
       // skip corrupt line
     }
   }
+  return events;
+}
+
+/** Delete the buffer file. Best-effort — a failure leaves the file in place. */
+export async function clearCollegeBuffer(storePath: string): Promise<void> {
   try {
     await fs.rm(storePath, { force: true });
   } catch {
     // leave the file if it cannot be cleared; re-drain is idempotent enough
   }
+}
+
+/** Read every buffered event and CLEAR the buffer. Returns [] on any read error. */
+export async function drainCollegeEvents(
+  storePath: string,
+): Promise<CollegeObservationEventLike[]> {
+  const events = await readCollegeEvents(storePath);
+  await clearCollegeBuffer(storePath);
   return events;
 }
 
@@ -128,30 +141,24 @@ export function eventsToSessionObservation(
 }
 
 /**
- * Present the persistent buffer at `storePath` to the `wireCollegeObservations`
- * adapter as a `CollegeBridgeLike`. `flush()` drains the buffer; the events are
- * cached so the connector's subsequent `toSessionObservation(events)` sees the
- * same drained batch.
+ * Present an ALREADY-LOADED event batch to the `wireCollegeObservations` adapter
+ * as a `CollegeBridgeLike`. `flush()` returns the in-memory batch; the connector
+ * then converts it via `toSessionObservation`. Loading (reading from disk) and
+ * clearing happen in the pump AROUND the forward, so a forward failure never
+ * loses the batch (the buffer is cleared only after a successful forward).
  */
-export function makePersistentCollegeBridge(
-  storePath: string,
+function makeLoadedCollegeBridge(
+  events: CollegeObservationEventLike[],
   sessionId: string,
 ): CollegeBridgeLike {
-  let drained: CollegeObservationEventLike[] = [];
   return {
-    // The batch is loaded (drained from disk) via `_load()` before the connector
-    // pumps, so `flush()` returns the cached batch the connector then converts.
     flush(): unknown[] {
-      return drained;
+      return events;
     },
-    toSessionObservation(events: unknown[]): Record<string, unknown> {
-      return eventsToSessionObservation(events as CollegeObservationEventLike[], sessionId);
+    toSessionObservation(evs: unknown[]): Record<string, unknown> {
+      return eventsToSessionObservation(evs as CollegeObservationEventLike[], sessionId);
     },
-    // Non-interface helper the pump uses to load the batch before flushing.
-    async _load(): Promise<void> {
-      drained = await drainCollegeEvents(storePath);
-    },
-  } as CollegeBridgeLike & { _load(): Promise<void> };
+  };
 }
 
 export interface PumpCollegeOptions {
@@ -163,29 +170,38 @@ export interface PumpCollegeOptions {
 }
 
 /**
- * Drain the persistent buffer and forward its events into `sink` through the
+ * Read the persistent buffer and forward its events into `sink` through the
  * existing `wireCollegeObservations` connector. Returns the number of
  * observations forwarded (0 when disabled or the buffer is empty).
+ *
+ * Two-phase for durability: READ (without deleting) → forward → CLEAR only on a
+ * successful forward. If loading the connector or the sink append throws, the
+ * buffer is left intact for a later retry — a transient failure never loses
+ * buffered events (the "never corrupts the buffer" contract).
  */
 export async function pumpCollegeObservations(
   storePath: string,
   sink: CollegePatternSinkLike,
   options: PumpCollegeOptions = {},
 ): Promise<number> {
-  // Gate BEFORE draining: when forwarding is off the buffer must be preserved
+  // Gate BEFORE reading: when forwarding is off the buffer must be preserved
   // (mirrors the connector's own no-op-and-preserve contract).
   if (!(options.enabled ?? false)) return 0;
 
   const sessionId = options.sessionId ?? 'college-session';
-  const bridge = makePersistentCollegeBridge(storePath, sessionId) as CollegeBridgeLike & {
-    _load(): Promise<void>;
-  };
-  await bridge._load();
+  const events = await readCollegeEvents(storePath);
+  if (events.length === 0) return 0;
+
+  const bridge = makeLoadedCollegeBridge(events, sessionId);
   const connector = await wireCollegeObservations(
     bridge,
     sink,
     { enabled: true, ...(options.collection ? { collection: options.collection } : {}) },
     options.deps ?? {},
   );
-  return connector.pump();
+  // A throw here (connector import / sink append) propagates WITHOUT clearing the
+  // buffer, so the events survive for a retry.
+  const forwarded = await connector.pump();
+  await clearCollegeBuffer(storePath);
+  return forwarded;
 }
