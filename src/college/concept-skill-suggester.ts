@@ -121,7 +121,15 @@ export async function suggestConceptSkillLinksSemantic(
     }
   }
 
-  out.sort((a, b) => b.similarity - a.similarity || a.conceptId.localeCompare(b.conceptId));
+  // Skill-name tiebreak keeps the output (and the maxPerConcept truncation)
+  // deterministic when candidates tie on similarity — skill enumeration order is
+  // filesystem-dependent (readdir), so without this the surviving SET could vary.
+  out.sort(
+    (a, b) =>
+      b.similarity - a.similarity ||
+      a.conceptId.localeCompare(b.conceptId) ||
+      a.skill.localeCompare(b.skill),
+  );
 
   const cap = opts.maxPerConcept;
   if (cap === undefined || cap <= 0) return out;

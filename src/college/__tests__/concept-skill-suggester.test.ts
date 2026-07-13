@@ -81,6 +81,24 @@ describe('suggestConceptSkillLinksSemantic', () => {
     expect(await suggestConceptSkillLinksSemantic([], SKILLS, new Set(), fakeEmbedder)).toEqual([]);
     expect(await suggestConceptSkillLinksSemantic(CONCEPTS, [], new Set(), fakeEmbedder)).toEqual([]);
   });
+
+  it('breaks similarity ties deterministically by skill name', async () => {
+    // Both skills share "review" -> both cosine 1 with the review concept.
+    const tiedSkills = [
+      { name: 'code-review', description: 'review code' },
+      { name: 'adversarial-pr-review', description: 'review pull requests' },
+    ];
+    const out = await suggestConceptSkillLinksSemantic(
+      [CONCEPTS[0]!],
+      tiedSkills,
+      new Set(),
+      fakeEmbedder,
+      { similarityThreshold: 0.5 },
+    );
+    const forReview = out.filter((c) => c.conceptId === 'code-peer-review').map((c) => c.skill);
+    // Tie-broken by ascending skill name, independent of input enumeration order.
+    expect(forReview).toEqual(['adversarial-pr-review', 'code-review']);
+  });
 });
 
 describe('formatConceptSkillCandidates', () => {
