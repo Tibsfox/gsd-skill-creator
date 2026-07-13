@@ -184,8 +184,10 @@ describe('reachability-v2 — control-theory island reachability (Ship 3.1, v1.4
 // Ship 3.2 allowlisted 14; Ship 3.3 (v1.49.979) WIRED three of them — commands,
 // learn, scan-arxiv (the sc-learn/scan-arxiv CLI registration) — leaving 11; then
 // v1.49.987 WIRED amiga (the dispatch `amiga` command gave the dormant
-// meta-mission/CE-1 substrate its production runtime consumer) — leaving 10 here.
-// (git + skill were the two of the Ship-3.1 "16" already WIRED at Ship 3.2.)
+// meta-mission/CE-1 substrate its production runtime consumer) — leaving 10; then
+// v1.49.1128 WIRED skill-promotion (the flywheel advisory telemetry-driven ROI
+// gate on mint gave the thermodynamic ROI module a production consumer) — leaving
+// 9 here. (git + skill were the two of the Ship-3.1 "16" already WIRED at Ship 3.2.)
 const SHIP32_ALLOWLISTED = [
   'audio-engineering',
   'bayes-ab',
@@ -195,7 +197,6 @@ const SHIP32_ALLOWLISTED = [
   'engines',
   'health-diagnostician',
   'skill-isotropy',
-  'skill-promotion',
   'umwelt',
 ] as const;
 
@@ -299,6 +300,25 @@ describe('Ship 3.2 — reachability-only shelfware disposition (v1.49.978)', () 
       allowlist().map((e) => e.module),
       'amiga allowlist entry must be REMOVED at v1.49.987 (mirrors git/skill — wired, not allowlisted)',
     ).not.toContain('amiga');
+  });
+
+  it('WIRE (v1.49.1128) — skill-promotion is reachable via the flywheel advisory ROI gate on mint (no allowlist)', () => {
+    // The flywheel advisory telemetry-driven ROI gate on skill mint
+    // (feat(skill-promotion): advisory telemetry-driven ROI gate on mint) gives the
+    // thermodynamic skill-promotion ROI module its first production consumer, so it
+    // flips reachableFromProduction:true and, per the git/skill + Ship-3.3 + amiga
+    // precedent, carries NO allowlist entry (wired, not allowlisted).
+    const r = byModule.get('skill-promotion');
+    expect(r, 'skill-promotion must be in the scan').toBeTruthy();
+    expect(
+      r!.reachableFromProduction,
+      'skill-promotion must be reachable after the flywheel ROI-gate wire',
+    ).toBe(true);
+    expect(r!.allowlisted, 'skill-promotion should NOT read allowlisted (it is wired)').toBe(false);
+    expect(
+      allowlist().map((e) => e.module),
+      'skill-promotion allowlist entry must be REMOVED at v1.49.1128 (mirrors amiga — wired, not allowlisted)',
+    ).not.toContain('skill-promotion');
   });
 
   it('RETIRE — upstream + upstream-intelligence are deleted, but the config namespace survives', () => {

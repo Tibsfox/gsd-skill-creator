@@ -1,5 +1,18 @@
 import { describe, it, expect } from 'vitest';
+import { execFileSync } from 'node:child_process';
 import { parseRetroArgs, collectGitMetrics } from '../../src/cli/commands/retro.js';
+
+// CI checks out shallow (actions/checkout@v5 defaults to fetch-depth: 1), so the
+// HEAD~1 parent this range test relies on may not exist. Detect that and skip
+// rather than assert a commit range git provably cannot resolve in a 1-deep clone.
+function hasParentCommit(): boolean {
+  try {
+    execFileSync('git', ['rev-parse', '--verify', '--quiet', 'HEAD~1'], { stdio: 'ignore' });
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 describe('parseRetroArgs', () => {
   it('parses the subcommand and space-separated flags', () => {
@@ -44,8 +57,9 @@ describe('parseRetroArgs', () => {
 });
 
 describe('collectGitMetrics (real git, no ProcessContext)', () => {
-  it('derives commit count and source LOC for a range', () => {
-    // HEAD~1..HEAD is guaranteed to exist in this repo and have >=1 commit.
+  it.skipIf(!hasParentCommit())('derives commit count and source LOC for a range', () => {
+    // HEAD~1..HEAD exists whenever the checkout has history (skipped under a
+    // shallow depth-1 CI checkout, where HEAD has no parent).
     const m = collectGitMetrics({ since: 'HEAD~1', name: 'test', version: 'v0' });
     expect(m.milestone_name).toBe('test');
     expect(m.milestone_version).toBe('v0');

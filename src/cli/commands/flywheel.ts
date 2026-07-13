@@ -14,6 +14,13 @@
  * src/flywheel/lineage.ts. Upstream (source/concept → skill) links are inferred
  * and tagged with their confidence; the downstream telemetry join is exact.
  *
+ * Concept join is HEURISTIC-ONLY and OPT-IN. The `.college` Rosetta concept
+ * model carries no concept→skill back-link, so every concept match is
+ * heuristic (token overlap). Heuristic upstream links are suppressed unless the
+ * caller passes `--allow-heuristic` (assembleFlywheelChain's allowHeuristic).
+ * Without the flag the concept stage renders empty by design; a real back-link
+ * (or a separate mapping artifact) is the durable fix.
+ *
  *   flywheel status              Overview: skills with telemetry + coverage
  *   flywheel status <skill>      Full lineage chain for one skill
  *   flywheel status <skill> --json   Machine-readable chain
@@ -54,6 +61,14 @@ export interface ParsedFlywheelArgs {
   html?: string;
   json: boolean;
   help: boolean;
+  /**
+   * Opt into the heuristic (token-overlap) tier of the upstream join. OFF by
+   * default: the `.college` concept model carries no concept→skill back-link, so
+   * without this flag the concept stage renders empty (only explicit-confidence
+   * links survive). A real back-link is the durable fix; this flag makes the
+   * heuristic tier reachable in the meantime.
+   */
+  allowHeuristic: boolean;
 }
 
 /** Parse the argument slice after `flywheel`. */
@@ -64,10 +79,12 @@ export function parseFlywheelArgs(args: string[]): ParsedFlywheelArgs {
   let html: string | undefined;
   let json = false;
   let help = false;
+  let allowHeuristic = false;
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
     if (a === '--help' || a === '-h') help = true;
     else if (a === '--json') json = true;
+    else if (a === '--allow-heuristic') allowHeuristic = true;
     else if (a === '--path') path = args[++i];
     else if (a.startsWith('--path=')) path = a.slice('--path='.length);
     else if (a === '--telemetry') telemetry = args[++i];
@@ -76,7 +93,7 @@ export function parseFlywheelArgs(args: string[]): ParsedFlywheelArgs {
     else if (a.startsWith('--html=')) html = a.slice('--html='.length);
     else if (!a.startsWith('-')) positional.push(a);
   }
-  return { subcommand: positional[0], skill: positional[1], path, telemetry, html, json, help };
+  return { subcommand: positional[0], skill: positional[1], path, telemetry, html, json, help, allowHeuristic };
 }
 
 // ─── .college/ runtime resolution (mirrors college.ts) ───────────────────────
@@ -84,6 +101,7 @@ export function parseFlywheelArgs(args: string[]): ParsedFlywheelArgs {
 interface ConceptEvidenceLike {
   id: string;
   domain: string;
+  name?: string;
 }
 interface ConceptRegistryLike {
   getAll(): ConceptEvidenceLike[];
@@ -125,7 +143,7 @@ async function loadConcepts(): Promise<ConceptLike[]> {
     const loader = new CollegeLoader(join(collegeRoot(), '.college', 'departments'));
     const registry = new ConceptRegistry();
     loader.populateRegistry(registry);
-    return registry.getAll().map((c) => ({ id: c.id, domain: c.domain }));
+    return registry.getAll().map((c) => ({ id: c.id, domain: c.domain, name: c.name }));
   } catch {
     return [];
   }
@@ -284,6 +302,7 @@ async function handleStatus(parsed: ParsedFlywheelArgs): Promise<number> {
     telemetry: slice.entry,
     correctionMagnet: slice.correctionMagnet,
     correctionCount: slice.correctionCount,
+    allowHeuristic: parsed.allowHeuristic,
   });
 
   if (parsed.html) {
@@ -331,10 +350,14 @@ function printFlywheelHelp(): void {
   p.log.message('    --html <path>      Emit a self-contained Sankey render (atlas)');
   p.log.message('    --path <ledger>    Override the source-ledger path');
   p.log.message('    --telemetry <p>    Override the telemetry event-store path');
+  p.log.message('    --allow-heuristic  Include token-overlap (heuristic) upstream links.');
+  p.log.message('                       OFF by default; the concept stage is empty without it');
+  p.log.message('                       until a real concept->skill back-link exists.');
   p.log.message('');
   p.log.message('  Examples:');
   p.log.message('    skill-creator flywheel status');
   p.log.message('    skill-creator flywheel status commit-style');
+  p.log.message('    skill-creator flywheel status commit-style --allow-heuristic');
   p.log.message('    skill-creator flywheel status commit-style --html out/flywheel.html');
 }
 

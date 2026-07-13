@@ -160,12 +160,6 @@
       "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
     },
     {
-      "module": "skill-promotion",
-      "reason": "Thermodynamic skill-promotion ROI gate (Landauer-floor deployment-horizon ROI per JP-005 / arXiv:2604.20897; Wave 2, Phase 835). Consumed only by ab-harness/bo-autotune.ts (a Wave-3 BO skeleton, test-only); meant to be consumed programmatically by the BO loop, not as a CLI. Generic resume (Wave-3 bo-autotune integration, JP-018); retire-or-resume review by 2027-06-05.",
-      "addedAt": "v1.49.978",
-      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
-    },
-    {
       "module": "umwelt",
       "reason": "M7 Umwelt — categorical generative model + Markov-blanket partition + variational free-energy minimiser (core Living Sensoria M1..M8 substrate; v1.49.640/647). Type re-exports in src/types/index.ts are type-only (safe); the only implementation consumer (symbiosis/m7-adapter.ts) is test-only. Default-OFF preserved substrate. Generic resume (an M5/learning-loop Living-Sensoria consumer); retire-or-resume review by 2027-06-05.",
       "addedAt": "v1.49.978",

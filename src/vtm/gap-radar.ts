@@ -368,7 +368,7 @@ async function foldSpineCoverage(
     const response = await source.query('', { type, limit: 10_000 });
     for (const { record } of response.results) {
       // A record satisfying two type queries must only be counted once.
-      const identity = `${record.name} ${record.description}`;
+      const identity = `${record.name}\x00${record.description}`;
       if (seenIds.has(identity)) continue;
       seenIds.add(identity);
       memories.push(record);

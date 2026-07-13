@@ -6,7 +6,7 @@
 
 ## Summary
 
-v1.49.1128 ships the **flywheel capability roadmap** — the entire 24-feature design that turns skill-creator's adaptive-learning subsystems from a set of disconnected pipelines into a single, navigable loop. Alongside the flagship **MemorySink** (the first real `ObservationSink` that promotes mined patterns into recallable `lesson`/`finding` memories), the release wires the College, Research, Learning, and cross-cutting intelligence tracks so that a signal captured at one end of the system — an observation, a correction, a research source, a co-activation cluster — can travel through mining, memory, calibration, and promotion, and be *joined and inspected* end-to-end via a new `flywheel status` command.
+v1.49.1128 ships the **flywheel capability roadmap** — the entire 24-feature design that turns skill-creator's adaptive-learning subsystems from a set of disconnected pipelines into a single, navigable loop. Alongside the flagship **MemorySink** (the first real `ObservationSink` — a tested, opt-in capability that can promote mined patterns into recallable `lesson`/`finding` memories once a live observation flow is wired to it; it has no production callsite yet), the release wires the College, Research, Learning, and cross-cutting intelligence tracks so that a signal captured at one end of the system — an observation, a correction, a research source, a co-activation cluster — *can* travel through mining, memory, calibration, and promotion, and be joined and inspected via a new `flywheel status` command.
 
 This is a large, interleaved ship: **182 commits ahead of `origin/main`** (the v1.49.1127 tip `a9135f77e`), comprising **145 pre-flywheel backlog commits** (item-7 auto-correction attribution, the MEM-7 memory work, a deferred-follow-ups cluster, and cargo/hygiene fixes) and **37 flywheel-session commits** (`82421a34b..b25614545`). In aggregate: **657 files changed, +47,167 / −6,903 lines**, spanning the TypeScript library and CLI (`src/`), the Rust backend (`src-tauri/`), the College structure (`.college/`), the release/adoption tooling, and the teams/chipsets examples.
 
@@ -22,7 +22,7 @@ The work landed as **four sequential agent waves** (A–D). Each feature was bui
 
 ### Flagship — Memory
 
-- **MemorySink** (`5abffa701`) — the first real `ObservationSink` that promotes mined patterns into recallable memory. Where pattern mining previously terminated at a report, MemorySink writes durable `lesson`/`finding` memories that the recall path can surface later. This is the keystone that makes the flywheel a loop rather than a funnel.
+- **MemorySink** (`5abffa701`) — the first real `ObservationSink`: given an observation stream, it can promote mined patterns into durable `lesson`/`finding` memories that the recall path surfaces later, where pattern mining previously terminated at a report. It is the keystone the loop is *designed* around — but it ships as a tested, opt-in library capability with **no production `ObservationEmitter` callsite yet** (its factory constructs nothing by default). Wiring a live observation flow into it is a documented follow-up (see *Still Open*), so this ship makes the loop *closable*, not yet closed in production.
 
 ### College — the Rosetta / department structure
 
@@ -71,7 +71,7 @@ The work landed as **four sequential agent waves** (A–D). Each feature was bui
 
 ## Structural firsts
 
-- **First real `ObservationSink`.** MemorySink is the first sink that closes the observe → mine → *remember* loop with durable, recallable memories rather than a terminal report.
+- **First real `ObservationSink`.** MemorySink is the first sink *built* to close the observe → mine → *remember* loop with durable, recallable memories rather than a terminal report. The sink exists and is tested; a production callsite that pumps it is still a seam (see *Still Open*).
 - **First navigable flywheel join.** `flywheel status` is the first command that traverses lineage across all of the adaptive-learning subsystems and renders it (including `--html`), joining precedent and citation sources precisely.
 - **First real `college translate`.** Cross-panel Rosetta translation runs against the live Rosetta stack instead of a stub, reached via a computed dynamic `import()` because `src/` cannot statically import `.college/`.
 - **First embedding-driven xref discovery.** `xref suggest --semantic` discovers cross-department edges from embedding similarity rather than only from explicit evidence.
@@ -94,7 +94,7 @@ The work landed as **four sequential agent waves** (A–D). Each feature was bui
 
 ## Surprises
 
-- **The loop closed with a small keystone.** A single sink (MemorySink) was enough to turn a set of one-directional pipelines into a genuine flywheel — the downstream connections were mostly already latent, waiting for a durable memory target.
+- **The loop's design turned on a small keystone.** A single sink (MemorySink) is all the loop is *designed* to need to become bidirectional — the downstream connections were mostly already latent, waiting for a durable memory target. The keystone is in place and tested; triggering it from a live observation flow is the remaining wiring, not more design.
 - **975 concepts already carried panel + position structure.** Populating the ConceptRegistry surfaced that the College's concept corpus was richer and more geometrically organized (complex-plane positions) than a flat list, which made the semantic xref discovery immediately useful.
 - **The backlog was larger than the marquee work.** The 145 pre-flywheel commits (auto-correction attribution, MEM-7, deferred follow-ups) outnumbered the 37 flywheel commits nearly 4:1 — the release is as much a backlog drain as a feature ship.
 
@@ -115,6 +115,8 @@ The work landed as **four sequential agent waves** (A–D). Each feature was bui
 
 ## Still Open (deferred, honest — not ship blockers)
 
+- **MemorySink has no production `ObservationEmitter` callsite yet.** The sink is a tested, opt-in library capability — its factory constructs nothing by default — and is not yet triggered by any live session/observation flow. Wiring a production emitter to it is the follow-up that actually closes the observe → mine → remember loop in production; until then the loop is *closable*, not closed.
+- **`flywheel status` concept-join is heuristic-only and off by default.** The `.college` Rosetta data model carries no concept→skill back-link, so the concept stage of `flywheel status <skill>` renders empty unless the new `--allow-heuristic` flag opts into token-overlap matching. A real back-link (or mapping artifact) is the durable fix.
 - **Heavy-ML cores** need real infrastructure, not wiring: claim-extraction NLP (`HeuristicClaimExtractor`), distill intelligent fill (`DistillEnricher`), try-session pedagogical authoring, and co-activation live-data density (activation writers unwired, Phase 646).
 - **Wave-D live-callsite tails**: gap-radar CLI live `MemoryService` injection; a production callsite pumping the college-obs-adapter; the flywheel CLI loading live precedents/citations; the ledger-scribe path; and reverted-commit coverage beyond the formal `git revert` case.
 

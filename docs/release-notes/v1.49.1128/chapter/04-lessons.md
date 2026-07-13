@@ -3,19 +3,19 @@
 7 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
 
 1. **Wiring is cheap; cores are expensive — and honesty about the line is the deliverable.**
-   The flywheel roadmap proved that connecting subsystems (seams, entry points, routers, joins) is fast and testable, while the intelligent cores behind those seams (claim NLP, distill fill, pedagogy authoring) need real infrastructure. Shipping the wiring with the cores stubbed — and *documenting exactly which is which* — is more valuable than a half-built monolith.
+   **Wiring is cheap; cores are expensive — and honesty about the line is the deliverable.**
    _⚙ Status: `investigate` · lesson #13393_
 
 2. **A shared session-retro file is a footgun under sub-agents.**
-   Sub-agents that run `tools/session-retro/observe.mjs start/end` clobber the parent mission's session state because the file is shared. Self-observing agents must not be relied on for parent-session retro capture.
+   **A shared session-retro file is a footgun under sub-agents.**
    _⚙ Status: `investigate` · lesson #13394_
 
 3. **The dynamic-import boundary has a runtime cost.**
-   Because `.college/` is not emitted to `dist`, the `college`/`flywheel` verbs run fine under `tsx`/`vitest` but require `.college` to be compiled to run from the shipped binary — a pre-existing condition the flywheel work inherits, not introduces.
+   **The dynamic-import boundary has a runtime cost.**
    _⚙ Status: `investigate` · lesson #13395_
 
 4. **Targeted sweeps are not the full suite.**
-   The Wave sweeps ran targeted suites (5797 pass / 0 fail on the Wave-D tip); the pre-tag gate is the first time the full ~36k-test suite runs against this dev tip. Plan for that to be the real gate.
+   **Targeted sweeps are not the full suite.**
    _⚙ Status: `investigate` · lesson #13396_
 
 5. **The heavy-ML cores remain stubbed.**
