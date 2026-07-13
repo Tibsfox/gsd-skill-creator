@@ -17,7 +17,7 @@
  * dispatcher.
  */
 
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as p from '@clack/prompts';
@@ -765,6 +765,82 @@ async function handleXrefSuggest(
   }
 }
 
+/**
+ * Suggest semantic concept→skill links for HUMAN REVIEW. Opt-in by being its own
+ * subcommand — nothing constructs the embedder unless a user runs it. Enumerates
+ * .college concepts and the on-disk skills, dedups against the checked-in
+ * concept-skills.json mapping, and prints a ranked candidate list. Writes NOTHING.
+ */
+async function handleConceptSkillSuggest(json: boolean): Promise<number> {
+  try {
+    const { CollegeLoader } = await loadCollegeBarrel();
+    const { ConceptRegistry } = await loadRosettaCore();
+    const { suggestConceptSkillLinksSemantic, conceptSkillPairKey, formatConceptSkillCandidates } =
+      await import('../../college/concept-skill-suggester.js');
+    const { buildConceptSkillMap } = await import('./flywheel.js');
+    const { SkillStore } = await import('../../storage/skill-store.js');
+
+    const loader = new CollegeLoader(departmentsPath());
+    const registry = new ConceptRegistry();
+    loader.populateRegistry(registry);
+    const concepts = registry.getAll().map((c) => ({
+      id: c.id,
+      name: c.name,
+      description: c.description,
+      domain: c.domain,
+    }));
+
+    // Enumerate on-disk skills → { name, description } through the guarded store.
+    const store = new SkillStore(join(collegeRoot(), '.claude', 'skills'));
+    const skillNames = await store.list();
+    const skills: { name: string; description?: string }[] = [];
+    for (const name of skillNames) {
+      try {
+        const s = await store.read(name);
+        skills.push({ name: s.metadata.name, description: s.metadata.description });
+      } catch {
+        // Skip an unreadable/invalid skill — best-effort enumeration.
+      }
+    }
+
+    // Dedup against the checked-in explicit mapping (tolerant of absence/corruption).
+    const existingPairs = new Set<string>();
+    const mapPath = join(collegeRoot(), '.college', 'mappings', 'concept-skills.json');
+    if (existsSync(mapPath)) {
+      try {
+        const csMap = buildConceptSkillMap(JSON.parse(readFileSync(mapPath, 'utf8')));
+        for (const [conceptId, mapped] of csMap) {
+          for (const sk of mapped) existingPairs.add(conceptSkillPairKey(conceptId, sk));
+        }
+      } catch {
+        // Corrupt mapping → no dedup, still safe (review-only output).
+      }
+    }
+
+    // Semantic-only tier: constructing the embedder here IS the opt-in gate.
+    const { EmbeddingService } = await import('../../embeddings/embedding-service.js');
+    const embedder = EmbeddingService.createFresh();
+
+    const candidates = await suggestConceptSkillLinksSemantic(
+      concepts,
+      skills,
+      existingPairs,
+      embedder,
+      { similarityThreshold: 0.8, maxPerConcept: 3 },
+    );
+
+    if (json) {
+      console.log(JSON.stringify(candidates, null, 2));
+    } else {
+      console.log(formatConceptSkillCandidates(candidates));
+    }
+    return 0;
+  } catch (err) {
+    p.log.error(`Concept-skill suggest failed: ${(err as Error).message}`);
+    return 1;
+  }
+}
+
 async function handleGenTrysession(
   dept: string | undefined,
   wing: string | undefined,
@@ -883,6 +959,9 @@ function printCollegeHelp(): void {
     `    ${pc.cyan('college xref suggest [--dept] [--semantic] [--json]')} Propose new cross-dept prerequisite edges`,
   );
   p.log.message(
+    `    ${pc.cyan('college concept-skill-suggest [--json]')} Propose concept→skill links (semantic, review-only)`,
+  );
+  p.log.message(
     `    ${pc.cyan('college gen-trysession <dept>')}          Generate a DRAFT try-session (--wing, --out, --json)`,
   );
   p.log.message('');
@@ -936,6 +1015,9 @@ export async function collegeCommand(args: string[]): Promise<number> {
       }
       return handleXrefSuggest(parsed.dept, parsed.json, parsed.semantic);
     }
+    case 'concept-skill-suggest':
+    case 'cs-suggest':
+      return handleConceptSkillSuggest(parsed.json);
     case 'gen-trysession':
     case 'gen-try':
       return handleGenTrysession(parsed.positional[0], parsed.wing, parsed.out, parsed.json);

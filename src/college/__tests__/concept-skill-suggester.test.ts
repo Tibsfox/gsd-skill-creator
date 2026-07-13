@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   suggestConceptSkillLinksSemantic,
   conceptSkillPairKey,
+  formatConceptSkillCandidates,
   type ConceptSkillEmbedder,
 } from '../concept-skill-suggester.js';
 
@@ -79,5 +80,24 @@ describe('suggestConceptSkillLinksSemantic', () => {
   it('is inert (returns []) when either side has no embeddable text', async () => {
     expect(await suggestConceptSkillLinksSemantic([], SKILLS, new Set(), fakeEmbedder)).toEqual([]);
     expect(await suggestConceptSkillLinksSemantic(CONCEPTS, [], new Set(), fakeEmbedder)).toEqual([]);
+  });
+});
+
+describe('formatConceptSkillCandidates', () => {
+  it('renders an empty queue as a single no-suggestions line', () => {
+    expect(formatConceptSkillCandidates([])).toBe(
+      'No concept→skill links suggested (existing mapping already covers the corpus).',
+    );
+  });
+
+  it('renders candidates as a HUMAN REVIEW ONLY block with cosine + domain', () => {
+    const out = formatConceptSkillCandidates([
+      { conceptId: 'code-peer-review', skill: 'code-review', similarity: 0.912, conceptDomain: 'engineering' },
+      { conceptId: 'derivative', skill: 'test-generator', similarity: 0.8 },
+    ]);
+    expect(out).toContain('HUMAN REVIEW ONLY, nothing written');
+    expect(out).toContain('Suggested concept→skill links (2)');
+    expect(out).toContain('+ code-peer-review [engineering] -> code-review  (cos 0.912)');
+    expect(out).toContain('+ derivative -> test-generator  (cos 0.800)');
   });
 });

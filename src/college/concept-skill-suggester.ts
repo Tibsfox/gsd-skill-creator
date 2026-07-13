@@ -133,3 +133,26 @@ export async function suggestConceptSkillLinksSemantic(
     return true;
   });
 }
+
+/**
+ * Render candidates as a human-review queue. Mirrors {@link
+ * ./xref-suggester.ts formatXrefCandidates}. The banner is explicit that this
+ * is review-only — nothing is written to concept-skills.json.
+ */
+export function formatConceptSkillCandidates(
+  candidates: ReadonlyArray<ConceptSkillCandidate>,
+): string {
+  if (candidates.length === 0) {
+    return 'No concept→skill links suggested (existing mapping already covers the corpus).';
+  }
+  const lines: string[] = [];
+  lines.push(
+    `Suggested concept→skill links (${candidates.length}) — HUMAN REVIEW ONLY, nothing written:`,
+  );
+  lines.push('');
+  for (const c of candidates) {
+    const domain = c.conceptDomain ? ` [${c.conceptDomain}]` : '';
+    lines.push(`+ ${c.conceptId}${domain} -> ${c.skill}  (cos ${c.similarity.toFixed(3)})`);
+  }
+  return lines.join('\n');
+}
