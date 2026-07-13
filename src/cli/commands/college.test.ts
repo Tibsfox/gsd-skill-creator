@@ -61,6 +61,20 @@ describe('parseCollegeArgs', () => {
     expect(r.positional).toEqual([]);
   });
 
+  it('captures --min-concepts and --min-sessions for doctor as numbers', () => {
+    const r = parseCollegeArgs(['doctor', '--min-concepts', '5', '--min-sessions=2']);
+    expect(r.subcommand).toBe('doctor');
+    expect(r.minConcepts).toBe(5);
+    expect(r.minSessions).toBe(2);
+    expect(r.positional).toEqual([]);
+  });
+
+  it('leaves threshold flags undefined when absent and ignores non-numeric values', () => {
+    expect(parseCollegeArgs(['doctor']).minConcepts).toBeUndefined();
+    expect(parseCollegeArgs(['doctor']).minSessions).toBeUndefined();
+    expect(parseCollegeArgs(['doctor', '--min-concepts', 'abc']).minConcepts).toBeUndefined();
+  });
+
   it('returns undefined subcommand for an empty slice', () => {
     expect(parseCollegeArgs([]).subcommand).toBeUndefined();
   });

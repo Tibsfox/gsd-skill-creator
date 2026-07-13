@@ -92,6 +92,18 @@ describe('buildDoctorReport', () => {
     expect(sev).toEqual([...sev].sort((x, y) => y - x));
   });
 
+  it('a stricter minConceptsPerWing threshold widens the flagged set', () => {
+    const baseline = buildDoctorReport([healthy, thin]);
+    expect(baseline.flaggedCount).toBe(1); // only 'alpha' at defaults
+    const strict = buildDoctorReport([healthy, thin], {
+      ...DEFAULT_THRESHOLDS,
+      minConceptsPerWing: 5,
+    });
+    // 'zeta' has a 4-concept wing, now below 5 -> both departments flagged
+    expect(strict.flaggedCount).toBe(2);
+    expect(strict.departments.every((d) => !d.healthy)).toBe(true);
+  });
+
   it('handles the empty corpus', () => {
     const report = buildDoctorReport([]);
     expect(report.departments).toEqual([]);

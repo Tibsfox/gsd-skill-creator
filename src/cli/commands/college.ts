@@ -61,6 +61,12 @@ interface DoctorReportLike {
   proposals: unknown[];
 }
 
+interface DoctorThresholdsLike {
+  minConceptsPerWing: number;
+  minTrySessions: number;
+  requirePopulatedReferences: boolean;
+}
+
 interface ConceptEvidenceLike {
   id: string;
   domain: string;
@@ -112,8 +118,12 @@ interface CollegeBarrel {
       sessionId: string,
     ): Promise<TrySessionRunnerLike>;
   };
-  runDepartmentDoctor(loader: CollegeLoaderLike): Promise<DoctorReportLike>;
+  runDepartmentDoctor(
+    loader: CollegeLoaderLike,
+    thresholds?: DoctorThresholdsLike,
+  ): Promise<DoctorReportLike>;
   formatDoctorReport(report: DoctorReportLike): string;
+  DEFAULT_THRESHOLDS: DoctorThresholdsLike;
 }
 
 interface RosettaCoreBarrel {
@@ -199,14 +209,24 @@ export interface ParsedCollegeArgs {
   out?: string;
   task?: string;
   level?: string;
+  minConcepts?: number;
+  minSessions?: number;
   json: boolean;
   help: boolean;
 }
 
+/** Parse a numeric flag value; returns undefined for missing or non-finite input. */
+function parseNumeric(value: string | undefined): number | undefined {
+  if (value === undefined) return undefined;
+  const n = Number(value);
+  return Number.isFinite(n) ? n : undefined;
+}
+
 /**
  * Parse the argument slice after `college`. Recognises `--to <panel>`,
- * `--topic <t>`, `--wings <a,b,c>` (and their `--flag=value` forms) plus
- * `--help`/`-h`; all other dashed tokens are ignored.
+ * `--topic <t>`, `--wings <a,b,c>`, `--min-concepts <n>`, `--min-sessions <n>`
+ * (and their `--flag=value` forms) plus `--help`/`-h`; all other dashed tokens
+ * are ignored.
  */
 export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
   const positional: string[] = [];
@@ -218,6 +238,8 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
   let out: string | undefined;
   let task: string | undefined;
   let level: string | undefined;
+  let minConcepts: number | undefined;
+  let minSessions: number | undefined;
   let json = false;
   let help = false;
   for (let i = 0; i < args.length; i++) {
@@ -258,6 +280,14 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
       level = args[++i];
     } else if (a.startsWith('--level=')) {
       level = a.slice('--level='.length);
+    } else if (a === '--min-concepts') {
+      minConcepts = parseNumeric(args[++i]);
+    } else if (a.startsWith('--min-concepts=')) {
+      minConcepts = parseNumeric(a.slice('--min-concepts='.length));
+    } else if (a === '--min-sessions') {
+      minSessions = parseNumeric(args[++i]);
+    } else if (a.startsWith('--min-sessions=')) {
+      minSessions = parseNumeric(a.slice('--min-sessions='.length));
     } else if (!a.startsWith('-')) {
       positional.push(a);
     }
@@ -273,6 +303,8 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
     out,
     task,
     level,
+    minConcepts,
+    minSessions,
     json,
     help,
   };
@@ -632,11 +664,21 @@ async function handleScaffoldDepartment(
   }
 }
 
-async function handleDoctor(json: boolean): Promise<number> {
+async function handleDoctor(
+  json: boolean,
+  minConcepts: number | undefined,
+  minSessions: number | undefined,
+): Promise<number> {
   try {
-    const { CollegeLoader, runDepartmentDoctor, formatDoctorReport } = await loadCollegeBarrel();
+    const { CollegeLoader, runDepartmentDoctor, formatDoctorReport, DEFAULT_THRESHOLDS } =
+      await loadCollegeBarrel();
     const loader = new CollegeLoader(departmentsPath());
-    const report = await runDepartmentDoctor(loader);
+    const thresholds = {
+      ...DEFAULT_THRESHOLDS,
+      ...(minConcepts !== undefined ? { minConceptsPerWing: minConcepts } : {}),
+      ...(minSessions !== undefined ? { minTrySessions: minSessions } : {}),
+    };
+    const report = await runDepartmentDoctor(loader, thresholds);
     if (json) {
       console.log(JSON.stringify(report, null, 2));
     } else {
@@ -799,7 +841,7 @@ function printCollegeHelp(): void {
     `    ${pc.cyan('college scaffold-department <slug>')}   Mint a discoverable .college tree (--topic, --wings)`,
   );
   p.log.message(
-    `    ${pc.cyan('college doctor [--json]')}             Audit thin/stale department coverage`,
+    `    ${pc.cyan('college doctor [--json]')}             Audit coverage (--min-concepts, --min-sessions)`,
   );
   p.log.message(
     `    ${pc.cyan('college xref suggest [--dept] [--json]')} Propose new cross-dept prerequisite edges`,
@@ -848,7 +890,7 @@ export async function collegeCommand(args: string[]): Promise<number> {
       return handleScaffoldDepartment(parsed.positional[0], parsed.topic, parsed.wings);
     case 'doctor':
     case 'dr':
-      return handleDoctor(parsed.json);
+      return handleDoctor(parsed.json, parsed.minConcepts, parsed.minSessions);
     case 'xref':
     case 'xr': {
       const verb = parsed.positional[0];
