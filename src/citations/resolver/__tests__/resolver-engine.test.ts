@@ -15,9 +15,16 @@ import { ArchiveOrgAdapter } from '../adapters/archive-org.js';
 import { GenericWebAdapter } from '../adapters/generic-web.js';
 import { CrossRefAdapter } from '../adapters/crossref.js';
 import { OpenAlexAdapter } from '../adapters/openalex.js';
-import { deduplicateCitations } from '../dedup.js';
+import { deduplicateCitations, recordCitationSources } from '../dedup.js';
 import { ResolverEngine, type CitationStorePort } from '../resolver-engine.js';
 import type { RawCitation, CitedWork } from '../../types/index.js';
+import {
+  SourceLedger,
+  arxivSourceEntry,
+  hashSourceId,
+} from '../../../source-ledger/source-ledger.js';
+import { mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 
 // ============================================================================
 // Test fixtures
@@ -289,6 +296,50 @@ describe('deduplicateCitations', () => {
     const result = deduplicateCitations(citations);
 
     expect(result).toHaveLength(3);
+  });
+});
+
+// ============================================================================
+// Source-ledger recording (citations entry point)
+// ============================================================================
+
+describe('recordCitationSources', () => {
+  it('records an arxiv-cited source under one key with the arxiv path', async () => {
+    // The cross-entry-point promise reached from citations: a paper cited here
+    // shares its dedup key with the arxiv path for the same (version-stripped) id.
+    const ledgerDir = mkdtempSync(join(tmpdir(), 'cite-ledger-'));
+    const ledger = new SourceLedger(join(ledgerDir, 'ledger.jsonl'));
+
+    await recordCitationSources(
+      [makeRawCitation({ text: 'Foo et al. arXiv:2601.00001v1 A New Result.' })],
+      ledger,
+    );
+
+    // The arxiv path dedup-checks the same paper (different version) and hits.
+    expect(await ledger.has(arxivSourceEntry('2601.00001v3').contentHash)).toBe(true);
+    const byHash = await ledger.findByHash(hashSourceId('arxiv:2601.00001'));
+    expect(byHash.map((e) => e.provenance.origin)).toContain('citation');
+
+    rmSync(ledgerDir, { recursive: true, force: true });
+  });
+
+  it('falls back to a DOI key and skips citations with no stable identity', async () => {
+    const ledgerDir = mkdtempSync(join(tmpdir(), 'cite-ledger-'));
+    const ledger = new SourceLedger(join(ledgerDir, 'ledger.jsonl'));
+
+    await recordCitationSources(
+      [
+        makeRawCitation({ text: 'Bar 2020. 10.1234/xyz Title.' }),
+        makeRawCitation({ text: 'Prose-only reference with no id' }),
+      ],
+      ledger,
+    );
+
+    const all = await ledger.list();
+    expect(all).toHaveLength(1);
+    expect(all[0]!.contentHash).toBe(hashSourceId('doi:10.1234/xyz'));
+
+    rmSync(ledgerDir, { recursive: true, force: true });
   });
 });
 

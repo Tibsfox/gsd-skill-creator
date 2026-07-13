@@ -49,6 +49,7 @@ import {
 } from '../citations/generator/review-queue.js';
 import { readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import type { SourceLedgerPort } from '../source-ledger/source-ledger.js';
 
 // === Exported Types ===
 
@@ -88,6 +89,14 @@ export interface ScLearnOptions {
    * `sourceAudit` is supplied or when the verdict passes.
    */
   reviewQueuePath?: string;
+  /**
+   * When supplied, the acquired source's CONTENT hash is recorded on the unified
+   * SourceLedger so a document learned here becomes dedup-visible to the arxiv /
+   * citations entry points. Opt-in and best-effort — the acquirer swallows any
+   * ledger failure, so this never affects ingestion (LEARN path stays I/O-free
+   * by default).
+   */
+  ledger?: SourceLedgerPort;
 }
 
 export interface ScLearnResult {
@@ -201,6 +210,7 @@ export async function scLearn(
   try {
     acquisitionResult = await acquireSource(source, {
       githubScope: options.scope,
+      ledger: options.ledger,
     });
   } catch (err) {
     const errMsg = (err as Error).message;

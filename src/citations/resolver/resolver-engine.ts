@@ -18,7 +18,8 @@
 import type { CitedWork, RawCitation } from '../types/index.js';
 import type { ResolutionResult } from '../types/pipeline.js';
 import type { ResolverAdapter } from './adapter.js';
-import { deduplicateCitations } from './dedup.js';
+import { deduplicateCitations, recordCitationSources } from './dedup.js';
+import type { SourceLedgerPort } from '../../source-ledger/source-ledger.js';
 
 // ============================================================================
 // Store interface (minimal, to avoid circular dependency)
@@ -42,6 +43,13 @@ export interface ResolverEngineOptions {
   acceptThreshold?: number;
   /** Minimum confidence to continue trying more adapters (default: 0.50). */
   continueThreshold?: number;
+  /**
+   * When supplied, each deduplicated citation in a `resolveBatch` is recorded on
+   * the unified SourceLedger under the `citation` origin, keyed by cross-origin
+   * canonical id so it is dedup-visible to the arxiv / learn entry points.
+   * Opt-in and best-effort — a ledger failure never affects resolution.
+   */
+  ledger?: SourceLedgerPort;
 }
 
 // ============================================================================
@@ -53,12 +61,14 @@ export class ResolverEngine {
   private readonly store: CitationStorePort | null;
   private readonly acceptThreshold: number;
   private readonly continueThreshold: number;
+  private readonly ledger: SourceLedgerPort | null;
 
   constructor(adapters: ResolverAdapter[], options: ResolverEngineOptions = {}) {
     this.adapters = adapters;
     this.store = options.store ?? null;
     this.acceptThreshold = options.acceptThreshold ?? 0.70;
     this.continueThreshold = options.continueThreshold ?? 0.50;
+    this.ledger = options.ledger ?? null;
   }
 
   // --------------------------------------------------------------------------
@@ -122,6 +132,13 @@ export class ResolverEngine {
    */
   async resolveBatch(citations: RawCitation[]): Promise<ResolutionResult> {
     const deduped = deduplicateCitations(citations);
+
+    // Unified source ledger (opt-in): record each deduped citation under the
+    // `citation` origin so it is dedup-visible to the arxiv / learn paths.
+    // Best-effort — recordCitationSources swallows any ledger failure.
+    if (this.ledger) {
+      await recordCitationSources(citations, this.ledger);
+    }
 
     const resolved: CitedWork[] = [];
     const unresolved: RawCitation[] = [];

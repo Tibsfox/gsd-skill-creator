@@ -8,6 +8,8 @@ import {
   hashSourceId,
   arxivSourceEntry,
   acquiredSourceEntry,
+  canonicalCitationId,
+  citationSourceEntry,
   DEFAULT_SOURCE_LEDGER_PATH,
   type SourceLedgerEntry,
 } from './source-ledger.js';
@@ -125,5 +127,34 @@ describe('adapters', () => {
     expect(e.contentHash).toBe(hashContent('body'));
     expect(e.provenance.origin).toBe('learn-acquirer');
     expect(e.provenance.sourceId).toBe('/tmp/a.txt');
+  });
+
+  it('canonicalCitationId prefers arxiv (version-stripped) then doi/url/title', () => {
+    expect(canonicalCitationId({ arxivId: '2601.00001v3' })).toBe('arxiv:2601.00001');
+    expect(canonicalCitationId({ doi: '10.1000/XyZ' })).toBe('doi:10.1000/xyz');
+    expect(canonicalCitationId({ url: 'https://x.test/p' })).toBe('url:https://x.test/p');
+    expect(canonicalCitationId({ title: 'On Groups' })).toBe('title:on groups');
+    expect(canonicalCitationId({})).toBeNull();
+  });
+
+  it('citationSourceEntry keys via hashSourceId and tags origin citation', () => {
+    const e = citationSourceEntry('arxiv:2601.00001', 'ref.md', 't', 'cite-1');
+    expect(e.contentHash).toBe(hashSourceId('arxiv:2601.00001'));
+    expect(e.provenance.origin).toBe('citation');
+    expect(e.provenance.sourceId).toBe('ref.md');
+    expect(e.provenance.label).toBe('cite-1');
+  });
+
+  it('a citation shares one dedup key with the arxiv path for the same paper', async () => {
+    // The cross-entry-point promise, reached from the citations side: record a
+    // source via the citations origin, then dedup-check it via the arxiv path.
+    const ledger = new SourceLedger(ledgerPath);
+    const cid = canonicalCitationId({ arxivId: '2601.00001' })!;
+    await ledger.record(citationSourceEntry(cid, 'ref.md', 't'));
+
+    // The arxiv path (a different version suffix) hashes to the same key.
+    expect(await ledger.has(arxivSourceEntry('2601.00001v2').contentHash)).toBe(true);
+    const byHash = await ledger.findByHash(hashSourceId('arxiv:2601.00001'));
+    expect(byHash.map((e) => e.provenance.origin)).toContain('citation');
   });
 });

@@ -8,6 +8,11 @@
 
 import type { RawCitation } from '../types/index.js';
 import { normalizeTitleForComparison, levenshteinRatio } from './confidence.js';
+import {
+  canonicalCitationId,
+  citationSourceEntry,
+  type SourceLedgerPort,
+} from '../../source-ledger/source-ledger.js';
 
 // ============================================================================
 // Public API
@@ -132,4 +137,56 @@ function extractFirstAuthorFamily(text: string): string | null {
 function extractYear(text: string): number | null {
   const m = text.match(/\b(1[4-9]\d{2}|20[0-2]\d|2100)\b/);
   return m ? parseInt(m[1], 10) : null;
+}
+
+function extractArxivId(text: string): string | null {
+  // Modern id (YYMM.NNNNN, optional vN) with or without an `arXiv:` prefix.
+  const modern = text.match(/(?:arxiv[:\s]*)?(\d{4}\.\d{4,5}(?:v\d+)?)/i);
+  if (modern) return modern[1];
+  // Legacy scheme (`hep-th/9901001`).
+  const legacy = text.match(/arxiv[:\s]*([a-z-]+(?:\.[A-Z]{2})?\/\d{7})/i);
+  return legacy ? legacy[1] : null;
+}
+
+// ============================================================================
+// Source-ledger recording (citations entry point)
+// ============================================================================
+
+/**
+ * Derive a citation's cross-origin canonical id (arxiv id preferred, then DOI)
+ * from its raw text, in the same normalized form the arxiv / learn entry points
+ * key on. Returns null when no stable identity can be extracted.
+ */
+export function canonicalIdForCitation(citation: RawCitation): string | null {
+  const arxivId = extractArxivId(citation.text);
+  if (arxivId) return canonicalCitationId({ arxivId });
+  const doi = extractDoi(citation.text);
+  if (doi) return canonicalCitationId({ doi });
+  return null;
+}
+
+/**
+ * Record a batch of citations onto the unified SourceLedger under the `citation`
+ * origin, keyed by cross-origin canonical id so an arxiv-resolved citation shares
+ * a dedup key with the arxiv / learn paths. Deduplicates first (one row per
+ * distinct work) and is best-effort: a ledger failure never propagates, since
+ * the ledger is an observability spine, not a gate on the citations pipeline.
+ */
+export async function recordCitationSources(
+  citations: RawCitation[],
+  ledger: SourceLedgerPort,
+): Promise<void> {
+  const deduped = deduplicateCitations(citations);
+  const ingestedAt = new Date().toISOString();
+  for (const citation of deduped) {
+    const canonicalId = canonicalIdForCitation(citation);
+    if (!canonicalId) continue;
+    try {
+      await ledger.record(
+        citationSourceEntry(canonicalId, citation.source_document, ingestedAt),
+      );
+    } catch {
+      // Swallow — recording is observability, not a gate.
+    }
+  }
 }

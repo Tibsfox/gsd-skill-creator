@@ -533,6 +533,18 @@ describe('sc:learn: options', () => {
     expect(acquireSource).toHaveBeenCalledWith('test.md', expect.objectContaining({ githubScope: ['src/', 'lib/'] }));
   });
 
+  it('threads an opt-in ledger through to acquireSource', async () => {
+    const ledger = {
+      record: vi.fn(),
+      has: vi.fn(),
+      findByHash: vi.fn(),
+      findBySource: vi.fn(),
+      list: vi.fn(),
+    };
+    await scLearn('test.md', { ledger });
+    expect(acquireSource).toHaveBeenCalledWith('test.md', expect.objectContaining({ ledger }));
+  });
+
   it('--depth shallow skips dependency wiring', async () => {
     await scLearn('test.md', { depth: 'shallow' });
     expect(wireDependencies).not.toHaveBeenCalled();
