@@ -5,10 +5,15 @@ import {
   FindingMemorySync,
   findingToMemoryRecord,
   findingText,
+  mirrorFindings,
   type FindingSource,
   type FindingEmbedder,
   type FindingMemoryWriter,
   type FindingEmbeddingCache,
+  type FindingProjectDirectory,
+  type FindingMirrorRunner,
+  type MirrorProject,
+  type SyncResult,
 } from '../finding-memory-sync.js';
 
 function makeFinding(over: Partial<Finding> = {}): Finding {
@@ -173,5 +178,83 @@ describe('FindingMemorySync.syncProject', () => {
     expect(cache.setFindingEmbedding).toHaveBeenCalledWith('proj-1', 'F-abc123', [2, 2]);
     // No project name given → falls back to project id as the join key.
     expect(result.mirrored[0].provenance.project).toBe('proj-1');
+  });
+});
+
+/** A runner that records its calls and returns a fixed per-project SyncResult. */
+function makeRunner(perProject: (projectId: string) => SyncResult): {
+  runner: FindingMirrorRunner;
+  calls: Array<{ projectId: string; projectName?: string }>;
+} {
+  const calls: Array<{ projectId: string; projectName?: string }> = [];
+  return {
+    calls,
+    runner: {
+      syncProject: vi.fn(async (projectId: string, projectName?: string) => {
+        calls.push({ projectId, projectName });
+        return perProject(projectId);
+      }),
+    },
+  };
+}
+
+function fakeResult(mirrored: number, embedded: number, cacheHits: number): SyncResult {
+  return {
+    mirrored: Array.from({ length: mirrored }, () => findingToMemoryRecord(makeFinding(), { project: 'x' })),
+    embedded,
+    cacheHits,
+  };
+}
+
+describe('mirrorFindings (production trigger core)', () => {
+  it('mirrors every registry project and folds per-project totals', async () => {
+    const projects: MirrorProject[] = [
+      { id: 'p1', name: 'repo-one' },
+      { id: 'p2', name: 'repo-two' },
+    ];
+    const directory: FindingProjectDirectory = {
+      listProjects: vi.fn(async () => projects),
+      getProject: vi.fn(async () => null),
+    };
+    const { runner, calls } = makeRunner((id) =>
+      id === 'p1' ? fakeResult(2, 2, 0) : fakeResult(3, 1, 2),
+    );
+
+    const report = await mirrorFindings({ directory, runner });
+
+    expect(calls).toEqual([
+      { projectId: 'p1', projectName: 'repo-one' },
+      { projectId: 'p2', projectName: 'repo-two' },
+    ]);
+    expect(directory.getProject).not.toHaveBeenCalled();
+    expect(report.totals).toEqual({ projects: 2, mirrored: 5, embedded: 3, cacheHits: 2 });
+    expect(report.projects[0]).toMatchObject({ projectId: 'p1', projectName: 'repo-one', mirrored: 2 });
+  });
+
+  it('restricts to one project when projectId is given, resolving its name', async () => {
+    const directory: FindingProjectDirectory = {
+      listProjects: vi.fn(async () => []),
+      getProject: vi.fn(async (id: string) => ({ id, name: 'named-repo' })),
+    };
+    const { runner, calls } = makeRunner(() => fakeResult(1, 1, 0));
+
+    const report = await mirrorFindings({ directory, runner }, { projectId: 'p9' });
+
+    expect(directory.listProjects).not.toHaveBeenCalled();
+    expect(calls).toEqual([{ projectId: 'p9', projectName: 'named-repo' }]);
+    expect(report.totals.projects).toBe(1);
+  });
+
+  it('falls back to the id as name for an unregistered --project (mirrors zero)', async () => {
+    const directory: FindingProjectDirectory = {
+      listProjects: vi.fn(async () => []),
+      getProject: vi.fn(async () => null),
+    };
+    const { runner, calls } = makeRunner(() => fakeResult(0, 0, 0));
+
+    const report = await mirrorFindings({ directory, runner }, { projectId: 'ghost' });
+
+    expect(calls).toEqual([{ projectId: 'ghost', projectName: 'ghost' }]);
+    expect(report.totals).toEqual({ projects: 1, mirrored: 0, embedded: 0, cacheHits: 0 });
   });
 });

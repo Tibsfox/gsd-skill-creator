@@ -211,3 +211,83 @@ export class FindingMemorySync {
 export function createFindingMemorySync(deps: FindingMemorySyncDeps): FindingMemorySync {
   return new FindingMemorySync(deps);
 }
+
+/** A project the mirror can target — KBStore's Project satisfies this. */
+export interface MirrorProject {
+  id: string;
+  name: string;
+  branch?: string;
+}
+
+/**
+ * Project directory surface — KBStore satisfies this structurally. Lets the
+ * mirror trigger resolve either the whole registry or a single project without
+ * binding to the concrete KBStore type.
+ */
+export interface FindingProjectDirectory {
+  listProjects(opts?: {
+    sort?: 'recent' | 'priority' | 'findings';
+  }): Promise<MirrorProject[]>;
+  getProject(id: string): Promise<MirrorProject | null>;
+}
+
+/** The per-project mirror surface — FindingMemorySync satisfies this. */
+export interface FindingMirrorRunner {
+  syncProject(projectId: string, projectName?: string): Promise<SyncResult>;
+}
+
+export interface MirrorFindingsReport {
+  projects: Array<{
+    projectId: string;
+    projectName: string;
+    mirrored: number;
+    embedded: number;
+    cacheHits: number;
+  }>;
+  totals: { projects: number; mirrored: number; embedded: number; cacheHits: number };
+}
+
+/**
+ * Production trigger core: drive the finding→memory mirror across one or all
+ * projects and fold the per-project SyncResults into a report.
+ *
+ * Resolves the target set (a single `projectId` or the whole registry via
+ * `listProjects`), runs the mirror per project, and aggregates. DB + embedding
+ * live behind the injected `runner`/`directory`, so this is exercised without
+ * live Postgres or a live model. A `--project` that isn't in the registry still
+ * runs (id doubles as name), mirroring zero findings rather than erroring.
+ */
+export async function mirrorFindings(
+  deps: { directory: FindingProjectDirectory; runner: FindingMirrorRunner },
+  options: { projectId?: string } = {},
+): Promise<MirrorFindingsReport> {
+  let targets: MirrorProject[];
+  if (options.projectId) {
+    const found = await deps.directory.getProject(options.projectId);
+    targets = [found ?? { id: options.projectId, name: options.projectId }];
+  } else {
+    targets = await deps.directory.listProjects();
+  }
+
+  const report: MirrorFindingsReport = {
+    projects: [],
+    totals: { projects: 0, mirrored: 0, embedded: 0, cacheHits: 0 },
+  };
+
+  for (const project of targets) {
+    const res = await deps.runner.syncProject(project.id, project.name);
+    report.projects.push({
+      projectId: project.id,
+      projectName: project.name,
+      mirrored: res.mirrored.length,
+      embedded: res.embedded,
+      cacheHits: res.cacheHits,
+    });
+    report.totals.projects++;
+    report.totals.mirrored += res.mirrored.length;
+    report.totals.embedded += res.embedded;
+    report.totals.cacheHits += res.cacheHits;
+  }
+
+  return report;
+}

@@ -312,6 +312,10 @@ export const REGISTRY: readonly CommandEntry[] = [
     const { flywheelCommand } = await import('./commands/flywheel.js');
     process.exitCode = await flywheelCommand(ctx.args.slice(1));
   } },
+  { aliases: ['intelligence', 'intel'], handler: async (ctx) => {
+    const { intelligenceCommand } = await import('./commands/intelligence.js');
+    process.exitCode = await intelligenceCommand(ctx.args.slice(1));
+  } },
   { aliases: ['dogfood', 'df'], handler: async (ctx) => {
     const { dogfoodCommand } = await import('./commands/dogfood.js');
     process.exitCode = await dogfoodCommand(ctx.args.slice(1));

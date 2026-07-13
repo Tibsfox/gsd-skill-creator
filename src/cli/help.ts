@@ -96,6 +96,7 @@ Commands:
   dashboard, db     Generate GSD Planning Docs Dashboard from .planning/
   college, col      Explore the .college/ departments (list, explore, translate, try)
   flywheel, fw      Navigable lineage: source -> concept -> skill -> activations -> corrections (status)
+  intelligence, intel  Mirror intelligence-KB findings into pgvector memory (mirror-findings)
   source, src       Inspect the unified source ledger (ledger list, show, dedup-check)
   retro, retrospective  Generate a milestone retrospective and route action items (milestone --since)
   dogfood, df       Route dogfood refinement proposals into staged skill drafts (promote)
