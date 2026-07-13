@@ -22,6 +22,10 @@ import { join, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
+import {
+  recordCollegeEvent,
+  DEFAULT_COLLEGE_OBS_PATH,
+} from '../../observation/college-observation-buffer.js';
 
 // ─── Structural handles on the .college/ surface ────────────────────────────
 // Declared locally because the concrete types live outside src/ rootDir.
@@ -476,6 +480,20 @@ async function handleExplore(pathArg: string | undefined): Promise<number> {
     }
     if (result.relatedPaths.length > 0) {
       p.log.message(`  related: ${result.relatedPaths.join(', ')}`);
+    }
+
+    // Opt-in College observation (SC_COLLEGE_OBS=1): persist this exploration to
+    // the buffer so the session-end pump (pumpCollegeObservations) can forward it
+    // into the pattern pipeline. Best-effort — never affects the command.
+    if (/^(1|true|on)$/i.test((process.env.SC_COLLEGE_OBS ?? '').trim())) {
+      await recordCollegeEvent(DEFAULT_COLLEGE_OBS_PATH, {
+        id: `explore-${result.concept.id}-${Date.now()}`,
+        type: 'exploration',
+        conceptId: result.concept.id,
+        departmentId: result.departmentId,
+        path: result.path,
+        timestamp: Date.now(),
+      });
     }
     return 0;
   } catch (err) {
