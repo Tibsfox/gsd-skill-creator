@@ -96,5 +96,8 @@ export function createClaudeClaimCompletion(
   if (!env.ANTHROPIC_API_KEY) return null;
 
   const model = env.SC_CLAIM_LLM_MODEL?.trim();
-  return new ClaudeClaimCompletion(model ? { model } : {});
+  // Forward the key from the injected env so the completion is actually usable
+  // when env !== process.env (DI/testing); the chip would otherwise read only the
+  // real process.env and drop an injected key.
+  return new ClaudeClaimCompletion({ apiKey: env.ANTHROPIC_API_KEY, ...(model ? { model } : {}) });
 }

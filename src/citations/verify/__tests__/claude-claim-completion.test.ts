@@ -84,10 +84,15 @@ describe('createClaudeClaimCompletion (gated factory)', () => {
     expect(createClaudeClaimCompletion({ SC_CLAIM_LLM: '0', ANTHROPIC_API_KEY: 'k' })).toBeNull();
   });
 
-  it('returns a working completion when both gates are satisfied', () => {
-    const completion = createClaudeClaimCompletion({ SC_CLAIM_LLM: '1', ANTHROPIC_API_KEY: 'k' });
+  it('returns a completion wired with the INJECTED key (usable when env !== process.env)', async () => {
+    // process.env.ANTHROPIC_API_KEY is deleted in beforeEach, so the chip has no
+    // ambient key — a working request proves the factory forwarded the env-arg key.
+    mockFetch.mockResolvedValueOnce(jsonResponse(anthropicText('[]')));
+    const completion = createClaudeClaimCompletion({ SC_CLAIM_LLM: '1', ANTHROPIC_API_KEY: 'factory-key' });
     expect(completion).not.toBeNull();
-    expect(typeof completion!.complete).toBe('function');
+    await completion!.complete('p');
+    const headers = mockFetch.mock.calls[0]![1].headers as Record<string, string>;
+    expect(headers['x-api-key']).toBe('factory-key');
   });
 });
 
