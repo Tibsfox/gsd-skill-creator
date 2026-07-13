@@ -1,0 +1,10 @@
+{
+  "$comment": "Concept->skill back-link for `flywheel status`. Skill-keyed (easier to author than concept-keyed across ~975 concepts). Populates ConceptLike.skills so the concept stage of the flywheel lineage renders EXPLICIT links WITHOUT --allow-heuristic. PARTIAL BY DESIGN: only defensible pairs are seeded; unmapped concepts stay empty (no fabrication). Concept ids are from the .college `coding` department (grep `id:` in .college/departments/coding/). The durable auto-population across all skills x concepts is a separate (semantic/embedding) effort.",
+  "version": 1,
+  "mappings": [
+    { "skill": "code-review", "concepts": ["code-peer-review"] },
+    { "skill": "adversarial-pr-review", "concepts": ["code-peer-review"] },
+    { "skill": "security-hygiene", "concepts": ["code-cybersecurity-basics"] },
+    { "skill": "typescript-patterns", "concepts": ["code-syntax-style"] }
+  ]
+}

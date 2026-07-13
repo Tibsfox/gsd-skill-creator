@@ -14,12 +14,12 @@
  * src/flywheel/lineage.ts. Upstream (source/concept → skill) links are inferred
  * and tagged with their confidence; the downstream telemetry join is exact.
  *
- * Concept join is HEURISTIC-ONLY and OPT-IN. The `.college` Rosetta concept
- * model carries no concept→skill back-link, so every concept match is
- * heuristic (token overlap). Heuristic upstream links are suppressed unless the
+ * Concept join: EXPLICIT for concepts named in the checked-in
+ * `.college/mappings/concept-skills.json` back-link (rendered WITHOUT a flag);
+ * HEURISTIC (token overlap) for the unmapped remainder, suppressed unless the
  * caller passes `--allow-heuristic` (assembleFlywheelChain's allowHeuristic).
- * Without the flag the concept stage renders empty by design; a real back-link
- * (or a separate mapping artifact) is the durable fix.
+ * The mapping is partial by design — expanding it (or auto-populating it
+ * semantically) grows the explicit coverage without touching this code.
  *
  *   flywheel status              Overview: skills with telemetry + coverage
  *   flywheel status <skill>      Full lineage chain for one skill
@@ -30,7 +30,7 @@
  * pulled in through a computed dynamic import() (mirrors college.ts).
  */
 
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as p from '@clack/prompts';
@@ -132,6 +132,42 @@ function moduleUrl(...relSegments: string[]): string {
  * Load the .college concept registry. Returns [] when the tree is absent or
  * fails to parse, so the flywheel still renders its other stages.
  */
+/**
+ * Invert a skill-keyed concept→skill mapping into concept→skills[]. Pure.
+ * (Exported for tests.)
+ */
+export function buildConceptSkillMap(
+  raw: { mappings?: Array<{ skill?: string; concepts?: string[] }> } | null | undefined,
+): Map<string, string[]> {
+  const map = new Map<string, string[]>();
+  for (const m of raw?.mappings ?? []) {
+    if (!m || typeof m.skill !== 'string') continue;
+    for (const conceptId of m.concepts ?? []) {
+      if (typeof conceptId !== 'string') continue;
+      const arr = map.get(conceptId) ?? [];
+      if (!arr.includes(m.skill)) arr.push(m.skill);
+      map.set(conceptId, arr);
+    }
+  }
+  return map;
+}
+
+/**
+ * Read the checked-in `.college/mappings/concept-skills.json` back-link, tolerant
+ * of absence/corruption (→ empty map). This is the DURABLE, explicit concept→skill
+ * join: mapped concepts render as explicit links without `--allow-heuristic`; the
+ * unmapped remainder stays heuristic-only (opt-in).
+ */
+function loadConceptSkillMap(): Map<string, string[]> {
+  try {
+    const path = join(collegeRoot(), '.college', 'mappings', 'concept-skills.json');
+    if (!existsSync(path)) return new Map();
+    return buildConceptSkillMap(JSON.parse(readFileSync(path, 'utf8')));
+  } catch {
+    return new Map();
+  }
+}
+
 async function loadConcepts(): Promise<ConceptLike[]> {
   try {
     const { CollegeLoader } = (await import(
@@ -143,7 +179,10 @@ async function loadConcepts(): Promise<ConceptLike[]> {
     const loader = new CollegeLoader(join(collegeRoot(), '.college', 'departments'));
     const registry = new ConceptRegistry();
     loader.populateRegistry(registry);
-    return registry.getAll().map((c) => ({ id: c.id, domain: c.domain, name: c.name }));
+    const skillMap = loadConceptSkillMap();
+    return registry
+      .getAll()
+      .map((c) => ({ id: c.id, domain: c.domain, name: c.name, skills: skillMap.get(c.id) }));
   } catch {
     return [];
   }
