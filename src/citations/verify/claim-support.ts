@@ -182,6 +182,22 @@ function classify(sentence: string): { marker: string | null; method: Extraction
 }
 
 /**
+ * Detect a citation marker in an arbitrary claim text. Used to enrich atomic
+ * claims produced by an async (LLM) extractor — which yields claim text with no
+ * marker info — so they flow through {@link VerificationStage.verifyClaim} the
+ * same way heuristic claims do (marker present → resolvable, absent →
+ * unsupported).
+ */
+export function classifyClaimText(text: string): {
+  marker: string | null;
+  method: ExtractionMethod | null;
+  hasCitation: boolean;
+} {
+  const { marker, method } = classify(text);
+  return { marker, method, hasCitation: marker !== null };
+}
+
+/**
  * Conservative heuristic claim extractor.
  *
  * A sentence becomes a claim when it either carries a citation marker (APA,
@@ -224,8 +240,20 @@ export class HeuristicClaimExtractor implements ClaimExtractor {
 // Verification stage
 // ============================================================================
 
+/** An async claim extractor (e.g. the LLM-backed {@link ./llm-claim-extractor.js LlmClaimExtractor}). */
+export interface AsyncClaimExtractor {
+  extract(markdown: string, sourceDocument: string): Promise<Claim[]>;
+}
+
 export interface VerificationStageOptions {
   extractor?: ClaimExtractor;
+  /**
+   * Opt-in async extractor. When supplied it REPLACES the sync `extractor` for
+   * claim extraction; its atomic claims are re-classified for citation markers
+   * (they arrive marker-less) so they verify identically. Default: unset — the
+   * sync heuristic extractor is used and behavior is unchanged.
+   */
+  llmExtractor?: AsyncClaimExtractor;
 }
 
 /**
@@ -235,14 +263,21 @@ export interface VerificationStageOptions {
 export class VerificationStage {
   private readonly resolver: ClaimResolverPort;
   private readonly extractor: ClaimExtractor;
+  private readonly llmExtractor?: AsyncClaimExtractor;
 
   constructor(resolver: ClaimResolverPort, options: VerificationStageOptions = {}) {
     this.resolver = resolver;
     this.extractor = options.extractor ?? new HeuristicClaimExtractor();
+    this.llmExtractor = options.llmExtractor;
   }
 
   async verify(markdown: string, sourceDocument: string): Promise<ClaimSupportReport> {
-    const claims = this.extractor.extract(markdown, sourceDocument);
+    const claims = this.llmExtractor
+      ? (await this.llmExtractor.extract(markdown, sourceDocument)).map((c) => ({
+          ...c,
+          ...classifyClaimText(c.text),
+        }))
+      : this.extractor.extract(markdown, sourceDocument);
     const results: ClaimSupport[] = [];
 
     for (const claim of claims) {

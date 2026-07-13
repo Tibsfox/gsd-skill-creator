@@ -31,6 +31,8 @@ import type { MemoryType } from '../../memory/types.js';
 import {
   VerificationStage,
   createDefaultResolver,
+  createClaudeClaimCompletion,
+  LlmClaimExtractor,
   type ClaimSupportReport,
 } from '../../citations/verify/index.js';
 
@@ -49,6 +51,8 @@ export interface ParsedResearchArgs {
   memoryDir?: string;
   /** Disable the Knowledge Spine (lesson/finding memory) coverage signal. */
   noSpine: boolean;
+  /** Opt-in: use the Claude-backed LLM claim extractor for `verify` (default OFF). */
+  llm: boolean;
 }
 
 function takeValue(args: string[], i: number, flag: string): [string | undefined, number] {
@@ -74,6 +78,7 @@ export function parseResearchArgs(args: string[]): ParsedResearchArgs {
   let seenIds: string | undefined;
   let memoryDir: string | undefined;
   let noSpine = false;
+  let llm = false;
 
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
@@ -83,6 +88,8 @@ export function parseResearchArgs(args: string[]): ParsedResearchArgs {
       help = true;
     } else if (a === '--no-spine') {
       noSpine = true;
+    } else if (a === '--llm') {
+      llm = true;
     } else if (a === '--topic' || a.startsWith('--topic=')) {
       [topic, i] = takeValue(args, i, '--topic');
     } else if (a === '--subtopics' || a.startsWith('--subtopics=')) {
@@ -114,6 +121,7 @@ export function parseResearchArgs(args: string[]): ParsedResearchArgs {
     seenIds,
     memoryDir,
     noSpine,
+    llm,
   };
 }
 
@@ -184,7 +192,25 @@ async function handleVerify(parsed: ParsedResearchArgs): Promise<number> {
   }
 
   try {
-    const stage = new VerificationStage(createDefaultResolver());
+    // Opt-in LLM claim extraction. --llm requests it; the gated factory returns
+    // a completion only when SC_CLAIM_LLM=1 AND ANTHROPIC_API_KEY are set. Absent
+    // either, fall back to the heuristic extractor (default behavior).
+    let llmExtractor: LlmClaimExtractor | undefined;
+    if (parsed.llm) {
+      const completion = createClaudeClaimCompletion();
+      if (completion) {
+        llmExtractor = new LlmClaimExtractor(completion);
+      } else {
+        // Diagnostic to stderr so it never corrupts a --json report on stdout.
+        console.error(
+          'LLM claim extraction is opt-in: set SC_CLAIM_LLM=1 and ANTHROPIC_API_KEY. Using the heuristic extractor.',
+        );
+      }
+    }
+    const stage = new VerificationStage(
+      createDefaultResolver(),
+      llmExtractor ? { llmExtractor } : {},
+    );
     const report = await stage.verify(markdown, docPath);
 
     if (parsed.json) {
@@ -259,6 +285,8 @@ function printResearchHelp(): void {
   p.log.message('    --topic <t>            Umbrella topic label');
   p.log.message('    --subtopics a,b,c      Candidate subtopics (default: the four mission domains)');
   p.log.message('    --json                 Emit the full report as JSON');
+  p.log.message('    --llm                  verify: use the Claude-backed claim extractor');
+  p.log.message('                           (opt-in; needs SC_CLAIM_LLM=1 + ANTHROPIC_API_KEY)');
   p.log.message('    --citations-db <path>  Override the citation store base path');
   p.log.message('    --seen-ids <path>      Override the arxiv seen-ids ledger path');
   p.log.message('');

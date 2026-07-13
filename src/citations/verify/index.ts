@@ -18,8 +18,10 @@ import {
 export {
   HeuristicClaimExtractor,
   VerificationStage,
+  classifyClaimText,
   type Claim,
   type ClaimExtractor,
+  type AsyncClaimExtractor,
   type ClaimResolverPort,
   type ClaimSupport,
   type ClaimSupportReport,
@@ -27,6 +29,21 @@ export {
   type ClaimVerdict,
   type VerificationStageOptions,
 } from './claim-support.js';
+
+export {
+  extractClaimsWithLlm,
+  buildClaimExtractionPrompt,
+  parseClaimCompletion,
+  LlmClaimExtractor,
+  type ClaimCompletion,
+  type LlmClaimExtractorOptions,
+} from './llm-claim-extractor.js';
+
+export {
+  ClaudeClaimCompletion,
+  createClaudeClaimCompletion,
+  type ClaudeClaimCompletionOptions,
+} from './claude-claim-completion.js';
 
 /**
  * Build a ResolverEngine with the default adapter cascade (scholarly APIs
