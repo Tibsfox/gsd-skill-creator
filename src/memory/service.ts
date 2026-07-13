@@ -819,6 +819,18 @@ export class MemoryService {
    *
    * @returns Counts per tier, by type, active vs deprecated, and age range.
    */
+  /**
+   * List all stored memory records (optionally filtered by type). Unlike
+   * `query`, this is a NON-semantic full enumeration — for consumers that fold
+   * the whole corpus (e.g. the research gap-radar Knowledge Spine, which reads
+   * every lesson/finding memory's name/description/tags). Returns [] on an empty
+   * or absent store.
+   */
+  async list(type?: MemoryType): Promise<MemoryRecord[]> {
+    const all = Array.from((await this.collectAllRecords()).values());
+    return type ? all.filter((r) => r.type === type) : all;
+  }
+
   async getStats(): Promise<MemoryStats> {
     const tierCounts: Record<number, number> = {};
     let totalMemories = 0;

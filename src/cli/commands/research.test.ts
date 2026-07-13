@@ -43,6 +43,18 @@ describe('parseResearchArgs', () => {
     expect(parsed.positional).toEqual(['draft.md']);
     expect(parsed.json).toBe(true);
   });
+
+  it('parses --memory-dir and --no-spine (Knowledge Spine controls)', () => {
+    const parsed = parseResearchArgs(['gaps', '--memory-dir', '/m', '--no-spine']);
+    expect(parsed.memoryDir).toBe('/m');
+    expect(parsed.noSpine).toBe(true);
+  });
+
+  it('defaults noSpine=false and memoryDir=undefined', () => {
+    const parsed = parseResearchArgs(['gaps']);
+    expect(parsed.noSpine).toBe(false);
+    expect(parsed.memoryDir).toBeUndefined();
+  });
 });
 
 describe('formatClaimSupportReport', () => {
@@ -117,6 +129,37 @@ describe('researchCommand', () => {
     const printed = JSON.parse(logSpy.mock.calls[0]![0] as string) as GapReport;
     expect(printed.subtopics).toHaveLength(4);
     expect(printed.workCount).toBe(0);
+  });
+
+  it('folds live Knowledge Spine (lesson/finding) memories into the gap report', async () => {
+    const { MemoryService } = await import('../../memory/service.js');
+    const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'research-spine-'));
+    const svc = new MemoryService({ memoryDir: tmp, indexFile: 'MEMORY.md' });
+    await svc.remember('CI checkout is shallow', 'lesson', 'shallow clone breaks HEAD~1', 'ci');
+    await svc.remember('spine folds memories', 'finding', 'knowledge spine signal', 'coverage');
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const code = await researchCommand([
+      'gaps', '--json', '--topic', 'ci', '--memory-dir', tmp,
+      '--citations-db', path.join(tmp, 'db'), '--seen-ids', path.join(tmp, 'seen.json'),
+    ]);
+    expect(code).toBe(0);
+    const printed = JSON.parse(logSpy.mock.calls[0]![0] as string) as GapReport;
+    expect(printed.spineCount).toBe(2);
+  });
+
+  it('--no-spine disables the spine signal even with memories present', async () => {
+    const { MemoryService } = await import('../../memory/service.js');
+    const tmp = await fs.mkdtemp(path.join(os.tmpdir(), 'research-nospine-'));
+    const svc = new MemoryService({ memoryDir: tmp, indexFile: 'MEMORY.md' });
+    await svc.remember('x', 'lesson', 'y', 'z');
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const code = await researchCommand([
+      'gaps', '--json', '--memory-dir', tmp, '--no-spine',
+      '--citations-db', path.join(tmp, 'db'), '--seen-ids', path.join(tmp, 'seen.json'),
+    ]);
+    expect(code).toBe(0);
+    const printed = JSON.parse(logSpy.mock.calls[0]![0] as string) as GapReport;
+    expect(printed.spineCount).toBe(0);
   });
 
   it('returns 0 and prints help for no subcommand', async () => {

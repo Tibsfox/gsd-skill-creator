@@ -16,14 +16,18 @@
  *   research verify <doc.md> [--json]
  */
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve, join } from 'node:path';
+import { MemoryService } from '../../memory/service.js';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import {
   analyzeGaps,
   buildCorpusCoverage,
   type GapReport,
+  type MemorySource,
 } from '../../vtm/gap-radar.js';
+import type { MemoryType } from '../../memory/types.js';
 import {
   VerificationStage,
   createDefaultResolver,
@@ -41,6 +45,10 @@ export interface ParsedResearchArgs {
   subtopics?: string[];
   citationsDb?: string;
   seenIds?: string;
+  /** Directory holding the MEMORY.md FileStore (Knowledge Spine signal for `gaps`). */
+  memoryDir?: string;
+  /** Disable the Knowledge Spine (lesson/finding memory) coverage signal. */
+  noSpine: boolean;
 }
 
 function takeValue(args: string[], i: number, flag: string): [string | undefined, number] {
@@ -52,8 +60,9 @@ function takeValue(args: string[], i: number, flag: string): [string | undefined
 
 /**
  * Parse the argument slice after `research`. Recognises `--json`,
- * `--topic`, `--subtopics` (comma-separated), `--citations-db`, `--seen-ids`
- * (and their `--flag=value` forms) plus `--help`/`-h`.
+ * `--topic`, `--subtopics` (comma-separated), `--citations-db`, `--seen-ids`,
+ * `--memory-dir` (Knowledge Spine store; `gaps`), `--no-spine` (disable the
+ * spine signal) (and their `--flag=value` forms) plus `--help`/`-h`.
  */
 export function parseResearchArgs(args: string[]): ParsedResearchArgs {
   const positional: string[] = [];
@@ -63,6 +72,8 @@ export function parseResearchArgs(args: string[]): ParsedResearchArgs {
   let subtopics: string[] | undefined;
   let citationsDb: string | undefined;
   let seenIds: string | undefined;
+  let memoryDir: string | undefined;
+  let noSpine = false;
 
   for (let i = 0; i < args.length; i++) {
     const a = args[i]!;
@@ -70,6 +81,8 @@ export function parseResearchArgs(args: string[]): ParsedResearchArgs {
       json = true;
     } else if (a === '--help' || a === '-h') {
       help = true;
+    } else if (a === '--no-spine') {
+      noSpine = true;
     } else if (a === '--topic' || a.startsWith('--topic=')) {
       [topic, i] = takeValue(args, i, '--topic');
     } else if (a === '--subtopics' || a.startsWith('--subtopics=')) {
@@ -83,6 +96,8 @@ export function parseResearchArgs(args: string[]): ParsedResearchArgs {
       [citationsDb, i] = takeValue(args, i, '--citations-db');
     } else if (a === '--seen-ids' || a.startsWith('--seen-ids=')) {
       [seenIds, i] = takeValue(args, i, '--seen-ids');
+    } else if (a === '--memory-dir' || a.startsWith('--memory-dir=')) {
+      [memoryDir, i] = takeValue(args, i, '--memory-dir');
     } else if (!a.startsWith('-')) {
       positional.push(a);
     }
@@ -97,6 +112,8 @@ export function parseResearchArgs(args: string[]): ParsedResearchArgs {
     subtopics,
     citationsDb,
     seenIds,
+    memoryDir,
+    noSpine,
   };
 }
 
@@ -184,9 +201,33 @@ async function handleVerify(parsed: ParsedResearchArgs): Promise<number> {
 
 async function handleGaps(parsed: ParsedResearchArgs): Promise<number> {
   try {
+    // Knowledge Spine signal: fold ALL lesson/finding memories into corpus
+    // coverage. gap-radar's fold calls query('', {type}) meaning "every memory of
+    // this type", but MemoryService.query is SEMANTIC (empty text → 0 results), so
+    // we adapt MemoryService.list (a non-semantic full enumeration) onto that
+    // contract. Built only when enabled AND the memory dir exists; errors and an
+    // empty store both degrade cleanly to citations + arxiv (spineCount 0).
+    let memorySource: MemorySource | undefined;
+    if (!parsed.noSpine) {
+      const memoryDir = resolve(parsed.memoryDir ?? join(process.cwd(), '.claude', 'memory'));
+      if (existsSync(memoryDir)) {
+        const svc = new MemoryService({ memoryDir, indexFile: 'MEMORY.md' });
+        memorySource = {
+          async query(_text: string, options?: { type?: MemoryType; limit?: number }) {
+            try {
+              const records = await svc.list(options?.type);
+              return { results: records.map((record) => ({ record })) };
+            } catch {
+              return { results: [] };
+            }
+          },
+        };
+      }
+    }
     const coverage = await buildCorpusCoverage({
       citationBasePath: parsed.citationsDb,
       seenIdsPath: parsed.seenIds,
+      memorySource,
     });
     const report = analyzeGaps(parsed.topic ?? 'corpus', parsed.subtopics ?? [], coverage);
 
