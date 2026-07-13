@@ -193,6 +193,11 @@ export interface RevertedCommitSignal {
   revertCommitHash: string;
   // Optional revert-commit subject — reviewer triage context.
   revertMessage?: string;
+  // True when this pairing was found by informal same-session undo detection (a
+  // byte-exact content round-trip) rather than a formal `git revert` marker.
+  // Informal reverts are heuristic and more false-positive-prone, so reviewers
+  // and the quarantine flow can treat them with extra scepticism.
+  informal?: boolean;
 }
 
 // Review lifecycle of a quarantined candidate.

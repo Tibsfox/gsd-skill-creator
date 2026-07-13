@@ -279,6 +279,40 @@ describe('VersionManager', () => {
       expect(await manager.resolveReverts()).toEqual([]);
     });
 
+    it('detects an informal same-session undo only when detectInformalUndo is set', async () => {
+      const file = join(testDir, 'src', 'widget.ts');
+      await mkdir(join(testDir, 'src'), { recursive: true });
+
+      await writeFile(file, 'export const v = "good";\n');
+      await execAsync('git add .', { cwd: testDir });
+      await execAsync('git commit -m "feat: seed widget"', { cwd: testDir });
+
+      await writeFile(file, 'export const v = "bad";\n');
+      await execAsync('git add .', { cwd: testDir });
+      await execAsync('git commit -m "feat: bad widget change"', { cwd: testDir });
+      const { stdout: mistakeHash } = await execAsync('git rev-parse HEAD', { cwd: testDir });
+
+      // Hand-restore with a PLAIN commit — no `git revert`.
+      await writeFile(file, 'export const v = "good";\n');
+      await execAsync('git add .', { cwd: testDir });
+      await execAsync('git commit -m "fix: put widget back the way it was"', { cwd: testDir });
+      const { stdout: undoHash } = await execAsync('git rev-parse HEAD', { cwd: testDir });
+
+      // OFF by default: the plain restore carries no `git revert` marker.
+      const off = await manager.resolveReverts();
+      expect(off.find((r) => r.filePath === 'src/widget.ts')).toBeUndefined();
+
+      // ON: detected as an informal round-trip.
+      const on = await manager.resolveReverts({ detectInformalUndo: true });
+      const match = on.find((r) => r.filePath === 'src/widget.ts');
+      expect(match).toBeDefined();
+      expect(match!.informal).toBe(true);
+      expect(match!.revertCommitHash).toBe(undoHash.trim());
+      expect(match!.revertedCommitHash).toBe(mistakeHash.trim());
+      expect(match!.original).toBe('export const v = "bad";\n');
+      expect(match!.corrected).toBe('export const v = "good";\n');
+    });
+
     it('propagates ProcessContextDenied from the gated git runner', async () => {
       const ctx: ProcessContext = {
         allowList: [],

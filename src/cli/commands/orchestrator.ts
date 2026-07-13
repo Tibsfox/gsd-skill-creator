@@ -737,7 +737,14 @@ async function handleSnapshot(args: string[]): Promise<number> {
  */
 async function resolveSessionReverts(): Promise<RevertedCommitSignal[]> {
   try {
-    return await new VersionManager().resolveReverts();
+    // Opt-in: also detect informal same-session undos (byte-exact content
+    // round-trips with no `git revert` marker). Default OFF — heuristic and more
+    // false-positive-prone than the exact marker. Sits under the correction
+    // kill switch; candidates still land quarantine-only with a null skillName.
+    const detectInformalUndo = /^(1|true|on)$/i.test(
+      (process.env.SC_DETECT_INFORMAL_UNDO ?? '').trim(),
+    );
+    return await new VersionManager().resolveReverts({ detectInformalUndo });
   } catch {
     return [];
   }
