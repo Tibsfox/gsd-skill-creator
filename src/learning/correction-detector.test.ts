@@ -277,6 +277,13 @@ describe('CorrectionDetector', () => {
     expect(c.fixerAssistantUuid).toBeNull();
   });
 
+  it('propagates the informal flag so reviewers can distinguish heuristic undos', () => {
+    const [formal] = det().detect([], 'sess', '/t.jsonl', [revert()]);
+    expect(formal.informal).toBeUndefined();
+    const [informal] = det().detect([], 'sess', '/t.jsonl', [revert({ informal: true })]);
+    expect(informal.informal).toBe(true);
+  });
+
   it('applies the significance gate to reverts (drops trivial rollbacks)', () => {
     const cands = det().detect([], 'sess', '/t.jsonl', [
       revert({ original: 'hello world foo bar', corrected: 'hello world foo' }),

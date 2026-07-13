@@ -214,6 +214,7 @@ export class CorrectionDetector {
         preSimilarity: detection.analysis.similarity,
         revertedCommitHash: rev.revertedCommitHash,
         revertCommitHash: rev.revertCommitHash,
+        ...(rev.informal ? { informal: true } : {}),
       });
     }
 

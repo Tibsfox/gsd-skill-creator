@@ -250,6 +250,11 @@ export interface CorrectionCandidateInput {
   // reviewer can inspect the actual revert. Absent for transcript signals.
   revertedCommitHash?: string;
   revertCommitHash?: string;
+  // True when the revert was found by INFORMAL same-session undo detection (a
+  // byte-exact round-trip with no `git revert` marker) rather than an exact
+  // marker. Informal pairings are heuristic and more false-positive-prone, so a
+  // reviewer triaging the quarantine ledger should weigh them with extra care.
+  informal?: boolean;
   // Stable, content-derived dedup key (set by the detector). Re-detecting the
   // same correction on the same session yields the same key, so the quarantine
   // store skips a duplicate append. Undefined on hand-built inputs → no dedup.
