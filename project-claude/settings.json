@@ -45,6 +45,14 @@
             "command": "node .claude/hooks/gsd-snapshot-session.js"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/dev-memory-session-end.cjs"
+          }
+        ]
       }
     ],
     "PreCompact": [

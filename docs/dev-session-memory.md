@@ -70,3 +70,27 @@ skill-creator flywheel dev-memory --execute
 Programmatically, call `runDevMemory({ sessionsDir, sessionId, repo, writer })`
 with any `PatternMemoryWriter` (a real `MemoryService`, or a collector for a
 dry run).
+
+## Auto-invoke at session end (opt-in, default OFF)
+
+A `SessionEnd` hook (`.claude/hooks/dev-memory-session-end.cjs`, source in
+`project-claude/hooks/`) can run the miner automatically when a Claude Code
+session ends — including when the operator never runs `observe.mjs end` (e.g.
+context death), so session memory is still captured. It only acts when an
+observation session is active (`current.meta.json` present) and is **default
+OFF**; enabling it is the explicit opt-in.
+
+Enable via the env var `SC_DEV_MEMORY_ON_END` **or** the
+`.claude/gsd-skill-creator.json` flag `"devMemoryOnEnd"`:
+
+| value | behavior |
+| --- | --- |
+| `off` (default) | no-op |
+| `dry` / `1` / `true` / `on` | write candidates to `.planning/sessions/dev-memory-candidates.json` — **no corpus write** |
+| `execute` | persist into the memory corpus (`--execute`) |
+
+Extra env: `SC_DEV_MEMORY_INCLUDE_CORRECTIONS=1` (adds `--include-corrections`),
+`SC_DEV_MEMORY_DIR` (memory dir for `execute`). The hook is best-effort — it
+never fails session end. Install/refresh it with `node project-claude/install.cjs`
+(hooks merge non-destructively; run `npm run render:claude-md` if you used
+`--force`).

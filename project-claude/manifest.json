@@ -451,6 +451,11 @@
         "source": "hooks/lib/hook-output.cjs",
         "target": ".claude/hooks/lib/hook-output.cjs",
         "description": "Shared hook output helper library"
+      },
+      {
+        "source": "hooks/dev-memory-session-end.cjs",
+        "target": ".claude/hooks/dev-memory-session-end.cjs",
+        "description": "SessionEnd hook: opt-in dev-session memory mining (default off)"
       }
     ],
     "claudeMd": {
