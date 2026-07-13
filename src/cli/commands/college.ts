@@ -217,6 +217,8 @@ export interface ParsedCollegeArgs {
   level?: string;
   minConcepts?: number;
   minSessions?: number;
+  /** gen-trysession author mode: 'llm' opts into LLM-authored pedagogy. */
+  author?: string;
   semantic: boolean;
   json: boolean;
   help: boolean;
@@ -247,6 +249,7 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
   let level: string | undefined;
   let minConcepts: number | undefined;
   let minSessions: number | undefined;
+  let author: string | undefined;
   let semantic = false;
   let json = false;
   let help = false;
@@ -298,6 +301,10 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
       minSessions = parseNumeric(args[++i]);
     } else if (a.startsWith('--min-sessions=')) {
       minSessions = parseNumeric(a.slice('--min-sessions='.length));
+    } else if (a === '--author') {
+      author = args[++i];
+    } else if (a.startsWith('--author=')) {
+      author = a.slice('--author='.length);
     } else if (!a.startsWith('-')) {
       positional.push(a);
     }
@@ -315,6 +322,7 @@ export function parseCollegeArgs(args: string[]): ParsedCollegeArgs {
     level,
     minConcepts,
     minSessions,
+    author,
     semantic,
     json,
     help,
@@ -846,16 +854,16 @@ async function handleGenTrysession(
   wing: string | undefined,
   out: string | undefined,
   json: boolean,
+  author?: string,
 ): Promise<number> {
   if (!dept) {
-    p.log.error('Usage: skill-creator college gen-trysession <dept> [--wing <id>] [--out <path>]');
+    p.log.error('Usage: skill-creator college gen-trysession <dept> [--wing <id>] [--out <path>] [--author llm]');
     return 1;
   }
   try {
     const { CollegeLoader } = await loadCollegeBarrel();
-    const { generateTrySession, serializeTrySession, validateGeneratedSession } = await import(
-      '../../college/try-session-generator.js'
-    );
+    const { generateTrySession, generateTrySessionAuthored, serializeTrySession, validateGeneratedSession } =
+      await import('../../college/try-session-generator.js');
     const loader = new CollegeLoader(departmentsPath());
     const summary = await loader.loadSummary(dept);
 
@@ -897,7 +905,28 @@ async function handleGenTrysession(
       return 0;
     }
 
-    const session = generateTrySession(concepts, { departmentId: dept, wingId: wing });
+    // Opt-in LLM authoring. --author llm requests it; the gated factory returns
+    // an author only when SC_TRYSESSION_LLM=1 AND ANTHROPIC_API_KEY are set.
+    // Absent either, fall back to the template scaffold (default behavior).
+    let session;
+    if (author === 'llm') {
+      const { createClaudeTrySessionAuthor } = await import(
+        '../../college/llm-try-session-author.js'
+      );
+      const llmAuthor = createClaudeTrySessionAuthor();
+      if (!llmAuthor) {
+        console.error(
+          'LLM authoring is opt-in: set SC_TRYSESSION_LLM=1 and ANTHROPIC_API_KEY. Using the template scaffold.',
+        );
+      }
+      session = await generateTrySessionAuthored(
+        concepts,
+        { departmentId: dept, wingId: wing },
+        llmAuthor,
+      );
+    } else {
+      session = generateTrySession(concepts, { departmentId: dept, wingId: wing });
+    }
     const check = validateGeneratedSession(session);
     if (!check.valid) {
       p.log.error(`Generated session failed the structural quality bar: ${check.errors.join('; ')}`);
@@ -962,7 +991,7 @@ function printCollegeHelp(): void {
     `    ${pc.cyan('college concept-skill-suggest [--json]')} Propose concept→skill links (semantic, review-only)`,
   );
   p.log.message(
-    `    ${pc.cyan('college gen-trysession <dept>')}          Generate a DRAFT try-session (--wing, --out, --json)`,
+    `    ${pc.cyan('college gen-trysession <dept>')}          Generate a DRAFT try-session (--wing, --out, --json, --author llm)`,
   );
   p.log.message('');
   p.log.message('  Examples:');
@@ -1020,7 +1049,7 @@ export async function collegeCommand(args: string[]): Promise<number> {
       return handleConceptSkillSuggest(parsed.json);
     case 'gen-trysession':
     case 'gen-try':
-      return handleGenTrysession(parsed.positional[0], parsed.wing, parsed.out, parsed.json);
+      return handleGenTrysession(parsed.positional[0], parsed.wing, parsed.out, parsed.json, parsed.author);
     default:
       p.log.error(`Unknown college subcommand: ${parsed.subcommand}`);
       printCollegeHelp();

@@ -5,10 +5,12 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
   generateTrySession,
+  generateTrySessionAuthored,
   orderConceptsByPrerequisite,
   validateGeneratedSession,
   serializeTrySession,
   type GeneratorConcept,
+  type TrySessionAuthor,
 } from '../try-session-generator.js';
 
 // A small department: `sum` depends on `add`, `add` depends on `count`, plus a
@@ -95,6 +97,42 @@ describe('generateTrySession', () => {
   it('respects maxSteps', () => {
     const session = generateTrySession(CONCEPTS, { departmentId: 'math', maxSteps: 2 });
     expect(session.steps).toHaveLength(2);
+  });
+});
+
+describe('generateTrySessionAuthored', () => {
+  it('with no author, is identical to the template generateTrySession (opt-in gate)', async () => {
+    const template = generateTrySession(CONCEPTS, { departmentId: 'math' });
+    const authored = await generateTrySessionAuthored(CONCEPTS, { departmentId: 'math' });
+    expect(authored).toEqual(template);
+  });
+
+  it('uses an injected author for step prose while preserving structure', async () => {
+    const author: TrySessionAuthor = {
+      async authorStep({ concept, index }) {
+        return {
+          instruction: `Hands-on task ${index + 1} for ${concept.id}: build a small example.`,
+          expectedOutcome: `You produced a working ${concept.id} example.`,
+          hint: `Start from the ${concept.id} definition.`,
+        };
+      },
+    };
+    const session = await generateTrySessionAuthored(CONCEPTS, { departmentId: 'math' }, author);
+    expect(validateGeneratedSession(session).valid).toBe(true);
+    for (const step of session.steps) {
+      expect(step.instruction).toContain('Hands-on task');
+      expect(step.instruction).not.toContain('[DRAFT');
+    }
+    // Ordering + concept tracking survive authoring.
+    expect(session.steps[0]!.conceptsExplored[0]).toBe('math-count');
+  });
+
+  it('falls back to the template on a throwing or unusable author (best-effort)', async () => {
+    const template = generateTrySession(CONCEPTS, { departmentId: 'math' });
+    const throwing: TrySessionAuthor = { async authorStep() { throw new Error('boom'); } };
+    const empty: TrySessionAuthor = { async authorStep() { return { instruction: '', expectedOutcome: '' }; } };
+    expect((await generateTrySessionAuthored(CONCEPTS, { departmentId: 'math' }, throwing)).steps).toEqual(template.steps);
+    expect((await generateTrySessionAuthored(CONCEPTS, { departmentId: 'math' }, empty)).steps).toEqual(template.steps);
   });
 });
 

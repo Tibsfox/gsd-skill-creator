@@ -16,11 +16,14 @@
  *
  * SCOPE: mechanical ordering + a concrete structural quality bar (valid steps,
  * prereq-respecting order, every step tied to a real concept id) is delivered
- * here. The genuinely hard part — pedagogically authored prompts, worked
- * examples, and Socratic scaffolding per step — is deferred; the emitted
- * instruction/expectedOutcome text is a labelled DRAFT for human authoring.
+ * here. Per-step prose comes from a pluggable {@link TrySessionAuthor}: the
+ * default {@link templateStepAuthor} emits a labelled DRAFT for human authoring;
+ * an opt-in LLM author ({@link ./llm-try-session-author.js}) synthesizes real
+ * pedagogy via {@link generateTrySessionAuthored}. The DRAFT banner and human
+ * gate stay until a person clears them.
  *
- * Pure module: no fs, no side effects, deterministic given the same input.
+ * Pure module: no fs, no side effects, deterministic given the same input. The
+ * LLM author lives in a SEPARATE file so no model/network import lands here.
  *
  * @module college/try-session-generator
  */
@@ -168,6 +171,34 @@ export function orderConceptsByPrerequisite(
   };
 }
 
+/** The authored prose of one step — what an author (template or LLM) produces. */
+export interface AuthoredStep {
+  instruction: string;
+  expectedOutcome: string;
+  hint?: string;
+}
+
+/** Structural context handed to an author for one step. */
+export interface TrySessionAuthorInput {
+  concept: GeneratorConcept;
+  index: number;
+  /** In-set prerequisite concept ids (ordered before this concept). */
+  prereqIds: string[];
+  /** In-set analogy concept ids (shared structure, no ordering constraint). */
+  analogyIds: string[];
+}
+
+/**
+ * Pluggable step author. The default {@link templateStepAuthor} emits the
+ * DRAFT-banner scaffold; a real (LLM-backed) author — see
+ * {@link ./llm-try-session-author.js} — synthesizes pedagogy. Authoring is
+ * async and best-effort: {@link generateTrySessionAuthored} falls back to the
+ * template on any throw or malformed result.
+ */
+export interface TrySessionAuthor {
+  authorStep(input: TrySessionAuthorInput): Promise<AuthoredStep>;
+}
+
 const DRAFT_BANNER = '[DRAFT — generated scaffold, needs pedagogical review]';
 
 function titleize(slug: string): string {
@@ -213,14 +244,14 @@ function inSetAnalogyIds(
   return out;
 }
 
-function buildStep(
+/** The DRAFT-banner scaffold prose for one step (the pre-authoring baseline). */
+function buildTemplateStepText(
   concept: GeneratorConcept,
   index: number,
-  inSet: ReadonlySet<string>,
-): GeneratedTryStep {
+  prereqIds: string[],
+  analogyIds: string[],
+): AuthoredStep {
   const name = concept.name && concept.name.length > 0 ? concept.name : concept.id;
-  const prereqIds = inSetPrereqIds(concept, inSet);
-  const analogyIds = inSetAnalogyIds(concept, inSet);
 
   const description = concept.description && concept.description.length > 0
     ? concept.description
@@ -238,17 +269,58 @@ function buildStep(
     ? `You can explain ${name} and articulate how it follows from ${prereqIds.join(', ')}.`
     : `You can explain ${name} and give a concrete example of it.`;
 
-  const conceptsExplored = dedupe([concept.id, ...prereqIds, ...analogyIds]);
-
-  const step: GeneratedTryStep = { instruction, expectedOutcome, conceptsExplored };
-
+  const authored: AuthoredStep = { instruction, expectedOutcome };
   if (prereqIds.length > 0) {
-    step.hint = `Revisit ${prereqIds.join(', ')} before attempting ${name}.`;
+    authored.hint = `Revisit ${prereqIds.join(', ')} before attempting ${name}.`;
   } else if (analogyIds.length > 0) {
-    step.hint = `Compare ${name} against ${analogyIds.join(', ')} — they share structure.`;
+    authored.hint = `Compare ${name} against ${analogyIds.join(', ')} — they share structure.`;
   }
+  return authored;
+}
 
+/** The default author — emits the DRAFT-banner template. Deterministic, no IO. */
+export const templateStepAuthor: TrySessionAuthor = {
+  async authorStep(input: TrySessionAuthorInput): Promise<AuthoredStep> {
+    return buildTemplateStepText(input.concept, input.index, input.prereqIds, input.analogyIds);
+  },
+};
+
+/** Assemble a full step: structural concept tracking + authored prose. */
+function assembleStep(
+  concept: GeneratorConcept,
+  prereqIds: string[],
+  analogyIds: string[],
+  prose: AuthoredStep,
+): GeneratedTryStep {
+  const step: GeneratedTryStep = {
+    instruction: prose.instruction,
+    expectedOutcome: prose.expectedOutcome,
+    conceptsExplored: dedupe([concept.id, ...prereqIds, ...analogyIds]),
+  };
+  if (prose.hint && prose.hint.length > 0) step.hint = prose.hint;
   return step;
+}
+
+function buildStep(
+  concept: GeneratorConcept,
+  index: number,
+  inSet: ReadonlySet<string>,
+): GeneratedTryStep {
+  const prereqIds = inSetPrereqIds(concept, inSet);
+  const analogyIds = inSetAnalogyIds(concept, inSet);
+  const prose = buildTemplateStepText(concept, index, prereqIds, analogyIds);
+  return assembleStep(concept, prereqIds, analogyIds, prose);
+}
+
+/** A prose result is usable only if both required fields are non-empty. */
+function isUsableProse(prose: AuthoredStep | null | undefined): prose is AuthoredStep {
+  return (
+    !!prose &&
+    typeof prose.instruction === 'string' &&
+    prose.instruction.length > 0 &&
+    typeof prose.expectedOutcome === 'string' &&
+    prose.expectedOutcome.length > 0
+  );
 }
 
 /**
@@ -267,14 +339,65 @@ export function generateTrySession(
   concepts: ReadonlyArray<GeneratorConcept>,
   options: GenerateTrySessionOptions,
 ): GeneratedTrySession {
-  const minutesPerStep = options.minutesPerStep ?? 5;
+  const { limited, inSet, externalPrerequisites } = prepareOrder(concepts, options);
+  const steps = limited.map((c, i) => buildStep(c, i, inSet));
+  return buildSessionShell(steps, externalPrerequisites, options);
+}
+
+/**
+ * Async, opt-in authored variant of {@link generateTrySession}. Runs the SAME
+ * ordering, then authors each step's prose through `author` (default: the
+ * template). Authoring is best-effort per step: any throw or malformed result
+ * falls back to the template scaffold, so the session is always structurally
+ * valid and the DRAFT banner / human-gate discipline is preserved.
+ */
+export async function generateTrySessionAuthored(
+  concepts: ReadonlyArray<GeneratorConcept>,
+  options: GenerateTrySessionOptions,
+  author?: TrySessionAuthor | null,
+): Promise<GeneratedTrySession> {
+  const { limited, inSet, externalPrerequisites } = prepareOrder(concepts, options);
+  const chosen = author ?? templateStepAuthor;
+
+  const steps = await Promise.all(
+    limited.map(async (concept, index) => {
+      const prereqIds = inSetPrereqIds(concept, inSet);
+      const analogyIds = inSetAnalogyIds(concept, inSet);
+      let prose: AuthoredStep;
+      try {
+        const authored = await chosen.authorStep({ concept, index, prereqIds, analogyIds });
+        prose = isUsableProse(authored)
+          ? authored
+          : buildTemplateStepText(concept, index, prereqIds, analogyIds);
+      } catch {
+        prose = buildTemplateStepText(concept, index, prereqIds, analogyIds);
+      }
+      return assembleStep(concept, prereqIds, analogyIds, prose);
+    }),
+  );
+
+  return buildSessionShell(steps, externalPrerequisites, options);
+}
+
+/** Shared ordering stage: order, cap, and the in-set id membership. */
+function prepareOrder(
+  concepts: ReadonlyArray<GeneratorConcept>,
+  options: GenerateTrySessionOptions,
+): { limited: GeneratorConcept[]; inSet: Set<string>; externalPrerequisites: string[] } {
   const { ordered, externalPrerequisites } = orderConceptsByPrerequisite(concepts);
   const limited =
     options.maxSteps && options.maxSteps > 0 ? ordered.slice(0, options.maxSteps) : ordered;
-
   const inSet = new Set(limited.map((c) => c.id));
-  const steps = limited.map((c, i) => buildStep(c, i, inSet));
+  return { limited, inSet, externalPrerequisites };
+}
 
+/** Wrap authored steps in the session shell (id/title/description/timing). */
+function buildSessionShell(
+  steps: GeneratedTryStep[],
+  externalPrerequisites: string[],
+  options: GenerateTrySessionOptions,
+): GeneratedTrySession {
+  const minutesPerStep = options.minutesPerStep ?? 5;
   const scopeSlug = options.wingId
     ? `${options.departmentId}-${options.wingId}`
     : options.departmentId;
