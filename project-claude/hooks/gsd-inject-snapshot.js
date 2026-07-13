@@ -3,7 +3,7 @@
 // Called by SessionStart hook - provides narrative continuity
 // Invokes: skill-creator orchestrator snapshot latest --format=context
 
-import { execSync } from 'child_process';
+const { execSync } = require('child_process');
 
 try {
   const result = execSync(

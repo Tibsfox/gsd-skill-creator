@@ -3,7 +3,7 @@
 // Called by SessionStart hook - loads previous session context
 // Invokes: skill-creator orchestrator work-state restore
 
-import { execSync } from 'child_process';
+const { execSync } = require('child_process');
 
 try {
   const result = execSync(

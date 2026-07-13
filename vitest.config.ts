@@ -64,6 +64,22 @@ export default defineConfig({
           ],
         },
       },
+      // project-claude hook tests. The root project excludes project-claude/**,
+      // and the sterile runner (tools/hook-tests-sterile.sh) only covers the
+      // bash *.test.sh scripts — so these vitest *.test.ts hook tests ran in NO
+      // lane. This project puts them in the default `vitest run` (which CI
+      // executes), closing that gap. Hook tests spawn subprocesses (execSync)
+      // with `node --check` + temp fixtures, so they get a generous timeout.
+      {
+        test: {
+          name: 'project-claude-hooks',
+          globals: true,
+          testTimeout: 30000,
+          hookTimeout: 30000,
+          include: ['project-claude/hooks/**/*.test.ts'],
+          exclude: ['**/node_modules/**', 'dist/**'],
+        },
+      },
       // The Space Between Engine — needs @/ alias and jsdom
       {
         resolve: {
