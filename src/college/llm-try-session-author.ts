@@ -18,8 +18,10 @@
  * @module college/llm-try-session-author
  */
 
-import { AnthropicChip } from '../chips/anthropic-chip.js';
-import { NULL_EGRESS_AUDIT_SINK, type EgressContext } from '../security/egress-context.js';
+import {
+  ClaudeCompletion,
+  type ClaudeCompletionOptions,
+} from '../chips/claude-completion.js';
 import type {
   AuthoredStep,
   TrySessionAuthor,
@@ -128,45 +130,15 @@ export class LlmTrySessionAuthor implements TrySessionAuthor {
   }
 }
 
-const ANTHROPIC_ALLOW = 'https://api.anthropic.com/';
-const DEFAULT_MODEL = 'claude-haiku-4-5-20251001';
 const DEFAULT_MAX_TOKENS = 1024;
 
-export interface ClaudeAuthorCompletionOptions {
-  model?: string;
-  maxTokens?: number;
-  apiKey?: string;
-  ctx?: EgressContext;
-}
+/** Construction knobs for {@link ClaudeAuthorCompletion}; see {@link ClaudeCompletionOptions}. */
+export type ClaudeAuthorCompletionOptions = ClaudeCompletionOptions;
 
-/** A Claude-backed {@link AuthorCompletion} over the egress-gated AnthropicChip. */
-export class ClaudeAuthorCompletion implements AuthorCompletion {
-  private readonly chip: AnthropicChip;
-  private readonly maxTokens: number;
-
+/** A Claude-backed {@link AuthorCompletion} over the shared {@link ClaudeCompletion} base. */
+export class ClaudeAuthorCompletion extends ClaudeCompletion implements AuthorCompletion {
   constructor(options: ClaudeAuthorCompletionOptions = {}) {
-    const ctx: EgressContext = options.ctx ?? {
-      allowList: [ANTHROPIC_ALLOW],
-      audit: NULL_EGRESS_AUDIT_SINK,
-    };
-    this.chip = new AnthropicChip(
-      {
-        type: 'anthropic',
-        name: 'try-session-author',
-        defaultModel: options.model ?? DEFAULT_MODEL,
-        ...(options.apiKey ? { apiKey: options.apiKey } : {}),
-      },
-      ctx,
-    );
-    this.maxTokens = options.maxTokens ?? DEFAULT_MAX_TOKENS;
-  }
-
-  async complete(prompt: string): Promise<string> {
-    const res = await this.chip.chat([{ role: 'user', content: prompt }], {
-      maxTokens: this.maxTokens,
-      temperature: 0,
-    });
-    return res.content;
+    super('try-session-author', DEFAULT_MAX_TOKENS, options);
   }
 }
 
