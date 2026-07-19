@@ -3,6 +3,8 @@
  * @module departments/adaptive-systems/concepts
  */
 export { lorenzPredictabilityLimit } from './lorenz-predictability-limit.js';
+// June-2026 arXiv math-department pass (SMALL-DEPARTMENTS-CONCEPT-SHORTLIST T1)
+export { lyapunovGradientStability } from './lyapunov-gradient-stability.js';
 // Drift in LLM Systems (Phase 690)
 export { contextEquilibrium } from './context-equilibrium.js';
 export { agentStabilityIndex } from './agent-stability-index.js';

@@ -37,11 +37,12 @@ stat-accounting-equation
 - stat-expected-value -- The long-run average outcome; the basis for rational decision-making under uncertainty
 - stat-conditional-probability -- How knowing one event changes the probability of another; Bayes' theorem
 
-### Statistical Analysis & Inference (4 concepts)
+### Statistical Analysis & Inference (5 concepts)
 - stat-descriptive-statistics -- Mean, median, mode, range, IQR, and standard deviation for summarizing data
 - stat-data-visualization -- Choosing and interpreting histograms, box plots, scatter plots, and other displays
 - stat-sampling-bias -- Survey design, random sampling, and sources of bias in data collection
 - stat-hypothesis-testing -- Null and alternative hypotheses, p-values, and distinguishing signal from noise
+- stat-multiple-testing -- When many hypotheses are tested at once, per-test error compounds; control FWER (Bonferroni) or FDR (Benjamini-Hochberg) (June-2026 arXiv 2606.26781)
 
 ### Financial Literacy & Personal Finance (4 concepts)
 - stat-personal-budgeting -- Income, expenses, savings goals, and maintaining a balanced budget

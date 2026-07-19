@@ -40,6 +40,7 @@ A system passes this benchmark if: (a) it maintains an internal representation o
 | Lorenz Predictability Limit | Control-Theoretic (Panel B adjacent) | Python, C++, Lisp | math-fractal-geometry, math-exponential-decay |
 | Context Equilibrium | Panel D — Biological Roots (Drift extension) | — (Phase 690; panels follow-up) | ai-computation-response-semantic-drift, ai-computation-grounding-faithfulness |
 | Agent Stability Index | Panel A — Behavioural Roots (Drift extension) | — (Phase 690; panels follow-up) | ai-computation-alignment-drift, adaptive-systems-context-equilibrium |
+| Lyapunov Gradient Stability | Control-Theoretic (Panel B) | Python, C++, Lisp | adaptive-systems-lorenz-predictability-limit, math-exponential-decay · June-2026 arXiv 2606.17013 |
 
 ## Cross-References
 

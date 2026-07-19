@@ -25,11 +25,12 @@ log-classification-principles
 - log-pattern-recognition -- Identifying logical patterns in sequences, grids, and argument structures
 - log-rule-following -- Understanding rules as logical constraints and reasoning about rule application
 
-### Arguments & Reasoning (4 concepts)
+### Arguments & Reasoning (5 concepts)
 - log-argument-structure -- Premises, conclusions, inference rules -- anatomy of a logical argument
 - log-deductive-reasoning -- Validity and soundness: structure guarantees truth when premises are true
 - log-inductive-reasoning -- Strength and cogency: evidence supports but does not guarantee conclusions
 - log-analogical-reasoning -- Arguing by similarity: when analogies are strong and when they break down
+- logic-abductive-reasoning -- Inference to the best explanation: completing the deduction/induction/abduction triad (June-2026 arXiv 2606.04877)
 
 ### Fallacies & Critical Thinking (4 concepts)
 - log-informal-fallacies -- Ad hominem, straw man, false dichotomy, appeal to authority, slippery slope
@@ -37,11 +38,12 @@ log-classification-principles
 - log-propaganda-techniques -- Emotional appeals, bandwagon, loaded language, cherry-picking evidence
 - log-argument-evaluation -- Distinguishing good from bad arguments using structured evaluation criteria
 
-### Formal Logic (4 concepts)
+### Formal Logic (5 concepts)
 - log-propositional-logic -- And, or, not, if-then operators and truth table analysis
 - log-truth-tables -- Systematic evaluation of compound propositions using all truth-value combinations
 - log-predicate-logic -- Extending propositional logic with for-all and there-exists quantifiers
 - log-proof-techniques -- Direct proof, proof by contradiction, proof by induction
+- logic-many-valued-logic -- Beyond two-valued logic: Kleene/Lukasiewicz three-valued and Belnap FDE four-valued truth tables (June-2026 arXiv 2606.24927)
 
 ### Applied Logic (4 concepts)
 - log-logic-in-mathematics -- How formal logic underpins mathematical proof and theorem structure
