@@ -18,3 +18,5 @@ export { instructionAutoformalization } from './instruction-autoformalization.js
 
 // June-2026 arXiv additional-scan T2 cohort (1 concepts)
 export { intervalAlgebraTemporalRetrieval } from './interval-algebra-temporal-retrieval.js';
+// June-2026 additional-scan batch B
+export { defeasibleDeonticCompilation } from './defeasible-deontic-compilation.js';

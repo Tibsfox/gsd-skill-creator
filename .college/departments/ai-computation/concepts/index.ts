@@ -68,3 +68,15 @@ export { costAwareEvidenceSelection } from './cost-aware-evidence-selection.js';
 export { contextualEntrainment } from './contextual-entrainment.js';
 export { categoricalPriorLockIn } from './categorical-prior-lock-in.js';
 export { matchedEvidenceUtilization } from './matched-evidence-utilization.js';
+// June-2026 additional-scan batch B
+export { recursiveSelfGateCollapse } from './recursive-self-gate-collapse.js';
+export { taskSpecificKnowledgeLocalization } from './task-specific-knowledge-localization.js';
+export { inheritedCircuitEvasion } from './inherited-circuit-evasion.js';
+export { unlearningSuppressionReversal } from './unlearning-suppression-reversal.js';
+export { programOfLayers } from './program-of-layers.js';
+export { serializationAttentionDecay } from './serialization-attention-decay.js';
+export { contextRemovability } from './context-removability.js';
+export { testTimeTraining } from './test-time-training.js';
+export { latentReconstructionFidelity } from './latent-reconstruction-fidelity.js';
+export { persistentHomologyTopology } from './persistent-homology-topology.js';
+export { retrievalCrowdingCollapse } from './retrieval-crowding-collapse.js';
