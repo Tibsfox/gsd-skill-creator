@@ -7,7 +7,8 @@ export const pairedTraceAudit: RosettaConcept = {
   description:
     'Run the same probe task twice — with the skill loaded and without — segment both traces into goal-directed phases, ' +
     'align phases, and emit a "skill influence pattern" (SIP) report covering surface anchoring, template copy, excess ' +
-    'planning, task recovery, and off-task artifact. The 2026 finding (Wang et al., arxiv 2605.11946v1 CTA) is that ' +
+    'planning, task recovery, and off-task artifact — surface anchoring, for instance, is the skilled trace reusing the ' +
+    "skill's exact phrasing or variable names even where the task did not require it. The 2026 finding (Wang et al., arxiv 2605.11946v1 CTA) is that " +
     'pass-rate is blind to most skill effects: a single skill can produce 522 measurable behavioural changes across 49 ' +
     'tasks while pass-rate moves only +0.3%. The audit is therefore the dominant signal for skill quality — pass-rate ' +
     'remains a sufficient condition for shipping but is no longer a necessary one for measuring impact. The pattern ' +

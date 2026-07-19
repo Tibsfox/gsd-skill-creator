@@ -29,11 +29,15 @@ export const sequentialTestingByBetting: RosettaConcept = {
   domain: 'data-science',
   description: 'Anytime-valid sequential testing that bets against a null ' +
     'hypothesis instead of computing a fixed-sample p-value. A test ' +
-    'martingale (equivalently an e-process) starts with unit wealth and, at ' +
+    'martingale starts with unit wealth and, at ' +
     'each observation, reinvests through a betting factor that pays off ' +
     'exactly when the null is false; under the null its expectation stays ' +
     '<= 1, so by Ville\'s inequality the probability it EVER exceeds 1/alpha ' +
-    'is at most alpha. The running wealth is an e-value: you may monitor it ' +
+    'is at most alpha. (The more general object is an e-process -- a ' +
+    'nonnegative process bounded above by a supermartingale under every ' +
+    'distribution in a composite null, hence <= 1 in expectation at any ' +
+    'stopping time; every test martingale is an e-process, but not ' +
+    'conversely.) The running wealth is an e-value: you may monitor it ' +
     'continuously, stop at any data-dependent time, and reject when it ' +
     'crosses 1/alpha without inflating the type-I error. Betting rules -- ' +
     'the online Newton step, mixtures, and the growth-rate-optimal (GRO) ' +

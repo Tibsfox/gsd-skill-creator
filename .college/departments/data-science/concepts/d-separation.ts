@@ -33,7 +33,12 @@ export const dSeparation: RosettaConcept = {
     'descendants lie outside Z; two variable sets X and Y are d-separated by Z ' +
     'when every path between them is blocked. Soundness guarantees that ' +
     'd-separation implies conditional independence in every distribution that ' +
-    'factorizes over the DAG, so the graph alone certifies X ⫫ Y | Z. The ' +
+    'factorizes over the DAG, so the graph alone certifies X ⫫ Y | Z. ' +
+    'Completeness runs the other way: whenever a path stays open -- X and Y ' +
+    'are d-CONNECTED given Z -- some distribution factorizing over the DAG ' +
+    'makes them dependent given Z, so the graph captures exactly the ' +
+    'conditional independencies shared by every distribution it admits and ' +
+    'asserts none that are merely coincidental. The ' +
     'criterion is a graphoid -- it obeys the semi-graphoid axioms (symmetry, ' +
     'decomposition, weak union, contraction) -- turning Bayesian conditioning ' +
     'into a matter of tracing open trails rather than integrating ' +

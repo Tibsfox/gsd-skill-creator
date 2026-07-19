@@ -9,7 +9,7 @@ export const wassersteinGradientFlowLangevinSession: TrySessionDefinition = {
   id: 'math-wasserstein-gradient-flow-langevin-first-steps',
   title: "From Langevin Particles to a Wasserstein Gradient Flow",
   description:
-    "Build a small particle simulation of mean-field Langevin dynamics, derive its free-energy functional and self-consistent stationary Gibbs measure, then sweep temperature to watch the low-temperature phase transition concentrate the cloud onto a hidden signal direction.",
+    "Build a small particle simulation of mean-field Langevin dynamics, derive its free-energy functional and self-consistent stationary Gibbs measure, then sweep temperature to watch the low-temperature phase transition -- sharp near τ_c ≈ 1 -- concentrate the cloud onto a hidden signal direction.",
   estimatedMinutes: 20,
   prerequisites: [],
   steps: [

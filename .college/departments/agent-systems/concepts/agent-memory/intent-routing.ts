@@ -8,9 +8,10 @@ export const intentRouting: RosettaConcept = {
     'Classify the query intent before selecting a retrieval (or reasoning) strategy. Converts retrieval from a fixed ' +
     'function into a policy: different intents (lookup vs. multi-hop vs. global summarisation vs. verification vs. deep ' +
     'reasoning) demand categorically different retrievers, context budgets, and refinement passes. LLMs possess latent ' +
-    "routing ability elicitable via a structured prompt without additional training (Chen et al., arxiv 2605.10235v2 " +
-    "Pre-Route); externalising the routing decision improves small-model performance by ~2x (Sharma et al. " +
-    "2605.03312v1 MemFlow). The pattern recurs across every domain in the 2026 frontier — code-gen 'plan only on " +
+    "routing ability elicitable via a structured prompt without additional training, so a single routed sample reaches " +
+    "Best-of-N quality (Chen et al., arxiv 2605.10235v2 Pre-Route); externalising the routing decision across three " +
+    "named tiers — Profile Lookup, Targeted Retrieval, Deep Reasoning — improves small-model performance by ~2x on a " +
+    "1.7B SLM (Sharma et al. 2605.03312v1 MemFlow). The pattern recurs across every domain in the 2026 frontier — code-gen 'plan only on " +
     "verification failure' (PaT 2605.07248v1), multi-agent 'critique-and-route MDP' (2605.08686), skill-design " +
     "Probe&Prefill (2605.14038v1) — making intent routing a cross-domain primitive. Anchored at the rosetta-core " +
     "level as Concept 7.",

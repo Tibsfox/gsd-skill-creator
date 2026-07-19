@@ -28,7 +28,8 @@ export const aperiodicWangTiles: RosettaConcept = {
     'neighbours, placed without rotation; a tile set is aperiodic when it tiles the whole ' +
     'plane yet admits no periodic tiling. Building on the classical aperiodic sets ' +
     '(Berger 1966), arXiv:2606.24693 (2026) forces the density of vertical and horizontal ' +
-    'colored stripes to equal a fixed quadratic irrational, pinning each quadratic irrational ' +
+    'colored stripes to equal a fixed quadratic irrational -- for instance the golden ratio\'s ' +
+    '1/φ ≈ 0.618 in Q(√5) -- pinning each pair of such irrationals from a common quadratic field ' +
     'to a finite aperiodic tile set and encoding the Penrose tilings in just 24 tiles. ' +
     'Order without repetition is enforced entirely by local edge-matching rules.',
   panels: new Map([

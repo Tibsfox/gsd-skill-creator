@@ -8,7 +8,12 @@ export const executionGroundedSelection: RosettaConcept = {
     'Pick among candidate outputs by RUNNING them on diverse inputs and clustering by behavioural fingerprint, rather ' +
     'than by textual aggregation, log-probability, or output-majority voting. The 2026 finding (Semantic Voting, arxiv ' +
     "`2605.08680v1`) is that ANY execution-based selector dominates output-majority voting by 19-52pp, and that " +
-    'sketch-generated inputs beat random fuzz by 11.3pp. The pattern is the strongest single signal in the May 2026 ' +
+    'sketch-generated inputs beat random fuzz by 11.3pp. Its core thesis is that once candidates are executed on ' +
+    'diverse inputs the AGGREGATION RULE barely matters — SemanticVote, weighted voting, and MBR-Exec become ' +
+    'statistically indistinguishable — so selection is fundamentally a signal-quality problem (get diverse, ' +
+    'discriminating inputs) rather than an aggregation-rule problem; this is also why deeper model reasoning, which ' +
+    'lifts plain output-majority voting by ~12pp, does not rescue execution-based selection as candidate diversity ' +
+    'falls. The pattern is the strongest single signal in the May 2026 ' +
     'agentic-code corpus: when an executor returns multiple plausible candidates, behavioural disambiguation under ' +
     'diverse inputs is what produces the right pick. Generalises beyond code to any output that can be probed under ' +
     'inputs the model did not see at generation time. Anchored at the rosetta-core level as Concept 9.',
