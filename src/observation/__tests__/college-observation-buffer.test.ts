@@ -74,8 +74,12 @@ describe('recordCollegeEvent + drainCollegeEvents', () => {
 
   it('skips corrupt lines and returns [] for a missing buffer', async () => {
     await fs.mkdir(dir, { recursive: true });
-    await fs.writeFile(storePath.replace('/nested', ''), '{bad\n' + JSON.stringify(ev({ id: 'ok' })) + '\n');
-    const drained = await drainCollegeEvents(storePath.replace('/nested', ''));
+    // A flat path directly under `dir` (parent already exists). Use join() —
+    // separator-agnostic — not a hard-coded '/nested' string replace, which is
+    // a no-op on Windows (backslash paths) and left the parent dir missing → ENOENT.
+    const flatPath = join(dir, 'observations.jsonl');
+    await fs.writeFile(flatPath, '{bad\n' + JSON.stringify(ev({ id: 'ok' })) + '\n');
+    const drained = await drainCollegeEvents(flatPath);
     expect(drained.map((e) => e.id)).toEqual(['ok']);
     expect(await drainCollegeEvents(join(dir, 'absent.jsonl'))).toEqual([]);
   });
