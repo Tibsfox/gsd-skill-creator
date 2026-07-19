@@ -31,9 +31,13 @@ export const densityEvolution: RosettaConcept = {
     'scale and tracking the modes, the level-set topology, and each ' +
     'feature\'s lifetime separates real structure from sampling noise -- ' +
     'modes born fine and persisting coarse are genuine, short-lived ones ' +
-    'are noise. This is the SiZer / mode-tree reading of a sample, a ' +
-    'persistence-style multiscale view surfaced for the College from ' +
-    'arXiv:2606.00233 (2026).',
+    'are noise -- the SiZer / mode-tree reading of a sample (the ' +
+    'diffusion-as-smoothing equivalence is specific to the Gaussian ' +
+    'kernel). The 2026 source (Kisung You) recasts a single estimate as ' +
+    'this whole path of densities and links the classical scale-space ' +
+    'picture to score-based generative diffusion, framing the heat-flow ' +
+    'smoothing as a moment-preserving Gaussianization (Ornstein-Uhlenbeck) ' +
+    'semigroup. Surfaced for the College from arXiv:2606.00233 (2026).',
   panels: new Map([
     ['python', {
       panelId: 'python',

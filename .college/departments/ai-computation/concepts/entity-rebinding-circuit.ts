@@ -15,7 +15,7 @@ export const entityRebindingCircuit: RosettaConcept = {
   name: "Entity Rebinding Circuit",
   domain: 'ai-computation',
   description:
-    "Language models tracking a scenario must keep each entity bound to its current attribute and rebind it as state changes — when an item changes hands or a variable is reassigned, the stale attribute must be dropped and the new one reinstated at readout. The Entity Rebinding Circuit (arXiv 2606.08644v1) is a compact attention-head circuit, isolated by causal intervention, that binds entities to attributes and, on a state change, reinstates the updated binding when the answer is read out. Its representational signature migrates across model families — carried in query/key subspaces in some, the key subspace alone in others — so one computation is realized by different substrates.",
+    "Language models tracking a scenario must keep each entity bound to its current attribute and rebind it as state changes — when an item changes hands or a variable is reassigned, the stale attribute must be dropped and the new one reinstated at readout. The Entity Rebinding Circuit (arXiv 2606.08644v1) is a compact attention-head circuit, isolated by causal intervention, that binds entities to attributes and, on a state change, reinstates the updated binding when the answer is read out. Its representational signature migrates across model families — in Gemma it is expressed in the query/key subspaces of the relevant heads, in Llama it is carried primarily in the key vectors — so one computation is realized by different substrates.",
   panels: new Map(),
   relationships: [
     {

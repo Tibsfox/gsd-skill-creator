@@ -30,9 +30,13 @@ export const informationGeometry: RosettaConcept = {
     'connections, the exponential (e-) and mixture (m-) connections, dual through the Fisher metric. ' +
     'From this the Fisher-Rao distance, the Kullback-Leibler divergence as a canonical dually-flat ' +
     'divergence, and the Pythagorean projection theorem all follow. That geometry lets surface-theory ' +
-    'notions transfer verbatim to statistics: a recent study characterises totally-umbilical ' +
-    'submanifolds of a statistical manifold, the analogue of a sphere inside Euclidean space ' +
-    '(Amari & Nagaoka 2000; arXiv:2606.06395, 2026).',
+    'notions transfer verbatim to statistics. A submanifold is totally-umbilical when its second ' +
+    'fundamental form is proportional to the metric (h = lambda*g), the analogue of a sphere inside ' +
+    'Euclidean space; but a statistical manifold carries two dual connections, so umbilicity becomes a ' +
+    'paired condition, and a doubly totally-umbilical submanifold is umbilical under both the e- and ' +
+    'm-connections. Furuhata\'s 2026 study gives a complete classification of the doubly ' +
+    'totally-umbilical submanifolds of the probability simplex (Amari & Nagaoka 2000; ' +
+    'arXiv:2606.06395, 2026).',
   panels: new Map([
     ['python', {
       panelId: 'python',

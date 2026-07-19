@@ -9,7 +9,7 @@ export const functionalIdentifiabilitySession: TrySessionDefinition = {
   id: 'adaptive-systems-functional-identifiability-first-steps',
   title: "Functional Identifiability: Recover the Dynamics, Not Just the Numbers",
   description:
-    "A guided first pass through functional identifiability -- from differential elimination of a scalar ODE, through a hand-built non-identifiable equivalence class you simulate to collision, to why no feedback update can recover dynamics the observations cannot distinguish. (arXiv:2606.30289v1, 2026)",
+    "A guided first pass through functional identifiability -- the generalization of classical structural parameter identifiability to unknown FUNCTIONS (constitutive relations) in differential-equation models, which Loman, Browning & Baker assess with differential-algebra techniques and use to flag the model classes where unique functional recovery is provably impossible. You go from differential elimination of a scalar ODE, through a hand-built non-identifiable equivalence class you simulate to collision, to why no feedback update can recover dynamics the observations cannot distinguish -- the recoverability precondition sitting upstream of any data-driven model discovery. (arXiv:2606.30289v1, 2026)",
   estimatedMinutes: 22,
   prerequisites: [],
   steps: [

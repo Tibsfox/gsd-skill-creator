@@ -27,10 +27,15 @@ export const optimalTransport: RosettaConcept = {
   description: 'The cheapest way to move one probability distribution onto another. ' +
     'Monge (1781) asked for a transport map minimising total cost; Kantorovich (1942) ' +
     'relaxed it to a coupling, exposing a linear program with a dual pair of potentials. ' +
-    'The minimum cost is the Wasserstein distance, a genuine metric on probability measures, ' +
-    'and steepest descent in Wasserstein geometry (the JKO scheme) recovers the heat and ' +
-    'Fokker-Planck equations as gradient flows. The same backbone links diffusion models, ' +
-    'flow matching, and the Schrödinger bridge (arXiv:2606.30053, 2026).',
+    'For quadratic cost Brenier\'s theorem makes the two pictures concrete: the optimal Monge map ' +
+    'is the gradient of a convex potential, T = grad(phi), so the dual potentials pin down an ' +
+    'actual map rather than only a coupling. The minimum cost is the Wasserstein distance, a ' +
+    'genuine metric on probability measures, and steepest descent in Wasserstein geometry (the JKO ' +
+    'scheme) recovers the heat and Fokker-Planck equations as gradient flows. Adding an entropy ' +
+    'penalty (entropic regularization) replaces the exact linear program with the Sinkhorn ' +
+    'iteration -- alternating row/column rescalings -- which is what makes OT computable at scale. ' +
+    'The same backbone links diffusion models, flow matching, and the Schrödinger bridge ' +
+    '(arXiv:2606.30053, 2026).',
   panels: new Map([
     ['python', {
       panelId: 'python',

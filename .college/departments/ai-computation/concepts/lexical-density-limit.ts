@@ -24,7 +24,11 @@ export const lexicalDensityLimit: RosettaConcept = {
   description: 'The effective context window is limited not only by length and by where the target ' +
     'sits (lost-in-the-middle) but by lexical density — the rate at which the context introduces ' +
     'distinct information. Holding length fixed at ~12k tokens and controlling needle position, ' +
-    'dense contexts drive a sharp retrieval collapse below 60% (arXiv 2606.06203v1, 2026). By ' +
+    'dense contexts drive a sharp retrieval collapse below 60% across open-weight models spanning ' +
+    '9B to 685B parameters (arXiv 2606.06203v1, 2026), so the effect is not a small-model artifact. ' +
+    'Crucially the study also varies density WITHIN each benchmark while holding length, needle ' +
+    'position, and task type fixed, and finds that reducing density restores performance — ' +
+    'upgrading the finding from a correlation to a controlled causal axis. By ' +
     'measuring density at identical length and position, the result isolates information density as ' +
     'an independent failure axis distinct from context-length dilution, teaching the clean claim ' +
     'that dense contexts are hard contexts even when they are not long ones.',

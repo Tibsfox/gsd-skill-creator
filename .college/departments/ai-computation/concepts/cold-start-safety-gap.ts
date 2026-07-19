@@ -22,12 +22,16 @@ export const coldStartSafetyGap: RosettaConcept = {
   name: 'Cold Start Safety Gap',
   domain: 'ai-computation',
   description: 'Agent safety is not constant across a session: tool-calling agents are least safe at ' +
-    'the very start and grow safer as the session deepens. SODA (arXiv 2606.07867, 2026) gives ' +
-    'representation-level evidence — the model\'s hidden state begins in an unsafe region and only ' +
-    'migrates toward a safety-aligned region after completing several regular agentic tasks, a ' +
-    'measurable cold-start gap of 9-52%. This inverts the usual drift picture: rather than safety ' +
+    'the very start and grow safer as the session deepens. SODA (Safety Over Depth for Agents, ' +
+    'arXiv 2606.07867, 2026) controls how many regular agentic tasks an agent completes — up to 20 — ' +
+    'before it meets a safety threat, and gives representation-level evidence: the model\'s hidden ' +
+    'state begins in an unsafe region and only migrates toward a safety-aligned region after several ' +
+    'such tasks, a measurable cold-start gap of 9-52% across 7 models from 4 families. A causal ' +
+    'decomposition isolates the driver — the regular agentic tasks themselves are the primary source ' +
+    'of the safety gain, while the agent\'s own prior responses matter less for safety but are ' +
+    'essential for preserving later utility. This inverts the usual drift picture: rather than safety ' +
     'eroding over time, it is warm-up-dependent, accruing with task depth from a cold start, which ' +
-    'argues for priming or warm-up before exposing an agent to sensitive actions.',
+    'argues for priming an agent with real tasks before exposing it to sensitive actions.',
   panels: new Map(),
   relationships: [
     {

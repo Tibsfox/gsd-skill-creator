@@ -5,13 +5,17 @@ export const episodePackage: RosettaConcept = {
   name: 'Episode Package',
   domain: 'agent-systems',
   description:
-    "A post-execution artifact that captures everything the harness was responsible for during one task: the model " +
-    'inputs and outputs, the tool calls, the privilege checks, the autonomy-ledger reads/writes, the retrieval traces, ' +
-    'the spec-gate verdicts, and the final outcome. The 2026 framing (Zhong & Zhu, arxiv `2605.13357v1`) enumerates ' +
-    'eleven harness responsibilities and argues that all eleven must be captured for an episode to be reproducible ' +
-    'and auditable. Episode packages are the unit of analysis for downstream audit, retrospective generation, and ' +
-    "calibration — without them, the system has no record of what it actually did, only of what it produced. The " +
-    'pattern reframes "logging" from an ops convenience into a first-class deliverable of every dispatch.',
+    "A post-execution artifact that captures everything the harness was responsible for during one task. The 2026 " +
+    'framing (Zhong & Zhu, arxiv `2605.13357v1`), which names the discipline AI Harness Engineering and reframes an ' +
+    'agent as a model-harness-environment triple, enumerates eleven harness responsibilities — task specification, ' +
+    'context selection, tool access, project memory, task state, observability, failure attribution, verification, ' +
+    'permissions, entropy auditing, and intervention recording — and argues all eleven must be captured for an ' +
+    "episode to be reproducible and auditable. The paper's structural core is an H0-H3 harness ladder: the richness " +
+    "of an episode package's evidence scales systematically with harness level, from a bare final patch at H0 to " +
+    'reproduction logs, failure attributions, and verification reports at higher levels. Episode packages are the ' +
+    'unit of analysis for downstream audit, retrospective generation, and calibration — without them, the system has ' +
+    'no record of what it actually did, only of what it produced. The pattern reframes "logging" from an ops ' +
+    'convenience into a first-class deliverable of every dispatch.',
   panels: new Map(),
   relationships: [
     {

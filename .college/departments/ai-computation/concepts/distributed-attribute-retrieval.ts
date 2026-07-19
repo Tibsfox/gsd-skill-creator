@@ -15,7 +15,7 @@ export const distributedAttributeRetrieval: RosettaConcept = {
   name: "Distributed Attribute Retrieval",
   domain: 'ai-computation',
   description:
-    "Mechanistic interpretability long assumed a fact lives in one localizable circuit — a specific MLP or attention head you could edit or ablate. Tracing factual attribute recall via activation patching, arXiv 2606.21345v1 finds instead that each fact is retrieved along non-contiguous, layer-skipping paths, with several functionally-equivalent routes per attribute. Retrieval is thus redundant and distributed: ablating one path leaves others intact, which explains why localized model-editing (ROME-style) often fails to fully erase a fact and why single-circuit locality claims overstate how concentrated knowledge really is.",
+    "Mechanistic interpretability long assumed a fact lives in one localizable circuit — a specific MLP or attention head you could edit or ablate. Tracing each fact's \"attribute-computation path\" with an iterative patching protocol that isolates the minimal subset of layers needed to elicit a target attribute, arXiv 2606.21345v1 (tested on LLaMA 3.1 8B and Qwen3 8B) finds instead that these paths are non-contiguous, often skipping layers, with several functionally-equivalent routes per attribute. Retrieval is thus redundant and distributed: ablating one path leaves others intact, which explains the localization-editing mismatch — why localized model-editing (ROME-style) often fails to fully erase a fact — and why single-circuit locality claims overstate how concentrated knowledge really is.",
   panels: new Map(),
   relationships: [
     {

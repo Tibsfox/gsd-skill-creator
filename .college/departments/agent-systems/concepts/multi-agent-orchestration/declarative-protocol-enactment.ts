@@ -15,7 +15,7 @@ export const declarativeProtocolEnactment: RosettaConcept = {
   name: "Declarative Protocol Enactment",
   domain: 'agent-systems',
   description:
-    "Classic multi-agent systems bake each interaction protocol — contract-net bidding, auctions, blackboards — into bespoke, protocol-specific agent code, so adding or combining coordination patterns means rewriting agents. The arXiv 2606.05390v2 approach expresses protocols as declarative, reusable specifications (a protocol grammar) and lets an LLM planner select and enact the appropriate protocol(s) at runtime to satisfy a user goal, running several concurrently when the goal decomposes. Coordination logic becomes data the agents interpret rather than code they embed, so new coordination patterns are composed at runtime instead of programmed ahead of time.",
+    "Classic multi-agent systems bake each interaction protocol — contract-net bidding, auctions, blackboards — into bespoke, protocol-specific agent code, so adding or combining coordination patterns means rewriting agents. Ahoy (arXiv 2606.05390v2) instead expresses protocols as declarative, reusable specifications and lets an LLM agent dynamically select and enact the appropriate protocol(s) at runtime to achieve a user goal — programming-free, with no specialized training — running several concurrently when the goal decomposes. Coordination logic becomes data the agents interpret rather than code they embed, so new coordination patterns are composed at runtime instead of programmed ahead of time.",
   panels: new Map(),
   relationships: [
     {

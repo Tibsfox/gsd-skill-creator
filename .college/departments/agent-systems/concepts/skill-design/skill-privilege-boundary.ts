@@ -5,13 +5,18 @@ export const skillPrivilegeBoundary: RosettaConcept = {
   name: 'Skill Privilege Boundary',
   domain: 'agent-systems',
   description:
-    'A declared capability/permission surface on a skill, enforced at selection time and at execution time. The 2026 ' +
-    'reframing (FORTIS, arxiv `2605.09163v2`) treats privilege as a first-class field of the skill manifest: which ' +
-    'tools the skill is allowed to call, which paths it can read/write, whether it can touch the network, exec ' +
-    'subprocesses, or read secrets. The runtime is responsible for refusing dispatch when a skill requests a tool ' +
-    'outside its declared boundary, and the audit log records every privilege check. The pattern closes a class of ' +
-    "lateral-movement failures where a skill's prose said one thing and its runtime calls did another. Privilege " +
-    'boundary is what makes a skill safe to compile and ship; without it, every skill is implicitly omnipotent.',
+    'A declared capability/permission surface on a skill — which tools it may call, which paths it may read or ' +
+    'write, whether it may touch the network, exec subprocesses, or read secrets — with enforcement at two stages: ' +
+    'selection time (choosing the least-privileged skill that fits the task) and execution time (refusing dispatch ' +
+    "when a skill reaches for a tool outside its declared boundary). That closes lateral-movement failures where a " +
+    "skill's prose says one thing and its runtime calls do another. FORTIS (arxiv `2605.09163v2`, 2026) is the " +
+    'benchmark that measures exactly these two failure modes, and its headline result is that over-privilege is the ' +
+    'norm rather than the exception: across ten frontier models and three domains, agents consistently reach for ' +
+    'higher-privilege skills and tools than the task requires, failing at both the selection and execution stages ' +
+    'at rates that stay high even for the strongest models — and doing so under ordinary conditions (incomplete ' +
+    'specs, convenience framing, proximity to skill boundaries) with no adversarial construction. Privilege ' +
+    'boundary is the agent-system instantiation of capability-based security; without it, every skill is ' +
+    'implicitly omnipotent.',
   panels: new Map(),
   relationships: [
     {

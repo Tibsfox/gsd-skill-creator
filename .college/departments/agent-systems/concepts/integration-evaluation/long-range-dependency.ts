@@ -5,13 +5,18 @@ export const longRangeDependency: RosettaConcept = {
   name: 'Long-Range Dependency',
   domain: 'agent-systems',
   description:
-    'A stress benchmark over dependency depths 5-20: each successive task in a chain depends on a fact established by ' +
-    "an earlier task whose details are no longer in the active context. The 2026 framing (AgentEscapeBench, arxiv " +
-    '`2605.07926v1`) measures how performance degrades with chain depth and reveals where retrieval, memory ' +
-    'consolidation, and intent routing actually pay off vs where they collapse. The benchmark is a calibration ' +
-    "instrument, not a leaderboard: it shows whether a system's memory architecture survives realistic dependency " +
-    'depth, and where the cliff is. Implication: every agent-systems change that touches memory, retrieval, or ' +
-    'context budgeting should be evaluated against a long-range-dependency probe, not just against single-task probes.',
+    'A stress benchmark over dependency depths 5-25, organized as five difficulty tiers across 270 instances ' +
+    '(AgentEscapeBench, arxiv `2605.07926v1`, 2026): each task is an escape-room-style directed acyclic dependency ' +
+    'graph over tools and items, where the agent must invoke real external functions, track incrementally-revealed ' +
+    'hidden state, propagate intermediate results, and submit a deterministically-verifiable answer. Each successive ' +
+    'step depends on a fact established by an earlier step whose details are no longer in the active context, so ' +
+    'performance degrades with chain depth: humans fall from 98.3% at difficulty-5 to 80.0% at difficulty-25, and the ' +
+    'best model from 90.0% to 60.0%, with failures attributed to breakdowns in long-range state tracking, clue ' +
+    'adherence, and intermediate-result propagation. It reveals where retrieval, memory consolidation, and intent ' +
+    'routing actually pay off vs where they collapse. The benchmark is a calibration instrument, not a leaderboard: ' +
+    "it shows whether a system's memory architecture survives realistic dependency depth, and where the cliff is. " +
+    'Implication: every agent-systems change that touches memory, retrieval, or context budgeting should be evaluated ' +
+    'against a long-range-dependency probe, not just against single-task probes.',
   panels: new Map(),
   relationships: [
     {

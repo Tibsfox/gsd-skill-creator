@@ -9,9 +9,14 @@ export const coordinationSurface: RosettaConcept = {
     'systems fail at 41-87% rates from coordination defects (Nechepurenko & Shuvalov, arxiv 2605.03310), not from base ' +
     'capability — coordination is the dominant failure axis. The coordination surface instantiates as a topology ' +
     '(chain/star/mesh/etc.), a dispatch policy (one-shot, critique-and-route, retrieval-conditioned), and a constraint ' +
-    'state (carried across delegations). Treating coordination as a *surface* — a thing with shape and properties, not a ' +
+    'state (carried across delegations). The paper grounds the abstraction in a concrete instantiation: prediction ' +
+    'markets running five reference coordination configurations, scored via a Murphy decomposition of the Brier score ' +
+    'so that two configurations sharing one aggregate score still leave distinguishable calibration-versus-' +
+    'discrimination signatures. Treating coordination as a *surface* — a thing with shape and properties, not a ' +
     'side-effect of agents talking — is the architectural shift that enables spectral diagnostics, budget algebras, and ' +
-    'constraint maintenance to be applied uniformly.',
+    'constraint maintenance to be applied uniformly. Read the numbers as a methodology-validating first instantiation, ' +
+    'not a general cross-model claim: single-model, n=100, with pairwise tests that do not survive Bonferroni ' +
+    'correction, so the 41-87% figure and the *dominant failure axis* framing are directional.',
   panels: new Map(),
   relationships: [
     {

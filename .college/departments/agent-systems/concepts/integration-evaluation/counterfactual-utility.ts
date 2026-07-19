@@ -6,9 +6,13 @@ export const counterfactualUtility: RosettaConcept = {
   domain: 'agent-systems',
   description:
     'The expected change in success rate from adding, refining, or retiring a skill, evaluated against a fixed probe ' +
-    'bank. The 2026 framing (SkillMaster, arxiv `2605.08693v2`) makes skill lifecycle decisions tractable: instead of ' +
-    "asking 'is this skill good?' (unanswerable), ask 'what's the expected delta if we ship/retire it?' (answerable " +
-    'via paired-trace audit at a fixed cost). The pattern extends `agent-counterfactual-audit` from observation ' +
+    'bank. In its source (SkillMaster, arxiv `2605.08693v2`) counterfactual utility on related probe tasks is a direct ' +
+    'LEARNING SIGNAL that trains the agent\'s skill-edit decisions — fed into DualAdv-GRPO, an advantage-separation ' +
+    'scheme, alongside trajectory-informed skill review — not merely a retirement threshold; SkillMaster reports +8.8% ' +
+    'success on ALFWorld and +9.3% on WebShop over prior SOTA. The college reuses the same quantity as a lifecycle ' +
+    "keep/retire estimate, the derived application: instead of asking 'is this skill good?' (unanswerable), ask " +
+    "'what's the expected delta if we ship/retire it?' (answerable via paired-trace audit at a fixed cost). The " +
+    'pattern extends `agent-counterfactual-audit` from observation ' +
     "(what did this skill do) to decision (what should we do about it). Operationally: every skill in the library " +
     'carries a counterfactual-utility estimate that is updated when the probe bank or the skill is touched; ' +
     'retirement candidates surface automatically when utility drops below a threshold.',

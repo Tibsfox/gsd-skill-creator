@@ -15,7 +15,7 @@ export const algorithmSteering: RosettaConcept = {
   name: "Algorithm Steering",
   domain: 'agent-systems',
   description:
-    "LLM code generators produce many behaviourally-correct programs for one spec, but which algorithm family they emit — recursive vs iterative, hashing vs sorting — is swayed by incidental prompt cues: wording, metadata, even typography. The Invisible Lottery (arXiv 2606.04057) names this cue-induced shift in output policy under fixed correctness: every candidate passes the same tests, so correctness-based selection is blind to it. For agent systems, non-functional properties like complexity, style, and security posture then drift with irrelevant surface features unless output policy is measured and controlled explicitly.",
+    "LLM code generators produce many behaviourally-correct programs for one spec, but which algorithm family they emit — recursive vs iterative, hashing vs sorting — is swayed by incidental prompt cues: wording, metadata, even typography. The Invisible Lottery (arXiv 2606.04057) names this cue-induced shift in output policy under fixed correctness: every candidate passes the same tests, so correctness-based selection is blind to it. Across 46,535 controlled experiments (11 tasks, 19 cue types, 15 model configurations) the authors measure algorithm-family shifts of up to 100 percentage points — even on applied, security-relevant tasks such as rate limiting — and find that directly naming the target algorithm in the spec is the most reliable mitigation they tested. For agent systems, non-functional properties like complexity, style, and security posture then drift with irrelevant surface features unless output policy is measured and controlled explicitly.",
   panels: new Map(),
   relationships: [
     {

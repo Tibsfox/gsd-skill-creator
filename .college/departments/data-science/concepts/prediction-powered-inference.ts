@@ -33,10 +33,16 @@ export const predictionPoweredInference: RosettaConcept = {
     'PPI forms a prediction-powered estimate theta_f (from f over the large unlabeled ' +
     'set) minus a rectifier Delta = mean(f(X) - Y) measured on the labeled set, which ' +
     'acts as a variance-reducing control variate that debiases the imputation. Coverage ' +
-    'holds for any predictor f, however inaccurate, while the interval tightens as f ' +
-    'sharpens; PPI++ tunes a power parameter lambda to reach the semiparametrically ' +
-    'efficient variance. The framework covers any M-estimation estimand -- means, ' +
-    'quantiles, and GLM coefficients (Angelopoulos et al., 2023; arXiv:2606.08730).',
+    'holds for any predictor f, however inaccurate -- provided the labeled and unlabeled ' +
+    'samples are drawn from the same distribution (simple random sampling) -- while the ' +
+    'interval tightens as f sharpens; PPI++ tunes a power parameter lambda to reach the ' +
+    'semiparametrically efficient variance. The framework covers any M-estimation estimand ' +
+    '-- means, quantiles, and GLM coefficients. The 2026 source (Statistical Optimality of ' +
+    'Prediction-Powered Inference) reframes PPI as M-estimation and, via its efficient ' +
+    'influence function, proves PPI attains the semiparametric efficiency bound exactly ' +
+    'when the predictor is score-calibrated (its output matches the true conditional ' +
+    'expectation), with cross-fitting extending the guarantee to learned predictors ' +
+    '(Angelopoulos et al., 2023; arXiv:2606.08730).',
   panels: new Map([
     ['python', {
       panelId: 'python',

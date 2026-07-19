@@ -15,8 +15,8 @@ export const aperiodicWangTilesSession: TrySessionDefinition = {
   title: 'Aperiodic Wang Tiles: Tiling the Plane Without Ever Repeating',
   description:
     'A guided first pass through aperiodic order: match colored tile edges, separate ' +
-    'periodic from aperiodic tilings, force a stripe density to a quadratic irrational, ' +
-    'and meet the 24-tile Penrose encoding.',
+    'periodic from aperiodic tilings, force a stripe density to a quadratic irrational ' +
+    'via a quadrilateral circumscribed to a parabola, and meet the 24-tile Penrose encoding.',
   estimatedMinutes: 21,
   prerequisites: [],
   steps: [

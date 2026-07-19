@@ -5,14 +5,15 @@ export const dynamicAutonomy: RosettaConcept = {
   name: 'Dynamic Autonomy',
   domain: 'agent-systems',
   description:
-    "Per-task-class autonomy that tightens on correction and loosens on clean runs. The 2026 framing (Hedwig, arxiv " +
-    '`2605.11495v1`) treats autonomy as a moving ledger, not a static configuration: every correction the user makes ' +
-    'on a task class lowers the autonomy floor for that class (more confirmation gates, smaller batches, more ' +
-    'explicit acknowledgement); every clean run raises it. Two timescales: the ledger updates online per correction, ' +
-    'and an offline intent-recovery audit runs post-execution to attribute corrections correctly. The pattern is the ' +
-    'opposite of one-shot per-mission autonomy settings — autonomy emerges from the trajectory record, not from ' +
-    "configuration. Closes the failure mode where an agent system feels right at first run but drifts toward " +
-    'over-confidence as the task distribution shifts.',
+    "Autonomy that tightens on correction and loosens on clean runs, rather than being fixed once per mission. " +
+    'Hedwig (arxiv `2605.11495v1`, "Dynamic Autonomy for Coding Agents Under Local Oversight") is a CLI coding agent ' +
+    'that treats autonomy as a moving target: motivated by a formative survey of 21 software engineers who found ' +
+    'calibrating autonomy frustrating and held evolving oversight preferences, it learns an evolving set of ' +
+    'behavioral guidelines from developer decisions and feedback across sessions. Each correction lowers the autonomy ' +
+    'floor (more confirmation gates, smaller batches, more explicit acknowledgement); each clean run raises it. The ' +
+    'pattern is the opposite of one-shot per-mission autonomy settings — autonomy emerges from the interaction ' +
+    "record, not from a global fixed configuration. Closes the failure mode where an agent system feels right at " +
+    'first run but drifts toward over-confidence as the task distribution shifts.',
   panels: new Map(),
   relationships: [
     {

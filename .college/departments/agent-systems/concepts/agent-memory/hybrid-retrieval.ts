@@ -6,13 +6,16 @@ export const hybridRetrieval: RosettaConcept = {
   domain: 'agent-systems',
   description:
     'Combine a lexical channel (BM25 over surface forms) and a dense channel (embedding cosine over learned ' +
-    'representation) into a single retrieval surface. The 2026 finding (arxiv `2605.14503v1`) is sharp: retriever ' +
-    'choice dominates generator choice on retrieval-heavy tasks, and BM25 alone wins on tasks where surface forms ' +
-    "carry the signal (identifiers, error messages, exact phrases) while dense alone wins on semantic-match tasks " +
-    '(paraphrases, conceptual neighbours). The combination outperforms either alone when the channels are routed by ' +
-    'intent (Theme B). Implication for gsd-skill-creator: the existing dense-embedding-only retrieval is one channel ' +
-    'in a planned `RetrievalStrategy` interface; a BM25 channel is a sibling, not a replacement. The combination is ' +
-    'gated by `agent-intent-routing`.',
+    'representation) into a single retrieval surface. The 2026 component-wise ablation (arxiv `2605.14503v1`, ' +
+    '21 methods spanning code generation, code summarization, and code repair) lands two sharp findings: retriever ' +
+    'choice influences end-to-end quality more than generator choice, and classic BM25 is remarkably robust — ' +
+    'frequently competitive with, and on surface-form-heavy tasks (identifiers, error messages, exact phrases) ' +
+    'beating, both dense and hybrid, inverting the assumption that bigger embeddings always win. Dense earns its ' +
+    'keep on semantic-match tasks (paraphrases, conceptual neighbours). That makes a hybrid surface a routing ' +
+    'problem rather than a free win: the payoff comes from sending each query to the channel its signal lives in. ' +
+    'Implication for gsd-skill-creator: the existing dense-embedding-only retrieval is one channel ' +
+    'in a planned `RetrievalStrategy` interface; a BM25 channel is a sibling, not a replacement, and the ' +
+    'combination is gated by `agent-intent-routing` (Theme B).',
   panels: new Map(),
   relationships: [
     {

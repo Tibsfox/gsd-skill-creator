@@ -6,13 +6,17 @@ export const memoryConsolidation: RosettaConcept = {
   domain: 'agent-systems',
   description:
     'An offline phase that merges, decays, and re-indexes long-lived memory between active sessions. The 2026 framing ' +
-    '(arxiv `2605.08538v1`) treats consolidation as the only escape from unbounded growth: read-side filtering at ' +
+    '(arxiv `2605.08538v1`, where consolidation — there sleep-phase consolidation — is one of six coupled memory ' +
+    'mechanisms alongside engram maturation) treats consolidation as the only escape from unbounded growth: ' +
+    'read-side filtering at ' +
     'retrieval time defers the problem but does not solve it. Three operations recur — merge (combine ' +
     'near-duplicate records), decay (lower access weight on stale records), reconsolidation (re-encode records ' +
     'that were modified at retrieval time so the next read sees the modification). The pattern is the memory ' +
     "instantiation of fast/slow co-evolution (Theme D): retrieval runs online per task, consolidation runs offline " +
     'at session/milestone boundaries. Closes the failure mode where an agent system that runs for weeks accumulates ' +
-    'memory faster than it forgets and eventually drowns its own retrieval. Anchored at the rosetta-core level as Concept 10.',
+    'memory faster than it forgets and eventually drowns its own retrieval. On a VSCode issue-tracking workload the ' +
+    'source system cut stored records by 58% while holding 97.2% retention precision — evidence that offline ' +
+    'consolidation buys bounded storage without sacrificing recall. Anchored at the rosetta-core level as Concept 10.',
   panels: new Map(),
   relationships: [
     {

@@ -27,11 +27,15 @@ export const dualSpaceInterpolation: RosettaConcept = {
   domain: 'mathematics',
   description: 'How do Lagrange polynomials, Hermite splines, and trigonometric interpolation turn out ' +
     'to be one theorem? Each interpolation condition -- evaluate here, match a derivative there, sample ' +
-    'this frequency -- is a linear functional on a finite-dimensional function space, and interpolation ' +
-    'is solvable exactly when those functionals form a basis of the dual space. That single ' +
-    'existence-uniqueness criterion replaces a dozen special cases, and the dual basis (Lagrange cardinal ' +
-    'functions, Hermite blending functions, the discrete Fourier transform) writes the interpolant ' +
-    'explicitly, decoupling the conditions from whatever basis spans the space (arXiv:2606.22671, 2026).',
+    'this frequency -- is a linear functional on a finite-dimensional function space: point evaluation ' +
+    'f -> f(x_k), the Hermite derivative-matching functional f -> f\'(x_k), or a Fourier sample ' +
+    'f -> <f, e^(i k x)>. Interpolation is solvable exactly when those functionals form a basis of the ' +
+    'dual space, equivalently when the collocation matrix A[i,j] = L_i(phi_j) is invertible -- the Haar ' +
+    '(unisolvence) condition, the single existence-uniqueness theorem that replaces a dozen special ' +
+    'cases. Its dual basis, pinned by the biorthogonality L_i(psi_j) = delta_ij (the Lagrange cardinal ' +
+    'functions, Hermite blending functions, and discrete Fourier transform), writes the interpolant ' +
+    'explicitly as f -> sum_i L_i(f) psi_i, decoupling the conditions from whatever basis spans the ' +
+    'space (arXiv:2606.22671, 2026).',
   panels: new Map([
     ['python', {
       panelId: 'python',

@@ -31,8 +31,12 @@ export const bakryEmeryCurvatureDimension: RosettaConcept = {
     'iterate Gamma_2, the curvature-dimension condition CD(K,N) demands Gamma_2(f) >= K*Gamma(f) + ' +
     '(1/N)(Lf)^2 for every f. On a graph L is the Laplacian, so CD(K,N) turns curvature into a ' +
     'per-vertex semidefinite test, the discrete shadow of the Bochner formula Gamma_2 = |Hess f|^2 + ' +
-    'Ric(grad f). Non-negative curvature forces polynomial volume growth, a discrete Bishop-Gromov ' +
-    'bound, distinguishing this transport-free route from Ollivier-Ricci curvature (arXiv:2606.11094, 2026).',
+    'Ric(grad f). On an edge-regular graph, non-negative curvature forces polynomial volume growth ' +
+    'together with a volume-doubling estimate whose constant depends only on the vertex degree -- a ' +
+    'discrete Bishop-Gromov bound. This also pins down the otherwise-abstract dimension parameter N: ' +
+    'any edge-regular graph meeting CD(K, infinity) automatically satisfies CD(K, n) for an explicit, ' +
+    'universal, optimal n fixed by the graph, so N is not a free choice. It is a transport-free route ' +
+    'distinct from Ollivier-Ricci curvature (arXiv:2606.11094, 2026).',
   panels: new Map([
     ['python', {
       panelId: 'python',

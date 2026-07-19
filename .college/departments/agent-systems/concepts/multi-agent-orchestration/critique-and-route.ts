@@ -6,12 +6,15 @@ export const critiqueAndRoute: RosettaConcept = {
   domain: 'agent-systems',
   description:
     'A finite-horizon MDP controller that replaces one-shot dispatch in a multi-agent system. Each step the controller ' +
-    "looks at the current draft output (not a prediction over it), critiques it against the task brief, and routes the " +
-    'next action — re-prompt the same agent, delegate to a different one, ask for clarification, or terminate. The ' +
-    '2026 framing (Fang et al., arxiv `2605.08686`) shows that critique-and-route dominates fixed pipelines on ' +
-    'long-horizon tasks where the right delegation order depends on what was actually produced so far, not what was ' +
-    "predicted to be produced. The controller is the multi-agent instantiation of the route-before-act principle; " +
-    'the routing signal is the draft output itself (Theme E: execution-grounded everything).',
+    "looks at the current draft output (not a prediction over it), critiques it against the task brief, and decides " +
+    'stop-or-continue — terminating, re-prompting the same agent, or delegating to a different one drawn from a ' +
+    'heterogeneous pool of LLMs. The 2026 framing (Fang et al., arxiv `2605.08686`) shows that critique-and-route ' +
+    'dominates fixed pipelines on long-horizon tasks where the right delegation order depends on what was actually ' +
+    "produced so far, not what was predicted to be produced. Trained by policy-gradient optimisation under a " +
+    'Lagrangian-relaxed objective with explicit agent-utilisation constraints, the controller rations the expensive ' +
+    'agent: it matches or narrows the gap to the strongest agent while calling it for under 25% of total turns. It is ' +
+    'the multi-agent instantiation of the route-before-act principle; the routing signal is the draft output itself ' +
+    '(Theme E: execution-grounded everything).',
   panels: new Map(),
   relationships: [
     {

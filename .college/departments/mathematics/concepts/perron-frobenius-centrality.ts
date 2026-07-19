@@ -30,7 +30,9 @@ export const perronFrobeniusCentrality: RosettaConcept = {
     'whose eigenvector is strictly positive; that eigenvector is eigenvector centrality, and ' +
     'power iteration converges to it. Damping it into a stochastic matrix gives PageRank, and ' +
     'the two-mode version gives hubs-and-authorities. A generalized Perron-Frobenius property ' +
-    'extends the guarantee to complex-valued edge weights (arXiv:2606.12026, 2026).',
+    'extends the guarantee to complex-valued matrices, yielding generalized eigenvector-based ' +
+    'centrality measures for the complex-weighted networks of quantum information, quantum ' +
+    'chemistry, electrodynamics, and machine learning (arXiv:2606.12026, 2026).',
   panels: new Map([
     ['python', {
       panelId: 'python',

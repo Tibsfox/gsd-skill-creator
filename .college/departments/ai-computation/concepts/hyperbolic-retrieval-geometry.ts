@@ -24,8 +24,12 @@ export const hyperbolicRetrievalGeometry: RosettaConcept = {
   description: 'Retrieval quality depends on whether the embedding geometry matches the data. Over ' +
     'tree-structured external knowledge, Euclidean space grows only polynomially with radius while a ' +
     'hierarchy branches exponentially, so distinct subtrees crowd together — producing hubness (a few ' +
-    'points that are everyone\'s nearest neighbour) and lost semantic granularity. Embedding retrieval ' +
-    'in hyperbolic space, whose volume grows exponentially, matches the tree geometry and restores ' +
+    'points that are everyone\'s nearest neighbour) and lost semantic granularity. Concretely, a tree ' +
+    'of branching factor b has about b^h nodes at depth h, but a Euclidean ball of radius r holds ' +
+    'volume only ~r^d — so an exponentially branching hierarchy packed into fixed-dimensional ' +
+    'Euclidean space forces far-apart branches to collide, whereas hyperbolic volume itself grows ' +
+    'exponentially with radius and leaves room for each branch. Embedding retrieval ' +
+    'in hyperbolic space thus matches the tree geometry and restores ' +
     'granularity (arXiv 2606.03307, 2026). The concept names a representational cause of retrieval ' +
     'degradation — geometry mismatch — rather than a ranking or grounding failure.',
   panels: new Map(),

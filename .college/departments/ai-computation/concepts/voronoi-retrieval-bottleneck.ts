@@ -26,7 +26,8 @@ export const voronoiRetrievalBottleneck: RosettaConcept = {
     '— its Voronoi complexity — equals the sign-rank of the target relevance matrix at fixed embedding ' +
     'dimension (arXiv 2606.28359v1, 2026). When the task demands more distinct patterns than the ' +
     'dimension affords, no amount of training can fit them. The result yields a label-free Capacity ' +
-    'Utilization Score that predicts per-query retrieval failure a priori, turning a representational ' +
+    'Utilization Score that predicts per-query retrieval failure a priori — flagging unservable ' +
+    'queries at AUC above 0.8 with no relevance labels — turning a representational ' +
     'ceiling into an actionable diagnostic before compute is spent.',
   panels: new Map(),
   relationships: [
