@@ -26,6 +26,11 @@ import {
   rateDistortionDeductiveSource,
   localLinearitySteering,
 } from './index.js';
+import { permutationInvariantEmbedding } from './permutation-invariant-embedding.js';
+import { isotropicEmbedding } from './isotropic-embedding.js';
+import { matchedEvidenceUtilization } from './matched-evidence-utilization.js';
+import { taskSpecificKnowledgeLocalization } from './task-specific-knowledge-localization.js';
+import { unlearningSuppressionReversal } from './unlearning-suppression-reversal.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const juneConcepts: RosettaConcept[] = [
@@ -58,6 +63,12 @@ const allDeptConcepts: RosettaConcept[] = [
   semanticChannel,
   rateDistortionDeductiveSource,
   localLinearitySteering,
+  permutationInvariantEmbedding,
+  isotropicEmbedding,
+  matchedEvidenceUtilization,
+  attentionReadoutGap,
+  taskSpecificKnowledgeLocalization,
+  unlearningSuppressionReversal,
 ];
 
 describe('AI Computation Department -- June-2026 arXiv concepts', () => {

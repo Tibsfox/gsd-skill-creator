@@ -28,6 +28,11 @@ export const counterfactualUtility: RosettaConcept = {
       targetId: 'agent-paired-trace-audit',
       description: 'Utility is computed from paired-trace audit deltas on the probe bank',
     },
+    {
+      type: "analogy",
+      targetId: "log-causal-reasoning",
+      description: "Counterfactual utility asks the classic but-for question — if this skill or step had been removed, would the outcome have changed? — which is exactly the counterfactual analysis at the heart of causal reasoning. The utility estimate is a causal-contribution measurement, not a correlation.",
+    },
   ],
   complexPlanePosition: {
     real: -0.4,

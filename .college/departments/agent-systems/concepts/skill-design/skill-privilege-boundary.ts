@@ -37,6 +37,11 @@ export const skillPrivilegeBoundary: RosettaConcept = {
       targetId: 'security-capability-model',
       description: 'Privilege boundary is the agent-system instantiation of capability-based security',
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-self-mutating-poisoning",
+      description: "Self-mutating poisoning already depends on skill-injection-guardian and cites this privilege boundary as its blast-radius containment layer. Making the reciprocal link explicit surfaces the defense-composition from both sides: the boundary caps what a poisoned self-mutating skill can reach, and the attack concept is the threat that motivates the boundary.",
+    },
   ],
   complexPlanePosition: {
     real: -0.5,

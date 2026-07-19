@@ -38,6 +38,11 @@ export const memoryDepth: RosettaConcept = {
       targetId: "agent-hybrid-retrieval",
       description: "Represents the access half of the access-vs-depth dichotomy — hybrid retrieval fetches facts at query time, the read-side counterpart to depth's write-side parametric consolidation.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-experience-internalization-collapse",
+      description: "The internalization-collapse warning — that agents flatten principle-level lessons into instance-level echoes — is precisely the write-admission rationale behind depth's surprise/valence gate: admitting shallow, low-surprise instances is what drives the collapse, so depth's gate is the defense the collapse concept motivates.",
+    },
   ],
   complexPlanePosition: {
     real,

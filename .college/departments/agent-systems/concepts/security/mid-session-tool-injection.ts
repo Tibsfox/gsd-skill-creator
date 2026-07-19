@@ -40,6 +40,11 @@ export const midSessionToolInjection: RosettaConcept = {
       targetId: 'agent-semantic-tool-transactions',
       description: 'MSTI\'s proposed defense of lifecycle consistency across registration and invocation mirrors transactional integrity over tool calls — treating a registration-then-invocation sequence as an atomic, tamper-checked unit rather than independently trusted events.',
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-isolated-planning-poison-defense",
+      description: "The reciprocal attack/defense link: the Tool Framing vector here (poisoned description/readOnlyHint/inputSchema) is exactly the tool-metadata surface that Tool-Guard's isolated planning defends by keeping planning out of reach of poisoned tool descriptions.",
+    },
   ],
   complexPlanePosition: {
     real,

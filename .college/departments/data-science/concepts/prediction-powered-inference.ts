@@ -76,6 +76,11 @@ export const predictionPoweredInference: RosettaConcept = {
       targetId: 'data-science-conformal-prediction',
       description: 'Both wrap a black-box predictor to obtain finite-sample-valid guarantees: PPI for parameter inference (CIs, p-values), conformal prediction for prediction sets',
     },
+    {
+      type: "analogy",
+      targetId: "data-science-causal-density-ratio",
+      description: "PPI's rectifier is a control-variate cousin of change-of-measure reweighting: both correct a biased-but-cheap estimate using a re-weighting term, so linking to causal-density-ratio exposes the shared importance-weighting structure behind the two corrections.",
+    },
   ],
   complexPlanePosition: {
     real,

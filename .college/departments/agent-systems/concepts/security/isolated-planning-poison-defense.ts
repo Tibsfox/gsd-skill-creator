@@ -33,6 +33,11 @@ export const isolatedPlanningPoisonDefense: RosettaConcept = {
       targetId: "skill-injection-guardian",
       description: "Tool-Guard's quarantine-the-influence-but-keep-the-tool tactic mirrors skill-injection-guardian's neutralize-the-embedded-instructions-but-keep-the-file defense, both isolating malicious steering while retaining the underlying artifact's legitimate function.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-mid-session-tool-injection",
+      description: "This is the defense half of an attack/defense pair on the tool-metadata channel: mid-session tool injection's Tool Framing (poisoning a tool's name, description, readOnlyHint, and inputSchema) is the concrete runtime instance of the cross-tool description poisoning that isolated planning is designed to neutralize.",
+    },
   ],
   complexPlanePosition: {
     real,

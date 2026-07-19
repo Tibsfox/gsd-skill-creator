@@ -34,6 +34,16 @@ export const memoryConsolidation: RosettaConcept = {
       targetId: 'agent-fast-slow-coevolution',
       description: 'Memory consolidation is the fast/slow pattern applied to memory rather than to topology',
     },
+    {
+      type: "analogy",
+      targetId: "psych-memory-consolidation",
+      description: "The agent mechanism is a direct structural borrow from the neuroscience of memory consolidation: both replay recent traces during an offline phase to stabilize durable memory and shed transient detail. The psych concept supplies the biological prior that motivates the agent design.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "agent-hybrid-retrieval",
+      description: "Consolidation and hybrid retrieval share the multi-cue mechanism: consolidation writes traces addressable by several cues, and hybrid retrieval is what later exploits those cues by fusing lexical and dense matches. The write-side and read-side of the same multi-cue memory contract.",
+    },
   ],
   complexPlanePosition: {
     real: -0.3,

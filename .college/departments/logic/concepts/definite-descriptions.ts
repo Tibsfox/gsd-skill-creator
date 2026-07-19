@@ -46,6 +46,11 @@ export const definiteDescriptions: RosettaConcept = {
       targetId: "logic-many-valued-logic",
       description: "An opposing response to reference failure -- Russell keeps exactly two truth values by pushing the empty-description case into falsity via scope, whereas many-valued logic instead admits a third, undefined value for the same sentences.",
     },
+    {
+      type: "cross-reference",
+      targetId: "log-formal-proof-systems",
+      description: "Russell's iota-operator theory of descriptions is discharged through the elimination rules of a sequent/natural-deduction calculus; linking to formal proof systems surfaces where the 'the F' contextual definition is actually proved in and out of a derivation.",
+    },
   ],
   complexPlanePosition: {
     real,

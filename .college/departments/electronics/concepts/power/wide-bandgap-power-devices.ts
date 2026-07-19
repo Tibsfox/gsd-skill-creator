@@ -40,6 +40,16 @@ export const wideBandgapPowerDevices: RosettaConcept = {
       targetId: 'elec-clock-gating-dynamic-power',
       description: 'A converter\'s frequency-dependent switching loss (C_oss*V^2*f_sw) is the power-electronics analogue of CMOS dynamic power P = C*V^2*f: in both, energy per event times switching rate sets a frequency-limited loss floor that motivates minimizing switched charge.',
     },
+    {
+      type: "cross-reference",
+      targetId: "elec-doherty-power-amplifier",
+      description: "The Doherty amplifier depends on wide-bandgap (GaN) devices for high-frequency, high-efficiency RF power stages, but the dependency was one-directional. This reciprocal edge points back to the downstream application that consumes WBG's high-electron-mobility, low-C_oss advantages.",
+    },
+    {
+      type: "analogy",
+      targetId: "elec-low-power-bus-encoding",
+      description: "WBG switching loss (C_oss*V^2*f_sw) and low-power bus encoding (alpha*C*V^2*f on interconnect) are two faces of the same CV^2f dynamic-energy law across power and digital domains. This edge closes the third leg of the CV^2f cluster so all three members interlink.",
+    },
   ],
   complexPlanePosition: {
     real,

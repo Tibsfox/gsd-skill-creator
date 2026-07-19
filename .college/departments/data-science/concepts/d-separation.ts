@@ -74,6 +74,11 @@ export const dSeparation: RosettaConcept = {
       targetId: 'data-probability-basics',
       description: 'd-separation is a graphical shortcut for conditional independence, so it presupposes conditional probability and statistical independence as its underlying semantics',
     },
+    {
+      type: "cross-reference",
+      targetId: "data-science-causal-density-ratio",
+      description: "Causal density ratio invokes d-separation to decide which conditioning sets license the q(x)/p(x) reweighting; adding the back-link closes the causal-cluster edge so a learner on d-separation can follow forward into how blocked/unblocked paths govern change-of-measure validity.",
+    },
   ],
   complexPlanePosition: {
     real,

@@ -35,6 +35,11 @@ export const clockGatingDynamicPower: RosettaConcept = {
       targetId: 'elec-semiconductor-physics',
       description: 'The quadratic V^2 dependence and the fact that CMOS burns switching energy (roughly C*V^2 per transition) come from the underlying transistor/capacitor charge-discharge physics that clock gating exploits.',
     },
+    {
+      type: "analogy",
+      targetId: "elec-wide-bandgap-power-devices",
+      description: "Both concepts exploit the same P = alpha*C*V^2*f dynamic-power law: clock gating drops the activity factor alpha to zero on idle CMOS logic, while wide-bandgap devices attack the same energy term via C_oss*V^2*f_sw switching loss. Reciprocates the existing WBG->clock-gating analogy so the CV^2f cluster is bidirectional.",
+    },
   ],
   complexPlanePosition: {
     real,

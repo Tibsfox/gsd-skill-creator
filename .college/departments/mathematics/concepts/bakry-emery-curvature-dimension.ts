@@ -70,6 +70,11 @@ export const bakryEmeryCurvatureDimension: RosettaConcept = {
       targetId: 'math-exponential-decay',
       description: 'Non-negative Bakry-Émery curvature controls the heat semigroup, yielding exponential-type gradient contraction and the volume-growth estimates that bound relaxation to equilibrium',
     },
+    {
+      type: "cross-reference",
+      targetId: "math-geometric-graph-manifold-recovery",
+      description: "Both concepts live in the discrete-curvature cluster: geometric-graph-manifold-recovery already cites Bakry-Emery's curvature-dimension condition as the continuum criterion its graph estimator approximates, so the loop closes when Bakry-Emery points back to the graph-recovery application that discretizes it.",
+    },
   ],
   complexPlanePosition: {
     real,

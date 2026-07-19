@@ -33,6 +33,11 @@ export const buildingToTheTest: RosettaConcept = {
       targetId: "agent-knowing-doing-gap",
       description: "The validation-self-awareness deficit mirrors the knowing-doing gap: an agent can satisfy the oracle (knowing the target behavior) yet fail to ship a usable library (doing), so score and delivery diverge.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-false-success",
+      description: "Both are sibling score-versus-reality divergences: building-to-the-test inflates a metric by optimizing for the evaluator, while false-success reports a passing signal the actual work never achieved. They share the knowing-doing anchor — a measured outcome diverging from real capability.",
+    },
   ],
   complexPlanePosition: {
     real,

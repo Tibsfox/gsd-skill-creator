@@ -58,6 +58,13 @@ import {
   skillIrCompilation,
   skillPrivilegeBoundary,
 } from './index.js';
+import { runDependencyGraph } from './integration-evaluation/run-dependency-graph.js';
+import { governanceTaxonomy } from './multi-agent-orchestration/governance-taxonomy.js';
+import { selfMutatingPoisoning } from './skill-design/self-mutating-poisoning.js';
+import { heldOutEvolutionGate } from './skill-design/held-out-evolution-gate.js';
+import { multimodalSkillDistillation } from './skill-design/multimodal-skill-distillation.js';
+import { planTensorRank } from './multi-agent-orchestration/plan-tensor-rank.js';
+import { memoryValidityGate } from './agent-memory/memory-validity-gate.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const juneConcepts: RosettaConcept[] = [
@@ -138,6 +145,18 @@ const allDeptConcepts: RosettaConcept[] = [
   skillAsArtifact,
   skillIrCompilation,
   skillPrivilegeBoundary,
+  runDependencyGraph,
+  governanceTaxonomy,
+  selfMutatingPoisoning,
+  compositionalSkillEvolution,
+  heldOutEvolutionGate,
+  traceToSkillInduction,
+  skillCoverageMetric,
+  capabilityControlledSelfEvolution,
+  multimodalSkillDistillation,
+  selectorPriorityArbitration,
+  planTensorRank,
+  memoryValidityGate,
 ];
 
 describe('Agent Systems Department -- June-2026 arXiv concepts', () => {

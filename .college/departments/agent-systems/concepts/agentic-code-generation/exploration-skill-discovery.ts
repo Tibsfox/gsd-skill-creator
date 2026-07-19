@@ -33,6 +33,11 @@ export const explorationSkillDiscovery: RosettaConcept = {
       targetId: "agent-trace-to-skill-induction",
       description: "ASPIRE's library step is trace-to-skill induction specialized to robotics: validated repairs mined from multimodal execution traces are distilled into transferable, reusable skills.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-active-experimentalist",
+      description: "Both are training-free-ish exploration methods that accrete a reusable, composable skill library, so they must state their distinguishing axis: active-experimentalist (HExA) does query-relevant experiment design — deliberately probing the environment to resolve the current task's uncertainty — whereas exploration-skill-discovery does evolutionary program search, mutating and selecting whole programs to grow the library. Naming the sibling keeps the pair from collapsing into a perceived duplicate.",
+    },
   ],
   complexPlanePosition: {
     real,

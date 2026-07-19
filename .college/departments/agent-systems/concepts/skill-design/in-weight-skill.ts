@@ -38,6 +38,11 @@ export const inWeightSkill: RosettaConcept = {
       targetId: "agent-compositional-kv-cache",
       description: "Both remove the cost of re-injecting skill tokens each step; the KV-cache approach caches the skill's in-context representation, while in-weight skill drops it from context entirely by encoding the skill in adapter weights.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-federated-skill-evolution",
+      description: "Federated skill evolution defines a non-text skill unit (the shareable diff-patch) that parallels this concept's weight-adapter unit; the two together frame the design axis of how a skill is represented when it moves between agents. Reciprocates the sibling pairing.",
+    },
   ],
   complexPlanePosition: {
     real,

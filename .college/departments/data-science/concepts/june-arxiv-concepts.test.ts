@@ -24,6 +24,7 @@ import {
   driftDetection,
   compressionSpectrum,
 } from './index.js';
+import { causalDensityRatio } from './causal-density-ratio.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const juneConcepts: RosettaConcept[] = [
@@ -53,6 +54,8 @@ const allDeptConcepts: RosettaConcept[] = [
   knowledgeDrift,
   driftDetection,
   compressionSpectrum,
+  causalDensityRatio,
+  conformalPrediction,
 ];
 
 describe('Data-Science Department -- June-2026 arXiv concepts', () => {

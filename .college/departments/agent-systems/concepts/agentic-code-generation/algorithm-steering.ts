@@ -38,6 +38,11 @@ export const algorithmSteering: RosettaConcept = {
       targetId: "agent-harness-as-substrate",
       description: "The steering cues — wording, metadata, typography — live in the prompt and harness, so the harness acts as a latent substrate that shapes which algorithm family gets generated, not merely how the agent executes.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-constraint-decay",
+      description: "Both concepts describe non-functional/behavioral properties silently drifting while the functional test suite stays green: algorithm steering shows an agent can swap the underlying algorithm (and thus performance characteristics) without changing observable pass/fail, and constraint decay shows non-functional constraints eroding under the same green-suite blind spot. This completes the reciprocal sibling edge already present on constraint-decay's side.",
+    },
   ],
   complexPlanePosition: {
     real,

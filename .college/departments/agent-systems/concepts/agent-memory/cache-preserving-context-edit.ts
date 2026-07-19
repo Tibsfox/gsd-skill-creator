@@ -33,6 +33,16 @@ export const cachePreservingContextEdit: RosettaConcept = {
       targetId: "agent-single-token-memory-compression",
       description: "Both reduce token footprint, but single-token compression rewrites the sequence and breaks prefixes, whereas cache-preserving edit deliberately trades sparsity to keep the prefix — and thus the cache — intact.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-context-resident-state",
+      description: "This concept is the HOW-to-evict-cheaply complement to the WHY-eviction-is-dangerous cluster: context-resident-state explains why dropping a still-needed block is costly, which is precisely the risk a cache-preserving edit is engineered to avoid while keeping the KV prefix intact.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "agent-load-bearing-eviction",
+      description: "Load-bearing-eviction names the failure mode this technique defends against — removing a block other content silently depends on. Cache-preserving context edits are the mitigation: they mutate context without invalidating the cached prefix, so eviction never becomes load-bearing damage.",
+    },
   ],
   complexPlanePosition: {
     real,

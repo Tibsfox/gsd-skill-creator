@@ -38,6 +38,11 @@ export const safetyRuleEvolution: RosettaConcept = {
       targetId: "agent-structured-spec-gate",
       description: "Functions like a structured spec gate — the learned rules act as an admission predicate on agent behavior — but the spec here is inductively synthesized from labeled examples rather than authored up front, so the gate's criteria shift as annotations accumulate.",
     },
+    {
+      type: "analogy",
+      targetId: "agent-nugget-grounded-judging",
+      description: "Sibling human-in-the-loop specification concepts: safety-rule-evolution compiles human safe/unsafe annotations into governing rules, just as nugget-grounded-judging compiles human-authored nuggets into a grading rubric. Both convert discrete human judgments into a durable machine-applied specification.",
+    },
   ],
   complexPlanePosition: {
     real,

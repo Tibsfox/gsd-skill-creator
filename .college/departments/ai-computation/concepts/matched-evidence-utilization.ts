@@ -33,6 +33,11 @@ export const matchedEvidenceUtilization: RosettaConcept = {
       targetId: "ai-computation-calibrated-retrieval-budget",
       description: "A calibrated retrieval budget can be tuned from this diagnostic's retrieved-evidence versus full-context conditions, which reveal when retrieval underperforms compact whole-context supply of the same evidence.",
     },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-lexical-density-limit",
+      description: "Reciprocal sibling: matched-evidence-utilization holds the evidence fixed and varies context to show recovery drops, which is precisely the mechanism lexical-density-limit names — dense or long input suppresses utilization of otherwise-present evidence.",
+    },
   ],
   complexPlanePosition: {
     real,

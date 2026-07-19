@@ -36,6 +36,11 @@ export const complianceTraceCheck: RosettaConcept = {
       description:
         'Both bring formal methods to agent behavior; MANTRA uses SMT to prove a synthesized compliance benchmark consistent, rather than verifying an agent design directly',
     },
+    {
+      type: "analogy",
+      targetId: "logic-instruction-autoformalization",
+      description: "MANTRA autoformalizes procedural manuals into SMT-checkable compliance predicates, mirroring how instruction-autoformalization translates natural-language instructions into a formal specification. Both turn informal human-authored procedure into a machine-checkable logical form before verifying a trace against it.",
+    },
   ],
   complexPlanePosition: {
     real: -0.5,

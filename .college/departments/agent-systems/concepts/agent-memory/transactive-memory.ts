@@ -38,6 +38,11 @@ export const transactiveMemory: RosettaConcept = {
       targetId: "agent-execution-grounded-selection",
       description: "When several retrieved peer trajectories plausibly apply, execution-grounded selection disambiguates which one to reuse, bridging the shared memory corpus to orchestration-time behavioural choice.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-memory-consolidation",
+      description: "Consolidation is the closest single-agent memory sibling to contrast against: it consolidates one agent's traces into durable memory, whereas transactive memory distributes who-knows-what across a population without consolidating content into any single store. The link anchors the single-agent-vs-population distinction.",
+    },
   ],
   complexPlanePosition: {
     real,

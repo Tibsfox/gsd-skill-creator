@@ -40,6 +40,11 @@ export const runDependencyGraph: RosettaConcept = {
       targetId: 'agent-paired-trace-audit',
       description: 'Both extract structure a raw trace omits; the paired-trace audit compares two traces to expose behavioral divergence, while the run dependency graph augments a single trace with a recovered dependency layer.',
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-long-range-dependency",
+      description: "The run-dependency graph is the DAG representation that surfaces long-range dependencies as explicit far-apart edges; long-range-dependency is the evaluation-relevant failure these edges expose when a distant producer feeds a much-later consumer.",
+    },
   ],
   complexPlanePosition: {
     real,

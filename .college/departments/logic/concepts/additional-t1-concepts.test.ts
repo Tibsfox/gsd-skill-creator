@@ -13,6 +13,8 @@ import {
   deonticLogic,
   aiVerifiedProof,
 } from './index.js';
+import { defeasibleDeonticCompilation } from './defeasible-deontic-compilation.js';
+import { instructionAutoformalization } from './instruction-autoformalization.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const concepts: RosettaConcept[] = [instructionAutoformalization];
@@ -21,6 +23,8 @@ const allDeptConcepts: RosettaConcept[] = [
   ...concepts,
   deonticLogic,
   aiVerifiedProof,
+  defeasibleDeonticCompilation,
+  instructionAutoformalization,
 ];
 
 describe('logic Department -- additional-material T1 concepts', () => {

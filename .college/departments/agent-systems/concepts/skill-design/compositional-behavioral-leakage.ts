@@ -38,6 +38,11 @@ export const compositionalBehavioralLeakage: RosettaConcept = {
       targetId: "agent-silent-failure-taxonomy",
       description: "Compositional behavioural leakage is a silent failure: it changes output without tripping pass/fail metrics, so it belongs to the taxonomy of defects that green test suites cannot see.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-compositional-skill-evolution",
+      description: "Compositional skill evolution's create/merge operators pull multiple skills into a single window, which is exactly the mechanism that widens the behavioral-leakage surface this concept warns about — every added or merged skill is another source of cross-skill interference to audit.",
+    },
   ],
   complexPlanePosition: {
     real,

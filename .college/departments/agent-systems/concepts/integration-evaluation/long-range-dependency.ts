@@ -34,6 +34,11 @@ export const longRangeDependency: RosettaConcept = {
       targetId: 'agent-paired-trace-audit',
       description: 'Paired-trace audit at depth 5-20 reveals consolidation/retrieval effects that single-task audit misses',
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-run-dependency-graph",
+      description: "Both model agent execution as a dependency DAG: long-range-dependency is the failure mode where a distant upstream node's output must reach a much-later node, and run-dependency-graph is the structure that makes those edges explicit and traceable.",
+    },
   ],
   complexPlanePosition: {
     real: -0.3,

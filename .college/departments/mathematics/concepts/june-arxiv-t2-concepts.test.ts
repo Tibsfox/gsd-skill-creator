@@ -44,6 +44,9 @@ import {
   dualSpaceInterpolation,
   transformUncertaintyPrinciple,
 } from './index.js';
+import { geometricGraphManifoldRecovery } from './geometric-graph-manifold-recovery.js';
+import { bregmanProjection } from './bregman-projection.js';
+import { cayleyGraphFourierEmbedding } from './cayley-graph-fourier-embedding.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const t2Concepts: RosettaConcept[] = [
@@ -95,6 +98,9 @@ const allDeptConcepts: RosettaConcept[] = [
   informationGeometry,
   dualSpaceInterpolation,
   transformUncertaintyPrinciple,
+  geometricGraphManifoldRecovery,
+  bregmanProjection,
+  cayleyGraphFourierEmbedding,
 ];
 
 describe('mathematics Department -- June-2026 arXiv T2 concepts', () => {

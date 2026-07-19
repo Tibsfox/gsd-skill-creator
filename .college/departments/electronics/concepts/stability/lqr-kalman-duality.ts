@@ -35,6 +35,11 @@ export const lqrKalmanDuality: RosettaConcept = {
       targetId: 'elec-absolute-stability-circle-criterion',
       description: 'Both rest on the same matrix machinery of optimal/robust control: the LQR-Kalman duality is governed by the matrix Riccati equation, while the circle criterion and KYP lemma tie a frequency-domain stability test to a matrix (Lyapunov/Riccati-type) inequality — a shared linear-algebra backbone for control-loop design.',
     },
+    {
+      type: "cross-reference",
+      targetId: "elec-feedback-linearization",
+      description: "The Kalman observer reconstructs the state estimate that feedback linearization's synthetic-input control law requires, since exact cancellation presumes access to the full state. Reciprocating the link closes the loop between state estimation (duality) and the nonlinear-cancellation controller that consumes those states.",
+    },
   ],
   complexPlanePosition: {
     real,

@@ -33,6 +33,11 @@ export const constraintDrift: RosettaConcept = {
       targetId: 'agent-coordination-surface',
       description: 'Constraint drift happens at the seams of the coordination surface; the surface is where to instrument',
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-governance-taxonomy",
+      description: "Both concepts treat governance and constraints not as static declarations but as maintained, auditable execution state that drifts and must be reconciled. Constraint drift is the failure mode the governance taxonomy classifies and provisions audit trails against, making them two views of the same lifecycle.",
+    },
   ],
   complexPlanePosition: {
     real: -0.6,

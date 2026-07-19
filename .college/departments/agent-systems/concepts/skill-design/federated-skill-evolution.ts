@@ -35,6 +35,11 @@ export const federatedSkillEvolution: RosettaConcept = {
       targetId: 'agent-skill-as-artifact',
       description: 'Treating the skill diff as the shared unit mirrors skills-as-artifacts: a library becomes a versioned, diffable object exchanged like git commits rather than an opaque model state.',
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-in-weight-skill",
+      description: "Both concepts fix the transport/representation UNIT of a skill: federated evolution ships diff-patches while in-weight skill encodes the skill as a weight-adapter. Pairing them contrasts a text-diff unit against a parametric unit — a natural sibling comparison.",
+    },
   ],
   complexPlanePosition: {
     real,

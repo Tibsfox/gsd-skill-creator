@@ -38,6 +38,11 @@ export const semanticConcurrencyControl: RosettaConcept = {
       targetId: "agent-episode-package",
       description: "The minutes-long transaction whose abort is ruinously expensive is an episode package, which is why discard-and-retry OCC is the wrong cost model for agent work.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-plan-tensor-rank",
+      description: "Plan-tensor-rank produces an offline CP-residual conflict map that already points here; this back-link closes the pair, letting the runtime concurrency controller consume that precomputed conflict structure as prior input rather than rediscovering contention at execution time.",
+    },
   ],
   complexPlanePosition: {
     real,

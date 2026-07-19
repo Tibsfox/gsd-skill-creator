@@ -49,6 +49,16 @@ export const hyperbolicRetrievalGeometry: RosettaConcept = {
       targetId: 'math-fractal-geometry',
       description: 'Hierarchical, self-similar tree data is naturally embedded in hyperbolic (negatively curved) space, the same fractal/branching geometry the mathematics department studies',
     },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-permutation-invariant-embedding",
+      description: "Sibling embedding-geometry defect: where hyperbolic-retrieval-geometry shows a flat Euclidean space fails to encode retrieval hierarchy, permutation-invariant-embedding shows a bag-of-tokens geometry fails to encode order. Both diagnose an embedding whose geometry throws away the structure the task depends on.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-isotropic-embedding",
+      description: "Explicit contrast: isotropic-embedding pushes for uniform, anisotropy-free spread, whereas hyperbolic-retrieval-geometry deliberately introduces negative curvature so hierarchy can be encoded. The two prescriptions are orthogonal fixes to distinct geometric pathologies and should be read against each other.",
+    },
   ],
   complexPlanePosition: {
     real,

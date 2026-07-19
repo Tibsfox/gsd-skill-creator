@@ -33,6 +33,11 @@ export const governanceDecayCompaction: RosettaConcept = {
       targetId: "agent-compliance-trace-check",
       description: "A compliance trace that assumes the policy stays in context is silently defeated once compaction drops it; constraint pinning restores the premise the trace depends on.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-action-authority-alignment",
+      description: "The reciprocal 'safety cannot live inside the model' pairing: governance decays because rules do not survive context-window compaction, while authority alignment fails because privilege cannot be reliably weight-encoded. Both demand an external enforcement layer that outlives the model's own state.",
+    },
   ],
   complexPlanePosition: {
     real,

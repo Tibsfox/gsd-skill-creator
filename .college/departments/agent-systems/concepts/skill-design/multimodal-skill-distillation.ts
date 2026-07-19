@@ -38,6 +38,11 @@ export const multimodalSkillDistillation: RosettaConcept = {
       targetId: "agent-hierarchical-memory-navigation",
       description: "The hierarchical Skill Wiki is organized and traversed much like hierarchical memory — coarse categories narrowing to concrete entries — so retrieval over it can reuse hierarchical-navigation techniques.",
     },
+    {
+      type: "dependency",
+      targetId: "agent-compositional-skill-evolution",
+      description: "Distilled multimodal skill entries are precisely the create-operator inputs that the compositional evolution loop then improves and merges. This is the missing sibling feeder edge: label-free-skill-refinement already makes the create->improve link explicit, and multimodal distillation is the parallel producer whose outputs feed the same evolution pipeline.",
+    },
   ],
   complexPlanePosition: {
     real,

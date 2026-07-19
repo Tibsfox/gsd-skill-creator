@@ -69,6 +69,11 @@ export const perronFrobeniusCentrality: RosettaConcept = {
       targetId: 'math-ratios',
       description: 'Eigenvector centrality expresses each node\'s importance as a proportion of its neighbours\' importances -- a fixed point of proportional reasoning',
     },
+    {
+      type: "cross-reference",
+      targetId: "math-transform-uncertainty-principle",
+      description: "The complex-weight extension of Perron-Frobenius centrality is fundamentally a spectral-phase story: leading-eigenvalue dominance and phase concentration on the adjacency spectrum connect to the transform uncertainty principle that bounds simultaneous localization in the spectral and vertex domains.",
+    },
   ],
   complexPlanePosition: {
     real,

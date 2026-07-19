@@ -46,6 +46,11 @@ export const intervalAlgebraTemporalRetrieval: RosettaConcept = {
       targetId: "log-formal-proof-systems",
       description: "The Sub-graph Time Tightening mechanism refines fuzzy interval bounds by deductively propagating logical constraints to a fixpoint, a proof-style inference step within each connected event subgraph.",
     },
+    {
+      type: "analogy",
+      targetId: "logic-deontic-logic",
+      description: "Both formalize reasoning over a structured relation: Allen's interval algebra composes qualitative relations between time intervals, while deontic logic composes accessibility relations between deontic worlds via Kripke frames — the same 'formal relation over a domain of structures' shape.",
+    },
   ],
   complexPlanePosition: {
     real,

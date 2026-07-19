@@ -73,6 +73,11 @@ export const informationGeometry: RosettaConcept = {
       targetId: 'math-exponential-decay',
       description: 'Exponential families are the dually-flat natural coordinates of information geometry; the exponential map organises its e-connection and its geodesics',
     },
+    {
+      type: "cross-reference",
+      targetId: "math-bregman-projection",
+      description: "Bregman projection is the concrete divergence face of information geometry's dually-flat structure: the Bregman divergence IS the canonical divergence of a dually-flat manifold, and the generalized-Pythagorean projection is the operational content of the dual-flatness this concept describes, so the near-duplicate pair should be mutually linked.",
+    },
   ],
   complexPlanePosition: {
     real,

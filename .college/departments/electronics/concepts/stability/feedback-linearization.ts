@@ -35,6 +35,11 @@ export const feedbackLinearization: RosettaConcept = {
       targetId: 'elec-pid-anti-windup',
       description: 'The classic cascaded PI controller with dq feedforward decoupling is a partial, approximate feedback linearization that is exact only at its tuning point; full-state feedback linearization is the global generalization that cancels the same coupling terms across the whole operating range.',
     },
+    {
+      type: "cross-reference",
+      targetId: "elec-absolute-stability-circle-criterion",
+      description: "Feedback linearization cancels the nonlinearity exactly, whereas the circle criterion tolerates any nonlinearity confined to a sector without cancelling it. Linking here makes the cancel-vs-sector-tolerate contrast reciprocal, so a reader arriving from either side sees both design philosophies for handling nonlinear plants.",
+    },
   ],
   complexPlanePosition: {
     real,

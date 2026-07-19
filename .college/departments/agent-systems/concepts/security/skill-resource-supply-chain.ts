@@ -33,6 +33,11 @@ export const skillResourceSupplyChain: RosettaConcept = {
       targetId: "skill-injection-guardian",
       description: "The shipped static-inspection defense operates on text; cross-modal language-and-code attacks require it to reason over a skill's auxiliary scripts and resources as well.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-skill-scanner-evasion",
+      description: "Both are skill supply-chain attack classes that report catastrophic static-scanner miss rates (2-8% here; scanner-evasion hiding inside the scanner's own 74.6% false-alarm noise) and both conclude that vetting must become execution-grounded and multimodal. Supply-chain hides in scripts and resources; scanner-evasion hides in false-alarm noise and bundled images.",
+    },
   ],
   complexPlanePosition: {
     real,

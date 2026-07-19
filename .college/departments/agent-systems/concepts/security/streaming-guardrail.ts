@@ -40,6 +40,11 @@ export const streamingGuardrail: RosettaConcept = {
       targetId: 'agent-capability-gate-authorization',
       description: 'A sibling security-wing distinction that separates a policy dimension usually conflated: capability-gate authorization splits gating from authorizing, and the streaming guardrail splits when-to-moderate from whether-to-moderate, each recovering precision by decoupling two questions.',
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-stored-prompt-injection",
+      description: "Two ends of the moderation stack: the streaming guardrail moderates the model's OUTPUT content as it is generated (deciding WHEN to intervene at a sentence boundary), while stored prompt injection is an INPUT-side attack persisting in durable state and re-ingested on load. Output content-harm filtering and input-attack detection are complementary trust boundaries, not substitutes.",
+    },
   ],
   complexPlanePosition: {
     real,

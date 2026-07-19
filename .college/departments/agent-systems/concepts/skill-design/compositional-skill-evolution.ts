@@ -38,6 +38,11 @@ export const compositionalSkillEvolution: RosettaConcept = {
       targetId: "agent-capability-controlled-self-evolution",
       description: "Inference-time self-evolution via these operators must be bounded — capability control constrains what create/improve/merge are permitted to change so the library does not drift out of its privilege envelope.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-multimodal-skill-distillation",
+      description: "Multimodal skill distillation is a second feeder for the create operator: distilled human-media skills become new artifacts entering the compositional evolution loop, alongside trace-to-skill induction, which is currently the only create source referenced here.",
+    },
   ],
   complexPlanePosition: {
     real,

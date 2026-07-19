@@ -17,6 +17,8 @@ import {
   manyValuedLogic,
   abductiveReasoning,
 } from './index.js';
+import { defeasibleDeonticCompilation } from './defeasible-deontic-compilation.js';
+import { instructionAutoformalization } from './instruction-autoformalization.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const t2Concepts: RosettaConcept[] = [
@@ -34,6 +36,8 @@ const allDeptConcepts: RosettaConcept[] = [
   aiVerifiedProof,
   manyValuedLogic,
   abductiveReasoning,
+  defeasibleDeonticCompilation,
+  instructionAutoformalization,
 ];
 
 describe('logic Department -- June-2026 arXiv T2 concepts', () => {

@@ -33,6 +33,11 @@ export const semanticToolTransactions: RosettaConcept = {
       targetId: "agent-compliance-trace-check",
       description: "Validating the composed flow before commit is where compliance predicates gate a transaction — a semantic-transaction boundary gives those predicates a task-scoped point of enforcement.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-runtime-skill-spec-enforcement",
+      description: "The reciprocal sibling link: this containment boundary (Cordon stages and rolls back tool effects) complements VIGIL's detection of skill-spec violations. Detection without containment cannot undo harm, and containment without detection has nothing to trigger the rollback.",
+    },
   ],
   complexPlanePosition: {
     real,

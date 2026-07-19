@@ -45,6 +45,11 @@ export const actionAuthorityAlignment: RosettaConcept = {
       targetId: 'agent-skill-privilege-boundary',
       description: 'Shares the relational-authority framing but generalizes it from skill-scoped permissions to all actions an agent takes, locating the boundary at the tool-call site rather than at skill load.',
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-governance-decay-compaction",
+      description: "Both make the same structural argument that safety cannot be baked into the model itself: here the danger is authority latent in model weights, there it is governance eroding as context is compacted. In both cases the constraint must be externally pinned and enforced at runtime rather than trusted to persist inside the model.",
+    },
   ],
   complexPlanePosition: {
     real,

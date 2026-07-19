@@ -38,6 +38,16 @@ export const utilizationAccuracyGap: RosettaConcept = {
       targetId: "ai-computation-knowledge-conflict-steering",
       description: "When injected context conflicts with parametric knowledge, steering decides which to trust; the utilization-accuracy gap shows that even faithfully following the injected signal can degrade the answer, marking when compliance should be overridden.",
     },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-voronoi-retrieval-bottleneck",
+      description: "Completes the RAG-failure triangle on the capacity axis: the Voronoi retrieval bottleneck is the index-side capacity ceiling that limits which evidence can be surfaced, whereas the utilization-accuracy gap is the generation-side failure to exploit evidence that was surfaced. Read together they separate what retrieval CAN deliver from what generation DOES with it.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-retrieval-crowding-collapse",
+      description: "The density-collapse corner of the RAG-failure triangle: crowding collapse degrades retrieval quality by packing near-duplicate neighbors, while the utilization-accuracy gap measures how poorly the model uses whatever context it receives. Together they show a good answer needs both a healthy index and faithful enrichment use.",
+    },
   ],
   complexPlanePosition: {
     real,

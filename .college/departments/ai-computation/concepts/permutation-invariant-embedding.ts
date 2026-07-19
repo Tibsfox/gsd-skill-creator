@@ -38,6 +38,11 @@ export const permutationInvariantEmbedding: RosettaConcept = {
       targetId: "ai-computation-embedding-norm-specificity",
       description: "A sibling representation-probing finding about what a fine-tuned embedding geometry actually encodes. Both reveal an encoder optimizing a surrogate signal — norm-as-specificity in one case, position-as-field in the other — that diverges from the intended semantic content and is only exposed by targeted probing.",
     },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-hyperbolic-retrieval-geometry",
+      description: "Reciprocal sibling embedding-geometry defect: both concepts show an embedding whose geometry discards task-critical structure — order here, hierarchy in hyperbolic-retrieval-geometry — and both are corrected by changing the geometry rather than the model.",
+    },
   ],
   complexPlanePosition: {
     real,

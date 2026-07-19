@@ -26,6 +26,10 @@ import {
   skillAsArtifact,
   verifiableSkillContract,
 } from './index.js';
+import { governanceTaxonomy } from './multi-agent-orchestration/governance-taxonomy.js';
+import { actionAuthorityAlignment } from './security/action-authority-alignment.js';
+import { runtimeSkillSpecEnforcement } from './security/runtime-skill-spec-enforcement.js';
+import { skillScannerEvasion } from './security/skill-scanner-evasion.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const securityConcepts: RosettaConcept[] = [
@@ -55,6 +59,13 @@ const allDeptConcepts: RosettaConcept[] = [
   memoryConsolidation,
   skillAsArtifact,
   verifiableSkillContract,
+  governanceTaxonomy,
+  memoryConsolidation,
+  actionAuthorityAlignment,
+  capabilityGateAuthorization,
+  runtimeSkillSpecEnforcement,
+  skillPermissionDualPlane,
+  skillScannerEvasion,
 ];
 
 describe('Agent Systems Department -- Security & Governance wing concepts', () => {

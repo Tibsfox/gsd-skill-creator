@@ -38,6 +38,11 @@ export const capabilityControlledSelfEvolution: RosettaConcept = {
       targetId: "security-capability-model",
       description: "Maps capability-based security onto the time axis — capabilities may be re-exposed freely, but granting new authority requires an explicit, mediated primitive.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-held-out-evolution-gate",
+      description: "The held-out evolution gate is the empirical-validation counterpart to this concept's a-priori capability control: where capability-controlled self-evolution constrains what a skill may become before the fact, the held-out gate measures whether an accepted mutation actually generalizes. The gate already links back here as its a-priori-vs-empirical contrast; this edge closes the reciprocal.",
+    },
   ],
   complexPlanePosition: {
     real,

@@ -38,6 +38,11 @@ export const persistentDecisionHistory: RosettaConcept = {
       targetId: "agent-temporal-supersession-memory",
       description: "Supersession retires a stale skill version when a newer keyed record arrives; decision history keeps the superseded version's rationale readable, so the retirement stays interpretable and reversible rather than a silent overwrite.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-skill-as-artifact",
+      description: "Persistent decision history is the memory-layer complement of the skill-as-artifact hub: skills are the durable behavioral artifacts, decision history is the durable episodic record of how and why they were applied. Every other skill-design concept anchors to this hub, and the memory layer completes the pairing.",
+    },
   ],
   complexPlanePosition: {
     real,

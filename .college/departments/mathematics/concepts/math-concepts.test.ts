@@ -36,6 +36,9 @@ import {
   dualSpaceInterpolation,
   transformUncertaintyPrinciple,
 } from './index.js';
+import { geometricGraphManifoldRecovery } from './geometric-graph-manifold-recovery.js';
+import { cayleyGraphFourierEmbedding } from './cayley-graph-fourier-embedding.js';
+import { bregmanProjection } from './bregman-projection.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 // ─── All 12 Concepts ───────────────────────────────────────────────────────
@@ -273,6 +276,14 @@ const allDeptConcepts: RosettaConcept[] = [
   hourglassPersistence,
   tonnetzLattice,
   ...juneConcepts,
+  optimalTransport,
+  exponentialDecay,
+  geometricGraphManifoldRecovery,
+  trigFunctions,
+  eulerFormula,
+  transformUncertaintyPrinciple,
+  cayleyGraphFourierEmbedding,
+  bregmanProjection,
 ];
 
 describe('June-2026 arXiv pass — new concept assertions', () => {

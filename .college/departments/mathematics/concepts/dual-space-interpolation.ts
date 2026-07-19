@@ -69,6 +69,11 @@ export const dualSpaceInterpolation: RosettaConcept = {
       targetId: 'math-transform-uncertainty-principle',
       description: 'Reconstructing a function from few samples is the dual problem to the discrete uncertainty principle: a function and its transform cannot both be sparse, which bounds when interpolation from sparse data can succeed',
     },
+    {
+      type: "cross-reference",
+      targetId: "math-cayley-graph-fourier-embedding",
+      description: "cayley-graph-fourier-embedding already cites this concept as the Pontryagin-dual/vertex-dual perspective on its group Fourier transform; adding the return link completes the Algebra-wing duality pair, tying continuous dual-space interpolation to its discrete Cayley-graph realization.",
+    },
   ],
   complexPlanePosition: {
     real,

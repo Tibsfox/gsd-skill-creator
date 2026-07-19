@@ -38,6 +38,11 @@ export const nuggetGroundedJudging: RosettaConcept = {
       targetId: "agent-structured-spec-gate",
       description: "The nugget set functions as a human-authored structured spec that gates output quality; matching each nugget mirrors checking an output against declared spec clauses, making both approaches spec-driven rather than free-form judgment.",
     },
+    {
+      type: "analogy",
+      targetId: "agent-safety-rule-evolution",
+      description: "Both compile human judgment into a reusable evaluation substrate: nugget-grounded-judging scores answers against human-authored information nuggets, while safety-rule-evolution compiles human safe/unsafe annotations into enforceable rules. Each is a human-in-the-loop specification pipeline.",
+    },
   ],
   complexPlanePosition: {
     real,

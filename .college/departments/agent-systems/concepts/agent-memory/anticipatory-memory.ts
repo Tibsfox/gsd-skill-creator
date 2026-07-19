@@ -33,6 +33,11 @@ export const anticipatoryMemory: RosettaConcept = {
       targetId: "agent-memory-consolidation",
       description: "Both restructure stored experience after the exchange ends, but consolidation compresses and abstracts memories whereas anticipatory rehearsal instead generates extra descriptive and associative retrieval handles for forecasted future queries.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-answer-conditioned-information-gain",
+      description: "Both forecast what a memory is FOR, from opposite ends of the pipeline: anticipatory rehearsal predicts at write time which traces future queries will need, while answer-conditioned information-gain scores at retrieval time how much a candidate memory would move the answer. Reading them together frames the write-vs-read symmetry of memory value estimation.",
+    },
   ],
   complexPlanePosition: {
     real,

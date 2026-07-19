@@ -33,6 +33,16 @@ export const skillScannerEvasion: RosettaConcept = {
       targetId: "skill-injection-guardian",
       description: "The guardian's static neutralize-at-ingest pass is precisely the text-first defense POISE and SkillCamo are engineered to slip past, motivating an execution-grounded, multimodal complement to close its modality and noise blind spots.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-skill-resource-supply-chain",
+      description: "Reciprocal attack-sibling link: both defeat static, text-first skill scanners and both drive the same remedy — reconstruct behavior from code, images, and referenced resources rather than scanning prose. Scanner-evasion exploits placement stealth and modality blind spots; supply-chain exploits the auxiliary script/resource plane.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "agent-skill-edit-trait-vector",
+      description: "Direct attack-to-defense pairing: the trait vector is engineered to resist exactly the surface rephrasing and body-placement stealth (POISE) that lets a poisoned skill evade static scanners, because it scores the semantic embedding delta of the edit rather than pattern-matching its text.",
+    },
   ],
   complexPlanePosition: {
     real,

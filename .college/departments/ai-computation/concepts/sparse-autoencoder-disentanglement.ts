@@ -49,6 +49,16 @@ export const sparseAutoencoderDisentanglement: RosettaConcept = {
       targetId: 'ai-computation-attention-readout-gap',
       description: 'Both are mechanistic-interpretability probes: the readout gap localizes a decision fault, sparse-autoencoder disentanglement localizes and names the feature directions themselves',
     },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-task-specific-knowledge-localization",
+      description: "Both concern locating and naming feature directions in activation space: SAE disentanglement factors activations into monosemantic directions, while task-specific knowledge localization identifies where a capability lives in that same space. The SAE basis gives the coordinate system in which localization is expressed.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-unlearning-suppression-reversal",
+      description: "Unlearning-suppression-reversal shows that suppressing a feature direction rather than removing it leaves the knowledge recoverable — a direct consequence of how cleanly (or not) SAE disentanglement isolates that direction. Poorly disentangled directions make suppression leaky and reversible.",
+    },
   ],
   complexPlanePosition: {
     real,

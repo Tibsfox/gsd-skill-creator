@@ -33,6 +33,11 @@ export const modelDependencyAudit: RosettaConcept = {
       targetId: "agent-content-addressed-storage",
       description: "ModSleuth's hardest sub-problem, reconciling one artifact's identity across conflicting names, versions, and repositories, is the very ambiguity that content-addressed storage eliminates by identifying an artifact by the hash of its contents.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-deterministic-control-plane",
+      description: "Both treat undeclared upstream artifacts as an auditable supply chain and lean on content-addressed identity to pin them: model provenance here, config/control-plane provenance there. Auditing which model a dependency resolves to is the same move as fixing which config a deterministic control plane executes.",
+    },
   ],
   complexPlanePosition: {
     real,

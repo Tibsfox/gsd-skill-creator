@@ -40,6 +40,11 @@ export const retrievalCrowdingCollapse: RosettaConcept = {
       targetId: 'ai-computation-categorical-prior-lock-in',
       description: 'Both describe a self-reinforcing collapse toward a dominant mode: Categorical Prior Lock-In locks a model onto a majority category prior, while crowding collapse locks the retrieval geometry into exclusively serving the majority population via a local relevance objective.',
     },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-utilization-accuracy-gap",
+      description: "Both are index/context-level RAG failure modes that per-query evaluation cannot see: crowding collapse is a density pathology in the retrieval index, while the utilization-accuracy gap is a downstream mis-use of retrieved context. Neither surfaces when you score answers one query at a time, so they must be diagnosed at the corpus/context level together.",
+    },
   ],
   complexPlanePosition: {
     real,

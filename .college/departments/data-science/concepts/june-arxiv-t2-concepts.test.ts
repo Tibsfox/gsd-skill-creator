@@ -25,6 +25,7 @@ import {
   dSeparation,
   densityEvolution,
 } from './index.js';
+import { causalDensityRatio } from './causal-density-ratio.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const t2Concepts: RosettaConcept[] = [
@@ -49,6 +50,7 @@ const allDeptConcepts: RosettaConcept[] = [
   sequentialTestingByBetting,
   dSeparation,
   densityEvolution,
+  causalDensityRatio,
 ];
 
 describe('data-science Department -- June-2026 arXiv T2 concepts', () => {

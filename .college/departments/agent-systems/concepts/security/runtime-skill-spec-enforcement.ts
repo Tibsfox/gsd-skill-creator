@@ -33,6 +33,11 @@ export const runtimeSkillSpecEnforcement: RosettaConcept = {
       targetId: "agent-formal-agent-verification",
       description: "VIGIL acts like formal verification moved to runtime: rather than proving properties statically, it discharges each skill-policy obligation as an SMT constraint over the concrete finite execution trace and intervenes on violation.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-semantic-tool-transactions",
+      description: "Detection-side and containment-side siblings of the same runtime boundary above per-call guardrails: VIGIL detects spec violations as they occur while Cordon stages effects and rolls them back. Pairing them shows the full detect-then-contain response, not just enforcement in isolation.",
+    },
   ],
   complexPlanePosition: {
     real,

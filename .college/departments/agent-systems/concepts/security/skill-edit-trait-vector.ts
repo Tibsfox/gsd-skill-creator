@@ -40,6 +40,16 @@ export const skillEditTraitVector: RosettaConcept = {
       targetId: 'agent-safety-rule-evolution',
       description: 'Provides the quantitative drift measurement needed to gate how an agent\'s safety-relevant configuration is allowed to evolve over successive edits.',
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-self-mutating-poisoning",
+      description: "The trait vector scores an edit once, at admission time, from its before/after diff; self-mutating poisoning defeats exactly this by staying benign at ingest and rewriting its payload afterward, so a stale admission-time score no longer reflects the live skill. Names the temporal limit of a one-shot semantic gate against post-admission mutation.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "agent-skill-resource-supply-chain",
+      description: "The trait vector measures drift in the embedding delta of a skill's steering TEXT; supply-chain attacks hide malice in the auxiliary scripts and resources, not the prose. So the semantic-delta gate is blind precisely where resource-level payloads live, marking the boundary of what a prose-embedding audit can catch.",
+    },
   ],
   complexPlanePosition: {
     real,

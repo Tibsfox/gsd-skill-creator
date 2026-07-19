@@ -54,6 +54,11 @@ import { isotropicEmbedding } from './isotropic-embedding.js';
 import { jepaKernelPlanning } from './jepa-kernel-planning.js';
 import { latentWorldModel } from './latent-world-model.js';
 import { megakernelArchitectureRhyme } from './megakernel-architecture-rhyme.js';
+import { permutationInvariantEmbedding } from './permutation-invariant-embedding.js';
+import { matchedEvidenceUtilization } from './matched-evidence-utilization.js';
+import { taskSpecificKnowledgeLocalization } from './task-specific-knowledge-localization.js';
+import { unlearningSuppressionReversal } from './unlearning-suppression-reversal.js';
+import { retrievalCrowdingCollapse } from './retrieval-crowding-collapse.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const t2Concepts: RosettaConcept[] = [
@@ -115,6 +120,13 @@ const allDeptConcepts: RosettaConcept[] = [
   spatiotemporalLinkFormation,
   stackelbergDrainability,
   voronoiRetrievalBottleneck,
+  permutationInvariantEmbedding,
+  matchedEvidenceUtilization,
+  taskSpecificKnowledgeLocalization,
+  unlearningSuppressionReversal,
+  calibratedRetrievalBudget,
+  knowledgeConflictSteering,
+  retrievalCrowdingCollapse,
 ];
 
 describe('AI Computation Department -- June-2026 arXiv T2 concepts', () => {

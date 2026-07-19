@@ -38,6 +38,11 @@ export const skillIncidenceComposition: RosettaConcept = {
       targetId: "agent-latent-agent-communication",
       description: "Both replace hand-specified wiring with learned structure over embeddings: SIGMA decodes node embeddings and topology from the incidence matrix, while latent communication governs the medium over which those decoded edges carry state between agents.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-orchestration-meta-skill",
+      description: "Both are skill-as-first-class-artifact composition concepts co-resident in this wing: SIGMA composes skills via an incidence structure while Skill-MAS treats orchestration itself as a learned meta-skill. Linking them situates each as an alternative composition mechanism over the same object.",
+    },
   ],
   complexPlanePosition: {
     real,

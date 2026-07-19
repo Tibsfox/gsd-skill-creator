@@ -97,6 +97,14 @@ import {
   silentFailureTaxonomy,
   skillCoverageMetric,
 } from './index.js';
+import { memoryValidityGate } from './agent-memory/memory-validity-gate.js';
+import { runDependencyGraph } from './integration-evaluation/run-dependency-graph.js';
+import { governanceTaxonomy } from './multi-agent-orchestration/governance-taxonomy.js';
+import { planTensorRank } from './multi-agent-orchestration/plan-tensor-rank.js';
+import { heldOutEvolutionGate } from './skill-design/held-out-evolution-gate.js';
+import { multimodalSkillDistillation } from './skill-design/multimodal-skill-distillation.js';
+import { selfMutatingPoisoning } from './skill-design/self-mutating-poisoning.js';
+import { federatedSkillEvolution } from './skill-design/federated-skill-evolution.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
 const t2Concepts: RosettaConcept[] = [
@@ -231,6 +239,16 @@ const allDeptConcepts: RosettaConcept[] = [
   evaluatorValidityAudit,
   silentFailureTaxonomy,
   skillCoverageMetric,
+  memoryValidityGate,
+  runDependencyGraph,
+  governanceTaxonomy,
+  planTensorRank,
+  heldOutEvolutionGate,
+  multimodalSkillDistillation,
+  selfMutatingPoisoning,
+  skillInternalization,
+  compositionalKvCache,
+  federatedSkillEvolution,
 ];
 
 describe('Agent Systems Department -- June-2026 arXiv T2 concepts', () => {

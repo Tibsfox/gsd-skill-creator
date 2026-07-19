@@ -46,6 +46,11 @@ export const measureQuantization: RosettaConcept = {
       targetId: "math-fractal-geometry",
       description: "The homogeneous dimension d in the n^{−r/d} law generalizes beyond integer d: for self-similar measures on fractal supports the exponent uses the quantization dimension, a Minkowski-type dimension, tying distortion asymptotics directly to fractal geometry.",
     },
+    {
+      type: "cross-reference",
+      targetId: "math-wasserstein-gradient-flow-langevin",
+      description: "Both are Wasserstein/OT-cluster concepts: optimal quantization of a measure is a semi-discrete transport problem whose optimal point masses can be found by a Wasserstein gradient flow, so the quantization energy and the Langevin/JKO flow that minimizes it belong linked.",
+    },
   ],
   complexPlanePosition: {
     real,

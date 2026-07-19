@@ -40,6 +40,11 @@ export const lowPowerBusEncoding: RosettaConcept = {
       targetId: 'elec-microcontroller-interfacing',
       description: 'Off-chip address and data buses between an MCU and external memory carry the largest capacitance in an embedded system, making them the primary place low-power bus codes save energy.',
     },
+    {
+      type: "analogy",
+      targetId: "elec-wide-bandgap-power-devices",
+      description: "Low-power bus encoding minimizes toggle activity to shrink the C*V^2*f dynamic-power term on interconnect capacitance; wide-bandgap devices minimize the analogous C_oss*V^2*f_sw switching loss. Adding this edge completes the shared CV^2f cluster in which the other two members already interlink.",
+    },
   ],
   complexPlanePosition: {
     real,

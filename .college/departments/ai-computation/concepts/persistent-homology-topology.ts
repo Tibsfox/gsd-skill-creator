@@ -35,6 +35,11 @@ export const persistentHomologyTopology: RosettaConcept = {
       targetId: 'ai-computation-local-linearity-steering',
       description: 'Contrasts a linear/local steering formulation with topology-conditioned steering that retrieves topologically similar cases to build query-specific interventions toward clarification or abstention.',
     },
+    {
+      type: "cross-reference",
+      targetId: "mathematics-hourglass-persistence",
+      description: "Routes the TDA machinery back to the math topology wing: persistent-homology-topology imports filtration/persistence-diagram tooling that hourglass-persistence formalizes as a contraction index on filtered simplicial complexes. This mirrors hyperbolic-retrieval-geometry's link to math-fractal-geometry, keeping the mathematical foundation cross-referenced.",
+    },
   ],
   complexPlanePosition: {
     real,

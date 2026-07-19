@@ -38,6 +38,11 @@ export const temporalSupersessionMemory: RosettaConcept = {
       targetId: "data-science-bitemporal-versioning",
       description: "Like a valid-time database that closes a row's validity interval when a newer version of the same key arrives, rather than keeping both tuples live.",
     },
+    {
+      type: "cross-reference",
+      targetId: "agent-memory-validity-gate",
+      description: "The validity-gate is the read-side counterpart to supersession's write-side bookkeeping: supersession records which memories are superseded, and the validity-gate is what enforces that a superseded record is not surfaced at read time. The pairing is currently declared only from the gate side; this closes the reciprocal link.",
+    },
   ],
   complexPlanePosition: {
     real,

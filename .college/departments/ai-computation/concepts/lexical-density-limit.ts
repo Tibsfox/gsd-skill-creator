@@ -49,6 +49,11 @@ export const lexicalDensityLimit: RosettaConcept = {
       targetId: 'ai-computation-rate-distortion-deductive-source',
       description: 'Both are rate-distortion views: the density limit is where the information rate of the context exceeds what the model can losslessly attend to and retrieve',
     },
+    {
+      type: "cross-reference",
+      targetId: "ai-computation-matched-evidence-utilization",
+      description: "Same finding from two angles: lexical-density-limit shows dense input degrades recovery, and matched-evidence-utilization measures that the identical evidence buried in long context is recovered less often. The utilization diagnostic is the empirical instrument for the density limit.",
+    },
   ],
   complexPlanePosition: {
     real,

@@ -22,6 +22,11 @@ export const multipleTesting: RosettaConcept = {
       targetId: 'stat-distributions',
       description: 'FWER and FDR corrections both reason about the joint distribution of p-values across the tested family under the null',
     },
+    {
+      type: "dependency",
+      targetId: "stat-basic-probability",
+      description: "The family-wise error rate 1 − (1 − α)^m is derived directly from two basic-probability rules: the multiplication rule for independent events gives (1 − α)^m as the chance that all m tests correctly avoid a false positive, and the complement rule 1 − P(not A) turns that into the probability of at least one false positive. The whole motivation for correction rests on this elementary probability derivation.",
+    },
   ],
   complexPlanePosition: {
     real: 0.55,

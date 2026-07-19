@@ -46,6 +46,16 @@ export const deonticLogic: RosettaConcept = {
       targetId: "logic-ai-verified-proof",
       description: "Normative systems and AI-agent policies expressed in deontic logic can be machine-checked; a verified proof can certify that a conflict-tolerant norm-base remains non-trivial even in the presence of a genuine, unresolved moral dilemma.",
     },
+    {
+      type: "cross-reference",
+      targetId: "logic-defeasible-deontic-compilation",
+      description: "Defeasible deontic compilation's SG-DT operationalizes the obligation/permission modalities defined here, turning the abstract deontic frame into executable defeasible rules; this closes the currently one-way dependency into a reciprocal link.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "logic-instruction-autoformalization",
+      description: "Instruction autoformalization compiles this deontic content (obligations, permissions, prohibitions) into Cedar policy-as-code, showing the downstream enforcement path from the modal logic to executable authorization policy.",
+    },
   ],
   complexPlanePosition: {
     real,

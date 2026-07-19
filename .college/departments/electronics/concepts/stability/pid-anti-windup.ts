@@ -40,6 +40,11 @@ export const pidAntiWindup: RosettaConcept = {
       targetId: 'elc-1.22-limit-cycle-cold-gas-attitude',
       description: 'Both concern a saturating/relay actuator nonlinearity degrading a feedback loop; the limit-cycle attitude loop and the wound-up integrator are the same class of actuator-nonlinearity stability problem.',
     },
+    {
+      type: "cross-reference",
+      targetId: "elec-absolute-stability-circle-criterion",
+      description: "Actuator saturation is the canonical sector nonlinearity the circle criterion certifies, and anti-windup is the empirical fix for exactly that saturation. Linking back connects the practical clamp to its formal absolute-stability guarantee, showing anti-windup as the engineering realization of keeping the loop inside the certified sector.",
+    },
   ],
   complexPlanePosition: {
     real,
