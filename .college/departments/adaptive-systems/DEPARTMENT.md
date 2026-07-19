@@ -53,6 +53,7 @@ Full cross-departmental bridge specifications are in `CROSS_LINKS.md`.
 | engineering | Advanced treatment | `engr-control-systems` → MRAS and self-tuning |
 | culinary-arts | Physical analogy | `cook-specific-heat-capacity`, Weber-Fechner calibration model |
 | mind-body | Biological anchor | Homeostasis, interoception, active inference |
+| Functional Identifiability | Control-Theoretic Roots | Python, C++, Lisp | adapt-feedback-parameter-update, adaptive-systems-lyapunov-gradient-stability |
 
 ## Rosetta Cluster Connections
 

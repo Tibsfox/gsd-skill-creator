@@ -13,3 +13,6 @@ export { twoGateGuardrail } from './two-gate-guardrail.js';
 
 // Upstream Intelligence Pack v1.44 (Phase 764, v1.49.573 upstream-intelligence-pack)
 export { bleloraMesh } from './ble-lora-mesh.js';
+
+// June-2026 arXiv T2 cohort (adaptive-systems — 1 concepts)
+export { functionalIdentifiability } from './functional-identifiability.js';
