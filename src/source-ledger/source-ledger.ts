@@ -20,6 +20,7 @@
 import { promises as fs } from 'node:fs';
 import { dirname } from 'node:path';
 import { createHash } from 'node:crypto';
+import { FileLock } from '../safety/file-lock.js';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -222,24 +223,55 @@ export function scribeSourceEntry(
  */
 export class SourceLedger implements SourceLedgerPort {
   private readonly ledgerPath: string;
+  private readonly lockPath: string;
 
   constructor(ledgerPath?: string) {
     this.ledgerPath = ledgerPath ?? DEFAULT_SOURCE_LEDGER_PATH;
+    this.lockPath = `${this.ledgerPath}.lock`;
   }
 
   /**
    * Append `entry` unless an identity-equal row is already present. Returns
-   * `{ appended: false }` on the idempotent no-op so callers can tell.
+   * `{ appended: false }` on the idempotent no-op so callers can tell. The
+   * read-check-append runs under a cross-process lock so the idempotency the
+   * module header promises actually holds under concurrent writers.
    */
   async record(entry: SourceLedgerEntry): Promise<RecordResult> {
-    const existing = await this.list();
-    const id = identityOf(entry);
-    if (existing.some((e) => identityOf(e) === id)) {
-      return { entry, appended: false };
-    }
+    return this.withLock('record', async () => {
+      const existing = await this.list();
+      const id = identityOf(entry);
+      if (existing.some((e) => identityOf(e) === id)) {
+        return { entry, appended: false };
+      }
+      await fs.appendFile(this.ledgerPath, JSON.stringify(entry) + '\n', 'utf-8');
+      return { entry, appended: true };
+    });
+  }
+
+  /**
+   * Cross-process mutual exclusion for the read-check-append critical section,
+   * mirroring CorrectionQuarantineStore.withLock (30×100ms retry). Without it the
+   * check-then-append is a TOCTOU race: two concurrent writers can both pass the
+   * identity check before either appends, duplicating a row and breaking the
+   * "safe across processes" idempotency this module's header promises. Fails loud
+   * on retry exhaustion rather than silently skipping the write.
+   */
+  private async withLock<T>(operation: string, fn: () => Promise<T>): Promise<T> {
     await fs.mkdir(dirname(this.ledgerPath), { recursive: true });
-    await fs.appendFile(this.ledgerPath, JSON.stringify(entry) + '\n', 'utf-8');
-    return { entry, appended: true };
+    const lock = new FileLock(this.lockPath);
+    let acq = await lock.acquire(operation);
+    for (let attempt = 0; attempt < 30 && !acq.acquired; attempt++) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      acq = await lock.acquire(operation);
+    }
+    if (!acq.acquired) {
+      throw new Error(`Could not acquire source-ledger lock — ${acq.message}`);
+    }
+    try {
+      return await fn();
+    } finally {
+      await acq.release();
+    }
   }
 
   /** True if any entry carries `contentHash` (the dedup check). */

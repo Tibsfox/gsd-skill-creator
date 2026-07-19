@@ -156,5 +156,11 @@ export function createClaudeTrySessionAuthor(
   if (!env.ANTHROPIC_API_KEY) return null;
 
   const model = env.SC_TRYSESSION_LLM_MODEL?.trim();
-  return new LlmTrySessionAuthor(new ClaudeAuthorCompletion(model ? { model } : {}));
+  // Forward the validated key explicitly (matching createClaudeClaimCompletion /
+  // createClaudeDistillNamer): the ClaudeCompletion base only threads options.apiKey
+  // into the chip when set, else it reads process.env — which drops an injected
+  // key when env !== process.env (DI/testing).
+  return new LlmTrySessionAuthor(
+    new ClaudeAuthorCompletion({ apiKey: env.ANTHROPIC_API_KEY, ...(model ? { model } : {}) }),
+  );
 }

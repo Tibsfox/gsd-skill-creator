@@ -70,6 +70,10 @@ data-data-sources
 - data-science-causal-density-ratio -- Causal density functions -- Radon-Nikodym derivatives comparing interventional to observational laws -- act as pointwise density ratios so that… (arXiv:2606.00754)
 - data-science-epistemic-aleatoric-uncertainty -- Predictive uncertainty separates into aleatoric (irreducible noise) and epistemic parts, with the epistemic part further split into sample-reducible… (arXiv:2606.12646)
 
+### June-2026 arXiv scan backfill (2 concepts)
+- data-science-compression-spectrum -- Unifies episodic memory, procedural skills, and declarative rules as points on one compression axis (5-20x / 50-500x / 1000x+); cross-community citation below 1%, exposing the missing adaptive cross-level compression diagonal (arXiv:2604.15877)
+- data-science-heuristics-free-ssl -- LeJEPA replaces a decade of anti-collapse SSL tricks with one provable objective (SIGReg) targeting the isotropic Gaussian; stable 1.8B ViT-g training, 79% ImageNet-1K probe, Spearman ~0.99 loss-to-accuracy (arXiv:2511.08544)
+
 ## Calibration Models
 
 - Statistical models -- quantitative domains require precision calibration

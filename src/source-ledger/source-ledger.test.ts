@@ -64,6 +64,22 @@ describe('SourceLedger core', () => {
     expect(await ledger.list()).toHaveLength(1);
   });
 
+  it('collapses concurrent identity-equal records to one row (locked, not TOCTOU)', async () => {
+    // The read-check-append is serialized by a cross-process FileLock, so two
+    // racing writers cannot both pass the identity check before either appends.
+    const ledger = new SourceLedger(ledgerPath);
+    const entry = acquiredSourceEntry('a.txt', 'hello', '2026-01-01T00:00:00.000Z');
+
+    const results = await Promise.all([
+      ledger.record({ ...entry }),
+      ledger.record({ ...entry }),
+    ]);
+
+    // Exactly one append wins; the other is the idempotent no-op — never a duplicate row.
+    expect(results.filter((r) => r.appended)).toHaveLength(1);
+    expect(await ledger.list()).toHaveLength(1);
+  });
+
   it('records distinct provenances under the same content hash', async () => {
     const ledger = new SourceLedger(ledgerPath);
     const hash = hashContent('shared bytes');

@@ -162,6 +162,48 @@ agent-skill-as-artifact
 - agent-exploration-skill-discovery — Continual robot skill discovery by writing and refining code-as-policy programs through physical exploration (ASPIRE) (arXiv:2607.00272)
 - agent-productive-friction — Deliberately inject interactional resistance so users iterate and reflect rather than accept the first output (arXiv:2606.26626)
 
+### June-2026 arXiv scan backfill (28 concepts)
+
+**Security & Governance**
+- agent-action-authority-alignment — Agentic harm is the gap between the authority an action exercises and what the user granted; enforce least privilege outside the weights at the action boundary, not via refusal training (arXiv:2606.28739)
+- agent-artifact-provenance-gap — Context-Fractured Decomposition jailbreak plants benign artifacts early and composes harm later across instances; defeat via provenance lineage tags scoring composed risk at read time (arXiv:2606.09084)
+- agent-deterministic-control-plane — Rel(AI)Build governs agent config files as a content-addressed supply chain via SHA-256 addresses, HMAC-stamped lockfiles, hash-chained audit, and Jaccard drift detection (arXiv:2606.26924)
+- agent-instruction-hierarchy-repair — Decompose instruction-hierarchy violations into identify/resolve/realize stages; training-free pre- and post-generation self-monitors cut rule-following non-compliance 81-99% (arXiv:2606.07808)
+- agent-mid-session-tool-injection — MSTI attacks WebMCP by mutating the live tool surface (hijacking) or poisoning tool metadata (framing) mid-session; defend by binding tool identity and metadata to origin (arXiv:2606.06387)
+- agent-proactive-power-regulation — SafeMCP forecasts downstream consequences via an internal world model and refuses hazardous tool acquisitions before they enter the action space, with fail-safe live intervention (arXiv:2606.01991)
+- agent-skill-edit-trait-vector — Audit how a skill/config edit shifts a named behavioral trait by projecting the before/after embedding delta onto a learned trait direction; 91.2% sign accuracy, resists paraphrase (arXiv:2606.02536)
+- agent-stored-prompt-injection — Cross-session stored-XSS analogue: adversarial content persists in memory/filesystem/tool state and re-executes in later sessions; auto-loaded context channels are most exploitable (arXiv:2606.04425)
+- agent-streaming-guardrail — SentGuard moderates at sentence granularity in parallel with generation, releasing only verified chunks; detects 90.5% of unsafe cases within two sentences at 7.41% false-positive (arXiv:2606.02041)
+
+**Agent Memory**
+- agent-context-resident-state — An agent's early plan stays load-bearing only while its tokens remain in context; replay-pairing shows the plan signal decays ~4x per step, so eviction destroys it (−34.7pp) (arXiv:2606.22953)
+- agent-cross-model-memory-adaptation — Rosetta Memory trains profile-conditioned write/read operators so memory authored by one backbone reliably activates a different downstream model, surviving unseen-model replacement (arXiv:2606.07711)
+- agent-event-sourced-memory — ESAA captures visible turns into an immutable activity.jsonl and deterministically projects handoff/state/decisions read models, giving cross-agent continuity with no agent-to-agent channel (arXiv:2606.23752)
+- agent-load-bearing-eviction — LRE, a tiny CPU-only LM-free scorer, preserves load-bearing history units verbatim during eviction rather than compressing them; matches full-history accuracy while cutting peak context up to 52% (arXiv:2606.20954)
+- agent-observability-safe-retention — OSL-MR frames memory retention as NP-hard budget-constrained stochastic optimization, separating online-observable features from offline supervision so the policy stays deployable under partial observability (arXiv:2606.10616)
+- agent-parametric-memory — TMEM updates its own low-rank LoRA weight deltas mid-episode, so experience changes the policy; context dropped from the window persists in the weights instead of being lost (arXiv:2606.04536)
+
+**Multi-Agent Orchestration**
+- agent-context-divergence — Multi-agent hallucination as knowledge-state desync; naive full-broadcast sync worsens it 34% via belief contamination, while selective divergence-gated sync (SSVP) wins using 58% fewer API calls (arXiv:2606.21666)
+- agent-design-time-workflow-verification — Static pre-deployment linter checking twelve structural-compatibility rules over a multi-agent workflow graph; robust to logic-preserving structural obfuscation of a design flaw (arXiv:2606.21565)
+- agent-emergent-symbolic-protocol — CLSR agents evolve compact inspectable symbolic languages (LSFs) chosen per-query by a latent-free router, cutting generated tokens 3-6x versus chain-of-thought at parity accuracy (arXiv:2606.29354)
+- agent-semantic-early-stopping — Halt Writer/Critic loops when consecutive draft embeddings stop changing in meaning instead of a fixed iteration cap; cuts operational tokens 38% at parity quality on HotpotQA (arXiv:2606.27009)
+
+**Integration & Evaluation**
+- agent-entity-binding-failure — Agent picks the right tool but acts on the wrong real-world entity (24-26% of runs); entity-resolution preconditions and confidence-gated binding eliminate wrong-entity actions (arXiv:2606.30531)
+- agent-false-success — Agent claims completion while ground-truth state disagrees (45-48% of some failures); LLM judges cap at AUROC 0.65 while cheap TF-IDF state-change detectors reach 0.83-0.95 (arXiv:2606.09863)
+- agent-intervention-error-attribution — REFLECT localizes a silent-failure step by patch-and-replay: if patching flips the result wrong→right, that verified outcome-flip refines the attribution, self-verifying without ground truth (arXiv:2606.09071)
+- agent-run-dependency-graph — GRADE recovers a run's missing provenance-graded dependency-edge layer alongside execution order, predicting failure where run-size features are weak and localizing the faulting step (arXiv:2606.22741)
+
+**Agentic Code Generation**
+- agent-code-uncertainty-axes — Decompose code-generation uncertainty into orthogonal lexical/algorithmic/functional axes for selective prediction and abstention; ensembling lifts AUROC from 0.696 to 0.776 (arXiv:2606.09577)
+- agent-self-improving-harness — Self-Harness mines model-specific weaknesses, proposes minimal harness edits, and gates each on regression tests; lifts held-out pass rates ~15-21pp across three base models (arXiv:2606.09498)
+
+**Skill Design**
+- agent-compiled-correction-enforcement — TRACE compiles user chat corrections into executable PASS-gates that block task completion on violation, closing the preference access-vs-compliance gap (100%→2% out-of-distribution) (arXiv:2606.13174)
+- agent-federated-skill-evolution — FederatedSkill pools improvement as privacy-preserving semantic skill diffs (never raw trajectories) with per-client boundary modeling; up to +44.4% success and −37.5% cost (arXiv:2606.03143)
+- agent-held-out-evolution-gate — RSEA commits a self-evolved artifact only if it does not regress on a disjoint held-out split, else falls back to last-good, making recursive self-evolution monotone-safe (arXiv:2606.28374)
+
 ## Learning Path
 
 1. agent-skill-as-artifact (start here) — what an agent skill IS

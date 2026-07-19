@@ -541,7 +541,13 @@ async function handleDevMemory(parsed: ParsedFlywheelArgs): Promise<number> {
   // --execute: persist through a real MemoryService. Imported lazily so the
   // dry-run default carries no memory-infra dependency.
   const { MemoryService } = await import('../../memory/service.js');
-  const svc = new MemoryService({ memoryDir: parsed.memoryDir ?? '.', indexFile: 'MEMORY.md' });
+  // Default under the gitignored .claude/ tree (matching research.ts / gateway.ts),
+  // never the repo root: mined session content must not land where a stray
+  // `git add .` would stage it, outside .gitignore and the git-add-blocker.
+  const svc = new MemoryService({
+    memoryDir: parsed.memoryDir ?? join(process.cwd(), '.claude', 'memory'),
+    indexFile: 'MEMORY.md',
+  });
   const records = await runDevMemory({ sessionsDir, sessionId, repo, writer: svc, options });
   if (parsed.json) {
     console.log(JSON.stringify({ dryRun: false, count: records.length, ids: records.map((r) => r.id) }, null, 2));

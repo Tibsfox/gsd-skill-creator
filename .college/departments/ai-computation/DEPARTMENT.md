@@ -89,6 +89,19 @@
 - ai-computation-categorical-prior-lock-in — In-context learning cannot override a pretraining categorical prior via context alone (arXiv:2606.11961) — Representation Probing
 - ai-computation-matched-evidence-utilization — Isolate answer-advantage from supplied evidence vs parametric priors, beyond accuracy/recall/citation (arXiv:2606.06758) — Retrieval-Augmented Generation
 
+### June-2026 arXiv scan backfill (11 concepts)
+- ai-computation-context-removability — Robustness property that a context-distilled student's accuracy must not drop when the original privileged context is reinserted; consistency regularizer anchors the no-context output (arXiv:2606.11627) — Alignment & Goal Stability
+- ai-computation-inherited-circuit-evasion — Fine-tuning sharpens an inherited attention circuit into brittle token-indicator rules that pass in-distribution yet shatter under behavior-preserving input transforms; accuracy rises while the evasion surface silently expands (arXiv:2606.27091) — Representation Probing
+- ai-computation-latent-reconstruction-fidelity — ReLAT: test-time check that the query is recoverable from a latent reasoning state before answering, raising Qwen3-8B AIME accuracy from 56.7% to 73.3% (arXiv:2606.06252) — Representation Probing
+- ai-computation-persistent-homology-topology — Per-layer persistent-homology descriptors of the hidden-state cloud classify ill-posed questions and enable topology-conditioned steering toward clarification or abstention (arXiv:2606.23590) — Representation Probing
+- ai-computation-program-of-layers — PoLar reprograms which frozen layers execute per input (skip/loop) via a lightweight predictor, beating fixed-depth inference on reasoning while running fewer layers (arXiv:2606.06574) — Representation Probing
+- ai-computation-recursive-self-gate-collapse — Fine-tuning on self-generations gated by the same model provably degenerates to ungated self-training: acceptance rises as correctness falls and features collapse to a near one-dimensional subspace (arXiv:2606.28438) — Alignment & Goal Stability
+- ai-computation-retrieval-crowding-collapse — Mean-field account where majority document density crosses a phase transition and a Fokker-Planck update drift expels minority content from dense-retrieval top-k (arXiv:2606.28343) — Retrieval-Augmented Generation
+- ai-computation-serialization-attention-decay — Flattening a graph into a token sequence makes RoPE suppress attention between graph-adjacent-but-far nodes; a bandwidth-minimizing order or the GaLA inference-time bias restores it (arXiv:2606.15633) — Representation Probing
+- ai-computation-task-specific-knowledge-localization — A model re-encodes the same fact in distinct task-conditioned parameter subsets, so unlearning, editing, or verifying under one prompt framing gives no guarantee for another (arXiv:2606.27237) — Representation Probing
+- ai-computation-test-time-training — TTT-NTP: inference-time fast-weight adaptation whose write target is the next-token-prediction hidden-state projection, consistently improving long-context backbones on RULER (arXiv:2606.21803) — Representation Probing
+- ai-computation-unlearning-suppression-reversal — Machine-unlearning only suppresses expression in late decoding layers, not the early shared latent space; a single steering direction recovers 50-90% of the unlearned knowledge (arXiv:2606.03291) — Alignment & Goal Stability
+
 ## Cross-References
 
 | Department | Bridge Type | Entry Point |

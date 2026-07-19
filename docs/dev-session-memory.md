@@ -63,7 +63,7 @@ skill-creator flywheel dev-memory --execute
 # Options:
 #   --include-corrections   also write correction memories (QUARANTINE-gated)
 #   --sessions-dir <d>      session-streams dir (default .planning/sessions)
-#   --memory-dir <d>        memory dir for --execute (default .)
+#   --memory-dir <d>        memory dir for --execute (default <cwd>/.claude/memory)
 #   --min-recurrence <n>    detector recurrence threshold (default 2)
 ```
 

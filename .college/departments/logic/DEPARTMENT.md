@@ -65,6 +65,9 @@ log-classification-principles
 ### June-2026 additional-scan T2 (1 concept)
 - logic-interval-algebra-temporal-retrieval -- Allen interval-algebra relations over time-interval knowledge for temporal retrieval-augmented reasoning (IA-RAG) (arXiv:2606.06044)
 
+### June-2026 arXiv scan backfill (1 concepts)
+- logic-defeasible-deontic-compilation -- Span-Grounded Deontic Tree (SG-DT) compiles statutes into span-anchored, exclusion-guarded control flow so nested exceptions cannot be silently dropped, targeting Silent Scope Omission (arXiv:2606.08932)
+
 ## Calibration Models
 
 None currently -- future phases will add argument quality assessment models.
