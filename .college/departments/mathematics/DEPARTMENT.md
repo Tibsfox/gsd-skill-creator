@@ -38,6 +38,16 @@
 | Information Geometry | Geometry | Python, C++, Lisp | mathematics-ollivier-ricci-curvature, math-optimal-transport, math-exponential-decay · June-2026 arXiv 2606.06395 |
 | Dual-Space Interpolation | Algebra | Python, C++, Lisp | math-trig-functions, math-euler-formula, math-transform-uncertainty-principle · June-2026 arXiv 2606.22671 |
 | Transform Uncertainty Principle | Complex Analysis | Python, C++, Lisp | math-euler-formula, math-complex-numbers, math-dual-space-interpolation · June-2026 arXiv 2606.08662 |
+| Bregman Projection | Geometry | Python, C++, Lisp | mathematics-cramer-wold-slicing, math-information-geometry |
+| Cayley Graph Fourier Embedding | Algebra | Python, C++, Lisp | mathematics-tonnetz-lattice, math-dual-space-interpolation |
+| Chip Firing Graph Riemann Roch | Algebra | Python, C++, Lisp | mathematics-coherent-functor, math-perron-frobenius-centrality |
+| Discrete Nodal Domains | Geometry | Python, C++, Lisp | mathematics-hourglass-persistence, math-perron-frobenius-centrality |
+| Equilateral Dimension | Geometry | Python, C++, Lisp | math-erdos-problem-index, math-millennium-problem-catalogue |
+| Functorial Dynamics Semantics | Complex Analysis | Python, C++, Lisp | mathematics-coherent-functor, math-discrete-nodal-domains |
+| Geometric Graph Manifold Recovery | Geometry | Python, C++, Lisp | mathematics-ollivier-ricci-curvature, math-optimal-transport |
+| Measure Quantization | Calculus | Python, C++, Lisp | mathematics-cramer-wold-slicing, math-optimal-transport |
+| Tail Integral Moment Representation | Calculus | Python, C++, Lisp | math-exponential-decay, math-logarithmic-scales |
+| Wasserstein Gradient Flow Langevin | Calculus | Python, C++, Lisp | math-blow-up-dynamics, math-optimal-transport |
 
 ## Panels
 

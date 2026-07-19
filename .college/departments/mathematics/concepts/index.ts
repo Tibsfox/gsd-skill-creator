@@ -31,3 +31,15 @@ export { bakryEmeryCurvatureDimension } from './bakry-emery-curvature-dimension.
 export { informationGeometry } from './information-geometry.js';
 export { dualSpaceInterpolation } from './dual-space-interpolation.js';
 export { transformUncertaintyPrinciple } from './transform-uncertainty-principle.js';
+
+// June-2026 arXiv T2 cohort (mathematics — 10 concepts)
+export { bregmanProjection } from './bregman-projection.js';
+export { cayleyGraphFourierEmbedding } from './cayley-graph-fourier-embedding.js';
+export { chipFiringGraphRiemannRoch } from './chip-firing-graph-riemann-roch.js';
+export { discreteNodalDomains } from './discrete-nodal-domains.js';
+export { equilateralDimension } from './equilateral-dimension.js';
+export { functorialDynamicsSemantics } from './functorial-dynamics-semantics.js';
+export { geometricGraphManifoldRecovery } from './geometric-graph-manifold-recovery.js';
+export { measureQuantization } from './measure-quantization.js';
+export { tailIntegralMomentRepresentation } from './tail-integral-moment-representation.js';
+export { wassersteinGradientFlowLangevin } from './wasserstein-gradient-flow-langevin.js';
