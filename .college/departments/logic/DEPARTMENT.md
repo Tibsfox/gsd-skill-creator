@@ -54,6 +54,11 @@ log-classification-principles
 ### AI & Formal Verification (1 concept)
 - logic-ai-verified-proof -- AI-proposed, formally-verified, human-audited mathematics (GPT-5.4 Pro / Erdős #1196 pattern)
 
+### June-2026 arXiv T2 (3 concepts)
+- logic-kuratowski-ordered-pair -- Encoding ordered pairs and n-tuples as pure sets — Kuratowski's {{a},{a,b}} construction and its generalization to tuples in the hierarchy of simple… (arXiv:2606.18474)
+- logic-definite-descriptions -- Russell's theory of definite descriptions — 'the F' analyzed not as a singular term but eliminated by contextual definition, requiring scope markers… (arXiv:2606.11750)
+- logic-deontic-logic -- Deontic logic formalizes obligation, permission, and prohibition, and can be constructed to tolerate conflicting duties (moral dilemmas) without… (arXiv:2606.30297)
+
 ## Calibration Models
 
 None currently -- future phases will add argument quality assessment models.
