@@ -62,6 +62,9 @@ log-classification-principles
 ### June-2026 additional scan (1 concept)
 - logic-instruction-autoformalization -- LLM generator-critic loop compiles NL agent instructions, MCP tool descriptions, and policy docs into formally verified Cedar policy-as-code; deontic content becomes executable enforcement (arXiv:2606.26649)
 
+### June-2026 additional-scan T2 (1 concept)
+- logic-interval-algebra-temporal-retrieval -- Allen interval-algebra relations over time-interval knowledge for temporal retrieval-augmented reasoning (IA-RAG) (arXiv:2606.06044)
+
 ## Calibration Models
 
 None currently -- future phases will add argument quality assessment models.

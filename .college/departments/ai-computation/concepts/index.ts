@@ -58,3 +58,13 @@ export { megakernelArchitectureRhyme } from './megakernel-architecture-rhyme.js'
 
 // June-2026 arXiv additional-material scan (T1)
 export { instructionSetRecovery } from './instruction-set-recovery.js';
+
+// June-2026 arXiv additional-scan T2 cohort (8 concepts)
+export { blindToolDeference } from './blind-tool-deference.js';
+export { conflictRegimeRag } from './conflict-regime-rag.js';
+export { lineageInheritedTruthfulHeads } from './lineage-inherited-truthful-heads.js';
+export { selfRecognitionSignatures } from './self-recognition-signatures.js';
+export { costAwareEvidenceSelection } from './cost-aware-evidence-selection.js';
+export { contextualEntrainment } from './contextual-entrainment.js';
+export { categoricalPriorLockIn } from './categorical-prior-lock-in.js';
+export { matchedEvidenceUtilization } from './matched-evidence-utilization.js';

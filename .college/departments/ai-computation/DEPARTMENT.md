@@ -79,6 +79,16 @@
 ### June-2026 additional scan (1 concept)
 - ai-computation-instruction-set-recovery — Activation-conditioned interpreter decodes a frozen model's hidden states into the faithful set of active instructions/constraints/subgoals, exposing injected or hidden objectives (arXiv:2606.09563) — Representation Probing
 
+### June-2026 additional-scan T2 (8 concepts)
+- ai-computation-blind-tool-deference — Agents accept tool outputs without judgment; stronger models defer more (arXiv:2606.14476) — Alignment & Goal Stability
+- ai-computation-conflict-regime-rag — Specialize RAG behavior to the retrieved-vs-parametric conflict regime (RAPS-DA) (arXiv:2606.30518) — Retrieval-Augmented Generation
+- ai-computation-lineage-inherited-truthful-heads — Context-truthfulness is an attention-head property conserved across model lineages (arXiv:2606.15821) — Representation Probing
+- ai-computation-self-recognition-signatures — Steerable activation signatures let a model recognize its own outputs (arXiv:2606.06315) — Representation Probing
+- ai-computation-cost-aware-evidence-selection — Retrieved evidence carries access-cost tiers; answer under a budget (arXiv:2606.02245) — Retrieval-Augmented Generation
+- ai-computation-contextual-entrainment — Models inflate token probability merely because tokens appear in context, regardless of relevance (arXiv:2606.24077) — Representation Probing
+- ai-computation-categorical-prior-lock-in — In-context learning cannot override a pretraining categorical prior via context alone (arXiv:2606.11961) — Representation Probing
+- ai-computation-matched-evidence-utilization — Isolate answer-advantage from supplied evidence vs parametric priors, beyond accuracy/recall/citation (arXiv:2606.06758) — Retrieval-Augmented Generation
+
 ## Cross-References
 
 | Department | Bridge Type | Entry Point |

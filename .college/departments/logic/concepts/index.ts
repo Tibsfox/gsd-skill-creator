@@ -15,3 +15,6 @@ export { deonticLogic } from './deontic-logic.js';
 
 // June-2026 arXiv additional-material scan (T1)
 export { instructionAutoformalization } from './instruction-autoformalization.js';
+
+// June-2026 arXiv additional-scan T2 cohort (1 concepts)
+export { intervalAlgebraTemporalRetrieval } from './interval-algebra-temporal-retrieval.js';

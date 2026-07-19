@@ -123,6 +123,45 @@ agent-skill-as-artifact
 - agent-governance-decay-compaction — Context compaction silently drops in-context safety constraints; constraint-pinning restores enforcement (arXiv `2606.22528`)
 - agent-per-component-skill-identity — Locality-sensitive per-component (prompt/code/tools) fingerprint for skill lineage — recognition, not trust (arXiv `2606.31272`)
 
+### June-2026 additional-scan T2 (27 concepts)
+
+**Security & Governance**
+- agent-isolated-planning-poison-defense — Quarantine a poisoned tool's descriptive influence on planning while keeping the tool callable, defeating cross-tool description poisoning (arXiv:2606.20922)
+- agent-runtime-skill-spec-enforcement — Compile natural-language skill specs into SMT trace policies checked against the live execution trace (VIGIL) (arXiv:2606.26524)
+- agent-least-privilege-tool-selection — Over-privileged tool choice as a safety axis; prefer the lowest sufficient-privilege tool, escalate only on demonstrated failure (arXiv:2606.20023)
+- agent-joint-intent-harm-defense — Verify prompt intent AND response harm jointly behind a judge, catching attacks that split intent from harm (arXiv:2606.26377)
+- agent-purpose-bound-tool-privacy — Route task-private data only to tools/sinks authorized for that purpose, auditing disclosure not just success (arXiv:2606.28061)
+- agent-retriever-weight-editing-attack — Poison RAG by editing the retriever's parameters rather than the corpus — a model-centric threat surface (arXiv:2606.18310)
+- agent-skill-scanner-evasion — Poisoned skills that slip past static text-first scanners via task-preserving stealth and cross-modal visual hiding (arXiv:2606.07943, 2606.18198)
+- agent-model-dependency-audit — Reconstruct an LLM's provenance graph (data-gen/filtering/judging dependencies) from fragmented public artifacts (arXiv:2606.12385)
+
+**Agent Memory**
+- agent-anticipatory-memory — Organize memory around anticipated future use, not archival similarity, to escape recall's reachability bound (arXiv:2606.15405)
+- agent-prospective-memory — Spontaneously act on a latent constraint at the right moment without an explicit triggering query (arXiv:2606.23459)
+- agent-multi-factor-memory-valuation — Score memory value with a multi-factor utility function beyond similarity and recency (arXiv:2606.12945)
+- agent-sharded-context-rolling-memory — The "lost-in-conversation" accuracy collapse when task-critical detail arrives piecemeal across turns (arXiv:2606.12941)
+- agent-single-token-memory-compression — Replace each raw evidence item with one high-dimensional latent token instead of retrievable text (arXiv:2606.10572)
+- agent-cache-preserving-context-edit — Constrain context mutation to preserve the KV-cache prefix, cutting long-horizon inference cost (arXiv:2606.17016)
+
+**Multi-Agent Orchestration**
+- agent-skill-collision-routing — Overlapping skill descriptions misroute the router; name the collision and rewrite to disambiguate (arXiv:2606.30775)
+- agent-infrastructure-aware-orchestration — Route using live serving-infrastructure state (GPU load), not just task/model features (arXiv:2606.11440)
+- agent-non-readable-inter-model-encoding — Pack semantics into compact human-unreadable text for model-to-model channels (BabelTele) (arXiv:2606.19857)
+- agent-recursive-subagent-harness — Make the recursive unit a full agent harness (tools+execution+planning), not a bare model call (arXiv:2606.13643)
+
+**Integration & Evaluation**
+- agent-layer-isolated-eval — Decompose a deployed agent into a fixed layer taxonomy and evaluate each layer in isolation (arXiv:2606.11686)
+- agent-building-to-the-test — Given a test oracle, agents optimize to pass it rather than deliver the request — a Goodhart failure (arXiv:2606.28430)
+- agent-judge-prior-rigidity — LLM safety judges over-apply rigid priors and ignore supplied in-context information (arXiv:2606.07874)
+- agent-workflow-convertibility — A taxonomy for migrating static "LLM+script" workflows into self-evolving agents without losing encoded knowledge (arXiv:2606.24598)
+
+**Agentic Code Generation**
+- agent-active-experimentalist — Training-free in-context self-improvement by actively designing and running experiments (HExA) (arXiv:2606.29315)
+- agent-spec-anchored-drift-enforcement — Keep an evolving spec machine-readable and continuously coupled to code via automated drift enforcement (arXiv:2606.27045)
+- agent-native-computer-use — Design programmatic/CLI interfaces for agents directly instead of mimicking human GUI interaction (arXiv:2606.03854)
+- agent-exploration-skill-discovery — Continual robot skill discovery by writing and refining code-as-policy programs through physical exploration (ASPIRE) (arXiv:2607.00272)
+- agent-productive-friction — Deliberately inject interactional resistance so users iterate and reflect rather than accept the first output (arXiv:2606.26626)
+
 ## Learning Path
 
 1. agent-skill-as-artifact (start here) — what an agent skill IS

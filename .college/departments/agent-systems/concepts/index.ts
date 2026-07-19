@@ -100,3 +100,32 @@ export { semanticToolTransactions } from './security/semantic-tool-transactions.
 export { skillResourceSupplyChain } from './security/skill-resource-supply-chain.js';
 export { governanceDecayCompaction } from './security/governance-decay-compaction.js';
 export { perComponentSkillIdentity } from './security/per-component-skill-identity.js';
+
+// June-2026 arXiv additional-scan T2 cohort (27 concepts)
+export { isolatedPlanningPoisonDefense } from './security/isolated-planning-poison-defense.js';
+export { runtimeSkillSpecEnforcement } from './security/runtime-skill-spec-enforcement.js';
+export { leastPrivilegeToolSelection } from './security/least-privilege-tool-selection.js';
+export { jointIntentHarmDefense } from './security/joint-intent-harm-defense.js';
+export { purposeBoundToolPrivacy } from './security/purpose-bound-tool-privacy.js';
+export { retrieverWeightEditingAttack } from './security/retriever-weight-editing-attack.js';
+export { skillScannerEvasion } from './security/skill-scanner-evasion.js';
+export { modelDependencyAudit } from './security/model-dependency-audit.js';
+export { anticipatoryMemory } from './agent-memory/anticipatory-memory.js';
+export { prospectiveMemory } from './agent-memory/prospective-memory.js';
+export { multiFactorMemoryValuation } from './agent-memory/multi-factor-memory-valuation.js';
+export { shardedContextRollingMemory } from './agent-memory/sharded-context-rolling-memory.js';
+export { singleTokenMemoryCompression } from './agent-memory/single-token-memory-compression.js';
+export { cachePreservingContextEdit } from './agent-memory/cache-preserving-context-edit.js';
+export { skillCollisionRouting } from './multi-agent-orchestration/skill-collision-routing.js';
+export { infrastructureAwareOrchestration } from './multi-agent-orchestration/infrastructure-aware-orchestration.js';
+export { nonReadableInterModelEncoding } from './multi-agent-orchestration/non-readable-inter-model-encoding.js';
+export { recursiveSubagentHarness } from './multi-agent-orchestration/recursive-subagent-harness.js';
+export { layerIsolatedEval } from './integration-evaluation/layer-isolated-eval.js';
+export { buildingToTheTest } from './integration-evaluation/building-to-the-test.js';
+export { judgePriorRigidity } from './integration-evaluation/judge-prior-rigidity.js';
+export { workflowConvertibility } from './integration-evaluation/workflow-convertibility.js';
+export { activeExperimentalist } from './agentic-code-generation/active-experimentalist.js';
+export { specAnchoredDriftEnforcement } from './agentic-code-generation/spec-anchored-drift-enforcement.js';
+export { nativeComputerUse } from './agentic-code-generation/native-computer-use.js';
+export { explorationSkillDiscovery } from './agentic-code-generation/exploration-skill-discovery.js';
+export { productiveFriction } from './agentic-code-generation/productive-friction.js';
