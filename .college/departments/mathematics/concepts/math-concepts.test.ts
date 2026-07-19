@@ -22,6 +22,19 @@ import {
   scaleCriticalEquations,
   erdosProblemIndex,
   millenniumProblemCatalogue,
+  // Phase 744 additions (used to resolve dept-local cross-references)
+  coherentFunctor,
+  ollivierRicciCurvature,
+  hourglassPersistence,
+  tonnetzLattice,
+  // June-2026 arXiv math-department pass (T1 shortlist)
+  optimalTransport,
+  perronFrobeniusCentrality,
+  aperiodicWangTiles,
+  bakryEmeryCurvatureDimension,
+  informationGeometry,
+  dualSpaceInterpolation,
+  transformUncertaintyPrinciple,
 } from './index.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
@@ -219,6 +232,108 @@ describe('Phase 679 — new concept assertions', () => {
             expect(localIds.has(rel.targetId)).toBe(true);
           }
           // external refs (culinary-*, cross-dept refs) accepted per D-13
+        }
+      }
+    );
+  });
+});
+
+// ─── June-2026 arXiv math-department pass — new concept assertions ──────────
+//
+// The two T1 concepts from MATHEMATICS-CONCEPT-SHORTLIST.md. Same D-09
+// assertion set as Phase 679, but dept-local resolution is checked against the
+// FULL concept set (the dept mixes `math-*` and `mathematics-*` id prefixes, so
+// a `math`-prefixed targetId may point at either).
+
+const juneConcepts: RosettaConcept[] = [
+  optimalTransport,
+  perronFrobeniusCentrality,
+  aperiodicWangTiles,
+  bakryEmeryCurvatureDimension,
+  informationGeometry,
+  dualSpaceInterpolation,
+  transformUncertaintyPrinciple,
+];
+
+const juneConceptNames = [
+  'optimalTransport',
+  'perronFrobeniusCentrality',
+  'aperiodicWangTiles',
+  'bakryEmeryCurvatureDimension',
+  'informationGeometry',
+  'dualSpaceInterpolation',
+  'transformUncertaintyPrinciple',
+];
+
+// Every concept exported from the barrel — the resolution target set.
+const allDeptConcepts: RosettaConcept[] = [
+  ...allConcepts,
+  coherentFunctor,
+  ollivierRicciCurvature,
+  hourglassPersistence,
+  tonnetzLattice,
+  ...juneConcepts,
+];
+
+describe('June-2026 arXiv pass — new concept assertions', () => {
+
+  describe('valid RosettaConcept fields', () => {
+    it.each(juneConcepts.map((c, i) => [juneConceptNames[i], c] as const))(
+      '%s has non-empty id, name, domain=mathematics, and description',
+      (_name, concept) => {
+        expect(concept.id).toBeTruthy();
+        expect(concept.name).toBeTruthy();
+        expect(concept.domain).toBe('mathematics');
+        expect(concept.description.length).toBeGreaterThan(10);
+      }
+    );
+  });
+
+  describe('complexPlanePosition well-formed', () => {
+    it.each(juneConcepts.map((c, i) => [juneConceptNames[i], c] as const))(
+      '%s complexPlanePosition magnitude and angle agree with real/imaginary',
+      (_name, concept) => {
+        const pos = concept.complexPlanePosition!;
+        expect(pos).toBeDefined();
+        const expectedMag = Math.sqrt(pos.real * pos.real + pos.imaginary * pos.imaginary);
+        expect(pos.magnitude).toBeCloseTo(expectedMag, 5);
+        const expectedAngle = Math.atan2(pos.imaginary, pos.real);
+        expect(pos.angle).toBeCloseTo(expectedAngle, 5);
+      }
+    );
+  });
+
+  describe('relationship count (>= 2)', () => {
+    it.each(juneConcepts.map((c, i) => [juneConceptNames[i], c] as const))(
+      '%s has at least 2 relationships',
+      (_name, concept) => {
+        expect(concept.relationships.length).toBeGreaterThanOrEqual(2);
+      }
+    );
+  });
+
+  describe('panels Map populated with python + cpp + lisp', () => {
+    it.each(juneConcepts.map((c, i) => [juneConceptNames[i], c] as const))(
+      '%s has panels.size >= 3 with python, cpp, lisp keys',
+      (_name, concept) => {
+        expect(concept.panels.size).toBeGreaterThanOrEqual(3);
+        expect(concept.panels.has('python')).toBe(true);
+        expect(concept.panels.has('cpp')).toBe(true);
+        expect(concept.panels.has('lisp')).toBe(true);
+      }
+    );
+  });
+
+  describe('dept-local targetId resolution (against full barrel)', () => {
+    const localIds = new Set(allDeptConcepts.map((c) => c.id));
+
+    it.each(juneConcepts.map((c, i) => [juneConceptNames[i], c] as const))(
+      '%s dept-local (math*) targetIds resolve within the dept',
+      (_name, concept) => {
+        for (const rel of concept.relationships) {
+          if (rel.targetId.startsWith('math')) {
+            expect(localIds.has(rel.targetId)).toBe(true);
+          }
         }
       }
     );

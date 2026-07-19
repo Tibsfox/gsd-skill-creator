@@ -22,3 +22,12 @@ export { coherentFunctor } from './coherent-functor.js';
 export { ollivierRicciCurvature } from './ollivier-ricci-curvature.js';
 export { hourglassPersistence } from './hourglass-persistence.js';
 export { tonnetzLattice } from './tonnetz-lattice.js';
+
+// June-2026 arXiv math-department pass (MATHEMATICS-CONCEPT-SHORTLIST T1)
+export { optimalTransport } from './optimal-transport.js';
+export { perronFrobeniusCentrality } from './perron-frobenius-centrality.js';
+export { aperiodicWangTiles } from './aperiodic-wang-tiles.js';
+export { bakryEmeryCurvatureDimension } from './bakry-emery-curvature-dimension.js';
+export { informationGeometry } from './information-geometry.js';
+export { dualSpaceInterpolation } from './dual-space-interpolation.js';
+export { transformUncertaintyPrinciple } from './transform-uncertainty-principle.js';

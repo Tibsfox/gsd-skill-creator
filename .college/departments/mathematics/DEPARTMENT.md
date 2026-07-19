@@ -31,6 +31,13 @@
 | Ollivier-Ricci Curvature | Geometry | Python, TypeScript, Rust | math-fractal-geometry, ai-computation-harness-as-object, math-exponential-decay · Phase 744 v1.49.572 |
 | Hourglass Persistence | Geometry | Python, TypeScript | math-ollivier-ricci-curvature, math-fractal-geometry · Phase 744 v1.49.572 |
 | Tonnetz Lattice | Complex Analysis | Python, TypeScript | math-euler-formula, math-complex-numbers, math-trig-functions · Phase 744 v1.49.572 |
+| Optimal Transport | Calculus | Python, C++, Lisp | mathematics-ollivier-ricci-curvature, math-scale-critical-equations, math-exponential-decay · June-2026 arXiv 2606.30053 |
+| Perron-Frobenius Centrality | Algebra | Python, C++, Lisp | mathematics-ollivier-ricci-curvature, math-euler-formula, math-ratios · June-2026 arXiv 2606.12026 |
+| Aperiodic Wang Tiles | Geometry | Python, C++, Lisp | math-fractal-geometry, mathematics-tonnetz-lattice, math-ratios · June-2026 arXiv 2606.24693 |
+| Bakry-Émery Curvature-Dimension | Geometry | Python, C++, Lisp | mathematics-ollivier-ricci-curvature, math-optimal-transport, math-exponential-decay · June-2026 arXiv 2606.11094 |
+| Information Geometry | Geometry | Python, C++, Lisp | mathematics-ollivier-ricci-curvature, math-optimal-transport, math-exponential-decay · June-2026 arXiv 2606.06395 |
+| Dual-Space Interpolation | Algebra | Python, C++, Lisp | math-trig-functions, math-euler-formula, math-transform-uncertainty-principle · June-2026 arXiv 2606.22671 |
+| Transform Uncertainty Principle | Complex Analysis | Python, C++, Lisp | math-euler-formula, math-complex-numbers, math-dual-space-interpolation · June-2026 arXiv 2606.08662 |
 
 ## Panels
 
