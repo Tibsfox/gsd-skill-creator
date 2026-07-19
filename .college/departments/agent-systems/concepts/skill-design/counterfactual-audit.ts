@@ -24,11 +24,6 @@ export const counterfactualAudit: RosettaConcept = {
       targetId: 'agent-counterfactual-utility',
       description: 'Counterfactual utility extends counterfactual audit from current behaviour to expected impact',
     },
-    {
-      type: 'analogy',
-      targetId: 'ct-counterfactual-reasoning',
-      description: 'Counterfactual audit is counterfactual reasoning applied to skill effects',
-    },
   ],
   complexPlanePosition: {
     real: -0.7,

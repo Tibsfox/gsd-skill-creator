@@ -19,7 +19,7 @@ export const functionalIdentifiabilitySession: TrySessionDefinition = {
       expectedOutcome:
         "You articulate that parameter identifiability asks whether a finite vector θ is uniquely fixed by the data, while functional identifiability asks whether an entire unknown function is; both reduce to injectivity of the map from unknowns to observed input-output behaviour, and only the domain differs (finite-dimensional R^n versus a function space).",
       hint: "The unknown is now a point in a function space, not in R^n -- but the identifiability question, injectivity of unknowns-to-observations, is identical.",
-      conceptsExplored: ["adaptive-systems-functional-identifiability", "adapt-feedback-parameter-update"],
+      conceptsExplored: ["adaptive-systems-functional-identifiability"],
     },
     {
       instruction:
@@ -57,9 +57,9 @@ export const functionalIdentifiabilitySession: TrySessionDefinition = {
       instruction:
         "Return to the non-identifiable model and run the parent's move: an error-driven feedback update on (f, h) against the observed y. Track which member of the equivalence class the update converges to across several different initializations.",
       expectedOutcome:
-        "The update drives the output error to zero but lands on whichever equivalence-class member is nearest its initialization -- never reliably the true (f, h). You conclude that adapt-feedback-parameter-update can only tune within what the data distinguishes, so functional identifiability is a strict prerequisite sitting upstream of any adaptation.",
+        "The update drives the output error to zero but lands on whichever equivalence-class member is nearest its initialization -- never reliably the true (f, h). You conclude that error-driven parameter adaptation can only tune within what the data distinguishes, so functional identifiability is a strict prerequisite sitting upstream of any adaptation.",
       hint: "Zero output error is not zero parameter error when the loss surface has a flat valley -- the equivalence class IS that valley.",
-      conceptsExplored: ["adaptive-systems-functional-identifiability", "adapt-feedback-parameter-update"],
+      conceptsExplored: ["adaptive-systems-functional-identifiability"],
     },
     {
       instruction:

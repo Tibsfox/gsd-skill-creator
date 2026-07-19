@@ -26,11 +26,6 @@ export const pairedTraceAudit: RosettaConcept = {
       targetId: 'rosetta-execution-grounded-selection',
       description: 'Paired-trace audit is execution-grounded selection (Rosetta #9) applied to skills rather than to code outputs',
     },
-    {
-      type: 'cross-reference',
-      targetId: 'ct-counterfactual-reasoning',
-      description: 'Paired-trace audit is the agent-systems instantiation of counterfactual reasoning from critical-thinking department',
-    },
   ],
   complexPlanePosition: {
     real: -0.6,

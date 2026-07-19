@@ -32,11 +32,6 @@ export const functionalIdentifiability: RosettaConcept = {
   ]),
   relationships: [
     {
-      type: "dependency",
-      targetId: "adapt-feedback-parameter-update",
-      description: "Generalizes the parent's fixed-form parameter update: adapt-feedback-parameter-update tunes the values of a known parametric form via error feedback, whereas functional identifiability first asks whether the entire unknown function -- not merely its parameters -- is recoverable at all. It is the recoverability prerequisite that must hold before any error-driven update can converge to the true dynamics rather than to an observationally equivalent impostor.",
-    },
-    {
       type: "cross-reference",
       targetId: "adaptive-systems-lyapunov-gradient-stability",
       description: "Both are structural analyses of a differential model performed before fitting: Lyapunov gradient stability reads a spectral quantity off the product of layer Jacobians to bound trainable depth, while functional identifiability runs differential elimination to bound what the observations can recover. Each certifies a precondition for successful adaptation from the model's structure alone, not from fitted values.",

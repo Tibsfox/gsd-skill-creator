@@ -28,11 +28,6 @@ export const counterfactualUtility: RosettaConcept = {
       targetId: 'agent-paired-trace-audit',
       description: 'Utility is computed from paired-trace audit deltas on the probe bank',
     },
-    {
-      type: 'cross-reference',
-      targetId: 'ct-counterfactual-reasoning',
-      description: 'Counterfactual reasoning applied to skill lifecycle (ship / refine / retire)',
-    },
   ],
   complexPlanePosition: {
     real: -0.4,
