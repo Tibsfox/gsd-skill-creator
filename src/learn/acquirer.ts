@@ -396,6 +396,40 @@ async function acquireGitHub(
 
 // === URL Handler ===
 
+/**
+ * Resolve the effective file extension for a URL-downloaded file.
+ *
+ * A supported URL extension is trusted as-is. Otherwise the URL carries no
+ * usable type hint — the canonical case is arxiv's
+ * `https://arxiv.org/pdf/2606.32025v1`, whose `path.extname` is a junk
+ * `.32025v1` — so the content is sniffed: a PDF always begins with the 5-byte
+ * `%PDF-` signature. Anything else falls back to plain text. This is what makes
+ * the scan-arxiv `run-ingestion.sh` (which passes the bare `paper.pdfUrl`)
+ * extract real text instead of reading raw PDF bytes as UTF-8.
+ */
+export function resolveDownloadedExtension(url: string, filePath: string): string {
+  const urlExt = path.extname(url).toLowerCase();
+  if (SUPPORTED_EXTENSIONS.includes(urlExt as SupportedExtension)) {
+    return urlExt;
+  }
+  try {
+    const fd = fs.openSync(filePath, 'r');
+    try {
+      const magic = Buffer.alloc(5);
+      const read = fs.readSync(fd, magic, 0, 5, 0);
+      if (read === 5 && magic.toString('latin1') === '%PDF-') {
+        return '.pdf';
+      }
+    } finally {
+      fs.closeSync(fd);
+    }
+  } catch {
+    // Unreadable download → treat as text; acquireLocalFile surfaces any real
+    // read error downstream.
+  }
+  return '.txt';
+}
+
 async function acquireUrl(
   url: string,
   stagingDir: string,
@@ -403,20 +437,34 @@ async function acquireUrl(
   timeout: number,
   ctx?: ProcessContext,
 ): Promise<StagedContent> {
-  const tempFile = path.join(os.tmpdir(), `learn-url-${Date.now()}${path.extname(url) || '.txt'}`);
+  const base = path.join(os.tmpdir(), `learn-url-${Date.now()}`);
+  const downloadPath = `${base}.download`;
+  // Tracks the on-disk file to remove in `finally`; updated after the rename.
+  let cleanupPath = downloadPath;
 
   try {
     safeExecFile(
       ctx,
       'curl',
-      ['-sL', '--max-time', String(Math.ceil(timeout / 1000)), '-o', tempFile, url],
+      ['-sL', '--max-time', String(Math.ceil(timeout / 1000)), '-o', downloadPath, url],
       { stdio: 'pipe', timeout: timeout + 5000 },
     );
 
-    return await acquireLocalFile(tempFile, stagingDir, maxFileSize, ctx);
+    // The URL alone does not reliably encode the content type. Resolve it from a
+    // supported URL extension or the downloaded file's magic bytes, then give
+    // the temp file that extension so acquireLocalFile routes it to the right
+    // reader (a bare arxiv PDF URL otherwise fell through to the text reader).
+    const ext = resolveDownloadedExtension(url, downloadPath);
+    const typedPath = `${base}${ext}`;
+    if (typedPath !== downloadPath) {
+      fs.renameSync(downloadPath, typedPath);
+    }
+    cleanupPath = typedPath;
+
+    return await acquireLocalFile(typedPath, stagingDir, maxFileSize, ctx);
   } finally {
-    if (fs.existsSync(tempFile)) {
-      fs.unlinkSync(tempFile);
+    if (fs.existsSync(cleanupPath)) {
+      fs.unlinkSync(cleanupPath);
     }
   }
 }

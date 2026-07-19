@@ -13,6 +13,7 @@ import {
   detectSourceType,
   filterByScope,
   isSupportedExtension,
+  resolveDownloadedExtension,
   type AcquisitionResult,
   type AcquisitionSource,
   type SourceType,
@@ -399,5 +400,52 @@ describe('staging area', () => {
       expect(events[0].source).toBe('learn/acquirer');
       expect(events[0].target).toBe('unzip');
     });
+  });
+});
+
+// === Group: downloaded-content extension resolution ===
+//
+// Regression for the arxiv PDF-URL bug: `https://arxiv.org/pdf/2606.32025v1`
+// has no usable file extension (path.extname → junk ".32025v1"), so a
+// downloaded PDF was routed through the plain-text reader and yielded garbage.
+// resolveDownloadedExtension trusts a supported URL extension, else sniffs the
+// downloaded content's magic bytes.
+
+describe('resolveDownloadedExtension', () => {
+  function writeTmp(name: string, bytes: Buffer | string): string {
+    const p = path.join(tmpDir, name);
+    fs.writeFileSync(p, bytes);
+    return p;
+  }
+
+  it('sniffs a PDF (%PDF- magic) when the URL extension is junk (arxiv case)', () => {
+    const file = writeTmp('dl', Buffer.from('%PDF-1.7\n... binary ...', 'latin1'));
+    expect(resolveDownloadedExtension('https://arxiv.org/pdf/2606.32025v1', file)).toBe('.pdf');
+  });
+
+  it('sniffs a PDF when the URL has no extension at all', () => {
+    const file = writeTmp('dl', Buffer.from('%PDF-1.4 stream', 'latin1'));
+    expect(resolveDownloadedExtension('https://example.com/paper', file)).toBe('.pdf');
+  });
+
+  it('trusts a supported URL extension without reading content', () => {
+    // Content is NOT a PDF, but the URL ends in .md → trust the URL.
+    const file = writeTmp('dl', '# a markdown heading');
+    expect(resolveDownloadedExtension('https://example.com/notes.md', file)).toBe('.md');
+  });
+
+  it('trusts an explicit .pdf URL extension', () => {
+    const file = writeTmp('dl', Buffer.from('%PDF-1.5', 'latin1'));
+    expect(resolveDownloadedExtension('https://arxiv.org/pdf/2606.32025v1.pdf', file)).toBe('.pdf');
+  });
+
+  it('falls back to .txt for non-PDF content with a junk/absent URL extension', () => {
+    const file = writeTmp('dl', 'plain text, definitely not a pdf');
+    expect(resolveDownloadedExtension('https://arxiv.org/pdf/2606.32025v1', file)).toBe('.txt');
+  });
+
+  it('falls back to .txt when the file is too short to carry a PDF magic', () => {
+    const file = writeTmp('dl', '%PD'); // 3 bytes — cannot be the 5-byte %PDF- magic
+    expect(resolveDownloadedExtension('https://example.com/x', file)).toBe('.txt');
   });
 });
