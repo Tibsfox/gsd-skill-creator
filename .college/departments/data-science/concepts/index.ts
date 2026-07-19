@@ -10,3 +10,11 @@ export { knowledgeDrift } from './knowledge-drift.js';
 export { driftDetection } from './drift-detection.js';
 // Convergent Substrate (Phase 707, v1.49.570)
 export { compressionSpectrum } from './compression-spectrum.js';
+
+// Modern Inference & Uncertainty (June-2026 arXiv, DATA-SCIENCE-CONCEPT-SHORTLIST T1)
+export { conformalPrediction } from './conformal-prediction.js';
+export { predictionCalibration } from './prediction-calibration.js';
+export { predictionPoweredInference } from './prediction-powered-inference.js';
+export { sequentialTestingByBetting } from './sequential-testing-by-betting.js';
+export { dSeparation } from './d-separation.js';
+export { densityEvolution } from './density-evolution.js';

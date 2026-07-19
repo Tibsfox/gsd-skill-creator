@@ -58,6 +58,14 @@ data-data-sources
 - data-science-knowledge-drift -- Misinformation-induced belief shift: +56.6% overconfidence / -52.8% uncertainty (Fastowski 2024)
 - data-science-drift-detection -- DriftLens + D3Bench tooling; MMD/ADWIN/Page-Hinkley adapted to LLM context (Greco 2024, Muller 2024)
 
+### Modern Inference & Uncertainty (6 concepts, June-2026 arXiv)
+- data-science-conformal-prediction -- Distribution-free, finite-sample-valid prediction intervals via exchangeability (Statistical Inference)
+- data-science-prediction-calibration -- Reliability of probabilistic forecasts; reliability diagrams, ECE, recalibration (Statistical Inference)
+- data-science-prediction-powered-inference -- Valid, label-efficient inference from a few labels plus many model predictions (Statistical Inference)
+- data-science-sequential-testing-by-betting -- Anytime-valid testing via test martingales / e-values over a data stream (Statistical Inference)
+- data-science-d-separation -- Graphical conditional-independence criterion on a causal DAG; correlation vs causation made rigorous (Statistical Inference)
+- data-science-density-evolution -- Multiscale KDE as heat-flow scale-space; modes and feature lifetimes across bandwidth (Exploratory Analysis)
+
 ## Calibration Models
 
 - Statistical models -- quantitative domains require precision calibration
