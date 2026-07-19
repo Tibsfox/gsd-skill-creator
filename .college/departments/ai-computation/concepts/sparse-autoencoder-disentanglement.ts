@@ -20,13 +20,18 @@ export const sparseAutoencoderDisentanglement: RosettaConcept = {
   id: 'ai-computation-sparse-autoencoder-disentanglement',
   name: 'Sparse Autoencoder Disentanglement',
   domain: 'ai-computation',
-  description: 'Dense embeddings pack many features into few dimensions by superposition, so no single ' +
-    'axis is interpretable. A top-k sparse autoencoder learns an overcomplete dictionary in which each ' +
-    'latent activates rarely and aligns with a human-readable concept — semantic, syntactic, or ' +
-    'pragmatic — recovering interpretable directions from the superposed representation (arXiv ' +
-    '2607.00023, 2026). Because each concept is now a named latent, clamping or ablating one feature ' +
-    'becomes a precise intervention: it steers generation and re-ranks retrieval along a single ' +
-    'interpretable axis rather than an opaque embedding shift.',
+  description: 'Dense sentence embeddings pack many features into few dimensions by superposition, so no ' +
+    'single axis is interpretable — the entanglement that makes retrieval-augmented generation opaque and ' +
+    'hard to control. A top-k sparse autoencoder (SAE) attacks this by learning an overcomplete dictionary ' +
+    '(far more latent units than input dimensions), trained to reconstruct the embedding while a top-k ' +
+    'constraint keeps only the k largest latent activations nonzero on each input. That ' +
+    'reconstruction-versus-sparsity trade-off forces every latent to activate rarely and to align with a ' +
+    'single human-readable concept; applied to a sentence transformer such as E5, the recovered latents ' +
+    'sort into semantic, syntactic, and pragmatic categories (arXiv 2607.00023, 2026). Because each concept ' +
+    'is now a named, sparse direction, clamping one latent to a fixed value is a precise, backbone-frozen ' +
+    'intervention: it re-ranks retrieval results along that single interpretable axis — e.g. forcing a ' +
+    'pragmatic constraint up or down to match user intent — rather than applying an opaque, entangled ' +
+    'embedding shift, and it needs no retraining of the underlying model.',
   panels: new Map(),
   relationships: [
     {

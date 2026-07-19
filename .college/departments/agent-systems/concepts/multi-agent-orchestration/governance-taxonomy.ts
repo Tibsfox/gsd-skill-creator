@@ -15,7 +15,7 @@ export const governanceTaxonomy: RosettaConcept = {
   name: "Governance Taxonomy",
   domain: 'agent-systems',
   description:
-    "Task-oriented multi-agent coordination verifies only that work got done — it cannot tell whether a community of agents is actually governed. arXiv 2606.31498v1 introduces a six-dimension governance taxonomy — membership, deliberation, voting, dissent preservation, human escalation, and audit/replay — and scores agent-interoperability protocols against it. Its insight: compliance auditing is just one axis; a governed community also needs controlled membership, structured deliberation, explicit voting, preserved minority dissent, and human-escalation paths. This gives builders a checklist separating a legitimate agent polity from a swarm that merely finishes tasks.",
+    "Task-oriented multi-agent coordination verifies only that work got done — it cannot tell whether a community of agents is actually governed. arXiv 2606.31498v1 introduces a six-dimension governance taxonomy — membership, deliberation, voting, dissent preservation, human escalation, and audit/replay — and scores five agent-interoperability protocols (MCP, A2A, ACP, ANP, ERC-8004) against it, classifying each capability as Supported, Partial, or Absent. The gap matrix's headline finding: voting and dissent preservation are universally absent across all five protocols, deliberation is absent or at most partial, and no protocol encodes the full set of primitives a governed community needs. The paper then splits extensible gaps (closable through a protocol's own extension mechanisms) from structural gaps (requiring new architecture), concluding that agent-community governance is a missing architectural LAYER above today's interoperability standards — not a missing feature within them. This gives builders both a checklist separating a legitimate agent polity from a swarm that merely finishes tasks, and a warning about which primitives cannot simply be bolted on.",
   panels: new Map(),
   relationships: [
     {
@@ -37,6 +37,11 @@ export const governanceTaxonomy: RosettaConcept = {
       type: "analogy",
       targetId: "agent-persistent-decision-history",
       description: "Its dissent-preservation and audit/replay dimensions mirror a persistent decision history — retaining minority positions and replayable records instead of collapsing everything to final outcomes.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "agent-constraint-drift",
+      description: "Both treat governance as maintained, auditable execution state rather than a one-time check: constraint-drift tracks whether an agent still honors its constraints over time, while this taxonomy's membership and audit/replay dimensions demand that a community's governance state stay live and inspectable.",
     },
   ],
   complexPlanePosition: {

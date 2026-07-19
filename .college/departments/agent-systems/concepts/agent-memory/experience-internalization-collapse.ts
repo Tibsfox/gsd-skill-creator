@@ -15,7 +15,7 @@ export const experienceInternalizationCollapse: RosettaConcept = {
   name: "Experience Internalization Collapse",
   domain: 'agent-systems',
   description:
-    "Baking an agent's accumulated experience back into its weights through repeated fine-tuning is expected to compound skill, but Continual Experience Internalization (arXiv 2606.04703) shows the opposite: each round degrades capability rather than accumulating it. The collapse is driven by instance-level detail — verbatim episodes and surface specifics — which overfits and erodes prior competence, while principle-level experience (abstracted, transferable strategy) survives internalization. The lesson for agent design: keep raw experience in external memory and internalize only distilled principles, rather than looping episodic traces through the weights.",
+    "Baking an agent's accumulated experience back into its weights through repeated fine-tuning is expected to compound skill, but Continual Experience Internalization (arXiv 2606.04703) shows the opposite under multi-iteration learning: each round degrades capability rather than accumulating it — a progressive collapse, not compounding improvement. The paper turns this diagnosis into a three-dimension recipe for stable internalization. (1) Experience Granularity: instance-level detail — verbatim episodes and trajectory-specific specifics — overfits and erodes prior competence, while principle-level experience (abstracted, transferable strategy) is durable and survives internalization. (2) Injection Pattern: step-wise injection, which aligns each piece of experience with the intermediate decision state it applies to, significantly outperforms global injection — a distinction that is critical for long-horizon tool use. (3) Internalization Regime: off-policy context-distillation on high-quality teacher trajectories provides a substantially more stable training signal than on-policy distillation, which is limited to local corrections on student-induced flawed states. The lesson for agent design: keep raw experience in external memory and internalize only distilled principles, inject them step-wise at the decision states they inform, and distill off-policy from teacher trajectories rather than looping episodic traces through the weights.",
   panels: new Map(),
   relationships: [
     {
@@ -37,6 +37,11 @@ export const experienceInternalizationCollapse: RosettaConcept = {
       type: "cross-reference",
       targetId: "agent-memory-consolidation",
       description: "Motivates external consolidation over parametric internalization: retaining raw episodes in an external memory store and distilling before write-back avoids the instance-level collapse that repeated weight-baking induces.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "agent-memory-depth",
+      description: "Supplies the admission rule for write-side depth: this concept's finding that only principle-level experience survives internalization is exactly what Memory Depth's surprise/valence write-gate should enforce — consolidate abstracted, goal-relevant strategy into the parametric store, not instance-level episodic detail.",
     },
   ],
   complexPlanePosition: {

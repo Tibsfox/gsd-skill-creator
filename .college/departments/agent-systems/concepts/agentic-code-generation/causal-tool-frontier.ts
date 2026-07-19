@@ -15,7 +15,7 @@ export const causalToolFrontier: RosettaConcept = {
   name: "Causal Tool Frontier",
   domain: 'agent-systems',
   description:
-    "Expose only the minimal set of next-step tools that are causally sufficient to move the current state toward the goal — selected through lightweight precondition-effect contracts — instead of every semantically relevant tool. The 2026 finding (arXiv 2606.06284v1, 2026) is that flooding the menu with all contextually-matched tools (the CMTF baseline) inflates both selection error and context cost, because each irrelevant-but-plausible tool is one more way for the agent to pick wrong. The design axis is causal sufficiency, not semantic relevance: a tool belongs on the frontier only if its effect can satisfy a precondition the goal actually needs. This refines the harness's tool-access responsibility — the substrate should present the frontier, not the whole catalog. Over-exposure is therefore a harness failure mode, not a model weakness.",
+    "Expose only the minimal set of next-step tools that are causally sufficient to move the current state toward the goal — selected through lightweight precondition-effect contracts — instead of every semantically relevant tool. This training-free method, Causal Minimal Tool Filtering (CMTF), is the proposal of the 2026 study (arXiv 2606.06284v1, 2026); its finding is that the alternative — flooding the menu with all contextually-matched tools (the all-tools / semantic-relevance baseline) — inflates both selection error and context cost, because each irrelevant-but-plausible tool is one more way for the agent to pick wrong. The design axis is causal sufficiency, not semantic relevance: a tool belongs on the frontier only if its effect can satisfy a precondition the goal actually needs. Across 102 tasks, 100 tools, four LLM backends, and 2448 task-method-model runs, CMTF cuts the visible menu from 100 tools to one per step and reduces token usage by about 90% versus all-tools exposure, while matching the strongest causal baseline in aggregate success. This refines the harness's tool-access responsibility — the substrate should present the frontier, not the whole catalog. Over-exposure is therefore a harness failure mode, not a model weakness.",
   panels: new Map(),
   relationships: [
     {
@@ -35,8 +35,8 @@ export const causalToolFrontier: RosettaConcept = {
     },
     {
       type: "analogy",
-      targetId: "ct-counterfactual-reasoning",
-      description: "The frontier acts as a counterfactual filter — a tool stays only if removing it would change the reachable next state — mirroring counterfactual reasoning about which causes are actually necessary.",
+      targetId: "agent-counterfactual-audit",
+      description: "The frontier acts as a counterfactual filter — a tool stays only if removing it would change the reachable next state — mirroring the counterfactual audit idea that an element is defined by the difference between its presence and its absence.",
     },
   ],
   complexPlanePosition: {

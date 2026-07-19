@@ -15,23 +15,23 @@ export const semanticConcurrencyControl: RosettaConcept = {
   name: "Semantic Concurrency Control",
   domain: 'agent-systems',
   description:
-    "When several agents write shared state—a git tree, a cluster config, a shared document—the classical database toolkit offers two moves: pessimistic locks that serialize access, or optimistic concurrency control (OCC) that races transactions and aborts-and-retries the loser on conflict. CoAgent (arXiv 2606.15376v1, 2026) argues both break for minutes-long agent transactions: an abort discards a costly LLM run, and most detected conflicts are syntactic byte-overlaps that are not semantically real. The 2026 move is to let each agent's own model adjudicate whether two writes genuinely conflict, merging when intents are compatible and escalating only when they truly collide. This reframes concurrency control along a new axis—lock, abort-retry, or semantic adjudication—and tells system builders to treat conflict as a judgment about meaning rather than a lock on bytes.",
+    "When several agents write shared state—a git tree, a cluster config, a shared document—the classical database toolkit offers two moves: pessimistic locks that serialize access, or optimistic concurrency control (OCC) that races transactions and aborts-and-retries the loser on conflict. CoAgent (arXiv 2606.15376v1, 2026) argues both break for minutes-long agent transactions: a lock stalls a long inference interval, and an OCC abort discards a costly LLM run. Its protocol, MTPO (Monotonic Trajectory Pre-Order), makes control advisory rather than blocking—the runtime informs, the agent repairs. MTPO has four moving parts: it fixes a serialization pre-order at launch; serves each read the order-filtered value consistent with that order; applies writes speculatively in place on the live state; and, when a later write invalidates an earlier reader, sends that reader a one-way notification to re-judge and patch its plan, while the framework mechanically undoes and reorders misplaced writes through the saga-style inverse that each footprint-declared tool registers in advance. At quiescence the run is serializable in the pre-decided order. Realized as CoAgent toolcall middleware whose privileged ToolSmith grows undoable tools online, it stays within 5% of serial correctness at a 1.4x speedup and near-serial token cost where 2PL and OCC surrender their concurrency gains; on a bash-only target it grew a 25-tool library online and lifted the task pass rate from 45/71 to 63/71. The lesson for system builders: treat conflict not as a lock on bytes but as a judgment the affected agent makes after the fact, once the runtime has supplied a serialization order and mechanical reversibility.",
   panels: new Map(),
   relationships: [
     {
       type: "dependency",
       targetId: "agent-coordination-surface",
-      description: "Refines the coordination surface by specifying how concurrent writes to shared state are reconciled—replacing the surface's implicit locks with model-judged semantic adjudication of whether a conflict is real.",
+      description: "Refines the coordination surface by specifying how concurrent writes to shared state are reconciled—replacing the surface's implicit locks with MTPO's advisory control: a launch-time serialization order, order-filtered reads, speculative in-place writes, and a re-judge notification that lets the affected agent repair its plan.",
     },
     {
       type: "cross-reference",
       targetId: "agent-selector-priority-arbitration",
-      description: "Both resolve contention, but priority arbitration decides by a fixed precedence order while semantic concurrency control asks each agent's model whether the competing writes actually collide.",
+      description: "Both resolve contention, but priority arbitration decides by a fixed precedence order while semantic concurrency control fixes a serialization pre-order and then lets an affected agent re-judge and repair its plan when a speculative write invalidates it.",
     },
     {
       type: "cross-reference",
       targetId: "agent-harness-as-substrate",
-      description: "The shared state under contention—git tree, cluster, document—is the harness substrate, and this concept governs how simultaneous agent writes to that substrate are merged or escalated.",
+      description: "The shared state under contention—git tree, cluster, document—is the harness substrate, and this concept governs how simultaneous agent writes to that live substrate are ordered, applied speculatively in place, and reversed via saga-style inverse tools.",
     },
     {
       type: "analogy",

@@ -15,7 +15,7 @@ export const citationAttributionCircuit: RosettaConcept = {
   name: "Citation Attribution Circuit",
   domain: 'ai-computation',
   description:
-    "When a RAG model attaches an inline citation, engineers often assume a single \"citation head\" or localized component decides it. Activation patching in How Do LLMs Cite? (arXiv:2606.28358v1) refutes this: the choice is produced by a distributed, multi-stage attribution circuit — evidence localization, source-token binding, then a late format-and-emit step — and no single ablation removes citation behavior. This matters because faithfulness interventions aimed at one component leave the rest of the circuit intact, so missing or hallucinated attributions must be diagnosed circuit-wide rather than patched at one site.",
+    "When a RAG model attaches an inline citation, engineers often assume a single \"citation head\" or localized component decides it. Activation patching in How Do LLMs Cite? (arXiv:2606.28358v1) refutes this: the choice is produced by a distributed, multi-stage \"attributional ensemble\" of attention heads and MLP layers, so no single ablation removes citation behavior. Amplifying or attenuating only those critical heads and MLPs repairs over 90% of missed citations and eliminates 69% of spurious ones on PopQA without harming answer accuracy; gains on multi-document HotpotQA are modest but still shift citation rates in the intended direction, indicating the mechanism is not dataset-specific. The deeper lesson is a disconnect between the model's apparent reasoning and its internal computational pathway — a faithful-looking inline citation need not reflect the path that actually produced the answer, so citations can create a false sense of security. Practically, missing or hallucinated attributions must be diagnosed circuit-wide rather than patched at one site.",
   panels: new Map(),
   relationships: [
     {
@@ -36,7 +36,7 @@ export const citationAttributionCircuit: RosettaConcept = {
     {
       type: "cross-reference",
       targetId: "ai-computation-evidence-centric-reasoning",
-      description: "Provides the internal substrate for evidence-centric reasoning in RAG: the attribution circuit's evidence-localization and source-binding stages are the mechanistic realization of routing reasoning through cited evidence.",
+      description: "Provides the internal substrate for evidence-centric reasoning in RAG: the attribution circuit's distributed attention heads and MLP layers are the mechanistic realization of routing reasoning through cited evidence.",
     },
   ],
   complexPlanePosition: {
