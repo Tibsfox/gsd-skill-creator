@@ -16,3 +16,6 @@ export { bleloraMesh } from './ble-lora-mesh.js';
 
 // June-2026 arXiv T2 cohort (adaptive-systems — 1 concepts)
 export { functionalIdentifiability } from './functional-identifiability.js';
+
+// Barrel-orphan reconciliation
+export { singleLambdaPrinciple } from './single-lambda-principle.js';

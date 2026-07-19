@@ -47,3 +47,11 @@ export { knowledgeConflictSteering } from './knowledge-conflict-steering.js';
 export { lexicalAnchorProbe } from './lexical-anchor-probe.js';
 export { permutationInvariantEmbedding } from './permutation-invariant-embedding.js';
 export { utilizationAccuracyGap } from './utilization-accuracy-gap.js';
+
+// Barrel-orphan reconciliation (previously authored but unexported)
+export { characteristicFunctionTest } from './characteristic-function-test.js';
+export { instructionTensorPattern } from './instruction-tensor-pattern.js';
+export { isotropicEmbedding } from './isotropic-embedding.js';
+export { jepaKernelPlanning } from './jepa-kernel-planning.js';
+export { latentWorldModel } from './latent-world-model.js';
+export { megakernelArchitectureRhyme } from './megakernel-architecture-rhyme.js';

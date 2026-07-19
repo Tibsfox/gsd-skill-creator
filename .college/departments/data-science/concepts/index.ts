@@ -22,3 +22,6 @@ export { densityEvolution } from './density-evolution.js';
 // June-2026 arXiv T2 cohort (data-science — 2 concepts)
 export { causalDensityRatio } from './causal-density-ratio.js';
 export { epistemicAleatoricUncertainty } from './epistemic-aleatoric-uncertainty.js';
+
+// Barrel-orphan reconciliation
+export { heuristicsFreeSsl } from './heuristics-free-ssl.js';

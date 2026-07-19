@@ -43,3 +43,7 @@ export { geometricGraphManifoldRecovery } from './geometric-graph-manifold-recov
 export { measureQuantization } from './measure-quantization.js';
 export { tailIntegralMomentRepresentation } from './tail-integral-moment-representation.js';
 export { wassersteinGradientFlowLangevin } from './wasserstein-gradient-flow-langevin.js';
+
+// Barrel-orphan reconciliation — cross-ref target of bregman-projection + measure-quantization
+// (id uses the `mathematics-` prefix, which this dept mixes with `math-`)
+export { cramerWoldSlicing } from './cramer-wold-slicing.js';
