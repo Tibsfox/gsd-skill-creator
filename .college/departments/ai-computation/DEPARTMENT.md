@@ -42,6 +42,17 @@
 - ai-computation-hyperbolic-retrieval-geometry — Euclidean/tree geometry mismatch causes hubness; hyperbolic embedding restores granularity (arXiv:2606.03307) — Retrieval-Augmented Generation
 - ai-computation-voronoi-retrieval-bottleneck — Dense-retrieval capacity ceiling = sign-rank; a label-free score predicts per-query failure (arXiv:2606.28359) — Retrieval-Augmented Generation
 
+### June-2026 arXiv T2 (9 concepts)
+- ai-computation-calibrated-retrieval-budget — Confidence-gated retrieval decision (calibrated closed-book confidence + abstention), distinct from intent-router's question-KIND routing but borderline-applied (arXiv:2606.29959) — Retrieval-Augmented Generation
+- ai-computation-citation-attribution-circuit — Circuit-level finding that RAG citation is distributed multi-stage rather than localized (arXiv:2606.28358) — Retrieval-Augmented Generation
+- ai-computation-distributed-attribute-retrieval — Factual recall runs along redundant, layer-skipping paths, countering single-circuit assumptions (arXiv:2606.21345) — Representation Probing
+- ai-computation-embedding-norm-specificity — Adds the orthogonal magnitude axis — norm encodes specificity/uncertainty, free calibration — distinct from both isotropic-embedding (direction) and hyperbolic (curvature) (arXiv:2606.30625) — Representation Probing
+- ai-computation-entity-rebinding-circuit — Named binding-update circuit for dynamic entity/state tracking with a cross-family signature migration (arXiv:2606.08644) — Representation Probing
+- ai-computation-knowledge-conflict-steering — Names context-vs-parametric conflict and adds gate-modulated activation steering (vs entangled neuron editing) — mechanistic, distinct from grounding-faithfulness (arXiv:2606.27786) — Retrieval-Augmented Generation
+- ai-computation-lexical-anchor-probe — Anonymization/controlled-perturbation diagnostic isolating structural reasoning from lexical shortcuts — a specific probe evidence-centric-reasoning does not provide, but a probe variant (arXiv:2606.04915) — Representation Probing
+- ai-computation-permutation-invariant-embedding — Serialized-record encoders bind to absolute field position not labels, with a permutation-invariant fix — genuinely mechanistic but narrow (arXiv:2606.30473) — Representation Probing
+- ai-computation-utilization-accuracy-gap — Clean decoupling — a model can faithfully utilize enrichment signals yet lose accuracy — extends grounding-faithfulness with a distinct insight rather than duplicating it (arXiv:2606.29645) — Retrieval-Augmented Generation
+
 ## Cross-References
 
 | Department | Bridge Type | Entry Point |

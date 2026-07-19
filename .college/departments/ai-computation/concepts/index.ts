@@ -36,3 +36,14 @@ export { coldStartSafetyGap } from './cold-start-safety-gap.js';
 export { lexicalDensityLimit } from './lexical-density-limit.js';
 export { hyperbolicRetrievalGeometry } from './hyperbolic-retrieval-geometry.js';
 export { voronoiRetrievalBottleneck } from './voronoi-retrieval-bottleneck.js';
+
+// June-2026 arXiv cohort (AI-COMPUTATION-CONCEPT-SHORTLIST T2 -- 9 concepts)
+export { calibratedRetrievalBudget } from './calibrated-retrieval-budget.js';
+export { citationAttributionCircuit } from './citation-attribution-circuit.js';
+export { distributedAttributeRetrieval } from './distributed-attribute-retrieval.js';
+export { embeddingNormSpecificity } from './embedding-norm-specificity.js';
+export { entityRebindingCircuit } from './entity-rebinding-circuit.js';
+export { knowledgeConflictSteering } from './knowledge-conflict-steering.js';
+export { lexicalAnchorProbe } from './lexical-anchor-probe.js';
+export { permutationInvariantEmbedding } from './permutation-invariant-embedding.js';
+export { utilizationAccuracyGap } from './utilization-accuracy-gap.js';
