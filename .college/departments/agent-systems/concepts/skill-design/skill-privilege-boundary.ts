@@ -9,14 +9,17 @@ export const skillPrivilegeBoundary: RosettaConcept = {
     'write, whether it may touch the network, exec subprocesses, or read secrets — with enforcement at two stages: ' +
     'selection time (choosing the least-privileged skill that fits the task) and execution time (refusing dispatch ' +
     "when a skill reaches for a tool outside its declared boundary). That closes lateral-movement failures where a " +
-    "skill's prose says one thing and its runtime calls do another. FORTIS (arxiv `2605.09163v2`, 2026) is the " +
-    'benchmark that measures exactly these two failure modes, and its headline result is that over-privilege is the ' +
-    'norm rather than the exception: across ten frontier models and three domains, agents consistently reach for ' +
-    'higher-privilege skills and tools than the task requires, failing at both the selection and execution stages ' +
-    'at rates that stay high even for the strongest models — and doing so under ordinary conditions (incomplete ' +
-    'specs, convenience framing, proximity to skill boundaries) with no adversarial construction. Privilege ' +
-    'boundary is the agent-system instantiation of capability-based security; without it, every skill is ' +
-    'implicitly omnipotent.',
+    "skill's prose says one thing and its runtime calls do another. FORTIS (arxiv `2605.09163v2`, 2026), " +
+    "'Benchmarking Over-Privilege in Agent Skills,' is the benchmark that measures exactly these two failure " +
+    'modes — whether a model selects minimally sufficient skills from overlapping libraries, and whether it ' +
+    'executes them without expanding into unauthorized tools or actions — and its headline result is that ' +
+    'over-privilege is the norm rather than the exception: across ten frontier models and three domains, agents ' +
+    'consistently reach for higher-privilege skills and tools than the task requires, failing at both the ' +
+    'selection and execution stages at rates that stay high even for the strongest models — and doing so under ' +
+    'ordinary conditions (incomplete specs, convenience framing, proximity to skill boundaries) with no ' +
+    "adversarial construction. FORTIS's own framing is that the skill layer, far from containing agent behavior, " +
+    'is a primary source of privilege escalation in current systems. Privilege boundary is the agent-system ' +
+    'instantiation of capability-based security; without it, every skill is implicitly omnipotent.',
   panels: new Map(),
   relationships: [
     {

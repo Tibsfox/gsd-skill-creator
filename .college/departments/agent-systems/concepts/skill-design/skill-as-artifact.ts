@@ -5,12 +5,15 @@ export const skillAsArtifact: RosettaConcept = {
   name: 'Skill as Artifact',
   domain: 'agent-systems',
   description:
-    'A reusable procedural artifact that coordinates tools, memory, and runtime context under task-specific constraints. ' +
-    'The 2026 reframing (Zhou et al. survey, arxiv 2605.07358v1) treats skills not as prose convenience but as first-class ' +
-    'objects with a typed manifest: declared tools, dependencies, privilege boundary, and behavioural-audit history. ' +
+    'A reusable procedural artifact that coordinates tools, memory, and runtime context under task-specific constraints — ' +
+    'the definition adopted verbatim by the 2026 survey (Zhou et al., "A Comprehensive Survey on Agent Skills", arxiv 2605.07358v1), ' +
+    'which frames agents as handling high-level reasoning and planning while skills form the operational layer that enables ' +
+    'reliable, reusable, and composable execution. That survey organises the field around a four-stage skill lifecycle — ' +
+    'representation, acquisition, retrieval, and evolution — and flags open challenges in quality control, interoperability, ' +
+    'safe updating, and long-term capability management. ' +
     "The entry point for thinking about agent-system architecture: everything else (orchestration, memory, code-gen) " +
     'composes specialised skills as building blocks. Contrast with: prompt-engineering (skills as text patches), ' +
-    'tool-use (skills as flat tool descriptions). The artifact framing is what enables compilation, audit, retirement, and provenance.',
+    'tool-use (skills as flat tool descriptions). The first-class-artifact framing is what enables compilation, audit, retirement, and provenance.',
   panels: new Map(),
   relationships: [
     {

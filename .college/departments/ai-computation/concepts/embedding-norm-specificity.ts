@@ -15,7 +15,7 @@ export const embeddingNormSpecificity: RosettaConcept = {
   name: "Embedding Norm Specificity",
   domain: 'ai-computation',
   description:
-    "Cosine-similarity retrieval and contrastive objectives like InfoNCE L2-normalize embeddings, treating vector magnitude as a discardable nuisance. An analytic account of contrastive optimization dynamics (arXiv:2606.30625, 2026) shows the opposite: embedding length is a learned quantity that grows with concept specificity and token frequency and shrinks under human label uncertainty. Reading the norm alongside cosine direction yields a training-free confidence estimate, well-calibrated without a separate calibration head, and flags ambiguous or rare inputs that direction alone cannot distinguish.",
+    "Cosine-similarity retrieval and contrastive objectives like InfoNCE L2-normalize embeddings, treating vector magnitude as a discardable nuisance. \"Optimization Dynamics Imprint Semantic Specificity in Contrastive Embedding Norms\" (arXiv:2606.30625, 2026) shows the opposite: the authors derive an analytic formula proving that embedding length is not a nuisance but is imprinted by the scale-invariant training process itself, so that magnitude comes to correlate with concept specificity, token frequency, and human label uncertainty. Reading the norm alongside cosine direction yields a training-free confidence estimate — the paper positions the norm as a 'free' calibration tool needing no separate calibration head — and flags ambiguous or rare inputs that direction alone cannot distinguish.",
   panels: new Map(),
   relationships: [
     {

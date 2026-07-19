@@ -10,8 +10,9 @@ export const skillIrCompilation: RosettaConcept = {
     '2026 reframing (SkCC, arxiv `2605.03353v2`) treats the typed manifest — declared tools, inputs, dependencies, ' +
     'ordering, output shape — as the source of truth and the prose body as a per-target rendering, cutting ' +
     'adaptation complexity from O(m×n) to O(m+n) across m skills and n frameworks. Compilation closes three holes ' +
-    'that prose authoring leaves open: (a) cross-target drift, which the paper shows empirically — the same skill ' +
-    'varies widely because frameworks are highly sensitive to prompt formatting; (b) audit blindness, since prose ' +
+    'that prose authoring leaves open: (a) cross-target drift — the same skill varies widely in performance ' +
+    'because frameworks are highly sensitive to prompt formatting (the paper reports large per-framework ' +
+    'performance variation for identical skills as its motivation); (b) audit blindness, since prose ' +
     'cannot be statically checked for missing capabilities; (c) brittle migration, since framework-version bumps ' +
     'require re-authoring. Reported gains: pass rate rising 21.1% to 33.3% on Claude Code and 35.1% to 48.7% on ' +
     'Kimi CLI, sub-10ms compilation latency, 10–46% runtime token savings, and 94.8% proactive detection at the ' +

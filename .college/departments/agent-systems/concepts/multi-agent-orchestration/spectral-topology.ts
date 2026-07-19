@@ -8,8 +8,9 @@ export const spectralTopology: RosettaConcept = {
     'A pre-dispatch diagnostic on a multi-agent communication graph: build the row-stochastic transition operator P ' +
     'from the team graph, form the successor representation M = (I − γP)⁻¹, and rank the topology on three numbers — ' +
     'ρ (spectral radius, drift), Δ (spectral gap, consensus speed), κ (condition number of M, robustness). The 2026 ' +
-    'finding (Parks & Alharthi, arxiv `2605.11453`) is that rank order on (κ, Δ, ρ) predicts coordination quality ' +
-    'pre-execution with rank correlations of 1.0 / 0.5 / −1.0, measured across chain, star, and mesh topologies on ' +
+    'finding (Parks & Alharthi, arxiv `2605.11453`, "Predictive Maps of Multi-Agent Reasoning: A Successor-Representation ' +
+    'Spectrum for LLM Communication Topologies") is that rank order on (κ, Δ, ρ) predicts coordination quality ' +
+    'pre-execution with Spearman rank correlations rs of 1.0 / 0.5 / −1.0, measured across chain, star, and mesh topologies on ' +
     'a 12-step state-tracking task (Qwen2.5-7B-Instruct, 100 trials). The pattern reframes topology choice from intuition ' +
     "(pipeline? leader-worker? mesh?) into a measurable selection problem. Operationally: every TEAM.md emits a " +
     'coordination signature, and the dispatch gate refuses configurations that fall outside per-task-class thresholds.',

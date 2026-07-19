@@ -8,8 +8,9 @@ export const counterfactualAudit: RosettaConcept = {
     'The abstract idea that a skill is ultimately defined by the difference between its presence and its absence. The ' +
     '2026 finding (CTA, arxiv `2605.11946v1`) makes this measurable: pair-trace the same probe with and without the ' +
     'skill, then compute the behavioural delta — surface anchoring, template copy, excess planning, task recovery, ' +
-    "off-task artifact. The headline result is that pass-rate is BLIND to most skill effects: a single skill produces " +
-    '522 measurable behavioural changes across 49 tasks while pass-rate moves only +0.3%. Counterfactual audit is ' +
+    "off-task artifact. The headline result is that pass-rate is BLIND to most skill effects: across 49 software-" +
+    'engineering tasks (evaluated on Claude), CTA surfaced 522 Skill Influence Pattern (SIP) instances while pass-rate ' +
+    'moved only +0.3 percentage points. Counterfactual audit is ' +
     "therefore the operative definition of skill quality; pass-rate is sufficient for shipping but insufficient for " +
     'understanding. The concrete instantiation is `agent-paired-trace-audit`.',
   panels: new Map(),
