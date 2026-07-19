@@ -28,11 +28,26 @@
 ### Retrieval-Augmented Generation (1 concept)
 - ai-computation-grounding-faithfulness — Semantic Grounding Index (SGI); Cohen's d 0.92–1.28 grounded vs. ungrounded (SGI 2025)
 
+### Convergent Substrate (Phase 707, v1.49.570) (4 concepts)
+- ai-computation-capability-evolution — Versioned capability modules decoupled from persistent agent identity, with a runtime safety envelope that blocks unsafe actions independent of the modules (arXiv:2604.07799) — substrate
+- ai-computation-harness-as-object — Treats the LLM orchestration layer as a first-class systems object defined as control plus contracts plus state (arXiv:2603.25723) — orchestration substrate
+- ai-computation-evidence-centric-reasoning — Persists each evidence item as a graph node whose judgments accumulate across runs, raising accuracy without weight updates (arXiv:2604.07595) — reasoning memory
+- ai-computation-four-tier-trust — Gate-based governance mapping skill provenance to graduated deployment across four trust tiers T1-T4; 26.1% of community skills held vulnerabilities (arXiv:2602.12430) — Alignment & Goal Stability
+
 ### Mathematical Foundations Refresh — Silicon Layer (Phase 744, v1.49.572 math-foundations-apr2026)
 - ai-computation-semantic-channel — DACP three-part bundle channel; capacity bounded by weakest leg (arXiv:2604.16471) — Phase 747 substrate
 - ai-computation-rate-distortion-deductive-source — R-D curve for deductive sources has soundness discontinuity (arXiv:2604.15698) — Phase 747 substrate
 - ai-computation-koopman-bilinear-form — Mamba-Koopman sequence-memory bilinear form + spectral stability (arXiv:2604.17221) — Phase 749 substrate
 - ai-computation-bounded-learning-theorem — Formal backing for the 20%-rule via Peng continual-recovery envelope (arXiv:2604.17563) — Phase 748 reference
+
+### Upstream Intelligence Pack v1.44 (Phase 764, v1.49.573) (7 concepts)
+- ai-computation-skilldex-conformance — Two-layer static scorer verifies skill files against spec and construct schema without executing them (arXiv:2604.16911) — skill-registry gate
+- ai-computation-local-linearity-steering — LLM activation dynamics are locally linear, so LQR on the Jacobian yields analytic steering vectors without fine-tuning (arXiv:2604.19018) — Representation Probing
+- ai-computation-experience-compression-spectrum — Single compression-ratio axis over episodic, procedural, declarative memory; the missing diagonal is cross-level adaptive compression (arXiv:2604.15877) — memory abstraction axis
+- ai-computation-data-free-mia-attack — Gradient interception alone reconstructs training data via domain priors with no auxiliary dataset; mandates four federated-learning mitigations (arXiv:2604.19891) — FL threat model
+- ai-computation-spatiotemporal-link-formation — Temporal-attention GNN predicts an agent's next skill activation from the interaction graph, beating recency pre-warming (arXiv:2604.18888) — predictive skill loader
+- ai-computation-stackelberg-drainability — Bilevel Stackelberg pricing with a drainability guardrail preventing any tenant from exhausting shared compute in equilibrium (arXiv:2604.16802) — multi-tenant pricing
+- ai-computation-forensic-residual-physics — Generator-agnostic AI-audio detection from residual spectral artifacts surviving post-processing; three-way human/AI/hybrid labelling (arXiv:2604.16254) — provenance gate
 
 ### Modern Representation & Retrieval (6 concepts, June-2026 arXiv)
 - ai-computation-attention-readout-gap — Tool-selection failures live in the decision readout, not attention (arXiv:2606.16364) — Representation Probing
@@ -52,6 +67,14 @@
 - ai-computation-lexical-anchor-probe — Anonymization/controlled-perturbation diagnostic isolating structural reasoning from lexical shortcuts — a specific probe evidence-centric-reasoning does not provide, but a probe variant (arXiv:2606.04915) — Representation Probing
 - ai-computation-permutation-invariant-embedding — Serialized-record encoders bind to absolute field position not labels, with a permutation-invariant fix — genuinely mechanistic but narrow (arXiv:2606.30473) — Representation Probing
 - ai-computation-utilization-accuracy-gap — Clean decoupling — a model can faithfully utilize enrichment signals yet lose accuracy — extends grounding-faithfulness with a distinct insight rather than duplicating it (arXiv:2606.29645) — Retrieval-Augmented Generation
+
+### Reconciled Concepts — barrel-orphan backfill (6 concepts)
+- ai-computation-characteristic-function-test — Epps-Pulley ECF normality test: linear, differentiable, all-reduce-friendly, and matches full distributional identity rather than just finite moments (Epps & Pulley 1983, Biometrika) — SIGReg substrate
+- ai-computation-instruction-tensor-pattern — CPU-produced opcode sequence an on-GPU interpreter runs in one persistent kernel, counter-synced, collapsing ~100 Llama-1B launches into one (arXiv:2505.22758) — GPU coordination primitive
+- ai-computation-isotropic-embedding — Isotropic Gaussian is the unique optimal JEPA embedding distribution under both linear and nonlinear downstream probes (arXiv:2511.08544v3) — Representation Probing
+- ai-computation-jepa-kernel-planning — JEPA trained on GPU execution traces ranks kernel transformations in latent space without executing each candidate (arXiv:2603.19312) — Retrieval-Augmented Generation
+- ai-computation-latent-world-model — Predicts future embeddings from current embedding plus action; 192-dim latent yields 48x CEM planning speedup over DINO-WM (LeWorldModel, Maes et al. 2026) — Retrieval-Augmented Generation
+- ai-computation-megakernel-architecture-rhyme — Replace a cluster of approximate coordination mechanisms with one rigorous minimum-viable invariant; megakernel counter-sync and SIGReg both rhyme (arXiv:2505.22758 + arXiv:2603.19312) — architectural pattern
 
 ## Cross-References
 
