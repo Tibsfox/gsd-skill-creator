@@ -4,3 +4,4 @@ export { seleniumBeaconLowPowerRadio } from './selenium-beacon-low-power-radio.j
 export { solarCellShuntRegulator } from './solar-cell-shunt-regulator.js';
 export { squarewaveInverterVacuumTube } from './squarewave-inverter-vacuum-tube.js';
 export { squibCduVernierGmkPowerChain } from './squib-cdu-vernier-gmk-power-chain.js';
+export { wideBandgapPowerDevices } from './wide-bandgap-power-devices.js';

@@ -3,3 +3,4 @@ export { fluxgateMagnetometerFrontendFrequencyResponse } from './fluxgate-magnet
 export { pllBandwidthRadioOccultation } from './pll-bandwidth-radio-occultation.js';
 export { rendezvousRadarAcquisitionTrackingBandwidth } from './rendezvous-radar-acquisition-tracking-bandwidth.js';
 export { videoTelemetryBandwidthBudget } from './video-telemetry-bandwidth-budget.js';
+export { analogFilterDiscretization } from './analog-filter-discretization.js';

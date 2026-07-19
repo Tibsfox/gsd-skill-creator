@@ -3,3 +3,7 @@ export { cutoffLogicSoftLanding } from './cutoff-logic-soft-landing.js';
 export { feedbackStabilityGuidance } from './feedback-stability-guidance.js';
 export { limitCycleColdGasAttitude } from './limit-cycle-cold-gas-attitude.js';
 export { stuckActuatorSignInversion } from './stuck-actuator-sign-inversion.js';
+export { lqrKalmanDuality } from './lqr-kalman-duality.js';
+export { pidAntiWindup } from './pid-anti-windup.js';
+export { feedbackLinearization } from './feedback-linearization.js';
+export { absoluteStabilityCircleCriterion } from './absolute-stability-circle-criterion.js';
