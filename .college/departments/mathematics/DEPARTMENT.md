@@ -2,7 +2,7 @@
 
 **Domain:** mathematics
 **Source:** "The Space Between" mathematical foundations
-**Status:** Active -- 7 concepts seeded across 4 wings
+**Status:** Active -- 34 concepts across 4 wings
 
 ## Wings
 
@@ -48,6 +48,9 @@
 | Measure Quantization | Calculus | Python, C++, Lisp | mathematics-cramer-wold-slicing, math-optimal-transport |
 | Tail Integral Moment Representation | Calculus | Python, C++, Lisp | math-exponential-decay, math-logarithmic-scales |
 | Wasserstein Gradient Flow Langevin | Calculus | Python, C++, Lisp | math-blow-up-dynamics, math-optimal-transport |
+| Cramér-Wold Slicing | Complex Analysis | — (bridge) | ai-computation-isotropic-embedding, ai-computation-characteristic-function-test, data-science-heuristics-free-ssl |
+
+> **ID-prefix note (intentional):** most concept IDs use the `math-` prefix, but the Phase-744 additions (Coherent Functor, Ollivier-Ricci Curvature, Hourglass Persistence, Tonnetz Lattice) and Cramér-Wold Slicing carry `mathematics-` IDs. Cross-reference resolution treats both prefixes as dept-local — the split is expected, not a defect.
 
 ## Panels
 

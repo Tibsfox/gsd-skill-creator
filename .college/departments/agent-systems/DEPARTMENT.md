@@ -1,7 +1,7 @@
 # Agent Systems Department
 
 **Domain:** agent-systems
-**Source:** May 2026 arxiv synthesis — 60 papers across skill-design, multi-agent orchestration, code generation, and agent memory
+**Source:** May 2026 arxiv synthesis (60 papers) + June 2026 arxiv wave, across skill-design, multi-agent orchestration, code generation, and agent memory
 **Status:** Active
 **Purpose:** The structural vocabulary of LLM-agent systems — how skills are represented, how agents coordinate, how generated code is validated, and how long-lived memory consolidates. Five wings covering the 2026 frontier: representation, orchestration, code generation, memory, and integration.
 
@@ -142,4 +142,4 @@ Calibration models: pass-rate-blind paired-trace audit (CTA `2605.11946v1`) over
 
 ## Sources
 
-This department's vocabulary is derived from 60 May 2026 arxiv papers — see `.planning/research/arxiv-may-2026-synthesis.md` for the master synthesis and the four per-domain syntheses for full citations. All concept IDs reference their primary paper by arxivId so the lineage is verifiable.
+This department's vocabulary is derived from 60 May 2026 arxiv papers — see `.planning/research/arxiv-may-2026-synthesis.md` for the master synthesis and the four per-domain syntheses for full citations — and extended by the June-2026 arXiv wave (concept IDs citing `2606.*`/`2607.*`), which added concepts to every wing on the 2026 LLM-agent-skill frontier. All concept IDs reference their primary paper by arxivId so the lineage is verifiable.

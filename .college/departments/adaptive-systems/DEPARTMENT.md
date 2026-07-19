@@ -41,6 +41,10 @@ A system passes this benchmark if: (a) it maintains an internal representation o
 | Context Equilibrium | Panel D — Biological Roots (Drift extension) | — (Phase 690; panels follow-up) | ai-computation-response-semantic-drift, ai-computation-grounding-faithfulness |
 | Agent Stability Index | Panel A — Behavioural Roots (Drift extension) | — (Phase 690; panels follow-up) | ai-computation-alignment-drift, adaptive-systems-context-equilibrium |
 | Lyapunov Gradient Stability | Control-Theoretic (Panel B) | Python, C++, Lisp | adaptive-systems-lorenz-predictability-limit, math-exponential-decay · June-2026 arXiv 2606.17013 |
+| Functional Identifiability | Control-Theoretic (Panel B) | Python, C++, Lisp | adapt-feedback-parameter-update, adaptive-systems-lyapunov-gradient-stability |
+| Single-λ Principle | Control-Theoretic (Panel B) | — | ai-computation-isotropic-embedding, adaptive-systems-bounded-learning |
+| Two-Gate Guardrail | Control-Theoretic (Panel B) | — | ai-computation-capability-evolution, adaptive-systems-agent-stability-index |
+| BLE-LoRa Mesh | Physical-Systems (Panel C) | TypeScript | adaptive-systems-two-gate-guardrail, adaptive-systems-agent-stability-index |
 
 ## Cross-References
 
@@ -53,7 +57,6 @@ Full cross-departmental bridge specifications are in `CROSS_LINKS.md`.
 | engineering | Advanced treatment | `engr-control-systems` → MRAS and self-tuning |
 | culinary-arts | Physical analogy | `cook-specific-heat-capacity`, Weber-Fechner calibration model |
 | mind-body | Biological anchor | Homeostasis, interoception, active inference |
-| Functional Identifiability | Control-Theoretic Roots | Python, C++, Lisp | adapt-feedback-parameter-update, adaptive-systems-lyapunov-gradient-stability |
 
 ## Rosetta Cluster Connections
 
