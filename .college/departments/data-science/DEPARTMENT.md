@@ -66,6 +66,10 @@ data-data-sources
 - data-science-d-separation -- Graphical conditional-independence criterion on a causal DAG; correlation vs causation made rigorous (Statistical Inference)
 - data-science-density-evolution -- Multiscale KDE as heat-flow scale-space; modes and feature lifetimes across bandwidth (Exploratory Analysis)
 
+### June-2026 arXiv T2 (2 concepts)
+- data-science-causal-density-ratio -- Causal density functions -- Radon-Nikodym derivatives comparing interventional to observational laws -- act as pointwise density ratios so that… (arXiv:2606.00754)
+- data-science-epistemic-aleatoric-uncertainty -- Predictive uncertainty separates into aleatoric (irreducible noise) and epistemic parts, with the epistemic part further split into sample-reducible… (arXiv:2606.12646)
+
 ## Calibration Models
 
 - Statistical models -- quantitative domains require precision calibration

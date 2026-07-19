@@ -18,3 +18,7 @@ export { predictionPoweredInference } from './prediction-powered-inference.js';
 export { sequentialTestingByBetting } from './sequential-testing-by-betting.js';
 export { dSeparation } from './d-separation.js';
 export { densityEvolution } from './density-evolution.js';
+
+// June-2026 arXiv T2 cohort (data-science — 2 concepts)
+export { causalDensityRatio } from './causal-density-ratio.js';
+export { epistemicAleatoricUncertainty } from './epistemic-aleatoric-uncertainty.js';
