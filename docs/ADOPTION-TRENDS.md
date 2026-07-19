@@ -2,7 +2,7 @@
 
 > **Auto-generated** by `tools/adoption-trends.mjs` from `docs/ADOPTION-BASELINE-v*.json`. Run `node tools/adoption-trends.mjs --write` to refresh.
 
-**Snapshots considered:** 105 (`v1.49.787` → `v1.49.1057`)
+**Snapshots considered:** 147 (`v1.49.787` → `v1.49.1129`)
 **Shelfware threshold:** 6 consecutive non-living snapshots (override via `SC_ADOPTION_STALE_SHIPS`)
 **New-module watch window:** last 10 snapshots (override via `SC_NEW_MODULE_WATCH_SHIPS`)
 
@@ -115,13 +115,64 @@
 | v1.49.1055 | 151 | 98 | 45 | 8 | 28 |
 | v1.49.1056 | 151 | 98 | 45 | 8 | 28 |
 | v1.49.1057 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1088 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1089 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1090 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1091 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1092 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1093 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1094 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1095 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1096 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1097 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1098 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1099 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1100 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1101 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1102 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1103 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1104 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1105 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1106 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1107 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1108 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1109 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1110 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1111 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1112 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1113 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1114 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1115 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1116 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1117 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1118 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1119 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1120 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1121 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1122 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1123 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1124 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1125 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1126 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1127 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1128 | 154 | 108 | 40 | 6 | 28 |
+| v1.49.1129 | 154 | 109 | 39 | 6 | 27 |
 
 ## Status changes
 
-7 status transition(s) across the window. Most recent first.
+16 status transition(s) across the window. Most recent first.
 
 | module | transition | at version | note |
 |---|---|---|---|
+| `knowledge` | test-only → living | v1.49.1129 | ✓ adoption |
+| `citations` | test-only → living | v1.49.1128 | ✓ adoption |
+| `dogfood` | isolated → living | v1.49.1128 | allowlisted |
+| `experience-compression` | test-only → living | v1.49.1128 | ✓ adoption |
+| `hooks` | test-only → isolated | v1.49.1128 | ⚠ regression |
+| `retro` | isolated → living | v1.49.1128 | allowlisted |
+| `scribe` | test-only → living | v1.49.1128 | ✓ adoption |
+| `settings` | isolated → living | v1.49.1128 | allowlisted |
+| `vtm` | test-only → living | v1.49.1128 | ✓ adoption |
 | `predictive-skill-loader` | test-only → living | v1.49.965 | ✓ adoption |
 | `stochastic` | test-only → living | v1.49.965 | ✓ adoption |
 | `bounded-learning` | test-only → living | v1.49.795 | ✓ adoption |
@@ -132,53 +183,54 @@
 
 ## Persistent shelfware watch
 
-39 module(s) with ≥6 consecutive non-living snapshots. Operator action: wire a real caller, allowlist with reason, or retire.
+34 module(s) with ≥6 consecutive non-living snapshots. Operator action: wire a real caller, allowlist with reason, or retire.
 
 | module | consecutive non-living | current status | non-living since |
 |---|---|---|---|
-| `activation-steering` | 6 | test-only | v1.49.1052 |
-| `agc` | 6 | test-only | v1.49.1052 |
-| `alternative-discoverer` | 6 | test-only | v1.49.1052 |
-| `aminet` | 6 | test-only | v1.49.1052 |
-| `artifactnet-provenance` | 6 | test-only | v1.49.1052 |
-| `bounded-learning-empirical` | 6 | test-only | v1.49.1052 |
-| `brainstorm` | 6 | test-only | v1.49.1052 |
-| `catalog` | 6 | test-only | v1.49.1052 |
-| `citations` | 6 | test-only | v1.49.1052 |
-| `cloud-ops` | 6 | test-only | v1.49.1052 |
-| `code-absorber` | 6 | test-only | v1.49.1052 |
-| `compression-spectrum` | 6 | test-only | v1.49.1052 |
-| `convergent` | 6 | test-only | v1.49.1052 |
-| `dependency-resolver` | 6 | test-only | v1.49.1052 |
-| `experience-compression` | 6 | test-only | v1.49.1052 |
-| `fl-threat-model` | 6 | test-only | v1.49.1052 |
-| `hardware-infrastructure` | 6 | test-only | v1.49.1052 |
-| `heuristics-free-skill-space` | 6 | test-only | v1.49.1052 |
-| `hooks` | 6 | test-only | v1.49.1052 |
+| `activation-steering` | 6 | test-only | v1.49.1124 |
+| `agc` | 6 | test-only | v1.49.1124 |
+| `alternative-discoverer` | 6 | test-only | v1.49.1124 |
+| `aminet` | 6 | test-only | v1.49.1124 |
+| `artifactnet-provenance` | 6 | test-only | v1.49.1124 |
+| `bounded-learning-empirical` | 6 | test-only | v1.49.1124 |
+| `brainstorm` | 6 | test-only | v1.49.1124 |
+| `catalog` | 6 | test-only | v1.49.1124 |
+| `cloud-ops` | 6 | test-only | v1.49.1124 |
+| `code-absorber` | 6 | test-only | v1.49.1124 |
+| `compression-spectrum` | 6 | test-only | v1.49.1124 |
+| `convergent` | 6 | test-only | v1.49.1124 |
+| `dependency-resolver` | 6 | test-only | v1.49.1124 |
+| `fl-threat-model` | 6 | test-only | v1.49.1124 |
+| `hardware-infrastructure` | 6 | test-only | v1.49.1124 |
+| `heuristics-free-skill-space` | 6 | test-only | v1.49.1124 |
+| `hooks` | 6 | isolated | v1.49.1124 |
 | `intrinsic-telemetry` | 6 | test-only | v1.49.966 |
-| `knowledge` | 6 | test-only | v1.49.1052 |
-| `launcher` | 6 | test-only | v1.49.1052 |
-| `mcp-defense` | 6 | test-only | v1.49.1052 |
-| `mission-world-model` | 6 | test-only | v1.49.1052 |
-| `promptcluster-batcheffect` | 6 | test-only | v1.49.1052 |
-| `random` | 6 | test-only | v1.49.1052 |
-| `reasoning-graphs` | 6 | test-only | v1.49.1052 |
-| `rumor-delay-model` | 6 | test-only | v1.49.1052 |
-| `runtime-hal` | 6 | test-only | v1.49.1052 |
-| `scribe` | 6 | test-only | v1.49.1052 |
-| `sigreg` | 6 | test-only | v1.49.1052 |
-| `skill-creator` | 6 | test-only | v1.49.1052 |
-| `skilldex-auditor` | 6 | test-only | v1.49.1052 |
-| `spatial-awareness` | 6 | test-only | v1.49.1052 |
-| `stackelberg-pricing` | 6 | test-only | v1.49.1052 |
-| `token-budget` | 6 | test-only | v1.49.1052 |
-| `trust-tiers` | 6 | test-only | v1.49.1052 |
-| `utils` | 6 | test-only | v1.49.1052 |
-| `vtm` | 6 | test-only | v1.49.1052 |
+| `launcher` | 6 | test-only | v1.49.1124 |
+| `mcp-defense` | 6 | test-only | v1.49.1124 |
+| `mission-world-model` | 6 | test-only | v1.49.1124 |
+| `promptcluster-batcheffect` | 6 | test-only | v1.49.1124 |
+| `random` | 6 | test-only | v1.49.1124 |
+| `reasoning-graphs` | 6 | test-only | v1.49.1124 |
+| `rumor-delay-model` | 6 | test-only | v1.49.1124 |
+| `runtime-hal` | 6 | test-only | v1.49.1124 |
+| `sigreg` | 6 | test-only | v1.49.1124 |
+| `skill-creator` | 6 | test-only | v1.49.1124 |
+| `skilldex-auditor` | 6 | test-only | v1.49.1124 |
+| `spatial-awareness` | 6 | test-only | v1.49.1124 |
+| `stackelberg-pricing` | 6 | test-only | v1.49.1124 |
+| `token-budget` | 6 | test-only | v1.49.1124 |
+| `trust-tiers` | 6 | test-only | v1.49.1124 |
+| `utils` | 6 | test-only | v1.49.1124 |
 
 ## New-module watch
 
-_No new modules first observed in the last 10 snapshots._
+3 module(s) first observed in the last 10 snapshots. Per S2: track the "first real caller" timeline for each.
+
+| module | first observed | snapshots since | current status | real callers |
+|---|---|---|---|---|
+| `college` | v1.49.1128 | 2 | living | 1 |
+| `flywheel` | v1.49.1128 | 2 | living | 1 |
+| `source-ledger` | v1.49.1128 | 2 | living | 9 |
 
 ---
 

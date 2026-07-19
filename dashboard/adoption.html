@@ -64,11 +64,11 @@
 
     <div class="summary-grid">
       <div class="summary-card"><div class="label">Total modules</div><div class="value">154</div></div>
-      <div class="summary-card good"><div class="label">Living</div><div class="value">108</div></div>
-      <div class="summary-card alert"><div class="label">Test-only</div><div class="value">40</div></div>
+      <div class="summary-card good"><div class="label">Living</div><div class="value">109</div></div>
+      <div class="summary-card alert"><div class="label">Test-only</div><div class="value">39</div></div>
       <div class="summary-card crit"><div class="label">Isolated</div><div class="value">6</div></div>
-      <div class="summary-card"><div class="label">Allowlisted</div><div class="value">28</div></div>
-      <div class="summary-card alert"><div class="label">Shelfware (non-allowlisted)</div><div class="value">34</div></div>
+      <div class="summary-card"><div class="label">Allowlisted</div><div class="value">27</div></div>
+      <div class="summary-card alert"><div class="label">Shelfware (non-allowlisted)</div><div class="value">33</div></div>
     </div>
 
     <div class="legend">
@@ -78,7 +78,7 @@
     </div>
 
     <div class="meta">
-      Generated <code>2026-07-13T08:44:29.534Z</code> · Baseline source: <a href="../docs/ADOPTION-BASELINE-v1.49.787.md">docs/ADOPTION-BASELINE-v1.49.787.md</a>
+      Generated <code>2026-07-19T20:27:15.584Z</code> · Baseline source: <a href="../docs/ADOPTION-BASELINE-v1.49.787.md">docs/ADOPTION-BASELINE-v1.49.787.md</a>
     </div>
 
     <table>
@@ -268,14 +268,6 @@
       <td class="num">3</td>
       <td class="num">0</td>
       <td class="num">2</td>
-      <td class="callers">—</td>
-    </tr>
-    <tr class="status-test-only">
-      <td><code>knowledge</code></td>
-      <td><span class="badge" style="background:#f97316">test-only</span></td>
-      <td class="num">45</td>
-      <td class="num">0</td>
-      <td class="num">23</td>
       <td class="callers">—</td>
     </tr>
     <tr class="status-test-only">
@@ -481,9 +473,9 @@
     <tr class="status-living">
       <td><code>college</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">6</td>
+      <td class="num">10</td>
       <td class="num">1</td>
-      <td class="num">3</td>
+      <td class="num">5</td>
       <td class="callers">cli</td>
     </tr>
     <tr class="status-living">
@@ -521,9 +513,9 @@
     <tr class="status-living">
       <td><code>flywheel</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">4</td>
+      <td class="num">1</td>
       <td class="num">2</td>
-      <td class="num">1</td>
-      <td class="num">1</td>
       <td class="callers">cli</td>
     </tr>
     <tr class="status-living">
@@ -549,6 +541,14 @@
       <td class="num">1</td>
       <td class="num">1</td>
       <td class="callers">1 external</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>knowledge</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">55</td>
+      <td class="num">1</td>
+      <td class="num">28</td>
+      <td class="callers">cli</td>
     </tr>
     <tr class="status-living">
       <td><code>koopman-memory</code></td>
@@ -801,9 +801,9 @@
     <tr class="status-living">
       <td><code>cartridge</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">64</td>
+      <td class="num">70</td>
       <td class="num">3</td>
-      <td class="num">36</td>
+      <td class="num">39</td>
       <td class="callers">`orchestration`, `traces`, cli</td>
     </tr>
     <tr class="status-living">
@@ -913,9 +913,9 @@
     <tr class="status-living">
       <td><code>citations</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">78</td>
+      <td class="num">82</td>
       <td class="num">4</td>
-      <td class="num">19</td>
+      <td class="num">21</td>
       <td class="callers">`commands`, `scan-arxiv`, `vtm`, cli</td>
     </tr>
     <tr class="status-living">
@@ -975,6 +975,14 @@
       <td class="callers">`application`, `orchestration`, `symbiosis`, cli</td>
     </tr>
     <tr class="status-living">
+      <td><code>skill-promotion</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">8</td>
+      <td class="num">4</td>
+      <td class="num">3</td>
+      <td class="callers">`ab-harness`, `cartridge`, `discovery`, `experience-compression`</td>
+    </tr>
+    <tr class="status-living">
       <td><code>agents</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">9</td>
@@ -1007,30 +1015,6 @@
       <td class="callers">`application`, `bayes-ab`, `branches`, `cartridge`, `stochastic`</td>
     </tr>
     <tr class="status-living">
-      <td><code>traces</code></td>
-      <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">18</td>
-      <td class="num">5</td>
-      <td class="num">22</td>
-      <td class="callers">`branches`, `cartridge`, `orchestration`, `reinforcement`, cli</td>
-    </tr>
-    <tr class="status-living">
-      <td><code>chips</code></td>
-      <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">17</td>
-      <td class="num">6</td>
-      <td class="num">14</td>
-      <td class="callers">`eval`, `mcp`, `mesh`, cli</td>
-    </tr>
-    <tr class="status-living">
-      <td><code>source-ledger</code></td>
-      <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">2</td>
-      <td class="num">6</td>
-      <td class="num">4</td>
-      <td class="callers">`citations`, `commands`, `learn`, `scan-arxiv`, cli</td>
-    </tr>
-    <tr class="status-living">
       <td><code>bounded-learning</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">29</td>
@@ -1047,14 +1031,6 @@
       <td class="callers">`index.ts`, `orchestrator`, `staging`, cli</td>
     </tr>
     <tr class="status-living">
-      <td><code>observation</code></td>
-      <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">40</td>
-      <td class="num">7</td>
-      <td class="num">22</td>
-      <td class="callers">`dashboard`, `hooks`, `learning`, `orchestrator`, cli</td>
-    </tr>
-    <tr class="status-living">
       <td><code>orchestrator</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">90</td>
@@ -1065,9 +1041,9 @@
     <tr class="status-living">
       <td><code>scribe</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">59</td>
+      <td class="num">61</td>
       <td class="num">7</td>
-      <td class="num">24</td>
+      <td class="num">25</td>
       <td class="callers">`memory`, cli</td>
     </tr>
     <tr class="status-living">
@@ -1087,6 +1063,14 @@
       <td class="callers">`chips`, `evaluator`, `index.ts`, `mesh`, cli</td>
     </tr>
     <tr class="status-living">
+      <td><code>traces</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">18</td>
+      <td class="num">7</td>
+      <td class="num">23</td>
+      <td class="callers">`branches`, `cartridge`, `flywheel`, `orchestration`, `reinforcement`, cli</td>
+    </tr>
+    <tr class="status-living">
       <td><code>integration</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">61</td>
@@ -1103,12 +1087,36 @@
       <td class="callers">`index.ts`, cli</td>
     </tr>
     <tr class="status-living">
+      <td><code>observation</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">42</td>
+      <td class="num">8</td>
+      <td class="num">23</td>
+      <td class="callers">`dashboard`, `hooks`, `learning`, `orchestrator`, cli</td>
+    </tr>
+    <tr class="status-living">
       <td><code>tractability</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">9</td>
       <td class="num">8</td>
       <td class="num">8</td>
       <td class="callers">`ab-harness`, `branches`, `langevin`, `orchestration`, `stochastic`, `symbiosis`, +2</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>chips</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">18</td>
+      <td class="num">9</td>
+      <td class="num">14</td>
+      <td class="callers">`cartridge`, `citations`, `college`, `eval`, `mcp`, `mesh`, +1</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>source-ledger</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">2</td>
+      <td class="num">9</td>
+      <td class="num">7</td>
+      <td class="callers">`cartridge`, `citations`, `commands`, `learn`, `scan-arxiv`, `scribe`, +1</td>
     </tr>
     <tr class="status-living">
       <td><code>application</code></td>
@@ -1122,9 +1130,9 @@
       <td><code>safety</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">47</td>
-      <td class="num">12</td>
+      <td class="num">13</td>
       <td class="num">25</td>
-      <td class="callers">`bundles`, `calibration`, `evaluator`, `events`, `learning`, `projection`, +6</td>
+      <td class="callers">`bundles`, `calibration`, `evaluator`, `events`, `learning`, `projection`, +7</td>
     </tr>
     <tr class="status-living">
       <td><code>atlas</code></td>
@@ -1137,16 +1145,16 @@
     <tr class="status-living">
       <td><code>cli</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">168</td>
-      <td class="num">16</td>
-      <td class="num">72</td>
+      <td class="num">169</td>
+      <td class="num">17</td>
+      <td class="num">73</td>
       <td class="callers">`commands`, `scribe`, `skill`, cli, 1 external</td>
     </tr>
     <tr class="status-living">
       <td><code>embeddings</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">21</td>
-      <td class="num">18</td>
+      <td class="num">19</td>
       <td class="num">23</td>
       <td class="callers">`application`, `conflicts`, `discovery`, `index.ts`, `orchestrator`, `retrieval`, +5</td>
     </tr>
@@ -1154,8 +1162,8 @@
       <td><code>memory</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">70</td>
-      <td class="num">18</td>
-      <td class="num">55</td>
+      <td class="num">20</td>
+      <td class="num">58</td>
       <td class="callers">`application`, `graph`, `intelligence`, `knowledge`, `mcp`, `mesh`, +6</td>
     </tr>
     <tr class="status-living">
@@ -1175,28 +1183,28 @@
       <td class="callers">`agents`, `capabilities`, `cartridge`, `college`, `critique`, `dashboard`, +13</td>
     </tr>
     <tr class="status-living">
-      <td><code>storage</code></td>
-      <td><span class="badge" style="background:#22c55e">living</span></td>
-      <td class="num">7</td>
-      <td class="num">42</td>
-      <td class="num">39</td>
-      <td class="callers">`agents`, `application`, `capabilities`, `chips`, `composition`, `dashboard`, +15</td>
-    </tr>
-    <tr class="status-living">
       <td><code>security</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">12</td>
       <td class="num">43</td>
-      <td class="num">47</td>
+      <td class="num">50</td>
       <td class="callers">`agc`, `alternative-discoverer`, `amiga`, `aminet`, `atlas`, `cartridge`, +32</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>storage</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">7</td>
+      <td class="num">43</td>
+      <td class="num">39</td>
+      <td class="callers">`agents`, `application`, `capabilities`, `chips`, `composition`, `dashboard`, +15</td>
     </tr>
     <tr class="status-living">
       <td><code>types</code></td>
       <td><span class="badge" style="background:#22c55e">living</span></td>
       <td class="num">32</td>
-      <td class="num">88</td>
-      <td class="num">160</td>
-      <td class="callers">`ace`, `activation`, `agents`, `amiga`, `application`, `branches`, +53</td>
+      <td class="num">90</td>
+      <td class="num">161</td>
+      <td class="callers">`ace`, `activation`, `agents`, `amiga`, `application`, `branches`, +54</td>
     </tr>
     <tr class="status-living allowlisted">
       <td><code>audio-engineering</code></td>
@@ -1301,14 +1309,6 @@
       <td class="num">4</td>
       <td class="num">23</td>
       <td class="callers">`alternative-discoverer`, `code-absorber`, `dependency-resolver`, `health-diagnostician`</td>
-    </tr>
-    <tr class="status-living allowlisted">
-      <td><code>skill-promotion</code></td>
-      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
-      <td class="num">8</td>
-      <td class="num">4</td>
-      <td class="num">3</td>
-      <td class="callers">`ab-harness`, `cartridge`, `discovery`, `experience-compression`</td>
     </tr>
     <tr class="status-living allowlisted">
       <td><code>ace</code></td>
