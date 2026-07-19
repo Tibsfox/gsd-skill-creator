@@ -1,0 +1,48 @@
+/**
+ * Capability-Controlled Self-Evolution -- agent-systems concept (June-2026 arXiv cohort).
+ * @module departments/agent-systems/concepts/skill-design/capability-controlled-self-evolution
+ */
+
+import type { RosettaConcept } from '../../../../rosetta-core/types.js';
+
+const theta = 94 * 2 * Math.PI / 47;
+const radius = 0.85;
+const real = radius * Math.cos(theta);
+const imaginary = radius * Math.sin(theta);
+
+export const capabilityControlledSelfEvolution: RosettaConcept = {
+  id: "agent-capability-controlled-self-evolution",
+  name: "Capability-Controlled Self-Evolution",
+  domain: 'agent-systems',
+  description:
+    "A long-running agent that rewrites its own skills turns self-evolution into a privilege-escalation surface: every mutation is a chance to silently widen the resource authority it can reach. The 2026 invariant (arXiv 2606.03895v2, 2026) closes this hole by splitting two mutation channels — model-visible affordances may change freely, while resource authority changes only through explicit, audited runtime primitives. Affordance drift is cheap and unlogged; authority drift is expensive, gated, and traced. This adds the temporal dimension the static per-skill privilege field lacks: privilege stops being a fixed manifest field checked at one dispatch and becomes an invariant maintained across the agent's whole evolutionary trajectory. Implication for building agent systems: let a self-modifying system freely reshape what it can see and attempt, but force every change to what it can actually reach through one narrow, auditable gate.",
+  panels: new Map(),
+  relationships: [
+    {
+      type: "dependency",
+      targetId: "agent-skill-privilege-boundary",
+      description: "Extends the static per-skill privilege field into a temporal invariant held across self-evolution, rather than a boundary checked only at a single dispatch.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "agent-constraint-drift",
+      description: "Unaudited affordance or authority mutation is how privilege drifts over a long run; this invariant bounds that drift to one traced channel.",
+    },
+    {
+      type: "cross-reference",
+      targetId: "agent-compositional-skill-evolution",
+      description: "Governs the resource-authority side of evolving skills: composition may freely grow affordances but never silently grow reach.",
+    },
+    {
+      type: "analogy",
+      targetId: "security-capability-model",
+      description: "Maps capability-based security onto the time axis — capabilities may be re-exposed freely, but granting new authority requires an explicit, mediated primitive.",
+    },
+  ],
+  complexPlanePosition: {
+    real,
+    imaginary,
+    magnitude: Math.sqrt(real * real + imaginary * imaginary),
+    angle: Math.atan2(imaginary, real),
+  },
+};
