@@ -59,6 +59,9 @@ log-classification-principles
 - logic-definite-descriptions -- Russell's theory of definite descriptions — 'the F' analyzed not as a singular term but eliminated by contextual definition, requiring scope markers… (arXiv:2606.11750)
 - logic-deontic-logic -- Deontic logic formalizes obligation, permission, and prohibition, and can be constructed to tolerate conflicting duties (moral dilemmas) without… (arXiv:2606.30297)
 
+### June-2026 additional scan (1 concept)
+- logic-instruction-autoformalization -- LLM generator-critic loop compiles NL agent instructions, MCP tool descriptions, and policy docs into formally verified Cedar policy-as-code; deontic content becomes executable enforcement (arXiv:2606.26649)
+
 ## Calibration Models
 
 None currently -- future phases will add argument quality assessment models.

@@ -12,3 +12,6 @@ export { abductiveReasoning } from './abductive-reasoning.js';
 export { kuratowskiOrderedPair } from './kuratowski-ordered-pair.js';
 export { definiteDescriptions } from './definite-descriptions.js';
 export { deonticLogic } from './deontic-logic.js';
+
+// June-2026 arXiv additional-material scan (T1)
+export { instructionAutoformalization } from './instruction-autoformalization.js';

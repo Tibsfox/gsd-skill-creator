@@ -76,6 +76,9 @@
 - ai-computation-latent-world-model — Predicts future embeddings from current embedding plus action; 192-dim latent yields 48x CEM planning speedup over DINO-WM (LeWorldModel, Maes et al. 2026) — Retrieval-Augmented Generation
 - ai-computation-megakernel-architecture-rhyme — Replace a cluster of approximate coordination mechanisms with one rigorous minimum-viable invariant; megakernel counter-sync and SIGReg both rhyme (arXiv:2505.22758 + arXiv:2603.19312) — architectural pattern
 
+### June-2026 additional scan (1 concept)
+- ai-computation-instruction-set-recovery — Activation-conditioned interpreter decodes a frozen model's hidden states into the faithful set of active instructions/constraints/subgoals, exposing injected or hidden objectives (arXiv:2606.09563) — Representation Probing
+
 ## Cross-References
 
 | Department | Bridge Type | Entry Point |

@@ -55,3 +55,6 @@ export { isotropicEmbedding } from './isotropic-embedding.js';
 export { jepaKernelPlanning } from './jepa-kernel-planning.js';
 export { latentWorldModel } from './latent-world-model.js';
 export { megakernelArchitectureRhyme } from './megakernel-architecture-rhyme.js';
+
+// June-2026 arXiv additional-material scan (T1)
+export { instructionSetRecovery } from './instruction-set-recovery.js';

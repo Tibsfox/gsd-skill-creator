@@ -92,3 +92,11 @@ export { transactiveMemory } from './agent-memory/transactive-memory.js';
 export { verifiableSkillContract } from './skill-design/verifiable-skill-contract.js';
 export { compositionalKvCache } from './agent-memory/compositional-kv-cache.js';
 export { labelFreeSkillRefinement } from './skill-design/label-free-skill-refinement.js';
+
+// June-2026 arXiv Security & Governance wing (additional-material scan — 6 concepts)
+export { skillPermissionDualPlane } from './security/skill-permission-dual-plane.js';
+export { capabilityGateAuthorization } from './security/capability-gate-authorization.js';
+export { semanticToolTransactions } from './security/semantic-tool-transactions.js';
+export { skillResourceSupplyChain } from './security/skill-resource-supply-chain.js';
+export { governanceDecayCompaction } from './security/governance-decay-compaction.js';
+export { perComponentSkillIdentity } from './security/per-component-skill-identity.js';

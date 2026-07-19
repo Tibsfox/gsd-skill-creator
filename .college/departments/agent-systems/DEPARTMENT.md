@@ -12,6 +12,7 @@
 - Agentic Code Generation — Harness as substrate, execution-grounded selection, structured specs, dynamic autonomy
 - Agent Memory — Consolidation, intent routing, tiered storage, content-addressed records, hybrid retrieval
 - Integration & Evaluation — Episode packaging, pass-rate-blind audit, compliance traces, eval rubrics
+- Security & Governance — Skill permission models, capability-vs-authorization gating, semantic tool transactions, supply-chain/resource attacks, governance decay under compaction, skill identity
 
 ## Entry Point
 
@@ -113,6 +114,14 @@ agent-skill-as-artifact
 - agent-formal-agent-verification — Lean4 machine-checked workflow/trajectory verification, categorically different guarantee from runtime audits (arXiv `2606.06523v2`)
 - agent-nugget-grounded-judging — Human-authored nuggets + LLM matching (division of labor to avoid rubber-stamping) (arXiv `2606.29033v2`)
 - agent-safety-rule-evolution — Learned interpretable safety rules via CEGIS/ILP, distinct from static privilege-boundary (arXiv `2606.24245v3`)
+
+### Security & Governance (6 concepts)
+- agent-skill-permission-dual-plane — Skill as a security principal governed on two planes — reasoning-influence AND action side-effects — beyond the single action-surface privilege boundary (arXiv `2606.03024`) — SkillGuard
+- agent-capability-gate-authorization — Exposing a tool is not authorizing the call; a fail-closed per-call value-authorization PDP/PEP defeats confused-deputy misuse (arXiv `2606.28679`) — ScopeGate
+- agent-semantic-tool-transactions — Task-scoped commit/rollback/recovery/audit boundary over a tool sequence; the task, not the RPC, is the unit of containment (arXiv `2606.17573`) — Cordon
+- agent-skill-resource-supply-chain — Malice hidden in a skill's auxiliary scripts/resources, and cross-modal prose-and-code attacks that evade text-only scanners (arXiv `2606.19191`, `2606.14154`)
+- agent-governance-decay-compaction — Context compaction silently drops in-context safety constraints; constraint-pinning restores enforcement (arXiv `2606.22528`)
+- agent-per-component-skill-identity — Locality-sensitive per-component (prompt/code/tools) fingerprint for skill lineage — recognition, not trust (arXiv `2606.31272`)
 
 ## Learning Path
 
