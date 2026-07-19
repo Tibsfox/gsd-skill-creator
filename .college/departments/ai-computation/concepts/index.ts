@@ -28,3 +28,11 @@ export { dataFreeMiaAttack } from './data-free-mia-attack.js';
 export { spatiotemporalLinkFormation } from './spatiotemporal-link-formation.js';
 export { stackelbergDrainability } from './stackelberg-drainability.js';
 export { forensicResidualPhysics } from './forensic-residual-physics.js';
+
+// Modern Representation & Retrieval (June-2026 arXiv, AI-COMPUTATION-CONCEPT-SHORTLIST T1)
+export { attentionReadoutGap } from './attention-readout-gap.js';
+export { sparseAutoencoderDisentanglement } from './sparse-autoencoder-disentanglement.js';
+export { coldStartSafetyGap } from './cold-start-safety-gap.js';
+export { lexicalDensityLimit } from './lexical-density-limit.js';
+export { hyperbolicRetrievalGeometry } from './hyperbolic-retrieval-geometry.js';
+export { voronoiRetrievalBottleneck } from './voronoi-retrieval-bottleneck.js';

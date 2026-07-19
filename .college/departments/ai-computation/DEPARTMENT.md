@@ -34,6 +34,14 @@
 - ai-computation-koopman-bilinear-form — Mamba-Koopman sequence-memory bilinear form + spectral stability (arXiv:2604.17221) — Phase 749 substrate
 - ai-computation-bounded-learning-theorem — Formal backing for the 20%-rule via Peng continual-recovery envelope (arXiv:2604.17563) — Phase 748 reference
 
+### Modern Representation & Retrieval (6 concepts, June-2026 arXiv)
+- ai-computation-attention-readout-gap — Tool-selection failures live in the decision readout, not attention (arXiv:2606.16364) — Representation Probing
+- ai-computation-sparse-autoencoder-disentanglement — Top-k SAE decomposes embedding superposition into interpretable, clampable features (arXiv:2607.00023) — Representation Probing
+- ai-computation-cold-start-safety-gap — Agents are least safe at session start; hidden state migrates to a safe region with task depth (arXiv:2606.07867) — Alignment & Goal Stability
+- ai-computation-lexical-density-limit — Information density as a third context-window limiter beyond length and position (arXiv:2606.06203) — Retrieval-Augmented Generation
+- ai-computation-hyperbolic-retrieval-geometry — Euclidean/tree geometry mismatch causes hubness; hyperbolic embedding restores granularity (arXiv:2606.03307) — Retrieval-Augmented Generation
+- ai-computation-voronoi-retrieval-bottleneck — Dense-retrieval capacity ceiling = sign-rank; a label-free score predicts per-query failure (arXiv:2606.28359) — Retrieval-Augmented Generation
+
 ## Cross-References
 
 | Department | Bridge Type | Entry Point |
